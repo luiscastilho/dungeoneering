@@ -1,0 +1,285 @@
+{
+  "doors": [{
+    "vertexes": [
+      [
+        711,
+        513
+      ],
+      [
+        711,
+        566
+      ]
+    ],
+    "closed": true
+  }],
+  "dmTokens": [
+    {
+      "imagePath": "/data/tokens/dm/Goblin.png",
+      "name": "Goblin",
+      "column": 5,
+      "row": 2,
+      "lights": [{
+        "dimLightRadius": 700,
+        "brightLightRadius": 0,
+        "name": "Darkvision"
+      }]
+    },
+    {
+      "imagePath": "/data/tokens/dm/Goblin.png",
+      "name": "Goblin",
+      "column": 2,
+      "row": 3,
+      "lights": [{
+        "dimLightRadius": 700,
+        "brightLightRadius": 0,
+        "name": "Darkvision"
+      }]
+    },
+    {
+      "imagePath": "/data/tokens/dm/Goblin.png",
+      "name": "Goblin",
+      "column": 4,
+      "row": 4,
+      "lights": [{
+        "dimLightRadius": 700,
+        "brightLightRadius": 0,
+        "name": "Darkvision"
+      }]
+    },
+    {
+      "imagePath": "/data/tokens/dm/Goblin.png",
+      "name": "Goblin",
+      "column": 2,
+      "row": 5,
+      "lights": [{
+        "dimLightRadius": 700,
+        "brightLightRadius": 0,
+        "name": "Darkvision"
+      }]
+    },
+    {
+      "imagePath": "/data/tokens/dm/Goblin.png",
+      "name": "Goblin",
+      "column": 4,
+      "row": 5,
+      "lights": [{
+        "dimLightRadius": 700,
+        "brightLightRadius": 0,
+        "name": "Darkvision"
+      }]
+    },
+    {
+      "imagePath": "/data/tokens/dm/Orc.png",
+      "name": "Orc",
+      "column": 12,
+      "row": 5,
+      "lights": [{
+        "dimLightRadius": 700,
+        "brightLightRadius": 0,
+        "name": "Darkvision"
+      }]
+    },
+    {
+      "imagePath": "/data/tokens/dm/Orc.png",
+      "name": "Orc",
+      "column": 11,
+      "row": 6,
+      "lights": [{
+        "dimLightRadius": 700,
+        "brightLightRadius": 0,
+        "name": "Darkvision"
+      }]
+    },
+    {
+      "imagePath": "/data/tokens/dm/Orc.png",
+      "name": "Orc",
+      "column": 11,
+      "row": 4,
+      "lights": [{
+        "dimLightRadius": 700,
+        "brightLightRadius": 0,
+        "name": "Darkvision"
+      }]
+    }
+  ],
+  "walls": [
+    {"vertexes": [
+      [
+        427,
+        389
+      ],
+      [
+        428,
+        515
+      ]
+    ]},
+    {"vertexes": [
+      [
+        428,
+        513
+      ],
+      [
+        497,
+        513
+      ]
+    ]},
+    {"vertexes": [
+      [
+        528,
+        513
+      ],
+      [
+        609,
+        513
+      ]
+    ]},
+    {"vertexes": [
+      [
+        644,
+        513
+      ],
+      [
+        712,
+        513
+      ]
+    ]},
+    {"vertexes": [
+      [
+        711,
+        513
+      ],
+      [
+        711,
+        520
+      ]
+    ]},
+    {"vertexes": [
+      [
+        711,
+        562
+      ],
+      [
+        711,
+        627
+      ]
+    ]},
+    {"vertexes": [
+      [
+        711,
+        625
+      ],
+      [
+        835,
+        625
+      ]
+    ]},
+    {"vertexes": [
+      [
+        865,
+        625
+      ],
+      [
+        1158,
+        625
+      ]
+    ]},
+    {"vertexes": [
+      [
+        1156,
+        625
+      ],
+      [
+        1156,
+        231
+      ]
+    ]},
+    {"vertexes": [
+      [
+        1156,
+        233
+      ],
+      [
+        1094,
+        233
+      ]
+    ]},
+    {"vertexes": [
+      [
+        1054,
+        233
+      ],
+      [
+        807,
+        233
+      ]
+    ]},
+    {"vertexes": [
+      [
+        777,
+        233
+      ],
+      [
+        426,
+        233
+      ]
+    ]},
+    {"vertexes": [
+      [
+        428,
+        233
+      ],
+      [
+        428,
+        359
+      ]
+    ]}
+  ],
+  "illumination": {"lightning": "darkness"},
+  "grid": {
+    "cellWidth": 56,
+    "lastCellCenterY": 933,
+    "cellHeight": 56,
+    "firstCellCenterX": 400,
+    "lastCellCenterX": 1520,
+    "firstCellCenterY": 149
+  },
+  "playerTokens": [
+    {
+      "imagePath": "/data/tokens/players/Orsik.png",
+      "name": "Orsik",
+      "column": 2,
+      "row": 13,
+      "lights": [{
+        "dimLightRadius": 700,
+        "brightLightRadius": 0,
+        "name": "Darkvision"
+      }]
+    },
+    {
+      "imagePath": "/data/tokens/players/Luth.png",
+      "name": "Luth",
+      "column": 1,
+      "row": 14,
+      "lights": [{
+        "dimLightRadius": 476,
+        "brightLightRadius": 252,
+        "name": "Torch"
+      }]
+    },
+    {
+      "imagePath": "/data/tokens/players/Lia.png",
+      "name": "Lia",
+      "column": 3,
+      "row": 14,
+      "lights": [{
+        "dimLightRadius": 700,
+        "brightLightRadius": 0,
+        "name": "Darkvision"
+      }]
+    }
+  ],
+  "map": {
+    "imagePath": "/data/maps/AbandonedHouse.jpg",
+    "fitToScreen": false
+  }
+}

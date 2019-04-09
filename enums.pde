@@ -1,0 +1,39 @@
+enum AppStates {
+  
+  idle,
+  loadingScene,
+  gridSetup,
+  tokenSetup,
+  tokenMovement,
+  wallSetup,
+  doorSetup,
+  switchingLayer,
+  switchingLightning;
+  
+};
+
+enum LayerShown {
+  
+  all,
+  playersOnly,
+  dmOnly;
+  
+};
+
+enum Illumination {
+  
+  brightLight(255),
+  dimLight(47),
+  darkness(0);
+  
+  private final int envLightColor;
+  
+  private Illumination(final int _envLightColor) {
+      envLightColor = _envLightColor;
+  }
+  
+  int getColor() {
+    return envLightColor;
+  }
+  
+}

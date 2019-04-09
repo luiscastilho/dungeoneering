@@ -1,0 +1,131 @@
+{
+  "doors": [],
+  "dmTokens": [
+    {
+      "imagePath": "/data/tokens/dm/Orc.png",
+      "name": "Orc",
+      "column": 12,
+      "row": 3,
+      "lights": [{
+        "dimLightRadius": 1150,
+        "brightLightRadius": 0,
+        "name": "Darkvision"
+      }]
+    },
+    {
+      "imagePath": "/data/tokens/dm/Orc.png",
+      "name": "Orc",
+      "column": 12,
+      "row": 1,
+      "lights": [{
+        "dimLightRadius": 1150,
+        "brightLightRadius": 0,
+        "name": "Darkvision"
+      }]
+    },
+    {
+      "imagePath": "/data/tokens/dm/Orc.png",
+      "name": "Orc",
+      "column": 13,
+      "row": 2,
+      "lights": [{
+        "dimLightRadius": 1150,
+        "brightLightRadius": 0,
+        "name": "Darkvision"
+      }]
+    },
+    {
+      "imagePath": "/data/tokens/dm/Goblin.png",
+      "name": "Goblin",
+      "column": 7,
+      "row": 8,
+      "lights": [{
+        "dimLightRadius": 1150,
+        "brightLightRadius": 0,
+        "name": "Darkvision"
+      }]
+    },
+    {
+      "imagePath": "/data/tokens/dm/Goblin.png",
+      "name": "Goblin",
+      "column": 5,
+      "row": 7,
+      "lights": [{
+        "dimLightRadius": 1150,
+        "brightLightRadius": 0,
+        "name": "Darkvision"
+      }]
+    },
+    {
+      "imagePath": "/data/tokens/dm/Goblin.png",
+      "name": "Goblin",
+      "column": 4,
+      "row": 6,
+      "lights": [{
+        "dimLightRadius": 1150,
+        "brightLightRadius": 0,
+        "name": "Darkvision"
+      }]
+    },
+    {
+      "imagePath": "/data/tokens/dm/Goblin.png",
+      "name": "Goblin",
+      "column": 8,
+      "row": 9,
+      "lights": [{
+        "dimLightRadius": 1150,
+        "brightLightRadius": 0,
+        "name": "Darkvision"
+      }]
+    }
+  ],
+  "walls": [],
+  "illumination": {"lightning": "darkness"},
+  "grid": {
+    "cellWidth": 92,
+    "lastCellCenterY": 974,
+    "cellHeight": 88,
+    "firstCellCenterX": 283,
+    "lastCellCenterX": 1663,
+    "firstCellCenterY": 94
+  },
+  "playerTokens": [
+    {
+      "imagePath": "/data/tokens/players/Orsik.png",
+      "name": "Orsik",
+      "column": 3,
+      "row": 2,
+      "lights": [{
+        "dimLightRadius": 1150,
+        "brightLightRadius": 0,
+        "name": "Darkvision"
+      }]
+    },
+    {
+      "imagePath": "/data/tokens/players/Luth.png",
+      "name": "Luth",
+      "column": 2,
+      "row": 1,
+      "lights": [{
+        "dimLightRadius": 782,
+        "brightLightRadius": 414,
+        "name": "Torch"
+      }]
+    },
+    {
+      "imagePath": "/data/tokens/players/Lia.png",
+      "name": "Lia",
+      "column": 1,
+      "row": 2,
+      "lights": [{
+        "dimLightRadius": 1150,
+        "brightLightRadius": 0,
+        "name": "Darkvision"
+      }]
+    }
+  ],
+  "map": {
+    "imagePath": "/data/maps/HillsideAltar.jpg",
+    "fitToScreen": false
+  }
+}
