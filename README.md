@@ -1,2 +1,2 @@
 # dungeoneering
-Combat grid and dungeon explorer for use in RPG sessions
+Combat grid and dungeon explorer for use in tabletop RPG sessions
