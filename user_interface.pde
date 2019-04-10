@@ -708,6 +708,9 @@ public class UserInterface {
   
   void gridHelperSetup(int x, int y, boolean start, boolean done) {
     
+    if ( isInside() )
+      return;
+    
     if ( start ) {
       
       gridHelperX = gridHelperToX = max(x, 0);
@@ -817,6 +820,9 @@ public class UserInterface {
   
   void newWallSetup(int _mouseX, int _mouseY) {
     
+    if ( isInside() )
+      return;
+    
     newWall.addVertex(map.transformX(_mouseX), map.transformY(_mouseY));
     
   }
@@ -831,6 +837,9 @@ public class UserInterface {
   }
   
   void newDoorSetup(int _mouseX, int _mouseY) {
+    
+    if ( isInside() )
+      return;
     
     newDoor.addVertex(map.transformX(_mouseX), map.transformY(_mouseY));
     
@@ -1314,13 +1323,31 @@ public class UserInterface {
   
   boolean isInside() {
     
-    boolean isInside = false;
+    boolean inside = false;
+    int x = mouseX;
+    int y = mouseX;
     
     List<Button> buttons = cp5.getAll(Button.class);
     for ( Button button: buttons )
-      isInside = isInside || button.isInside();
+      inside = inside || isInside(button, x, y);
     
-    return isInside;
+    return inside;
+    
+  }
+  
+  boolean isInside(Controller controller, int x, int y) {
+    
+    boolean inside = false;
+    
+    float startX = controller.getPosition()[0];
+    float startY = controller.getPosition()[1];
+    float endX = startX + controller.getWidth();
+    float endY = startY + controller.getHeight();
+    
+    if ( x > startX && x < endX && y > startY && y < endY )
+      inside = true;
+    
+    return inside;
     
   }
   
@@ -1335,7 +1362,9 @@ public class UserInterface {
   }
   
   boolean fileExists(String filePath) {
+    
     boolean exists = false;
+    
     try {
       File f = new File(filePath);
       if ( f.isFile() )
@@ -1343,7 +1372,9 @@ public class UserInterface {
     } catch(Exception e) {
       exists = false;
     }
+    
     return exists;
+    
   }
   
 }
