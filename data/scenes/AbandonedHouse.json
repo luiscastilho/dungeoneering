@@ -239,6 +239,7 @@
     "cellWidth": 56,
     "lastCellCenterY": 933,
     "cellHeight": 56,
+    "drawGrid": false,
     "firstCellCenterX": 400,
     "lastCellCenterX": 1520,
     "firstCellCenterY": 149

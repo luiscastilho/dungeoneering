@@ -96,10 +96,13 @@ class Map {
   
   void zoom(int mouseWheelAmount, int _mouseX, int _mouseY) {
     
+    // TODO: fix zoom bug causing low FPS
+    /*
     float zoom = -mouseWheelAmount * .05;
     panToX -= zoom * (_mouseX - panToX);
     panToY -= zoom * (_mouseY - panToY);
     toScale *= zoom+1;
+    */
     
   }
   

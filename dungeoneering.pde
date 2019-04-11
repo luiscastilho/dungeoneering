@@ -350,7 +350,7 @@ void mouseWheel(MouseEvent event) {
       if ( map == null || !map.isSet() )
         return;
       
-      //map.zoom(event.getCount(), mouseX, mouseY);
+      map.zoom(event.getCount(), mouseX, mouseY);
       
       break;
     default:

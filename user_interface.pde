@@ -415,7 +415,8 @@ public class UserInterface {
           disableController("Toggle UI");
           
           Button toggleGrid = (Button)cp5.getController("Toggle grid");
-          toggleGrid.setOn();
+          if ( !toggleGrid.isOn() )
+            toggleGrid.setOn();
           
           obstacles.clear();
           playersLayer.clear();
@@ -463,7 +464,7 @@ public class UserInterface {
         
         if ( addToken.isOn() ) {
           
-          //map.reset();
+          map.reset();
           playersLayer.reset();
           dmLayer.reset();
           
@@ -693,6 +694,7 @@ public class UserInterface {
     
     map.setup(mapImageFile.getAbsolutePath(), false);
     
+    obstacles.setIllumination(Illumination.brightLight);
     obstacles.clear();
     playersLayer.clear();
     dmLayer.clear();
@@ -976,6 +978,7 @@ public class UserInterface {
     gridJson.setInt("lastCellCenterY", grid.getLastCellCenter().y);
     gridJson.setInt("cellWidth", grid.getCellWidth());
     gridJson.setInt("cellHeight", grid.getCellHeight());
+    gridJson.setBoolean("drawGrid", grid.getDrawGrid());
     sceneJson.setJSONObject("grid", gridJson);
     
     JSONArray playerTokensArray = new JSONArray();
@@ -1151,7 +1154,8 @@ public class UserInterface {
       int lastCellCenterY = gridJson.getInt("lastCellCenterY");
       int cellWidth = gridJson.getInt("cellWidth");
       int cellHeight = gridJson.getInt("cellHeight");
-      grid.setup(firstCellCenterX, firstCellCenterY, lastCellCenterX, lastCellCenterY, cellWidth, cellHeight);
+      boolean drawGrid = gridJson.getBoolean("drawGrid");
+      grid.setup(firstCellCenterX, firstCellCenterY, lastCellCenterX, lastCellCenterY, cellWidth, cellHeight, drawGrid);
       
     }
     
@@ -1296,6 +1300,8 @@ public class UserInterface {
       }
       
     }
+    
+    layerShown = LayerShown.playersOnly;
     
     obstacles.setRecalculateShadows(true);
     

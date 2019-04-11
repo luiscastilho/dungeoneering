@@ -43,7 +43,7 @@ class Grid {
     
   }
   
-  void setup(int _firstCenterX, int _firstCenterY, int _lastCenterX, int _lastCenterY, int _cellWidth, int _cellHeight) {
+  void setup(int _firstCenterX, int _firstCenterY, int _lastCenterX, int _lastCenterY, int _cellWidth, int _cellHeight, boolean _drawGrid) {
     
     if ( abs(_firstCenterX-_lastCenterX) < 10 || abs(_firstCenterY-_lastCenterY) < 10 || _cellWidth < 10 || _cellHeight < 10 )
       return;
@@ -77,6 +77,8 @@ class Grid {
       rowCount += 1;
       
     }
+    
+    drawGrid = _drawGrid;
     
     set = true;
     
@@ -222,6 +224,10 @@ class Grid {
   
   int getCellHeight() {
     return cellHeight;
+  }
+  
+  boolean getDrawGrid() {
+    return drawGrid;
   }
   
   void toggleDrawGrid() {

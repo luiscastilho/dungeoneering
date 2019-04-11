@@ -85,6 +85,7 @@
     "cellWidth": 92,
     "lastCellCenterY": 974,
     "cellHeight": 88,
+    "drawGrid": true,
     "firstCellCenterX": 283,
     "lastCellCenterX": 1663,
     "firstCellCenterY": 94
