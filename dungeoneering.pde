@@ -73,6 +73,8 @@ void draw() {
   
   map.draw();
   
+  grid.draw();
+  
   if ( obstacles.getRecalculateShadows() )
     obstacles.resetShadows();
   
@@ -111,8 +113,6 @@ void draw() {
       
       break;
   }
-  
-  grid.draw();
   
   userInterface.draw();
   
