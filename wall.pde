@@ -39,6 +39,20 @@ class Wall {
     
   }
   
+  boolean reachedBy(Light light) {
+    
+    float distance;
+    
+    for ( PVector v: vertexes ) {
+      distance = light.getPosition().dist(v);
+      if ( distance < light.getDimLightRadius() || distance < light.getBrightLightRadius() )
+        return true;
+    }
+    
+    return false;
+    
+  }
+  
   void calculateShadows(Light light, PGraphics shadows) {
     
     float angle = 0;

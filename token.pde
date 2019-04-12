@@ -61,6 +61,9 @@ class Token {
   
   void recalculateShadows() {
     
+    if ( DEBUG )
+      println("DEBUG: Token " + name + ": recalculating shadows");
+    
     for ( Light light: lights ) {
       
       PGraphics shadows = obstacles.getCurrentShadowsCanvas();
@@ -72,11 +75,21 @@ class Token {
       
       light.draw(shadows);
       
+      int wallsReached = 0;
       for ( Wall wall: obstacles.getWalls() )
-        wall.calculateShadows(light, shadows);
+        if ( wall.reachedBy(light) ) {
+          wall.calculateShadows(light, shadows);
+          wallsReached += 1;
+        }
+      println("DEBUG: Token " + name + ": Light " + light.getName() + ": " + wallsReached + "/" + obstacles.getWalls().size() + " walls reached");
       
+      int doorsReached = 0;
       for ( Door door: obstacles.getDoors() )
-        door.calculateShadows(light, shadows);
+        if ( door.reachedBy(light) ) {
+          door.calculateShadows(light, shadows);
+          doorsReached += 1;
+        }
+      println("DEBUG: Token " + name + ": Light " + light.getName() + ": " + doorsReached + "/" + obstacles.getDoors().size() + " doors reached");
       
       shadows.endDraw();
       obstacles.blendShadows();

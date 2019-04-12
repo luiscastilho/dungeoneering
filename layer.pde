@@ -62,11 +62,11 @@ class Layer {
   
   void recalculateShadows() {
     
-    for ( Token token: tokens )
-      token.recalculateShadows();
-    
     if ( DEBUG )
       println("DEBUG: " + name + ": recalculating shadows");
+    
+    for ( Token token: tokens )
+      token.recalculateShadows();
     
   }
   
