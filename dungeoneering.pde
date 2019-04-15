@@ -31,7 +31,7 @@ void setup() {
   appState = AppStates.idle;
   
   cp5 = new ControlP5(this);
-  cp5.isTouch = true;
+  cp5.isTouch = false;
   
   canvas = createGraphics(width, height);
   
@@ -365,14 +365,25 @@ void keyPressed() {
     case gridSetup:
       
       if ( key == CODED ) {
+        // adjust grid helper start point
         if ( keyCode == UP )
-          userInterface.gridHelperSetupAdjustment(0, 1);
+          userInterface.gridHelperSetupAdjustment(0, 1, false);
         if ( keyCode == RIGHT )
-          userInterface.gridHelperSetupAdjustment(1, 0);
+          userInterface.gridHelperSetupAdjustment(1, 0, false);
         if ( keyCode == DOWN )
-          userInterface.gridHelperSetupAdjustment(0, -1);
+          userInterface.gridHelperSetupAdjustment(0, -1, false);
         if ( keyCode == LEFT )
-          userInterface.gridHelperSetupAdjustment(-1, 0);
+          userInterface.gridHelperSetupAdjustment(-1, 0, false);
+      } else {
+        // adjust grid helper end point
+        if ( key == 'w' )
+          userInterface.gridHelperSetupAdjustment(0, 1, true);
+        if ( key == 'd' )
+          userInterface.gridHelperSetupAdjustment(1, 0, true);
+        if ( key == 's' )
+          userInterface.gridHelperSetupAdjustment(0, -1, true);
+        if ( key == 'a' )
+          userInterface.gridHelperSetupAdjustment(-1, 0, true);
       }
       
       break;

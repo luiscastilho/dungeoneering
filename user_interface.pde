@@ -749,15 +749,20 @@ public class UserInterface {
     
   }
   
-  void gridHelperSetupAdjustment(int xAdjustment, int yAdjustment) {
+  void gridHelperSetupAdjustment(int xAdjustment, int yAdjustment, boolean toPosition) {
     
     if ( !gridHelperSet )
       return;
     
     grid.clear();
     
-    gridHelperToX += xAdjustment;
-    gridHelperToY += yAdjustment;
+    if ( toPosition ) {
+      gridHelperToX += xAdjustment;
+      gridHelperToY += yAdjustment;
+    } else {
+      gridHelperX += xAdjustment;
+      gridHelperY += yAdjustment;
+    }
     
     if ( abs(gridHelperX-gridHelperToX) < 10 || abs(gridHelperY-gridHelperToY) < 10 ) {
       
@@ -1350,7 +1355,7 @@ public class UserInterface {
     float endX = startX + controller.getWidth();
     float endY = startY + controller.getHeight();
     
-    if ( x > startX && x < endX && y > startY && y < endY )
+    if ( controller.isInside() || (x > startX && x < endX && y > startY && y < endY ) )
       inside = true;
     
     return inside;
