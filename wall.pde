@@ -53,6 +53,48 @@ class Wall {
     
   }
   
+  // Source: stackoverflow.com/questions/13242738/how-can-i-find-the-general-form-equation-of-a-line-from-two-points
+  // Source: www.geeksforgeeks.org/check-line-touches-intersects-circle
+  boolean intersectedBy(Light light) {
+    
+    boolean intersects = false;
+    
+    PVector lightCenter = light.getPosition();
+    int lightRadius = max(light.getBrightLightRadius(), light.getDimLightRadius());
+    
+    for ( PVector i: vertexes ) {
+      
+      for ( PVector j: vertexes ) {
+        
+        if ( i.equals(j) )
+          continue;
+        
+        // calculate line defined by these two vertexes 
+        float lineA = i.y - j.y;
+        float lineB = j.x - i.x;
+        float lineC = (i.x - j.x) * i.y + (j.y - i.y) * i.x;
+        
+        // calculate distance between this line and the light radius
+        double dist = (Math.abs(lineA * lightCenter.x + lineB * lightCenter.y + lineC)) /  
+                        Math.sqrt(lineA * lineA + lineB * lineB); 
+        
+        // check if light radius is greater than or equals the calculated distance
+        intersects = lightRadius >= dist;
+        
+        if ( intersects )
+          break;
+        
+      }
+      
+      if ( intersects )
+        break;
+      
+    }
+    
+    return intersects;
+    
+  }
+  
   void calculateShadows(Light light, PGraphics shadows) {
     
     float angle = 0;

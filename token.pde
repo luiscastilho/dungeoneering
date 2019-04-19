@@ -99,7 +99,7 @@ class Token {
     
     int wallsReached = 0;
     for ( Wall wall: obstacles.getWalls() )
-      if ( wall.reachedBy(light) ) {
+      if ( wall.reachedBy(light) || wall.intersectedBy(light) ) {
         wall.calculateShadows(light, shadows);
         wallsReached += 1;
       }
@@ -108,7 +108,7 @@ class Token {
     
     int doorsReached = 0;
     for ( Door door: obstacles.getDoors() )
-      if ( door.reachedBy(light) ) {
+      if ( door.reachedBy(light) || door.intersectedBy(light) ) {
         door.calculateShadows(light, shadows);
         doorsReached += 1;
       }
