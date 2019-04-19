@@ -19,6 +19,8 @@ class Token {
   
   ArrayList<Condition> conditions;
   
+  boolean disabled;
+  
   Token(PGraphics _canvas) {
     
     canvas = _canvas;
@@ -38,6 +40,8 @@ class Token {
     lightSources = new ArrayList<Light>();
     
     conditions = new ArrayList<Condition>();
+    
+    disabled = false;
     
   }
   
@@ -76,8 +80,9 @@ class Token {
     for ( Light lightSource: lightSources )
       recalculateShadows(lightSource, "Light source");
     
-    for ( Light sightType: sightTypes )
-      recalculateShadows(sightType, "Sight type");
+    if ( !disabled )
+      for ( Light sightType: sightTypes )
+        recalculateShadows(sightType, "Sight type");
     
   }
   
@@ -217,13 +222,29 @@ class Token {
     
     for ( Condition activeCondition: conditions )
       if ( activeCondition.getName().equals(condition.getName()) ) {
+        
         conditions.remove(condition);
+        
+        if ( disabled ) {
+          
+          boolean stillDisabled = false;
+          for ( Condition stillActiveCondition: conditions )
+            if ( stillActiveCondition.disablesTarget() )
+              stillDisabled = true;
+          
+          disabled = stillDisabled;
+          
+        }
+        
         if ( DEBUG )
           println("DEBUG: Token " + name + ": Condition " + condition.getName() + " removed");
         return;
+        
       }
     
     conditions.add(condition);
+    if ( condition.disablesTarget() )
+      disabled = true;
     
     if ( DEBUG )
       println("DEBUG: Token " + name + ": Condition " + condition.getName() + " added");

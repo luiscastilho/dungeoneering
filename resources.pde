@@ -81,7 +81,7 @@ class Resources {
   
   void setConditions() {
     
-    conditions.put("Dead", new Condition(canvas, "Dead", "conditions/dead.png", grid.getCellWidth(), grid.getCellHeight()));
+    conditions.put("Dead", new Condition(canvas, "Dead", "conditions/dead.png", grid.getCellWidth(), grid.getCellHeight(), true));
     
   }
   

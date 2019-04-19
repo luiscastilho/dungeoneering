@@ -903,6 +903,7 @@ public class UserInterface {
         }
         
         rightClickedToken.toggleCondition(conditionTemplate);
+        obstacles.setRecalculateShadows(true);
         hideMenu(0, 0);
         
         break;

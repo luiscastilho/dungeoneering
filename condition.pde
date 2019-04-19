@@ -7,7 +7,9 @@ class Condition {
   String imagePath;
   PImage image;
   
-  Condition(PGraphics _canvas, String _name, String _imagePath, int cellWidth, int cellHeight) {
+  boolean disablesTarget;
+  
+  Condition(PGraphics _canvas, String _name, String _imagePath, int cellWidth, int cellHeight, boolean _disablesTarget) {
     
     canvas = _canvas;
     
@@ -16,6 +18,8 @@ class Condition {
     imagePath = _imagePath;
     image = loadImage(imagePath);
     image.resize(cellWidth, cellHeight);
+    
+    disablesTarget = _disablesTarget;
     
   }
   
@@ -31,6 +35,10 @@ class Condition {
   
   String getName() {
     return name;
+  }
+  
+  boolean disablesTarget() {
+    return disablesTarget;
   }
   
 }
