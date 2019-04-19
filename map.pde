@@ -17,6 +17,9 @@ class Map {
   float lastPanX, lastPanY, lastScale;
   float panIncrement, zoomIncrement;
   
+  boolean panEnabled;
+  boolean zoomEnabled;
+  
   Map(PGraphics _canvas, Obstacles _obstacles) {
     
     canvas = _canvas;
@@ -35,6 +38,9 @@ class Map {
     
     panIncrement = 1;
     zoomIncrement = .3;
+    
+    panEnabled = true;
+    zoomEnabled = false;
     
   }
   
@@ -89,6 +95,9 @@ class Map {
   
   void pan(int _mouseX, int _pmouseX, int _mouseY, int _pmouseY) {
     
+    if ( !panEnabled )
+      return;
+    
     panToX += _mouseX-_pmouseX;
     panToY += _mouseY-_pmouseY;
     
@@ -96,13 +105,13 @@ class Map {
   
   void zoom(int mouseWheelAmount, int _mouseX, int _mouseY) {
     
-    // TODO: fix zoom bug causing low FPS
-    /*
+    if ( !zoomEnabled )
+      return;
+    
     float zoom = -mouseWheelAmount * .05;
     panToX -= zoom * (_mouseX - panToX);
     panToY -= zoom * (_mouseY - panToY);
     toScale *= zoom+1;
-    */
     
   }
   
@@ -208,6 +217,14 @@ class Map {
   
   int transformY(int y){
     return int((1/scale)*(y - panY));
+  }
+  
+  void togglePan() {
+    panEnabled = !panEnabled;
+  }
+  
+  void toggleZoom() {
+    zoomEnabled = !zoomEnabled;
   }
   
 }

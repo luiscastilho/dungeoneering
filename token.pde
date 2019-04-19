@@ -14,7 +14,10 @@ class Token {
   //ArrayList<Cell> cell;
   //ArrayList<Cell> prevCell;
   
-  ArrayList<Light> lights;
+  ArrayList<Light> sightTypes;
+  ArrayList<Light> lightSources;
+  
+  ArrayList<Condition> conditions;
   
   Token(PGraphics _canvas) {
     
@@ -31,7 +34,10 @@ class Token {
     cell = null; //new ArrayList<Cell>();
     prevCell = null; //new ArrayList<Cell>();
     
-    lights = new ArrayList<Light>();
+    sightTypes = new ArrayList<Light>();
+    lightSources = new ArrayList<Light>();
+    
+    conditions = new ArrayList<Condition>();
     
   }
   
@@ -44,6 +50,9 @@ class Token {
     
     canvas.imageMode(CENTER);
     canvas.image(image, cell.getCenter().x, cell.getCenter().y);
+    
+    for ( Condition condition: conditions )
+      condition.draw(cell.getCenter().x, cell.getCenter().y);
     
   }
   
@@ -64,37 +73,45 @@ class Token {
     if ( DEBUG )
       println("DEBUG: Token " + name + ": recalculating shadows");
     
-    for ( Light light: lights ) {
-      
-      PGraphics shadows = obstacles.getCurrentShadowsCanvas();
-      
-      shadows.beginDraw();
-      shadows.background(0);
-      shadows.translate(obstacles.getCurrentPanX(), obstacles.getCurrentPanY());
-      shadows.scale(obstacles.getCurrentScale());
-      
-      light.draw(shadows);
-      
-      int wallsReached = 0;
-      for ( Wall wall: obstacles.getWalls() )
-        if ( wall.reachedBy(light) ) {
-          wall.calculateShadows(light, shadows);
-          wallsReached += 1;
-        }
-      println("DEBUG: Token " + name + ": Light " + light.getName() + ": " + wallsReached + "/" + obstacles.getWalls().size() + " walls reached");
-      
-      int doorsReached = 0;
-      for ( Door door: obstacles.getDoors() )
-        if ( door.reachedBy(light) ) {
-          door.calculateShadows(light, shadows);
-          doorsReached += 1;
-        }
-      println("DEBUG: Token " + name + ": Light " + light.getName() + ": " + doorsReached + "/" + obstacles.getDoors().size() + " doors reached");
-      
-      shadows.endDraw();
-      obstacles.blendShadows();
-      
-    }
+    for ( Light lightSource: lightSources )
+      recalculateShadows(lightSource, "Light source");
+    
+    for ( Light sightType: sightTypes )
+      recalculateShadows(sightType, "Sight type");
+    
+  }
+  
+  void recalculateShadows(Light light, String type) {
+    
+    PGraphics shadows = obstacles.getCurrentShadowsCanvas();
+    
+    shadows.beginDraw();
+    shadows.background(0);
+    shadows.translate(obstacles.getCurrentPanX(), obstacles.getCurrentPanY());
+    shadows.scale(obstacles.getCurrentScale());
+    
+    light.draw(shadows);
+    
+    int wallsReached = 0;
+    for ( Wall wall: obstacles.getWalls() )
+      if ( wall.reachedBy(light) ) {
+        wall.calculateShadows(light, shadows);
+        wallsReached += 1;
+      }
+    if ( DEBUG )
+      println("DEBUG: Token " + name + ": " + type + " " + light.getName() + ": " + wallsReached + "/" + obstacles.getWalls().size() + " walls reached");
+    
+    int doorsReached = 0;
+    for ( Door door: obstacles.getDoors() )
+      if ( door.reachedBy(light) ) {
+        door.calculateShadows(light, shadows);
+        doorsReached += 1;
+      }
+    if ( DEBUG )
+      println("DEBUG: Token " + name + ": " + type + " " + light.getName() + ": " + doorsReached + "/" + obstacles.getDoors().size() + " doors reached");
+    
+    shadows.endDraw();
+    obstacles.blendShadows();
     
   }
   
@@ -102,8 +119,10 @@ class Token {
     
     if ( _cell != null ) {
       cell = _cell;
-      for ( Light light: lights )
+      for ( Light light: lightSources )
         light.setPosition(cell.getCenter().x, cell.getCenter().y);
+      for ( Light sight: sightTypes )
+        sight.setPosition(cell.getCenter().x, cell.getCenter().y);
     }
     
   }
@@ -123,8 +142,10 @@ class Token {
     
     if ( prevCell != null ) {
       cell = prevCell;
-      for ( Light light: lights )
+      for ( Light light: lightSources )
         light.setPosition(cell.getCenter().x, cell.getCenter().y);
+      for ( Light sight: sightTypes )
+        sight.setPosition(cell.getCenter().x, cell.getCenter().y);
     }
     beingMoved = false;
     
@@ -150,14 +171,62 @@ class Token {
     return cell;
   }
   
-  ArrayList<Light> getLights() {
-    return lights;
+  ArrayList<Light> getLightSources() {
+    return lightSources;
   }
   
-  void addLight(Light light) {
+  ArrayList<Light> getSightTypes() {
+    return sightTypes;
+  }
+  
+  void addLightSource(Light light) {
     
-    lights.add(light);
+    for ( Light activeLightSource: lightSources )
+      if ( activeLightSource.getName().equals(light.getName()) ) {
+        if ( DEBUG )
+          println("DEBUG: Token " + name + ": Light source " + light.getName() + " already present");
+        return;
+      }
+    
+    lightSources.add(light);
     light.setPosition(cell.getCenter().x, cell.getCenter().y);
+    
+    if ( DEBUG )
+      println("DEBUG: Token " + name + ": Light source " + light.getName() + " added");
+    
+  }
+  
+  void addSightType(Light sight) {
+    
+    for ( Light activeSightType: sightTypes )
+      if ( activeSightType.getName().equals(sight.getName()) ) {
+        if ( DEBUG )
+          println("DEBUG: Token " + name + ": Sight type " + sight.getName() + " already present");
+        return;
+      }
+    
+    sightTypes.add(sight);
+    sight.setPosition(cell.getCenter().x, cell.getCenter().y);
+    
+    if ( DEBUG )
+      println("DEBUG: Token " + name + ": Sight type " + sight.getName() + " added");
+    
+  }
+  
+  void toggleCondition(Condition condition) {
+    
+    for ( Condition activeCondition: conditions )
+      if ( activeCondition.getName().equals(condition.getName()) ) {
+        conditions.remove(condition);
+        if ( DEBUG )
+          println("DEBUG: Token " + name + ": Condition " + condition.getName() + " removed");
+        return;
+      }
+    
+    conditions.add(condition);
+    
+    if ( DEBUG )
+      println("DEBUG: Token " + name + ": Condition " + condition.getName() + " added");
     
   }
   

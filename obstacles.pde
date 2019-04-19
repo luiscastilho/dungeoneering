@@ -190,7 +190,7 @@ class Obstacles {
     
     recalculateShadows = _recalculateShadows;
     
-    if ( DEBUG )
+    if ( DEBUG && _recalculateShadows )
       println("DEBUG: Obstacles: recalculating shadows");
     
   }

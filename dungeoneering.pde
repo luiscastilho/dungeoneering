@@ -18,6 +18,8 @@ Layer playersLayer;
 Layer dmLayer;
 LayerShown layerShown;
 
+Resources resources;
+
 UserInterface userInterface;
 
 color backgroundColor;
@@ -45,7 +47,9 @@ void setup() {
   dmLayer = new Layer(canvas, grid, obstacles, "DM Layer");
   layerShown = LayerShown.playersOnly;
   
-  userInterface = new UserInterface(canvas, cp5, map, grid, obstacles, playersLayer, dmLayer);
+  resources = new Resources(canvas, grid);
+  
+  userInterface = new UserInterface(canvas, cp5, map, grid, obstacles, playersLayer, dmLayer, resources);
   
   backgroundColor = color(0);
   
@@ -179,6 +183,18 @@ void appStateBasedAction() {
       appState = AppStates.idle;
       
       break;
+    case togglingCameraPan:
+      
+      map.togglePan();
+      appState = AppStates.idle;
+      
+      break;
+    case togglingCameraZoom:
+      
+      map.toggleZoom();
+      appState = AppStates.idle;
+      
+      break;
     default:
       break;
   }
@@ -191,6 +207,12 @@ void mousePressed() {
     return;
   
   switch ( appState ) {
+    case idle:
+      
+      if ( mouseButton == LEFT )
+        userInterface.hideMenu(mouseX, mouseY);
+      
+      break;
     case gridSetup:
       
       if ( mouseButton != LEFT )
@@ -246,60 +268,9 @@ void mouseReleased() {
       if ( mouseButton == LEFT )
         userInterface.openDoor(mouseX, mouseY);
       
-      if ( mouseButton == RIGHT ) {
-        Token token;
-        
-        token = playersLayer.getToken(mouseX, mouseY);
-        if ( token == null )
-          token = dmLayer.getToken(mouseX, mouseY);
-        if ( token == null )
-          break;
-        
-        Light candle = userInterface.createLight("Candle", 5, 10);
-        Light torch = userInterface.createLight("Torch", 20, 40);
-        Light darkvision60 = userInterface.createLight("Darkvision", 0, 60);
-        Light darkvision120 = userInterface.createLight("Darkvision", 0, 120);
-        
-        switch ( token.getName() ) {
-          case "Candle":
-            token.addLight(candle);
-            println("Candle added");
-            break;
-          case "Torch":
-            token.addLight(torch);
-            println("Torch added");
-            break;
-          case "Lia":
-          case "Orsik":
-          case "Luth":
-          case "Claw":
-          case "Gruk":
-          case "Labard":
-          case "Lander":
-          case "Naven":
-            token.addLight(torch);
-            println("Torch added to token " + token.getName());
-            break;
-          case "Grum'shar":
-          case "Goblin":
-          case "Orc":
-          case "Grey Ooze":
-            token.addLight(darkvision60);
-            println("Darkvision 60' added to token " + token.getName());
-            break;
-          case "Duergar":
-          case "Nihiloor":
-            token.addLight(darkvision120);
-            println("Darkvision 120' added to token " + token.getName());
-            break;
-          case "Kenku":
-            token.addLight(candle);
-            println("Candle added to token " + token.getName());
-            break;
-        }
-        
-        obstacles.setRecalculateShadows(true);
-      }
+      if ( resources.isSet() )
+        if ( mouseButton == RIGHT )
+          userInterface.showMenu(mouseX, mouseY);
       
       break;
     case gridSetup:

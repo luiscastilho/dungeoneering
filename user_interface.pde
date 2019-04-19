@@ -7,33 +7,36 @@ public class UserInterface {
   PGraphics canvas;
   
   ControlP5 cp5;
-  Group togglableControllers;
   
   Map map;
   
   Grid grid;
   
+  Obstacles obstacles;
+  
   Layer playersLayer;
   Layer dmLayer;
   
-  Obstacles obstacles;
+  Resources resources;
   
   Wall newWall;
   Door newDoor;
   
-  int controllersTopLeftX;
-  int controllersTopLeftY;
-  int controllersTopRightX;
-  int controllersTopRightY;
-  int controllersBottomRightX;
-  int controllersBottomRightY;
+  Token rightClickedToken;
+  
   int controllersSpacing;
+  int controllersTopLeftX, controllersTopLeftY;
+  int controllersTopRightX, controllersTopRightY;
+  int controllersBottomRightX, controllersBottomRightY;
+  int controllersMenuX, controllersMenuY;
+  int controllersMenuInitialX, controllersMenuInitialY;
   
   int rectButtonWidth;
   int rectButtonHeight;
   int squareButtonWidth;
   int squareButtonHeight;
   int instructionsHeight;
+  int menuBarHeight;
   
   color enabledBackgroundColor, disabledBackgroundColor, mouseOverBackgroundColor, activeBackgroundColor;
   
@@ -46,38 +49,50 @@ public class UserInterface {
   int gridHelperToX, gridHelperToY;
   boolean gridHelperSet;
   
-  UserInterface(PGraphics _canvas, ControlP5 _cp5, Map _map, Grid _grid, Obstacles _obstacles, Layer _playersLayer, Layer _dmLayer) {
+  Group togglableControllers;
+  Group menuControllers;
+  Accordion tokenMenu;
+  
+  UserInterface(PGraphics _canvas, ControlP5 _cp5, Map _map, Grid _grid, Obstacles _obstacles, Layer _playersLayer, Layer _dmLayer, Resources _resources) {
     
     canvas = _canvas;
     
     cp5 = _cp5;
-    togglableControllers = cp5.addGroup("Toggable controllers");
     
     map = _map;
     
     grid = _grid;
     
+    obstacles = _obstacles;
+    
     playersLayer = _playersLayer;
     dmLayer = _dmLayer;
     
-    obstacles = _obstacles;
+    resources = _resources;
     
     newWall = null;
     newDoor = null;
     
+    rightClickedToken = null;
+    
+    controllersSpacing = 5;
     controllersTopLeftX = int(min(canvas.width, canvas.height) * 0.05);
     controllersTopLeftY = int(min(canvas.width, canvas.height) * 0.05);
     controllersTopRightX = canvas.width - int(min(canvas.width, canvas.height) * 0.05);
     controllersTopRightY = int(min(canvas.width, canvas.height) * 0.05);
     controllersBottomRightX = controllersTopRightX;
     controllersBottomRightY = canvas.height - controllersTopLeftY;
-    controllersSpacing = 5;
+    controllersMenuX = controllersSpacing;
+    controllersMenuY = controllersSpacing;
+    controllersMenuInitialX = controllersMenuX;
+    controllersMenuInitialY = controllersMenuY;
     
     rectButtonWidth = 100;
     rectButtonHeight = 25;
     squareButtonWidth = 25;
     squareButtonHeight = 25;
     instructionsHeight = 15;
+    menuBarHeight = 15;
     
     enabledBackgroundColor = color(0, 45, 90);
     disabledBackgroundColor = color(100);
@@ -95,6 +110,10 @@ public class UserInterface {
     gridHelperX = gridHelperToX = 0;
     gridHelperY = gridHelperToY = 0;
     gridHelperSet = false;
+    
+    togglableControllers = null;
+    menuControllers = null;
+    tokenMenu = null;
     
     setupControllers();
     
@@ -138,6 +157,15 @@ public class UserInterface {
   }
   
   void setupControllers() {
+    
+    // Togglable controllers group
+    
+    togglableControllers = cp5.addGroup("Toggable controllers");
+    
+    // Right click menu controllers group
+    
+    menuControllers = cp5.addGroup("Actions")
+                         .setBackgroundColor(color(0, 127));
     
     // Top left bar
     
@@ -315,6 +343,131 @@ public class UserInterface {
        .setOn()
        ;
     
+    controllersBottomRightX = controllersBottomRightX - squareButtonWidth - controllersSpacing;
+    
+    PImage[] panButtonImages = {loadImage("icons/pan_default.png"), loadImage("icons/pan_over.png"), loadImage("icons/pan_active.png")};
+    for ( PImage img: panButtonImages )
+      if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
+        img.resize(squareButtonWidth, squareButtonHeight);
+    cp5.addButton("Toggle camera pan")
+       .setPosition(controllersBottomRightX, controllersBottomRightY)
+       .setSize(squareButtonWidth, squareButtonHeight)
+       .setImages(panButtonImages)
+       .updateSize()
+       .setSwitch(true)
+       .setOn()
+       ;
+    
+    controllersBottomRightX = controllersBottomRightX - squareButtonWidth - controllersSpacing;
+    
+    PImage[] zoomButtonImages = {loadImage("icons/zoom_default.png"), loadImage("icons/zoom_over.png"), loadImage("icons/zoom_active.png")};
+    for ( PImage img: zoomButtonImages )
+      if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
+        img.resize(squareButtonWidth, squareButtonHeight);
+    cp5.addButton("Toggle camera zoom")
+       .setPosition(controllersBottomRightX, controllersBottomRightY)
+       .setSize(squareButtonWidth, squareButtonHeight)
+       .setImages(zoomButtonImages)
+       .updateSize()
+       .setSwitch(true)
+       .setOff()
+       ;
+    
+    // Token right click menu
+    
+    menuControllers.setHeight(menuBarHeight)                // menu bar height
+                   .setBackgroundHeight(controllersSpacing) // item height
+                   ;
+    tokenMenu = cp5.addAccordion("Right click menu")
+       .setPosition(0, 0)
+       .setWidth(controllersSpacing)         // menu bar and items width
+       .setMinItemHeight(controllersSpacing) // min item height
+       .addItem(menuControllers)
+       .updateItems()
+       .setCollapseMode(Accordion.SINGLE)
+       .open(0)
+       .hide()
+       ;
+    
+    PImage[] candleButtonImages = {loadImage("icons/candle_default.png"), loadImage("icons/candle_over.png"), loadImage("icons/candle_active.png")};
+    for ( PImage img: candleButtonImages )
+      if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
+        img.resize(squareButtonWidth, squareButtonHeight);
+    cp5.addButton("Add light source candle")
+       .setPosition(controllersMenuX, controllersMenuY)
+       .setSize(squareButtonWidth, squareButtonHeight)
+       .setImages(candleButtonImages)
+       .updateSize()
+       .moveTo(menuControllers)
+       ;
+    
+    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    tokenMenu.setWidth(tokenMenu.getWidth() + squareButtonWidth + controllersSpacing);
+    menuControllers.setBackgroundHeight(menuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
+    
+    PImage[] torchButtonImages = {loadImage("icons/torch_default.png"), loadImage("icons/torch_over.png"), loadImage("icons/torch_active.png")};
+    for ( PImage img: torchButtonImages )
+      if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
+        img.resize(squareButtonWidth, squareButtonHeight);
+    cp5.addButton("Add light source torch")
+       .setPosition(controllersMenuX, controllersMenuY)
+       .setSize(squareButtonWidth, squareButtonHeight)
+       .setImages(torchButtonImages)
+       .updateSize()
+       .moveTo(menuControllers)
+       ;
+    
+    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    tokenMenu.setWidth(tokenMenu.getWidth() + squareButtonWidth + controllersSpacing);
+    
+    PImage[] darkvisionButtonImages = {loadImage("icons/darkvision_default.png"), loadImage("icons/darkvision_over.png"), loadImage("icons/darkvision_active.png")};
+    for ( PImage img: darkvisionButtonImages )
+      if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
+        img.resize(squareButtonWidth, squareButtonHeight);
+    cp5.addButton("Add sight type darkvision")
+       .setPosition(controllersMenuX, controllersMenuY)
+       .setSize(squareButtonWidth, squareButtonHeight)
+       .setImages(darkvisionButtonImages)
+       .updateSize()
+       .moveTo(menuControllers)
+       ;
+    
+    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    tokenMenu.setWidth(tokenMenu.getWidth() + squareButtonWidth + controllersSpacing);
+    
+    PImage[] deathButtonImages = {loadImage("icons/death_default.png"), loadImage("icons/death_over.png"), loadImage("icons/death_active.png")};
+    for ( PImage img: deathButtonImages )
+      if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
+        img.resize(squareButtonWidth, squareButtonHeight);
+    cp5.addButton("Toggle condition dead")
+       .setPosition(controllersMenuX, controllersMenuY)
+       .setSize(squareButtonWidth, squareButtonHeight)
+       .setImages(deathButtonImages)
+       .updateSize()
+       .moveTo(menuControllers)
+       ;
+    
+    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    tokenMenu.setWidth(tokenMenu.getWidth() + squareButtonWidth + controllersSpacing);
+    
+    controllersMenuX = controllersMenuInitialX;
+    controllersMenuY = controllersMenuY + squareButtonWidth + controllersSpacing;
+    
+    PImage[] switchLayerButtonImages = {loadImage("icons/switch_layer_default.png"), loadImage("icons/switch_layer_over.png"), loadImage("icons/switch_layer_active.png")};
+    for ( PImage img: switchLayerButtonImages )
+      if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
+        img.resize(squareButtonWidth, squareButtonHeight);
+    cp5.addButton("Switch token layer")
+       .setPosition(controllersMenuX, controllersMenuY)
+       .setSize(squareButtonWidth, squareButtonHeight)
+       .setImages(switchLayerButtonImages)
+       .updateSize()
+       .moveTo(menuControllers)
+       ;
+    
+    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    menuControllers.setBackgroundHeight(menuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
+    
     // Bottom left messages
     
     // Roll20 "Grid Alignment Tool" instructions:
@@ -385,10 +538,17 @@ public class UserInterface {
   
   AppStates controllerEvent(ControlEvent controlEvent) {
     
+    String resourceName;
+    Light lightTemplate;
+    Condition conditionTemplate;
+    
     AppStates newAppState = AppStates.idle;
     
-    Controller controller = controlEvent.getController();
-    String controllerName = controller.getName();
+    String controllerName = "";
+    if ( controlEvent.isController() )
+      controllerName = controlEvent.getController().getName();
+    else if ( controlEvent.isGroup() )
+      controllerName = controlEvent.getGroup().getName();
     
     switch ( controllerName ) {
       case "Select map":
@@ -401,7 +561,7 @@ public class UserInterface {
         break;
       case "Grid setup":
         
-        Button gridSetup = (Button)controller;
+        Button gridSetup = (Button)controlEvent.getController();
         Textlabel gridInstructions1stLine = (Textlabel)cp5.getController("Grid instructions - 1st line");
         Textlabel gridInstructions2ndLine = (Textlabel)cp5.getController("Grid instructions - 2nd line");
         
@@ -450,6 +610,9 @@ public class UserInterface {
           gridInstructions1stLine.hide();
           gridInstructions2ndLine.hide();
           
+          if ( grid.isSet() )
+            resources.setup();
+          
           cursor(ARROW);
           
           newAppState = AppStates.idle;
@@ -460,7 +623,7 @@ public class UserInterface {
       case "Add player token":
       case "Add DM token":
         
-        Button addToken = (Button)controller;
+        Button addToken = (Button)controlEvent.getController();
         
         if ( addToken.isOn() ) {
           
@@ -473,12 +636,6 @@ public class UserInterface {
             selectInput("Select a token image:", "playerTokenImageSelected", tokenFile, this);
           else
             selectInput("Select a token image:", "dmTokenImageSelected", tokenFile, this);
-          
-          if ( controllerName.equals("Add player token") )
-            layerShown = LayerShown.playersOnly;
-          else
-            layerShown = LayerShown.dmOnly;
-          obstacles.setRecalculateShadows(true);
           
           disableController("Select map");
           disableController("Grid setup");
@@ -511,7 +668,7 @@ public class UserInterface {
         break;
       case "Add/Remove walls":
         
-        Button addWall = (Button)controller;
+        Button addWall = (Button)controlEvent.getController();
         Textlabel wallInstructions1stLine = (Textlabel)cp5.getController("Wall instructions - 1st line");
         Textlabel wallInstructions2ndLine = (Textlabel)cp5.getController("Wall instructions - 2nd line");
         
@@ -567,7 +724,7 @@ public class UserInterface {
         break;
       case "Add/Remove doors":
         
-        Button addDoor = (Button)controller;
+        Button addDoor = (Button)controlEvent.getController();
         Textlabel doorInstructions1stLine = (Textlabel)cp5.getController("Door instructions - 1st line");
         Textlabel doorInstructions2ndLine = (Textlabel)cp5.getController("Door instructions - 2nd line");
         
@@ -659,7 +816,7 @@ public class UserInterface {
         break;
       case "Toggle UI":
         
-        Button toggleUi = (Button)controller;
+        Button toggleUi = (Button)controlEvent.getController();
         
         if ( toggleUi.isOn() ) {
           
@@ -670,6 +827,106 @@ public class UserInterface {
           togglableControllers.hide();
           
         }
+        
+        break;
+      case "Toggle camera pan":
+        
+        newAppState = AppStates.togglingCameraPan;
+        
+        break;
+      case "Toggle camera zoom":
+        
+        newAppState = AppStates.togglingCameraZoom;
+        
+        break;
+      case "Add light source candle":
+        
+        if ( rightClickedToken == null )
+          break;
+        
+        resourceName = "Candle";
+        lightTemplate = resources.getCommonLightSource(resourceName);
+        if ( lightTemplate == null ) {
+          println("Resource: Common light source " + resourceName + " not found");
+          break;
+        }
+        
+        rightClickedToken.addLightSource(new Light(lightTemplate.getName(), lightTemplate.getBrightLightRadius(), lightTemplate.getDimLightRadius()));
+        obstacles.setRecalculateShadows(true);
+        hideMenu(0, 0);
+        
+        break;
+      case "Add light source torch":
+        
+        if ( rightClickedToken == null )
+          break;
+        
+        resourceName = "Torch";
+        lightTemplate = resources.getCommonLightSource(resourceName);
+        if ( lightTemplate == null ) {
+          println("Resource: Common light source " + resourceName + " not found");
+          break;
+        }
+        
+        rightClickedToken.addLightSource(new Light(lightTemplate.getName(), lightTemplate.getBrightLightRadius(), lightTemplate.getDimLightRadius()));
+        obstacles.setRecalculateShadows(true);
+        hideMenu(0, 0);
+        
+        break;
+      case "Add sight type darkvision":
+        
+        if ( rightClickedToken == null )
+          break;
+        
+        resourceName = "Darkvision 60'";
+        lightTemplate = resources.getSightType(resourceName);
+        if ( lightTemplate == null ) {
+          println("Resource: Sight type " + resourceName + " not found");
+          break;
+        }
+        
+        rightClickedToken.addSightType(new Light(lightTemplate.getName(), lightTemplate.getBrightLightRadius(), lightTemplate.getDimLightRadius()));
+        obstacles.setRecalculateShadows(true);
+        hideMenu(0, 0);
+        
+        break;
+      case "Toggle condition dead":
+        
+        if ( rightClickedToken == null )
+          break;
+        
+        resourceName = "Dead";
+        conditionTemplate = resources.getCondition("Dead");
+        if ( conditionTemplate == null ) {
+          println("Resource: Condition " + resourceName + " not found");
+          break;
+        }
+        
+        rightClickedToken.toggleCondition(conditionTemplate);
+        hideMenu(0, 0);
+        
+        break;
+      case "Switch token layer":
+        
+        if ( rightClickedToken == null )
+          break;
+        
+        Point rightClickedTokenPosition = rightClickedToken.getCell().getCenter();
+        
+        if ( rightClickedToken.equals(playersLayer.getToken(rightClickedTokenPosition.x, rightClickedTokenPosition.y)) ) {
+          
+          playersLayer.removeToken(rightClickedToken);
+          dmLayer.addToken(rightClickedToken);
+          
+        } else {
+          
+          dmLayer.removeToken(rightClickedToken);
+          playersLayer.addToken(rightClickedToken);
+          
+        }
+        
+        obstacles.setRecalculateShadows(true);
+        hideMenu(0, 0);
         
         break;
     }
@@ -958,6 +1215,36 @@ public class UserInterface {
     
   }
   
+  void showMenu(int _mouseX, int _mouseY) {
+    
+    Token token;
+    
+    token = playersLayer.getToken(_mouseX, _mouseY);
+    if ( token == null )
+      token = dmLayer.getToken(_mouseX, _mouseY);
+    if ( token == null )
+      return;
+    
+    rightClickedToken = token;
+    
+    int menuX = token.getCell().getCenter().x;
+    int menuY = token.getCell().getCenter().y;
+    
+    tokenMenu.setPosition(menuX, menuY);
+    tokenMenu.show();
+    
+  }
+  
+  void hideMenu(int _mouseX, int _mouseY) {
+    
+    if ( isInsideMenu(_mouseX, _mouseY) )
+      return;
+    
+    tokenMenu.hide();
+    rightClickedToken = null;
+    
+  }
+  
   void saveScene(File sceneFolder) {
     
     if ( sceneFolder == null )
@@ -967,7 +1254,7 @@ public class UserInterface {
     
     String sketchPath = sketchPath().replaceAll("\\\\", "/");
     
-    int tokensIndex, obstaclesIndex, lightsIndex;
+    int obstaclesIndex;
     
     JSONObject sceneJson = new JSONObject();
     
@@ -986,69 +1273,8 @@ public class UserInterface {
     gridJson.setBoolean("drawGrid", grid.getDrawGrid());
     sceneJson.setJSONObject("grid", gridJson);
     
-    JSONArray playerTokensArray = new JSONArray();
-    ArrayList<Token> playerTokens = playersLayer.getTokens();
-    tokensIndex = 0;
-    for ( Token token: playerTokens ) {
-      
-      JSONObject tokenJson = new JSONObject();
-      
-      tokenJson.setString("name", token.getName());
-      tokenJson.setString("imagePath", token.getImagePath().replaceAll("\\\\", "/").replaceFirst("^" + sketchPath, ""));
-      
-      Cell cell = token.getCell();
-      tokenJson.setInt("row", cell.getRow());
-      tokenJson.setInt("column", cell.getColumn());
-      
-      JSONArray tokenLightsArray = new JSONArray();
-      ArrayList<Light> tokenLights = token.getLights();
-      lightsIndex = 0;
-      for ( Light light: tokenLights ) {
-        JSONObject lightJson = new JSONObject();
-        lightJson.setString("name", light.getName());
-        lightJson.setInt("brightLightRadius", light.getBrightLightRadius());
-        lightJson.setInt("dimLightRadius", light.getDimLightRadius());
-        tokenLightsArray.setJSONObject(lightsIndex, lightJson);
-      }
-      tokenJson.setJSONArray("lights", tokenLightsArray);
-      
-      playerTokensArray.setJSONObject(tokensIndex, tokenJson);
-      tokensIndex += 1;
-      
-    }
-    sceneJson.setJSONArray("playerTokens", playerTokensArray);
-    
-    JSONArray dmTokensArray = new JSONArray();
-    ArrayList<Token> dmTokens = dmLayer.getTokens();
-    tokensIndex = 0;
-    for ( Token token: dmTokens ) {
-      
-      JSONObject tokenJson = new JSONObject();
-      
-      tokenJson.setString("name", token.getName());
-      tokenJson.setString("imagePath", token.getImagePath().replaceAll("\\\\", "/").replaceFirst("^" + sketchPath, ""));
-      
-      Cell cell = token.getCell();
-      tokenJson.setInt("row", cell.getRow());
-      tokenJson.setInt("column", cell.getColumn());
-      
-      JSONArray tokenLightsArray = new JSONArray();
-      ArrayList<Light> tokenLights = token.getLights();
-      lightsIndex = 0;
-      for ( Light light: tokenLights ) {
-        JSONObject lightJson = new JSONObject();
-        lightJson.setString("name", light.getName());
-        lightJson.setInt("brightLightRadius", light.getBrightLightRadius());
-        lightJson.setInt("dimLightRadius", light.getDimLightRadius());
-        tokenLightsArray.setJSONObject(lightsIndex, lightJson);
-      }
-      tokenJson.setJSONArray("lights", tokenLightsArray);
-      
-      dmTokensArray.setJSONObject(tokensIndex, tokenJson);
-      tokensIndex += 1;
-      
-    }
-    sceneJson.setJSONArray("dmTokens", dmTokensArray);
+    sceneJson.setJSONArray("playerTokens", getTokensJsonArray(playersLayer.getTokens(), sketchPath));
+    sceneJson.setJSONArray("dmTokens", getTokensJsonArray(dmLayer.getTokens(), sketchPath));
     
     JSONArray wallsArray = new JSONArray();
     ArrayList<Wall> walls = obstacles.getWalls();
@@ -1114,6 +1340,52 @@ public class UserInterface {
     
   }
   
+  JSONArray getTokensJsonArray(ArrayList<Token> tokens, String sketchPath) {
+    
+    JSONArray tokensArray = new JSONArray();
+    int tokensIndex = 0;
+    
+    for ( Token token: tokens ) {
+      
+      JSONObject tokenJson = new JSONObject();
+      
+      tokenJson.setString("name", token.getName());
+      tokenJson.setString("imagePath", token.getImagePath().replaceAll("\\\\", "/").replaceFirst("^" + sketchPath, ""));
+      
+      Cell cell = token.getCell();
+      tokenJson.setInt("row", cell.getRow());
+      tokenJson.setInt("column", cell.getColumn());
+      
+      tokenJson.setJSONArray("lightSources", getLightsJsonArray(token.getLightSources()));
+      tokenJson.setJSONArray("sightTypes", getLightsJsonArray(token.getSightTypes()));
+      
+      tokensArray.setJSONObject(tokensIndex, tokenJson);
+      tokensIndex += 1;
+      
+    }
+    
+    return tokensArray;
+    
+  }
+  
+  JSONArray getLightsJsonArray(ArrayList<Light> lights) {
+    
+    JSONArray tokenLightsArray = new JSONArray();
+    int lightsIndex = 0;
+    
+    for ( Light light: lights ) {
+      JSONObject lightJson = new JSONObject();
+      lightJson.setString("name", light.getName());
+      lightJson.setInt("brightLightRadius", light.getBrightLightRadius());
+      lightJson.setInt("dimLightRadius", light.getDimLightRadius());
+      tokenLightsArray.setJSONObject(lightsIndex, lightJson);
+      lightsIndex += 1;
+    }
+    
+    return tokenLightsArray;
+    
+  }
+  
   void loadScene(File sceneFile) {
     
     if ( sceneFile == null )
@@ -1161,91 +1433,24 @@ public class UserInterface {
       int cellHeight = gridJson.getInt("cellHeight");
       boolean drawGrid = gridJson.getBoolean("drawGrid");
       grid.setup(firstCellCenterX, firstCellCenterY, lastCellCenterX, lastCellCenterY, cellWidth, cellHeight, drawGrid);
-      
     }
+    
+    if ( grid.isSet() )
+      resources.setup();
     
     if ( grid.isSet() ) {
       
-      JSONArray playerTokensArray = sceneJson.getJSONArray("playerTokens");
-      if ( playerTokensArray != null ) {
-        for ( int i = 0; i < playerTokensArray.size(); i++ ) {
-          
-          JSONObject tokenJson = playerTokensArray.getJSONObject(i);
-          String tokenName = tokenJson.getString("name");
-          String tokenImagePath = tokenJson.getString("imagePath");
-          int tokenRow = tokenJson.getInt("row");
-          int tokenColumn = tokenJson.getInt("column");
-          
-          if ( !fileExists(tokenImagePath) ) {
-            if ( fileExists(sketchPath + tokenImagePath) )
-              tokenImagePath = sketchPath + tokenImagePath;
-          }
-          
-          Cell cell = grid.getCellAt(tokenRow, tokenColumn);
-          Token token = new Token(canvas);
-          token.setup(tokenName, tokenImagePath, grid.getCellWidth(), grid.getCellHeight());
-          token.setCell(cell);
-          
-          JSONArray tokenLightsArray = tokenJson.getJSONArray("lights");
-          if ( tokenLightsArray != null ) {
-            for ( int j = 0; j < tokenLightsArray.size(); j++ ) {
-              JSONObject lightJson = tokenLightsArray.getJSONObject(j);
-              String lightName = lightJson.getString("name");
-              int lightBrightLightRadius = lightJson.getInt("brightLightRadius");
-              int lightDimLightRadius = lightJson.getInt("dimLightRadius");
-              Light light = new Light(lightName, lightBrightLightRadius, lightDimLightRadius);
-              token.addLight(light);
-            }
-          }
-          
-          playersLayer.addToken(token);
-          
-        }
-      }
-      
-      JSONArray dmTokensArray = sceneJson.getJSONArray("dmTokens");
-      if ( dmTokensArray != null ) {
-        for ( int i = 0; i < dmTokensArray.size(); i++ ) {
-          
-          JSONObject tokenJson = dmTokensArray.getJSONObject(i);
-          String tokenName = tokenJson.getString("name");
-          String tokenImagePath = tokenJson.getString("imagePath");
-          int tokenRow = tokenJson.getInt("row");
-          int tokenColumn = tokenJson.getInt("column");
-          
-          if ( !fileExists(tokenImagePath) ) {
-            if ( fileExists(sketchPath + tokenImagePath) )
-              tokenImagePath = sketchPath + tokenImagePath;
-          }
-          
-          Cell cell = grid.getCellAt(tokenRow, tokenColumn);
-          Token token = new Token(canvas);
-          token.setup(tokenName, tokenImagePath, grid.getCellWidth(), grid.getCellHeight());
-          token.setCell(cell);
-          
-          JSONArray tokenLightsArray = tokenJson.getJSONArray("lights");
-          if ( tokenLightsArray != null ) {
-            for ( int j = 0; j < tokenLightsArray.size(); j++ ) {
-              JSONObject lightJson = tokenLightsArray.getJSONObject(j);
-              String lightName = lightJson.getString("name");
-              int lightBrightLightRadius = lightJson.getInt("brightLightRadius");
-              int lightDimLightRadius = lightJson.getInt("dimLightRadius");
-              Light light = new Light(lightName, lightBrightLightRadius, lightDimLightRadius);
-              token.addLight(light);
-            }
-          }
-          
-          dmLayer.addToken(token);
-          
-        }
-      }
+      setTokensFromJsonArray(playersLayer, sceneJson.getJSONArray("playerTokens"), sketchPath);
+      setTokensFromJsonArray(dmLayer, sceneJson.getJSONArray("dmTokens"), sketchPath);
       
       enableController("Add player token");
       enableController("Add DM token");
       
     } else {
+      
       disableController("Add player token");
       disableController("Add DM token");
+      
     }
     
     JSONArray wallsArray = sceneJson.getJSONArray("walls");
@@ -1306,13 +1511,66 @@ public class UserInterface {
       
     }
     
+    println("Scene loaded from: " + sceneFile.getAbsolutePath());
+    
     layerShown = LayerShown.playersOnly;
     
     obstacles.setRecalculateShadows(true);
     
-    println("Scene loaded from: " + sceneFile.getAbsolutePath());
-    
     appState = AppStates.idle;
+    
+  }
+  
+  void setTokensFromJsonArray(Layer layer, JSONArray tokensArray, String sketchPath) {
+    
+    if ( tokensArray != null ) {
+      for ( int i = 0; i < tokensArray.size(); i++ ) {
+        
+        JSONObject tokenJson = tokensArray.getJSONObject(i);
+        String tokenName = tokenJson.getString("name");
+        String tokenImagePath = tokenJson.getString("imagePath");
+        int tokenRow = tokenJson.getInt("row");
+        int tokenColumn = tokenJson.getInt("column");
+        
+        if ( !fileExists(tokenImagePath) ) {
+          if ( fileExists(sketchPath + tokenImagePath) )
+            tokenImagePath = sketchPath + tokenImagePath;
+        }
+        
+        Cell cell = grid.getCellAt(tokenRow, tokenColumn);
+        Token token = new Token(canvas);
+        token.setup(tokenName, tokenImagePath, grid.getCellWidth(), grid.getCellHeight());
+        token.setCell(cell);
+        
+        for ( Light lightSource: getLightsFromJsonArray(tokenJson.getJSONArray("lightSources")) )
+          token.addLightSource(lightSource);
+        
+        for ( Light sightType: getLightsFromJsonArray(tokenJson.getJSONArray("sightTypes")) )
+          token.addSightType(sightType);
+        
+        layer.addToken(token);
+        
+      }
+    }
+    
+  }
+  
+  ArrayList<Light> getLightsFromJsonArray(JSONArray lightsArray) {
+    
+    ArrayList<Light> lights = new ArrayList<Light>();
+    
+    if ( lightsArray != null ) {
+      for ( int j = 0; j < lightsArray.size(); j++ ) {
+        JSONObject lightJson = lightsArray.getJSONObject(j);
+        String name = lightJson.getString("name");
+        int brightLightRadius = lightJson.getInt("brightLightRadius");
+        int dimLightRadius = lightJson.getInt("dimLightRadius");
+        Light light = new Light(name, brightLightRadius, dimLightRadius);
+        lights.add(light);
+      }
+    }
+    
+    return lights;
     
   }
   
@@ -1362,13 +1620,26 @@ public class UserInterface {
     
   }
   
-  Light createLight(String name, int brightLightRadiusInFeet, int dimLightRadiusInFeet) {
+  boolean isInsideMenu(int x, int y) {
     
-    int cellSize = max(grid.getCellWidth(), grid.getCellHeight());
-    int brightLightRadius = brightLightRadiusInFeet != 0 ? (brightLightRadiusInFeet / 5) * cellSize + cellSize/2 : 0;
-    int dimLightRadius = dimLightRadiusInFeet != 0 ? (dimLightRadiusInFeet / 5) * cellSize + cellSize/2 : 0;
+    boolean inside = false;
     
-    return new Light(name, brightLightRadius, dimLightRadius);
+    // menu bar
+    float barStartX = tokenMenu.getPosition()[0];
+    float barStartY = tokenMenu.getPosition()[1];
+    float barEndX = barStartX + tokenMenu.getWidth();
+    float barEndY = barStartY + menuControllers.getHeight();
+    
+    // menu item
+    float itemStartX = barStartX;
+    float itemStartY = barEndY;
+    float itemEndX = barEndX;
+    float itemEndY = itemStartY + menuControllers.getBackgroundHeight();
+    
+    if ( (x > barStartX && x < barEndX && y > barStartY && y < barEndY) || (x > itemStartX && x < itemEndX && y > itemStartY && y < itemEndY) )
+      inside = true;
+    
+    return inside;
     
   }
   

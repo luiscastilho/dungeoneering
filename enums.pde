@@ -8,7 +8,9 @@ enum AppStates {
   wallSetup,
   doorSetup,
   switchingLayer,
-  switchingLightning;
+  switchingLightning,
+  togglingCameraPan,
+  togglingCameraZoom;
   
 };
 

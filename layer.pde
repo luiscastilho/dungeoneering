@@ -113,7 +113,12 @@ class Layer {
     if ( token == null )
       return AppStates.idle;
     
-    token.setBeingMoved(true);
+    if ( !token.isBeingMoved() ) {
+      token.setBeingMoved(true);
+      tokens.remove(token);
+      tokens.add(token);
+    }
+    
     setTokenCell(token, _mouseX, _mouseY);
     
     if ( done ) {

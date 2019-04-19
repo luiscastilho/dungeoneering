@@ -18,7 +18,7 @@
       "name": "Goblin",
       "column": 5,
       "row": 2,
-      "lights": [{
+      "sightTypes": [{
         "dimLightRadius": 700,
         "brightLightRadius": 0,
         "name": "Darkvision"
@@ -29,7 +29,7 @@
       "name": "Goblin",
       "column": 2,
       "row": 3,
-      "lights": [{
+      "sightTypes": [{
         "dimLightRadius": 700,
         "brightLightRadius": 0,
         "name": "Darkvision"
@@ -40,7 +40,7 @@
       "name": "Goblin",
       "column": 4,
       "row": 4,
-      "lights": [{
+      "sightTypes": [{
         "dimLightRadius": 700,
         "brightLightRadius": 0,
         "name": "Darkvision"
@@ -51,7 +51,7 @@
       "name": "Goblin",
       "column": 2,
       "row": 5,
-      "lights": [{
+      "sightTypes": [{
         "dimLightRadius": 700,
         "brightLightRadius": 0,
         "name": "Darkvision"
@@ -62,7 +62,7 @@
       "name": "Goblin",
       "column": 4,
       "row": 5,
-      "lights": [{
+      "sightTypes": [{
         "dimLightRadius": 700,
         "brightLightRadius": 0,
         "name": "Darkvision"
@@ -73,7 +73,7 @@
       "name": "Orc",
       "column": 12,
       "row": 5,
-      "lights": [{
+      "sightTypes": [{
         "dimLightRadius": 700,
         "brightLightRadius": 0,
         "name": "Darkvision"
@@ -84,7 +84,7 @@
       "name": "Orc",
       "column": 11,
       "row": 6,
-      "lights": [{
+      "sightTypes": [{
         "dimLightRadius": 700,
         "brightLightRadius": 0,
         "name": "Darkvision"
@@ -95,7 +95,7 @@
       "name": "Orc",
       "column": 11,
       "row": 4,
-      "lights": [{
+      "sightTypes": [{
         "dimLightRadius": 700,
         "brightLightRadius": 0,
         "name": "Darkvision"
@@ -250,7 +250,7 @@
       "name": "Orsik",
       "column": 2,
       "row": 13,
-      "lights": [{
+      "sightTypes": [{
         "dimLightRadius": 700,
         "brightLightRadius": 0,
         "name": "Darkvision"
@@ -261,7 +261,7 @@
       "name": "Luth",
       "column": 1,
       "row": 14,
-      "lights": [{
+      "lightSources": [{
         "dimLightRadius": 476,
         "brightLightRadius": 252,
         "name": "Torch"
@@ -272,7 +272,7 @@
       "name": "Lia",
       "column": 3,
       "row": 14,
-      "lights": [{
+      "sightTypes": [{
         "dimLightRadius": 700,
         "brightLightRadius": 0,
         "name": "Darkvision"
