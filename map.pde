@@ -39,7 +39,7 @@ class Map {
     panIncrement = 1;
     zoomIncrement = .3;
     
-    panEnabled = true;
+    panEnabled = false;
     zoomEnabled = false;
     
   }

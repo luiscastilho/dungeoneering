@@ -184,13 +184,17 @@ class Token {
     return sightTypes;
   }
   
-  void addLightSource(Light light) {
+  void toggleLightSource(Light light) {
     
     for ( Light activeLightSource: lightSources )
       if ( activeLightSource.getName().equals(light.getName()) ) {
+        
+        lightSources.remove(activeLightSource);
+        
         if ( DEBUG )
-          println("DEBUG: Token " + name + ": Light source " + light.getName() + " already present");
+          println("DEBUG: Token " + name + ": Light source " + activeLightSource.getName() + " removed");
         return;
+        
       }
     
     lightSources.add(light);
@@ -201,13 +205,17 @@ class Token {
     
   }
   
-  void addSightType(Light sight) {
+  void toggleSightType(Light sight) {
     
     for ( Light activeSightType: sightTypes )
       if ( activeSightType.getName().equals(sight.getName()) ) {
+        
+        sightTypes.remove(activeSightType);
+        
         if ( DEBUG )
-          println("DEBUG: Token " + name + ": Sight type " + sight.getName() + " already present");
+          println("DEBUG: Token " + name + ": Sight type " + activeSightType.getName() + " removed");
         return;
+        
       }
     
     sightTypes.add(sight);

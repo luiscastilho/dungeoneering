@@ -38,6 +38,9 @@ public class UserInterface {
   int instructionsHeight;
   int menuBarHeight;
   
+  int menuItemsPerLine;
+  boolean menuItemClicked;
+  
   color enabledBackgroundColor, disabledBackgroundColor, mouseOverBackgroundColor, activeBackgroundColor;
   
   PFont instructionsFont;
@@ -50,7 +53,10 @@ public class UserInterface {
   boolean gridHelperSet;
   
   Group togglableControllers;
-  Group menuControllers;
+  Group conditionMenuControllers;
+  Group lightSourceMenuControllers;
+  Group sightTypeMenuControllers;
+  Group otherMenuControllers;
   Accordion tokenMenu;
   
   UserInterface(PGraphics _canvas, ControlP5 _cp5, Map _map, Grid _grid, Obstacles _obstacles, Layer _playersLayer, Layer _dmLayer, Resources _resources) {
@@ -94,6 +100,9 @@ public class UserInterface {
     instructionsHeight = 15;
     menuBarHeight = 15;
     
+    menuItemsPerLine = 5;
+    menuItemClicked = false;
+    
     enabledBackgroundColor = color(0, 45, 90);
     disabledBackgroundColor = color(100);
     mouseOverBackgroundColor = color(0, 116, 217);
@@ -112,7 +121,10 @@ public class UserInterface {
     gridHelperSet = false;
     
     togglableControllers = null;
-    menuControllers = null;
+    conditionMenuControllers = null;
+    lightSourceMenuControllers = null;
+    sightTypeMenuControllers = null;
+    otherMenuControllers = null;
     tokenMenu = null;
     
     setupControllers();
@@ -164,8 +176,14 @@ public class UserInterface {
     
     // Right click menu controllers group
     
-    menuControllers = cp5.addGroup("Actions")
-                         .setBackgroundColor(color(0, 127));
+    conditionMenuControllers = cp5.addGroup("Conditions")
+                                    .setBackgroundColor(color(0, 127));
+    lightSourceMenuControllers = cp5.addGroup("Light Sources")
+                                    .setBackgroundColor(color(0, 127));
+    sightTypeMenuControllers = cp5.addGroup("Sight Types")
+                                    .setBackgroundColor(color(0, 127));
+    otherMenuControllers = cp5.addGroup("Other")
+                              .setBackgroundColor(color(0, 127));
     
     // Top left bar
     
@@ -355,7 +373,7 @@ public class UserInterface {
        .setImages(panButtonImages)
        .updateSize()
        .setSwitch(true)
-       .setOn()
+       .setOff()
        ;
     
     controllersBottomRightX = controllersBottomRightX - squareButtonWidth - controllersSpacing;
@@ -375,65 +393,36 @@ public class UserInterface {
     
     // Token right click menu
     
-    menuControllers.setHeight(menuBarHeight)                // menu bar height
-                   .setBackgroundHeight(controllersSpacing) // item height
-                   ;
+    conditionMenuControllers.setHeight(menuBarHeight)                  // menu bar height
+                            .setBackgroundHeight(controllersSpacing)   // item height
+                            ;
+    lightSourceMenuControllers.setHeight(menuBarHeight)                // menu bar height
+                              .setBackgroundHeight(controllersSpacing) // item height
+                              ;
+    sightTypeMenuControllers.setHeight(menuBarHeight)                  // menu bar height
+                            .setBackgroundHeight(controllersSpacing)   // item height
+                            ;
+    otherMenuControllers.setHeight(menuBarHeight)                      // menu bar height
+                        .setBackgroundHeight(controllersSpacing)       // item height
+                        ;
     tokenMenu = cp5.addAccordion("Right click menu")
        .setPosition(0, 0)
-       .setWidth(controllersSpacing)         // menu bar and items width
-       .setMinItemHeight(controllersSpacing) // min item height
-       .addItem(menuControllers)
+       .setWidth((menuItemsPerLine+1)*controllersSpacing + menuItemsPerLine*squareButtonWidth)  // menu bar and items width
+       .setMinItemHeight(controllersSpacing)                                                    // min item height
+       .addItem(conditionMenuControllers)
+       .addItem(lightSourceMenuControllers)
+       .addItem(sightTypeMenuControllers)
+       .addItem(otherMenuControllers)
        .updateItems()
        .setCollapseMode(Accordion.SINGLE)
        .open(0)
        .hide()
        ;
     
-    PImage[] candleButtonImages = {loadImage("icons/candle_default.png"), loadImage("icons/candle_over.png"), loadImage("icons/candle_active.png")};
-    for ( PImage img: candleButtonImages )
-      if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
-        img.resize(squareButtonWidth, squareButtonHeight);
-    cp5.addButton("Add light source candle")
-       .setPosition(controllersMenuX, controllersMenuY)
-       .setSize(squareButtonWidth, squareButtonHeight)
-       .setImages(candleButtonImages)
-       .updateSize()
-       .moveTo(menuControllers)
-       ;
-    
-    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
-    tokenMenu.setWidth(tokenMenu.getWidth() + squareButtonWidth + controllersSpacing);
-    menuControllers.setBackgroundHeight(menuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
-    
-    PImage[] torchButtonImages = {loadImage("icons/torch_default.png"), loadImage("icons/torch_over.png"), loadImage("icons/torch_active.png")};
-    for ( PImage img: torchButtonImages )
-      if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
-        img.resize(squareButtonWidth, squareButtonHeight);
-    cp5.addButton("Add light source torch")
-       .setPosition(controllersMenuX, controllersMenuY)
-       .setSize(squareButtonWidth, squareButtonHeight)
-       .setImages(torchButtonImages)
-       .updateSize()
-       .moveTo(menuControllers)
-       ;
-    
-    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
-    tokenMenu.setWidth(tokenMenu.getWidth() + squareButtonWidth + controllersSpacing);
-    
-    PImage[] darkvisionButtonImages = {loadImage("icons/darkvision_default.png"), loadImage("icons/darkvision_over.png"), loadImage("icons/darkvision_active.png")};
-    for ( PImage img: darkvisionButtonImages )
-      if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
-        img.resize(squareButtonWidth, squareButtonHeight);
-    cp5.addButton("Add sight type darkvision")
-       .setPosition(controllersMenuX, controllersMenuY)
-       .setSize(squareButtonWidth, squareButtonHeight)
-       .setImages(darkvisionButtonImages)
-       .updateSize()
-       .moveTo(menuControllers)
-       ;
-    
-    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
-    tokenMenu.setWidth(tokenMenu.getWidth() + squareButtonWidth + controllersSpacing);
+    // first line in menu item
+    conditionMenuControllers.setBackgroundHeight(otherMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
+    controllersMenuX = controllersMenuInitialX;
+    controllersMenuY = controllersMenuInitialY;
     
     PImage[] deathButtonImages = {loadImage("icons/death_default.png"), loadImage("icons/death_over.png"), loadImage("icons/death_active.png")};
     for ( PImage img: deathButtonImages )
@@ -444,14 +433,109 @@ public class UserInterface {
        .setSize(squareButtonWidth, squareButtonHeight)
        .setImages(deathButtonImages)
        .updateSize()
-       .moveTo(menuControllers)
+       .moveTo(conditionMenuControllers)
        ;
     
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
-    tokenMenu.setWidth(tokenMenu.getWidth() + squareButtonWidth + controllersSpacing);
     
+    // first line in menu item
+    lightSourceMenuControllers.setBackgroundHeight(otherMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
-    controllersMenuY = controllersMenuY + squareButtonWidth + controllersSpacing;
+    controllersMenuY = controllersMenuInitialY;
+    
+    PImage[] candleButtonImages = {loadImage("icons/candle_default.png"), loadImage("icons/candle_over.png"), loadImage("icons/candle_active.png")};
+    for ( PImage img: candleButtonImages )
+      if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
+        img.resize(squareButtonWidth, squareButtonHeight);
+    cp5.addButton("Add light source candle")
+       .setPosition(controllersMenuX, controllersMenuY)
+       .setSize(squareButtonWidth, squareButtonHeight)
+       .setImages(candleButtonImages)
+       .updateSize()
+       .moveTo(lightSourceMenuControllers)
+       ;
+    
+    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    
+    PImage[] torchButtonImages = {loadImage("icons/torch_default.png"), loadImage("icons/torch_over.png"), loadImage("icons/torch_active.png")};
+    for ( PImage img: torchButtonImages )
+      if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
+        img.resize(squareButtonWidth, squareButtonHeight);
+    cp5.addButton("Add light source torch")
+       .setPosition(controllersMenuX, controllersMenuY)
+       .setSize(squareButtonWidth, squareButtonHeight)
+       .setImages(torchButtonImages)
+       .updateSize()
+       .moveTo(lightSourceMenuControllers)
+       ;
+    
+    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    
+    PImage[] lampButtonImages = {loadImage("icons/lamp_default.png"), loadImage("icons/lamp_over.png"), loadImage("icons/lamp_active.png")};
+    for ( PImage img: lampButtonImages )
+      if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
+        img.resize(squareButtonWidth, squareButtonHeight);
+    cp5.addButton("Add light source lamp")
+       .setPosition(controllersMenuX, controllersMenuY)
+       .setSize(squareButtonWidth, squareButtonHeight)
+       .setImages(lampButtonImages)
+       .updateSize()
+       .moveTo(lightSourceMenuControllers)
+       ;
+    
+    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    
+    PImage[] hoodedLanternButtonImages = {loadImage("icons/hooded_lantern_default.png"), loadImage("icons/hooded_lantern_over.png"), loadImage("icons/hooded_lantern_active.png")};
+    for ( PImage img: hoodedLanternButtonImages )
+      if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
+        img.resize(squareButtonWidth, squareButtonHeight);
+    cp5.addButton("Add light source hooded lantern")
+       .setPosition(controllersMenuX, controllersMenuY)
+       .setSize(squareButtonWidth, squareButtonHeight)
+       .setImages(hoodedLanternButtonImages)
+       .updateSize()
+       .moveTo(lightSourceMenuControllers)
+       ;
+    
+    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    
+    PImage[] lightButtonImages = {loadImage("icons/light_default.png"), loadImage("icons/light_over.png"), loadImage("icons/light_active.png")};
+    for ( PImage img: lightButtonImages )
+      if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
+        img.resize(squareButtonWidth, squareButtonHeight);
+    cp5.addButton("Add light source light")
+       .setPosition(controllersMenuX, controllersMenuY)
+       .setSize(squareButtonWidth, squareButtonHeight)
+       .setImages(lightButtonImages)
+       .updateSize()
+       .moveTo(lightSourceMenuControllers)
+       ;
+    
+    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    
+    // first line in menu item
+    sightTypeMenuControllers.setBackgroundHeight(otherMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
+    controllersMenuX = controllersMenuInitialX;
+    controllersMenuY = controllersMenuInitialY;
+    
+    PImage[] darkvisionButtonImages = {loadImage("icons/darkvision_default.png"), loadImage("icons/darkvision_over.png"), loadImage("icons/darkvision_active.png")};
+    for ( PImage img: darkvisionButtonImages )
+      if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
+        img.resize(squareButtonWidth, squareButtonHeight);
+    cp5.addButton("Add sight type darkvision")
+       .setPosition(controllersMenuX, controllersMenuY)
+       .setSize(squareButtonWidth, squareButtonHeight)
+       .setImages(darkvisionButtonImages)
+       .updateSize()
+       .moveTo(sightTypeMenuControllers)
+       ;
+    
+    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    
+    // first line in menu item
+    otherMenuControllers.setBackgroundHeight(otherMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
+    controllersMenuX = controllersMenuInitialX;
+    controllersMenuY = controllersMenuInitialY;
     
     PImage[] switchLayerButtonImages = {loadImage("icons/switch_layer_default.png"), loadImage("icons/switch_layer_over.png"), loadImage("icons/switch_layer_active.png")};
     for ( PImage img: switchLayerButtonImages )
@@ -462,11 +546,10 @@ public class UserInterface {
        .setSize(squareButtonWidth, squareButtonHeight)
        .setImages(switchLayerButtonImages)
        .updateSize()
-       .moveTo(menuControllers)
+       .moveTo(otherMenuControllers)
        ;
     
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
-    menuControllers.setBackgroundHeight(menuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     
     // Bottom left messages
     
@@ -533,6 +616,8 @@ public class UserInterface {
        .setFont(instructionsFont)
        .hide()
        ;
+    
+    tokenMenu.updateItems();
     
   }
   
@@ -839,6 +924,14 @@ public class UserInterface {
         newAppState = AppStates.togglingCameraZoom;
         
         break;
+      case "Conditions":
+      case "Light Sources":
+      case "Sight Types":
+      case "Other":
+        
+        menuItemClicked = true;
+        
+        break;
       case "Add light source candle":
         
         if ( rightClickedToken == null )
@@ -851,7 +944,7 @@ public class UserInterface {
           break;
         }
         
-        rightClickedToken.addLightSource(new Light(lightTemplate.getName(), lightTemplate.getBrightLightRadius(), lightTemplate.getDimLightRadius()));
+        rightClickedToken.toggleLightSource(new Light(lightTemplate.getName(), lightTemplate.getBrightLightRadius(), lightTemplate.getDimLightRadius()));
         obstacles.setRecalculateShadows(true);
         hideMenu(0, 0);
         
@@ -868,7 +961,58 @@ public class UserInterface {
           break;
         }
         
-        rightClickedToken.addLightSource(new Light(lightTemplate.getName(), lightTemplate.getBrightLightRadius(), lightTemplate.getDimLightRadius()));
+        rightClickedToken.toggleLightSource(new Light(lightTemplate.getName(), lightTemplate.getBrightLightRadius(), lightTemplate.getDimLightRadius()));
+        obstacles.setRecalculateShadows(true);
+        hideMenu(0, 0);
+        
+        break;
+      case "Add light source lamp":
+        
+        if ( rightClickedToken == null )
+          break;
+        
+        resourceName = "Lamp";
+        lightTemplate = resources.getCommonLightSource(resourceName);
+        if ( lightTemplate == null ) {
+          println("Resource: Common light source " + resourceName + " not found");
+          break;
+        }
+        
+        rightClickedToken.toggleLightSource(new Light(lightTemplate.getName(), lightTemplate.getBrightLightRadius(), lightTemplate.getDimLightRadius()));
+        obstacles.setRecalculateShadows(true);
+        hideMenu(0, 0);
+        
+        break;
+      case "Add light source hooded lantern":
+        
+        if ( rightClickedToken == null )
+          break;
+        
+        resourceName = "Hooded Lantern";
+        lightTemplate = resources.getCommonLightSource(resourceName);
+        if ( lightTemplate == null ) {
+          println("Resource: Common light source " + resourceName + " not found");
+          break;
+        }
+        
+        rightClickedToken.toggleLightSource(new Light(lightTemplate.getName(), lightTemplate.getBrightLightRadius(), lightTemplate.getDimLightRadius()));
+        obstacles.setRecalculateShadows(true);
+        hideMenu(0, 0);
+        
+        break;
+      case "Add light source light":
+        
+        if ( rightClickedToken == null )
+          break;
+        
+        resourceName = "Light";
+        lightTemplate = resources.getSpellLightSource(resourceName);
+        if ( lightTemplate == null ) {
+          println("Resource: Spell light source " + resourceName + " not found");
+          break;
+        }
+        
+        rightClickedToken.toggleLightSource(new Light(lightTemplate.getName(), lightTemplate.getBrightLightRadius(), lightTemplate.getDimLightRadius()));
         obstacles.setRecalculateShadows(true);
         hideMenu(0, 0);
         
@@ -885,7 +1029,7 @@ public class UserInterface {
           break;
         }
         
-        rightClickedToken.addSightType(new Light(lightTemplate.getName(), lightTemplate.getBrightLightRadius(), lightTemplate.getDimLightRadius()));
+        rightClickedToken.toggleSightType(new Light(lightTemplate.getName(), lightTemplate.getBrightLightRadius(), lightTemplate.getDimLightRadius()));
         obstacles.setRecalculateShadows(true);
         hideMenu(0, 0);
         
@@ -1544,10 +1688,10 @@ public class UserInterface {
         token.setCell(cell);
         
         for ( Light lightSource: getLightsFromJsonArray(tokenJson.getJSONArray("lightSources")) )
-          token.addLightSource(lightSource);
+          token.toggleLightSource(lightSource);
         
         for ( Light sightType: getLightsFromJsonArray(tokenJson.getJSONArray("sightTypes")) )
-          token.addSightType(sightType);
+          token.toggleSightType(sightType);
         
         layer.addToken(token);
         
@@ -1623,19 +1767,36 @@ public class UserInterface {
   
   boolean isInsideMenu(int x, int y) {
     
+    if ( menuItemClicked ) {
+      
+      menuItemClicked = false;
+      return true;
+      
+    }
+    
     boolean inside = false;
+    
+    int openItemHeight = 0;
+    if ( lightSourceMenuControllers.isOpen() )
+      openItemHeight = lightSourceMenuControllers.getBackgroundHeight();
+    else if ( sightTypeMenuControllers.isOpen() )
+      openItemHeight = sightTypeMenuControllers.getBackgroundHeight();
+    else if ( conditionMenuControllers.isOpen() )
+      openItemHeight = conditionMenuControllers.getBackgroundHeight();
+    else if ( otherMenuControllers.isOpen() )
+      openItemHeight = otherMenuControllers.getBackgroundHeight();
     
     // menu bar
     float barStartX = tokenMenu.getPosition()[0];
     float barStartY = tokenMenu.getPosition()[1];
     float barEndX = barStartX + tokenMenu.getWidth();
-    float barEndY = barStartY + menuControllers.getHeight();
+    float barEndY = barStartY + menuBarHeight * 4 + 3;
     
     // menu item
     float itemStartX = barStartX;
     float itemStartY = barEndY;
     float itemEndX = barEndX;
-    float itemEndY = itemStartY + menuControllers.getBackgroundHeight();
+    float itemEndY = itemStartY + openItemHeight;
     
     if ( (x > barStartX && x < barEndX && y > barStartY && y < barEndY) || (x > itemStartX && x < itemEndX && y > itemStartY && y < itemEndY) )
       inside = true;
