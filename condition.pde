@@ -80,4 +80,8 @@ class Condition {
     return disablesTarget;
   }
   
+  boolean isCentered() {
+    return centered;
+  }
+  
 }

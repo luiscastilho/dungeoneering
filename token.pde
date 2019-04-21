@@ -57,11 +57,17 @@ class Token {
     
     int position = 0; 
     for ( Condition condition: conditions ) {
-      
-      condition.draw(cell, position);
-      position += 1;
-      
+      if ( !condition.isCentered() ) {
+        
+        condition.draw(cell, position);
+        position += 1;
+        
+      }
     }
+    
+    for ( Condition condition: conditions )
+      if ( condition.isCentered() )
+        condition.draw(cell, position);
     
   }
   
