@@ -256,140 +256,34 @@ public class UserInterface {
     // Top right bar
     
     controllersTopRightX = controllersTopRightX - squareButtonWidth;
-    
-    PImage[] loadButtonImages = {loadImage("icons/load_default.png"), loadImage("icons/load_over.png"), loadImage("icons/load_active.png")};
-    for ( PImage img: loadButtonImages )
-      if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
-        img.resize(squareButtonWidth, squareButtonHeight);
-    cp5.addButton("Load scene")
-       .setPosition(controllersTopRightX, controllersTopRightY)
-       .setSize(squareButtonWidth, squareButtonHeight)
-       .setImages(loadButtonImages)
-       .updateSize()
-       .moveTo(togglableControllers)
-       ;
+    addButton("Load scene", "load", controllersTopRightX, controllersTopRightY, togglableControllers, false, false);
     
     controllersTopRightX = controllersTopRightX - squareButtonWidth - controllersSpacing;
-    
-    PImage[] saveButtonImages = {loadImage("icons/save_default.png"), loadImage("icons/save_over.png"), loadImage("icons/save_active.png")};
-    for ( PImage img: saveButtonImages )
-      if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
-        img.resize(squareButtonWidth, squareButtonHeight);
-    cp5.addButton("Save scene")
-       .setPosition(controllersTopRightX, controllersTopRightY)
-       .setSize(squareButtonWidth, squareButtonHeight)
-       .setImages(saveButtonImages)
-       .updateSize()
-       .moveTo(togglableControllers)
-       ;
+    addButton("Save scene", "save", controllersTopRightX, controllersTopRightY, togglableControllers, false, false);
     
     controllersTopRightY = controllersTopRightY + squareButtonHeight + controllersSpacing;
     controllersTopRightX = controllersTopRightX + squareButtonWidth + controllersSpacing;
-    
-    PImage[] gridButtonImages = {loadImage("icons/grid_default.png"), loadImage("icons/grid_over.png"), loadImage("icons/grid_active.png")};
-    for ( PImage img: gridButtonImages )
-      if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
-        img.resize(squareButtonWidth, squareButtonHeight);
-    cp5.addButton("Toggle grid")
-       .setPosition(controllersTopRightX, controllersTopRightY)
-       .setSize(squareButtonWidth, squareButtonHeight)
-       .setImages(gridButtonImages)
-       .updateSize()
-       .setSwitch(true)
-       .setOff()
-       .moveTo(togglableControllers)
-       ;
+    addButton("Toggle grid", "grid", controllersTopRightX, controllersTopRightY, togglableControllers, true, false);
     
     controllersTopRightX = controllersTopRightX - squareButtonWidth - controllersSpacing;
-    
-    PImage[] wallButtonImages = {loadImage("icons/wall_default.png"), loadImage("icons/wall_over.png"), loadImage("icons/wall_active.png")};
-    for ( PImage img: wallButtonImages )
-      if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
-        img.resize(squareButtonWidth, squareButtonHeight);
-    cp5.addButton("Toggle walls")
-       .setPosition(controllersTopRightX, controllersTopRightY)
-       .setSize(squareButtonWidth, squareButtonHeight)
-       .setImages(wallButtonImages)
-       .updateSize()
-       .setSwitch(true)
-       .setOff()
-       .moveTo(togglableControllers)
-       ;
+    addButton("Toggle walls", "wall", controllersTopRightX, controllersTopRightY, togglableControllers, true, false);
     
     controllersTopRightX = controllersTopRightX - squareButtonWidth - controllersSpacing;
-    
-    PImage[] lightningButtonImages = {loadImage("icons/lightning_default.png"), loadImage("icons/lightning_over.png"), loadImage("icons/lightning_active.png")};
-    for ( PImage img: lightningButtonImages )
-      if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
-        img.resize(squareButtonWidth, squareButtonHeight);
-    cp5.addButton("Switch lightning")
-       .setPosition(controllersTopRightX, controllersTopRightY)
-       .setSize(squareButtonWidth, squareButtonHeight)
-       .setImages(lightningButtonImages)
-       .updateSize()
-       .moveTo(togglableControllers)
-       ;
+    addButton("Switch lightning", "lightning", controllersTopRightX, controllersTopRightY, togglableControllers, false, false);
     
     controllersTopRightX = controllersTopRightX - squareButtonWidth - controllersSpacing;
-    
-    PImage[] layersButtonImages = {loadImage("icons/layers_default.png"), loadImage("icons/layers_over.png"), loadImage("icons/layers_active.png")};
-    for ( PImage img: layersButtonImages )
-      if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
-        img.resize(squareButtonWidth, squareButtonHeight);
-    cp5.addButton("Switch layer")
-       .setPosition(controllersTopRightX, controllersTopRightY)
-       .setSize(squareButtonWidth, squareButtonHeight)
-       .setImages(layersButtonImages)
-       .updateSize()
-       .moveTo(togglableControllers)
-       ;
+    addButton("Switch layer", "layers", controllersTopRightX, controllersTopRightY, togglableControllers, false, false);
     
     // Bottom right bar
     
     controllersBottomRightX = controllersBottomRightX - squareButtonWidth;
-    
-    PImage[] uiButtonImages = {loadImage("icons/ui_default.png"), loadImage("icons/ui_over.png"), loadImage("icons/ui_active.png")};
-    for ( PImage img: uiButtonImages )
-      if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
-        img.resize(squareButtonWidth, squareButtonHeight);
-    cp5.addButton("Toggle UI")
-       .setPosition(controllersBottomRightX, controllersBottomRightY)
-       .setSize(squareButtonWidth, squareButtonHeight)
-       .setImages(uiButtonImages)
-       .updateSize()
-       .setSwitch(true)
-       .setOn()
-       ;
+    addButton("Toggle UI", "ui", controllersBottomRightX, controllersBottomRightY, null, true, true);
     
     controllersBottomRightX = controllersBottomRightX - squareButtonWidth - controllersSpacing;
-    
-    PImage[] panButtonImages = {loadImage("icons/pan_default.png"), loadImage("icons/pan_over.png"), loadImage("icons/pan_active.png")};
-    for ( PImage img: panButtonImages )
-      if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
-        img.resize(squareButtonWidth, squareButtonHeight);
-    cp5.addButton("Toggle camera pan")
-       .setPosition(controllersBottomRightX, controllersBottomRightY)
-       .setSize(squareButtonWidth, squareButtonHeight)
-       .setImages(panButtonImages)
-       .updateSize()
-       .setSwitch(true)
-       .setOff()
-       ;
+    addButton("Toggle camera pan", "pan", controllersBottomRightX, controllersBottomRightY, null, true, false);
     
     controllersBottomRightX = controllersBottomRightX - squareButtonWidth - controllersSpacing;
-    
-    PImage[] zoomButtonImages = {loadImage("icons/zoom_default.png"), loadImage("icons/zoom_over.png"), loadImage("icons/zoom_active.png")};
-    for ( PImage img: zoomButtonImages )
-      if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
-        img.resize(squareButtonWidth, squareButtonHeight);
-    cp5.addButton("Toggle camera zoom")
-       .setPosition(controllersBottomRightX, controllersBottomRightY)
-       .setSize(squareButtonWidth, squareButtonHeight)
-       .setImages(zoomButtonImages)
-       .updateSize()
-       .setSwitch(true)
-       .setOff()
-       ;
+    addButton("Toggle camera zoom", "zoom", controllersBottomRightX, controllersBottomRightY, null, true, false);
     
     // Token right click menu
     
@@ -420,136 +314,88 @@ public class UserInterface {
        ;
     
     // first line in menu item
-    conditionMenuControllers.setBackgroundHeight(otherMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
+    conditionMenuControllers.setBackgroundHeight(conditionMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY = controllersMenuInitialY;
-    
-    PImage[] deathButtonImages = {loadImage("icons/death_default.png"), loadImage("icons/death_over.png"), loadImage("icons/death_active.png")};
-    for ( PImage img: deathButtonImages )
-      if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
-        img.resize(squareButtonWidth, squareButtonHeight);
-    cp5.addButton("Toggle condition dead")
-       .setPosition(controllersMenuX, controllersMenuY)
-       .setSize(squareButtonWidth, squareButtonHeight)
-       .setImages(deathButtonImages)
-       .updateSize()
-       .moveTo(conditionMenuControllers)
-       ;
+    addButton("Toggle condition blinded", "blinded", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
     
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    addButton("Toggle condition charmed", "charmed", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
+    
+    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    addButton("Toggle condition dead", "dead", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
+    
+    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    addButton("Toggle condition deafened", "deafened", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
+    
+    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    addButton("Toggle condition frightened", "frightened", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
+    
+    // new line
+    conditionMenuControllers.setBackgroundHeight(conditionMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
+    controllersMenuX = controllersMenuInitialX;
+    controllersMenuY = controllersMenuY + squareButtonWidth + controllersSpacing;
+    addButton("Toggle condition grappled", "grappled", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
+    
+    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    addButton("Toggle condition incapacitated", "incapacitated", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
+    
+    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    addButton("Toggle condition invisible", "invisible", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
+    
+    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    addButton("Toggle condition paralyzed", "paralyzed", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
+    
+    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    addButton("Toggle condition petrified", "petrified", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
+    
+    // new line
+    conditionMenuControllers.setBackgroundHeight(conditionMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
+    controllersMenuX = controllersMenuInitialX;
+    controllersMenuY = controllersMenuY + squareButtonWidth + controllersSpacing;
+    addButton("Toggle condition poisoned", "poisoned", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
+    
+    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    addButton("Toggle condition prone", "prone", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
+    
+    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    addButton("Toggle condition restrained", "restrained", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
+    
+    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    addButton("Toggle condition stunned", "stunned", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
+    
+    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    addButton("Toggle condition unconscious", "unconscious", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
     
     // first line in menu item
-    lightSourceMenuControllers.setBackgroundHeight(otherMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
+    lightSourceMenuControllers.setBackgroundHeight(lightSourceMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY = controllersMenuInitialY;
-    
-    PImage[] candleButtonImages = {loadImage("icons/candle_default.png"), loadImage("icons/candle_over.png"), loadImage("icons/candle_active.png")};
-    for ( PImage img: candleButtonImages )
-      if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
-        img.resize(squareButtonWidth, squareButtonHeight);
-    cp5.addButton("Add light source candle")
-       .setPosition(controllersMenuX, controllersMenuY)
-       .setSize(squareButtonWidth, squareButtonHeight)
-       .setImages(candleButtonImages)
-       .updateSize()
-       .moveTo(lightSourceMenuControllers)
-       ;
+    addButton("Toggle light source candle", "candle", controllersMenuX, controllersMenuY, lightSourceMenuControllers, false, false);
     
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
-    
-    PImage[] torchButtonImages = {loadImage("icons/torch_default.png"), loadImage("icons/torch_over.png"), loadImage("icons/torch_active.png")};
-    for ( PImage img: torchButtonImages )
-      if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
-        img.resize(squareButtonWidth, squareButtonHeight);
-    cp5.addButton("Add light source torch")
-       .setPosition(controllersMenuX, controllersMenuY)
-       .setSize(squareButtonWidth, squareButtonHeight)
-       .setImages(torchButtonImages)
-       .updateSize()
-       .moveTo(lightSourceMenuControllers)
-       ;
+    addButton("Toggle light source torch", "torch", controllersMenuX, controllersMenuY, lightSourceMenuControllers, false, false);
     
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
-    
-    PImage[] lampButtonImages = {loadImage("icons/lamp_default.png"), loadImage("icons/lamp_over.png"), loadImage("icons/lamp_active.png")};
-    for ( PImage img: lampButtonImages )
-      if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
-        img.resize(squareButtonWidth, squareButtonHeight);
-    cp5.addButton("Add light source lamp")
-       .setPosition(controllersMenuX, controllersMenuY)
-       .setSize(squareButtonWidth, squareButtonHeight)
-       .setImages(lampButtonImages)
-       .updateSize()
-       .moveTo(lightSourceMenuControllers)
-       ;
+    addButton("Toggle light source lamp", "lamp", controllersMenuX, controllersMenuY, lightSourceMenuControllers, false, false);
     
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
-    
-    PImage[] hoodedLanternButtonImages = {loadImage("icons/hooded_lantern_default.png"), loadImage("icons/hooded_lantern_over.png"), loadImage("icons/hooded_lantern_active.png")};
-    for ( PImage img: hoodedLanternButtonImages )
-      if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
-        img.resize(squareButtonWidth, squareButtonHeight);
-    cp5.addButton("Add light source hooded lantern")
-       .setPosition(controllersMenuX, controllersMenuY)
-       .setSize(squareButtonWidth, squareButtonHeight)
-       .setImages(hoodedLanternButtonImages)
-       .updateSize()
-       .moveTo(lightSourceMenuControllers)
-       ;
+    addButton("Toggle light source hooded lantern", "hooded_lantern", controllersMenuX, controllersMenuY, lightSourceMenuControllers, false, false);
     
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
-    
-    PImage[] lightButtonImages = {loadImage("icons/light_default.png"), loadImage("icons/light_over.png"), loadImage("icons/light_active.png")};
-    for ( PImage img: lightButtonImages )
-      if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
-        img.resize(squareButtonWidth, squareButtonHeight);
-    cp5.addButton("Add light source light")
-       .setPosition(controllersMenuX, controllersMenuY)
-       .setSize(squareButtonWidth, squareButtonHeight)
-       .setImages(lightButtonImages)
-       .updateSize()
-       .moveTo(lightSourceMenuControllers)
-       ;
-    
-    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    addButton("Toggle light source light", "light", controllersMenuX, controllersMenuY, lightSourceMenuControllers, false, false);
     
     // first line in menu item
-    sightTypeMenuControllers.setBackgroundHeight(otherMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
+    sightTypeMenuControllers.setBackgroundHeight(sightTypeMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY = controllersMenuInitialY;
-    
-    PImage[] darkvisionButtonImages = {loadImage("icons/darkvision_default.png"), loadImage("icons/darkvision_over.png"), loadImage("icons/darkvision_active.png")};
-    for ( PImage img: darkvisionButtonImages )
-      if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
-        img.resize(squareButtonWidth, squareButtonHeight);
-    cp5.addButton("Add sight type darkvision")
-       .setPosition(controllersMenuX, controllersMenuY)
-       .setSize(squareButtonWidth, squareButtonHeight)
-       .setImages(darkvisionButtonImages)
-       .updateSize()
-       .moveTo(sightTypeMenuControllers)
-       ;
-    
-    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    addButton("Toggle sight type darkvision 60'", "darkvision", controllersMenuX, controllersMenuY, sightTypeMenuControllers, false, false);
     
     // first line in menu item
     otherMenuControllers.setBackgroundHeight(otherMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY = controllersMenuInitialY;
-    
-    PImage[] switchLayerButtonImages = {loadImage("icons/switch_layer_default.png"), loadImage("icons/switch_layer_over.png"), loadImage("icons/switch_layer_active.png")};
-    for ( PImage img: switchLayerButtonImages )
-      if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
-        img.resize(squareButtonWidth, squareButtonHeight);
-    cp5.addButton("Switch token layer")
-       .setPosition(controllersMenuX, controllersMenuY)
-       .setSize(squareButtonWidth, squareButtonHeight)
-       .setImages(switchLayerButtonImages)
-       .updateSize()
-       .moveTo(otherMenuControllers)
-       ;
-    
-    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    addButton("Switch token layer", "switch_layer", controllersMenuX, controllersMenuY, otherMenuControllers, false, false);
     
     // Bottom left messages
     
@@ -558,7 +404,7 @@ public class UserInterface {
     //   Instructions: Click and drag to create a box the size of 3 x 3 grid cells on the map background you are using.
     
     cp5.addTextlabel("Grid instructions - 2nd line")
-       .setText("Once you draw this square, you can adjust its size using the arrow keys.")
+       .setText("Once you draw this square, you can adjust its size using W, A, S, D and the arrow keys.")
        .setPosition(instructionsX, instructionsY)
        .setColorValue(instructionsFontColor)
        .setFont(instructionsFont)
@@ -621,6 +467,36 @@ public class UserInterface {
     
   }
   
+  void addButton(String buttonName, String imageBaseName, int buttonPositionX, int buttonPositionY, ControllerGroup buttonGroup, boolean isSwitch, boolean switchInitialState) {
+    
+    PImage[] buttonImages = {loadImage("icons/" + imageBaseName + "_default.png"), loadImage("icons/" + imageBaseName + "_over.png"), loadImage("icons/" + imageBaseName + "_active.png")};
+    for ( PImage img: buttonImages )
+      if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
+        img.resize(squareButtonWidth, squareButtonHeight);
+    
+    Button button = cp5.addButton(buttonName)
+       .setPosition(buttonPositionX, buttonPositionY)
+       .setSize(squareButtonWidth, squareButtonHeight)
+       .setImages(buttonImages)
+       .updateSize()
+       ;
+    
+    if ( buttonGroup != null )
+      button.moveTo(buttonGroup);
+    
+    if ( isSwitch ) {
+      
+      button.setSwitch(true);
+      
+      if ( switchInitialState )
+        button.setOn();
+      else
+        button.setOff();
+      
+    }
+    
+  }
+  
   AppStates controllerEvent(ControlEvent controlEvent) {
     
     String resourceName;
@@ -663,6 +539,7 @@ public class UserInterface {
           if ( !toggleGrid.isOn() )
             toggleGrid.setOn();
           
+          obstacles.setIllumination(Illumination.brightLight);
           obstacles.clear();
           playersLayer.clear();
           dmLayer.clear();
@@ -932,7 +809,262 @@ public class UserInterface {
         menuItemClicked = true;
         
         break;
-      case "Add light source candle":
+      case "Toggle condition blinded":
+        
+        if ( rightClickedToken == null )
+          break;
+        
+        resourceName = "Blinded";
+        conditionTemplate = resources.getCondition(resourceName);
+        if ( conditionTemplate == null ) {
+          println("Resource: Condition " + resourceName + " not found");
+          break;
+        }
+        
+        rightClickedToken.toggleCondition(conditionTemplate);
+        obstacles.setRecalculateShadows(true);
+        hideMenu(0, 0);
+        
+        break;
+      case "Toggle condition charmed":
+        
+        if ( rightClickedToken == null )
+          break;
+        
+        resourceName = "Charmed";
+        conditionTemplate = resources.getCondition(resourceName);
+        if ( conditionTemplate == null ) {
+          println("Resource: Condition " + resourceName + " not found");
+          break;
+        }
+        
+        rightClickedToken.toggleCondition(conditionTemplate);
+        obstacles.setRecalculateShadows(true);
+        hideMenu(0, 0);
+        
+        break;
+      case "Toggle condition dead":
+        
+        if ( rightClickedToken == null )
+          break;
+        
+        resourceName = "Dead";
+        conditionTemplate = resources.getCondition(resourceName);
+        if ( conditionTemplate == null ) {
+          println("Resource: Condition " + resourceName + " not found");
+          break;
+        }
+        
+        rightClickedToken.toggleCondition(conditionTemplate);
+        obstacles.setRecalculateShadows(true);
+        hideMenu(0, 0);
+        
+        break;
+      case "Toggle condition deafened":
+        
+        if ( rightClickedToken == null )
+          break;
+        
+        resourceName = "Deafened";
+        conditionTemplate = resources.getCondition(resourceName);
+        if ( conditionTemplate == null ) {
+          println("Resource: Condition " + resourceName + " not found");
+          break;
+        }
+        
+        rightClickedToken.toggleCondition(conditionTemplate);
+        obstacles.setRecalculateShadows(true);
+        hideMenu(0, 0);
+        
+        break;
+      case "Toggle condition frightened":
+        
+        if ( rightClickedToken == null )
+          break;
+        
+        resourceName = "Frightened";
+        conditionTemplate = resources.getCondition(resourceName);
+        if ( conditionTemplate == null ) {
+          println("Resource: Condition " + resourceName + " not found");
+          break;
+        }
+        
+        rightClickedToken.toggleCondition(conditionTemplate);
+        obstacles.setRecalculateShadows(true);
+        hideMenu(0, 0);
+        
+        break;
+      case "Toggle condition grappled":
+        
+        if ( rightClickedToken == null )
+          break;
+        
+        resourceName = "Grappled";
+        conditionTemplate = resources.getCondition(resourceName);
+        if ( conditionTemplate == null ) {
+          println("Resource: Condition " + resourceName + " not found");
+          break;
+        }
+        
+        rightClickedToken.toggleCondition(conditionTemplate);
+        obstacles.setRecalculateShadows(true);
+        hideMenu(0, 0);
+        
+        break;
+      case "Toggle condition incapacitated":
+        
+        if ( rightClickedToken == null )
+          break;
+        
+        resourceName = "Incapacitated";
+        conditionTemplate = resources.getCondition(resourceName);
+        if ( conditionTemplate == null ) {
+          println("Resource: Condition " + resourceName + " not found");
+          break;
+        }
+        
+        rightClickedToken.toggleCondition(conditionTemplate);
+        obstacles.setRecalculateShadows(true);
+        hideMenu(0, 0);
+        
+        break;
+      case "Toggle condition invisible":
+        
+        if ( rightClickedToken == null )
+          break;
+        
+        resourceName = "Invisible";
+        conditionTemplate = resources.getCondition(resourceName);
+        if ( conditionTemplate == null ) {
+          println("Resource: Condition " + resourceName + " not found");
+          break;
+        }
+        
+        rightClickedToken.toggleCondition(conditionTemplate);
+        obstacles.setRecalculateShadows(true);
+        hideMenu(0, 0);
+        
+        break;
+      case "Toggle condition paralyzed":
+        
+        if ( rightClickedToken == null )
+          break;
+        
+        resourceName = "Paralyzed";
+        conditionTemplate = resources.getCondition(resourceName);
+        if ( conditionTemplate == null ) {
+          println("Resource: Condition " + resourceName + " not found");
+          break;
+        }
+        
+        rightClickedToken.toggleCondition(conditionTemplate);
+        obstacles.setRecalculateShadows(true);
+        hideMenu(0, 0);
+        
+        break;
+      case "Toggle condition petrified":
+        
+        if ( rightClickedToken == null )
+          break;
+        
+        resourceName = "Petrified";
+        conditionTemplate = resources.getCondition(resourceName);
+        if ( conditionTemplate == null ) {
+          println("Resource: Condition " + resourceName + " not found");
+          break;
+        }
+        
+        rightClickedToken.toggleCondition(conditionTemplate);
+        obstacles.setRecalculateShadows(true);
+        hideMenu(0, 0);
+        
+        break;
+      case "Toggle condition poisoned":
+        
+        if ( rightClickedToken == null )
+          break;
+        
+        resourceName = "Poisoned";
+        conditionTemplate = resources.getCondition(resourceName);
+        if ( conditionTemplate == null ) {
+          println("Resource: Condition " + resourceName + " not found");
+          break;
+        }
+        
+        rightClickedToken.toggleCondition(conditionTemplate);
+        obstacles.setRecalculateShadows(true);
+        hideMenu(0, 0);
+        
+        break;
+      case "Toggle condition prone":
+        
+        if ( rightClickedToken == null )
+          break;
+        
+        resourceName = "Prone";
+        conditionTemplate = resources.getCondition(resourceName);
+        if ( conditionTemplate == null ) {
+          println("Resource: Condition " + resourceName + " not found");
+          break;
+        }
+        
+        rightClickedToken.toggleCondition(conditionTemplate);
+        obstacles.setRecalculateShadows(true);
+        hideMenu(0, 0);
+        
+        break;
+      case "Toggle condition restrained":
+        
+        if ( rightClickedToken == null )
+          break;
+        
+        resourceName = "Restrained";
+        conditionTemplate = resources.getCondition(resourceName);
+        if ( conditionTemplate == null ) {
+          println("Resource: Condition " + resourceName + " not found");
+          break;
+        }
+        
+        rightClickedToken.toggleCondition(conditionTemplate);
+        obstacles.setRecalculateShadows(true);
+        hideMenu(0, 0);
+        
+        break;
+      case "Toggle condition stunned":
+        
+        if ( rightClickedToken == null )
+          break;
+        
+        resourceName = "Stunned";
+        conditionTemplate = resources.getCondition(resourceName);
+        if ( conditionTemplate == null ) {
+          println("Resource: Condition " + resourceName + " not found");
+          break;
+        }
+        
+        rightClickedToken.toggleCondition(conditionTemplate);
+        obstacles.setRecalculateShadows(true);
+        hideMenu(0, 0);
+        
+        break;
+      case "Toggle condition unconscious":
+        
+        if ( rightClickedToken == null )
+          break;
+        
+        resourceName = "Unconscious";
+        conditionTemplate = resources.getCondition(resourceName);
+        if ( conditionTemplate == null ) {
+          println("Resource: Condition " + resourceName + " not found");
+          break;
+        }
+        
+        rightClickedToken.toggleCondition(conditionTemplate);
+        obstacles.setRecalculateShadows(true);
+        hideMenu(0, 0);
+        
+        break;
+      case "Toggle light source candle":
         
         if ( rightClickedToken == null )
           break;
@@ -949,7 +1081,7 @@ public class UserInterface {
         hideMenu(0, 0);
         
         break;
-      case "Add light source torch":
+      case "Toggle light source torch":
         
         if ( rightClickedToken == null )
           break;
@@ -966,7 +1098,7 @@ public class UserInterface {
         hideMenu(0, 0);
         
         break;
-      case "Add light source lamp":
+      case "Toggle light source lamp":
         
         if ( rightClickedToken == null )
           break;
@@ -983,7 +1115,7 @@ public class UserInterface {
         hideMenu(0, 0);
         
         break;
-      case "Add light source hooded lantern":
+      case "Toggle light source hooded lantern":
         
         if ( rightClickedToken == null )
           break;
@@ -1000,7 +1132,7 @@ public class UserInterface {
         hideMenu(0, 0);
         
         break;
-      case "Add light source light":
+      case "Toggle light source light":
         
         if ( rightClickedToken == null )
           break;
@@ -1017,7 +1149,7 @@ public class UserInterface {
         hideMenu(0, 0);
         
         break;
-      case "Add sight type darkvision":
+      case "Toggle sight type darkvision 60'":
         
         if ( rightClickedToken == null )
           break;
@@ -1030,23 +1162,6 @@ public class UserInterface {
         }
         
         rightClickedToken.toggleSightType(new Light(lightTemplate.getName(), lightTemplate.getBrightLightRadius(), lightTemplate.getDimLightRadius()));
-        obstacles.setRecalculateShadows(true);
-        hideMenu(0, 0);
-        
-        break;
-      case "Toggle condition dead":
-        
-        if ( rightClickedToken == null )
-          break;
-        
-        resourceName = "Dead";
-        conditionTemplate = resources.getCondition("Dead");
-        if ( conditionTemplate == null ) {
-          println("Resource: Condition " + resourceName + " not found");
-          break;
-        }
-        
-        rightClickedToken.toggleCondition(conditionTemplate);
         obstacles.setRecalculateShadows(true);
         hideMenu(0, 0);
         

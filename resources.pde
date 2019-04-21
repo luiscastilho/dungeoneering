@@ -81,7 +81,22 @@ class Resources {
   
   void setConditions() {
     
-    conditions.put("Dead", new Condition(canvas, "Dead", "conditions/dead.png", grid.getCellWidth(), grid.getCellHeight(), true));
+    conditions.put("Blinded", new Condition(canvas, "Blinded", "conditions/blinded.png", grid.getCellWidth(), grid.getCellHeight(), true, false));
+    conditions.put("Charmed", new Condition(canvas, "Charmed", "conditions/charmed.png", grid.getCellWidth(), grid.getCellHeight(), false, false));
+    conditions.put("Dead", new Condition(canvas, "Dead", "conditions/dead.png", grid.getCellWidth(), grid.getCellHeight(), true, true));
+    conditions.put("Deafened", new Condition(canvas, "Deafened", "conditions/deafened.png", grid.getCellWidth(), grid.getCellHeight(), false, false));
+    conditions.put("Frightened", new Condition(canvas, "Frightened", "conditions/frightened.png", grid.getCellWidth(), grid.getCellHeight(), false, false));
+    conditions.put("Grappled", new Condition(canvas, "Grappled", "conditions/grappled.png", grid.getCellWidth(), grid.getCellHeight(), false, false));
+    conditions.put("Incapacitated", new Condition(canvas, "Incapacitated", "conditions/incapacitated.png", grid.getCellWidth(), grid.getCellHeight(), true, false));
+    conditions.put("Invisible", new Condition(canvas, "Invisible", "conditions/invisible.png", grid.getCellWidth(), grid.getCellHeight(), false, false));
+    conditions.put("Paralyzed", new Condition(canvas, "Paralyzed", "conditions/paralyzed.png", grid.getCellWidth(), grid.getCellHeight(), true, false));
+    conditions.put("Petrified", new Condition(canvas, "Petrified", "conditions/petrified.png", grid.getCellWidth(), grid.getCellHeight(), true, false));
+    conditions.put("Poisoned", new Condition(canvas, "Poisoned", "conditions/poisoned.png", grid.getCellWidth(), grid.getCellHeight(), false, false));
+    conditions.put("Prone", new Condition(canvas, "Prone", "conditions/prone.png", grid.getCellWidth(), grid.getCellHeight(), false, false));
+    conditions.put("Restrained", new Condition(canvas, "Restrained", "conditions/restrained.png", grid.getCellWidth(), grid.getCellHeight(), false, false));
+    conditions.put("Stunned", new Condition(canvas, "Stunned", "conditions/stunned.png", grid.getCellWidth(), grid.getCellHeight(), true, false));
+    conditions.put("Unconscious", new Condition(canvas, "Unconscious", "conditions/unconscious.png", grid.getCellWidth(), grid.getCellHeight(), true, false));
+    
     
   }
   

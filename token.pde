@@ -55,8 +55,13 @@ class Token {
     canvas.imageMode(CENTER);
     canvas.image(image, cell.getCenter().x, cell.getCenter().y);
     
-    for ( Condition condition: conditions )
-      condition.draw(cell.getCenter().x, cell.getCenter().y);
+    int position = 0; 
+    for ( Condition condition: conditions ) {
+      
+      condition.draw(cell, position);
+      position += 1;
+      
+    }
     
   }
   
