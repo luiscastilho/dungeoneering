@@ -1487,8 +1487,8 @@ public class UserInterface {
     
     rightClickedToken = token;
     
-    int menuX = token.getCell().getCenter().x;
-    int menuY = token.getCell().getCenter().y;
+    int menuX = _mouseX;
+    int menuY = _mouseY;
     
     tokenMenu.setPosition(menuX, menuY);
     tokenMenu.show();
