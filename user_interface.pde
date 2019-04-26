@@ -94,11 +94,11 @@ public class UserInterface {
     controllersMenuInitialY = controllersMenuY;
     
     rectButtonWidth = 100;
-    rectButtonHeight = 25;
-    squareButtonWidth = 25;
-    squareButtonHeight = 25;
+    rectButtonHeight = 35;
+    squareButtonWidth = 35;
+    squareButtonHeight = 35;
     instructionsHeight = 15;
-    menuBarHeight = 15;
+    menuBarHeight = 25;
     
     menuItemsPerLine = 5;
     menuItemClicked = false;
