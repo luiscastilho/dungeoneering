@@ -1873,8 +1873,9 @@ public class UserInterface {
     float endX = startX + controller.getWidth();
     float endY = startY + controller.getHeight();
     
-    if ( controller.isInside() || (x > startX && x < endX && y > startY && y < endY ) )
-      inside = true;
+    if ( controller.isVisible() )
+      if ( controller.isInside() || (x > startX && x < endX && y > startY && y < endY ) )
+        inside = true;
     
     return inside;
     
