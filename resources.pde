@@ -10,6 +10,7 @@ class Resources {
   HashMap<String, Light> spellLightSources;
   HashMap<String, Light> sightTypes;
   HashMap<String, Condition> conditions;
+  HashMap<String, Size> sizes;
   
   boolean set;
   
@@ -23,6 +24,7 @@ class Resources {
     spellLightSources = new HashMap<String, Light>();
     sightTypes = new HashMap<String, Light>();
     conditions = new HashMap<String, Condition>();
+    sizes = new HashMap<String, Size>();
     
     set = false;
     
@@ -34,6 +36,7 @@ class Resources {
     setSpellLightSources();
     setSightTypes();
     setConditions();
+    setSizes();
     
     set = true;
     
@@ -100,6 +103,17 @@ class Resources {
     
   }
   
+  void setSizes() {
+    
+    sizes.put("Tiny", new Size("Tiny", 0.5f, true));
+    sizes.put("Small", new Size("Small", 1f, true));
+    sizes.put("Medium", new Size("Medium", 1f, true));
+    sizes.put("Large", new Size("Large", 2f, false));
+    sizes.put("Huge", new Size("Huge", 3f, true));
+    sizes.put("Gargantuan", new Size("Gargantuan", 4f, false));
+    
+  }
+  
   Light getCommonLightSource(String name) {
     return commonLightSources.get(name);
   }
@@ -114,6 +128,10 @@ class Resources {
   
   Condition getCondition(String name) {
     return conditions.get(name);
+  }
+  
+  Size getSize(String name) {
+    return sizes.get(name);
   }
   
   Light createLight(String name, int brightLightRadiusInFeet, int dimLightRadiusInFeet) {

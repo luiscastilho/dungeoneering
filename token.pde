@@ -11,8 +11,8 @@ class Token {
   boolean beingMoved;
   
   Cell cell, prevCell;
-  //ArrayList<Cell> cell;
-  //ArrayList<Cell> prevCell;
+  
+  Size size;
   
   ArrayList<Light> sightTypes;
   ArrayList<Light> lightSources;
@@ -33,8 +33,10 @@ class Token {
     set = false;
     beingMoved = false;
     
-    cell = null; //new ArrayList<Cell>();
-    prevCell = null; //new ArrayList<Cell>();
+    cell = null;
+    prevCell = null;
+    
+    size = null;
     
     sightTypes = new ArrayList<Light>();
     lightSources = new ArrayList<Light>();
@@ -52,8 +54,13 @@ class Token {
     if ( cell == null )
       return;
     
-    canvas.imageMode(CENTER);
-    canvas.image(image, cell.getCenter().x, cell.getCenter().y);
+    if ( size.isCentered() ) {
+      canvas.imageMode(CENTER);
+      canvas.image(image, cell.getCenter().x, cell.getCenter().y);
+    } else {
+      canvas.imageMode(CORNER);
+      canvas.image(image, cell.getCenter().x - cell.getCellWidth()/2f, cell.getCenter().y - cell.getCellHeight()/2f);
+    }
     
     int position = 0; 
     for ( Condition condition: conditions ) {
@@ -71,13 +78,15 @@ class Token {
     
   }
   
-  void setup(String _name, String _imagePath, int cellWidth, int cellHeight) {
+  void setup(String _name, String _imagePath, int cellWidth, int cellHeight, Size _size) {
     
     name = _name;
     
+    size = _size;
+    
     imagePath = _imagePath;
     image = loadImage(imagePath);
-    image.resize(cellWidth, cellHeight);
+    image.resize(round(cellWidth * size.getResizeFactor()), round(cellHeight * size.getResizeFactor()));
     
     set = true;
     
@@ -195,6 +204,10 @@ class Token {
     return sightTypes;
   }
   
+  Size getSize() {
+    return size;
+  }
+  
   void toggleLightSource(Light light) {
     
     for ( Light activeLightSource: lightSources )
@@ -267,6 +280,18 @@ class Token {
     
     if ( DEBUG )
       println("DEBUG: Token " + name + ": Condition " + condition.getName() + " added");
+    
+  }
+  
+  void setSize(Size _size) {
+    
+    size = _size;
+    
+    image = loadImage(imagePath);
+    image.resize(round(cell.getCellWidth() * size.getResizeFactor()), round(cell.getCellHeight() * size.getResizeFactor()));
+    
+    if ( DEBUG )
+      println("DEBUG: Token " + name + ": Size set to " + size.getName());
     
   }
   

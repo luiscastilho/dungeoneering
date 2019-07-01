@@ -81,7 +81,7 @@ class Layer {
       currentCell = grid.getCellAt(0, 0);
     
     Token token = new Token(canvas);
-    token.setup(tokenBaseName, tokenImageFile.getAbsolutePath(), grid.getCellWidth(), grid.getCellHeight());
+    token.setup(tokenBaseName, tokenImageFile.getAbsolutePath(), grid.getCellWidth(), grid.getCellHeight(), resources.getSize("Medium"));
     token.setCell(currentCell);
     token.setBeingMoved(true);
     tokens.add(token);

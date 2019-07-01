@@ -56,6 +56,7 @@ public class UserInterface {
   Group conditionMenuControllers;
   Group lightSourceMenuControllers;
   Group sightTypeMenuControllers;
+  Group sizeMenuControllers;
   Group otherMenuControllers;
   Accordion tokenMenu;
   
@@ -124,6 +125,7 @@ public class UserInterface {
     conditionMenuControllers = null;
     lightSourceMenuControllers = null;
     sightTypeMenuControllers = null;
+    sizeMenuControllers = null;
     otherMenuControllers = null;
     tokenMenu = null;
     
@@ -174,13 +176,15 @@ public class UserInterface {
     
     togglableControllers = cp5.addGroup("Toggable controllers");
     
-    // Right click menu controllers group
+    // Right click menu controller groups
     
     conditionMenuControllers = cp5.addGroup("Conditions")
                                     .setBackgroundColor(color(0, 127));
     lightSourceMenuControllers = cp5.addGroup("Light Sources")
                                     .setBackgroundColor(color(0, 127));
     sightTypeMenuControllers = cp5.addGroup("Sight Types")
+                                    .setBackgroundColor(color(0, 127));
+    sizeMenuControllers = cp5.addGroup("Sizes")
                                     .setBackgroundColor(color(0, 127));
     otherMenuControllers = cp5.addGroup("Other")
                               .setBackgroundColor(color(0, 127));
@@ -296,6 +300,9 @@ public class UserInterface {
     sightTypeMenuControllers.setHeight(menuBarHeight)                  // menu bar height
                             .setBackgroundHeight(controllersSpacing)   // item height
                             ;
+    sizeMenuControllers.setHeight(menuBarHeight)                       // menu bar height
+                            .setBackgroundHeight(controllersSpacing)   // item height
+                            ;
     otherMenuControllers.setHeight(menuBarHeight)                      // menu bar height
                         .setBackgroundHeight(controllersSpacing)       // item height
                         ;
@@ -306,6 +313,7 @@ public class UserInterface {
        .addItem(conditionMenuControllers)
        .addItem(lightSourceMenuControllers)
        .addItem(sightTypeMenuControllers)
+       .addItem(sizeMenuControllers)
        .addItem(otherMenuControllers)
        .updateItems()
        .setCollapseMode(Accordion.SINGLE)
@@ -390,6 +398,30 @@ public class UserInterface {
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY = controllersMenuInitialY;
     addButton("Toggle sight type darkvision 60'", "darkvision", controllersMenuX, controllersMenuY, sightTypeMenuControllers, false, false);
+    
+    // first line in menu item
+    sizeMenuControllers.setBackgroundHeight(sizeMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
+    controllersMenuX = controllersMenuInitialX;
+    controllersMenuY = controllersMenuInitialY;
+    addButton("Set size tiny", "tiny", controllersMenuX, controllersMenuY, sizeMenuControllers, false, false);
+    
+    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    addButton("Set size small", "small", controllersMenuX, controllersMenuY, sizeMenuControllers, false, false);
+    
+    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    addButton("Set size medium", "medium", controllersMenuX, controllersMenuY, sizeMenuControllers, false, false);
+    
+    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    addButton("Set size large", "large", controllersMenuX, controllersMenuY, sizeMenuControllers, false, false);
+    
+    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    addButton("Set size huge", "huge", controllersMenuX, controllersMenuY, sizeMenuControllers, false, false);
+    
+    // new line
+    sizeMenuControllers.setBackgroundHeight(sizeMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
+    controllersMenuX = controllersMenuInitialX;
+    controllersMenuY = controllersMenuY + squareButtonWidth + controllersSpacing;
+    addButton("Set size gargantuan", "gargantuan", controllersMenuX, controllersMenuY, sizeMenuControllers, false, false);
     
     // first line in menu item
     otherMenuControllers.setBackgroundHeight(otherMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
@@ -500,8 +532,9 @@ public class UserInterface {
   AppStates controllerEvent(ControlEvent controlEvent) {
     
     String resourceName;
-    Light lightTemplate;
     Condition conditionTemplate;
+    Light lightTemplate;
+    Size sizeTemplate;
     
     AppStates newAppState = AppStates.idle;
     
@@ -804,6 +837,7 @@ public class UserInterface {
       case "Conditions":
       case "Light Sources":
       case "Sight Types":
+      case "Sizes":
       case "Other":
         
         menuItemClicked = true;
@@ -1163,6 +1197,102 @@ public class UserInterface {
         
         rightClickedToken.toggleSightType(new Light(lightTemplate.getName(), lightTemplate.getBrightLightRadius(), lightTemplate.getDimLightRadius()));
         obstacles.setRecalculateShadows(true);
+        hideMenu(0, 0);
+        
+        break;
+      case "Set size tiny":
+        
+        if ( rightClickedToken == null )
+          break;
+        
+        resourceName = "Tiny";
+        sizeTemplate = resources.getSize(resourceName);
+        if ( sizeTemplate == null ) {
+          println("Resource: Size " + resourceName + " not found");
+          break;
+        }
+        
+        rightClickedToken.setSize(new Size(sizeTemplate.getName(), sizeTemplate.getResizeFactor(), sizeTemplate.isCentered()));
+        hideMenu(0, 0);
+        
+        break;
+      case "Set size small":
+        
+        if ( rightClickedToken == null )
+          break;
+        
+        resourceName = "Small";
+        sizeTemplate = resources.getSize(resourceName);
+        if ( sizeTemplate == null ) {
+          println("Resource: Size " + resourceName + " not found");
+          break;
+        }
+        
+        rightClickedToken.setSize(new Size(sizeTemplate.getName(), sizeTemplate.getResizeFactor(), sizeTemplate.isCentered()));
+        hideMenu(0, 0);
+        
+        break;
+      case "Set size medium":
+        
+        if ( rightClickedToken == null )
+          break;
+        
+        resourceName = "Medium";
+        sizeTemplate = resources.getSize(resourceName);
+        if ( sizeTemplate == null ) {
+          println("Resource: Size " + resourceName + " not found");
+          break;
+        }
+        
+        rightClickedToken.setSize(new Size(sizeTemplate.getName(), sizeTemplate.getResizeFactor(), sizeTemplate.isCentered()));
+        hideMenu(0, 0);
+        
+        break;
+      case "Set size large":
+        
+        if ( rightClickedToken == null )
+          break;
+        
+        resourceName = "Large";
+        sizeTemplate = resources.getSize(resourceName);
+        if ( sizeTemplate == null ) {
+          println("Resource: Size " + resourceName + " not found");
+          break;
+        }
+        
+        rightClickedToken.setSize(new Size(sizeTemplate.getName(), sizeTemplate.getResizeFactor(), sizeTemplate.isCentered()));
+        hideMenu(0, 0);
+        
+        break;
+      case "Set size huge":
+        
+        if ( rightClickedToken == null )
+          break;
+        
+        resourceName = "Huge";
+        sizeTemplate = resources.getSize(resourceName);
+        if ( sizeTemplate == null ) {
+          println("Resource: Size " + resourceName + " not found");
+          break;
+        }
+        
+        rightClickedToken.setSize(new Size(sizeTemplate.getName(), sizeTemplate.getResizeFactor(), sizeTemplate.isCentered()));
+        hideMenu(0, 0);
+        
+        break;
+      case "Set size gargantuan":
+        
+        if ( rightClickedToken == null )
+          break;
+        
+        resourceName = "Gargantuan";
+        sizeTemplate = resources.getSize(resourceName);
+        if ( sizeTemplate == null ) {
+          println("Resource: Size " + resourceName + " not found");
+          break;
+        }
+        
+        rightClickedToken.setSize(new Size(sizeTemplate.getName(), sizeTemplate.getResizeFactor(), sizeTemplate.isCentered()));
         hideMenu(0, 0);
         
         break;
@@ -1612,6 +1742,8 @@ public class UserInterface {
       tokenJson.setString("name", token.getName());
       tokenJson.setString("imagePath", token.getImagePath().replaceAll("\\\\", "/").replaceFirst("^" + sketchPath, ""));
       
+      tokenJson.setString("size", token.getSize().getName());
+      
       Cell cell = token.getCell();
       tokenJson.setInt("row", cell.getRow());
       tokenJson.setInt("column", cell.getColumn());
@@ -1789,6 +1921,10 @@ public class UserInterface {
         JSONObject tokenJson = tokensArray.getJSONObject(i);
         String tokenName = tokenJson.getString("name");
         String tokenImagePath = tokenJson.getString("imagePath");
+        
+        String tokenSizeName = tokenJson.getString("size", "Medium");
+        Size tokenSize = resources.getSize(tokenSizeName);
+        
         int tokenRow = tokenJson.getInt("row");
         int tokenColumn = tokenJson.getInt("column");
         
@@ -1799,7 +1935,7 @@ public class UserInterface {
         
         Cell cell = grid.getCellAt(tokenRow, tokenColumn);
         Token token = new Token(canvas);
-        token.setup(tokenName, tokenImagePath, grid.getCellWidth(), grid.getCellHeight());
+        token.setup(tokenName, tokenImagePath, grid.getCellWidth(), grid.getCellHeight(), tokenSize);
         token.setCell(cell);
         
         for ( Light lightSource: getLightsFromJsonArray(tokenJson.getJSONArray("lightSources")) )
@@ -1893,12 +2029,14 @@ public class UserInterface {
     boolean inside = false;
     
     int openItemHeight = 0;
-    if ( lightSourceMenuControllers.isOpen() )
+    if ( conditionMenuControllers.isOpen() )
+      openItemHeight = conditionMenuControllers.getBackgroundHeight();
+    else if ( lightSourceMenuControllers.isOpen() )
       openItemHeight = lightSourceMenuControllers.getBackgroundHeight();
     else if ( sightTypeMenuControllers.isOpen() )
       openItemHeight = sightTypeMenuControllers.getBackgroundHeight();
-    else if ( conditionMenuControllers.isOpen() )
-      openItemHeight = conditionMenuControllers.getBackgroundHeight();
+    else if ( sizeMenuControllers.isOpen() )
+      openItemHeight = sizeMenuControllers.getBackgroundHeight();
     else if ( otherMenuControllers.isOpen() )
       openItemHeight = otherMenuControllers.getBackgroundHeight();
     
