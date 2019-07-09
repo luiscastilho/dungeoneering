@@ -57,6 +57,7 @@ class Resources {
     commonLightSources.put("Hooded Lantern", createLight("Hooded Lantern", 30, 60));
     commonLightSources.put("Lamp", createLight("Lamp", 15, 45));
     commonLightSources.put("Torch", createLight("Torch", 20, 40));
+    commonLightSources.put("Daylight", createLight("Daylight", 150, 0));
     
   }
   
@@ -99,7 +100,6 @@ class Resources {
     conditions.put("Restrained", new Condition(canvas, "Restrained", "conditions/restrained.png", grid.getCellWidth(), grid.getCellHeight(), false, false));
     conditions.put("Stunned", new Condition(canvas, "Stunned", "conditions/stunned.png", grid.getCellWidth(), grid.getCellHeight(), true, false));
     conditions.put("Unconscious", new Condition(canvas, "Unconscious", "conditions/unconscious.png", grid.getCellWidth(), grid.getCellHeight(), true, false));
-    
     
   }
   

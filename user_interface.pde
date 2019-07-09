@@ -393,6 +393,12 @@ public class UserInterface {
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
     addButton("Toggle light source light", "light", controllersMenuX, controllersMenuY, lightSourceMenuControllers, false, false);
     
+    // new line
+    lightSourceMenuControllers.setBackgroundHeight(lightSourceMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
+    controllersMenuX = controllersMenuInitialX;
+    controllersMenuY = controllersMenuY + squareButtonWidth + controllersSpacing;
+    addButton("Toggle light source daylight", "daylight", controllersMenuX, controllersMenuY, lightSourceMenuControllers, false, false);
+    
     // first line in menu item
     sightTypeMenuControllers.setBackgroundHeight(sightTypeMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
@@ -1173,6 +1179,23 @@ public class UserInterface {
         
         resourceName = "Light";
         lightTemplate = resources.getSpellLightSource(resourceName);
+        if ( lightTemplate == null ) {
+          println("Resource: Spell light source " + resourceName + " not found");
+          break;
+        }
+        
+        rightClickedToken.toggleLightSource(new Light(lightTemplate.getName(), lightTemplate.getBrightLightRadius(), lightTemplate.getDimLightRadius()));
+        obstacles.setRecalculateShadows(true);
+        hideMenu(0, 0);
+        
+        break;
+      case "Toggle light source daylight":
+        
+        if ( rightClickedToken == null )
+          break;
+        
+        resourceName = "Daylight";
+        lightTemplate = resources.getCommonLightSource(resourceName);
         if ( lightTemplate == null ) {
           println("Resource: Spell light source " + resourceName + " not found");
           break;
