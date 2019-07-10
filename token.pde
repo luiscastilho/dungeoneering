@@ -204,6 +204,10 @@ class Token {
     return sightTypes;
   }
   
+  ArrayList<Condition> getConditions() {
+    return conditions;
+  }
+  
   Size getSize() {
     return size;
   }

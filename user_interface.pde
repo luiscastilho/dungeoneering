@@ -1773,6 +1773,7 @@ public class UserInterface {
       
       tokenJson.setJSONArray("lightSources", getLightsJsonArray(token.getLightSources()));
       tokenJson.setJSONArray("sightTypes", getLightsJsonArray(token.getSightTypes()));
+      tokenJson.setJSONArray("conditions", getConditionsJsonArray(token.getConditions()));
       
       tokensArray.setJSONObject(tokensIndex, tokenJson);
       tokensIndex += 1;
@@ -1791,13 +1792,27 @@ public class UserInterface {
     for ( Light light: lights ) {
       JSONObject lightJson = new JSONObject();
       lightJson.setString("name", light.getName());
-      lightJson.setInt("brightLightRadius", light.getBrightLightRadius());
-      lightJson.setInt("dimLightRadius", light.getDimLightRadius());
       tokenLightsArray.setJSONObject(lightsIndex, lightJson);
       lightsIndex += 1;
     }
     
     return tokenLightsArray;
+    
+  }
+  
+  JSONArray getConditionsJsonArray(ArrayList<Condition> conditions) {
+    
+    JSONArray tokenConditionsArray = new JSONArray();
+    int conditionsIndex = 0;
+    
+    for ( Condition condition: conditions ) {
+      JSONObject conditionJson = new JSONObject();
+      conditionJson.setString("name", condition.getName());
+      tokenConditionsArray.setJSONObject(conditionsIndex, conditionJson);
+      conditionsIndex += 1;
+    }
+    
+    return tokenConditionsArray;
     
   }
   
@@ -1961,11 +1976,14 @@ public class UserInterface {
         token.setup(tokenName, tokenImagePath, grid.getCellWidth(), grid.getCellHeight(), tokenSize);
         token.setCell(cell);
         
-        for ( Light lightSource: getLightsFromJsonArray(tokenJson.getJSONArray("lightSources")) )
+        for ( Light lightSource: getLightSourcesFromJsonArray(tokenJson.getJSONArray("lightSources")) )
           token.toggleLightSource(lightSource);
         
-        for ( Light sightType: getLightsFromJsonArray(tokenJson.getJSONArray("sightTypes")) )
+        for ( Light sightType: getSightTypesFromJsonArray(tokenJson.getJSONArray("sightTypes")) )
           token.toggleSightType(sightType);
+        
+        for ( Condition condition: getConditionsFromJsonArray(tokenJson.getJSONArray("conditions")) )
+          token.toggleCondition(condition);
         
         layer.addToken(token);
         
@@ -1974,7 +1992,7 @@ public class UserInterface {
     
   }
   
-  ArrayList<Light> getLightsFromJsonArray(JSONArray lightsArray) {
+  ArrayList<Light> getLightSourcesFromJsonArray(JSONArray lightsArray) {
     
     ArrayList<Light> lights = new ArrayList<Light>();
     
@@ -1982,14 +2000,51 @@ public class UserInterface {
       for ( int j = 0; j < lightsArray.size(); j++ ) {
         JSONObject lightJson = lightsArray.getJSONObject(j);
         String name = lightJson.getString("name");
-        int brightLightRadius = lightJson.getInt("brightLightRadius");
-        int dimLightRadius = lightJson.getInt("dimLightRadius");
-        Light light = new Light(name, brightLightRadius, dimLightRadius);
-        lights.add(light);
+        Light light = resources.getCommonLightSource(name);
+        if ( light == null )
+          light = resources.getSpellLightSource(name);
+        if ( light != null )
+          lights.add(light);
       }
     }
     
     return lights;
+    
+  }
+  
+  ArrayList<Light> getSightTypesFromJsonArray(JSONArray sightsArray) {
+    
+    ArrayList<Light> sights = new ArrayList<Light>();
+    
+    if ( sightsArray != null ) {
+      for ( int j = 0; j < sightsArray.size(); j++ ) {
+        JSONObject sightJson = sightsArray.getJSONObject(j);
+        String name = sightJson.getString("name");
+        Light sight = resources.getSightType(name);
+        if ( sight != null )
+          sights.add(sight);
+      }
+    }
+    
+    return sights;
+    
+  }
+  
+  ArrayList<Condition> getConditionsFromJsonArray(JSONArray conditionsArray) {
+    
+    ArrayList<Condition> conditions = new ArrayList<Condition>();
+    
+    if ( conditionsArray != null ) {
+      for ( int j = 0; j < conditionsArray.size(); j++ ) {
+        JSONObject conditionJson = conditionsArray.getJSONObject(j);
+        String name = conditionJson.getString("name");
+        Condition condition = resources.getCondition(name);
+        if ( condition != null )
+          conditions.add(condition);
+      }
+    }
+    
+    return conditions;
     
   }
   
