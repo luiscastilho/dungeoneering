@@ -153,11 +153,13 @@ class Layer {
   
   Token getToken(int x, int y) {
     
+    Token chosenToken = null;
+    
     for ( Token token: tokens )
       if ( token.isInside(x, y) )
-        return token;
+        chosenToken = token;
     
-    return null;
+    return chosenToken;
     
   }
   
