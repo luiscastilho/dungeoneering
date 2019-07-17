@@ -124,7 +124,7 @@ void draw() {
   image(canvas, 0, 0, width, height);
   
   if ( DEBUG )
-    if ( frameCount % 60 == 0 )
+    if ( frameCount % 180 == 0 )
       println("DEBUG: FPS: " + frameRate);
   
 }

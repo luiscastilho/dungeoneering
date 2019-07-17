@@ -2,6 +2,8 @@ class Token {
   
   PGraphics canvas;
   
+  Grid grid;
+  
   String name;
   
   String imagePath;
@@ -11,6 +13,7 @@ class Token {
   boolean beingMoved;
   
   Cell cell, prevCell;
+  ArrayList<Cell> extraCells;
   
   Size size;
   
@@ -21,9 +24,11 @@ class Token {
   
   boolean disabled;
   
-  Token(PGraphics _canvas) {
+  Token(PGraphics _canvas, Grid _grid) {
     
     canvas = _canvas;
+    
+    grid = _grid;
     
     name = null;
     
@@ -35,6 +40,7 @@ class Token {
     
     cell = null;
     prevCell = null;
+    extraCells = new ArrayList<Cell>();
     
     size = null;
     
@@ -148,6 +154,63 @@ class Token {
         light.setPosition(cell.getCenter().x, cell.getCenter().y);
       for ( Light sight: sightTypes )
         sight.setPosition(cell.getCenter().x, cell.getCenter().y);
+      
+      // set extra cells occupied based on size
+      switch ( size.getName() ) {
+        case "Tiny":
+        case "Small":
+        case "Medium":
+          extraCells.clear();
+          break;
+        case "Large":
+          // three extra cells occupied:
+          // X 1
+          // 2 3
+          extraCells.clear();
+          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + cell.getCellWidth(), cell.getCenter().y)));
+          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x, cell.getCenter().y + cell.getCellHeight())));
+          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + cell.getCellWidth(), cell.getCenter().y + cell.getCellHeight())));
+          break;
+        case "Huge":
+          // eight extra cells occupied:
+          // 1 2 3
+          // 4 X 5
+          // 6 7 8
+          extraCells.clear();
+          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x - cell.getCellWidth(), cell.getCenter().y - cell.getCellHeight())));
+          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x, cell.getCenter().y - cell.getCellHeight())));
+          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + cell.getCellWidth(), cell.getCenter().y - cell.getCellHeight())));
+          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x - cell.getCellWidth(), cell.getCenter().y)));
+          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + cell.getCellWidth(), cell.getCenter().y)));
+          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x - cell.getCellWidth(), cell.getCenter().y + cell.getCellHeight())));
+          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x, cell.getCenter().y + cell.getCellHeight())));
+          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + cell.getCellWidth(), cell.getCenter().y + cell.getCellHeight())));
+          break;
+        case "Gargantuan":
+          // fifteen extra cells occupied:
+          //  X  1  2  3
+          //  4  5  6  7
+          //  8  9 10 11
+          // 12 13 14 15
+          extraCells.clear();
+          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + cell.getCellWidth(), cell.getCenter().y)));
+          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + 2*cell.getCellWidth(), cell.getCenter().y)));
+          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + 3*cell.getCellWidth(), cell.getCenter().y)));
+          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x, cell.getCenter().y + cell.getCellHeight())));
+          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + cell.getCellWidth(), cell.getCenter().y + cell.getCellHeight())));
+          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + 2*cell.getCellWidth(), cell.getCenter().y + cell.getCellHeight())));
+          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + 3*cell.getCellWidth(), cell.getCenter().y + cell.getCellHeight())));
+          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x, cell.getCenter().y + 2*cell.getCellHeight())));
+          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + cell.getCellWidth(), cell.getCenter().y + 2*cell.getCellHeight())));
+          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + 2*cell.getCellWidth(), cell.getCenter().y + 2*cell.getCellHeight())));
+          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + 3*cell.getCellWidth(), cell.getCenter().y + 2*cell.getCellHeight())));
+          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x, cell.getCenter().y + 3*cell.getCellHeight())));
+          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + cell.getCellWidth(), cell.getCenter().y + 3*cell.getCellHeight())));
+          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + 2*cell.getCellWidth(), cell.getCenter().y + 3*cell.getCellHeight())));
+          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + 3*cell.getCellWidth(), cell.getCenter().y + 3*cell.getCellHeight())));
+          break;
+      }
+      
     }
     
   }
@@ -294,6 +357,8 @@ class Token {
     image = loadImage(imagePath);
     image.resize(round(cell.getCellWidth() * size.getResizeFactor()), round(cell.getCellHeight() * size.getResizeFactor()));
     
+    setCell(cell);
+    
     if ( DEBUG )
       println("DEBUG: Token " + name + ": Size set to " + size.getName());
     
@@ -303,6 +368,10 @@ class Token {
     
     if ( cell != null && cell.isInside(x, y) )
       return true;
+    
+    for ( Cell extraCell: extraCells )
+      if ( extraCell != null && extraCell.isInside(x, y) )
+        return true;
     
     return false;
     

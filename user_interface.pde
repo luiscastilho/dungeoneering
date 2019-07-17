@@ -1972,7 +1972,7 @@ public class UserInterface {
         }
         
         Cell cell = grid.getCellAt(tokenRow, tokenColumn);
-        Token token = new Token(canvas);
+        Token token = new Token(canvas, grid);
         token.setup(tokenName, tokenImagePath, grid.getCellWidth(), grid.getCellHeight(), tokenSize);
         token.setCell(cell);
         
