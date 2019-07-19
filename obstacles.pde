@@ -35,12 +35,12 @@ class Obstacles {
     
     illumination = Illumination.brightLight;
     
-    allShadows = createGraphics(canvas.width, canvas.height);
+    allShadows = createGraphics(canvas.width, canvas.height, P2D);
     allShadows.beginDraw();
     allShadows.background(illumination.getColor());
     allShadows.endDraw();
     
-    currentShadows = createGraphics(canvas.width, canvas.height);
+    currentShadows = createGraphics(canvas.width, canvas.height, P2D);
     currentShadows.beginDraw();
     currentShadows.background(illumination.getColor());
     currentShadows.endDraw();
@@ -58,8 +58,8 @@ class Obstacles {
     allShadows.beginDraw();
     allShadows.translate(currentPanX, currentPanY);
     allShadows.scale(currentScale);
-    canvas.mask(allShadows);
     allShadows.endDraw();
+    canvas.mask(allShadows);
     
     if ( drawObstacles ) {
       
@@ -109,7 +109,7 @@ class Obstacles {
   void resetShadows() {
     
     allShadows.beginDraw();
-    allShadows.background(illumination.getColor());
+    allShadows.background(illumination.getColor(), 0);
     allShadows.endDraw();
     
   }
@@ -118,7 +118,7 @@ class Obstacles {
     
     walls = new ArrayList<Wall>();
     doors = new ArrayList<Door>();
-    resetShadows();
+    recalculateShadows = true;
     
   }
   

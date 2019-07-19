@@ -117,7 +117,7 @@ class Token {
     PGraphics shadows = obstacles.getCurrentShadowsCanvas();
     
     shadows.beginDraw();
-    shadows.background(0);
+    shadows.background(0, 0);
     shadows.translate(obstacles.getCurrentPanX(), obstacles.getCurrentPanY());
     shadows.scale(obstacles.getCurrentScale());
     

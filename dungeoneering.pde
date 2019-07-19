@@ -26,7 +26,7 @@ color backgroundColor;
 
 void setup() {
   
-  fullScreen();
+  fullScreen(P2D);
   
   DEBUG = true;
   
@@ -35,7 +35,7 @@ void setup() {
   cp5 = new ControlP5(this);
   cp5.isTouch = false;
   
-  canvas = createGraphics(width, height);
+  canvas = createGraphics(width, height, P2D);
   
   obstacles = new Obstacles(canvas);
   
