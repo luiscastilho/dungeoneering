@@ -1355,7 +1355,7 @@ public class UserInterface {
     
     MimetypesFileTypeMap mimetypesMap = new MimetypesFileTypeMap();
     mimetypesMap.addMimeTypes("image png tif tiff jpg jpeg bmp gif");
-    mimetypesMap.addMimeTypes("video/mp4 mp4");
+    mimetypesMap.addMimeTypes("video/mp4 mp4 m4v");
     String mimetype = mimetypesMap.getContentType(mapFile);
     String type = mimetype.split("/")[0];
     if ( !type.equals("image") && !type.equals("video") ) {
