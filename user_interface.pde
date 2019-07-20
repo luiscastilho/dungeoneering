@@ -1977,10 +1977,10 @@ public class UserInterface {
         token.setCell(cell);
         
         for ( Light lightSource: getLightSourcesFromJsonArray(tokenJson.getJSONArray("lightSources")) )
-          token.toggleLightSource(lightSource);
+          token.toggleLightSource(new Light(lightSource.getName(), lightSource.getBrightLightRadius(), lightSource.getDimLightRadius()));
         
         for ( Light sightType: getSightTypesFromJsonArray(tokenJson.getJSONArray("sightTypes")) )
-          token.toggleSightType(sightType);
+          token.toggleSightType(new Light(sightType.getName(), sightType.getBrightLightRadius(), sightType.getDimLightRadius()));
         
         for ( Condition condition: getConditionsFromJsonArray(tokenJson.getJSONArray("conditions")) )
           token.toggleCondition(condition);

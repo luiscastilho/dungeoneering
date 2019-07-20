@@ -32,7 +32,7 @@ class Wall {
     canvas.strokeWeight(wallWidth);
     canvas.strokeCap(SQUARE);
     canvas.noFill();
-    canvas.beginShape();
+    canvas.beginShape(LINES);
     for ( PVector vertex: vertexes )
       canvas.vertex(vertex.x, vertex.y);
     canvas.endShape();
