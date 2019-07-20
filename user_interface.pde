@@ -2053,7 +2053,7 @@ public class UserInterface {
   
   void enableController(String controllerName) {
     
-    Controller controller = cp5.getController(controllerName);
+    controlP5.Controller controller = cp5.getController(controllerName);
     controller.setColorBackground(enabledBackgroundColor);
     controller.unlock();
     
@@ -2061,7 +2061,7 @@ public class UserInterface {
   
   void disableController(String controllerName) {
     
-    Controller controller = cp5.getController(controllerName);
+    controlP5.Controller controller = cp5.getController(controllerName);
     controller.setColorBackground(disabledBackgroundColor);
     controller.lock();
     
@@ -2081,7 +2081,7 @@ public class UserInterface {
     
   }
   
-  boolean isInside(Controller controller, int x, int y) {
+  boolean isInside(controlP5.Controller controller, int x, int y) {
     
     boolean inside = false;
     
