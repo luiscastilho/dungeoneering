@@ -2,14 +2,18 @@ import java.awt.Point;
 
 class Map {
   
+  PApplet sketch;
+  
   PGraphics canvas;
   
   Obstacles obstacles;
   
-  String imagePath;
+  String filePath;
   PImage image;
+  Movie video;
   
   boolean set;
+  boolean isVideo;
   
   boolean fitToScreen;
   float panX, panY, scale;
@@ -20,16 +24,20 @@ class Map {
   boolean panEnabled;
   boolean zoomEnabled;
   
-  Map(PGraphics _canvas, Obstacles _obstacles) {
+  Map(PApplet _sketch, PGraphics _canvas, Obstacles _obstacles) {
+    
+    sketch = _sketch;
     
     canvas = _canvas;
     
     obstacles = _obstacles;
     
-    imagePath = null;
+    filePath = null;
     image = null;
+    video = null;
     
     set = false;
+    isVideo = false;
     
     fitToScreen = false;
     panX = panToX = lastPanX = 0;
@@ -46,7 +54,7 @@ class Map {
   
   void draw() {
     
-    if ( image == null || !set )
+    if ( ( image == null && video == null ) || !set )
       return;
     
     panX = lerp(panX, panToX, panIncrement);
@@ -57,7 +65,10 @@ class Map {
     canvas.scale(scale);
     
     canvas.imageMode(CENTER);
-    canvas.image(image, canvas.width/2, canvas.height/2);
+    if ( !isVideo )
+      canvas.image(image, canvas.width/2, canvas.height/2);
+    else
+      canvas.image(video, canvas.width/2, canvas.height/2);
     
     if ( Math.abs(panX - lastPanX) > 0.1 || Math.abs(panY - lastPanY) > 0.1 || Math.abs(scale - lastScale) > 0.1 ) {
       obstacles.setCurrentPanX(panX);
@@ -76,14 +87,26 @@ class Map {
     
   }
   
-  void setup(String _imagePath, boolean _fitToScreen) {
+  void setup(String _filePath, boolean _fitToScreen, boolean _isVideo) {
     
-    imagePath = _imagePath;
-    image = loadImage(imagePath);
+    isVideo = _isVideo;
     
-    fitToScreen = _fitToScreen;
-    if ( fitToScreen )
-      fitToScreen();
+    filePath = _filePath;
+    if ( !isVideo ) {
+      
+      image = loadImage(filePath);
+      
+      fitToScreen = _fitToScreen;
+      if ( fitToScreen )
+        fitToScreen();
+      
+    } else {
+      
+      video = new Movie(sketch, filePath);
+      video.frameRate(30);
+      video.loop();
+      
+    }
     
     panX = panToX = 0;
     panY = panToY = 0;
@@ -117,6 +140,9 @@ class Map {
   
   void fitToScreen() {
     
+    if ( isVideo )
+      return;
+    
     float ratioWidth = image.width / float(canvas.width);
     float ratioHeight = image.height / float(canvas.height);
     if ( ratioWidth > ratioHeight )
@@ -130,17 +156,27 @@ class Map {
     
     Point mappedPoint = new Point();
     int x, y;
+    int mapWidth, mapHeight;
     float ratioWidth, ratioHeight;
     int widthDiff, heightDiff;
     
     x = p.x;
     y = p.y;
     
-    ratioWidth = image.width / float(canvas.width);
-    ratioHeight = image.height / float(canvas.height);
+    mapWidth = mapHeight = 0;
+    if ( isVideo ) {
+      mapWidth = video.width;
+      mapHeight = video.height;
+    } else {
+      mapWidth = image.width;
+      mapHeight = image.height;
+    }
     
-    widthDiff = abs(canvas.width - image.width);
-    heightDiff = abs(canvas.height - image.height);
+    ratioWidth = mapWidth / float(canvas.width);
+    ratioHeight = mapHeight / float(canvas.height);
+    
+    widthDiff = abs(canvas.width - mapWidth);
+    heightDiff = abs(canvas.height - mapHeight);
     
     // fits into canvas
     if ( ratioWidth <= 1 && ratioHeight <= 1 ) {
@@ -171,10 +207,12 @@ class Map {
   
   void clear() {
     
-    imagePath = null;
+    filePath = null;
     image = null;
+    video = null;
     
     set = false;
+    isVideo = false;
     
     fitToScreen = false;
     panX = panToX = 0;
@@ -195,16 +233,26 @@ class Map {
     return set;
   }
   
-  int getImageWidth() {
-    return image.width;
+  boolean isVideo() {
+    return isVideo;
   }
   
-  int getImageHeight() {
-    return image.height;
+  int getMapWidth() {
+    if ( isVideo )
+      return video.width;
+    else
+      return image.width;
   }
   
-  String getImagePath() {
-    return imagePath;
+  int getMapHeight() {
+    if ( isVideo )
+      return video.height;
+    else
+      return image.height;
+  }
+  
+  String getFilePath() {
+    return filePath;
   }
   
   boolean getFitToScreen() {

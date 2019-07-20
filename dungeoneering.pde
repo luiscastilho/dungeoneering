@@ -1,4 +1,5 @@
 import controlP5.*;
+import processing.video.*;
 
 boolean DEBUG;
 
@@ -39,7 +40,7 @@ void setup() {
   
   obstacles = new Obstacles(canvas);
   
-  map = new Map(canvas, obstacles);
+  map = new Map(this, canvas, obstacles);
   
   grid = new Grid(canvas);
   
@@ -362,4 +363,8 @@ void keyPressed() {
       break;
   }
   
+}
+
+void movieEvent(Movie movie) {
+  movie.read();
 }

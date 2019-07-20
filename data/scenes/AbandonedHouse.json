@@ -269,7 +269,8 @@
     }
   ],
   "map": {
-    "imagePath": "/data/maps/AbandonedHouse.jpg",
-    "fitToScreen": false
+    "filePath": "/data/maps/AbandonedHouse.jpg",
+    "fitToScreen": false,
+    "isVideo": false
   }
 }

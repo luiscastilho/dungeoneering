@@ -116,7 +116,8 @@
     }
   ],
   "map": {
-    "imagePath": "/data/maps/HillsideAltar.jpg",
-    "fitToScreen": false
+    "filePath": "/data/maps/HillsideAltar.jpg",
+    "fitToScreen": false,
+    "isVideo": false
   }
 }

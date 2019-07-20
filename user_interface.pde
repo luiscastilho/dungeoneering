@@ -554,7 +554,7 @@ public class UserInterface {
       case "Select map":
         
         File mapFile = null;
-        selectInput("Select a map:", "mapImageSelected", mapFile, this);
+        selectInput("Select a map:", "mapFileSelected", mapFile, this);
         
         newAppState = AppStates.idle;
         
@@ -1348,21 +1348,22 @@ public class UserInterface {
     
   }
   
-  void mapImageSelected(File mapImageFile) {
+  void mapFileSelected(File mapFile) {
     
-    if ( mapImageFile == null )
+    if ( mapFile == null )
       return;
     
     MimetypesFileTypeMap mimetypesMap = new MimetypesFileTypeMap();
     mimetypesMap.addMimeTypes("image png tif tiff jpg jpeg bmp gif");
-    String mimetype = mimetypesMap.getContentType(mapImageFile);
+    mimetypesMap.addMimeTypes("video/mp4 mp4");
+    String mimetype = mimetypesMap.getContentType(mapFile);
     String type = mimetype.split("/")[0];
-    if ( !type.equals("image") ) {
-      println("Map selection: selected file is not an image");
+    if ( !type.equals("image") && !type.equals("video") ) {
+      println("Map selection: selected file is not an image or a video");
       return;
     }
     
-    map.setup(mapImageFile.getAbsolutePath(), false);
+    map.setup(mapFile.getAbsolutePath(), false, type.equals("video"));
     
     obstacles.setIllumination(Illumination.brightLight);
     obstacles.clear();
@@ -1413,7 +1414,7 @@ public class UserInterface {
       Point mappedEndPos = map.mapCanvasToImage(new Point(gridHelperToX, gridHelperToY));
       int xDiff = gridHelperX-mappedStartPos.x;
       int yDiff = gridHelperY-mappedStartPos.y;
-      grid.setupFromHelper(mappedStartPos.x, mappedStartPos.y, mappedEndPos.x, mappedEndPos.y, map.getImageWidth(), map.getImageHeight(), xDiff, yDiff);
+      grid.setupFromHelper(mappedStartPos.x, mappedStartPos.y, mappedEndPos.x, mappedEndPos.y, map.getMapWidth(), map.getMapHeight(), xDiff, yDiff);
       
     }
     
@@ -1447,7 +1448,7 @@ public class UserInterface {
     Point mappedEndPos = map.mapCanvasToImage(new Point(gridHelperToX, gridHelperToY));
     int xDiff = gridHelperX-mappedStartPos.x;
     int yDiff = gridHelperY-mappedStartPos.y;
-    grid.setupFromHelper(mappedStartPos.x, mappedStartPos.y, mappedEndPos.x, mappedEndPos.y, map.getImageWidth(), map.getImageHeight(), xDiff, yDiff);
+    grid.setupFromHelper(mappedStartPos.x, mappedStartPos.y, mappedEndPos.x, mappedEndPos.y, map.getMapWidth(), map.getMapHeight(), xDiff, yDiff);
     
   }
   
@@ -1662,7 +1663,7 @@ public class UserInterface {
     
     if ( sceneFolder == null )
       return;
-    if ( map.getImagePath() == null )
+    if ( map.getFilePath() == null )
       return;
     
     String sketchPath = sketchPath().replaceAll("\\\\", "/");
@@ -1672,8 +1673,9 @@ public class UserInterface {
     JSONObject sceneJson = new JSONObject();
     
     JSONObject mapJson = new JSONObject();
-    mapJson.setString("imagePath", map.getImagePath().replaceAll("\\\\", "/").replaceFirst("^" + sketchPath, ""));
+    mapJson.setString("filePath", map.getFilePath().replaceAll("\\\\", "/").replaceFirst("^" + sketchPath, ""));
     mapJson.setBoolean("fitToScreen", map.getFitToScreen());
+    mapJson.setBoolean("isVideo", map.isVideo());
     sceneJson.setJSONObject("map", mapJson);
     
     JSONObject gridJson = new JSONObject();
@@ -1742,7 +1744,7 @@ public class UserInterface {
     }
     sceneJson.setJSONObject("illumination", illuminationJson);
     
-    File mapFile = new File(map.getImagePath());
+    File mapFile = new File(map.getFilePath());
     String mapFileName = mapFile.getName();
     String[] mapFileNameTokens = mapFileName.split("\\.(?=[^\\.]+$)");
     String mapBaseName = mapFileNameTokens[0];
@@ -1836,15 +1838,16 @@ public class UserInterface {
     JSONObject mapJson = sceneJson.getJSONObject("map");
     if ( mapJson != null ) {
       
-      String mapImagePath = mapJson.getString("imagePath");
+      String mapImagePath = mapJson.getString("filePath");
       boolean fitToScreen = mapJson.getBoolean("fitToScreen");
+      boolean isVideo = mapJson.getBoolean("isVideo");
       
       if ( !fileExists(mapImagePath) ) {
         if ( fileExists(sketchPath + mapImagePath) )
           mapImagePath = sketchPath + mapImagePath;
       }
       
-      map.setup(mapImagePath, fitToScreen);
+      map.setup(mapImagePath, fitToScreen, isVideo);
       
       enableController("Grid setup");
       enableController("Add/Remove walls");
