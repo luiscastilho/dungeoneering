@@ -14,92 +14,84 @@
   }],
   "dmTokens": [
     {
+      "size": "Medium",
+      "lightSources": [],
       "imagePath": "/data/tokens/dm/Goblin.png",
+      "sightTypes": [{"name": "Darkvision 60'"}],
       "name": "Goblin",
       "column": 5,
       "row": 2,
-      "sightTypes": [{
-        "dimLightRadius": 700,
-        "brightLightRadius": 0,
-        "name": "Darkvision 60'"
-      }]
+      "conditions": []
     },
     {
+      "size": "Medium",
+      "lightSources": [],
       "imagePath": "/data/tokens/dm/Goblin.png",
+      "sightTypes": [{"name": "Darkvision 60'"}],
       "name": "Goblin",
       "column": 2,
       "row": 3,
-      "sightTypes": [{
-        "dimLightRadius": 700,
-        "brightLightRadius": 0,
-        "name": "Darkvision 60'"
-      }]
+      "conditions": []
     },
     {
+      "size": "Medium",
+      "lightSources": [],
       "imagePath": "/data/tokens/dm/Goblin.png",
+      "sightTypes": [{"name": "Darkvision 60'"}],
       "name": "Goblin",
       "column": 4,
       "row": 4,
-      "sightTypes": [{
-        "dimLightRadius": 700,
-        "brightLightRadius": 0,
-        "name": "Darkvision 60'"
-      }]
+      "conditions": []
     },
     {
+      "size": "Medium",
+      "lightSources": [],
       "imagePath": "/data/tokens/dm/Goblin.png",
+      "sightTypes": [{"name": "Darkvision 60'"}],
       "name": "Goblin",
       "column": 2,
       "row": 5,
-      "sightTypes": [{
-        "dimLightRadius": 700,
-        "brightLightRadius": 0,
-        "name": "Darkvision 60'"
-      }]
+      "conditions": []
     },
     {
+      "size": "Medium",
+      "lightSources": [],
       "imagePath": "/data/tokens/dm/Goblin.png",
+      "sightTypes": [{"name": "Darkvision 60'"}],
       "name": "Goblin",
       "column": 4,
       "row": 5,
-      "sightTypes": [{
-        "dimLightRadius": 700,
-        "brightLightRadius": 0,
-        "name": "Darkvision 60'"
-      }]
+      "conditions": []
     },
     {
+      "size": "Medium",
+      "lightSources": [],
       "imagePath": "/data/tokens/dm/Orc.png",
+      "sightTypes": [{"name": "Darkvision 60'"}],
       "name": "Orc",
       "column": 12,
       "row": 5,
-      "sightTypes": [{
-        "dimLightRadius": 700,
-        "brightLightRadius": 0,
-        "name": "Darkvision 60'"
-      }]
+      "conditions": []
     },
     {
+      "size": "Medium",
+      "lightSources": [],
       "imagePath": "/data/tokens/dm/Orc.png",
+      "sightTypes": [{"name": "Darkvision 60'"}],
       "name": "Orc",
       "column": 11,
       "row": 6,
-      "sightTypes": [{
-        "dimLightRadius": 700,
-        "brightLightRadius": 0,
-        "name": "Darkvision 60'"
-      }]
+      "conditions": []
     },
     {
+      "size": "Medium",
+      "lightSources": [],
       "imagePath": "/data/tokens/dm/Orc.png",
+      "sightTypes": [{"name": "Darkvision 60'"}],
       "name": "Orc",
       "column": 11,
       "row": 4,
-      "sightTypes": [{
-        "dimLightRadius": 700,
-        "brightLightRadius": 0,
-        "name": "Darkvision 60'"
-      }]
+      "conditions": []
     }
   ],
   "walls": [
@@ -246,37 +238,34 @@
   },
   "playerTokens": [
     {
+      "size": "Medium",
+      "lightSources": [],
       "imagePath": "/data/tokens/players/Orsik.png",
+      "sightTypes": [{"name": "Darkvision 60'"}],
       "name": "Orsik",
       "column": 2,
       "row": 13,
-      "sightTypes": [{
-        "dimLightRadius": 700,
-        "brightLightRadius": 0,
-        "name": "Darkvision 60'"
-      }]
+      "conditions": []
     },
     {
+      "size": "Medium",
+      "lightSources": [{"name": "Torch"}],
       "imagePath": "/data/tokens/players/Luth.png",
+      "sightTypes": [],
       "name": "Luth",
       "column": 1,
       "row": 14,
-      "lightSources": [{
-        "dimLightRadius": 476,
-        "brightLightRadius": 252,
-        "name": "Torch"
-      }]
+      "conditions": []
     },
     {
+      "size": "Medium",
+      "lightSources": [],
       "imagePath": "/data/tokens/players/Lia.png",
+      "sightTypes": [{"name": "Darkvision 60'"}],
       "name": "Lia",
       "column": 3,
       "row": 14,
-      "sightTypes": [{
-        "dimLightRadius": 700,
-        "brightLightRadius": 0,
-        "name": "Darkvision 60'"
-      }]
+      "conditions": []
     }
   ],
   "map": {

@@ -109,7 +109,7 @@ class Obstacles {
   void resetShadows() {
     
     allShadows.beginDraw();
-    allShadows.background(illumination.getColor(), 0);
+    allShadows.background(illumination.getColor());
     allShadows.endDraw();
     
   }

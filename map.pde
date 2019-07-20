@@ -36,8 +36,8 @@ class Map {
     panY = panToY = lastPanY = 0;
     scale = toScale = lastScale = 1;
     
-    panIncrement = .3;
-    zoomIncrement = .3;
+    panIncrement = 1;
+    zoomIncrement = 1;
     
     panEnabled = false;
     zoomEnabled = false;

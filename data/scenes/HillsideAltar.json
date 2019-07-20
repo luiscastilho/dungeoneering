@@ -2,81 +2,74 @@
   "doors": [],
   "dmTokens": [
     {
+      "size": "Medium",
+      "lightSources": [],
       "imagePath": "/data/tokens/dm/Orc.png",
+      "sightTypes": [{"name": "Darkvision 60'"}],
       "name": "Orc",
       "column": 12,
       "row": 3,
-      "sightTypes": [{
-        "dimLightRadius": 1150,
-        "brightLightRadius": 0,
-        "name": "Darkvision 60'"
-      }]
+      "conditions": []
     },
     {
+      "size": "Medium",
+      "lightSources": [],
       "imagePath": "/data/tokens/dm/Orc.png",
+      "sightTypes": [{"name": "Darkvision 60'"}],
       "name": "Orc",
       "column": 12,
       "row": 1,
-      "sightTypes": [{
-        "dimLightRadius": 1150,
-        "brightLightRadius": 0,
-        "name": "Darkvision 60'"
-      }]
+      "conditions": []
     },
     {
+      "size": "Medium",
+      "lightSources": [],
       "imagePath": "/data/tokens/dm/Orc.png",
+      "sightTypes": [{"name": "Darkvision 60'"}],
       "name": "Orc",
       "column": 13,
       "row": 2,
-      "sightTypes": [{
-        "dimLightRadius": 1150,
-        "brightLightRadius": 0,
-        "name": "Darkvision 60'"
-      }]
+      "conditions": []
     },
     {
+      "size": "Medium",
+      "lightSources": [],
       "imagePath": "/data/tokens/dm/Goblin.png",
+      "sightTypes": [{"name": "Darkvision 60'"}],
       "name": "Goblin",
       "column": 7,
       "row": 8,
-      "sightTypes": [{
-        "dimLightRadius": 1150,
-        "brightLightRadius": 0,
-        "name": "Darkvision 60'"
-      }]
+      "conditions": []
     },
     {
+      "size": "Medium",
+      "lightSources": [],
       "imagePath": "/data/tokens/dm/Goblin.png",
+      "sightTypes": [{"name": "Darkvision 60'"}],
       "name": "Goblin",
       "column": 5,
       "row": 7,
-      "sightTypes": [{
-        "dimLightRadius": 1150,
-        "brightLightRadius": 0,
-        "name": "Darkvision 60'"
-      }]
+      "conditions": []
     },
     {
+      "size": "Medium",
+      "lightSources": [],
       "imagePath": "/data/tokens/dm/Goblin.png",
+      "sightTypes": [{"name": "Darkvision 60'"}],
       "name": "Goblin",
       "column": 4,
       "row": 6,
-      "sightTypes": [{
-        "dimLightRadius": 1150,
-        "brightLightRadius": 0,
-        "name": "Darkvision 60'"
-      }]
+      "conditions": []
     },
     {
+      "size": "Medium",
+      "lightSources": [],
       "imagePath": "/data/tokens/dm/Goblin.png",
+      "sightTypes": [{"name": "Darkvision 60'"}],
       "name": "Goblin",
       "column": 8,
       "row": 9,
-      "sightTypes": [{
-        "dimLightRadius": 1150,
-        "brightLightRadius": 0,
-        "name": "Darkvision 60'"
-      }]
+      "conditions": []
     }
   ],
   "walls": [],
@@ -92,37 +85,34 @@
   },
   "playerTokens": [
     {
+      "size": "Medium",
+      "lightSources": [],
       "imagePath": "/data/tokens/players/Orsik.png",
+      "sightTypes": [{"name": "Darkvision 60'"}],
       "name": "Orsik",
       "column": 3,
       "row": 2,
-      "sightTypes": [{
-        "dimLightRadius": 1150,
-        "brightLightRadius": 0,
-        "name": "Darkvision 60'"
-      }]
+      "conditions": []
     },
     {
+      "size": "Medium",
+      "lightSources": [{"name": "Torch"}],
       "imagePath": "/data/tokens/players/Luth.png",
+      "sightTypes": [],
       "name": "Luth",
       "column": 2,
       "row": 1,
-      "lightSources": [{
-        "dimLightRadius": 782,
-        "brightLightRadius": 414,
-        "name": "Torch"
-      }]
+      "conditions": []
     },
     {
+      "size": "Medium",
+      "lightSources": [],
       "imagePath": "/data/tokens/players/Lia.png",
+      "sightTypes": [{"name": "Darkvision 60'"}],
       "name": "Lia",
       "column": 1,
       "row": 2,
-      "sightTypes": [{
-        "dimLightRadius": 1150,
-        "brightLightRadius": 0,
-        "name": "Darkvision 60'"
-      }]
+      "conditions": []
     }
   ],
   "map": {
