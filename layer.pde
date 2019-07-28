@@ -174,6 +174,8 @@ class Layer {
     
     tokens = new ArrayList<Token>();
     
+    System.gc();
+    
   }
   
   boolean hasTokens() {

@@ -28,6 +28,8 @@ color backgroundColor;
 void setup() {
   
   fullScreen(P2D);
+  smooth();
+  frameRate(60);
   
   DEBUG = true;
   
@@ -37,6 +39,7 @@ void setup() {
   cp5.isTouch = false;
   
   canvas = createGraphics(width, height, P2D);
+  canvas.smooth();
   
   obstacles = new Obstacles(canvas);
   
@@ -124,9 +127,19 @@ void draw() {
   canvas.endDraw();
   image(canvas, 0, 0, width, height);
   
-  if ( DEBUG )
-    if ( frameCount % 180 == 0 )
-      println("DEBUG: FPS: " + frameRate);
+  if ( frameCount % 180 == 0 ) {
+    
+    System.gc();
+    System.runFinalization();
+    
+    if ( DEBUG ) {
+      long totalMemory = Runtime.getRuntime().totalMemory();
+      long usedMemory = totalMemory - Runtime.getRuntime().freeMemory();
+      float usedMemoryPercent = (100*(float)usedMemory/totalMemory);
+      println("DEBUG: FPS: " + nf(frameRate, 2, 2) + " / " + "Memory usage: " + nf(usedMemoryPercent, 2, 2) + "%");
+    }
+    
+  }
   
 }
 

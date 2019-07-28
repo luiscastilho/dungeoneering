@@ -200,6 +200,8 @@ class Grid {
     lastCenterX = lastCenterY = 0;
     cellWidth = cellHeight = 0;
     
+    System.gc();
+    
   }
   
   ArrayList<ArrayList<Cell>> getCells() {

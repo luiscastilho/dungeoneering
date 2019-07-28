@@ -103,7 +103,6 @@ class Map {
     } else {
       
       video = new Movie(sketch, filePath);
-      video.frameRate(30);
       video.loop();
       
     }
@@ -218,6 +217,8 @@ class Map {
     panX = panToX = 0;
     panY = panToY = 0;
     scale = toScale = 1;
+    
+    System.gc();
     
   }
   
