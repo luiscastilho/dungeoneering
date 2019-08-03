@@ -86,6 +86,7 @@ class Resources {
   void setConditions() {
     
     conditions.put("Blinded", new Condition(canvas, "Blinded", "conditions/blinded.png", grid.getCellWidth(), grid.getCellHeight(), true, false));
+    conditions.put("Bloodied", new Condition(canvas, "Bloodied", "conditions/bloodied.png", grid.getCellWidth(), grid.getCellHeight(), true, false));
     conditions.put("Charmed", new Condition(canvas, "Charmed", "conditions/charmed.png", grid.getCellWidth(), grid.getCellHeight(), false, false));
     conditions.put("Dead", new Condition(canvas, "Dead", "conditions/dead.png", grid.getCellWidth(), grid.getCellHeight(), true, true));
     conditions.put("Deafened", new Condition(canvas, "Deafened", "conditions/deafened.png", grid.getCellWidth(), grid.getCellHeight(), false, false));

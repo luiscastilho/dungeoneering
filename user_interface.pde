@@ -328,6 +328,9 @@ public class UserInterface {
     addButton("Toggle condition blinded", "blinded", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
     
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    addButton("Toggle condition bloodied", "bloodied", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
+    
+    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
     addButton("Toggle condition charmed", "charmed", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
     
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
@@ -336,13 +339,13 @@ public class UserInterface {
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
     addButton("Toggle condition deafened", "deafened", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
     
-    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition frightened", "frightened", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
-    
     // new line
     conditionMenuControllers.setBackgroundHeight(conditionMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY = controllersMenuY + squareButtonWidth + controllersSpacing;
+    addButton("Toggle condition frightened", "frightened", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
+    
+    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
     addButton("Toggle condition grappled", "grappled", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
     
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
@@ -354,13 +357,13 @@ public class UserInterface {
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
     addButton("Toggle condition paralyzed", "paralyzed", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
     
-    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition petrified", "petrified", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
-    
     // new line
     conditionMenuControllers.setBackgroundHeight(conditionMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY = controllersMenuY + squareButtonWidth + controllersSpacing;
+    addButton("Toggle condition petrified", "petrified", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
+    
+    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
     addButton("Toggle condition poisoned", "poisoned", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
     
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
@@ -372,7 +375,10 @@ public class UserInterface {
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
     addButton("Toggle condition stunned", "stunned", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
     
-    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    // new line
+    conditionMenuControllers.setBackgroundHeight(conditionMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
+    controllersMenuX = controllersMenuInitialX;
+    controllersMenuY = controllersMenuY + squareButtonWidth + controllersSpacing;
     addButton("Toggle condition unconscious", "unconscious", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
     
     // first line in menu item
@@ -855,6 +861,23 @@ public class UserInterface {
           break;
         
         resourceName = "Blinded";
+        conditionTemplate = resources.getCondition(resourceName);
+        if ( conditionTemplate == null ) {
+          println("Resource: Condition " + resourceName + " not found");
+          break;
+        }
+        
+        rightClickedToken.toggleCondition(conditionTemplate);
+        obstacles.setRecalculateShadows(true);
+        hideMenu(0, 0);
+        
+        break;
+      case "Toggle condition bloodied":
+        
+        if ( rightClickedToken == null )
+          break;
+        
+        resourceName = "Bloodied";
         conditionTemplate = resources.getCondition(resourceName);
         if ( conditionTemplate == null ) {
           println("Resource: Condition " + resourceName + " not found");
