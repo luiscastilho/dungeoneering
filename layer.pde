@@ -31,6 +31,7 @@ class Layer {
     switch ( appState ) {
       case idle:
       case wallSetup:
+      case doorSetup:
         
         for ( Token token: tokens )
           token.draw();

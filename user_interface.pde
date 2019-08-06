@@ -60,6 +60,8 @@ public class UserInterface {
   Group otherMenuControllers;
   Accordion tokenMenu;
   
+  boolean fileDialogOpen;
+  
   UserInterface(PGraphics _canvas, ControlP5 _cp5, Map _map, Grid _grid, Obstacles _obstacles, Layer _playersLayer, Layer _dmLayer, Resources _resources) {
     
     canvas = _canvas;
@@ -128,6 +130,8 @@ public class UserInterface {
     sizeMenuControllers = null;
     otherMenuControllers = null;
     tokenMenu = null;
+    
+    fileDialogOpen = false;
     
     setupControllers();
     
@@ -561,6 +565,7 @@ public class UserInterface {
         
         File mapFile = null;
         selectInput("Select a map:", "mapFileSelected", mapFile, this);
+        fileDialogOpen = true;
         
         newAppState = AppStates.idle;
         
@@ -643,6 +648,7 @@ public class UserInterface {
             selectInput("Select a token image:", "playerTokenImageSelected", tokenFile, this);
           else
             selectInput("Select a token image:", "dmTokenImageSelected", tokenFile, this);
+          fileDialogOpen = true;
           
           disableController("Select map");
           disableController("Grid setup");
@@ -789,6 +795,7 @@ public class UserInterface {
         
         File sceneFolder = null;
         selectFolder("Select folder where to save scene:", "saveScene", sceneFolder, this);
+        fileDialogOpen = true;
         
         newAppState = AppStates.idle;
         
@@ -797,6 +804,7 @@ public class UserInterface {
         
         File sceneFile = null;
         selectInput("Select scene to load:", "loadScene", sceneFile, this);
+        fileDialogOpen = true;
         
         newAppState = AppStates.idle;
         
@@ -1373,6 +1381,8 @@ public class UserInterface {
   
   void mapFileSelected(File mapFile) {
     
+    fileDialogOpen = false;
+    
     if ( mapFile == null )
       return;
     
@@ -1477,6 +1487,8 @@ public class UserInterface {
   
   void playerTokenImageSelected(File tokenImageFile) {
     
+    fileDialogOpen = false;
+    
     if ( tokenImageFile == null )
       return;
     
@@ -1485,6 +1497,8 @@ public class UserInterface {
   }
   
   void dmTokenImageSelected(File tokenImageFile) {
+    
+    fileDialogOpen = false;
     
     if ( tokenImageFile == null )
       return;
@@ -1684,6 +1698,8 @@ public class UserInterface {
   
   void saveScene(File sceneFolder) {
     
+    fileDialogOpen = false;
+    
     if ( sceneFolder == null )
       return;
     if ( map.getFilePath() == null )
@@ -1842,6 +1858,8 @@ public class UserInterface {
   }
   
   void loadScene(File sceneFile) {
+    
+    fileDialogOpen = false;
     
     if ( sceneFile == null )
       return;
@@ -2177,6 +2195,10 @@ public class UserInterface {
     
     return exists;
     
+  }
+  
+  boolean isFileDialogOpen() {
+    return fileDialogOpen;
   }
   
 }

@@ -379,5 +379,6 @@ void keyPressed() {
 }
 
 void movieEvent(Movie movie) {
-  movie.read();
+  if ( !userInterface.isFileDialogOpen() )
+    movie.read();
 }
