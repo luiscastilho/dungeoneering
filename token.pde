@@ -350,7 +350,9 @@ class Token {
     
   }
   
-  void setSize(Size _size) {
+  void setSize(Size _size, Resources resources) {
+    
+    ArrayList<Condition> resizedConditions = new ArrayList<Condition>();
     
     size = _size;
     
@@ -358,6 +360,11 @@ class Token {
     image.resize(round(cell.getCellWidth() * size.getResizeFactor()), round(cell.getCellHeight() * size.getResizeFactor()));
     
     setCell(cell);
+    
+    for ( Condition condition: conditions )
+      resizedConditions.add(resources.getCondition(condition.getName(), size));
+    
+    conditions = resizedConditions;
     
     if ( DEBUG )
       println("DEBUG: Token " + name + ": Size set to " + size.getName());

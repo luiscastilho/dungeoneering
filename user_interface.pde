@@ -869,7 +869,7 @@ public class UserInterface {
           break;
         
         resourceName = "Blinded";
-        conditionTemplate = resources.getCondition(resourceName);
+        conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
         if ( conditionTemplate == null ) {
           println("Resource: Condition " + resourceName + " not found");
           break;
@@ -886,7 +886,7 @@ public class UserInterface {
           break;
         
         resourceName = "Bloodied";
-        conditionTemplate = resources.getCondition(resourceName);
+        conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
         if ( conditionTemplate == null ) {
           println("Resource: Condition " + resourceName + " not found");
           break;
@@ -903,7 +903,7 @@ public class UserInterface {
           break;
         
         resourceName = "Charmed";
-        conditionTemplate = resources.getCondition(resourceName);
+        conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
         if ( conditionTemplate == null ) {
           println("Resource: Condition " + resourceName + " not found");
           break;
@@ -920,7 +920,7 @@ public class UserInterface {
           break;
         
         resourceName = "Dead";
-        conditionTemplate = resources.getCondition(resourceName);
+        conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
         if ( conditionTemplate == null ) {
           println("Resource: Condition " + resourceName + " not found");
           break;
@@ -937,7 +937,7 @@ public class UserInterface {
           break;
         
         resourceName = "Deafened";
-        conditionTemplate = resources.getCondition(resourceName);
+        conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
         if ( conditionTemplate == null ) {
           println("Resource: Condition " + resourceName + " not found");
           break;
@@ -954,7 +954,7 @@ public class UserInterface {
           break;
         
         resourceName = "Frightened";
-        conditionTemplate = resources.getCondition(resourceName);
+        conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
         if ( conditionTemplate == null ) {
           println("Resource: Condition " + resourceName + " not found");
           break;
@@ -971,7 +971,7 @@ public class UserInterface {
           break;
         
         resourceName = "Grappled";
-        conditionTemplate = resources.getCondition(resourceName);
+        conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
         if ( conditionTemplate == null ) {
           println("Resource: Condition " + resourceName + " not found");
           break;
@@ -988,7 +988,7 @@ public class UserInterface {
           break;
         
         resourceName = "Incapacitated";
-        conditionTemplate = resources.getCondition(resourceName);
+        conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
         if ( conditionTemplate == null ) {
           println("Resource: Condition " + resourceName + " not found");
           break;
@@ -1005,7 +1005,7 @@ public class UserInterface {
           break;
         
         resourceName = "Invisible";
-        conditionTemplate = resources.getCondition(resourceName);
+        conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
         if ( conditionTemplate == null ) {
           println("Resource: Condition " + resourceName + " not found");
           break;
@@ -1022,7 +1022,7 @@ public class UserInterface {
           break;
         
         resourceName = "Paralyzed";
-        conditionTemplate = resources.getCondition(resourceName);
+        conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
         if ( conditionTemplate == null ) {
           println("Resource: Condition " + resourceName + " not found");
           break;
@@ -1039,7 +1039,7 @@ public class UserInterface {
           break;
         
         resourceName = "Petrified";
-        conditionTemplate = resources.getCondition(resourceName);
+        conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
         if ( conditionTemplate == null ) {
           println("Resource: Condition " + resourceName + " not found");
           break;
@@ -1056,7 +1056,7 @@ public class UserInterface {
           break;
         
         resourceName = "Poisoned";
-        conditionTemplate = resources.getCondition(resourceName);
+        conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
         if ( conditionTemplate == null ) {
           println("Resource: Condition " + resourceName + " not found");
           break;
@@ -1073,7 +1073,7 @@ public class UserInterface {
           break;
         
         resourceName = "Prone";
-        conditionTemplate = resources.getCondition(resourceName);
+        conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
         if ( conditionTemplate == null ) {
           println("Resource: Condition " + resourceName + " not found");
           break;
@@ -1090,7 +1090,7 @@ public class UserInterface {
           break;
         
         resourceName = "Restrained";
-        conditionTemplate = resources.getCondition(resourceName);
+        conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
         if ( conditionTemplate == null ) {
           println("Resource: Condition " + resourceName + " not found");
           break;
@@ -1107,7 +1107,7 @@ public class UserInterface {
           break;
         
         resourceName = "Stunned";
-        conditionTemplate = resources.getCondition(resourceName);
+        conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
         if ( conditionTemplate == null ) {
           println("Resource: Condition " + resourceName + " not found");
           break;
@@ -1124,7 +1124,7 @@ public class UserInterface {
           break;
         
         resourceName = "Unconscious";
-        conditionTemplate = resources.getCondition(resourceName);
+        conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
         if ( conditionTemplate == null ) {
           println("Resource: Condition " + resourceName + " not found");
           break;
@@ -1266,7 +1266,7 @@ public class UserInterface {
           break;
         }
         
-        rightClickedToken.setSize(new Size(sizeTemplate.getName(), sizeTemplate.getResizeFactor(), sizeTemplate.isCentered()));
+        rightClickedToken.setSize(new Size(sizeTemplate.getName(), sizeTemplate.getResizeFactor(), sizeTemplate.isCentered()), resources);
         hideMenu(0, 0);
         
         break;
@@ -1282,7 +1282,7 @@ public class UserInterface {
           break;
         }
         
-        rightClickedToken.setSize(new Size(sizeTemplate.getName(), sizeTemplate.getResizeFactor(), sizeTemplate.isCentered()));
+        rightClickedToken.setSize(new Size(sizeTemplate.getName(), sizeTemplate.getResizeFactor(), sizeTemplate.isCentered()), resources);
         hideMenu(0, 0);
         
         break;
@@ -1298,7 +1298,7 @@ public class UserInterface {
           break;
         }
         
-        rightClickedToken.setSize(new Size(sizeTemplate.getName(), sizeTemplate.getResizeFactor(), sizeTemplate.isCentered()));
+        rightClickedToken.setSize(new Size(sizeTemplate.getName(), sizeTemplate.getResizeFactor(), sizeTemplate.isCentered()), resources);
         hideMenu(0, 0);
         
         break;
@@ -1314,7 +1314,7 @@ public class UserInterface {
           break;
         }
         
-        rightClickedToken.setSize(new Size(sizeTemplate.getName(), sizeTemplate.getResizeFactor(), sizeTemplate.isCentered()));
+        rightClickedToken.setSize(new Size(sizeTemplate.getName(), sizeTemplate.getResizeFactor(), sizeTemplate.isCentered()), resources);
         hideMenu(0, 0);
         
         break;
@@ -1330,7 +1330,7 @@ public class UserInterface {
           break;
         }
         
-        rightClickedToken.setSize(new Size(sizeTemplate.getName(), sizeTemplate.getResizeFactor(), sizeTemplate.isCentered()));
+        rightClickedToken.setSize(new Size(sizeTemplate.getName(), sizeTemplate.getResizeFactor(), sizeTemplate.isCentered()), resources);
         hideMenu(0, 0);
         
         break;
@@ -1346,7 +1346,7 @@ public class UserInterface {
           break;
         }
         
-        rightClickedToken.setSize(new Size(sizeTemplate.getName(), sizeTemplate.getResizeFactor(), sizeTemplate.isCentered()));
+        rightClickedToken.setSize(new Size(sizeTemplate.getName(), sizeTemplate.getResizeFactor(), sizeTemplate.isCentered()), resources);
         hideMenu(0, 0);
         
         break;
@@ -2026,7 +2026,7 @@ public class UserInterface {
         for ( Light sightType: getSightTypesFromJsonArray(tokenJson.getJSONArray("sightTypes")) )
           token.toggleSightType(new Light(sightType.getName(), sightType.getBrightLightRadius(), sightType.getDimLightRadius()));
         
-        for ( Condition condition: getConditionsFromJsonArray(tokenJson.getJSONArray("conditions")) )
+        for ( Condition condition: getConditionsFromJsonArray(tokenJson.getJSONArray("conditions"), tokenSize) )
           token.toggleCondition(condition);
         
         layer.addToken(token);
@@ -2074,7 +2074,7 @@ public class UserInterface {
     
   }
   
-  ArrayList<Condition> getConditionsFromJsonArray(JSONArray conditionsArray) {
+  ArrayList<Condition> getConditionsFromJsonArray(JSONArray conditionsArray, Size tokenSize) {
     
     ArrayList<Condition> conditions = new ArrayList<Condition>();
     
@@ -2082,7 +2082,7 @@ public class UserInterface {
       for ( int j = 0; j < conditionsArray.size(); j++ ) {
         JSONObject conditionJson = conditionsArray.getJSONObject(j);
         String name = conditionJson.getString("name");
-        Condition condition = resources.getCondition(name);
+        Condition condition = resources.getCondition(name, tokenSize);
         if ( condition != null )
           conditions.add(condition);
       }

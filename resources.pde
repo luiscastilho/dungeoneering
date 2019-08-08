@@ -35,8 +35,8 @@ class Resources {
     setCommonLightSources();
     setSpellLightSources();
     setSightTypes();
-    setConditions();
     setSizes();
+    setConditions();
     
     set = true;
     
@@ -83,27 +83,6 @@ class Resources {
     
   }
   
-  void setConditions() {
-    
-    conditions.put("Blinded", new Condition(canvas, "Blinded", "conditions/blinded.png", grid.getCellWidth(), grid.getCellHeight(), true, false));
-    conditions.put("Bloodied", new Condition(canvas, "Bloodied", "conditions/bloodied.png", grid.getCellWidth(), grid.getCellHeight(), true, false));
-    conditions.put("Charmed", new Condition(canvas, "Charmed", "conditions/charmed.png", grid.getCellWidth(), grid.getCellHeight(), false, false));
-    conditions.put("Dead", new Condition(canvas, "Dead", "conditions/dead.png", grid.getCellWidth(), grid.getCellHeight(), true, true));
-    conditions.put("Deafened", new Condition(canvas, "Deafened", "conditions/deafened.png", grid.getCellWidth(), grid.getCellHeight(), false, false));
-    conditions.put("Frightened", new Condition(canvas, "Frightened", "conditions/frightened.png", grid.getCellWidth(), grid.getCellHeight(), false, false));
-    conditions.put("Grappled", new Condition(canvas, "Grappled", "conditions/grappled.png", grid.getCellWidth(), grid.getCellHeight(), false, false));
-    conditions.put("Incapacitated", new Condition(canvas, "Incapacitated", "conditions/incapacitated.png", grid.getCellWidth(), grid.getCellHeight(), true, false));
-    conditions.put("Invisible", new Condition(canvas, "Invisible", "conditions/invisible.png", grid.getCellWidth(), grid.getCellHeight(), false, false));
-    conditions.put("Paralyzed", new Condition(canvas, "Paralyzed", "conditions/paralyzed.png", grid.getCellWidth(), grid.getCellHeight(), true, false));
-    conditions.put("Petrified", new Condition(canvas, "Petrified", "conditions/petrified.png", grid.getCellWidth(), grid.getCellHeight(), true, false));
-    conditions.put("Poisoned", new Condition(canvas, "Poisoned", "conditions/poisoned.png", grid.getCellWidth(), grid.getCellHeight(), false, false));
-    conditions.put("Prone", new Condition(canvas, "Prone", "conditions/prone.png", grid.getCellWidth(), grid.getCellHeight(), false, false));
-    conditions.put("Restrained", new Condition(canvas, "Restrained", "conditions/restrained.png", grid.getCellWidth(), grid.getCellHeight(), false, false));
-    conditions.put("Stunned", new Condition(canvas, "Stunned", "conditions/stunned.png", grid.getCellWidth(), grid.getCellHeight(), true, false));
-    conditions.put("Unconscious", new Condition(canvas, "Unconscious", "conditions/unconscious.png", grid.getCellWidth(), grid.getCellHeight(), true, false));
-    
-  }
-  
   void setSizes() {
     
     sizes.put("Tiny", new Size("Tiny", 0.5f, true));
@@ -112,6 +91,29 @@ class Resources {
     sizes.put("Large", new Size("Large", 2f, false));
     sizes.put("Huge", new Size("Huge", 3f, true));
     sizes.put("Gargantuan", new Size("Gargantuan", 4f, false));
+    
+  }
+  
+  void setConditions() {
+    
+    for ( Size size: sizes.values() ) {
+      conditions.put(size.getName() + " Blinded", new Condition(canvas, "Blinded", "conditions/blinded.png", grid.getCellWidth(), grid.getCellHeight(), true, false, size));
+      conditions.put(size.getName() + " Bloodied", new Condition(canvas, "Bloodied", "conditions/bloodied.png", grid.getCellWidth(), grid.getCellHeight(), true, false, size));
+      conditions.put(size.getName() + " Charmed", new Condition(canvas, "Charmed", "conditions/charmed.png", grid.getCellWidth(), grid.getCellHeight(), false, false, size));
+      conditions.put(size.getName() + " Dead", new Condition(canvas, "Dead", "conditions/dead.png", grid.getCellWidth(), grid.getCellHeight(), true, true, size));
+      conditions.put(size.getName() + " Deafened", new Condition(canvas, "Deafened", "conditions/deafened.png", grid.getCellWidth(), grid.getCellHeight(), false, false, size));
+      conditions.put(size.getName() + " Frightened", new Condition(canvas, "Frightened", "conditions/frightened.png", grid.getCellWidth(), grid.getCellHeight(), false, false, size));
+      conditions.put(size.getName() + " Grappled", new Condition(canvas, "Grappled", "conditions/grappled.png", grid.getCellWidth(), grid.getCellHeight(), false, false, size));
+      conditions.put(size.getName() + " Incapacitated", new Condition(canvas, "Incapacitated", "conditions/incapacitated.png", grid.getCellWidth(), grid.getCellHeight(), true, false, size));
+      conditions.put(size.getName() + " Invisible", new Condition(canvas, "Invisible", "conditions/invisible.png", grid.getCellWidth(), grid.getCellHeight(), false, false, size));
+      conditions.put(size.getName() + " Paralyzed", new Condition(canvas, "Paralyzed", "conditions/paralyzed.png", grid.getCellWidth(), grid.getCellHeight(), true, false, size));
+      conditions.put(size.getName() + " Petrified", new Condition(canvas, "Petrified", "conditions/petrified.png", grid.getCellWidth(), grid.getCellHeight(), true, false, size));
+      conditions.put(size.getName() + " Poisoned", new Condition(canvas, "Poisoned", "conditions/poisoned.png", grid.getCellWidth(), grid.getCellHeight(), false, false, size));
+      conditions.put(size.getName() + " Prone", new Condition(canvas, "Prone", "conditions/prone.png", grid.getCellWidth(), grid.getCellHeight(), false, false, size));
+      conditions.put(size.getName() + " Restrained", new Condition(canvas, "Restrained", "conditions/restrained.png", grid.getCellWidth(), grid.getCellHeight(), false, false, size));
+      conditions.put(size.getName() + " Stunned", new Condition(canvas, "Stunned", "conditions/stunned.png", grid.getCellWidth(), grid.getCellHeight(), true, false, size));
+      conditions.put(size.getName() + " Unconscious", new Condition(canvas, "Unconscious", "conditions/unconscious.png", grid.getCellWidth(), grid.getCellHeight(), true, false, size));
+    }
     
   }
   
@@ -127,8 +129,8 @@ class Resources {
     return sightTypes.get(name);
   }
   
-  Condition getCondition(String name) {
-    return conditions.get(name);
+  Condition getCondition(String name, Size size) {
+    return conditions.get(size.getName() + " " + name);
   }
   
   Size getSize(String name) {
