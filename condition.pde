@@ -1,8 +1,5 @@
 class Condition {
   
-  // must be a square number: 4, 9, 16
-  static final int maxConditionsPerToken = 4;
-  
   PGraphics canvas;
   
   String name;
@@ -14,6 +11,7 @@ class Condition {
   
   boolean centered;
   
+  int maxConditionsPerToken;
   int maxConditionRows, maxConditionColumns;
   
   Size size;
@@ -32,6 +30,36 @@ class Condition {
     centered = _centered;
     
     size = _size;
+    
+    // must be a square number: 4, 9, 16, 25
+    switch ( size.getName() ) {
+      case "Tiny":
+      case "Small":
+      case "Medium":
+        maxConditionsPerToken = 4;
+        break;
+      case "Large":
+        // three extra cells occupied:
+        // X 1
+        // 2 3
+        maxConditionsPerToken = 9;
+        break;
+      case "Huge":
+        // eight extra cells occupied:
+        // 1 2 3
+        // 4 X 5
+        // 6 7 8
+        maxConditionsPerToken = 16;
+        break;
+      case "Gargantuan":
+        // fifteen extra cells occupied:
+        //  X  1  2  3
+        //  4  5  6  7
+        //  8  9 10 11
+        // 12 13 14 15
+        maxConditionsPerToken = 25;
+        break;
+    }
     
     if ( centered ) {
       
