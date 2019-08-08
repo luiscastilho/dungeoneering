@@ -1267,6 +1267,7 @@ public class UserInterface {
         }
         
         rightClickedToken.setSize(new Size(sizeTemplate.getName(), sizeTemplate.getResizeFactor(), sizeTemplate.isCentered()), resources);
+        obstacles.setRecalculateShadows(true);
         hideMenu(0, 0);
         
         break;
@@ -1283,6 +1284,7 @@ public class UserInterface {
         }
         
         rightClickedToken.setSize(new Size(sizeTemplate.getName(), sizeTemplate.getResizeFactor(), sizeTemplate.isCentered()), resources);
+        obstacles.setRecalculateShadows(true);
         hideMenu(0, 0);
         
         break;
@@ -1299,6 +1301,7 @@ public class UserInterface {
         }
         
         rightClickedToken.setSize(new Size(sizeTemplate.getName(), sizeTemplate.getResizeFactor(), sizeTemplate.isCentered()), resources);
+        obstacles.setRecalculateShadows(true);
         hideMenu(0, 0);
         
         break;
@@ -1315,6 +1318,7 @@ public class UserInterface {
         }
         
         rightClickedToken.setSize(new Size(sizeTemplate.getName(), sizeTemplate.getResizeFactor(), sizeTemplate.isCentered()), resources);
+        obstacles.setRecalculateShadows(true);
         hideMenu(0, 0);
         
         break;
@@ -1331,6 +1335,7 @@ public class UserInterface {
         }
         
         rightClickedToken.setSize(new Size(sizeTemplate.getName(), sizeTemplate.getResizeFactor(), sizeTemplate.isCentered()), resources);
+        obstacles.setRecalculateShadows(true);
         hideMenu(0, 0);
         
         break;
@@ -1347,6 +1352,7 @@ public class UserInterface {
         }
         
         rightClickedToken.setSize(new Size(sizeTemplate.getName(), sizeTemplate.getResizeFactor(), sizeTemplate.isCentered()), resources);
+        obstacles.setRecalculateShadows(true);
         hideMenu(0, 0);
         
         break;

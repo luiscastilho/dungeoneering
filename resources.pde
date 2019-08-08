@@ -6,11 +6,11 @@ class Resources {
   
   Grid grid;
   
+  HashMap<String, Size> sizes;
   HashMap<String, Light> commonLightSources;
   HashMap<String, Light> spellLightSources;
   HashMap<String, Light> sightTypes;
   HashMap<String, Condition> conditions;
-  HashMap<String, Size> sizes;
   
   boolean set;
   
@@ -20,11 +20,11 @@ class Resources {
     
     grid = _grid;
     
+    sizes = new HashMap<String, Size>();
     commonLightSources = new HashMap<String, Light>();
     spellLightSources = new HashMap<String, Light>();
     sightTypes = new HashMap<String, Light>();
     conditions = new HashMap<String, Condition>();
-    sizes = new HashMap<String, Size>();
     
     set = false;
     
@@ -32,10 +32,10 @@ class Resources {
   
   void setup() {
     
+    setSizes();
     setCommonLightSources();
     setSpellLightSources();
     setSightTypes();
-    setSizes();
     setConditions();
     
     set = true;
@@ -44,10 +44,22 @@ class Resources {
   
   void reset() {
     
+    sizes = new HashMap<String, Size>();
     commonLightSources = new HashMap<String, Light>();
     spellLightSources = new HashMap<String, Light>();
     sightTypes = new HashMap<String, Light>();
     conditions = new HashMap<String, Condition>();
+    
+  }
+  
+  void setSizes() {
+    
+    sizes.put("Tiny", new Size("Tiny", 0.5f, true));
+    sizes.put("Small", new Size("Small", 1f, true));
+    sizes.put("Medium", new Size("Medium", 1f, true));
+    sizes.put("Large", new Size("Large", 2f, false));
+    sizes.put("Huge", new Size("Huge", 3f, true));
+    sizes.put("Gargantuan", new Size("Gargantuan", 4f, false));
     
   }
   
@@ -80,17 +92,6 @@ class Resources {
     sightTypes.put("Darkvision 90'", createLight("Darkvision 90'", 0, 90));
     sightTypes.put("Darkvision 120'", createLight("Darkvision 120'", 0, 120));
     sightTypes.put("Truesight 120'", createLight("Truesight 120'", 120, 0));
-    
-  }
-  
-  void setSizes() {
-    
-    sizes.put("Tiny", new Size("Tiny", 0.5f, true));
-    sizes.put("Small", new Size("Small", 1f, true));
-    sizes.put("Medium", new Size("Medium", 1f, true));
-    sizes.put("Large", new Size("Large", 2f, false));
-    sizes.put("Huge", new Size("Huge", 3f, true));
-    sizes.put("Gargantuan", new Size("Gargantuan", 4f, false));
     
   }
   

@@ -150,19 +150,21 @@ class Token {
     
     if ( _cell != null ) {
       cell = _cell;
-      for ( Light light: lightSources )
-        light.setPosition(cell.getCenter().x, cell.getCenter().y);
-      for ( Light sight: sightTypes )
-        sight.setPosition(cell.getCenter().x, cell.getCenter().y);
+      
+      recenterLightSources();
       
       // set extra cells occupied based on size
       switch ( size.getName() ) {
         case "Tiny":
         case "Small":
         case "Medium":
+          
+          // no extra cells occupied
           extraCells.clear();
+          
           break;
         case "Large":
+          
           // three extra cells occupied:
           // X 1
           // 2 3
@@ -170,8 +172,10 @@ class Token {
           extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + cell.getCellWidth(), cell.getCenter().y)));
           extraCells.add(grid.getCellAt(new Point(cell.getCenter().x, cell.getCenter().y + cell.getCellHeight())));
           extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + cell.getCellWidth(), cell.getCenter().y + cell.getCellHeight())));
+          
           break;
         case "Huge":
+          
           // eight extra cells occupied:
           // 1 2 3
           // 4 X 5
@@ -185,8 +189,10 @@ class Token {
           extraCells.add(grid.getCellAt(new Point(cell.getCenter().x - cell.getCellWidth(), cell.getCenter().y + cell.getCellHeight())));
           extraCells.add(grid.getCellAt(new Point(cell.getCenter().x, cell.getCenter().y + cell.getCellHeight())));
           extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + cell.getCellWidth(), cell.getCenter().y + cell.getCellHeight())));
+          
           break;
         case "Gargantuan":
+          
           // fifteen extra cells occupied:
           //  X  1  2  3
           //  4  5  6  7
@@ -208,9 +214,52 @@ class Token {
           extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + cell.getCellWidth(), cell.getCenter().y + 3*cell.getCellHeight())));
           extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + 2*cell.getCellWidth(), cell.getCenter().y + 3*cell.getCellHeight())));
           extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + 3*cell.getCellWidth(), cell.getCenter().y + 3*cell.getCellHeight())));
+          
           break;
       }
       
+    }
+    
+  }
+  
+  void recenterLightSources() {
+    
+    // set light sources center based on size
+    switch ( size.getName() ) {
+      case "Tiny":
+      case "Small":
+      case "Medium":
+        
+        for ( Light light: lightSources )
+          light.setPosition(cell.getCenter().x, cell.getCenter().y);
+        for ( Light sight: sightTypes )
+          sight.setPosition(cell.getCenter().x, cell.getCenter().y);
+        
+        break;
+      case "Large":
+        
+        for ( Light light: lightSources )
+          light.setPosition(cell.getCenter().x + round(cell.getCellWidth()*0.5f), cell.getCenter().y + round(cell.getCellHeight()*0.5f));
+        for ( Light sight: sightTypes )
+          sight.setPosition(cell.getCenter().x + round(cell.getCellWidth()*0.5f), cell.getCenter().y + round(cell.getCellHeight()*0.5f));
+        
+        break;
+      case "Huge":
+        
+        for ( Light light: lightSources )
+          light.setPosition(cell.getCenter().x, cell.getCenter().y);
+        for ( Light sight: sightTypes )
+          sight.setPosition(cell.getCenter().x, cell.getCenter().y);
+        
+        break;
+      case "Gargantuan":
+        
+        for ( Light light: lightSources )
+          light.setPosition(cell.getCenter().x + round(cell.getCellWidth()*1.5f), cell.getCenter().y + round(cell.getCellHeight()*1.5f));
+        for ( Light sight: sightTypes )
+          sight.setPosition(cell.getCenter().x + round(cell.getCellWidth()*1.5f), cell.getCenter().y + round(cell.getCellHeight()*1.5f));
+        
+        break;
     }
     
   }
@@ -289,7 +338,7 @@ class Token {
       }
     
     lightSources.add(light);
-    light.setPosition(cell.getCenter().x, cell.getCenter().y);
+    recenterLightSources();
     
     if ( DEBUG )
       println("DEBUG: Token " + name + ": Light source " + light.getName() + " added");
@@ -310,7 +359,7 @@ class Token {
       }
     
     sightTypes.add(sight);
-    sight.setPosition(cell.getCenter().x, cell.getCenter().y);
+    recenterLightSources();
     
     if ( DEBUG )
       println("DEBUG: Token " + name + ": Sight type " + sight.getName() + " added");
@@ -363,8 +412,9 @@ class Token {
     
     for ( Condition condition: conditions )
       resizedConditions.add(resources.getCondition(condition.getName(), size));
-    
     conditions = resizedConditions;
+    
+    recenterLightSources();
     
     if ( DEBUG )
       println("DEBUG: Token " + name + ": Size set to " + size.getName());
