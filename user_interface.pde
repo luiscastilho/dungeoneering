@@ -84,32 +84,32 @@ public class UserInterface {
     
     rightClickedToken = null;
     
+    rectButtonWidth = 140;
+    rectButtonHeight = 50;
+    squareButtonWidth = 50;
+    squareButtonHeight = 50;
+    instructionsHeight = 15;
+    menuBarHeight = 35;
+    
     controllersSpacing = 5;
     controllersTopLeftX = int(min(canvas.width, canvas.height) * 0.05);
     controllersTopLeftY = int(min(canvas.width, canvas.height) * 0.05);
     controllersTopRightX = canvas.width - int(min(canvas.width, canvas.height) * 0.05);
     controllersTopRightY = int(min(canvas.width, canvas.height) * 0.05);
     controllersBottomRightX = controllersTopRightX;
-    controllersBottomRightY = canvas.height - controllersTopLeftY;
+    controllersBottomRightY = canvas.height - controllersTopLeftY - squareButtonHeight;
     controllersMenuX = controllersSpacing;
     controllersMenuY = controllersSpacing;
     controllersMenuInitialX = controllersMenuX;
     controllersMenuInitialY = controllersMenuY;
     
-    rectButtonWidth = 100;
-    rectButtonHeight = 35;
-    squareButtonWidth = 35;
-    squareButtonHeight = 35;
-    instructionsHeight = 15;
-    menuBarHeight = 25;
-    
     menuItemsPerLine = 5;
     menuItemClicked = false;
     
-    enabledBackgroundColor = color(0, 45, 90);
+    enabledBackgroundColor = color(31, 76, 115);
     disabledBackgroundColor = color(100);
-    mouseOverBackgroundColor = color(0, 116, 217);
-    activeBackgroundColor = color(0, 170, 255);
+    mouseOverBackgroundColor = color(56, 124, 166);
+    activeBackgroundColor = color(0, 187, 224);
     
     instructionsFont = loadFont("fonts/ProcessingSansPro-Regular-12.vlw");
     instructionsFontColor = color(255);
@@ -198,6 +198,9 @@ public class UserInterface {
     cp5.addButton("Select map")
        .setPosition(controllersTopLeftX, controllersTopLeftY)
        .setSize(rectButtonWidth, rectButtonHeight)
+       .setColorBackground(enabledBackgroundColor)
+       .setColorForeground(mouseOverBackgroundColor)
+       .setColorActive(activeBackgroundColor)
        .moveTo(togglableControllers)
        ;
     
@@ -206,6 +209,9 @@ public class UserInterface {
     cp5.addButton("Grid setup")
        .setPosition(controllersTopLeftX, controllersTopLeftY)
        .setSize(rectButtonWidth, rectButtonHeight)
+       .setColorBackground(enabledBackgroundColor)
+       .setColorForeground(mouseOverBackgroundColor)
+       .setColorActive(activeBackgroundColor)
        .setSwitch(true)
        .setOff()
        .lock()
@@ -218,6 +224,9 @@ public class UserInterface {
     cp5.addButton("Add player token")
        .setPosition(controllersTopLeftX, controllersTopLeftY)
        .setSize(rectButtonWidth, rectButtonHeight)
+       .setColorBackground(enabledBackgroundColor)
+       .setColorForeground(mouseOverBackgroundColor)
+       .setColorActive(activeBackgroundColor)
        .setSwitch(true)
        .setOff()
        .lock()
@@ -230,6 +239,9 @@ public class UserInterface {
     cp5.addButton("Add DM token")
        .setPosition(controllersTopLeftX, controllersTopLeftY)
        .setSize(rectButtonWidth, rectButtonHeight)
+       .setColorBackground(enabledBackgroundColor)
+       .setColorForeground(mouseOverBackgroundColor)
+       .setColorActive(activeBackgroundColor)
        .setSwitch(true)
        .setOff()
        .lock()
@@ -242,6 +254,9 @@ public class UserInterface {
     cp5.addButton("Add/Remove walls")
        .setPosition(controllersTopLeftX, controllersTopLeftY)
        .setSize(rectButtonWidth, rectButtonHeight)
+       .setColorBackground(enabledBackgroundColor)
+       .setColorForeground(mouseOverBackgroundColor)
+       .setColorActive(activeBackgroundColor)
        .setSwitch(true)
        .setOff()
        .lock()
@@ -254,6 +269,9 @@ public class UserInterface {
     cp5.addButton("Add/Remove doors")
        .setPosition(controllersTopLeftX, controllersTopLeftY)
        .setSize(rectButtonWidth, rectButtonHeight)
+       .setColorBackground(enabledBackgroundColor)
+       .setColorForeground(mouseOverBackgroundColor)
+       .setColorActive(activeBackgroundColor)
        .setSwitch(true)
        .setOff()
        .lock()
@@ -297,18 +315,28 @@ public class UserInterface {
     
     conditionMenuControllers.setHeight(menuBarHeight)                  // menu bar height
                             .setBackgroundHeight(controllersSpacing)   // item height
+                            .setColorBackground(enabledBackgroundColor)
+                            .setColorForeground(mouseOverBackgroundColor)
                             ;
     lightSourceMenuControllers.setHeight(menuBarHeight)                // menu bar height
                               .setBackgroundHeight(controllersSpacing) // item height
+                              .setColorBackground(enabledBackgroundColor)
+                              .setColorForeground(mouseOverBackgroundColor)
                               ;
     sightTypeMenuControllers.setHeight(menuBarHeight)                  // menu bar height
                             .setBackgroundHeight(controllersSpacing)   // item height
+                            .setColorBackground(enabledBackgroundColor)
+                            .setColorForeground(mouseOverBackgroundColor)
                             ;
     sizeMenuControllers.setHeight(menuBarHeight)                       // menu bar height
-                            .setBackgroundHeight(controllersSpacing)   // item height
-                            ;
+                       .setBackgroundHeight(controllersSpacing)        // item height
+                       .setColorBackground(enabledBackgroundColor)
+                       .setColorForeground(mouseOverBackgroundColor)
+                       ;
     otherMenuControllers.setHeight(menuBarHeight)                      // menu bar height
                         .setBackgroundHeight(controllersSpacing)       // item height
+                        .setColorBackground(enabledBackgroundColor)
+                        .setColorForeground(mouseOverBackgroundColor)
                         ;
     tokenMenu = cp5.addAccordion("Right click menu")
        .setPosition(0, 0)

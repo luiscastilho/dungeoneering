@@ -36,7 +36,7 @@ void setup() {
   appState = AppStates.idle;
   
   cp5 = new ControlP5(this);
-  cp5.isTouch = false;
+  cp5.isTouch = true;
   
   canvas = createGraphics(width, height, P2D);
   canvas.smooth();
