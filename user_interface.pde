@@ -473,6 +473,9 @@ public class UserInterface {
     controllersMenuY = controllersMenuInitialY;
     addButton("Switch token layer", "switch_layer", controllersMenuX, controllersMenuY, otherMenuControllers, false, false);
     
+    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    addButton("Remove token", "remove", controllersMenuX, controllersMenuY, otherMenuControllers, false, false);
+    
     // Bottom left messages
     
     // Roll20 "Grid Alignment Tool" instructions:
@@ -579,6 +582,7 @@ public class UserInterface {
     Condition conditionTemplate;
     Light lightTemplate;
     Size sizeTemplate;
+    Point rightClickedTokenPosition;
     
     AppStates newAppState = AppStates.idle;
     
@@ -1389,7 +1393,7 @@ public class UserInterface {
         if ( rightClickedToken == null )
           break;
         
-        Point rightClickedTokenPosition = rightClickedToken.getCell().getCenter();
+        rightClickedTokenPosition = rightClickedToken.getCell().getCenter();
         
         if ( rightClickedToken.equals(playersLayer.getToken(rightClickedTokenPosition.x, rightClickedTokenPosition.y)) ) {
           
@@ -1400,6 +1404,27 @@ public class UserInterface {
           
           dmLayer.removeToken(rightClickedToken);
           playersLayer.addToken(rightClickedToken);
+          
+        }
+        
+        obstacles.setRecalculateShadows(true);
+        hideMenu(0, 0);
+        
+        break;
+      case "Remove token":
+        
+        if ( rightClickedToken == null )
+          break;
+        
+        rightClickedTokenPosition = rightClickedToken.getCell().getCenter();
+        
+        if ( rightClickedToken.equals(playersLayer.getToken(rightClickedTokenPosition.x, rightClickedTokenPosition.y)) ) {
+          
+          playersLayer.removeToken(rightClickedToken);
+          
+        } else {
+          
+          dmLayer.removeToken(rightClickedToken);
           
         }
         
