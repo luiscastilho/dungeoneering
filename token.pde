@@ -279,10 +279,7 @@ class Token {
     
     if ( prevCell != null ) {
       cell = prevCell;
-      for ( Light light: lightSources )
-        light.setPosition(cell.getCenter().x, cell.getCenter().y);
-      for ( Light sight: sightTypes )
-        sight.setPosition(cell.getCenter().x, cell.getCenter().y);
+      recenterLightSources();
     }
     beingMoved = false;
     

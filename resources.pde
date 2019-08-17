@@ -99,7 +99,7 @@ class Resources {
     
     for ( Size size: sizes.values() ) {
       conditions.put(size.getName() + " Blinded", new Condition(canvas, "Blinded", "conditions/blinded.png", grid.getCellWidth(), grid.getCellHeight(), true, false, size));
-      conditions.put(size.getName() + " Bloodied", new Condition(canvas, "Bloodied", "conditions/bloodied.png", grid.getCellWidth(), grid.getCellHeight(), true, false, size));
+      conditions.put(size.getName() + " Bloodied", new Condition(canvas, "Bloodied", "conditions/bloodied.png", grid.getCellWidth(), grid.getCellHeight(), false, false, size));
       conditions.put(size.getName() + " Charmed", new Condition(canvas, "Charmed", "conditions/charmed.png", grid.getCellWidth(), grid.getCellHeight(), false, false, size));
       conditions.put(size.getName() + " Dead", new Condition(canvas, "Dead", "conditions/dead.png", grid.getCellWidth(), grid.getCellHeight(), true, true, size));
       conditions.put(size.getName() + " Deafened", new Condition(canvas, "Deafened", "conditions/deafened.png", grid.getCellWidth(), grid.getCellHeight(), false, false, size));
