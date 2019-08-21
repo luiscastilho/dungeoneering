@@ -28,7 +28,7 @@ class Grid {
     cellWidth = cellHeight = 0;
     
     drawGrid = false;
-    gridColor = color(47);
+    gridColor = color(0, 159);
     
   }
   

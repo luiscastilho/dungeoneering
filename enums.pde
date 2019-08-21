@@ -10,7 +10,8 @@ enum AppStates {
   switchingLayer,
   switchingLightning,
   togglingCameraPan,
-  togglingCameraZoom;
+  togglingCameraZoom,
+  initiativeOrderSetup;
   
 };
 

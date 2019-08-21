@@ -19,6 +19,8 @@ public class UserInterface {
   
   Resources resources;
   
+  Initiative initiative;
+  
   Wall newWall;
   Door newDoor;
   
@@ -62,7 +64,7 @@ public class UserInterface {
   
   boolean fileDialogOpen;
   
-  UserInterface(PGraphics _canvas, ControlP5 _cp5, Map _map, Grid _grid, Obstacles _obstacles, Layer _playersLayer, Layer _dmLayer, Resources _resources) {
+  UserInterface(PGraphics _canvas, ControlP5 _cp5, Map _map, Grid _grid, Obstacles _obstacles, Layer _playersLayer, Layer _dmLayer, Resources _resources, Initiative _initiative) {
     
     canvas = _canvas;
     
@@ -78,6 +80,8 @@ public class UserInterface {
     dmLayer = _dmLayer;
     
     resources = _resources;
+    
+    initiative = _initiative;
     
     newWall = null;
     newDoor = null;
@@ -310,6 +314,9 @@ public class UserInterface {
     
     controllersBottomRightX = controllersBottomRightX - squareButtonWidth - controllersSpacing;
     addButton("Toggle camera zoom", "zoom", controllersBottomRightX, controllersBottomRightY, null, true, false);
+    
+    controllersBottomRightX = controllersBottomRightX - squareButtonWidth - controllersSpacing;
+    addButton("Toggle combat mode", "combat", controllersBottomRightX, controllersBottomRightY, null, true, false);
     
     // Token right click menu
     
@@ -617,10 +624,9 @@ public class UserInterface {
           disableController("Add/Remove doors");
           disableController("Toggle UI");
           
-          Button toggleGrid = (Button)cp5.getController("Toggle grid");
-          if ( !toggleGrid.isOn() )
-            toggleGrid.setOn();
+          setSwitchButtonState("Toggle grid", true);
           
+          initiative.clear();
           obstacles.setIllumination(Illumination.brightLight);
           obstacles.clear();
           playersLayer.clear();
@@ -726,9 +732,7 @@ public class UserInterface {
           disableController("Add/Remove doors");
           disableController("Toggle UI");
           
-          Button toggleWalls = (Button)cp5.getController("Toggle walls");
-          if ( !toggleWalls.isOn() )
-            toggleWalls.setOn();
+          setSwitchButtonState("Toggle walls", true);
           
           playersLayer.reset();
           dmLayer.reset();
@@ -782,9 +786,7 @@ public class UserInterface {
           disableController("Add/Remove walls");
           disableController("Toggle UI");
           
-          Button toggleWalls = (Button)cp5.getController("Toggle walls");
-          if ( !toggleWalls.isOn() )
-            toggleWalls.setOn();
+          setSwitchButtonState("Toggle walls", true);
           
           playersLayer.reset();
           dmLayer.reset();
@@ -884,6 +886,11 @@ public class UserInterface {
       case "Toggle camera zoom":
         
         newAppState = AppStates.togglingCameraZoom;
+        
+        break;
+      case "Toggle combat mode":
+        
+        initiative.toggleDrawInitiativeOrder();
         
         break;
       case "Conditions":
@@ -1457,6 +1464,7 @@ public class UserInterface {
     
     map.setup(mapFile.getAbsolutePath(), false, type.equals("video"));
     
+    initiative.clear();
     obstacles.setIllumination(Illumination.brightLight);
     obstacles.clear();
     playersLayer.clear();
@@ -1473,7 +1481,7 @@ public class UserInterface {
   
   void gridHelperSetup(int x, int y, boolean start, boolean done) {
     
-    if ( isInside() )
+    if ( isInside(x, y) )
       return;
     
     if ( start ) {
@@ -1578,13 +1586,8 @@ public class UserInterface {
     
     if ( done ) {
       
-      Button addTokenButton;
-      
-      addTokenButton = (Button)cp5.getController("Add player token");
-      addTokenButton.setOff();
-      
-      addTokenButton = (Button)cp5.getController("Add DM token");
-      addTokenButton.setOff();
+      setSwitchButtonState("Add player token", false);
+      setSwitchButtonState("Add DM token", false);
       
     }
     
@@ -1594,7 +1597,7 @@ public class UserInterface {
   
   void newWallSetup(int _mouseX, int _mouseY) {
     
-    if ( isInside() )
+    if ( isInside(_mouseX, _mouseY) )
       return;
     
     newWall.addVertex(map.transformX(_mouseX), map.transformY(_mouseY));
@@ -1612,7 +1615,7 @@ public class UserInterface {
   
   void newDoorSetup(int _mouseX, int _mouseY) {
     
-    if ( isInside() )
+    if ( isInside(_mouseX, _mouseY) )
       return;
     
     newDoor.addVertex(map.transformX(_mouseX), map.transformY(_mouseY));
@@ -1755,6 +1758,18 @@ public class UserInterface {
     
   }
   
+  boolean isInsideInitiativeOrder() {
+    
+    return initiative.getDrawInitiativeOrder() && initiative.isInside(mouseX, mouseY);
+    
+  }
+  
+  AppStates changeInitiativeOrder(int _mouseX, boolean done) {
+    
+    return initiative.changeInitiativeOrder(_mouseX, done);
+    
+  }
+  
   void saveScene(File sceneFolder) {
     
     fileDialogOpen = false;
@@ -1766,6 +1781,7 @@ public class UserInterface {
     
     String sketchPath = sketchPath().replaceAll("\\\\", "/");
     
+    int initiativeGroupsIndex;
     int obstaclesIndex;
     
     JSONObject sceneJson = new JSONObject();
@@ -1786,13 +1802,26 @@ public class UserInterface {
     gridJson.setBoolean("drawGrid", grid.getDrawGrid());
     sceneJson.setJSONObject("grid", gridJson);
     
+    JSONObject initiativeJson = new JSONObject();
+    initiativeJson.setBoolean("drawInitiativeOrder", initiative.getDrawInitiativeOrder());
+    JSONArray initiativeGroupsArray = new JSONArray();
+    initiativeGroupsIndex = 0;
+    for ( Initiative.InitiativeGroup group: initiative.getInitiativeGroups() ) {
+      JSONObject initiativeGroupJson = new JSONObject();
+      initiativeGroupJson.setString("name", group.getName());
+      initiativeGroupJson.setInt("position", initiativeGroupsIndex);
+      initiativeGroupsArray.setJSONObject(initiativeGroupsIndex, initiativeGroupJson);
+      initiativeGroupsIndex += 1;
+    }
+    initiativeJson.setJSONArray("initiativeGroups", initiativeGroupsArray);
+    sceneJson.setJSONObject("initiative", initiativeJson);
+    
     sceneJson.setJSONArray("playerTokens", getTokensJsonArray(playersLayer.getTokens(), sketchPath));
     sceneJson.setJSONArray("dmTokens", getTokensJsonArray(dmLayer.getTokens(), sketchPath));
     
     JSONArray wallsArray = new JSONArray();
-    ArrayList<Wall> walls = obstacles.getWalls();
     obstaclesIndex = 0;
-    for ( Wall wall: walls ) {
+    for ( Wall wall: obstacles.getWalls() ) {
       JSONObject wallJson = new JSONObject();
       ArrayList<PVector> wallVertexes = wall.getVertexes();
       JSONArray wallVertexesJson = new JSONArray();
@@ -1809,9 +1838,8 @@ public class UserInterface {
     sceneJson.setJSONArray("walls", wallsArray);
     
     JSONArray doorsArray = new JSONArray();
-    ArrayList<Door> doors = obstacles.getDoors();
     obstaclesIndex = 0;
-    for ( Door door: doors ) {
+    for ( Door door: obstacles.getDoors() ) {
       JSONObject doorJson = new JSONObject();
       doorJson.setBoolean("closed", door.getClosed());
       ArrayList<PVector> doorVertexes = door.getVertexes();
@@ -1927,11 +1955,16 @@ public class UserInterface {
     
     appState = AppStates.loadingScene;
     
-    map.reset();
+    map.clear();
     grid.clear();
     playersLayer.clear();
     dmLayer.clear();
     obstacles.clear();
+    initiative.clear();
+    
+    setSwitchButtonState("Toggle combat mode", false);
+    setSwitchButtonState("Toggle grid", false);
+    setSwitchButtonState("Toggle walls", false);
     
     JSONObject sceneJson = loadJSONObject(sceneFile.getAbsolutePath());
     
@@ -1965,7 +1998,11 @@ public class UserInterface {
       int cellWidth = gridJson.getInt("cellWidth");
       int cellHeight = gridJson.getInt("cellHeight");
       boolean drawGrid = gridJson.getBoolean("drawGrid");
-      grid.setup(firstCellCenterX, firstCellCenterY, lastCellCenterX, lastCellCenterY, cellWidth, cellHeight, drawGrid);
+      grid.setup(firstCellCenterX, firstCellCenterY, lastCellCenterX, lastCellCenterY, cellWidth, cellHeight, false);
+      
+      if ( drawGrid )
+        setSwitchButtonState("Toggle grid", true);
+      
     }
     
     if ( grid.isSet() )
@@ -1983,6 +2020,28 @@ public class UserInterface {
       
       disableController("Add player token");
       disableController("Add DM token");
+      
+    }
+    
+    JSONObject initiativeJson = sceneJson.getJSONObject("initiative");
+    if ( initiativeJson != null ) {
+      
+      boolean drawInitiativeOrder = initiativeJson.getBoolean("drawInitiativeOrder");
+      if ( drawInitiativeOrder )
+        setSwitchButtonState("Toggle combat mode", true);
+      
+      JSONArray initiativeGroupsArray = initiativeJson.getJSONArray("initiativeGroups");
+      if ( initiativeGroupsArray != null ) {
+        for ( int i = 0; i < initiativeGroupsArray.size(); i++ ) {
+          
+          JSONObject initiativeGroupJson = initiativeGroupsArray.getJSONObject(i);
+          String groupName = initiativeGroupJson.getString("name");
+          int groupPosition = initiativeGroupJson.getInt("position");
+          
+          initiative.moveGroupTo(groupName, groupPosition);
+          
+        }
+      }
       
     }
     
@@ -2167,11 +2226,20 @@ public class UserInterface {
     
   }
   
-  boolean isInside() {
+  void setSwitchButtonState(String buttonName, boolean buttonState) {
+    
+    Button button = (Button)cp5.getController(buttonName);
+    
+    if ( buttonState && !button.isOn() )
+      button.setOn();
+    else if ( !buttonState && button.isOn() )
+      button.setOff();
+    
+  }
+  
+  boolean isInside(int x, int y) {
     
     boolean inside = false;
-    int x = mouseX;
-    int y = mouseX;
     
     List<Button> buttons = cp5.getAll(Button.class);
     for ( Button button: buttons )

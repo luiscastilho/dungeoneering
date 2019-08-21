@@ -8,17 +8,21 @@ class Layer {
   
   Obstacles obstacles;
   
+  Initiative initiative;
+  
   ArrayList<Token> tokens;
   
   String name;
   
-  Layer(PGraphics _canvas, Grid _grid, Obstacles _obstacles, String _name) {
+  Layer(PGraphics _canvas, Grid _grid, Obstacles _obstacles, Initiative _initiative, String _name) {
     
     canvas = _canvas;
     
     grid = _grid;
     
     obstacles = _obstacles;
+    
+    initiative = _initiative;
     
     tokens = new ArrayList<Token>();
     
@@ -32,6 +36,7 @@ class Layer {
       case idle:
       case wallSetup:
       case doorSetup:
+      case initiativeOrderSetup:
         
         for ( Token token: tokens )
           token.draw();
@@ -87,11 +92,15 @@ class Layer {
     token.setBeingMoved(true);
     tokens.add(token);
     
+    initiative.addGroup(tokenBaseName, tokenImageFile.getAbsolutePath());
+    
   }
   
   void addToken(Token token) {
     
     tokens.add(token);
+    
+    initiative.addGroup(token.getName(), token.getImagePath());
     
   }
   
@@ -135,6 +144,8 @@ class Layer {
   void removeToken(Token tokenToRemove) {
     
     tokens.remove(tokenToRemove);
+    
+    initiative.removeGroup(tokenToRemove.getName());
     
   }
   

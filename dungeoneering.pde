@@ -8,6 +8,7 @@ AppStates appState;
 ControlP5 cp5;
 
 PGraphics canvas;
+PGraphics initiativeCanvas;
 
 Obstacles obstacles;
 
@@ -21,9 +22,14 @@ LayerShown layerShown;
 
 Resources resources;
 
+Initiative initiative;
+
 UserInterface userInterface;
 
 color backgroundColor;
+
+PFont loadingFont;
+String loadingMessage;
 
 void setup() {
   
@@ -41,21 +47,29 @@ void setup() {
   canvas = createGraphics(width, height, P2D);
   canvas.smooth();
   
+  initiativeCanvas = createGraphics(width, height, P2D);
+  initiativeCanvas.smooth();
+  
   obstacles = new Obstacles(canvas);
   
   map = new Map(this, canvas, obstacles);
   
   grid = new Grid(canvas);
   
-  playersLayer = new Layer(canvas, grid, obstacles, "Players Layer");
-  dmLayer = new Layer(canvas, grid, obstacles, "DM Layer");
+  initiative = new Initiative(initiativeCanvas);
+  
+  playersLayer = new Layer(canvas, grid, obstacles, initiative, "Players Layer");
+  dmLayer = new Layer(canvas, grid, obstacles, initiative, "DM Layer");
   layerShown = LayerShown.playersOnly;
   
   resources = new Resources(canvas, grid);
   
-  userInterface = new UserInterface(canvas, cp5, map, grid, obstacles, playersLayer, dmLayer, resources);
+  userInterface = new UserInterface(canvas, cp5, map, grid, obstacles, playersLayer, dmLayer, resources, initiative);
   
   backgroundColor = color(0);
+  
+  loadingFont = loadFont("fonts/ProcessingSansPro-Regular-18.vlw");
+  loadingMessage = "Loading...";
   
 }
 
@@ -66,8 +80,6 @@ void draw() {
   switch ( appState ) {
     case loadingScene:
       
-      PFont loadingFont = loadFont("fonts/ProcessingSansPro-Regular-18.vlw");
-      String loadingMessage = "Loading...";
       textFont(loadingFont);
       text(loadingMessage, width/2 - textWidth(loadingMessage)/2, height/2);
       return;
@@ -126,6 +138,14 @@ void draw() {
   
   canvas.endDraw();
   image(canvas, 0, 0, width, height);
+  
+  initiativeCanvas.beginDraw();
+  initiativeCanvas.background(0, 0);
+  
+  initiative.draw();
+  
+  initiativeCanvas.endDraw();
+  image(initiativeCanvas, 0, 0, width, height);
   
   if ( frameCount % 180 == 0 ) {
     
@@ -217,7 +237,7 @@ void appStateBasedAction() {
 
 void mousePressed() {
   
-  if (userInterface.isInside())
+  if (userInterface.isInside(mouseX, mouseY))
     return;
   
   switch ( appState ) {
@@ -243,26 +263,53 @@ void mousePressed() {
 
 void mouseDragged() {
   
-  if (userInterface.isInside())
+  if (userInterface.isInside(mouseX, mouseY))
     return;
   
   switch ( appState ) {
     case idle:
       
-      if ( map != null && map.isSet() )
-        if ( mouseButton == RIGHT )
+      if ( mouseButton == RIGHT ) {
+        
+        if ( map != null && map.isSet() ) {
           map.pan(mouseX, pmouseX, mouseY, pmouseY);
-      
-      if ( map != null && map.isSet() )
-        if ( grid != null && grid.isSet() )
-          if ( mouseButton == LEFT )
+          break;
+        }
+        
+      } else if ( mouseButton == LEFT ) {
+        
+        if ( map != null && map.isSet() ) {
+          if ( grid != null && grid.isSet() ) {
+            if ( userInterface.isInsideInitiativeOrder() ) {
+              appState = userInterface.changeInitiativeOrder(mouseX, false);
+              break;
+            }
+          }
+        }
+        
+        if ( map != null && map.isSet() ) {
+          if ( grid != null && grid.isSet() ) {
             appState = userInterface.moveToken(mouseX, mouseY, false);
+            break;
+          }
+        }
+        
+      }
       
       break;
     case gridSetup:
       
       if ( mouseButton == LEFT )
         userInterface.gridHelperSetup(mouseX, mouseY, false, false);
+      
+      break;
+    case initiativeOrderSetup:
+      
+      if ( mouseButton == LEFT )
+        if ( userInterface.isInsideInitiativeOrder() )
+          appState = userInterface.changeInitiativeOrder(mouseX, false);
+        else
+          appState = userInterface.changeInitiativeOrder(mouseX, true);
       
       break;
     default:
@@ -273,7 +320,7 @@ void mouseDragged() {
 
 void mouseReleased() {
   
-  if (userInterface.isInside())
+  if (userInterface.isInside(mouseX, mouseY))
     return;
   
   switch ( appState ) {
@@ -282,8 +329,8 @@ void mouseReleased() {
       if ( mouseButton == LEFT )
         userInterface.openDoor(mouseX, mouseY);
       
-      if ( resources.isSet() )
-        if ( mouseButton == RIGHT )
+      if ( mouseButton == RIGHT )
+        if ( resources.isSet() )
           userInterface.showMenu(mouseX, mouseY);
       
       break;
@@ -297,7 +344,7 @@ void mouseReleased() {
     case tokenMovement:
       
       if ( mouseButton == LEFT )
-        userInterface.moveToken(mouseX, mouseY, true);
+        appState = userInterface.moveToken(mouseX, mouseY, true);
       
       break;
     case wallSetup:
@@ -318,6 +365,12 @@ void mouseReleased() {
         userInterface.removeDoor(mouseX, mouseY);
       
       break;
+    case initiativeOrderSetup:
+      
+      if ( mouseButton == LEFT )
+        appState = userInterface.changeInitiativeOrder(mouseX, true);
+      
+      break;
     default:
       break;
   }
@@ -326,16 +379,14 @@ void mouseReleased() {
 
 void mouseWheel(MouseEvent event) {
   
-  if (userInterface.isInside())
+  if (userInterface.isInside(mouseX, mouseY))
     return;
   
   switch ( appState ) {
     case idle:
       
-      if ( map == null || !map.isSet() )
-        return;
-      
-      map.zoom(event.getCount(), mouseX, mouseY);
+      if ( map != null && map.isSet() )
+        map.zoom(event.getCount(), mouseX, mouseY);
       
       break;
     default:
@@ -350,6 +401,7 @@ void keyPressed() {
     case gridSetup:
       
       if ( key == CODED ) {
+        
         // adjust grid helper start point
         if ( keyCode == UP )
           userInterface.gridHelperSetupAdjustment(0, 1, false);
@@ -359,7 +411,9 @@ void keyPressed() {
           userInterface.gridHelperSetupAdjustment(0, -1, false);
         if ( keyCode == LEFT )
           userInterface.gridHelperSetupAdjustment(-1, 0, false);
+        
       } else {
+        
         // adjust grid helper end point
         if ( key == 'w' )
           userInterface.gridHelperSetupAdjustment(0, 1, true);
@@ -369,6 +423,7 @@ void keyPressed() {
           userInterface.gridHelperSetupAdjustment(0, -1, true);
         if ( key == 'a' )
           userInterface.gridHelperSetupAdjustment(-1, 0, true);
+        
       }
       
       break;

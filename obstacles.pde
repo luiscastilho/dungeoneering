@@ -208,6 +208,10 @@ class Obstacles {
     illumination = _illumination;
   }
   
+  boolean getDrawObstacles() {
+    return drawObstacles;
+  }
+  
   void toggleDrawObstacles() {
     drawObstacles = !drawObstacles;
   }
