@@ -68,7 +68,7 @@ void setup() {
   
   backgroundColor = color(0);
   
-  loadingFont = loadFont("fonts/ProcessingSansPro-Regular-18.vlw");
+  loadingFont = loadFont("fonts/ProcessingSansPro-Semibold-18.vlw");
   loadingMessage = "Loading...";
   
 }
@@ -242,10 +242,9 @@ void mousePressed() {
   
   switch ( appState ) {
     case idle:
-      
-      if ( mouseButton == LEFT )
+        
         userInterface.hideMenu(mouseX, mouseY);
-      
+        
       break;
     case gridSetup:
       
@@ -268,6 +267,8 @@ void mouseDragged() {
   
   switch ( appState ) {
     case idle:
+      
+      userInterface.hideMenu(mouseX, mouseY);
       
       if ( mouseButton == RIGHT ) {
         

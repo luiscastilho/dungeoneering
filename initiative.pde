@@ -29,8 +29,8 @@ class Initiative {
     
     title = "Initiative order:";
     titleFontColor = color(255);
-    titleFontHeight = 12;
-    titleFont = loadFont("fonts/ProcessingSansPro-Regular-12.vlw");
+    titleFontHeight = 14;
+    titleFont = loadFont("fonts/ProcessingSansPro-Semibold-14.vlw");
     
     drawInitiativeOrder = false;
     

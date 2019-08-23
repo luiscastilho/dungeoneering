@@ -115,7 +115,7 @@ public class UserInterface {
     mouseOverBackgroundColor = color(56, 124, 166);
     activeBackgroundColor = color(0, 187, 224);
     
-    instructionsFont = loadFont("fonts/ProcessingSansPro-Regular-12.vlw");
+    instructionsFont = loadFont("fonts/ProcessingSansPro-Semibold-14.vlw");
     instructionsFontColor = color(255);
     instructionsVisualColor = color(0, 116, 217, 127);
     instructionsX = controllersTopLeftX;
@@ -2241,9 +2241,15 @@ public class UserInterface {
     
     boolean inside = false;
     
+    inside = isInsideMenu(x, y);
+    
     List<Button> buttons = cp5.getAll(Button.class);
-    for ( Button button: buttons )
+    for ( Button button: buttons ) {
+      if ( inside ) {
+        break;
+      }
       inside = inside || isInside(button, x, y);
+    }
     
     return inside;
     
@@ -2267,6 +2273,9 @@ public class UserInterface {
   }
   
   boolean isInsideMenu(int x, int y) {
+    
+    if ( !tokenMenu.isVisible() )
+      return false;
     
     if ( menuItemClicked ) {
       
