@@ -2302,7 +2302,7 @@ public class UserInterface {
     float barStartX = tokenMenu.getPosition()[0];
     float barStartY = tokenMenu.getPosition()[1];
     float barEndX = barStartX + tokenMenu.getWidth();
-    float barEndY = barStartY + menuBarHeight * 4 + 3;
+    float barEndY = barStartY + menuBarHeight * tokenMenu.size() + tokenMenu.size()-1;
     
     // menu item
     float itemStartX = barStartX;
