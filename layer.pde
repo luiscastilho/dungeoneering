@@ -194,4 +194,20 @@ class Layer {
     return !tokens.isEmpty();
   }
   
+  boolean isOverToken(int x, int y) {
+    
+    Token token;
+    
+    token = getTokenBeingMoved();
+    
+    if ( token == null )
+      token = getToken(x, y);
+    
+    if ( token == null )
+      return false;
+    
+    return true;
+    
+  }
+  
 }

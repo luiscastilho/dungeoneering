@@ -310,6 +310,9 @@ public class UserInterface {
     addButton("Toggle UI", "ui", controllersBottomRightX, controllersBottomRightY, null, true, true);
     
     controllersBottomRightX = controllersBottomRightX - squareButtonWidth - controllersSpacing;
+    addButton("Toggle touch screen mode", "touch", controllersBottomRightX, controllersBottomRightY, null, true, false);
+    
+    controllersBottomRightX = controllersBottomRightX - squareButtonWidth - controllersSpacing;
     addButton("Toggle camera pan", "pan", controllersBottomRightX, controllersBottomRightY, null, true, false);
     
     controllersBottomRightX = controllersBottomRightX - squareButtonWidth - controllersSpacing;
@@ -886,6 +889,11 @@ public class UserInterface {
       case "Toggle camera zoom":
         
         newAppState = AppStates.togglingCameraZoom;
+        
+        break;
+      case "Toggle touch screen mode":
+        
+        cp5.isTouch = !cp5.isTouch;
         
         break;
       case "Toggle combat mode":
@@ -1592,6 +1600,15 @@ public class UserInterface {
     }
     
     return newState;
+    
+  }
+  
+  boolean isOverToken(int _mouseX, int _mouseY) {
+    
+    if ( playersLayer.isOverToken(_mouseX, _mouseY) || dmLayer.isOverToken(_mouseX, _mouseY) )
+      return true;
+    
+    return false;
     
   }
   

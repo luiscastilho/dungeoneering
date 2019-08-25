@@ -42,7 +42,6 @@ void setup() {
   appState = AppStates.idle;
   
   cp5 = new ControlP5(this);
-  cp5.isTouch = false;
   
   canvas = createGraphics(width, height, P2D);
   canvas.smooth();
@@ -268,9 +267,9 @@ void mouseDragged() {
   switch ( appState ) {
     case idle:
       
-      userInterface.hideMenu(mouseX, mouseY);
-      
       if ( mouseButton == RIGHT ) {
+        
+        userInterface.hideMenu(mouseX, mouseY);
         
         if ( map != null && map.isSet() ) {
           map.pan(mouseX, pmouseX, mouseY, pmouseY);
@@ -282,6 +281,7 @@ void mouseDragged() {
         if ( map != null && map.isSet() ) {
           if ( grid != null && grid.isSet() ) {
             if ( userInterface.isInsideInitiativeOrder() ) {
+              userInterface.hideMenu(mouseX, mouseY);
               appState = userInterface.changeInitiativeOrder(mouseX, false);
               break;
             }
@@ -290,8 +290,11 @@ void mouseDragged() {
         
         if ( map != null && map.isSet() ) {
           if ( grid != null && grid.isSet() ) {
-            appState = userInterface.moveToken(mouseX, mouseY, false);
-            break;
+            if ( userInterface.isOverToken(mouseX, mouseY) ) {
+              userInterface.hideMenu(mouseX, mouseY);
+              appState = userInterface.moveToken(mouseX, mouseY, false);
+              break;
+            }
           }
         }
         
