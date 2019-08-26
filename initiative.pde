@@ -8,13 +8,17 @@ class Initiative {
   int xOffset, yOffset;
   int groupImageSize;
   int currentX, currentY;
+  int maxWidth;
   
   String title;
   color titleFontColor;
   int titleFontHeight;
   PFont titleFont;
+  String loadingMessage;
   
   boolean drawInitiativeOrder;
+  
+  boolean set;
   
   Initiative(PGraphics _canvas) {
     
@@ -26,13 +30,18 @@ class Initiative {
     xOffset = yOffset = int(min(canvas.width, canvas.height) * 0.05);
     groupImageSize = 100;
     currentX = currentY = 0;
+    maxWidth = canvas.width;
     
     title = "Initiative order:";
     titleFontColor = color(255);
     titleFontHeight = 14;
     titleFont = loadFont("fonts/ProcessingSansPro-Semibold-14.vlw");
     
+    loadingMessage = "Loading...";
+    
     drawInitiativeOrder = false;
+    
+    set = true;
     
   }
   
@@ -43,8 +52,20 @@ class Initiative {
     if ( groups.isEmpty() )
       return;
     
+    if ( !set ) {
+      
+      currentX = xOffset;
+      currentY = canvas.height - yOffset - groupImageSize - imagesSpacing - titleFontHeight;
+      canvas.fill(titleFontColor);
+      canvas.textFont(titleFont);
+      canvas.text(loadingMessage, currentX, currentY);
+      return;
+      
+    }
+    
     currentX = xOffset;
     currentY = canvas.height - yOffset - groupImageSize - imagesSpacing - titleFontHeight;
+    canvas.fill(titleFontColor);
     canvas.textFont(titleFont);
     canvas.text(title, currentX, currentY);
     
@@ -52,7 +73,6 @@ class Initiative {
     currentY = canvas.height - yOffset - groupImageSize;
     for ( InitiativeGroup group: groups ) {
       
-      canvas.fill(titleFontColor);
       canvas.imageMode(CORNER);
       canvas.image(group.image, currentX, currentY);
       currentX += groupImageSize + imagesSpacing;
@@ -69,15 +89,32 @@ class Initiative {
   
   void addGroup(String groupName, String groupImagePath) {
     
+    set = false;
+    
+    InitiativeGroup groupAlreadyAdded = null;
+    
     for ( InitiativeGroup group: groups )
       if ( group.name.equals(groupName) )
-        return;
+        groupAlreadyAdded = group;
     
-    groups.add(new InitiativeGroup(groupName, groupImagePath, groupImageSize));
+    if ( groupAlreadyAdded != null ) {
+      
+      groupAlreadyAdded.addMember();
+      
+    } else {
+      
+      groups.add(new InitiativeGroup(groupName, groupImagePath, groupImageSize));
+      setGroupImageSize();
+      
+    }
+    
+    set = true;
     
   }
   
   void removeGroup(String groupName) {
+    
+    set = false;
     
     InitiativeGroup groupToRemove = null;
     
@@ -85,8 +122,22 @@ class Initiative {
       if ( group.name.equals(groupName) )
         groupToRemove = group;
     
-    if ( groupToRemove != null )
-      groups.remove(groupToRemove);
+    if ( groupToRemove != null ) {
+      
+      if ( groupToRemove.getMembersCount() == 1 ) {
+      
+        groups.remove(groupToRemove);
+        setGroupImageSize();
+      
+      } else {
+        
+        groupToRemove.removeMember();
+        
+      }
+      
+    }
+    
+    set = true;
     
   }
   
@@ -197,6 +248,28 @@ class Initiative {
     
   }
   
+  void setMaxWidth(int _maxWidth) {
+    maxWidth = _maxWidth;
+  }
+  
+  void setGroupImageSize() {
+    
+    int prevGroupImageSize = groupImageSize;
+    int newGroupImageSize = groupImageSize;
+    
+    if ( groups.size() == 0 )
+      newGroupImageSize = 100;
+    else
+      newGroupImageSize = min(100, ( ( maxWidth - xOffset - (imagesSpacing * groups.size()) ) / groups.size() ));
+    
+    if ( newGroupImageSize != prevGroupImageSize )
+      for ( InitiativeGroup group: groups )
+        group.resizeImage(groupImageSize);
+    
+    groupImageSize = newGroupImageSize;
+    
+  }
+  
   class InitiativeGroup {
     
     String name;
@@ -206,15 +279,18 @@ class Initiative {
     
     boolean beingMoved;
     
+    int membersCount;
+    
     InitiativeGroup(String _name, String _imagePath, int _imageSize) {
       
       name = _name;
       
       imagePath = _imagePath;
-      image = loadImage(imagePath);
-      image.resize(_imageSize, _imageSize);
+      resizeImage(_imageSize);
       
       beingMoved = false;
+      
+      membersCount = 1;
       
     }
     
@@ -232,6 +308,25 @@ class Initiative {
     
     void setBeingMoved(boolean _beingMoved) {
       beingMoved = _beingMoved;
+    }
+    
+    void resizeImage(int _imageSize) {
+      
+      image = loadImage(imagePath);
+      image.resize(_imageSize, _imageSize);
+      
+    }
+    
+    void addMember() {
+      membersCount += 1;
+    }
+    
+    void removeMember() {
+      membersCount -= 1;
+    }
+    
+    int getMembersCount() {
+      return membersCount;
     }
     
   }

@@ -139,6 +139,8 @@ public class UserInterface {
     
     setupControllers();
     
+    initiative.setMaxWidth(controllersBottomRightX - controllersSpacing);
+    
   }
   
   void draw() {
