@@ -62,7 +62,9 @@ class Obstacles {
     allShadows.scale(currentScale);
     allShadows.endDraw();
     if (canvas != null && allShadows != null)
-      canvas.mask(allShadows);
+      try {
+        canvas.mask(allShadows);
+      } catch(Exception e) {}
     
     if ( drawObstacles ) {
       
