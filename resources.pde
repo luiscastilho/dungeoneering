@@ -105,6 +105,7 @@ class Resources {
       conditions.put(size.getName() + " Deafened", new Condition(canvas, "Deafened", "conditions/deafened.png", grid.getCellWidth(), grid.getCellHeight(), false, false, false, size));
       conditions.put(size.getName() + " Frightened", new Condition(canvas, "Frightened", "conditions/frightened.png", grid.getCellWidth(), grid.getCellHeight(), false, false, false, size));
       conditions.put(size.getName() + " Grappled", new Condition(canvas, "Grappled", "conditions/grappled.png", grid.getCellWidth(), grid.getCellHeight(), false, false, false, size));
+      conditions.put(size.getName() + " Hidden", new Condition(canvas, "Hidden", "conditions/hidden.png", grid.getCellWidth(), grid.getCellHeight(), false, true, false, size));
       conditions.put(size.getName() + " Incapacitated", new Condition(canvas, "Incapacitated", "conditions/incapacitated.png", grid.getCellWidth(), grid.getCellHeight(), true, false, false, size));
       conditions.put(size.getName() + " Invisible", new Condition(canvas, "Invisible", "conditions/invisible.png", grid.getCellWidth(), grid.getCellHeight(), false, true, false, size));
       conditions.put(size.getName() + " Paralyzed", new Condition(canvas, "Paralyzed", "conditions/paralyzed.png", grid.getCellWidth(), grid.getCellHeight(), true, false, false, size));
