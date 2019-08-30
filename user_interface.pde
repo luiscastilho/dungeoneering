@@ -2124,7 +2124,7 @@ public class UserInterface {
     
     println("Scene loaded from: " + sceneFile.getAbsolutePath());
     
-    layerShown = LayerShown.playersOnly;
+    layerShown = Layers.players;
     
     obstacles.setRecalculateShadows(true);
     

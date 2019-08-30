@@ -8,6 +8,7 @@ class Condition {
   PImage image;
   
   boolean disablesTarget;
+  boolean hidesTarget;
   
   boolean centered;
   
@@ -16,7 +17,7 @@ class Condition {
   
   Size size;
   
-  Condition(PGraphics _canvas, String _name, String _imagePath, int cellWidth, int cellHeight, boolean _disablesTarget, boolean _centered, Size _size) {
+  Condition(PGraphics _canvas, String _name, String _imagePath, int cellWidth, int cellHeight, boolean _disablesTarget, boolean _hidesTarget, boolean _centered, Size _size) {
     
     canvas = _canvas;
     
@@ -26,6 +27,7 @@ class Condition {
     image = loadImage(imagePath);
     
     disablesTarget = _disablesTarget;
+    hidesTarget = _hidesTarget;
     
     centered = _centered;
     
@@ -172,6 +174,10 @@ class Condition {
   
   boolean disablesTarget() {
     return disablesTarget;
+  }
+  
+  boolean hidesTarget() {
+    return hidesTarget;
   }
   
   boolean isCentered() {

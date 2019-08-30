@@ -14,7 +14,9 @@ class Layer {
   
   String name;
   
-  Layer(PGraphics _canvas, Grid _grid, Obstacles _obstacles, Initiative _initiative, String _name) {
+  Layers thisLayer;
+  
+  Layer(PGraphics _canvas, Grid _grid, Obstacles _obstacles, Initiative _initiative, String _name, Layers _thisLayer) {
     
     canvas = _canvas;
     
@@ -28,9 +30,13 @@ class Layer {
     
     name = _name;
     
+    thisLayer = _thisLayer;
+    
   }
   
-  void draw() {
+  void draw(Layers layerShown) {
+    
+    boolean concealHidden = layerShown != Layers.all && layerShown != thisLayer;
     
     switch ( appState ) {
       case idle:
@@ -39,7 +45,7 @@ class Layer {
       case initiativeOrderSetup:
         
         for ( Token token: tokens )
-          token.draw();
+          token.draw(concealHidden);
         
         break;
       case tokenSetup:
@@ -49,10 +55,10 @@ class Layer {
           if ( token.isBeingMoved() ) {
             
             token.setCell(grid.getCellAt(new Point(mouseX, mouseY)));
-            token.draw();
+            token.draw(concealHidden);
             
           } else {
-            token.draw();
+            token.draw(concealHidden);
           }
         }
         
@@ -92,7 +98,7 @@ class Layer {
     token.setBeingMoved(true);
     tokens.add(token);
     
-    initiative.addGroup(tokenBaseName, tokenImageFile.getAbsolutePath());
+    initiative.addGroup(tokenBaseName, tokenImageFile.getAbsolutePath(), token, thisLayer);
     
   }
   
@@ -100,7 +106,7 @@ class Layer {
     
     tokens.add(token);
     
-    initiative.addGroup(token.getName(), token.getImagePath());
+    initiative.addGroup(token.getName(), token.getImagePath(), token, thisLayer);
     
   }
   
@@ -145,7 +151,7 @@ class Layer {
     
     tokens.remove(tokenToRemove);
     
-    initiative.removeGroup(tokenToRemove.getName());
+    initiative.removeGroup(tokenToRemove.getName(), tokenToRemove);
     
   }
   

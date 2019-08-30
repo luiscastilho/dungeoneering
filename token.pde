@@ -53,12 +53,16 @@ class Token {
     
   }
   
-  void draw() {
+  void draw(boolean concealHidden) {
     
     if ( image == null || !set )
       return;
     if ( cell == null )
       return;
+    
+    for ( Condition condition: conditions )
+      if ( condition.hidesTarget() && concealHidden )
+        return;
     
     if ( size.isCentered() ) {
       canvas.imageMode(CENTER);
@@ -425,6 +429,16 @@ class Token {
     
     for ( Cell extraCell: extraCells )
       if ( extraCell != null && extraCell.isInside(x, y) )
+        return true;
+    
+    return false;
+    
+  }
+  
+  boolean isHidden() {
+    
+    for ( Condition condition: conditions )
+      if ( condition.hidesTarget() )
         return true;
     
     return false;

@@ -18,7 +18,7 @@ Grid grid;
 
 Layer playersLayer;
 Layer dmLayer;
-LayerShown layerShown;
+Layers layerShown;
 
 Resources resources;
 
@@ -57,9 +57,9 @@ void setup() {
   
   initiative = new Initiative(initiativeCanvas);
   
-  playersLayer = new Layer(canvas, grid, obstacles, initiative, "Players Layer");
-  dmLayer = new Layer(canvas, grid, obstacles, initiative, "DM Layer");
-  layerShown = LayerShown.playersOnly;
+  playersLayer = new Layer(canvas, grid, obstacles, initiative, "Players Layer", Layers.players);
+  dmLayer = new Layer(canvas, grid, obstacles, initiative, "DM Layer", Layers.dm);
+  layerShown = Layers.players;
   
   resources = new Resources(canvas, grid);
   
@@ -98,24 +98,24 @@ void draw() {
     obstacles.resetShadows();
   
   switch ( layerShown ) {
-    case playersOnly:
+    case players:
       
       if ( obstacles.getRecalculateShadows() )
         playersLayer.recalculateShadows();
       
-      dmLayer.draw();
+      dmLayer.draw(layerShown);
       obstacles.draw();
-      playersLayer.draw();
+      playersLayer.draw(layerShown);
       
       break;
-    case dmOnly:
+    case dm:
       
       if ( obstacles.getRecalculateShadows() )
         dmLayer.recalculateShadows();
       
-      playersLayer.draw();
+      playersLayer.draw(layerShown);
       obstacles.draw();
-      dmLayer.draw();
+      dmLayer.draw(layerShown);
       
       break;
     case all:
@@ -127,8 +127,8 @@ void draw() {
       }
       
       obstacles.draw();
-      playersLayer.draw();
-      dmLayer.draw();
+      playersLayer.draw(layerShown);
+      dmLayer.draw(layerShown);
       
       break;
   }
@@ -141,7 +141,7 @@ void draw() {
   initiativeCanvas.beginDraw();
   initiativeCanvas.background(0, 0);
   
-  initiative.draw();
+  initiative.draw(layerShown);
   
   initiativeCanvas.endDraw();
   image(initiativeCanvas, 0, 0, width, height);
@@ -179,14 +179,14 @@ void appStateBasedAction() {
     case switchingLayer:
       
       switch ( layerShown ) {
-        case playersOnly:
-          layerShown = LayerShown.dmOnly;
+        case players:
+          layerShown = Layers.dm;
           break;
-        case dmOnly:
-          layerShown = LayerShown.all;
+        case dm:
+          layerShown = Layers.all;
           break;
         case all:
-          layerShown = LayerShown.playersOnly;
+          layerShown = Layers.players;
           break;
         default:
           break;

@@ -15,11 +15,11 @@ enum AppStates {
   
 };
 
-enum LayerShown {
+enum Layers {
   
   all,
-  playersOnly,
-  dmOnly;
+  players,
+  dm;
   
 };
 

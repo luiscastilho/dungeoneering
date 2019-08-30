@@ -45,11 +45,22 @@ class Initiative {
     
   }
   
-  void draw() {
+  void draw(Layers layerShown) {
     
     if ( !drawInitiativeOrder )
       return;
+    
     if ( groups.isEmpty() )
+      return;
+    
+    boolean allHidden = true;
+    for ( InitiativeGroup group: groups ) {
+      if ( !group.isHidden(layerShown) ) {
+        allHidden = false;
+        break;
+      }
+    }
+    if ( allHidden )
       return;
     
     if ( !set ) {
@@ -73,6 +84,9 @@ class Initiative {
     currentY = canvas.height - yOffset - groupImageSize;
     for ( InitiativeGroup group: groups ) {
       
+      if ( group.isHidden(layerShown) )
+        continue;
+      
       canvas.imageMode(CORNER);
       canvas.image(group.image, currentX, currentY);
       currentX += groupImageSize + imagesSpacing;
@@ -87,7 +101,7 @@ class Initiative {
     
   }
   
-  void addGroup(String groupName, String groupImagePath) {
+  void addGroup(String groupName, String groupImagePath, Token token, Layers layer) {
     
     set = false;
     
@@ -99,11 +113,14 @@ class Initiative {
     
     if ( groupAlreadyAdded != null ) {
       
-      groupAlreadyAdded.addMember();
+      groupAlreadyAdded.addToken(token);
       
     } else {
       
-      groups.add(new InitiativeGroup(groupName, groupImagePath, groupImageSize));
+      InitiativeGroup newGroup = new InitiativeGroup(groupName, groupImagePath, groupImageSize, layer);
+      newGroup.addToken(token);
+      groups.add(newGroup);
+      
       setGroupImageSize();
       
     }
@@ -112,7 +129,7 @@ class Initiative {
     
   }
   
-  void removeGroup(String groupName) {
+  void removeGroup(String groupName, Token token) {
     
     set = false;
     
@@ -125,13 +142,15 @@ class Initiative {
     if ( groupToRemove != null ) {
       
       if ( groupToRemove.getMembersCount() == 1 ) {
-      
+        
+        groupToRemove.removeToken(token);
         groups.remove(groupToRemove);
+        
         setGroupImageSize();
-      
+        
       } else {
         
-        groupToRemove.removeMember();
+        groupToRemove.removeToken(token);
         
       }
       
@@ -277,20 +296,22 @@ class Initiative {
     String imagePath;
     PImage image;
     
+    ArrayList<Token> tokens;
+    Layers layer;
+    
     boolean beingMoved;
     
-    int membersCount;
-    
-    InitiativeGroup(String _name, String _imagePath, int _imageSize) {
+    InitiativeGroup(String _name, String _imagePath, int _imageSize, Layers _layer) {
       
       name = _name;
       
       imagePath = _imagePath;
       resizeImage(_imageSize);
       
-      beingMoved = false;
+      tokens = new ArrayList<Token>();
+      layer = _layer;
       
-      membersCount = 1;
+      beingMoved = false;
       
     }
     
@@ -317,16 +338,33 @@ class Initiative {
       
     }
     
-    void addMember() {
-      membersCount += 1;
+    void addToken(Token token) {
+      tokens.add(token);
     }
     
-    void removeMember() {
-      membersCount -= 1;
+    void removeToken(Token token) {
+      tokens.remove(token);
     }
     
     int getMembersCount() {
-      return membersCount;
+      return tokens.size();
+    }
+    
+    boolean isHidden(Layers layerShown) {
+      
+      if ( layerShown == Layers.all || layerShown == layer )
+        return false;
+      
+      for ( Token token: tokens )
+        if ( !token.isHidden() )
+          return false;
+      
+      return true;
+      
+    }
+    
+    Layers getLayer() {
+      return layer;
     }
     
   }
