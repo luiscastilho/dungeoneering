@@ -30,6 +30,7 @@ color backgroundColor;
 
 PFont loadingFont;
 String loadingMessage;
+color loadingFontColor, loadingFontOutlineColor;
 
 void setup() {
   
@@ -69,6 +70,8 @@ void setup() {
   
   loadingFont = loadFont("fonts/ProcessingSansPro-Semibold-18.vlw");
   loadingMessage = "Loading...";
+  loadingFontColor = color(255);
+  loadingFontOutlineColor = color(0);
   
 }
 
@@ -80,7 +83,7 @@ void draw() {
     case loadingScene:
       
       textFont(loadingFont);
-      text(loadingMessage, width/2 - textWidth(loadingMessage)/2, height/2);
+      outlineText(this.getGraphics(), loadingMessage, loadingFontColor, loadingFontOutlineColor, round(width/2 - textWidth(loadingMessage)/2), round(height/2));
       return;
       
     default:
@@ -408,25 +411,25 @@ void keyPressed() {
         
         // adjust grid helper start point
         if ( keyCode == UP )
-          userInterface.gridHelperSetupAdjustment(0, 1, false);
+          userInterface.gridHelperSetupAdjustment(0, -1, true);
         if ( keyCode == RIGHT )
-          userInterface.gridHelperSetupAdjustment(1, 0, false);
+          userInterface.gridHelperSetupAdjustment(1, 0, true);
         if ( keyCode == DOWN )
-          userInterface.gridHelperSetupAdjustment(0, -1, false);
+          userInterface.gridHelperSetupAdjustment(0, 1, true);
         if ( keyCode == LEFT )
-          userInterface.gridHelperSetupAdjustment(-1, 0, false);
+          userInterface.gridHelperSetupAdjustment(-1, 0, true);
         
       } else {
         
         // adjust grid helper end point
         if ( key == 'w' )
-          userInterface.gridHelperSetupAdjustment(0, 1, true);
+          userInterface.gridHelperSetupAdjustment(0, -1, false);
         if ( key == 'd' )
-          userInterface.gridHelperSetupAdjustment(1, 0, true);
+          userInterface.gridHelperSetupAdjustment(1, 0, false);
         if ( key == 's' )
-          userInterface.gridHelperSetupAdjustment(0, -1, true);
+          userInterface.gridHelperSetupAdjustment(0, 1, false);
         if ( key == 'a' )
-          userInterface.gridHelperSetupAdjustment(-1, 0, true);
+          userInterface.gridHelperSetupAdjustment(-1, 0, false);
         
       }
       
@@ -440,4 +443,18 @@ void keyPressed() {
 void movieEvent(Movie movie) {
   if ( !userInterface.isFileDialogOpen() )
     movie.read();
+}
+
+void outlineText(PGraphics canvas, String text, color textColor, color outlineColor, int x, int y) {
+  
+  int outlineWidth = 1;
+  
+  canvas.fill(outlineColor);
+  for ( int outlineX = x-outlineWidth; outlineX <= x+outlineWidth; outlineX++ )
+    for ( int outlineY = y-outlineWidth; outlineY <= y+outlineWidth; outlineY++ )
+      canvas.text(text, outlineX, outlineY);
+  
+  canvas.fill(textColor);
+  canvas.text(text, x, y);
+  
 }

@@ -46,7 +46,7 @@ public class UserInterface {
   color enabledBackgroundColor, disabledBackgroundColor, mouseOverBackgroundColor, activeBackgroundColor;
   
   PFont instructionsFont;
-  color instructionsFontColor, instructionsVisualColor;
+  color instructionsFontColor, instructionsFontOutlineColor, instructionsVisualColor;
   int instructionsX, instructionsY;
   int instructionsInitialX, instructionsInitialY;
   
@@ -117,6 +117,7 @@ public class UserInterface {
     
     instructionsFont = loadFont("fonts/ProcessingSansPro-Semibold-14.vlw");
     instructionsFontColor = color(255);
+    instructionsFontOutlineColor = color(0);
     instructionsVisualColor = color(0, 116, 217, 127);
     instructionsX = controllersTopLeftX;
     instructionsY = canvas.height - controllersTopLeftY;
@@ -157,6 +158,10 @@ public class UserInterface {
         canvas.fill(instructionsVisualColor);
         canvas.rect(map.transformX(gridHelperX), map.transformY(gridHelperY), map.transformX(gridHelperToX), map.transformY(gridHelperToY));
         
+        String gridHelperSize = "Cell size: " + abs(gridHelperX-gridHelperToX)/3 + " x " + abs(gridHelperY-gridHelperToY)/3;
+        canvas.textFont(instructionsFont);
+        outlineText(canvas, gridHelperSize, instructionsFontColor, instructionsFontOutlineColor, map.transformX(gridHelperToX) + 10, map.transformY(gridHelperToY) + 10);
+        
         break;
       case wallSetup:
         
@@ -165,6 +170,9 @@ public class UserInterface {
         
         newWall.draw(obstacles.getWallColor(), obstacles.getWallWidth());
         
+        if ( !isInside(mouseX, mouseY) )
+          newWall.drawNewEdge(obstacles.getWallColor(), obstacles.getWallWidth(), map.transformX(mouseX), map.transformY(mouseY));
+        
         break;
       case doorSetup:
         
@@ -172,6 +180,9 @@ public class UserInterface {
           break;
         
         newDoor.draw(obstacles.getClosedDoorColor(), obstacles.getOpenDoorColor(), obstacles.getDoorWidth());
+        
+        if ( !isInside(mouseX, mouseY) )
+          newDoor.drawNewEdge(obstacles.getClosedDoorColor(), obstacles.getDoorWidth(), map.transformX(mouseX), map.transformY(mouseY));
         
         break;
       default:
@@ -502,6 +513,7 @@ public class UserInterface {
        .setPosition(instructionsX, instructionsY)
        .setColorValue(instructionsFontColor)
        .setFont(instructionsFont)
+       .setOutlineText(true)
        .hide()
        ;
     
@@ -512,6 +524,7 @@ public class UserInterface {
        .setPosition(instructionsX, instructionsY)
        .setColorValue(instructionsFontColor)
        .setFont(instructionsFont)
+       .setOutlineText(true)
        .hide()
        ;
     
@@ -523,6 +536,7 @@ public class UserInterface {
        .setPosition(instructionsX, instructionsY)
        .setColorValue(instructionsFontColor)
        .setFont(instructionsFont)
+       .setOutlineText(true)
        .hide()
        ;
     
@@ -533,6 +547,7 @@ public class UserInterface {
        .setPosition(instructionsX, instructionsY)
        .setColorValue(instructionsFontColor)
        .setFont(instructionsFont)
+       .setOutlineText(true)
        .hide()
        ;
     
@@ -544,6 +559,7 @@ public class UserInterface {
        .setPosition(instructionsX, instructionsY)
        .setColorValue(instructionsFontColor)
        .setFont(instructionsFont)
+       .setOutlineText(true)
        .hide()
        ;
     
@@ -554,6 +570,7 @@ public class UserInterface {
        .setPosition(instructionsX, instructionsY)
        .setColorValue(instructionsFontColor)
        .setFont(instructionsFont)
+       .setOutlineText(true)
        .hide()
        ;
     
@@ -572,6 +589,9 @@ public class UserInterface {
        .setPosition(buttonPositionX, buttonPositionY)
        .setSize(squareButtonWidth, squareButtonHeight)
        .setImages(buttonImages)
+       .setColorBackground(enabledBackgroundColor)
+       .setColorForeground(mouseOverBackgroundColor)
+       .setColorActive(activeBackgroundColor)
        .updateSize()
        ;
     
@@ -1516,10 +1536,11 @@ public class UserInterface {
     
     if ( start ) {
       
+      grid.clear();
+      
       gridHelperX = gridHelperToX = max(x, 0);
       gridHelperY = gridHelperToY = max(y, 0);
       gridHelperSet = false;
-      grid.clear();
       
     } else {
       

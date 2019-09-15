@@ -39,6 +39,24 @@ class Wall {
     
   }
   
+  void drawNewEdge(color wallColor, int wallWidth, int newVertexX, int newVertexY) {
+    
+    if ( vertexes.isEmpty() )
+      return;
+    
+    PVector lastVertex = vertexes.get(vertexes.size() - 1);
+    
+    canvas.stroke(wallColor);
+    canvas.strokeWeight(wallWidth);
+    canvas.strokeCap(SQUARE);
+    canvas.noFill();
+    canvas.beginShape(LINES);
+    canvas.vertex(lastVertex.x, lastVertex.y);
+    canvas.vertex(newVertexX, newVertexY);
+    canvas.endShape();
+    
+  }
+  
   boolean reachedBy(Light light) {
     
     float distance;

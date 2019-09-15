@@ -11,7 +11,7 @@ class Initiative {
   int maxWidth;
   
   String title;
-  color titleFontColor;
+  color titleFontColor, titleFontOutlineColor;
   int titleFontHeight;
   PFont titleFont;
   String loadingMessage;
@@ -34,6 +34,7 @@ class Initiative {
     
     title = "Initiative order:";
     titleFontColor = color(255);
+    titleFontOutlineColor = color(0);
     titleFontHeight = 14;
     titleFont = loadFont("fonts/ProcessingSansPro-Semibold-14.vlw");
     
@@ -67,18 +68,16 @@ class Initiative {
       
       currentX = xOffset;
       currentY = canvas.height - yOffset - groupImageSize - imagesSpacing - titleFontHeight;
-      canvas.fill(titleFontColor);
       canvas.textFont(titleFont);
-      canvas.text(loadingMessage, currentX, currentY);
+      outlineText(canvas, loadingMessage, titleFontColor, titleFontOutlineColor, currentX, currentY);
       return;
       
     }
     
     currentX = xOffset;
     currentY = canvas.height - yOffset - groupImageSize - imagesSpacing - titleFontHeight;
-    canvas.fill(titleFontColor);
     canvas.textFont(titleFont);
-    canvas.text(title, currentX, currentY);
+    outlineText(canvas, title, titleFontColor, titleFontOutlineColor, currentX, currentY);
     
     currentX = xOffset;
     currentY = canvas.height - yOffset - groupImageSize;
