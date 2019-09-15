@@ -765,20 +765,17 @@ public class UserInterface {
           playersLayer.reset();
           dmLayer.reset();
           
-          newWall = new Wall(canvas);
-          
           wallInstructions1stLine.show();
           wallInstructions2ndLine.show();
           
           PImage cursorCross = loadImage("cursors/cursor_cross_32.png");
           cursor(cursorCross);
           
+          newWall = null;
+          
           newAppState = AppStates.wallSetup;
           
         } else {
-          
-          if ( newWall.isSet() )
-            obstacles.addWall(newWall);
           
           enableController("Select map");
           enableController("Grid setup");
@@ -1660,7 +1657,19 @@ public class UserInterface {
     if ( isInside(_mouseX, _mouseY) )
       return;
     
+    if ( newWall == null )
+      newWall = new Wall(canvas);
+    
     newWall.addVertex(map.transformX(_mouseX), map.transformY(_mouseY));
+    
+    if ( newWall.isSet() ) {
+      
+      obstacles.addWall(newWall);
+      
+      newWall = new Wall(canvas);
+      newWall.addVertex(map.transformX(_mouseX), map.transformY(_mouseY));
+      
+    }
     
   }
   
