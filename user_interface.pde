@@ -602,10 +602,12 @@ public class UserInterface {
       
       button.setSwitch(true);
       
+      button.setBroadcast(false);
       if ( switchInitialState )
         button.setOn();
       else
         button.setOff();
+      button.setBroadcast(true);
       
     }
     
@@ -2299,10 +2301,12 @@ public class UserInterface {
     
     Button button = (Button)cp5.getController(buttonName);
     
+    button.setBroadcast(false);
     if ( buttonState && !button.isOn() )
       button.setOn();
     else if ( !buttonState && button.isOn() )
       button.setOff();
+    button.setBroadcast(true);
     
   }
   

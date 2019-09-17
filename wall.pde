@@ -22,7 +22,7 @@ class Wall {
     minVertexDiff = null;
     maxVertexDiff = null;
     
-    magnitude = 60000;
+    magnitude = 100000;
     
   }
   
@@ -59,6 +59,9 @@ class Wall {
   
   boolean reachedBy(Light light) {
     
+    if ( light == null )
+      return false;
+    
     float distance;
     
     for ( PVector v: vertexes ) {
@@ -75,6 +78,9 @@ class Wall {
   // Source: www.geeksforgeeks.org/check-line-touches-intersects-circle
   boolean intersectedBy(Light light) {
     
+    if ( light == null )
+      return false;
+    
     boolean intersects = false;
     
     PVector lightCenter = light.getPosition();
@@ -87,14 +93,14 @@ class Wall {
         if ( i.equals(j) )
           continue;
         
-        // calculate line defined by these two vertexes 
+        // calculate line defined by these two vertexes
         float lineA = i.y - j.y;
         float lineB = j.x - i.x;
         float lineC = (i.x - j.x) * i.y + (j.y - i.y) * i.x;
         
         // calculate distance between this line and the light radius
-        double dist = (Math.abs(lineA * lightCenter.x + lineB * lightCenter.y + lineC)) /  
-                        Math.sqrt(lineA * lineA + lineB * lineB); 
+        double dist = (Math.abs(lineA * lightCenter.x + lineB * lightCenter.y + lineC)) /
+                        Math.sqrt(lineA * lineA + lineB * lineB);
         
         // check if light radius is greater than or equals the calculated distance
         intersects = lightRadius >= dist;
@@ -114,6 +120,9 @@ class Wall {
   }
   
   void calculateShadows(Light light, PGraphics shadows) {
+    
+    if ( light == null || shadows == null )
+      return;
     
     float angle = 0;
     
@@ -136,6 +145,9 @@ class Wall {
         
       }
     }
+    
+    if ( minVertex == null || maxVertex == null || minVertexDiff == null || maxVertexDiff == null )
+      return;
     
     minVertexDiff.setMag(magnitude);
     maxVertexDiff.setMag(magnitude);
