@@ -80,6 +80,13 @@ class Condition {
     
     if ( image == null )
       return;
+    if ( tokenCell == null )
+      return;
+    
+    int tokenCellCenterX = tokenCell.getCenter().x;
+    int tokenCellCenterY = tokenCell.getCenter().y;
+    int tokenCellWidth = tokenCell.getCellWidth();
+    int tokenCellHeight = tokenCell.getCellHeight();
     
     if ( centered ) {
       
@@ -89,20 +96,20 @@ class Condition {
         case "Tiny":
         case "Small":
         case "Medium":
-          canvas.image(image, tokenCell.getCenter().x, tokenCell.getCenter().y);
+          canvas.image(image, tokenCellCenterX, tokenCellCenterY);
           break;
         case "Large":
           // three extra cells occupied:
           // X 1
           // 2 3
-          canvas.image(image, tokenCell.getCenter().x + tokenCell.getCellWidth()/2f, tokenCell.getCenter().y + tokenCell.getCellHeight()/2f);
+          canvas.image(image, tokenCellCenterX + tokenCellWidth/2f, tokenCellCenterY + tokenCellHeight/2f);
           break;
         case "Huge":
           // eight extra cells occupied:
           // 1 2 3
           // 4 X 5
           // 6 7 8
-          canvas.image(image, tokenCell.getCenter().x, tokenCell.getCenter().y);
+          canvas.image(image, tokenCellCenterX, tokenCellCenterY);
           break;
         case "Gargantuan":
           // fifteen extra cells occupied:
@@ -110,7 +117,7 @@ class Condition {
           //  4  5  6  7
           //  8  9 10 11
           // 12 13 14 15
-          canvas.image(image, tokenCell.getCenter().x + tokenCell.getCellWidth() + tokenCell.getCellWidth()/2f, tokenCell.getCenter().y + tokenCell.getCellHeight() + tokenCell.getCellHeight()/2f);
+          canvas.image(image, tokenCellCenterX + tokenCellWidth + tokenCellWidth/2f, tokenCellCenterY + tokenCellHeight + tokenCellHeight/2f);
           break;
       }
       
@@ -126,23 +133,23 @@ class Condition {
         case "Tiny":
         case "Small":
         case "Medium":
-          tokenLowRightCornerX = tokenCell.getCenter().x + tokenCell.getCellWidth()/2;
-          tokenLowRightCornerY = tokenCell.getCenter().y + tokenCell.getCellHeight()/2;
+          tokenLowRightCornerX = tokenCellCenterX + tokenCellWidth/2;
+          tokenLowRightCornerY = tokenCellCenterY + tokenCellHeight/2;
           break;
         case "Large":
           // three extra cells occupied:
           // X 1
           // 2 3
-          tokenLowRightCornerX = tokenCell.getCenter().x + tokenCell.getCellWidth()/2 + tokenCell.getCellWidth();
-          tokenLowRightCornerY = tokenCell.getCenter().y + tokenCell.getCellHeight()/2 + tokenCell.getCellHeight();
+          tokenLowRightCornerX = tokenCellCenterX + tokenCellWidth/2 + tokenCellWidth;
+          tokenLowRightCornerY = tokenCellCenterY + tokenCellHeight/2 + tokenCellHeight;
           break;
         case "Huge":
           // eight extra cells occupied:
           // 1 2 3
           // 4 X 5
           // 6 7 8
-          tokenLowRightCornerX = tokenCell.getCenter().x + tokenCell.getCellWidth()/2 + tokenCell.getCellWidth();
-          tokenLowRightCornerY = tokenCell.getCenter().y + tokenCell.getCellHeight()/2 + tokenCell.getCellHeight();
+          tokenLowRightCornerX = tokenCellCenterX + tokenCellWidth/2 + tokenCellWidth;
+          tokenLowRightCornerY = tokenCellCenterY + tokenCellHeight/2 + tokenCellHeight;
           break;
         case "Gargantuan":
           // fifteen extra cells occupied:
@@ -150,8 +157,8 @@ class Condition {
           //  4  5  6  7
           //  8  9 10 11
           // 12 13 14 15
-          tokenLowRightCornerX = tokenCell.getCenter().x + tokenCell.getCellWidth()/2 + tokenCell.getCellWidth()*3;
-          tokenLowRightCornerY = tokenCell.getCenter().y + tokenCell.getCellHeight()/2 + tokenCell.getCellHeight()*3;
+          tokenLowRightCornerX = tokenCellCenterX + tokenCellWidth/2 + tokenCellWidth*3;
+          tokenLowRightCornerY = tokenCellCenterY + tokenCellHeight/2 + tokenCellHeight*3;
           break;
       }
       

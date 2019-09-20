@@ -158,6 +158,9 @@ class Token {
       recenterLightSources();
       
       // set extra cells occupied based on size
+      int cellRow = cell.getRow();
+      int cellColumn = cell.getColumn();
+      
       switch ( size.getName() ) {
         case "Tiny":
         case "Small":
@@ -173,9 +176,9 @@ class Token {
           // X 1
           // 2 3
           extraCells.clear();
-          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + cell.getCellWidth(), cell.getCenter().y)));
-          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x, cell.getCenter().y + cell.getCellHeight())));
-          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + cell.getCellWidth(), cell.getCenter().y + cell.getCellHeight())));
+          extraCells.add(grid.getCellAt(cellRow, cellColumn+1));
+          extraCells.add(grid.getCellAt(cellRow+1, cellColumn));
+          extraCells.add(grid.getCellAt(cellRow+1, cellColumn+1));
           
           break;
         case "Huge":
@@ -185,14 +188,14 @@ class Token {
           // 4 X 5
           // 6 7 8
           extraCells.clear();
-          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x - cell.getCellWidth(), cell.getCenter().y - cell.getCellHeight())));
-          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x, cell.getCenter().y - cell.getCellHeight())));
-          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + cell.getCellWidth(), cell.getCenter().y - cell.getCellHeight())));
-          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x - cell.getCellWidth(), cell.getCenter().y)));
-          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + cell.getCellWidth(), cell.getCenter().y)));
-          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x - cell.getCellWidth(), cell.getCenter().y + cell.getCellHeight())));
-          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x, cell.getCenter().y + cell.getCellHeight())));
-          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + cell.getCellWidth(), cell.getCenter().y + cell.getCellHeight())));
+          extraCells.add(grid.getCellAt(cellRow-1, cellColumn-1));
+          extraCells.add(grid.getCellAt(cellRow-1, cellColumn));
+          extraCells.add(grid.getCellAt(cellRow-1, cellColumn+1));
+          extraCells.add(grid.getCellAt(cellRow, cellColumn-1));
+          extraCells.add(grid.getCellAt(cellRow, cellColumn+1));
+          extraCells.add(grid.getCellAt(cellRow+1, cellColumn-1));
+          extraCells.add(grid.getCellAt(cellRow+1, cellColumn));
+          extraCells.add(grid.getCellAt(cellRow+1, cellColumn+1));
           
           break;
         case "Gargantuan":
@@ -203,21 +206,21 @@ class Token {
           //  8  9 10 11
           // 12 13 14 15
           extraCells.clear();
-          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + cell.getCellWidth(), cell.getCenter().y)));
-          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + 2*cell.getCellWidth(), cell.getCenter().y)));
-          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + 3*cell.getCellWidth(), cell.getCenter().y)));
-          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x, cell.getCenter().y + cell.getCellHeight())));
-          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + cell.getCellWidth(), cell.getCenter().y + cell.getCellHeight())));
-          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + 2*cell.getCellWidth(), cell.getCenter().y + cell.getCellHeight())));
-          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + 3*cell.getCellWidth(), cell.getCenter().y + cell.getCellHeight())));
-          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x, cell.getCenter().y + 2*cell.getCellHeight())));
-          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + cell.getCellWidth(), cell.getCenter().y + 2*cell.getCellHeight())));
-          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + 2*cell.getCellWidth(), cell.getCenter().y + 2*cell.getCellHeight())));
-          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + 3*cell.getCellWidth(), cell.getCenter().y + 2*cell.getCellHeight())));
-          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x, cell.getCenter().y + 3*cell.getCellHeight())));
-          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + cell.getCellWidth(), cell.getCenter().y + 3*cell.getCellHeight())));
-          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + 2*cell.getCellWidth(), cell.getCenter().y + 3*cell.getCellHeight())));
-          extraCells.add(grid.getCellAt(new Point(cell.getCenter().x + 3*cell.getCellWidth(), cell.getCenter().y + 3*cell.getCellHeight())));
+          extraCells.add(grid.getCellAt(cellRow, cellColumn+1));
+          extraCells.add(grid.getCellAt(cellRow, cellColumn+2));
+          extraCells.add(grid.getCellAt(cellRow, cellColumn+3));
+          extraCells.add(grid.getCellAt(cellRow+1, cellColumn));
+          extraCells.add(grid.getCellAt(cellRow+1, cellColumn+1));
+          extraCells.add(grid.getCellAt(cellRow+1, cellColumn+2));
+          extraCells.add(grid.getCellAt(cellRow+1, cellColumn+3));
+          extraCells.add(grid.getCellAt(cellRow+2, cellColumn));
+          extraCells.add(grid.getCellAt(cellRow+2, cellColumn+1));
+          extraCells.add(grid.getCellAt(cellRow+2, cellColumn+2));
+          extraCells.add(grid.getCellAt(cellRow+2, cellColumn+3));
+          extraCells.add(grid.getCellAt(cellRow+3, cellColumn));
+          extraCells.add(grid.getCellAt(cellRow+3, cellColumn+1));
+          extraCells.add(grid.getCellAt(cellRow+3, cellColumn+2));
+          extraCells.add(grid.getCellAt(cellRow+3, cellColumn+3));
           
           break;
       }
@@ -228,43 +231,44 @@ class Token {
   
   void recenterLightSources() {
     
-    // set light sources center based on size
+    int tokenCenterX = 0;
+    int tokenCenterY = 0;
+    
+    // calculate token center based on its size
     switch ( size.getName() ) {
       case "Tiny":
       case "Small":
       case "Medium":
         
-        for ( Light light: lightSources )
-          light.setPosition(cell.getCenter().x, cell.getCenter().y);
-        for ( Light sight: sightTypes )
-          sight.setPosition(cell.getCenter().x, cell.getCenter().y);
+        tokenCenterX = cell.getCenter().x;
+        tokenCenterY = cell.getCenter().y;
         
         break;
       case "Large":
         
-        for ( Light light: lightSources )
-          light.setPosition(cell.getCenter().x + round(cell.getCellWidth()*0.5f), cell.getCenter().y + round(cell.getCellHeight()*0.5f));
-        for ( Light sight: sightTypes )
-          sight.setPosition(cell.getCenter().x + round(cell.getCellWidth()*0.5f), cell.getCenter().y + round(cell.getCellHeight()*0.5f));
+        tokenCenterX = cell.getCenter().x + round(cell.getCellWidth()*0.5f);
+        tokenCenterY = cell.getCenter().y + round(cell.getCellHeight()*0.5f);
         
         break;
       case "Huge":
         
-        for ( Light light: lightSources )
-          light.setPosition(cell.getCenter().x, cell.getCenter().y);
-        for ( Light sight: sightTypes )
-          sight.setPosition(cell.getCenter().x, cell.getCenter().y);
+        tokenCenterX = cell.getCenter().x;
+        tokenCenterY = cell.getCenter().y;
         
         break;
       case "Gargantuan":
         
-        for ( Light light: lightSources )
-          light.setPosition(cell.getCenter().x + round(cell.getCellWidth()*1.5f), cell.getCenter().y + round(cell.getCellHeight()*1.5f));
-        for ( Light sight: sightTypes )
-          sight.setPosition(cell.getCenter().x + round(cell.getCellWidth()*1.5f), cell.getCenter().y + round(cell.getCellHeight()*1.5f));
+        tokenCenterX = cell.getCenter().x + round(cell.getCellWidth()*1.5f);
+        tokenCenterY = cell.getCenter().y + round(cell.getCellHeight()*1.5f);
         
         break;
     }
+    
+    // set light sources and sight types center
+    for ( Light light: lightSources )
+      light.setPosition(tokenCenterX, tokenCenterY);
+    for ( Light sight: sightTypes )
+      sight.setPosition(tokenCenterX, tokenCenterY);
     
   }
   

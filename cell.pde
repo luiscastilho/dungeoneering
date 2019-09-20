@@ -38,7 +38,7 @@ class Cell {
   boolean isInside(int x, int y) {
     
     int startX, startY, screenStartX, screenStartY;
-    int endX, endY, screenEndX, screenlEndY;
+    int endX, endY, screenEndX, screenEndY;
         
     startX = centerX - round(cellWidth/2f);
     endX = startX + cellWidth;
@@ -48,9 +48,9 @@ class Cell {
     screenStartX = round(canvas.screenX(startX, startY));
     screenStartY = round(canvas.screenY(startX, startY));
     screenEndX = round(canvas.screenX(endX, endY));
-    screenlEndY = round(canvas.screenY(endX, endY));
+    screenEndY = round(canvas.screenY(endX, endY));
     
-    if ( x >= screenStartX && x <= screenEndX && y >= screenStartY && y <= screenlEndY )
+    if ( x >= screenStartX && x <= screenEndX && y >= screenStartY && y <= screenEndY )
       return true;
     
     return false;

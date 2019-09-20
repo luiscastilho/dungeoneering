@@ -621,7 +621,7 @@ public class UserInterface {
     Size sizeTemplate;
     Point rightClickedTokenPosition;
     
-    AppStates newAppState = AppStates.idle;
+    AppStates newAppState = appState;
     
     String controllerName = "";
     if ( controlEvent.isController() )
@@ -2301,12 +2301,10 @@ public class UserInterface {
     
     Button button = (Button)cp5.getController(buttonName);
     
-    button.setBroadcast(false);
     if ( buttonState && !button.isOn() )
       button.setOn();
     else if ( !buttonState && button.isOn() )
       button.setOff();
-    button.setBroadcast(true);
     
   }
   
