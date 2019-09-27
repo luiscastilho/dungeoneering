@@ -39,15 +39,6 @@ class Layer {
     boolean concealHidden = layerShown != Layers.all && layerShown != thisLayer;
     
     switch ( appState ) {
-      case idle:
-      case wallSetup:
-      case doorSetup:
-      case initiativeOrderSetup:
-        
-        for ( Token token: tokens )
-          token.draw(concealHidden);
-        
-        break;
       case tokenSetup:
       case tokenMovement:
         
@@ -64,6 +55,10 @@ class Layer {
         
         break;
       default:
+        
+        for ( Token token: tokens )
+          token.draw(concealHidden);
+        
         break;
     }
     
@@ -119,6 +114,9 @@ class Layer {
   
   AppStates moveToken(int _mouseX, int _mouseY, boolean done) {
     
+   if ( tokens.isEmpty() )
+      return appState;
+    
     Token token;
     
     token = getTokenBeingMoved();
@@ -127,7 +125,7 @@ class Layer {
       token = getToken(_mouseX, _mouseY);
     
     if ( token == null )
-      return AppStates.idle;
+      return appState;
     
     if ( !token.isBeingMoved() ) {
       token.setBeingMoved(true);
@@ -138,9 +136,11 @@ class Layer {
     setTokenCell(token, _mouseX, _mouseY);
     
     if ( done ) {
+      
       token.setBeingMoved(false);
       obstacles.setRecalculateShadows(true);
       return AppStates.idle;
+      
     }
     
     return AppStates.tokenMovement;

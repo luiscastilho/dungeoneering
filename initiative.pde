@@ -189,7 +189,7 @@ class Initiative {
   
   AppStates changeInitiativeOrder(int _mouseX, boolean done) {
     
-    InitiativeGroup group;
+    InitiativeGroup group = null;
     
     group = getGroupBeingMoved();
     
@@ -197,11 +197,10 @@ class Initiative {
       group = getGroup(_mouseX);
     
     if ( group == null )
-      return AppStates.idle;
+      return appState;
     
-    if ( !group.isBeingMoved() ) {
+    if ( !group.isBeingMoved() )
       group.setBeingMoved(true);
-    }
     
     moveGroupTo(group, getIndexAt(_mouseX));
     
@@ -227,6 +226,9 @@ class Initiative {
   }
   
   InitiativeGroup getGroup(int _mouseX) {
+    
+    if ( groups.isEmpty() )
+      return null;
     
     return groups.get(getIndexAt(_mouseX));
     

@@ -80,7 +80,7 @@ void draw() {
   background(backgroundColor);
   
   switch ( appState ) {
-    case loadingScene:
+    case sceneLoad:
       
       textFont(loadingFont);
       outlineText(this.getGraphics(), loadingMessage, loadingFontColor, loadingFontOutlineColor, round(width/2 - textWidth(loadingMessage)/2), round(height/2));
@@ -172,74 +172,11 @@ void controlEvent(ControlEvent controlEvent) {
   
   appState = userInterface.controllerEvent(controlEvent);
   
-  appStateBasedAction();
-  
-}
-
-void appStateBasedAction() {
-  
-  switch ( appState ) {
-    case switchingLayer:
-      
-      switch ( layerShown ) {
-        case players:
-          layerShown = Layers.dm;
-          break;
-        case dm:
-          layerShown = Layers.all;
-          break;
-        case all:
-          layerShown = Layers.players;
-          break;
-        default:
-          break;
-      }
-      
-      obstacles.setRecalculateShadows(true);
-      appState = AppStates.idle;
-      
-      break;
-    case switchingLightning:
-      
-      switch ( obstacles.getIllumination() ) {
-        case brightLight:
-          obstacles.setIllumination(Illumination.darkness);
-          break;
-        case dimLight:
-          obstacles.setIllumination(Illumination.brightLight);
-          break;
-        case darkness:
-          obstacles.setIllumination(Illumination.dimLight);
-          break;
-        default:
-          break;
-      }
-      
-      obstacles.setRecalculateShadows(true);
-      appState = AppStates.idle;
-      
-      break;
-    case togglingCameraPan:
-      
-      map.togglePan();
-      appState = AppStates.idle;
-      
-      break;
-    case togglingCameraZoom:
-      
-      map.toggleZoom();
-      appState = AppStates.idle;
-      
-      break;
-    default:
-      break;
-  }
-  
 }
 
 void mousePressed() {
   
-  if (userInterface.isInside(mouseX, mouseY))
+  if ( userInterface.isInside(mouseX, mouseY) )
     return;
   
   switch ( appState ) {
@@ -264,42 +201,22 @@ void mousePressed() {
 
 void mouseDragged() {
   
-  if (userInterface.isInside(mouseX, mouseY))
+  if ( userInterface.isInside(mouseX, mouseY) )
     return;
   
   switch ( appState ) {
     case idle:
       
-      if ( mouseButton == RIGHT ) {
+      if ( mouseButton == LEFT ) {
         
         userInterface.hideMenu(mouseX, mouseY);
         
-        if ( map != null && map.isSet() ) {
-          map.pan(mouseX, pmouseX, mouseY, pmouseY);
-          break;
-        }
-        
-      } else if ( mouseButton == LEFT ) {
-        
-        if ( map != null && map.isSet() ) {
-          if ( grid != null && grid.isSet() ) {
-            if ( userInterface.isInsideInitiativeOrder() ) {
-              userInterface.hideMenu(mouseX, mouseY);
-              appState = userInterface.changeInitiativeOrder(mouseX, false);
-              break;
-            }
-          }
-        }
-        
-        if ( map != null && map.isSet() ) {
-          if ( grid != null && grid.isSet() ) {
-            if ( userInterface.isOverToken(mouseX, mouseY) ) {
-              userInterface.hideMenu(mouseX, mouseY);
-              appState = userInterface.moveToken(mouseX, mouseY, false);
-              break;
-            }
-          }
-        }
+        if ( userInterface.isInsideInitiativeOrder() )
+          appState = userInterface.changeInitiativeOrder(mouseX, false);
+        else if ( userInterface.isOverToken(mouseX, mouseY) )
+          appState = userInterface.moveToken(mouseX, mouseY, false);
+        else
+          appState = userInterface.panMap(mouseX, pmouseX, mouseY, pmouseY, false);
         
       }
       
@@ -319,6 +236,12 @@ void mouseDragged() {
           appState = userInterface.changeInitiativeOrder(mouseX, true);
       
       break;
+    case mapPan:
+      
+      if ( mouseButton == LEFT )
+        userInterface.panMap(mouseX, pmouseX, mouseY, pmouseY, false);
+      
+      break;
     default:
       break;
   }
@@ -327,7 +250,7 @@ void mouseDragged() {
 
 void mouseReleased() {
   
-  if (userInterface.isInside(mouseX, mouseY))
+  if ( userInterface.isInside(mouseX, mouseY) )
     return;
   
   switch ( appState ) {
@@ -337,8 +260,7 @@ void mouseReleased() {
         userInterface.openDoor(mouseX, mouseY);
       
       if ( mouseButton == RIGHT )
-        if ( resources.isSet() )
-          userInterface.showMenu(mouseX, mouseY);
+        userInterface.showMenu(mouseX, mouseY);
       
       break;
     case gridSetup:
@@ -378,6 +300,12 @@ void mouseReleased() {
         appState = userInterface.changeInitiativeOrder(mouseX, true);
       
       break;
+    case mapPan:
+      
+      if ( mouseButton == LEFT )
+        appState = userInterface.panMap(mouseX, pmouseX, mouseY, pmouseY, true);
+      
+      break;
     default:
       break;
   }
@@ -386,14 +314,13 @@ void mouseReleased() {
 
 void mouseWheel(MouseEvent event) {
   
-  if (userInterface.isInside(mouseX, mouseY))
+  if ( userInterface.isInside(mouseX, mouseY) )
     return;
   
   switch ( appState ) {
     case idle:
       
-      if ( map != null && map.isSet() )
-        map.zoom(event.getCount(), mouseX, mouseY);
+      userInterface.zoomMap(event.getCount(), mouseX, mouseY);
       
       break;
     default:
@@ -409,26 +336,26 @@ void keyPressed() {
       
       if ( key == CODED ) {
         
-        // adjust grid helper start point
+        // adjust grid helper end point
         if ( keyCode == UP )
           userInterface.gridHelperSetupAdjustment(0, -1, true);
-        if ( keyCode == RIGHT )
+        else if ( keyCode == RIGHT )
           userInterface.gridHelperSetupAdjustment(1, 0, true);
-        if ( keyCode == DOWN )
+        else if ( keyCode == DOWN )
           userInterface.gridHelperSetupAdjustment(0, 1, true);
-        if ( keyCode == LEFT )
+        else if ( keyCode == LEFT )
           userInterface.gridHelperSetupAdjustment(-1, 0, true);
         
       } else {
         
-        // adjust grid helper end point
+        // adjust grid helper start point
         if ( key == 'w' )
           userInterface.gridHelperSetupAdjustment(0, -1, false);
-        if ( key == 'd' )
+        else if ( key == 'd' )
           userInterface.gridHelperSetupAdjustment(1, 0, false);
-        if ( key == 's' )
+        else if ( key == 's' )
           userInterface.gridHelperSetupAdjustment(0, 1, false);
-        if ( key == 'a' )
+        else if ( key == 'a' )
           userInterface.gridHelperSetupAdjustment(-1, 0, false);
         
       }
@@ -441,8 +368,10 @@ void keyPressed() {
 }
 
 void movieEvent(Movie movie) {
+  
   if ( !userInterface.isFileDialogOpen() )
     movie.read();
+  
 }
 
 void outlineText(PGraphics canvas, String text, color textColor, color outlineColor, int x, int y) {

@@ -636,8 +636,6 @@ public class UserInterface {
         selectInput("Select a map:", "mapFileSelected", mapFile, this);
         fileDialogOpen = true;
         
-        newAppState = AppStates.idle;
-        
         break;
       case "Grid setup":
         
@@ -858,8 +856,6 @@ public class UserInterface {
         selectFolder("Select folder where to save scene:", "saveScene", sceneFolder, this);
         fileDialogOpen = true;
         
-        newAppState = AppStates.idle;
-        
         break;
       case "Load scene":
         
@@ -867,17 +863,43 @@ public class UserInterface {
         selectInput("Select scene to load:", "loadScene", sceneFile, this);
         fileDialogOpen = true;
         
-        newAppState = AppStates.idle;
-        
         break;
       case "Switch layer":
         
-        newAppState = AppStates.switchingLayer;
+        switch ( layerShown ) {
+          case players:
+            layerShown = Layers.dm;
+            break;
+          case dm:
+            layerShown = Layers.all;
+            break;
+          case all:
+            layerShown = Layers.players;
+            break;
+          default:
+            break;
+        }
+        
+        obstacles.setRecalculateShadows(true);
         
         break;
       case "Switch lightning":
         
-        newAppState = AppStates.switchingLightning;
+        switch ( obstacles.getIllumination() ) {
+          case brightLight:
+            obstacles.setIllumination(Illumination.darkness);
+            break;
+          case dimLight:
+            obstacles.setIllumination(Illumination.brightLight);
+            break;
+          case darkness:
+            obstacles.setIllumination(Illumination.dimLight);
+            break;
+          default:
+            break;
+        }
+        
+        obstacles.setRecalculateShadows(true);
         
         break;
       case "Toggle grid":
@@ -907,12 +929,12 @@ public class UserInterface {
         break;
       case "Toggle camera pan":
         
-        newAppState = AppStates.togglingCameraPan;
+        map.togglePan();
         
         break;
       case "Toggle camera zoom":
         
-        newAppState = AppStates.togglingCameraZoom;
+        map.toggleZoom();
         
         break;
       case "Toggle touch screen mode":
@@ -1626,7 +1648,7 @@ public class UserInterface {
   
   AppStates moveToken(int _mouseX, int _mouseY, boolean done) {
     
-    AppStates newState = null;
+    AppStates newState = appState;
     
     if ( playersLayer.getToken(_mouseX, _mouseY) != null ) {
       newState = playersLayer.moveToken(_mouseX, _mouseY, done);
@@ -1707,8 +1729,10 @@ public class UserInterface {
     Door doorToToggle = getClosestDoor(map.transformX(_mouseX), map.transformY(_mouseY), 20);
     
     if ( doorToToggle != null ) {
+      
       doorToToggle.toggle();
       obstacles.setRecalculateShadows(true);
+      
     }
     
   }
@@ -1801,6 +1825,9 @@ public class UserInterface {
   
   void showMenu(int _mouseX, int _mouseY) {
     
+    if ( !resources.isSet() )
+      return;
+    
     Token token;
     
     token = playersLayer.getToken(_mouseX, _mouseY);
@@ -1838,6 +1865,29 @@ public class UserInterface {
   AppStates changeInitiativeOrder(int _mouseX, boolean done) {
     
     return initiative.changeInitiativeOrder(_mouseX, done);
+    
+  }
+  
+  AppStates panMap(int _mouseX, int _pmouseX, int _mouseY, int _pmouseY, boolean done) {
+    
+    if ( map == null || !map.isSet() )
+      return appState;
+    
+    map.pan(_mouseX, _pmouseX, _mouseY, _pmouseY);
+    
+    if ( done )
+      return AppStates.idle;
+    else
+      return AppStates.mapPan;
+    
+  }
+  
+  void zoomMap(int mouseWheelAmount, int _mouseX, int _mouseY) {
+    
+    if ( map == null || !map.isSet() )
+      return;
+    
+    map.zoom(mouseWheelAmount, _mouseX, _mouseY);
     
   }
   
@@ -2024,7 +2074,7 @@ public class UserInterface {
     
     String sketchPath = sketchPath().replaceAll("\\\\", "/");
     
-    appState = AppStates.loadingScene;
+    appState = AppStates.sceneLoad;
     
     map.clear();
     grid.clear();

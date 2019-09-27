@@ -1,17 +1,14 @@
 enum AppStates {
   
   idle,
-  loadingScene,
+  sceneLoad,
   gridSetup,
   tokenSetup,
   tokenMovement,
   wallSetup,
   doorSetup,
-  switchingLayer,
-  switchingLightning,
-  togglingCameraPan,
-  togglingCameraZoom,
-  initiativeOrderSetup;
+  initiativeOrderSetup,
+  mapPan;
   
 };
 
