@@ -284,4 +284,8 @@ class Map {
     zoomEnabled = !zoomEnabled;
   }
   
+  boolean isPanEnabled() {
+    return panEnabled;
+  }
+  
 }

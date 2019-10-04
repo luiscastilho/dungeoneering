@@ -1870,7 +1870,7 @@ public class UserInterface {
   
   AppStates panMap(int _mouseX, int _pmouseX, int _mouseY, int _pmouseY, boolean done) {
     
-    if ( map == null || !map.isSet() )
+    if ( map == null || !map.isSet() || !map.isPanEnabled() )
       return appState;
     
     map.pan(_mouseX, _pmouseX, _mouseY, _pmouseY);
