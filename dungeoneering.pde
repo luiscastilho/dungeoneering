@@ -1,5 +1,8 @@
 import controlP5.*;
 import processing.video.*;
+import ch.bildspur.postfx.builder.*;
+import ch.bildspur.postfx.pass.*;
+import ch.bildspur.postfx.*;
 
 boolean DEBUG;
 
@@ -10,6 +13,7 @@ ControlP5 cp5;
 PGraphics canvas;
 PGraphics initiativeCanvas;
 
+PostFX postFx;
 Obstacles obstacles;
 
 Map map;
@@ -50,7 +54,8 @@ void setup() {
   initiativeCanvas = createGraphics(width, height, P2D);
   initiativeCanvas.smooth();
   
-  obstacles = new Obstacles(canvas);
+  postFx = new PostFX(this);
+  obstacles = new Obstacles(canvas, postFx);
   
   map = new Map(this, canvas, obstacles);
   
@@ -135,6 +140,9 @@ void draw() {
       
       break;
   }
+  
+  if ( obstacles.getRecalculateShadows() )
+    obstacles.setRecalculateShadows(false);
   
   userInterface.draw();
   

@@ -2,6 +2,8 @@ class Obstacles {
   
   PGraphics canvas;
   
+  PostFX postFx;
+  
   ArrayList<Wall> walls;
   ArrayList<Door> doors;
   
@@ -19,9 +21,11 @@ class Obstacles {
   
   boolean recalculateShadows;
   
-  Obstacles(PGraphics _canvas) {
+  Obstacles(PGraphics _canvas, PostFX _postFx) {
     
     canvas = _canvas;
+    
+    postFx = _postFx;
     
     walls = new ArrayList<Wall>();
     doors = new ArrayList<Door>();
@@ -57,10 +61,6 @@ class Obstacles {
   
   void draw() {
     
-    allShadows.beginDraw();
-    allShadows.translate(currentPanX, currentPanY);
-    allShadows.scale(currentScale);
-    allShadows.endDraw();
     if (canvas != null && allShadows != null)
       try {
         canvas.mask(allShadows);
@@ -105,9 +105,17 @@ class Obstacles {
   void blendShadows() {
     
     allShadows.beginDraw();
-    allShadows.blend(currentShadows, 0, 0, currentShadows.width, currentShadows.height, 0, 0, allShadows.width, allShadows.height, LIGHTEST);
-    //allShadows.filter(BLUR, 5);
+    allShadows.blendMode(LIGHTEST);
+    allShadows.image(currentShadows, 0, 0);
     allShadows.endDraw();
+    
+  }
+  
+  void blurShadows() {
+    
+    postFx.render(allShadows)
+      .blur(20, 20)
+      .compose(allShadows);
     
   }
   

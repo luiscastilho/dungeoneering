@@ -969,7 +969,8 @@ public class UserInterface {
         }
         
         rightClickedToken.toggleCondition(conditionTemplate);
-        obstacles.setRecalculateShadows(true);
+        if ( conditionTemplate.disablesTarget() )
+          obstacles.setRecalculateShadows(true);
         hideMenu(0, 0);
         
         break;
@@ -986,7 +987,8 @@ public class UserInterface {
         }
         
         rightClickedToken.toggleCondition(conditionTemplate);
-        obstacles.setRecalculateShadows(true);
+        if ( conditionTemplate.disablesTarget() )
+          obstacles.setRecalculateShadows(true);
         hideMenu(0, 0);
         
         break;
@@ -1003,7 +1005,8 @@ public class UserInterface {
         }
         
         rightClickedToken.toggleCondition(conditionTemplate);
-        obstacles.setRecalculateShadows(true);
+        if ( conditionTemplate.disablesTarget() )
+          obstacles.setRecalculateShadows(true);
         hideMenu(0, 0);
         
         break;
@@ -1020,7 +1023,8 @@ public class UserInterface {
         }
         
         rightClickedToken.toggleCondition(conditionTemplate);
-        obstacles.setRecalculateShadows(true);
+        if ( conditionTemplate.disablesTarget() )
+          obstacles.setRecalculateShadows(true);
         hideMenu(0, 0);
         
         break;
@@ -1037,7 +1041,8 @@ public class UserInterface {
         }
         
         rightClickedToken.toggleCondition(conditionTemplate);
-        obstacles.setRecalculateShadows(true);
+        if ( conditionTemplate.disablesTarget() )
+          obstacles.setRecalculateShadows(true);
         hideMenu(0, 0);
         
         break;
@@ -1054,7 +1059,8 @@ public class UserInterface {
         }
         
         rightClickedToken.toggleCondition(conditionTemplate);
-        obstacles.setRecalculateShadows(true);
+        if ( conditionTemplate.disablesTarget() )
+          obstacles.setRecalculateShadows(true);
         hideMenu(0, 0);
         
         break;
@@ -1071,7 +1077,8 @@ public class UserInterface {
         }
         
         rightClickedToken.toggleCondition(conditionTemplate);
-        obstacles.setRecalculateShadows(true);
+        if ( conditionTemplate.disablesTarget() )
+          obstacles.setRecalculateShadows(true);
         hideMenu(0, 0);
         
         break;
@@ -1088,7 +1095,8 @@ public class UserInterface {
         }
         
         rightClickedToken.toggleCondition(conditionTemplate);
-        obstacles.setRecalculateShadows(true);
+        if ( conditionTemplate.disablesTarget() )
+          obstacles.setRecalculateShadows(true);
         hideMenu(0, 0);
         
         break;
@@ -1105,7 +1113,8 @@ public class UserInterface {
         }
         
         rightClickedToken.toggleCondition(conditionTemplate);
-        obstacles.setRecalculateShadows(true);
+        if ( conditionTemplate.disablesTarget() )
+          obstacles.setRecalculateShadows(true);
         hideMenu(0, 0);
         
         break;
@@ -1122,7 +1131,8 @@ public class UserInterface {
         }
         
         rightClickedToken.toggleCondition(conditionTemplate);
-        obstacles.setRecalculateShadows(true);
+        if ( conditionTemplate.disablesTarget() )
+          obstacles.setRecalculateShadows(true);
         hideMenu(0, 0);
         
         break;
@@ -1139,7 +1149,8 @@ public class UserInterface {
         }
         
         rightClickedToken.toggleCondition(conditionTemplate);
-        obstacles.setRecalculateShadows(true);
+        if ( conditionTemplate.disablesTarget() )
+          obstacles.setRecalculateShadows(true);
         hideMenu(0, 0);
         
         break;
@@ -1156,7 +1167,8 @@ public class UserInterface {
         }
         
         rightClickedToken.toggleCondition(conditionTemplate);
-        obstacles.setRecalculateShadows(true);
+        if ( conditionTemplate.disablesTarget() )
+          obstacles.setRecalculateShadows(true);
         hideMenu(0, 0);
         
         break;
@@ -1173,7 +1185,8 @@ public class UserInterface {
         }
         
         rightClickedToken.toggleCondition(conditionTemplate);
-        obstacles.setRecalculateShadows(true);
+        if ( conditionTemplate.disablesTarget() )
+          obstacles.setRecalculateShadows(true);
         hideMenu(0, 0);
         
         break;
@@ -1190,7 +1203,8 @@ public class UserInterface {
         }
         
         rightClickedToken.toggleCondition(conditionTemplate);
-        obstacles.setRecalculateShadows(true);
+        if ( conditionTemplate.disablesTarget() )
+          obstacles.setRecalculateShadows(true);
         hideMenu(0, 0);
         
         break;
@@ -1207,7 +1221,8 @@ public class UserInterface {
         }
         
         rightClickedToken.toggleCondition(conditionTemplate);
-        obstacles.setRecalculateShadows(true);
+        if ( conditionTemplate.disablesTarget() )
+          obstacles.setRecalculateShadows(true);
         hideMenu(0, 0);
         
         break;
@@ -1224,7 +1239,8 @@ public class UserInterface {
         }
         
         rightClickedToken.toggleCondition(conditionTemplate);
-        obstacles.setRecalculateShadows(true);
+        if ( conditionTemplate.disablesTarget() )
+          obstacles.setRecalculateShadows(true);
         hideMenu(0, 0);
         
         break;
@@ -1241,7 +1257,8 @@ public class UserInterface {
         }
         
         rightClickedToken.toggleCondition(conditionTemplate);
-        obstacles.setRecalculateShadows(true);
+        if ( conditionTemplate.disablesTarget() )
+          obstacles.setRecalculateShadows(true);
         hideMenu(0, 0);
         
         break;

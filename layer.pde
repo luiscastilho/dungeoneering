@@ -62,9 +62,6 @@ class Layer {
         break;
     }
     
-    if ( obstacles.getRecalculateShadows() )
-      obstacles.setRecalculateShadows(false);
-    
   }
   
   void recalculateShadows() {
@@ -74,6 +71,7 @@ class Layer {
     
     for ( Token token: tokens )
       token.recalculateShadows();
+    obstacles.blurShadows();
     
   }
   
