@@ -1,0 +1,603 @@
+{
+  "doors": [],
+  "dmTokens": [{
+    "size": "Large",
+    "lightSources": [],
+    "imagePath": "/data/tokens/dm/Beholder.png",
+    "sightTypes": [],
+    "name": "Beholder",
+    "column": 8,
+    "row": 10,
+    "conditions": []
+  }],
+  "initiative": {
+    "initiativeGroups": [
+      {
+        "name": "Orsik",
+        "position": 0
+      },
+      {
+        "name": "Luth",
+        "position": 1
+      },
+      {
+        "name": "Lia",
+        "position": 2
+      },
+      {
+        "name": "Beholder",
+        "position": 3
+      }
+    ],
+    "drawInitiativeOrder": true
+  },
+  "walls": [
+    {"vertexes": [
+      [
+        670,
+        9
+      ],
+      [
+        678,
+        87
+      ]
+    ]},
+    {"vertexes": [
+      [
+        678,
+        87
+      ],
+      [
+        721,
+        133
+      ]
+    ]},
+    {"vertexes": [
+      [
+        721,
+        133
+      ],
+      [
+        766,
+        211
+      ]
+    ]},
+    {"vertexes": [
+      [
+        766,
+        211
+      ],
+      [
+        790,
+        212
+      ]
+    ]},
+    {"vertexes": [
+      [
+        790,
+        212
+      ],
+      [
+        791,
+        264
+      ]
+    ]},
+    {"vertexes": [
+      [
+        791,
+        264
+      ],
+      [
+        704,
+        263
+      ]
+    ]},
+    {"vertexes": [
+      [
+        704,
+        263
+      ],
+      [
+        704,
+        243
+      ]
+    ]},
+    {"vertexes": [
+      [
+        704,
+        243
+      ],
+      [
+        428,
+        244
+      ]
+    ]},
+    {"vertexes": [
+      [
+        428,
+        244
+      ],
+      [
+        428,
+        585
+      ]
+    ]},
+    {"vertexes": [
+      [
+        428,
+        585
+      ],
+      [
+        345,
+        586
+      ]
+    ]},
+    {"vertexes": [
+      [
+        345,
+        586
+      ],
+      [
+        346,
+        605
+      ]
+    ]},
+    {"vertexes": [
+      [
+        346,
+        605
+      ],
+      [
+        332,
+        605
+      ]
+    ]},
+    {"vertexes": [
+      [
+        332,
+        605
+      ],
+      [
+        331,
+        684
+      ]
+    ]},
+    {"vertexes": [
+      [
+        331,
+        684
+      ],
+      [
+        245,
+        684
+      ]
+    ]},
+    {"vertexes": [
+      [
+        245,
+        684
+      ],
+      [
+        243,
+        932
+      ]
+    ]},
+    {"vertexes": [
+      [
+        243,
+        932
+      ],
+      [
+        332,
+        932
+      ]
+    ]},
+    {"vertexes": [
+      [
+        332,
+        932
+      ],
+      [
+        332,
+        1011
+      ]
+    ]},
+    {"vertexes": [
+      [
+        332,
+        1011
+      ],
+      [
+        423,
+        1015
+      ]
+    ]},
+    {"vertexes": [
+      [
+        423,
+        1015
+      ],
+      [
+        423,
+        1070
+      ]
+    ]},
+    {"vertexes": [
+      [
+        1117,
+        11
+      ],
+      [
+        1115,
+        183
+      ]
+    ]},
+    {"vertexes": [
+      [
+        1115,
+        183
+      ],
+      [
+        1102,
+        183
+      ]
+    ]},
+    {"vertexes": [
+      [
+        1102,
+        183
+      ],
+      [
+        1101,
+        212
+      ]
+    ]},
+    {"vertexes": [
+      [
+        1101,
+        212
+      ],
+      [
+        939,
+        209
+      ]
+    ]},
+    {"vertexes": [
+      [
+        939,
+        209
+      ],
+      [
+        940,
+        255
+      ]
+    ]},
+    {"vertexes": [
+      [
+        940,
+        255
+      ],
+      [
+        1125,
+        254
+      ]
+    ]},
+    {"vertexes": [
+      [
+        1125,
+        254
+      ],
+      [
+        1124,
+        99
+      ]
+    ]},
+    {"vertexes": [
+      [
+        1124,
+        99
+      ],
+      [
+        1151,
+        98
+      ]
+    ]},
+    {"vertexes": [
+      [
+        1151,
+        98
+      ],
+      [
+        1151,
+        86
+      ]
+    ]},
+    {"vertexes": [
+      [
+        1151,
+        86
+      ],
+      [
+        1458,
+        86
+      ]
+    ]},
+    {"vertexes": [
+      [
+        1458,
+        86
+      ],
+      [
+        1482,
+        6
+      ]
+    ]},
+    {"vertexes": [
+      [
+        1320,
+        658
+      ],
+      [
+        1146,
+        657
+      ]
+    ]},
+    {"vertexes": [
+      [
+        1146,
+        657
+      ],
+      [
+        1146,
+        648
+      ]
+    ]},
+    {"vertexes": [
+      [
+        1146,
+        648
+      ],
+      [
+        1118,
+        647
+      ]
+    ]},
+    {"vertexes": [
+      [
+        1120,
+        648
+      ],
+      [
+        1122,
+        491
+      ]
+    ]},
+    {"vertexes": [
+      [
+        1122,
+        491
+      ],
+      [
+        666,
+        493
+      ]
+    ]},
+    {"vertexes": [
+      [
+        666,
+        493
+      ],
+      [
+        666,
+        678
+      ]
+    ]},
+    {"vertexes": [
+      [
+        666,
+        678
+      ],
+      [
+        697,
+        678
+      ]
+    ]},
+    {"vertexes": [
+      [
+        697,
+        678
+      ],
+      [
+        698,
+        589
+      ]
+    ]},
+    {"vertexes": [
+      [
+        698,
+        589
+      ],
+      [
+        1025,
+        590
+      ]
+    ]},
+    {"vertexes": [
+      [
+        1025,
+        590
+      ],
+      [
+        1025,
+        681
+      ]
+    ]},
+    {"vertexes": [
+      [
+        1025,
+        681
+      ],
+      [
+        1080,
+        681
+      ]
+    ]},
+    {"vertexes": [
+      [
+        1080,
+        681
+      ],
+      [
+        1121,
+        695
+      ]
+    ]},
+    {"vertexes": [
+      [
+        1121,
+        695
+      ],
+      [
+        1117,
+        914
+      ]
+    ]},
+    {"vertexes": [
+      [
+        1117,
+        914
+      ],
+      [
+        1079,
+        927
+      ]
+    ]},
+    {"vertexes": [
+      [
+        1079,
+        927
+      ],
+      [
+        1027,
+        926
+      ]
+    ]},
+    {"vertexes": [
+      [
+        1027,
+        926
+      ],
+      [
+        1028,
+        1017
+      ]
+    ]},
+    {"vertexes": [
+      [
+        1028,
+        1017
+      ],
+      [
+        708,
+        1017
+      ]
+    ]},
+    {"vertexes": [
+      [
+        708,
+        1017
+      ],
+      [
+        697,
+        1003
+      ]
+    ]},
+    {"vertexes": [
+      [
+        697,
+        1003
+      ],
+      [
+        697,
+        934
+      ]
+    ]},
+    {"vertexes": [
+      [
+        697,
+        934
+      ],
+      [
+        674,
+        934
+      ]
+    ]},
+    {"vertexes": [
+      [
+        674,
+        934
+      ],
+      [
+        675,
+        1074
+      ]
+    ]},
+    {"vertexes": [
+      [
+        1317,
+        656
+      ],
+      [
+        1187,
+        1071
+      ]
+    ]}
+  ],
+  "illumination": {"lightning": "darkness"},
+  "grid": {
+    "cellWidth": 72,
+    "lastCellCenterY": 984,
+    "cellHeight": 72,
+    "drawGrid": false,
+    "firstCellCenterX": 297,
+    "lastCellCenterX": 1593,
+    "firstCellCenterY": 48
+  },
+  "playerTokens": [
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/players/Lia.png",
+      "sightTypes": [{"name": "Darkvision 60'"}],
+      "name": "Lia",
+      "column": 4,
+      "row": 8,
+      "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [{"name": "Torch"}],
+      "imagePath": "/data/tokens/players/Luth.png",
+      "sightTypes": [],
+      "name": "Luth",
+      "column": 4,
+      "row": 10,
+      "conditions": [{"name": "Charmed"}]
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/players/Orsik.png",
+      "sightTypes": [{"name": "Darkvision 60'"}],
+      "name": "Orsik",
+      "column": 6,
+      "row": 11,
+      "conditions": [{"name": "Petrified"}]
+    }
+  ],
+  "map": {
+    "filePath": "/data/maps/Ruins.jpg",
+    "isVideo": false,
+    "fitToScreen": false
+  }
+}

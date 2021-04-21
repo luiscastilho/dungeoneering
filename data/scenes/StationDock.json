@@ -1,0 +1,172 @@
+{
+  "doors": [],
+  "dmTokens": [
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Downside Kings member.png",
+      "sightTypes": [],
+      "name": "Downside Kings member",
+      "column": 6,
+      "row": 7,
+      "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Downside Kings member.png",
+      "sightTypes": [],
+      "name": "Downside Kings member",
+      "column": 5,
+      "row": 8,
+      "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Level 21 Crew member.png",
+      "sightTypes": [],
+      "name": "Level 21 Crew member",
+      "column": 23,
+      "row": 7,
+      "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Downside Kings member.png",
+      "sightTypes": [],
+      "name": "Downside Kings member",
+      "column": 4,
+      "row": 7,
+      "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Downside Kings member.png",
+      "sightTypes": [],
+      "name": "Downside Kings member",
+      "column": 4,
+      "row": 9,
+      "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Level 21 Crew member.png",
+      "sightTypes": [],
+      "name": "Level 21 Crew member",
+      "column": 23,
+      "row": 8,
+      "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Level 21 Crew member.png",
+      "sightTypes": [],
+      "name": "Level 21 Crew member",
+      "column": 24,
+      "row": 9,
+      "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Level 21 Crew member.png",
+      "sightTypes": [],
+      "name": "Level 21 Crew member",
+      "column": 25,
+      "row": 8,
+      "conditions": []
+    }
+  ],
+  "initiative": {
+    "initiativeGroups": [
+      {
+        "name": "Keskodai",
+        "position": 0
+      },
+      {
+        "name": "Navasi",
+        "position": 1
+      },
+      {
+        "name": "Downside Kings member",
+        "position": 2
+      },
+      {
+        "name": "Quig",
+        "position": 3
+      },
+      {
+        "name": "Level 21 Crew member",
+        "position": 4
+      },
+      {
+        "name": "Raia",
+        "position": 5
+      }
+    ],
+    "drawInitiativeOrder": true
+  },
+  "walls": [],
+  "illumination": {"lightning": "brightLigt"},
+  "grid": {
+    "cellWidth": 75,
+    "lastCellCenterY": 1177,
+    "cellHeight": 75,
+    "drawGrid": false,
+    "firstCellCenterX": -181,
+    "lastCellCenterX": 2144,
+    "firstCellCenterY": -98
+  },
+  "playerTokens": [
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/players/Navasi.png",
+      "sightTypes": [],
+      "name": "Navasi",
+      "column": 13,
+      "row": 8,
+      "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/players/Keskodai.png",
+      "sightTypes": [],
+      "name": "Keskodai",
+      "column": 14,
+      "row": 7,
+      "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/players/Quig.png",
+      "sightTypes": [],
+      "name": "Quig",
+      "column": 15,
+      "row": 8,
+      "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/players/Raia.png",
+      "sightTypes": [],
+      "name": "Raia",
+      "column": 16,
+      "row": 7,
+      "conditions": []
+    }
+  ],
+  "map": {
+    "filePath": "/data/maps/StationDock.jpg",
+    "isVideo": false,
+    "fitToScreen": false
+  }
+}

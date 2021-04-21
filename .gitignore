@@ -1,2 +1,6 @@
-# Campaign maps, scenes, etc
+# Campaign assets
 data/campaign/
+
+# VS Code directories
+.vscode/
+out/
