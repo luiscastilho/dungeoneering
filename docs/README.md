@@ -16,15 +16,15 @@ appropriate file for your operating system.
 3. Extract all files to a folder of your choice - `Documents/dungeoneering` for example.
 4. Run the `dungeoneering.exe`/`dungeoneering` executable.
 
-You can either create a new scene - add a map image/video, setup grid, add tokens, etc - or load an
-example scene from the `data/scenes` folder.
+You can either create a new scene - add an image/video as a map, setup a grid, add tokens, etc - or
+you load an example scene from the `data/scenes` folder.
 
 To exit the application, press `ESC`.
 
 ## Contributing
 
 dungeoneering code can be loaded and run directly in [Processing](https://processing.org/) IDE.
-Clone this repository and open `dungeoneering.pde` file in Processing.
+Clone this repository and open the `dungeoneering.pde` file in Processing.
 
 Bugs can be reported through the project's
 [issues](https://github.com/luiscastilho/dungeoneering/issues) page.
