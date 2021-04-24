@@ -1,5 +1,5 @@
 # dungeoneering
-Combat grid and dungeon explorer for use in tabletop RPG sessions.
+Combat grid and dungeon explorer for use in local tabletop RPG sessions.
 
 ![dungeoneering screenshot](screenshot.jpg)
 
