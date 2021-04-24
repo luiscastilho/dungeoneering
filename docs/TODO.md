@@ -1,0 +1,60 @@
+# TODO list
+
+- [X] Shadows respecting pan and zoom
+- [X] Multiple lights and shadows
+- [X] Enemies in a separate layer
+- [X] Switch layers button
+- [X] Save and load lights
+- [X] Save and load environment lightning
+- [X] Change environment lightning button
+- [X] Show/Hide grid button
+- [X] Show/Hide walls button
+- [X] Choose layer when adding token
+- [X] Allow to remove walls by right clicking
+- [X] Add door button
+- [X] Allow to remove doors by right clicking
+- [X] Test rectangular light radius - Not good
+- [X] Hide UI button, always visible
+- [X] Make all paths relative to sketch folder
+- [X] Shadows should hide grid along with map
+- [X] Add right click menu to token
+- [X] Add light to token
+- [X] Add condition to token
+- [X] Token being moved should be drawn on top of the others
+- [X] Don't change layer being shown when adding tokens
+- [X] Move token from one layer to another
+- [X] Disable sight types if token is dead/incapacitated
+- [X] Add D&D 5e common light sources to right click menu
+- [X] Add D&D 5e sight types to right click menu
+- [X] Add D&D 5e spell light sources to right click menu
+- [X] Add D&D 5e conditions to right click menu
+- [X] Enable other sizes of token (Large, etc)
+- [X] Emulate sunlight
+- [X] Fix pan causing low FPS
+- [X] Fix zoom causing low FPS
+- [X] Set combat mode
+- [X] Set initiative order
+- [X] Activate UI buttons if they're active in loaded scene
+- [X] Disable combat mode button if there are no tokens
+- [X] Set initiative groups image size based on bottom space left
+- [X] Conceal hidden tokens if they don't belong to layer being shown
+- [X] Walls/doors setup cursor is too dark in dark backgrounds
+- [X] Fix low FPS when panning due to shadows being recalculated
+- [ ] Make UI more intuitive (and pretty)
+- [ ] Light sources should be visible in all layers
+- [ ] Set maximum zoom and pan
+- [ ] Keep tokens inside grid when moving - larger tokens being moved to grid borders
+- [ ] Keep right click menu inside canvas - right click in tokens near the grid borders
+- [ ] For larger tokens, remember token cell being dragged
+- [ ] Don't allow move over walls/closed doors
+- [ ] Don't allow tokens to move over tokens in other layers
+- [ ] Allow to click on an icon in the Initiative Order and centralize the map on this token
+- [ ] Add tooltips to right click menu icons - light source and condition names, etc
+- [ ] Add D&D 5e obscurement sources to right click menu
+- [ ] Add D&D 5e spell effects - fireball, etc
+- [ ] Allow to automatically move a token placed on a givan cell to another cell (stairs, secret passages, etc)
+- [ ] Allow to load images as free floating objects on top of map
+- [ ] FoW/revealed/visited by room
+- [ ] Multiple maps linked (NSEW)
+- [ ] Show movement path
+- [ ] Don't allow tokens to stop on top of another tokens - move it back to previous cell
