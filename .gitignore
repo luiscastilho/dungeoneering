@@ -1,6 +1,9 @@
 # Campaign assets
-data/campaign/
+/data/campaign/
 
-# VS Code directories
-.vscode/
-out/
+# VS Code dirs
+/.vscode/
+/out/
+
+# Processing export application dirs
+/application.*/
