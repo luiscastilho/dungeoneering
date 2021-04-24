@@ -5,7 +5,7 @@ Combat grid and dungeon explorer for use in tabletop RPG sessions.
 
 ## Latest Version
 
-The latest version along with release notes can always be found on the project's
+The latest stable version along with release notes can be found on the project's
 [releases](https://github.com/luiscastilho/dungeoneering/releases) page.
 
 ## Installation
@@ -20,6 +20,14 @@ You can either create a new scene - add a map image/video, setup grid, add token
 example scene from the `data/scenes` folder.
 
 To exit the application, press `ESC`.
+
+## Contributing
+
+dungeoneering code can be loaded and run directly in [Processing](https://processing.org/) IDE.
+Clone this repository and open `dungeoneering.pde` file in Processing IDE.
+
+Bugs can be reported through the project's
+[issues](https://github.com/luiscastilho/dungeoneering/issues) page.
 
 ## License
 
