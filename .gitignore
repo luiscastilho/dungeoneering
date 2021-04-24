@@ -7,3 +7,6 @@
 
 # Processing export application dirs
 /application.*/
+
+# Releases dir
+/releases/
