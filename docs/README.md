@@ -17,7 +17,7 @@ appropriate file for your operating system.
 4. Run the `dungeoneering.exe`/`dungeoneering` executable.
 
 You can either create a new scene - select an image/video to use as a map, setup a grid, add
-tokens, etc - or you load an example scene from the `data/scenes` folder.
+tokens, etc - or you can load an example scene from the `data/scenes` folder.
 
 To exit the application, press `ESC`.
 
