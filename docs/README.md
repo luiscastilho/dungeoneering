@@ -1,7 +1,7 @@
 # dungeoneering
 Combat grid and dungeon explorer for use in tabletop RPG sessions.
 
-[dungeoneering screenshot](screenshot.jpg)
+![dungeoneering screenshot](screenshot.jpg)
 
 ## Latest Version
 
