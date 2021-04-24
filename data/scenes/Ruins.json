@@ -4,7 +4,7 @@
     "size": "Large",
     "lightSources": [],
     "imagePath": "/data/tokens/dm/Beholder.png",
-    "sightTypes": [],
+    "sightTypes": [{"name": "Darkvision 60'"}],
     "name": "Beholder",
     "column": 8,
     "row": 10,
@@ -13,19 +13,19 @@
   "initiative": {
     "initiativeGroups": [
       {
-        "name": "Orsik",
+        "name": "Beholder",
         "position": 0
       },
       {
-        "name": "Luth",
+        "name": "Orsik",
         "position": 1
       },
       {
-        "name": "Lia",
+        "name": "Luth",
         "position": 2
       },
       {
-        "name": "Beholder",
+        "name": "Lia",
         "position": 3
       }
     ],
@@ -576,23 +576,23 @@
     },
     {
       "size": "Medium",
-      "lightSources": [{"name": "Torch"}],
-      "imagePath": "/data/tokens/players/Luth.png",
-      "sightTypes": [],
-      "name": "Luth",
-      "column": 4,
-      "row": 10,
-      "conditions": [{"name": "Charmed"}]
-    },
-    {
-      "size": "Medium",
       "lightSources": [],
       "imagePath": "/data/tokens/players/Orsik.png",
       "sightTypes": [{"name": "Darkvision 60'"}],
       "name": "Orsik",
-      "column": 6,
+      "column": 5,
       "row": 11,
       "conditions": [{"name": "Petrified"}]
+    },
+    {
+      "size": "Medium",
+      "lightSources": [{"name": "Torch"}],
+      "imagePath": "/data/tokens/players/Luth.png",
+      "sightTypes": [],
+      "name": "Luth",
+      "column": 7,
+      "row": 10,
+      "conditions": [{"name": "Charmed"}]
     }
   ],
   "map": {
