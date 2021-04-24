@@ -24,7 +24,7 @@ To exit the application, press `ESC`.
 ## Contributing
 
 dungeoneering code can be loaded and run directly in [Processing](https://processing.org/) IDE.
-Clone this repository and open `dungeoneering.pde` file in Processing IDE.
+Clone this repository and open `dungeoneering.pde` file in Processing.
 
 Bugs can be reported through the project's
 [issues](https://github.com/luiscastilho/dungeoneering/issues) page.

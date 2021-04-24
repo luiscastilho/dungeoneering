@@ -567,16 +567,6 @@
     {
       "size": "Medium",
       "lightSources": [],
-      "imagePath": "/data/tokens/players/Lia.png",
-      "sightTypes": [{"name": "Darkvision 60'"}],
-      "name": "Lia",
-      "column": 4,
-      "row": 8,
-      "conditions": []
-    },
-    {
-      "size": "Medium",
-      "lightSources": [],
       "imagePath": "/data/tokens/players/Orsik.png",
       "sightTypes": [{"name": "Darkvision 60'"}],
       "name": "Orsik",
@@ -593,6 +583,16 @@
       "column": 7,
       "row": 10,
       "conditions": [{"name": "Charmed"}]
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/players/Lia.png",
+      "sightTypes": [{"name": "Darkvision 60'"}],
+      "name": "Lia",
+      "column": 3,
+      "row": 10,
+      "conditions": []
     }
   ],
   "map": {
