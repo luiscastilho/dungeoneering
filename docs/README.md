@@ -1,5 +1,7 @@
 # dungeoneering
-Combat grid and dungeon explorer for use in local tabletop RPG sessions.
+dungeoneering is an open source combat grid and dungeon explorer for use in local tabletop RPG
+sessions. It can load static and animated maps, has a dynamic lighting system, offers lots of
+conditions that can be easily applied to tokens and much more.
 
 ![dungeoneering screenshot](screenshot.png)
 
