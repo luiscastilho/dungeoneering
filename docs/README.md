@@ -20,6 +20,18 @@ You can either create a new scene - select an image/video to use as a map, setup
 
 To exit the application, press `ESC`.
 
+### Windows
+
+The application should work with the instructions above. Create an issue if it doesn't please.
+
+### macOS
+
+macOS releases are created and tested in a virtual machine running Catalina. Not sure if it will work on older macOS releases. Create an issue if it doesn't and let me know.
+
+### Linux
+
+There's an extra step to run the application in Linux - GStreamer must be installed on your system. Installation instructions can be found [here](https://gstreamer.freedesktop.org/documentation/installing/on-linux.html). If it doesn't work even with GStreamer installed, create an issue please.
+
 ## Contributing
 
 dungeoneering code can be loaded, edited and run directly in [Processing](https://processing.org/) IDE. Clone this repository and open the `dungeoneering.pde` file in Processing.
