@@ -43,6 +43,7 @@
 - [ ] Make UI more intuitive (and pretty)
 - [ ] Light sources should be visible in all layers
 - [ ] Set maximum zoom and pan
+- [ ] Light sources and conditions applied to a token should remain highlighted in the right click menu
 - [ ] Keep tokens inside grid when moving - larger tokens being moved to grid borders
 - [ ] Keep right click menu inside canvas - right click in tokens near the grid borders
 - [ ] For larger tokens, remember token cell being dragged
