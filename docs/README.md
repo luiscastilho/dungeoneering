@@ -22,7 +22,7 @@ To exit the application, press `ESC`.
 
 ### Windows
 
-The application should work with the instructions above. Create an issue if it doesn't please.
+The application should work with the instructions above. If it doesn't, crate an issue please.
 
 ### macOS
 
