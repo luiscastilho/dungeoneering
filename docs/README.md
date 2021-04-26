@@ -14,7 +14,7 @@ The latest stable version along with release notes can be found on the project's
 1. Download and install [Java 8](https://java.com/en/download/).
 2. In the [releases](https://github.com/luiscastilho/dungeoneering/releases) page, download the appropriate file for your operating system.
 3. Extract all files to a folder of your choice - `Documents/dungeoneering` for example.
-4. Run `dungeoneering.exe`, `dungeoneering.app`, or`dungeoneering` depending on your system.
+4. Run `dungeoneering.exe`, `dungeoneering.app`, or `dungeoneering` depending on your system.
 
 You can either create a new scene - select an image/video to use as a map, setup a grid, add tokens, etc - or you can load an example scene from the `data/scenes` folder.
 
