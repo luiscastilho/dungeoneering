@@ -40,7 +40,7 @@ Bugs can be reported through the project's [issues](https://github.com/luiscasti
 
 ## License
 
-dungeoneering is licensed under the GPLv3. See [LICENSE.txt](LICENSE.txt) for more details. dungeoneering also uses components from other open source projects:
+dungeoneering is licensed under the GPLv3. See [LICENSE.txt](LICENSE.txt) for more details. dungeoneering also uses components from other open source projects. Their code and license can be found at these links:
 
 - [Processing](https://github.com/processing/processing)
 - [ControlP5](https://github.com/sojamo/controlp5)
