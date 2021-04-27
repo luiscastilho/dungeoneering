@@ -1,7 +1,7 @@
 # dungeoneering
 dungeoneering is a minimalistic combat grid and dungeon explorer for use in local tabletop RPG sessions. It can load static and animated maps, has a dynamic lighting system, offers lots of conditions that can be easily applied to tokens and more.
 
-![dungeoneering screenshot](screenshot.png "Screenshot, v0.1.0")
+![dungeoneering screenshot, v0.1.0](screenshot.png "dungeoneering screenshot, v0.1.0")
 
 The main goal here is to make an application with all the basic features needed to run a tabletop RPG session. It should be easy to install, setup and run and should have a minimalistic, intuitive and hopefully pretty user interface.
 
@@ -50,4 +50,9 @@ dungeoneering is licensed under the GPLv3. See [LICENSE.txt](LICENSE.txt) for mo
 
 Thanks to my awesome RPG group that supported me in developing this application and were patient enough to playtest it in our sessions. :heart:
 
-![dungeoneering screenshot](playtesters/claw.png "Claw, Tabaxi Sorcerer (Wild Magic)") ![dungeoneering screenshot](playtesters/gruk.png "Gruk, Dwarf Fighter (Eldritch Knight)") ![dungeoneering screenshot](playtesters/labard.png "Labard, Halfling Rogue (Assassin)") ![dungeoneering screenshot](playtesters/lander.png "Lander, Human Cleric (Forge Domain)") ![dungeoneering screenshot](playtesters/naven.png "Naven, Half-Elf Paladin (Oath of the Ancients)") ![dungeoneering screenshot](playtesters/sora.png "Sora, Human Monk (Way of the Long Death)")
+![Claw, Tabaxi Sorcerer (Wild Magic)](playtesters/claw.png "Claw, Tabaxi Sorcerer (Wild Magic)")
+![Gruk, Dwarf Fighter (Eldritch Knight)](playtesters/gruk.png "Gruk, Dwarf Fighter (Eldritch Knight)")
+![Labard, Halfling Rogue (Assassin)](playtesters/labard.png "Labard, Halfling Rogue (Assassin)")
+![Lander, Human Cleric (Forge Domain)](playtesters/lander.png "Lander, Human Cleric (Forge Domain)")
+![Naven, Half-Elf Paladin (Oath of the Ancients)](playtesters/naven.png "Naven, Half-Elf Paladin (Oath of the Ancients)")
+![Sora, Human Monk (Way of the Long Death)](playtesters/sora.png "Sora, Human Monk (Way of the Long Death)")
