@@ -45,3 +45,9 @@ dungeoneering is licensed under the GPLv3. See [LICENSE.txt](LICENSE.txt) for mo
 - [Processing](https://github.com/processing/processing)
 - [ControlP5](https://github.com/sojamo/controlp5)
 - [PostFX for Processing](https://github.com/cansik/processing-postfx)
+
+## Thanks
+
+Thanks to my awesome RPG group that supported me in developing this application and were patient enough to playtest it in our sessions. :heart:
+
+![dungeoneering screenshot](playtesters/claw.png "Claw, Tabaxi Sorcerer (Wild Magic)") ![dungeoneering screenshot](playtesters/gruk.png "Gruk, Dwarf Fighter (Eldritch Knight)") ![dungeoneering screenshot](playtesters/labard.png "Labard, Halfling Rogue (Assassin)") ![dungeoneering screenshot](playtesters/lander.png "Lander, Human Cleric (Forge Domain)") ![dungeoneering screenshot](playtesters/naven.png "Naven, Half-Elf Paladin (Oath of the Ancients)") ![dungeoneering screenshot](playtesters/sora.png "Sora, Human Monk (Way of the Long Death)")
