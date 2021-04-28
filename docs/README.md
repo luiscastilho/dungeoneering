@@ -45,7 +45,7 @@ To create a new scene follow these steps:
 4. Setup walls and doors using the corresponding buttons — `Add/Remove walls` and `Add/Remove doors` — and following the on-screen instructions. Walls and doors are used to hide parts of the map and to block token light sources. With these elements in place you will have a dynamic lighting system, were players will only see parts of the map depending on where they characters are and what they can see.
 5. If it's a combat scene, enable the initiative order widget by clicking on the combat button. In this widget you can drag players or enemies to the position they should occupy based on the initiative they rolled.
 
-And that's it! Now that you have setup your scene, players and DM can drag their tokens around the map; right click on them to add conditions, light sources and sight types (e.g., darkvision); pan and zoom the map as needed; players can reveal hidden parts of the map with the dynamic lighting system; and hopefully with all that you and your group will have more fun in your RPG session. :)
+And that's it! Now that you have setup your scene, players and DM can drag their tokens around the map; right click on them to add conditions, light sources and sight types (e.g., darkvision); pan and zoom the map as needed; players can reveal hidden parts of the map with the dynamic lighting system; and hopefully with all that you and your group will have more fun in your RPG sessions. :)
 
 To exit the application, press `ESC`.
 
