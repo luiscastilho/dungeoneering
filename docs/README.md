@@ -47,7 +47,7 @@ To create a new scene follow these steps:
 
 And that's it! Now that you have setup your scene, players and DM can drag their tokens around the map; right click on them to add conditions, light sources and sight types (e.g., darkvision); pan and zoom the map as needed; players can reveal hidden parts of the map with the dynamic lighting system; and hopefully with all that you and your group will have more fun in your RPG session. :)
 
-Oh, and to exit the application, press `ESC`.
+To exit the application, press `ESC`.
 
 
 
