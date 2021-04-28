@@ -73,7 +73,7 @@
     }
   ],
   "walls": [],
-  "illumination": {"lightning": "darkness"},
+  "illumination": {"lighting": "darkness"},
   "grid": {
     "cellWidth": 92,
     "lastCellCenterY": 974,

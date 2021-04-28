@@ -5,8 +5,8 @@
 - [X] Enemies in a separate layer
 - [X] Switch layers button
 - [X] Save and load lights
-- [X] Save and load environment lightning
-- [X] Change environment lightning button
+- [X] Save and load environment lighting
+- [X] Change environment lighting button
 - [X] Show/Hide grid button
 - [X] Show/Hide walls button
 - [X] Choose layer when adding token

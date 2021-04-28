@@ -553,7 +553,7 @@
       ]
     ]}
   ],
-  "illumination": {"lightning": "darkness"},
+  "illumination": {"lighting": "darkness"},
   "grid": {
     "cellWidth": 72,
     "lastCellCenterY": 984,

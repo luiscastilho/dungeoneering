@@ -312,7 +312,7 @@ public class UserInterface {
     addButton("Toggle walls", "wall", controllersTopRightX, controllersTopRightY, togglableControllers, true, false);
     
     controllersTopRightX = controllersTopRightX - squareButtonWidth - controllersSpacing;
-    addButton("Switch lightning", "lightning", controllersTopRightX, controllersTopRightY, togglableControllers, false, false);
+    addButton("Switch lighting", "lighting", controllersTopRightX, controllersTopRightY, togglableControllers, false, false);
     
     controllersTopRightX = controllersTopRightX - squareButtonWidth - controllersSpacing;
     addButton("Switch layer", "layers", controllersTopRightX, controllersTopRightY, togglableControllers, false, false);
@@ -883,7 +883,7 @@ public class UserInterface {
         obstacles.setRecalculateShadows(true);
         
         break;
-      case "Switch lightning":
+      case "Switch lighting":
         
         switch ( obstacles.getIllumination() ) {
           case brightLight:
@@ -1997,13 +1997,13 @@ public class UserInterface {
     JSONObject illuminationJson = new JSONObject();
     switch ( obstacles.getIllumination() ) {
       case brightLight:
-        illuminationJson.setString("lightning", "brightLigt");
+        illuminationJson.setString("lighting", "brightLigt");
         break;
       case dimLight:
-        illuminationJson.setString("lightning", "dimLight");
+        illuminationJson.setString("lighting", "dimLight");
         break;
       case darkness:
-        illuminationJson.setString("lightning", "darkness");
+        illuminationJson.setString("lighting", "darkness");
         break;
     }
     sceneJson.setJSONObject("illumination", illuminationJson);
@@ -2226,8 +2226,8 @@ public class UserInterface {
     JSONObject illuminationJson = sceneJson.getJSONObject("illumination");
     if ( illuminationJson != null ) {
       
-      String lightning = illuminationJson.getString("lightning");
-      switch ( lightning ) {
+      String lighting = illuminationJson.getString("lighting");
+      switch ( lighting ) {
         case "brightLigt":
           obstacles.setIllumination(Illumination.brightLight);
           break;

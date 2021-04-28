@@ -226,7 +226,7 @@
       ]
     ]}
   ],
-  "illumination": {"lightning": "darkness"},
+  "illumination": {"lighting": "darkness"},
   "grid": {
     "cellWidth": 56,
     "lastCellCenterY": 933,
