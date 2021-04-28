@@ -50,6 +50,9 @@
 - [ ] Don't allow move over walls/closed doors
 - [ ] Don't allow tokens to move over tokens in other layers
 - [ ] Allow to click on an icon in the Initiative Order and centralize the map on this token
+- [ ] When setting up walls and doors, add a door icon over doors already created
+- [ ] Allow doors to be locked - only DM can unlock them
+- [ ] Allow to add light sources not associated with player or DM tokens
 - [ ] Add tooltips to right click menu icons - light source and condition names, etc
 - [ ] Add D&D 5e obscurement sources to right click menu
 - [ ] Add D&D 5e spell effects - fireball, etc
