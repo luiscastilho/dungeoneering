@@ -26,19 +26,21 @@ public class UserInterface {
   
   Token rightClickedToken;
   
+  int controllerBarsSpacing;
   int controllersSpacing;
-  int controllersTopLeftX, controllersTopLeftY;
-  int controllersTopRightX, controllersTopRightY;
-  int controllersBottomRightX, controllersBottomRightY;
-  int controllersMenuX, controllersMenuY;
-  int controllersMenuInitialX, controllersMenuInitialY;
-  
-  int rectButtonWidth;
-  int rectButtonHeight;
+
   int squareButtonWidth;
   int squareButtonHeight;
   int instructionsHeight;
   int menuBarHeight;
+
+  int controllersTopLeftX, controllersTopLeftY;
+  int controllersTopLeftInitialX, controllersTopLeftInitialY;
+  int controllersTopRightX, controllersTopRightY;
+  int controllersTopRightInitialX, controllersTopRightInitialY;
+  int controllersBottomRightX, controllersBottomRightY;
+  int controllersMenuX, controllersMenuY;
+  int controllersMenuInitialX, controllersMenuInitialY;
   
   int menuItemsPerLine;
   boolean menuItemClicked;
@@ -88,16 +90,18 @@ public class UserInterface {
     
     rightClickedToken = null;
     
-    rectButtonWidth = 140;
-    rectButtonHeight = 50;
+    controllerBarsSpacing = 50;
+    controllersSpacing = 5;
+
     squareButtonWidth = 50;
     squareButtonHeight = 50;
     instructionsHeight = 15;
     menuBarHeight = 35;
     
-    controllersSpacing = 5;
     controllersTopLeftX = int(min(canvas.width, canvas.height) * 0.05);
     controllersTopLeftY = int(min(canvas.width, canvas.height) * 0.05);
+    controllersTopLeftInitialX = controllersTopLeftX;
+    controllersTopLeftInitialY = controllersTopLeftY;
     controllersTopRightX = canvas.width - int(min(canvas.width, canvas.height) * 0.05);
     controllersTopRightY = int(min(canvas.width, canvas.height) * 0.05);
     controllersBottomRightX = controllersTopRightX;
@@ -221,76 +225,94 @@ public class UserInterface {
     otherMenuControllers = cp5.addGroup("Other")
                               .setBackgroundColor(color(0, 127));
     
-    // Top left bar
-    
-    sceneSetupIconFolder = "scene/setup/";
-    
-    addButton("Select map", sceneSetupIconFolder + "map", controllersTopLeftX, controllersTopLeftY, togglableControllers);
-
-    controllersTopLeftY = controllersTopLeftY + rectButtonHeight + controllersSpacing;
-    addButton("Grid setup", sceneSetupIconFolder + "grid", controllersTopLeftX, controllersTopLeftY, togglableControllers, true, false);
-
-    controllersTopLeftY = controllersTopLeftY + rectButtonHeight + controllersSpacing;
-    addButton("Add/Remove walls", sceneSetupIconFolder + "wall", controllersTopLeftX, controllersTopLeftY, togglableControllers, true, false);
-    
-    controllersTopLeftY = controllersTopLeftY + rectButtonHeight + controllersSpacing;
-    addButton("Add/Remove doors", sceneSetupIconFolder + "door", controllersTopLeftX, controllersTopLeftY, togglableControllers, true, false);
-
-    controllersTopLeftY = controllersTopLeftY + rectButtonHeight + controllersSpacing;
-    addButton("Add player token", sceneSetupIconFolder + "hero", controllersTopLeftX, controllersTopLeftY, togglableControllers, true, false);
-    
-    controllersTopLeftY = controllersTopLeftY + rectButtonHeight + controllersSpacing;
-    addButton("Add DM token", sceneSetupIconFolder + "monster", controllersTopLeftX, controllersTopLeftY, togglableControllers, true, false);
-    
-    // Top right bar
-    
+    // Icon paths
     appIconFolder = "app/";
     sceneConfigIconFolder = "scene/config/";
-
-    controllersTopRightX = controllersTopRightX - squareButtonWidth;
-    addButton("Load scene", appIconFolder + "load", controllersTopRightX, controllersTopRightY, togglableControllers);
-    
-    controllersTopRightX = controllersTopRightX - squareButtonWidth - controllersSpacing;
-    addButton("Save scene", appIconFolder + "save", controllersTopRightX, controllersTopRightY, togglableControllers);
-    
-    controllersTopRightY = controllersTopRightY + squareButtonHeight + controllersSpacing;
-    controllersTopRightX = controllersTopRightX + squareButtonWidth + controllersSpacing;
-    addButton("Toggle grid", sceneConfigIconFolder + "grid", controllersTopRightX, controllersTopRightY, togglableControllers, true, false);
-    
-    controllersTopRightX = controllersTopRightX - squareButtonWidth - controllersSpacing;
-    addButton("Toggle walls", sceneConfigIconFolder + "walls", controllersTopRightX, controllersTopRightY, togglableControllers, true, false);
-    
-    controllersTopRightX = controllersTopRightX - squareButtonWidth - controllersSpacing;
-    addButton("Switch lighting", sceneConfigIconFolder + "lighting", controllersTopRightX, controllersTopRightY, togglableControllers);
-    
-    controllersTopRightX = controllersTopRightX - squareButtonWidth - controllersSpacing;
-    addButton("Switch layer", sceneConfigIconFolder + "layers", controllersTopRightX, controllersTopRightY, togglableControllers);
-    
-    // Bottom right bar
-    
-    controllersBottomRightX = controllersBottomRightX - squareButtonWidth;
-    addButton("Toggle UI", appIconFolder + "ui", controllersBottomRightX, controllersBottomRightY, null, true, true);
-    
-    controllersBottomRightX = controllersBottomRightX - squareButtonWidth - controllersSpacing;
-    addButton("Toggle touch screen mode", appIconFolder + "touch", controllersBottomRightX, controllersBottomRightY, null, true, false);
-    
-    controllersBottomRightX = controllersBottomRightX - squareButtonWidth - controllersSpacing;
-    addButton("Toggle camera pan", sceneConfigIconFolder + "pan", controllersBottomRightX, controllersBottomRightY, null, true, false);
-    
-    controllersBottomRightX = controllersBottomRightX - squareButtonWidth - controllersSpacing;
-    addButton("Toggle camera zoom", sceneConfigIconFolder + "zoom", controllersBottomRightX, controllersBottomRightY, null, true, false);
-    
-    controllersBottomRightX = controllersBottomRightX - squareButtonWidth - controllersSpacing;
-    addButton("Toggle combat mode", sceneConfigIconFolder + "combat", controllersBottomRightX, controllersBottomRightY, null, true, false);
-    
-    // Token right click menu
-    
+    sceneSetupIconFolder = "scene/setup/";
     tokenConditionsIconFolder = "token/condition/";
     tokenCommonLightSourcesIconFolder = "token/light_source/common/";
     tokenSpellLightSourcesIconFolder = "token/light_source/spell/";
     tokenSightTypesIconFolder = "token/sight_type/";
     tokenSizesIconFolder = "token/size/";
     tokenSetupIconFolder = "token/setup/";
+
+    // Left top horizontal bar - scenes management
+
+    controllersTopLeftX = controllersTopLeftInitialX;
+    controllersTopLeftY = controllersTopLeftInitialY;
+    addButton("New scene", appIconFolder + "new", controllersTopLeftX, controllersTopLeftY, togglableControllers);
+
+    controllersTopLeftX += squareButtonWidth + controllersSpacing;
+    addButton("Load scene", appIconFolder + "load", controllersTopLeftX, controllersTopLeftY, togglableControllers);
+
+    controllersTopLeftX += squareButtonWidth + controllersSpacing;
+    addButton("Save scene", appIconFolder + "save", controllersTopLeftX, controllersTopLeftY, togglableControllers);
+
+    // Left vertical bar - scene setup
+
+    controllersTopLeftX = controllersTopLeftInitialX;
+    controllersTopLeftY += squareButtonHeight + controllerBarsSpacing + controllersSpacing;
+    addButton("Select map", sceneSetupIconFolder + "map", controllersTopLeftX, controllersTopLeftY, togglableControllers);
+
+    controllersTopLeftY += squareButtonHeight + controllersSpacing;
+    addButton("Grid setup", sceneSetupIconFolder + "grid", controllersTopLeftX, controllersTopLeftY, togglableControllers, true, false);
+
+    controllersTopLeftY += squareButtonHeight + controllersSpacing;
+    addButton("Add/Remove walls", sceneSetupIconFolder + "wall", controllersTopLeftX, controllersTopLeftY, togglableControllers, true, false);
+
+    controllersTopLeftY += squareButtonHeight + controllersSpacing;
+    addButton("Add/Remove doors", sceneSetupIconFolder + "door", controllersTopLeftX, controllersTopLeftY, togglableControllers, true, false);
+
+    controllersTopLeftY += squareButtonHeight + controllersSpacing;
+    addButton("Add player token", sceneSetupIconFolder + "hero", controllersTopLeftX, controllersTopLeftY, togglableControllers, true, false);
+
+    controllersTopLeftY += squareButtonHeight + controllersSpacing;
+    addButton("Add DM token", sceneSetupIconFolder + "monster", controllersTopLeftX, controllersTopLeftY, togglableControllers, true, false);
+
+    // Left bottom horizontal bar - scene config
+
+    controllersTopLeftX = controllersTopLeftInitialX;
+    controllersTopLeftY += squareButtonHeight + controllerBarsSpacing + controllersSpacing;
+    addButton("Toggle combat mode", sceneConfigIconFolder + "combat", controllersTopLeftX, controllersTopLeftY, togglableControllers, true, false);
+
+    controllersTopLeftX += squareButtonWidth + controllersSpacing;
+    addButton("Toggle grid", sceneConfigIconFolder + "grid", controllersTopLeftX, controllersTopLeftY, togglableControllers, true, false);
+
+    controllersTopLeftX += squareButtonWidth + controllersSpacing;
+    addButton("Toggle walls", sceneConfigIconFolder + "walls", controllersTopLeftX, controllersTopLeftY, togglableControllers, true, false);
+
+    // new line
+    controllersTopLeftX = controllersTopLeftInitialX;
+    controllersTopLeftY += squareButtonHeight + controllersSpacing;
+    addButton("Switch layer", sceneConfigIconFolder + "layers", controllersTopLeftX, controllersTopLeftY, togglableControllers);
+
+    controllersTopLeftX += squareButtonWidth + controllersSpacing;
+    addButton("Switch lighting", sceneConfigIconFolder + "lighting", controllersTopLeftX, controllersTopLeftY, togglableControllers);
+
+    // new line
+
+    // Disabled - map pan and zoom enabled by default
+
+    // controllersTopLeftX += squareButtonWidth + controllersSpacing;
+    // addButton("Toggle camera pan", sceneConfigIconFolder + "pan", controllersTopLeftX, controllersTopLeftY, null, true, false);
+    
+    // controllersTopLeftX += squareButtonWidth + controllersSpacing;
+    // addButton("Toggle camera zoom", sceneConfigIconFolder + "zoom", controllersTopLeftX, controllersTopLeftY, null, true, false);
+
+    // Top right bar - quit
+
+    controllersTopRightX -= squareButtonWidth;
+    addButton("Quit", appIconFolder + "quit", controllersTopRightX, controllersTopRightY);
+
+    // Bottom right bar - UI config
+    
+    controllersBottomRightX -= squareButtonWidth;
+    addButton("Toggle UI", appIconFolder + "ui", controllersBottomRightX, controllersBottomRightY, null, true, true);
+    
+    controllersBottomRightX -= squareButtonWidth - controllersSpacing;
+    addButton("Toggle touch screen mode", appIconFolder + "touch", controllersBottomRightX, controllersBottomRightY, null, true, false);
+    
+    // Token right click menu
 
     conditionMenuControllers.setHeight(menuBarHeight)                  // menu bar height
                             .setBackgroundHeight(controllersSpacing)   // item height
@@ -338,61 +360,61 @@ public class UserInterface {
     controllersMenuY = controllersMenuInitialY;
     addButton("Toggle condition blinded", tokenConditionsIconFolder + "blinded", controllersMenuX, controllersMenuY, conditionMenuControllers);
     
-    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    controllersMenuX += squareButtonWidth + controllersSpacing;
     addButton("Toggle condition bloodied", tokenConditionsIconFolder + "bloodied", controllersMenuX, controllersMenuY, conditionMenuControllers);
     
-    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    controllersMenuX += squareButtonWidth + controllersSpacing;
     addButton("Toggle condition charmed", tokenConditionsIconFolder + "charmed", controllersMenuX, controllersMenuY, conditionMenuControllers);
     
-    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    controllersMenuX += squareButtonWidth + controllersSpacing;
     addButton("Toggle condition dead", tokenConditionsIconFolder + "dead", controllersMenuX, controllersMenuY, conditionMenuControllers);
     
-    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    controllersMenuX += squareButtonWidth + controllersSpacing;
     addButton("Toggle condition deafened", tokenConditionsIconFolder + "deafened", controllersMenuX, controllersMenuY, conditionMenuControllers);
     
     // new line
     conditionMenuControllers.setBackgroundHeight(conditionMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
-    controllersMenuY = controllersMenuY + squareButtonWidth + controllersSpacing;
+    controllersMenuY += squareButtonWidth + controllersSpacing;
     addButton("Toggle condition frightened", tokenConditionsIconFolder + "frightened", controllersMenuX, controllersMenuY, conditionMenuControllers);
     
-    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    controllersMenuX += squareButtonWidth + controllersSpacing;
     addButton("Toggle condition grappled", tokenConditionsIconFolder + "grappled", controllersMenuX, controllersMenuY, conditionMenuControllers);
     
-    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    controllersMenuX += squareButtonWidth + controllersSpacing;
     addButton("Toggle condition hidden", tokenConditionsIconFolder + "hidden", controllersMenuX, controllersMenuY, conditionMenuControllers);
     
-    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    controllersMenuX += squareButtonWidth + controllersSpacing;
     addButton("Toggle condition incapacitated", tokenConditionsIconFolder + "incapacitated", controllersMenuX, controllersMenuY, conditionMenuControllers);
     
-    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    controllersMenuX += squareButtonWidth + controllersSpacing;
     addButton("Toggle condition invisible", tokenConditionsIconFolder + "invisible", controllersMenuX, controllersMenuY, conditionMenuControllers);
     
     // new line
     conditionMenuControllers.setBackgroundHeight(conditionMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
-    controllersMenuY = controllersMenuY + squareButtonWidth + controllersSpacing;
+    controllersMenuY += squareButtonWidth + controllersSpacing;
     addButton("Toggle condition paralyzed", tokenConditionsIconFolder + "paralyzed", controllersMenuX, controllersMenuY, conditionMenuControllers);
     
-    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    controllersMenuX += squareButtonWidth + controllersSpacing;
     addButton("Toggle condition petrified", tokenConditionsIconFolder + "petrified", controllersMenuX, controllersMenuY, conditionMenuControllers);
     
-    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    controllersMenuX += squareButtonWidth + controllersSpacing;
     addButton("Toggle condition poisoned", tokenConditionsIconFolder + "poisoned", controllersMenuX, controllersMenuY, conditionMenuControllers);
     
-    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    controllersMenuX += squareButtonWidth + controllersSpacing;
     addButton("Toggle condition prone", tokenConditionsIconFolder + "prone", controllersMenuX, controllersMenuY, conditionMenuControllers);
     
-    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    controllersMenuX += squareButtonWidth + controllersSpacing;
     addButton("Toggle condition restrained", tokenConditionsIconFolder + "restrained", controllersMenuX, controllersMenuY, conditionMenuControllers);
     
     // new line
     conditionMenuControllers.setBackgroundHeight(conditionMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
-    controllersMenuY = controllersMenuY + squareButtonWidth + controllersSpacing;
+    controllersMenuY += squareButtonWidth + controllersSpacing;
     addButton("Toggle condition stunned", tokenConditionsIconFolder + "stunned", controllersMenuX, controllersMenuY, conditionMenuControllers);
     
-    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    controllersMenuX += squareButtonWidth + controllersSpacing;
     addButton("Toggle condition unconscious", tokenConditionsIconFolder + "unconscious", controllersMenuX, controllersMenuY, conditionMenuControllers);
     
     // first line in menu item
@@ -401,22 +423,22 @@ public class UserInterface {
     controllersMenuY = controllersMenuInitialY;
     addButton("Toggle light source candle", tokenCommonLightSourcesIconFolder + "candle", controllersMenuX, controllersMenuY, lightSourceMenuControllers);
     
-    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    controllersMenuX += squareButtonWidth + controllersSpacing;
     addButton("Toggle light source torch", tokenCommonLightSourcesIconFolder + "torch", controllersMenuX, controllersMenuY, lightSourceMenuControllers);
     
-    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    controllersMenuX += squareButtonWidth + controllersSpacing;
     addButton("Toggle light source lamp", tokenCommonLightSourcesIconFolder + "lamp", controllersMenuX, controllersMenuY, lightSourceMenuControllers);
     
-    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    controllersMenuX += squareButtonWidth + controllersSpacing;
     addButton("Toggle light source hooded lantern", tokenCommonLightSourcesIconFolder + "hooded_lantern", controllersMenuX, controllersMenuY, lightSourceMenuControllers);
     
-    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    controllersMenuX += squareButtonWidth + controllersSpacing;
     addButton("Toggle light source light", tokenSpellLightSourcesIconFolder + "light", controllersMenuX, controllersMenuY, lightSourceMenuControllers);
     
     // new line
     lightSourceMenuControllers.setBackgroundHeight(lightSourceMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
-    controllersMenuY = controllersMenuY + squareButtonWidth + controllersSpacing;
+    controllersMenuY += squareButtonWidth + controllersSpacing;
     addButton("Toggle light source daylight", tokenCommonLightSourcesIconFolder + "daylight", controllersMenuX, controllersMenuY, lightSourceMenuControllers);
     
     // first line in menu item
@@ -431,22 +453,22 @@ public class UserInterface {
     controllersMenuY = controllersMenuInitialY;
     addButton("Set size tiny", tokenSizesIconFolder + "tiny", controllersMenuX, controllersMenuY, sizeMenuControllers);
     
-    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    controllersMenuX += squareButtonWidth + controllersSpacing;
     addButton("Set size small", tokenSizesIconFolder + "small", controllersMenuX, controllersMenuY, sizeMenuControllers);
     
-    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    controllersMenuX += squareButtonWidth + controllersSpacing;
     addButton("Set size medium", tokenSizesIconFolder + "medium", controllersMenuX, controllersMenuY, sizeMenuControllers);
     
-    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    controllersMenuX += squareButtonWidth + controllersSpacing;
     addButton("Set size large", tokenSizesIconFolder + "large", controllersMenuX, controllersMenuY, sizeMenuControllers);
     
-    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    controllersMenuX += squareButtonWidth + controllersSpacing;
     addButton("Set size huge", tokenSizesIconFolder + "huge", controllersMenuX, controllersMenuY, sizeMenuControllers);
     
     // new line
     sizeMenuControllers.setBackgroundHeight(sizeMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
-    controllersMenuY = controllersMenuY + squareButtonWidth + controllersSpacing;
+    controllersMenuY += squareButtonWidth + controllersSpacing;
     addButton("Set size gargantuan", tokenSizesIconFolder + "gargantuan", controllersMenuX, controllersMenuY, sizeMenuControllers);
     
     // first line in menu item
@@ -455,7 +477,7 @@ public class UserInterface {
     controllersMenuY = controllersMenuInitialY;
     addButton("Switch token layer", tokenSetupIconFolder + "switch_layer", controllersMenuX, controllersMenuY, otherMenuControllers);
     
-    controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
+    controllersMenuX += squareButtonWidth + controllersSpacing;
     addButton("Remove token", tokenSetupIconFolder + "remove", controllersMenuX, controllersMenuY, otherMenuControllers);
     
     // Bottom left messages
@@ -601,6 +623,45 @@ public class UserInterface {
       controllerName = controlEvent.getGroup().getName();
     
     switch ( controllerName ) {
+      case "New scene":
+
+        initiative.clear();
+        obstacles.setIllumination(Illumination.brightLight);
+        obstacles.clear();
+        playersLayer.clear();
+        dmLayer.clear();
+        grid.clear();
+        map.clear();
+
+        setControllersInitialState();
+
+        break;
+      case "Save scene":
+        
+        File sceneFolder = null;
+        selectFolder("Select folder where to save scene:", "saveScene", sceneFolder, this);
+        fileDialogOpen = true;
+        
+        break;
+      case "Load scene":
+        
+        File sceneFile = null;
+        selectInput("Select scene to load:", "loadScene", sceneFile, this);
+        fileDialogOpen = true;
+        
+        break;
+      case "Quit":
+        
+        initiative.clear();
+        obstacles.clear();
+        playersLayer.clear();
+        dmLayer.clear();
+        grid.clear();
+        map.clear();
+
+        exit();
+        
+        break;
       case "Select map":
         
         File mapFile = null;
@@ -663,53 +724,6 @@ public class UserInterface {
             resources.setup();
           
           cursor(ARROW);
-          
-          newAppState = AppStates.idle;
-          
-        }
-        
-        break;
-      case "Add player token":
-      case "Add DM token":
-        
-        Button addToken = (Button)controlEvent.getController();
-        
-        if ( addToken.isOn() ) {
-          
-          map.reset();
-          playersLayer.reset();
-          dmLayer.reset();
-          
-          File tokenFile = null;
-          if ( controllerName.equals("Add player token") )
-            selectInput("Select a token image:", "playerTokenImageSelected", tokenFile, this);
-          else
-            selectInput("Select a token image:", "dmTokenImageSelected", tokenFile, this);
-          fileDialogOpen = true;
-          
-          disableController("Select map");
-          disableController("Grid setup");
-          if ( controllerName.equals("Add player token") )
-            disableController("Add DM token");
-          else
-            disableController("Add player token");
-          disableController("Add/Remove walls");
-          disableController("Add/Remove doors");
-          disableController("Toggle UI");
-          
-          newAppState = AppStates.tokenSetup;
-          
-        } else {
-          
-          enableController("Select map");
-          enableController("Grid setup");
-          if ( controllerName.equals("Add player token") )
-            enableController("Add DM token");
-          else
-            enableController("Add player token");
-          enableController("Add/Remove walls");
-          enableController("Add/Remove doors");
-          enableController("Toggle UI");
           
           newAppState = AppStates.idle;
           
@@ -821,18 +835,51 @@ public class UserInterface {
         }
         
         break;
-      case "Save scene":
+      case "Add player token":
+      case "Add DM token":
         
-        File sceneFolder = null;
-        selectFolder("Select folder where to save scene:", "saveScene", sceneFolder, this);
-        fileDialogOpen = true;
+        Button addToken = (Button)controlEvent.getController();
         
-        break;
-      case "Load scene":
-        
-        File sceneFile = null;
-        selectInput("Select scene to load:", "loadScene", sceneFile, this);
-        fileDialogOpen = true;
+        if ( addToken.isOn() ) {
+          
+          map.reset();
+          playersLayer.reset();
+          dmLayer.reset();
+          
+          File tokenFile = null;
+          if ( controllerName.equals("Add player token") )
+            selectInput("Select a token image:", "playerTokenImageSelected", tokenFile, this);
+          else
+            selectInput("Select a token image:", "dmTokenImageSelected", tokenFile, this);
+          fileDialogOpen = true;
+          
+          disableController("Select map");
+          disableController("Grid setup");
+          if ( controllerName.equals("Add player token") )
+            disableController("Add DM token");
+          else
+            disableController("Add player token");
+          disableController("Add/Remove walls");
+          disableController("Add/Remove doors");
+          disableController("Toggle UI");
+          
+          newAppState = AppStates.tokenSetup;
+          
+        } else {
+          
+          enableController("Select map");
+          enableController("Grid setup");
+          if ( controllerName.equals("Add player token") )
+            enableController("Add DM token");
+          else
+            enableController("Add player token");
+          enableController("Add/Remove walls");
+          enableController("Add/Remove doors");
+          enableController("Toggle UI");
+          
+          newAppState = AppStates.idle;
+          
+        }
         
         break;
       case "Switch layer":
