@@ -29,7 +29,7 @@ macOS releases are created and tested in a virtual machine running Catalina. Not
 
 ### Linux
 
-There's an extra step to run the application in Linux - GStreamer must be installed on your system. Installation instructions can be found [here](https://gstreamer.freedesktop.org/documentation/installing/on-linux.html). If it doesn't work even with GStreamer installed, create an issue please.
+There's an extra step to run dungeoneering in Linux - GStreamer must be installed on your system. Installation instructions can be found [here](https://gstreamer.freedesktop.org/documentation/installing/on-linux.html). If it doesn't work even with GStreamer installed, create an issue please.
 
 
 
