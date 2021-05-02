@@ -35,19 +35,17 @@ There's an extra step to run dungeoneering in Linux - GStreamer must be installe
 
 ## How to Use It
 
-To see how a scene looks like once it's composed you can load an example scene from the `data/scenes` folder.
+To see how a scene looks like once it's composed you can load one of the example scenes that come with the application. Click on the load scene button (<img src="../data/icons/app/load_idle.png" width="25" height="25" alt="load scene icon" title="load scene icon">) and choose a scene (`*.json` files) from the `data/scenes` folder.
 
 To create a new scene follow these steps:
 
-1. Click on the `Select map` button and choose an image or video to use as a map.
-2. Click on the `Grid setup` buttton and follow the on-screen instructions to setup a grid over the map you chose.
-3. Add player and DM tokens using the corresponding buttons — `Add player token` and `Add DM token`.
-4. Setup walls and doors using the corresponding buttons — `Add/Remove walls` and `Add/Remove doors` — and following the on-screen instructions. Walls and doors are used to hide parts of the map and to block token light sources. With these elements in place you will have a dynamic lighting system, were players will only see parts of the map depending on where they characters are and what they can see.
-5. If it's a combat scene, enable the initiative order widget by clicking on the combat button. In this widget you can drag players or enemies to the position they should occupy based on the initiative they rolled.
+1. Click on the map setup button (<img src="../data/icons/scene/setup/map_idle.png" width="25" height="25" alt="map setup icon" title="map setup icon">) and choose an image or video to use as a map.
+2. Click on the grid setup button (<img src="../data/icons/scene/setup/grid_idle.png" width="25" height="25" alt="grid setup icon" title="grid setup icon">) and follow the on-screen instructions to setup a grid over the map you chose.
+3. Add player (<img src="../data/icons/scene/setup/hero_idle.png" width="25" height="25" alt="add player token icon" title="add player token icon">) and DM tokens (<img src="../data/icons/scene/setup/monster_idle.png" width="25" height="25" alt="add DM icon" title="add DM icon">) using the corresponding buttons.
+4. Setup walls (<img src="../data/icons/scene/setup/wall_idle.png" width="25" height="25" alt="walls setup icon" title="walls setup icon">) and doors (<img src="../data/icons/scene/setup/door_idle.png" width="25" height="25" alt="doors setup icon" title="doors setup icon">) using the corresponding buttons and following the on-screen instructions. Walls and doors are used to hide parts of the map and to block token light sources. With these elements in place you will have a dynamic lighting system, were players will only see parts of the map depending on where they characters are and what they can see.
+5. If it's a combat scene, enable the initiative order widget by clicking on the combat button (<img src="../data/icons/scene/config/combat_idle.png" width="25" height="25" alt="combat icon" title="combat icon">). In this widget you can drag players or enemies to the position they should occupy based on the initiative they rolled.
 
 And that's it! Now that you have setup your scene, players and DM can drag their tokens around the map; right click on them to add conditions, light sources and sight types (e.g., darkvision); pan and zoom the map as needed; players can reveal hidden parts of the map with the dynamic lighting system; and hopefully with all that you and your group will have more fun in your RPG sessions. :)
-
-To exit the application, press `ESC`.
 
 
 
