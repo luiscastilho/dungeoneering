@@ -10,16 +10,16 @@ set -euo pipefail
 IFS=$'\n\t'
 
 # UI color palette v1
-# idle_color="#1f4c73"
-# mouse_over_color="#387ca6"
-# mouse_click_color="#00bbe0"
+# idle_color="#1F4C73"
+# mouse_over_color="#387CA6"
+# mouse_click_color="#00BBE0"
 # disabled_color="#646464"
 
 # UI color palette v2
 idle_color="#222731"
 mouse_over_color="#404854"
-mouse_click_color="#f64b29"
-disabled_color="#999999"
+mouse_click_color="#F64B29"
+disabled_color="#6F6F6F"
 
 idle_suffix="idle"
 mouse_over_suffix="over"
@@ -47,7 +47,7 @@ for orig_file in $(find . -path "./$results_dir" -prune -false -o -type f -name 
     convert "$orig_file" -colorspace RGB -background "$idle_color" -alpha remove -alpha off "${results_dir}/${file_dirname}/${file_basename}_${idle_suffix}.png"
     convert "$orig_file" -colorspace RGB -background "$mouse_over_color" -alpha remove -alpha off "${results_dir}/${file_dirname}/${file_basename}_${mouse_over_suffix}.png"
     convert "$orig_file" -colorspace RGB -background "$mouse_click_color" -alpha remove -alpha off "${results_dir}/${file_dirname}/${file_basename}_${mouse_click_suffix}.png"
-    convert "$orig_file" -colorspace RGB -background "$disabled_color" -alpha remove -alpha off "${results_dir}/${file_dirname}/${file_basename}_${disabled_suffix}.png"
+    convert "$orig_file" -colorspace RGB -channel RGB +level-colors "$disabled_color" -background "$idle_color" -alpha remove -alpha off "${results_dir}/${file_dirname}/${file_basename}_${disabled_suffix}.png"
     echo " done"
 
     echo "Done processing $orig_file"
