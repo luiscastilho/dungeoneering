@@ -110,8 +110,8 @@ public class UserInterface {
     menuItemsPerLine = 5;
     menuItemClicked = false;
     
-    idleBackgroundColor = #161c26;
-    mouseOverBackgroundColor = #343A44;
+    idleBackgroundColor = #222731;
+    mouseOverBackgroundColor = #404854;
     mouseClickBackgroundColor = #f64b29;
     disabledBackgroundColor = #999999;
     
