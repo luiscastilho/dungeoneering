@@ -10,3 +10,6 @@
 
 # Releases dir
 /releases/
+
+# Generate icons script output dir
+/data/icons/orig/output/

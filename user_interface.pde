@@ -43,7 +43,7 @@ public class UserInterface {
   int menuItemsPerLine;
   boolean menuItemClicked;
   
-  color enabledBackgroundColor, disabledBackgroundColor, mouseOverBackgroundColor, activeBackgroundColor;
+  color idleBackgroundColor, mouseOverBackgroundColor, mouseClickBackgroundColor, disabledBackgroundColor;
   
   PFont instructionsFont;
   color instructionsFontColor, instructionsFontOutlineColor, instructionsVisualColor;
@@ -110,10 +110,10 @@ public class UserInterface {
     menuItemsPerLine = 5;
     menuItemClicked = false;
     
-    enabledBackgroundColor = color(31, 76, 115);
-    disabledBackgroundColor = color(100);
-    mouseOverBackgroundColor = color(56, 124, 166);
-    activeBackgroundColor = color(0, 187, 224);
+    idleBackgroundColor = #161c26;
+    mouseOverBackgroundColor = #343A44;
+    mouseClickBackgroundColor = #f64b29;
+    disabledBackgroundColor = #999999;
     
     instructionsFont = loadFont("fonts/ProcessingSansPro-Semibold-14.vlw");
     instructionsFontColor = color(255);
@@ -193,6 +193,15 @@ public class UserInterface {
   
   void setupControllers() {
     
+    String appIconFolder;
+    String sceneConfigIconFolder;
+    String conditionsIconFolder;
+    String commonLightSourcesIconFolder;
+    String spellLightSourcesIconFolder;
+    String sightTypesIconFolder;
+    String sizesIconFolder;
+    String tokenSetupIconFolder;
+
     // Togglable controllers group
     
     togglableControllers = cp5.addGroup("Toggable controllers");
@@ -215,9 +224,9 @@ public class UserInterface {
     cp5.addButton("Select map")
        .setPosition(controllersTopLeftX, controllersTopLeftY)
        .setSize(rectButtonWidth, rectButtonHeight)
-       .setColorBackground(enabledBackgroundColor)
+       .setColorBackground(idleBackgroundColor)
        .setColorForeground(mouseOverBackgroundColor)
-       .setColorActive(activeBackgroundColor)
+       .setColorActive(mouseClickBackgroundColor)
        .moveTo(togglableControllers)
        ;
     
@@ -226,9 +235,9 @@ public class UserInterface {
     cp5.addButton("Grid setup")
        .setPosition(controllersTopLeftX, controllersTopLeftY)
        .setSize(rectButtonWidth, rectButtonHeight)
-       .setColorBackground(enabledBackgroundColor)
+       .setColorBackground(idleBackgroundColor)
        .setColorForeground(mouseOverBackgroundColor)
-       .setColorActive(activeBackgroundColor)
+       .setColorActive(mouseClickBackgroundColor)
        .setSwitch(true)
        .setOff()
        .lock()
@@ -241,9 +250,9 @@ public class UserInterface {
     cp5.addButton("Add player token")
        .setPosition(controllersTopLeftX, controllersTopLeftY)
        .setSize(rectButtonWidth, rectButtonHeight)
-       .setColorBackground(enabledBackgroundColor)
+       .setColorBackground(idleBackgroundColor)
        .setColorForeground(mouseOverBackgroundColor)
-       .setColorActive(activeBackgroundColor)
+       .setColorActive(mouseClickBackgroundColor)
        .setSwitch(true)
        .setOff()
        .lock()
@@ -256,9 +265,9 @@ public class UserInterface {
     cp5.addButton("Add DM token")
        .setPosition(controllersTopLeftX, controllersTopLeftY)
        .setSize(rectButtonWidth, rectButtonHeight)
-       .setColorBackground(enabledBackgroundColor)
+       .setColorBackground(idleBackgroundColor)
        .setColorForeground(mouseOverBackgroundColor)
-       .setColorActive(activeBackgroundColor)
+       .setColorActive(mouseClickBackgroundColor)
        .setSwitch(true)
        .setOff()
        .lock()
@@ -271,9 +280,9 @@ public class UserInterface {
     cp5.addButton("Add/Remove walls")
        .setPosition(controllersTopLeftX, controllersTopLeftY)
        .setSize(rectButtonWidth, rectButtonHeight)
-       .setColorBackground(enabledBackgroundColor)
+       .setColorBackground(idleBackgroundColor)
        .setColorForeground(mouseOverBackgroundColor)
-       .setColorActive(activeBackgroundColor)
+       .setColorActive(mouseClickBackgroundColor)
        .setSwitch(true)
        .setOff()
        .lock()
@@ -286,9 +295,9 @@ public class UserInterface {
     cp5.addButton("Add/Remove doors")
        .setPosition(controllersTopLeftX, controllersTopLeftY)
        .setSize(rectButtonWidth, rectButtonHeight)
-       .setColorBackground(enabledBackgroundColor)
+       .setColorBackground(idleBackgroundColor)
        .setColorForeground(mouseOverBackgroundColor)
-       .setColorActive(activeBackgroundColor)
+       .setColorActive(mouseClickBackgroundColor)
        .setSwitch(true)
        .setOff()
        .lock()
@@ -298,67 +307,77 @@ public class UserInterface {
     
     // Top right bar
     
+    appIconFolder = "app/";
+    sceneConfigIconFolder = "scene/config/";
+
     controllersTopRightX = controllersTopRightX - squareButtonWidth;
-    addButton("Load scene", "load", controllersTopRightX, controllersTopRightY, togglableControllers, false, false);
+    addButton("Load scene", appIconFolder + "load", controllersTopRightX, controllersTopRightY, togglableControllers, false, false);
     
     controllersTopRightX = controllersTopRightX - squareButtonWidth - controllersSpacing;
-    addButton("Save scene", "save", controllersTopRightX, controllersTopRightY, togglableControllers, false, false);
+    addButton("Save scene", appIconFolder + "save", controllersTopRightX, controllersTopRightY, togglableControllers, false, false);
     
     controllersTopRightY = controllersTopRightY + squareButtonHeight + controllersSpacing;
     controllersTopRightX = controllersTopRightX + squareButtonWidth + controllersSpacing;
-    addButton("Toggle grid", "grid", controllersTopRightX, controllersTopRightY, togglableControllers, true, false);
+    addButton("Toggle grid", sceneConfigIconFolder + "grid", controllersTopRightX, controllersTopRightY, togglableControllers, true, false);
     
     controllersTopRightX = controllersTopRightX - squareButtonWidth - controllersSpacing;
-    addButton("Toggle walls", "wall", controllersTopRightX, controllersTopRightY, togglableControllers, true, false);
+    addButton("Toggle walls", sceneConfigIconFolder + "walls", controllersTopRightX, controllersTopRightY, togglableControllers, true, false);
     
     controllersTopRightX = controllersTopRightX - squareButtonWidth - controllersSpacing;
-    addButton("Switch lighting", "lighting", controllersTopRightX, controllersTopRightY, togglableControllers, false, false);
+    addButton("Switch lighting", sceneConfigIconFolder + "lighting", controllersTopRightX, controllersTopRightY, togglableControllers, false, false);
     
     controllersTopRightX = controllersTopRightX - squareButtonWidth - controllersSpacing;
-    addButton("Switch layer", "layers", controllersTopRightX, controllersTopRightY, togglableControllers, false, false);
+    addButton("Switch layer", sceneConfigIconFolder + "layers", controllersTopRightX, controllersTopRightY, togglableControllers, false, false);
     
     // Bottom right bar
     
     controllersBottomRightX = controllersBottomRightX - squareButtonWidth;
-    addButton("Toggle UI", "ui", controllersBottomRightX, controllersBottomRightY, null, true, true);
+    addButton("Toggle UI", appIconFolder + "ui", controllersBottomRightX, controllersBottomRightY, null, true, true);
     
     controllersBottomRightX = controllersBottomRightX - squareButtonWidth - controllersSpacing;
-    addButton("Toggle touch screen mode", "touch", controllersBottomRightX, controllersBottomRightY, null, true, false);
+    addButton("Toggle touch screen mode", appIconFolder + "touch", controllersBottomRightX, controllersBottomRightY, null, true, false);
     
     controllersBottomRightX = controllersBottomRightX - squareButtonWidth - controllersSpacing;
-    addButton("Toggle camera pan", "pan", controllersBottomRightX, controllersBottomRightY, null, true, false);
+    addButton("Toggle camera pan", sceneConfigIconFolder + "pan", controllersBottomRightX, controllersBottomRightY, null, true, false);
     
     controllersBottomRightX = controllersBottomRightX - squareButtonWidth - controllersSpacing;
-    addButton("Toggle camera zoom", "zoom", controllersBottomRightX, controllersBottomRightY, null, true, false);
+    addButton("Toggle camera zoom", sceneConfigIconFolder + "zoom", controllersBottomRightX, controllersBottomRightY, null, true, false);
     
     controllersBottomRightX = controllersBottomRightX - squareButtonWidth - controllersSpacing;
-    addButton("Toggle combat mode", "combat", controllersBottomRightX, controllersBottomRightY, null, true, false);
+    addButton("Toggle combat mode", sceneConfigIconFolder + "combat", controllersBottomRightX, controllersBottomRightY, null, true, false);
     
     // Token right click menu
     
+    conditionsIconFolder = "token/condition/";
+    commonLightSourcesIconFolder = "token/light_source/common/";
+    spellLightSourcesIconFolder = "token/light_source/spell/";
+    sightTypesIconFolder = "token/sight_type/";
+    sizesIconFolder = "token/size/";
+    tokenSetupIconFolder = "token/setup/";
+
     conditionMenuControllers.setHeight(menuBarHeight)                  // menu bar height
                             .setBackgroundHeight(controllersSpacing)   // item height
-                            .setColorBackground(enabledBackgroundColor)
+                            .setColorBackground(idleBackgroundColor)
                             .setColorForeground(mouseOverBackgroundColor)
                             ;
     lightSourceMenuControllers.setHeight(menuBarHeight)                // menu bar height
                               .setBackgroundHeight(controllersSpacing) // item height
-                              .setColorBackground(enabledBackgroundColor)
+                              .setColorBackground(idleBackgroundColor)
                               .setColorForeground(mouseOverBackgroundColor)
                               ;
     sightTypeMenuControllers.setHeight(menuBarHeight)                  // menu bar height
                             .setBackgroundHeight(controllersSpacing)   // item height
-                            .setColorBackground(enabledBackgroundColor)
+                            .setColorBackground(idleBackgroundColor)
                             .setColorForeground(mouseOverBackgroundColor)
                             ;
     sizeMenuControllers.setHeight(menuBarHeight)                       // menu bar height
                        .setBackgroundHeight(controllersSpacing)        // item height
-                       .setColorBackground(enabledBackgroundColor)
+                       .setColorBackground(idleBackgroundColor)
                        .setColorForeground(mouseOverBackgroundColor)
                        ;
     otherMenuControllers.setHeight(menuBarHeight)                      // menu bar height
                         .setBackgroundHeight(controllersSpacing)       // item height
-                        .setColorBackground(enabledBackgroundColor)
+                        .setColorBackground(idleBackgroundColor)
                         .setColorForeground(mouseOverBackgroundColor)
                         ;
     tokenMenu = cp5.addAccordion("Right click menu")
@@ -380,127 +399,127 @@ public class UserInterface {
     conditionMenuControllers.setBackgroundHeight(conditionMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY = controllersMenuInitialY;
-    addButton("Toggle condition blinded", "blinded", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
+    addButton("Toggle condition blinded", conditionsIconFolder + "blinded", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
     
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition bloodied", "bloodied", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
+    addButton("Toggle condition bloodied", conditionsIconFolder + "bloodied", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
     
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition charmed", "charmed", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
+    addButton("Toggle condition charmed", conditionsIconFolder + "charmed", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
     
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition dead", "dead", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
+    addButton("Toggle condition dead", conditionsIconFolder + "dead", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
     
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition deafened", "deafened", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
+    addButton("Toggle condition deafened", conditionsIconFolder + "deafened", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
     
     // new line
     conditionMenuControllers.setBackgroundHeight(conditionMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY = controllersMenuY + squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition frightened", "frightened", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
+    addButton("Toggle condition frightened", conditionsIconFolder + "frightened", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
     
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition grappled", "grappled", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
+    addButton("Toggle condition grappled", conditionsIconFolder + "grappled", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
     
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition hidden", "hidden", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
+    addButton("Toggle condition hidden", conditionsIconFolder + "hidden", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
     
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition incapacitated", "incapacitated", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
+    addButton("Toggle condition incapacitated", conditionsIconFolder + "incapacitated", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
     
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition invisible", "invisible", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
+    addButton("Toggle condition invisible", conditionsIconFolder + "invisible", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
     
     // new line
     conditionMenuControllers.setBackgroundHeight(conditionMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY = controllersMenuY + squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition paralyzed", "paralyzed", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
+    addButton("Toggle condition paralyzed", conditionsIconFolder + "paralyzed", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
     
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition petrified", "petrified", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
+    addButton("Toggle condition petrified", conditionsIconFolder + "petrified", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
     
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition poisoned", "poisoned", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
+    addButton("Toggle condition poisoned", conditionsIconFolder + "poisoned", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
     
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition prone", "prone", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
+    addButton("Toggle condition prone", conditionsIconFolder + "prone", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
     
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition restrained", "restrained", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
+    addButton("Toggle condition restrained", conditionsIconFolder + "restrained", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
     
     // new line
     conditionMenuControllers.setBackgroundHeight(conditionMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY = controllersMenuY + squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition stunned", "stunned", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
+    addButton("Toggle condition stunned", conditionsIconFolder + "stunned", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
     
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition unconscious", "unconscious", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
+    addButton("Toggle condition unconscious", conditionsIconFolder + "unconscious", controllersMenuX, controllersMenuY, conditionMenuControllers, false, false);
     
     // first line in menu item
     lightSourceMenuControllers.setBackgroundHeight(lightSourceMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY = controllersMenuInitialY;
-    addButton("Toggle light source candle", "candle", controllersMenuX, controllersMenuY, lightSourceMenuControllers, false, false);
+    addButton("Toggle light source candle", commonLightSourcesIconFolder + "candle", controllersMenuX, controllersMenuY, lightSourceMenuControllers, false, false);
     
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
-    addButton("Toggle light source torch", "torch", controllersMenuX, controllersMenuY, lightSourceMenuControllers, false, false);
+    addButton("Toggle light source torch", commonLightSourcesIconFolder + "torch", controllersMenuX, controllersMenuY, lightSourceMenuControllers, false, false);
     
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
-    addButton("Toggle light source lamp", "lamp", controllersMenuX, controllersMenuY, lightSourceMenuControllers, false, false);
+    addButton("Toggle light source lamp", commonLightSourcesIconFolder + "lamp", controllersMenuX, controllersMenuY, lightSourceMenuControllers, false, false);
     
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
-    addButton("Toggle light source hooded lantern", "hooded_lantern", controllersMenuX, controllersMenuY, lightSourceMenuControllers, false, false);
+    addButton("Toggle light source hooded lantern", commonLightSourcesIconFolder + "hooded_lantern", controllersMenuX, controllersMenuY, lightSourceMenuControllers, false, false);
     
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
-    addButton("Toggle light source light", "light", controllersMenuX, controllersMenuY, lightSourceMenuControllers, false, false);
+    addButton("Toggle light source light", spellLightSourcesIconFolder + "light", controllersMenuX, controllersMenuY, lightSourceMenuControllers, false, false);
     
     // new line
     lightSourceMenuControllers.setBackgroundHeight(lightSourceMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY = controllersMenuY + squareButtonWidth + controllersSpacing;
-    addButton("Toggle light source daylight", "daylight", controllersMenuX, controllersMenuY, lightSourceMenuControllers, false, false);
+    addButton("Toggle light source daylight", commonLightSourcesIconFolder + "daylight", controllersMenuX, controllersMenuY, lightSourceMenuControllers, false, false);
     
     // first line in menu item
     sightTypeMenuControllers.setBackgroundHeight(sightTypeMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY = controllersMenuInitialY;
-    addButton("Toggle sight type darkvision 60'", "darkvision", controllersMenuX, controllersMenuY, sightTypeMenuControllers, false, false);
+    addButton("Toggle sight type darkvision 60'", sightTypesIconFolder + "darkvision", controllersMenuX, controllersMenuY, sightTypeMenuControllers, false, false);
     
     // first line in menu item
     sizeMenuControllers.setBackgroundHeight(sizeMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY = controllersMenuInitialY;
-    addButton("Set size tiny", "tiny", controllersMenuX, controllersMenuY, sizeMenuControllers, false, false);
+    addButton("Set size tiny", sizesIconFolder + "tiny", controllersMenuX, controllersMenuY, sizeMenuControllers, false, false);
     
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
-    addButton("Set size small", "small", controllersMenuX, controllersMenuY, sizeMenuControllers, false, false);
+    addButton("Set size small", sizesIconFolder + "small", controllersMenuX, controllersMenuY, sizeMenuControllers, false, false);
     
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
-    addButton("Set size medium", "medium", controllersMenuX, controllersMenuY, sizeMenuControllers, false, false);
+    addButton("Set size medium", sizesIconFolder + "medium", controllersMenuX, controllersMenuY, sizeMenuControllers, false, false);
     
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
-    addButton("Set size large", "large", controllersMenuX, controllersMenuY, sizeMenuControllers, false, false);
+    addButton("Set size large", sizesIconFolder + "large", controllersMenuX, controllersMenuY, sizeMenuControllers, false, false);
     
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
-    addButton("Set size huge", "huge", controllersMenuX, controllersMenuY, sizeMenuControllers, false, false);
+    addButton("Set size huge", sizesIconFolder + "huge", controllersMenuX, controllersMenuY, sizeMenuControllers, false, false);
     
     // new line
     sizeMenuControllers.setBackgroundHeight(sizeMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY = controllersMenuY + squareButtonWidth + controllersSpacing;
-    addButton("Set size gargantuan", "gargantuan", controllersMenuX, controllersMenuY, sizeMenuControllers, false, false);
+    addButton("Set size gargantuan", sizesIconFolder + "gargantuan", controllersMenuX, controllersMenuY, sizeMenuControllers, false, false);
     
     // first line in menu item
     otherMenuControllers.setBackgroundHeight(otherMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY = controllersMenuInitialY;
-    addButton("Switch token layer", "switch_layer", controllersMenuX, controllersMenuY, otherMenuControllers, false, false);
+    addButton("Switch token layer", tokenSetupIconFolder + "switch_layer", controllersMenuX, controllersMenuY, otherMenuControllers, false, false);
     
     controllersMenuX = controllersMenuX + squareButtonWidth + controllersSpacing;
-    addButton("Remove token", "remove", controllersMenuX, controllersMenuY, otherMenuControllers, false, false);
+    addButton("Remove token", tokenSetupIconFolder + "remove", controllersMenuX, controllersMenuY, otherMenuControllers, false, false);
     
     // Bottom left messages
     
@@ -580,7 +599,7 @@ public class UserInterface {
   
   void addButton(String buttonName, String imageBaseName, int buttonPositionX, int buttonPositionY, ControllerGroup buttonGroup, boolean isSwitch, boolean switchInitialState) {
     
-    PImage[] buttonImages = {loadImage("icons/" + imageBaseName + "_default.png"), loadImage("icons/" + imageBaseName + "_over.png"), loadImage("icons/" + imageBaseName + "_active.png")};
+    PImage[] buttonImages = {loadImage("icons/" + imageBaseName + "_idle.png"), loadImage("icons/" + imageBaseName + "_over.png"), loadImage("icons/" + imageBaseName + "_click.png")};
     for ( PImage img: buttonImages )
       if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
         img.resize(squareButtonWidth, squareButtonHeight);
@@ -589,9 +608,9 @@ public class UserInterface {
        .setPosition(buttonPositionX, buttonPositionY)
        .setSize(squareButtonWidth, squareButtonHeight)
        .setImages(buttonImages)
-       .setColorBackground(enabledBackgroundColor)
+       .setColorBackground(idleBackgroundColor)
        .setColorForeground(mouseOverBackgroundColor)
-       .setColorActive(activeBackgroundColor)
+       .setColorActive(mouseClickBackgroundColor)
        .updateSize()
        ;
     
@@ -2346,7 +2365,7 @@ public class UserInterface {
   void enableController(String controllerName) {
     
     controlP5.Controller controller = cp5.getController(controllerName);
-    controller.setColorBackground(enabledBackgroundColor);
+    controller.setColorBackground(idleBackgroundColor);
     controller.unlock();
     
   }
