@@ -76,6 +76,7 @@ class Resources {
   void setSpellLightSources() {
     
     spellLightSources.put("Dancing Lights", createLight("Dancing Lights", 0, 10));
+    spellLightSources.put("Daylight", createLight("Daylight", 60, 60));
     spellLightSources.put("Faerie Fire", createLight("Faerie Fire", 0, 10));
     spellLightSources.put("Light", createLight("Light", 20, 40));
     spellLightSources.put("Produce Flame", createLight("Produce Flame", 10, 20));

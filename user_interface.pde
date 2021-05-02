@@ -619,7 +619,6 @@ public class UserInterface {
     Condition conditionTemplate;
     Light lightTemplate;
     Size sizeTemplate;
-    Point rightClickedTokenPosition;
     
     AppStates newAppState = appState;
     
@@ -1488,9 +1487,7 @@ public class UserInterface {
         if ( rightClickedToken == null )
           break;
         
-        rightClickedTokenPosition = rightClickedToken.getCell().getCenter();
-        
-        if ( rightClickedToken.equals(playersLayer.getToken(rightClickedTokenPosition.x, rightClickedTokenPosition.y)) ) {
+        if ( playersLayer.hasToken(rightClickedToken) ) {
           
           playersLayer.removeToken(rightClickedToken);
           dmLayer.addToken(rightClickedToken);
@@ -1511,9 +1508,7 @@ public class UserInterface {
         if ( rightClickedToken == null )
           break;
         
-        rightClickedTokenPosition = rightClickedToken.getCell().getCenter();
-        
-        if ( rightClickedToken.equals(playersLayer.getToken(rightClickedTokenPosition.x, rightClickedTokenPosition.y)) ) {
+        if ( playersLayer.hasToken(rightClickedToken) ) {
           
           playersLayer.removeToken(rightClickedToken);
           

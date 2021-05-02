@@ -214,4 +214,13 @@ class Layer {
     
   }
   
+  boolean hasToken(Token tokenToCheck) {
+    
+    for ( Token token: tokens )
+      if ( token.equals(tokenToCheck) )
+        return true;
+    return false;
+    
+  }
+  
 }
