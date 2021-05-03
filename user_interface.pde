@@ -1,13 +1,14 @@
 import javax.activation.MimetypesFileTypeMap;
 import java.util.List;
 import java.awt.Point;
+import uibooster.*;
 
 public class UserInterface {
   
   PGraphics canvas;
   
   ControlP5 cp5;
-  
+
   Map map;
   
   Grid grid;
@@ -21,6 +22,9 @@ public class UserInterface {
   
   Initiative initiative;
   
+  UiBooster uiDialogs;
+  boolean uiConfirmDialogAnswer;
+
   Wall newWall;
   Door newDoor;
   
@@ -85,6 +89,9 @@ public class UserInterface {
     
     initiative = _initiative;
     
+    uiDialogs = new UiBooster();
+    uiConfirmDialogAnswer = false;
+
     newWall = null;
     newDoor = null;
     
@@ -625,6 +632,28 @@ public class UserInterface {
     switch ( controllerName ) {
       case "New scene":
 
+        if ( map.isSet() ) {
+
+          uiDialogs.showConfirmDialog(
+              "This will reset the current scene. Confirm?",
+              "Create new scene",
+              new Runnable() {
+                public void run() {
+                  uiConfirmDialogAnswer = true;
+                }
+              },
+              new Runnable() {
+                public void run() {
+                  uiConfirmDialogAnswer = false;
+                }
+              }
+          );
+
+          if ( !uiConfirmDialogAnswer )
+            break;
+
+        }
+
         initiative.clear();
         obstacles.setIllumination(Illumination.brightLight);
         obstacles.clear();
@@ -644,7 +673,29 @@ public class UserInterface {
         
         break;
       case "Load scene":
-        
+
+        if ( map.isSet() ) {
+
+          uiDialogs.showConfirmDialog(
+              "This will replace the current scene. Confirm?",
+              "Load scene",
+              new Runnable() {
+                public void run() {
+                  uiConfirmDialogAnswer = true;
+                }
+              },
+              new Runnable() {
+                public void run() {
+                  uiConfirmDialogAnswer = false;
+                }
+              }
+          );
+
+          if ( !uiConfirmDialogAnswer )
+            break;
+
+        }
+
         File sceneFile = null;
         selectInput("Select scene to load:", "loadScene", sceneFile, this);
         fileDialogOpen = true;
@@ -652,6 +703,24 @@ public class UserInterface {
         break;
       case "Quit":
         
+        uiDialogs.showConfirmDialog(
+            "Quit dungeoneering?",
+            "Quit",
+            new Runnable() {
+              public void run() {
+                uiConfirmDialogAnswer = true;
+              }
+            },
+            new Runnable() {
+              public void run() {
+                uiConfirmDialogAnswer = false;
+              }
+            }
+        );
+
+        if ( !uiConfirmDialogAnswer )
+          break;
+
         initiative.clear();
         obstacles.clear();
         playersLayer.clear();
@@ -664,19 +733,70 @@ public class UserInterface {
         break;
       case "Select map":
         
+        if ( map.isSet() ) {
+
+          uiDialogs.showConfirmDialog(
+              "This will reset the current scene. Confirm?",
+              "Select new map",
+              new Runnable() {
+                public void run() {
+                  uiConfirmDialogAnswer = true;
+                }
+              },
+              new Runnable() {
+                public void run() {
+                  uiConfirmDialogAnswer = false;
+                }
+              }
+          );
+
+          if ( !uiConfirmDialogAnswer )
+            break;
+
+        }
+
         File mapFile = null;
         selectInput("Select a map:", "mapFileSelected", mapFile, this);
         fileDialogOpen = true;
         
         break;
       case "Grid setup":
-        
+
         Button gridSetup = (Button)controlEvent.getController();
         Textlabel gridInstructions1stLine = (Textlabel)cp5.getController("Grid instructions - 1st line");
         Textlabel gridInstructions2ndLine = (Textlabel)cp5.getController("Grid instructions - 2nd line");
-        
+
         if ( gridSetup.isOn() ) {
-          
+
+          if ( grid.isSet() ) {
+
+            uiDialogs.showConfirmDialog(
+                "This will reset the current scene, leaving only the selected map. Confirm?",
+                "New grid setup",
+                new Runnable() {
+                  public void run() {
+                    uiConfirmDialogAnswer = true;
+                  }
+                },
+                new Runnable() {
+                  public void run() {
+                    uiConfirmDialogAnswer = false;
+                  }
+                }
+            );
+
+            if ( !uiConfirmDialogAnswer ) {
+
+              gridSetup.setBroadcast(false);
+              gridSetup.setOff();
+              gridSetup.setBroadcast(true);
+
+              break;
+
+            }
+
+          }
+
           disableController("Select map");
           disableController("Add player token");
           disableController("Add DM token");
