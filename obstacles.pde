@@ -81,24 +81,28 @@ class Obstacles {
   void addWall(Wall _wall) {
     
     walls.add(_wall);
+    setRecalculateShadows(true);
     
   }
   
   void removeWall(Wall _wall) {
     
     walls.remove(_wall);
+    setRecalculateShadows(true);
     
   }
   
   void addDoor(Door _door) {
     
     doors.add(_door);
+    setRecalculateShadows(true);
     
   }
   
   void removeDoor(Door _door) {
     
     doors.remove(_door);
+    setRecalculateShadows(true);
     
   }
   
