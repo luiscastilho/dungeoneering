@@ -89,6 +89,8 @@ class Map {
   
   void setup(String _filePath, boolean _fitToScreen, boolean _isVideo) {
     
+    clear();
+
     isVideo = _isVideo;
     
     filePath = _filePath;
@@ -213,6 +215,13 @@ class Map {
   }
   
   void clear() {
+    
+    if ( isVideo && video != null ) {
+
+      video.stop();
+      video.dispose();
+      
+    }
     
     filePath = null;
     image = null;
