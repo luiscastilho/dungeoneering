@@ -316,8 +316,11 @@ public class UserInterface {
     controllersBottomRightX -= squareButtonWidth;
     addButton("Toggle UI", appIconFolder + "ui", controllersBottomRightX, controllersBottomRightY, null, true, true);
     
-    controllersBottomRightX -= squareButtonWidth - controllersSpacing;
+    controllersBottomRightX -= squareButtonWidth + controllersSpacing;
     addButton("Toggle touch screen mode", appIconFolder + "touch", controllersBottomRightX, controllersBottomRightY, null, true, false);
+
+    controllersBottomRightX -= squareButtonWidth + controllersSpacing;
+    addButton("Toggle mute sound", appIconFolder + "mute", controllersBottomRightX, controllersBottomRightY, null, true, false);
     
     // Token right click menu
 
@@ -611,6 +614,7 @@ public class UserInterface {
     disableController("Add/Remove doors");
     disableController("Add player token");
     disableController("Add DM token");
+    hideController("Toggle mute sound");
 
   }
 
@@ -1065,12 +1069,14 @@ public class UserInterface {
         break;
       case "Toggle camera pan":
         
-        map.togglePan();
+        if ( map != null && map.isSet() )
+          map.togglePan();
         
         break;
       case "Toggle camera zoom":
         
-        map.toggleZoom();
+        if ( map != null && map.isSet() )
+          map.toggleZoom();
         
         break;
       case "Toggle touch screen mode":
@@ -1081,6 +1087,12 @@ public class UserInterface {
       case "Toggle combat mode":
         
         initiative.toggleDrawInitiativeOrder();
+        
+        break;
+      case "Toggle mute sound":
+        
+        if ( map != null && map.isSet() )
+          map.toggleMute();
         
         break;
       case "Conditions":
@@ -1667,6 +1679,9 @@ public class UserInterface {
   
   void mapFileSelected(File mapFile) {
     
+    boolean isVideo;
+    boolean isMuted;
+
     fileDialogOpen = false;
     
     if ( mapFile == null )
@@ -1681,8 +1696,11 @@ public class UserInterface {
       println("Map selection: selected file is not an image or a video");
       return;
     }
+
+    isVideo = type.equals("video");
+    isMuted = getSwitchButtonState("Toggle mute sound");
     
-    map.setup(mapFile.getAbsolutePath(), false, type.equals("video"));
+    map.setup(mapFile.getAbsolutePath(), false, isVideo, isMuted);
     
     initiative.clear();
     obstacles.setIllumination(Illumination.brightLight);
@@ -1696,7 +1714,12 @@ public class UserInterface {
     disableController("Add DM token");
     enableController("Add/Remove walls");
     enableController("Add/Remove doors");
-    
+
+    if ( isVideo )
+      showController("Toggle mute sound");
+    else
+      hideController("Toggle mute sound");
+
   }
   
   void gridHelperSetup(int x, int y, boolean start, boolean done) {
@@ -2244,13 +2267,14 @@ public class UserInterface {
       String mapImagePath = mapJson.getString("filePath");
       boolean fitToScreen = mapJson.getBoolean("fitToScreen");
       boolean isVideo = mapJson.getBoolean("isVideo");
+      boolean isMuted = getSwitchButtonState("Toggle mute sound");
       
       if ( !fileExists(mapImagePath) ) {
         if ( fileExists(sketchPath + mapImagePath) )
           mapImagePath = sketchPath + mapImagePath;
       }
       
-      map.setup(mapImagePath, fitToScreen, isVideo);
+      map.setup(mapImagePath, fitToScreen, isVideo, isMuted);
       
       enableController("Grid setup");
       enableController("Add/Remove walls");
@@ -2508,7 +2532,30 @@ public class UserInterface {
     controller.lock();
 
   }
+
+  void showController(String controllerName) {
+
+    controlP5.Controller controller = cp5.getController(controllerName);
+    controller.unlock();
+    controller.show();
+
+  }
   
+  void hideController(String controllerName) {
+
+    controlP5.Controller controller = cp5.getController(controllerName);
+    controller.lock();
+    controller.hide();
+
+  }
+  
+  boolean getSwitchButtonState(String buttonName) {
+    
+    Button button = (Button)cp5.getController(buttonName);
+    return button.isOn();
+    
+  }
+
   void setSwitchButtonState(String buttonName, boolean buttonState) {
     
     Button button = (Button)cp5.getController(buttonName);

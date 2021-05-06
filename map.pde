@@ -14,6 +14,7 @@ class Map {
   
   boolean set;
   boolean isVideo;
+  boolean isMuted;
   
   boolean fitToScreen;
   float panX, panY, scale;
@@ -38,6 +39,7 @@ class Map {
     
     set = false;
     isVideo = false;
+    isMuted = false;
     
     fitToScreen = false;
     panX = panToX = lastPanX = 0;
@@ -84,16 +86,18 @@ class Map {
     lastPanX = panX;
     lastPanY = panY;
     lastScale = scale;
-    
+
   }
   
-  void setup(String _filePath, boolean _fitToScreen, boolean _isVideo) {
+  void setup(String _filePath, boolean _fitToScreen, boolean _isVideo, boolean _isMuted) {
     
     clear();
 
     isVideo = _isVideo;
+    isMuted = _isMuted;
     
     filePath = _filePath;
+
     if ( !isVideo ) {
       
       image = loadImage(filePath);
@@ -105,8 +109,12 @@ class Map {
     } else {
       
       video = new Movie(sketch, filePath);
+
+      if ( isMuted )
+        muteVideo();
+
       video.loop();
-      
+
     }
     
     panX = panToX = 0;
@@ -216,7 +224,7 @@ class Map {
   
   void clear() {
     
-    if ( isVideo && video != null ) {
+    if ( set && isVideo && video != null ) {
 
       video.stop();
       video.dispose();
@@ -229,6 +237,7 @@ class Map {
     
     set = false;
     isVideo = false;
+    isMuted = false;
     
     fitToScreen = false;
     panX = panToX = 0;
@@ -296,5 +305,27 @@ class Map {
   boolean isPanEnabled() {
     return panEnabled;
   }
-  
+
+  void toggleMute() {
+
+    isMuted = !isMuted;
+    muteVideo();
+
+  }
+
+  void muteVideo() {
+
+    int volume;
+
+    if ( isVideo && video != null ) {
+
+      volume = isMuted ? 0 : 1;
+      if ( video.playbin != null ) {
+        video.playbin.setVolume(volume);
+      }
+
+    }
+
+  }
+
 }
