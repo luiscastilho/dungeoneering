@@ -807,8 +807,6 @@ public class UserInterface {
           setSwitchButtonState("Toggle grid", true);
           
           initiative.clear();
-          obstacles.setIllumination(Illumination.brightLight);
-          obstacles.clear();
           playersLayer.clear();
           dmLayer.clear();
           grid.clear();
