@@ -40,17 +40,17 @@
 - [X] Conceal hidden tokens if they don't belong to layer being shown
 - [X] Walls/doors setup cursor is too dark in dark backgrounds
 - [X] Fix low FPS when panning due to shadows being recalculated
-- [ ] Make UI more intuitive (and pretty)
+- [X] Make UI more intuitive (and pretty)
+- [X] Conditions, light sources, etc, applied to a token should remain highlighted in the right click menu
 - [ ] Light sources should be visible in all layers
 - [ ] Set maximum zoom and pan
-- [ ] Light sources and conditions applied to a token should remain highlighted in the right click menu
 - [ ] Keep tokens inside grid when moving - larger tokens being moved to grid borders
 - [ ] Keep right click menu inside canvas - right click in tokens near the grid borders
 - [ ] For larger tokens, remember token cell being dragged
 - [ ] Don't allow move over walls/closed doors
 - [ ] Don't allow tokens to move over tokens in other layers
 - [ ] Allow to click on an icon in the Initiative Order and centralize the map on this token
-- [ ] When setting up walls and doors, add a door icon over doors already created
+- [ ] When setting up walls and doors, add an icon over walls/doors already created
 - [ ] Allow doors to be locked - only DM can unlock them
 - [ ] Allow to add light sources not associated with player or DM tokens
 - [ ] Add tooltips to right click menu icons - light source and condition names, etc

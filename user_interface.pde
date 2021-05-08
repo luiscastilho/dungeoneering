@@ -1,4 +1,5 @@
 import javax.activation.MimetypesFileTypeMap;
+import java.util.Arrays;
 import java.util.List;
 import java.awt.Point;
 import uibooster.*;
@@ -67,6 +68,12 @@ public class UserInterface {
   Group sizeMenuControllers;
   Group otherMenuControllers;
   Accordion tokenMenu;
+
+  // Maps resources to controllers
+  HashMap<String, String> conditionToController;
+  HashMap<String, String> lightSourceToController;
+  HashMap<String, String> sightTypeToController;
+  HashMap<String, String> sizeToController;
 
   boolean fileDialogOpen;
 
@@ -146,6 +153,11 @@ public class UserInterface {
     sizeMenuControllers = null;
     otherMenuControllers = null;
     tokenMenu = null;
+
+    conditionToController = new HashMap<String, String>();
+    lightSourceToController = new HashMap<String, String>();
+    sightTypeToController = new HashMap<String, String>();
+    sizeToController = new HashMap<String, String>();
 
     fileDialogOpen = false;
 
@@ -368,118 +380,148 @@ public class UserInterface {
     conditionMenuControllers.setBackgroundHeight(conditionMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY = controllersMenuInitialY;
-    addButton("Toggle condition blinded", tokenConditionsIconFolder + "blinded", controllersMenuX, controllersMenuY, conditionMenuControllers);
+    addButton("Toggle condition blinded", tokenConditionsIconFolder + "blinded", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
+    conditionToController.put("Blinded", "Toggle condition blinded");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition bloodied", tokenConditionsIconFolder + "bloodied", controllersMenuX, controllersMenuY, conditionMenuControllers);
+    addButton("Toggle condition bloodied", tokenConditionsIconFolder + "bloodied", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
+    conditionToController.put("Bloodied", "Toggle condition bloodied");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition charmed", tokenConditionsIconFolder + "charmed", controllersMenuX, controllersMenuY, conditionMenuControllers);
+    addButton("Toggle condition charmed", tokenConditionsIconFolder + "charmed", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
+    conditionToController.put("Charmed", "Toggle condition charmed");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition dead", tokenConditionsIconFolder + "dead", controllersMenuX, controllersMenuY, conditionMenuControllers);
+    addButton("Toggle condition dead", tokenConditionsIconFolder + "dead", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
+    conditionToController.put("Dead", "Toggle condition dead");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition deafened", tokenConditionsIconFolder + "deafened", controllersMenuX, controllersMenuY, conditionMenuControllers);
+    addButton("Toggle condition deafened", tokenConditionsIconFolder + "deafened", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
+    conditionToController.put("Deafened", "Toggle condition deafened");
 
     // new line
     conditionMenuControllers.setBackgroundHeight(conditionMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY += squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition frightened", tokenConditionsIconFolder + "frightened", controllersMenuX, controllersMenuY, conditionMenuControllers);
+    addButton("Toggle condition frightened", tokenConditionsIconFolder + "frightened", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
+    conditionToController.put("Frightened", "Toggle condition frightened");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition grappled", tokenConditionsIconFolder + "grappled", controllersMenuX, controllersMenuY, conditionMenuControllers);
+    addButton("Toggle condition grappled", tokenConditionsIconFolder + "grappled", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
+    conditionToController.put("Grappled", "Toggle condition grappled");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition hidden", tokenConditionsIconFolder + "hidden", controllersMenuX, controllersMenuY, conditionMenuControllers);
+    addButton("Toggle condition hidden", tokenConditionsIconFolder + "hidden", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
+    conditionToController.put("Hidden", "Toggle condition hidden");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition incapacitated", tokenConditionsIconFolder + "incapacitated", controllersMenuX, controllersMenuY, conditionMenuControllers);
+    addButton("Toggle condition incapacitated", tokenConditionsIconFolder + "incapacitated", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
+    conditionToController.put("Incapacitated", "Toggle condition incapacitated");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition invisible", tokenConditionsIconFolder + "invisible", controllersMenuX, controllersMenuY, conditionMenuControllers);
+    addButton("Toggle condition invisible", tokenConditionsIconFolder + "invisible", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
+    conditionToController.put("Invisible", "Toggle condition invisible");
 
     // new line
     conditionMenuControllers.setBackgroundHeight(conditionMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY += squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition paralyzed", tokenConditionsIconFolder + "paralyzed", controllersMenuX, controllersMenuY, conditionMenuControllers);
+    addButton("Toggle condition paralyzed", tokenConditionsIconFolder + "paralyzed", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
+    conditionToController.put("Paralyzed", "Toggle condition paralyzed");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition petrified", tokenConditionsIconFolder + "petrified", controllersMenuX, controllersMenuY, conditionMenuControllers);
+    addButton("Toggle condition petrified", tokenConditionsIconFolder + "petrified", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
+    conditionToController.put("Petrified", "Toggle condition petrified");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition poisoned", tokenConditionsIconFolder + "poisoned", controllersMenuX, controllersMenuY, conditionMenuControllers);
+    addButton("Toggle condition poisoned", tokenConditionsIconFolder + "poisoned", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
+    conditionToController.put("Poisoned", "Toggle condition poisoned");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition prone", tokenConditionsIconFolder + "prone", controllersMenuX, controllersMenuY, conditionMenuControllers);
+    addButton("Toggle condition prone", tokenConditionsIconFolder + "prone", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
+    conditionToController.put("Prone", "Toggle condition prone");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition restrained", tokenConditionsIconFolder + "restrained", controllersMenuX, controllersMenuY, conditionMenuControllers);
+    addButton("Toggle condition restrained", tokenConditionsIconFolder + "restrained", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
+    conditionToController.put("Restrained", "Toggle condition restrained");
 
     // new line
     conditionMenuControllers.setBackgroundHeight(conditionMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY += squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition stunned", tokenConditionsIconFolder + "stunned", controllersMenuX, controllersMenuY, conditionMenuControllers);
+    addButton("Toggle condition stunned", tokenConditionsIconFolder + "stunned", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
+    conditionToController.put("Stunned", "Toggle condition stunned");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition unconscious", tokenConditionsIconFolder + "unconscious", controllersMenuX, controllersMenuY, conditionMenuControllers);
+    addButton("Toggle condition unconscious", tokenConditionsIconFolder + "unconscious", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
+    conditionToController.put("Unconscious", "Toggle condition unconscious");
 
     // first line in menu item
     lightSourceMenuControllers.setBackgroundHeight(lightSourceMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY = controllersMenuInitialY;
-    addButton("Toggle light source candle", tokenCommonLightSourcesIconFolder + "candle", controllersMenuX, controllersMenuY, lightSourceMenuControllers);
+    addButton("Toggle light source candle", tokenCommonLightSourcesIconFolder + "candle", controllersMenuX, controllersMenuY, lightSourceMenuControllers, true, false);
+    lightSourceToController.put("Candle", "Toggle light source candle");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Toggle light source torch", tokenCommonLightSourcesIconFolder + "torch", controllersMenuX, controllersMenuY, lightSourceMenuControllers);
+    addButton("Toggle light source torch", tokenCommonLightSourcesIconFolder + "torch", controllersMenuX, controllersMenuY, lightSourceMenuControllers, true, false);
+    lightSourceToController.put("Torch", "Toggle light source torch");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Toggle light source lamp", tokenCommonLightSourcesIconFolder + "lamp", controllersMenuX, controllersMenuY, lightSourceMenuControllers);
+    addButton("Toggle light source lamp", tokenCommonLightSourcesIconFolder + "lamp", controllersMenuX, controllersMenuY, lightSourceMenuControllers, true, false);
+    lightSourceToController.put("Lamp", "Toggle light source lamp");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Toggle light source hooded lantern", tokenCommonLightSourcesIconFolder + "hooded_lantern", controllersMenuX, controllersMenuY, lightSourceMenuControllers);
+    addButton("Toggle light source hooded lantern", tokenCommonLightSourcesIconFolder + "hooded_lantern", controllersMenuX, controllersMenuY, lightSourceMenuControllers, true, false);
+    lightSourceToController.put("Hooded Lantern", "Toggle light source hooded lantern");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Toggle light source light", tokenSpellLightSourcesIconFolder + "light", controllersMenuX, controllersMenuY, lightSourceMenuControllers);
+    addButton("Toggle light source light", tokenSpellLightSourcesIconFolder + "light", controllersMenuX, controllersMenuY, lightSourceMenuControllers, true, false);
+    lightSourceToController.put("Light", "Toggle light source light");
 
     // new line
     lightSourceMenuControllers.setBackgroundHeight(lightSourceMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY += squareButtonWidth + controllersSpacing;
-    addButton("Toggle light source daylight", tokenCommonLightSourcesIconFolder + "daylight", controllersMenuX, controllersMenuY, lightSourceMenuControllers);
+    addButton("Toggle light source daylight", tokenCommonLightSourcesIconFolder + "daylight", controllersMenuX, controllersMenuY, lightSourceMenuControllers, true, false);
+    lightSourceToController.put("Daylight", "Toggle light source daylight");
 
     // first line in menu item
     sightTypeMenuControllers.setBackgroundHeight(sightTypeMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY = controllersMenuInitialY;
-    addButton("Toggle sight type darkvision 60'", tokenSightTypesIconFolder + "darkvision", controllersMenuX, controllersMenuY, sightTypeMenuControllers);
+    addButton("Toggle sight type darkvision 60'", tokenSightTypesIconFolder + "darkvision", controllersMenuX, controllersMenuY, sightTypeMenuControllers, true, false);
+    sightTypeToController.put("Darkvision 60'", "Toggle sight type darkvision 60'");
 
     // first line in menu item
     sizeMenuControllers.setBackgroundHeight(sizeMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY = controllersMenuInitialY;
-    addButton("Set size tiny", tokenSizesIconFolder + "tiny", controllersMenuX, controllersMenuY, sizeMenuControllers);
+    addButton("Set size tiny", tokenSizesIconFolder + "tiny", controllersMenuX, controllersMenuY, sizeMenuControllers, true, false);
+    sizeToController.put("Tiny", "Set size tiny");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Set size small", tokenSizesIconFolder + "small", controllersMenuX, controllersMenuY, sizeMenuControllers);
+    addButton("Set size small", tokenSizesIconFolder + "small", controllersMenuX, controllersMenuY, sizeMenuControllers, true, false);
+    sizeToController.put("Small", "Set size small");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Set size medium", tokenSizesIconFolder + "medium", controllersMenuX, controllersMenuY, sizeMenuControllers);
+    addButton("Set size medium", tokenSizesIconFolder + "medium", controllersMenuX, controllersMenuY, sizeMenuControllers, true, false);
+    sizeToController.put("Medium", "Set size medium");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Set size large", tokenSizesIconFolder + "large", controllersMenuX, controllersMenuY, sizeMenuControllers);
+    addButton("Set size large", tokenSizesIconFolder + "large", controllersMenuX, controllersMenuY, sizeMenuControllers, true, false);
+    sizeToController.put("Large", "Set size large");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Set size huge", tokenSizesIconFolder + "huge", controllersMenuX, controllersMenuY, sizeMenuControllers);
+    addButton("Set size huge", tokenSizesIconFolder + "huge", controllersMenuX, controllersMenuY, sizeMenuControllers, true, false);
+    sizeToController.put("Huge", "Set size huge");
 
     // new line
     sizeMenuControllers.setBackgroundHeight(sizeMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY += squareButtonWidth + controllersSpacing;
-    addButton("Set size gargantuan", tokenSizesIconFolder + "gargantuan", controllersMenuX, controllersMenuY, sizeMenuControllers);
+    addButton("Set size gargantuan", tokenSizesIconFolder + "gargantuan", controllersMenuX, controllersMenuY, sizeMenuControllers, true, false);
+    sizeToController.put("Gargantuan", "Set size gargantuan");
 
     // first line in menu item
     otherMenuControllers.setBackgroundHeight(otherMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
@@ -1916,6 +1958,12 @@ public class UserInterface {
 
     Token token;
 
+    String controllerName;
+    String conditionName;
+    String lightSourceName;
+    String sightTypeName;
+    String sizeName;
+
     token = playersLayer.getToken(_mouseX, _mouseY);
     if ( token == null )
       token = dmLayer.getToken(_mouseX, _mouseY);
@@ -1924,10 +1972,49 @@ public class UserInterface {
 
     rightClickedToken = token;
 
-    int menuX = _mouseX;
-    int menuY = _mouseY;
+    // Turn off all menu buttons
+    ArrayList<HashMap<String, String>> toControllerMaps = new ArrayList<HashMap<String, String>>(
+      Arrays.asList(
+        conditionToController,
+        lightSourceToController,
+        sightTypeToController,
+        sizeToController
+      )
+    );
+    for ( HashMap<String, String> toControllerMap: toControllerMaps ) {
+      for ( String resourceName: toControllerMap.keySet() ) {
+        controllerName = toControllerMap.get(resourceName);
+        setSwitchButtonState(controllerName, false, false);
+      }
+    }
 
-    tokenMenu.setPosition(menuX, menuY);
+    // Turn on condition buttons that are active for this token
+    for ( Condition condition: rightClickedToken.getConditions() ) {
+      conditionName = condition.getName();
+      controllerName = conditionToController.get(conditionName);
+      setSwitchButtonState(controllerName, true, false);
+    }
+
+    // Turn on light source buttons that are active for this token
+    for ( Light lightSource: rightClickedToken.getLightSources() ) {
+      lightSourceName = lightSource.getName();
+      controllerName = lightSourceToController.get(lightSourceName);
+      setSwitchButtonState(controllerName, true, false);
+    }
+
+    // Turn on sight type buttons that are active for this token
+    for ( Light sightType: rightClickedToken.getSightTypes() ) {
+      sightTypeName = sightType.getName();
+      controllerName = sightTypeToController.get(sightTypeName);
+      setSwitchButtonState(controllerName, true, false);
+    }
+
+    // Turn on the size button that is active for this token
+    sizeName = rightClickedToken.getSize().getName();
+    controllerName = sizeToController.get(sizeName);
+    setSwitchButtonState(controllerName, true, false);
+
+    tokenMenu.setPosition(_mouseX, _mouseY);
     tokenMenu.show();
 
   }
@@ -2472,12 +2559,24 @@ public class UserInterface {
 
   void setSwitchButtonState(String buttonName, boolean buttonState) {
 
+    setSwitchButtonState(buttonName, buttonState, true);
+
+  }
+
+  void setSwitchButtonState(String buttonName, boolean buttonState, boolean broadcastButtonPress) {
+
     Button button = (Button)cp5.getController(buttonName);
+
+    if ( !broadcastButtonPress )
+      button.setBroadcast(false);
 
     if ( buttonState && !button.isOn() )
       button.setOn();
     else if ( !buttonState && button.isOn() )
       button.setOff();
+
+    if ( !broadcastButtonPress )
+      button.setBroadcast(true);
 
   }
 
