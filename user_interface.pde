@@ -1871,7 +1871,7 @@ public class UserInterface {
 
   void removeWall(int _mouseX, int _mouseY) {
 
-    Wall wallToRemove = getClosestWall(map.transformX(_mouseX), map.transformY(_mouseY), 10);
+    Wall wallToRemove = obstacles.getClosestWall(map.transformX(_mouseX), map.transformY(_mouseY), 10);
 
     if ( wallToRemove != null )
       obstacles.removeWall(wallToRemove);
@@ -1889,7 +1889,7 @@ public class UserInterface {
 
   void removeDoor(int _mouseX, int _mouseY) {
 
-    Door doorToRemove = getClosestDoor(map.transformX(_mouseX), map.transformY(_mouseY), 10);
+    Door doorToRemove = obstacles.getClosestDoor(map.transformX(_mouseX), map.transformY(_mouseY), 10);
 
     if ( doorToRemove != null )
       obstacles.removeDoor(doorToRemove);
@@ -1898,7 +1898,7 @@ public class UserInterface {
 
   void openDoor(int _mouseX, int _mouseY) {
 
-    Door doorToToggle = getClosestDoor(map.transformX(_mouseX), map.transformY(_mouseY), 20);
+    Door doorToToggle = obstacles.getClosestDoor(map.transformX(_mouseX), map.transformY(_mouseY), 20);
 
     if ( doorToToggle != null ) {
 
@@ -1906,92 +1906,6 @@ public class UserInterface {
       obstacles.setRecalculateShadows(true);
 
     }
-
-  }
-
-  Wall getClosestWall(int _mouseX, int _mouseY, int maxAllowedClickDistance) {
-
-    ArrayList<Wall> walls = obstacles.getWalls();
-
-    float distanceToClosestWall = Integer.MAX_VALUE;
-    Wall closestWall = null;
-
-    for ( Wall wall: walls ) {
-
-      if ( wall.getVertexes().size() > 2 )
-        continue;
-
-      PVector start = wall.getVertexes().get(0);
-      PVector end = wall.getVertexes().get(1);
-
-      float sqDistanceToWall = pointToLineSqDistance(start, end, new PVector(_mouseX, _mouseY));
-
-      if ( sqDistanceToWall > sq(maxAllowedClickDistance) )
-        continue;
-
-      if ( sqDistanceToWall < distanceToClosestWall ) {
-        distanceToClosestWall = sqDistanceToWall;
-        closestWall = wall;
-      }
-
-    }
-
-    return closestWall;
-
-  }
-
-  Door getClosestDoor(int _mouseX, int _mouseY, int maxAllowedClickDistance) {
-
-    ArrayList<Door> doors = obstacles.getDoors();
-
-    float distanceToClosestDoor = Integer.MAX_VALUE;
-    Door closestDoor = null;
-
-    for ( Door door: doors ) {
-
-      if ( door.getVertexes().size() > 2 )
-        continue;
-
-      PVector start = door.getVertexes().get(0);
-      PVector end = door.getVertexes().get(1);
-
-      float sqDistanceToDoor = pointToLineSqDistance(start, end, new PVector(_mouseX, _mouseY));
-
-      if ( sqDistanceToDoor > sq(maxAllowedClickDistance) )
-        continue;
-
-      if ( sqDistanceToDoor < distanceToClosestDoor ) {
-        distanceToClosestDoor = sqDistanceToDoor;
-        closestDoor = door;
-      }
-
-    }
-
-    return closestDoor;
-
-  }
-
-  // Source: openprocessing.org/sketch/39479/
-  float pointToLineSqDistance(PVector A, PVector B, PVector P) {
-
-    float vx = P.x-A.x, vy = P.y-A.y;  // v = A->P
-    float ux = B.x-A.x, uy = B.y-A.y;  // u = A->B
-    float det = vx*ux + vy*uy;
-
-    // its outside the line segment near A
-    if ( det <= 0 ) {
-      return vx*vx + vy*vy;
-    }
-
-    float len = ux*ux + uy*uy;  // len = u^2
-
-    // its outside the line segment near B
-    if ( det >= len ) {
-      return sq(B.x-P.x) + sq(B.y-P.y);
-    }
-
-    // its near line segment between A and B
-    return sq(ux*vy-uy*vx) / len;  // (u X v)^2 / len
 
   }
 
