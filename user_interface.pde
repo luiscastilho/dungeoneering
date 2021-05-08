@@ -41,6 +41,8 @@ public class UserInterface {
 
   int controllersTopLeftX, controllersTopLeftY;
   int controllersTopLeftInitialX, controllersTopLeftInitialY;
+  int controllersMiddleLeftInitialX, controllersMiddleLeftInitialY;
+  int controllersBottomLeftInitialX, controllersBottomLeftInitialY;
   int controllersTopRightX, controllersTopRightY;
   int controllersTopRightInitialX, controllersTopRightInitialY;
   int controllersBottomRightX, controllersBottomRightY;
@@ -116,6 +118,10 @@ public class UserInterface {
     controllersTopLeftY = int(min(canvas.width, canvas.height) * 0.05);
     controllersTopLeftInitialX = controllersTopLeftX;
     controllersTopLeftInitialY = controllersTopLeftY;
+    controllersMiddleLeftInitialX = controllersTopLeftInitialX;
+    controllersMiddleLeftInitialY = controllersTopLeftInitialY + squareButtonHeight + controllerBarsSpacing + controllersSpacing;
+    controllersBottomLeftInitialX = controllersMiddleLeftInitialX;
+    controllersBottomLeftInitialY = controllersMiddleLeftInitialY + 5*(squareButtonHeight + controllersSpacing) + squareButtonHeight + controllerBarsSpacing + controllersSpacing;
     controllersTopRightX = canvas.width - int(min(canvas.width, canvas.height) * 0.05);
     controllersTopRightY = int(min(canvas.width, canvas.height) * 0.05);
     controllersBottomRightX = controllersTopRightX;
@@ -255,7 +261,7 @@ public class UserInterface {
     tokenSizesIconFolder = "token/size/";
     tokenSetupIconFolder = "token/setup/";
 
-    // Left top horizontal bar - scenes management
+    // Top left horizontal bar - scenes management
 
     controllersTopLeftX = controllersTopLeftInitialX;
     controllersTopLeftY = controllersTopLeftInitialY;
@@ -267,10 +273,10 @@ public class UserInterface {
     controllersTopLeftX += squareButtonWidth + controllersSpacing;
     addButton("Save scene", appIconFolder + "save", controllersTopLeftX, controllersTopLeftY, togglableControllers);
 
-    // Left vertical bar - scene setup
+    // Middle left vertical bar - scene setup
 
-    controllersTopLeftX = controllersTopLeftInitialX;
-    controllersTopLeftY += squareButtonHeight + controllerBarsSpacing + controllersSpacing;
+    controllersTopLeftX = controllersMiddleLeftInitialX;
+    controllersTopLeftY = controllersMiddleLeftInitialY;
     addButton("Select map", sceneSetupIconFolder + "map", controllersTopLeftX, controllersTopLeftY, togglableControllers);
 
     controllersTopLeftY += squareButtonHeight + controllersSpacing;
@@ -288,10 +294,10 @@ public class UserInterface {
     controllersTopLeftY += squareButtonHeight + controllersSpacing;
     addButton("Add DM token", sceneSetupIconFolder + "monster", controllersTopLeftX, controllersTopLeftY, togglableControllers, true, false);
 
-    // Left bottom horizontal bar - scene config
+    // Bottom left horizontal bar - scene config
 
-    controllersTopLeftX = controllersTopLeftInitialX;
-    controllersTopLeftY += squareButtonHeight + controllerBarsSpacing + controllersSpacing;
+    controllersTopLeftX = controllersBottomLeftInitialX;
+    controllersTopLeftY = controllersBottomLeftInitialY;
     addButton("Toggle combat mode", sceneConfigIconFolder + "combat", controllersTopLeftX, controllersTopLeftY, togglableControllers, true, false);
 
     controllersTopLeftX += squareButtonWidth + controllersSpacing;
@@ -532,11 +538,52 @@ public class UserInterface {
     controllersMenuX += squareButtonWidth + controllersSpacing;
     addButton("Remove token", tokenSetupIconFolder + "remove", controllersMenuX, controllersMenuY, otherMenuControllers);
 
+    // Button groups label
+
+    instructionsX = controllersTopLeftInitialX;
+    instructionsY = controllersTopLeftInitialY - instructionsHeight - controllersSpacing;
+
+    cp5.addTextlabel("Scenes management label")
+       .setText("Scenes management")
+       .setPosition(instructionsX, instructionsY)
+       .setColorValue(instructionsFontColor)
+       .setFont(instructionsFont)
+       .setOutlineText(true)
+       .moveTo(togglableControllers);
+       ;
+
+    instructionsX = controllersMiddleLeftInitialX;
+    instructionsY = controllersMiddleLeftInitialY - instructionsHeight - controllersSpacing;
+
+    cp5.addTextlabel("Scene setup label")
+       .setText("Scene setup")
+       .setPosition(instructionsX, instructionsY)
+       .setColorValue(instructionsFontColor)
+       .setFont(instructionsFont)
+       .setOutlineText(true)
+       .moveTo(togglableControllers);
+       ;
+
+    instructionsX = controllersBottomLeftInitialX;
+    instructionsY = controllersBottomLeftInitialY - instructionsHeight - controllersSpacing;
+
+    cp5.addTextlabel("Scene configuration label")
+       .setText("Scene configuration")
+       .setPosition(instructionsX, instructionsY)
+       .setColorValue(instructionsFontColor)
+       .setFont(instructionsFont)
+       .setOutlineText(true)
+       .moveTo(togglableControllers);
+       ;
+
     // Bottom left messages
 
     // Roll20 "Grid Alignment Tool" instructions:
     //   This tool allows you to quickly size your map background to match the Roll20 grid on the current page.
     //   Instructions: Click and drag to create a box the size of 3 x 3 grid cells on the map background you are using.
+
+    instructionsX = instructionsInitialX;
+    instructionsY = instructionsInitialY;
 
     cp5.addTextlabel("Grid instructions - 2nd line")
        .setText("Once you draw this square, you can adjust its size using W, A, S, D and the arrow keys.")
@@ -547,7 +594,7 @@ public class UserInterface {
        .hide()
        ;
 
-    instructionsY = instructionsY - instructionsHeight - controllersSpacing;
+    instructionsY -= instructionsHeight + controllersSpacing;
 
     cp5.addTextlabel("Grid instructions - 1st line")
        .setText("Click and drag to create a square the size of 3 x 3 grid cells on the map background you are using.")
@@ -570,7 +617,7 @@ public class UserInterface {
        .hide()
        ;
 
-    instructionsY = instructionsY - instructionsHeight - controllersSpacing;
+    instructionsY -= instructionsHeight + controllersSpacing;
 
     cp5.addTextlabel("Wall instructions - 1st line")
        .setText("Draw a new wall, adding vertexes to it by left clicking.")
@@ -593,7 +640,7 @@ public class UserInterface {
        .hide()
        ;
 
-    instructionsY = instructionsY - instructionsHeight - controllersSpacing;
+    instructionsY -= instructionsHeight + controllersSpacing;
 
     cp5.addTextlabel("Door instructions - 1st line")
        .setText("Draw a new door, adding vertexes to it by left clicking.")
