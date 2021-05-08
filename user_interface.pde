@@ -304,25 +304,17 @@ public class UserInterface {
     addButton("Toggle grid", sceneConfigIconFolder + "grid", controllersTopLeftX, controllersTopLeftY, togglableControllers, true, false);
 
     controllersTopLeftX += squareButtonWidth + controllersSpacing;
-    addButton("Toggle walls", sceneConfigIconFolder + "walls", controllersTopLeftX, controllersTopLeftY, togglableControllers, true, false);
-
-    // new line
-    controllersTopLeftX = controllersTopLeftInitialX;
-    controllersTopLeftY += squareButtonHeight + controllersSpacing;
     addButton("Switch layer", sceneConfigIconFolder + "layers", controllersTopLeftX, controllersTopLeftY, togglableControllers);
 
     controllersTopLeftX += squareButtonWidth + controllersSpacing;
     addButton("Switch lighting", sceneConfigIconFolder + "lighting", controllersTopLeftX, controllersTopLeftY, togglableControllers);
 
-    // new line
-
     // Disabled - map pan and zoom enabled by default
+    // addButton("Toggle camera pan", sceneConfigIconFolder + "pan", controllersTopLeftX, controllersTopLeftY, togglableControllers, true, false);
+    // addButton("Toggle camera zoom", sceneConfigIconFolder + "zoom", controllersTopLeftX, controllersTopLeftY, togglableControllers, true, false);
 
-    // controllersTopLeftX += squareButtonWidth + controllersSpacing;
-    // addButton("Toggle camera pan", sceneConfigIconFolder + "pan", controllersTopLeftX, controllersTopLeftY, null, true, false);
-
-    // controllersTopLeftX += squareButtonWidth + controllersSpacing;
-    // addButton("Toggle camera zoom", sceneConfigIconFolder + "zoom", controllersTopLeftX, controllersTopLeftY, null, true, false);
+    // Disabled - walls/doors shown during setup only
+    // addButton("Toggle walls", sceneConfigIconFolder + "walls", controllersTopLeftX, controllersTopLeftY, togglableControllers, true, false);
 
     // Top right bar - quit
 
@@ -956,10 +948,9 @@ public class UserInterface {
           disableController("Add/Remove doors");
           disableController("Toggle UI");
 
-          setSwitchButtonState("Toggle walls", true);
-
           playersLayer.reset();
           dmLayer.reset();
+          obstacles.toggleDrawObstacles();
 
           wallInstructions1stLine.show();
           wallInstructions2ndLine.show();
@@ -981,6 +972,8 @@ public class UserInterface {
           }
           enableController("Add/Remove doors");
           enableController("Toggle UI");
+
+          obstacles.toggleDrawObstacles();
 
           wallInstructions1stLine.hide();
           wallInstructions2ndLine.hide();
@@ -1007,10 +1000,9 @@ public class UserInterface {
           disableController("Add/Remove walls");
           disableController("Toggle UI");
 
-          setSwitchButtonState("Toggle walls", true);
-
           playersLayer.reset();
           dmLayer.reset();
+          obstacles.toggleDrawObstacles();
 
           newDoor = new Door(canvas);
 
@@ -1035,6 +1027,8 @@ public class UserInterface {
           }
           enableController("Add/Remove walls");
           enableController("Toggle UI");
+
+          obstacles.toggleDrawObstacles();
 
           doorInstructions1stLine.hide();
           doorInstructions2ndLine.hide();
@@ -2305,7 +2299,6 @@ public class UserInterface {
 
     setSwitchButtonState("Toggle combat mode", false);
     setSwitchButtonState("Toggle grid", false);
-    setSwitchButtonState("Toggle walls", false);
 
     JSONObject sceneJson = loadJSONObject(sceneFile.getAbsolutePath());
 
