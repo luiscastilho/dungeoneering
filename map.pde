@@ -67,10 +67,19 @@ class Map {
     canvas.scale(scale);
 
     canvas.imageMode(CENTER);
-    if ( !isVideo )
+    if ( !isVideo ) {
+
       canvas.image(image, canvas.width/2, canvas.height/2);
-    else
-      canvas.image(video, canvas.width/2, canvas.height/2);
+
+    } else {
+
+      try {
+        canvas.image(video, canvas.width/2, canvas.height/2);
+      } catch ( Exception e ) {
+        println("ERROR: Map: Error displaying video frame");
+      }
+
+    }
 
     if ( Math.abs(panX - lastPanX) > 0.1 || Math.abs(panY - lastPanY) > 0.1 || Math.abs(scale - lastScale) > 0.1 ) {
       obstacles.setCurrentPanX(panX);
@@ -108,12 +117,20 @@ class Map {
 
     } else {
 
-      video = new Movie(sketch, filePath);
+      try {
 
-      if ( isMuted )
-        muteVideo();
+        video = new Movie(sketch, filePath);
 
-      video.loop();
+        if ( isMuted )
+          muteVideo();
+
+        video.loop();
+
+      } catch ( Exception e ) {
+        println("ERROR: Map: Error loading and starting video");
+        clear();
+        return;
+      }
 
     }
 
@@ -226,8 +243,14 @@ class Map {
 
     if ( set && isVideo && video != null ) {
 
-      video.stop();
-      video.dispose();
+      try {
+
+        video.stop();
+        video.dispose();
+
+      } catch ( Exception e ) {
+        println("ERROR: Map: Error stopping and disposing of video");
+      }
 
     }
 
@@ -320,8 +343,14 @@ class Map {
     if ( isVideo && video != null ) {
 
       volume = isMuted ? 0 : 1;
-      if ( video.playbin != null ) {
-        video.playbin.setVolume(volume);
+
+      try {
+
+        if ( video.playbin != null )
+          video.playbin.setVolume(volume);
+
+      } catch ( Exception e ) {
+        println("ERROR: Map: Error setting video volume");
       }
 
     }

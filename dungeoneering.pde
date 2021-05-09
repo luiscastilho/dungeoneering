@@ -378,7 +378,12 @@ void keyPressed() {
 void movieEvent(Movie movie) {
 
   if ( !userInterface.isFileDialogOpen() )
-    movie.read();
+    try {
+      if ( movie.available() )
+        movie.read();
+    } catch ( Exception e ) {
+      println("ERROR: Map: Error reading video frame");
+    }
 
 }
 
