@@ -1841,7 +1841,7 @@ public class UserInterface {
       Point mappedEndPos = map.mapCanvasToImage(new Point(gridHelperToX, gridHelperToY));
       int xDiff = gridHelperX-mappedStartPos.x;
       int yDiff = gridHelperY-mappedStartPos.y;
-      grid.setupFromHelper(mappedStartPos.x, mappedStartPos.y, mappedEndPos.x, mappedEndPos.y, map.getMapWidth(), map.getMapHeight(), xDiff, yDiff);
+      grid.setupFromHelper(mappedStartPos.x, mappedStartPos.y, mappedEndPos.x, mappedEndPos.y, map.getWidth(), map.getHeight(), xDiff, yDiff);
 
     }
 
@@ -1875,7 +1875,7 @@ public class UserInterface {
     Point mappedEndPos = map.mapCanvasToImage(new Point(gridHelperToX, gridHelperToY));
     int xDiff = gridHelperX-mappedStartPos.x;
     int yDiff = gridHelperY-mappedStartPos.y;
-    grid.setupFromHelper(mappedStartPos.x, mappedStartPos.y, mappedEndPos.x, mappedEndPos.y, map.getMapWidth(), map.getMapHeight(), xDiff, yDiff);
+    grid.setupFromHelper(mappedStartPos.x, mappedStartPos.y, mappedEndPos.x, mappedEndPos.y, map.getWidth(), map.getHeight(), xDiff, yDiff);
 
   }
 

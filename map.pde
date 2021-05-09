@@ -264,14 +264,14 @@ class Map {
     return isVideo;
   }
 
-  int getMapWidth() {
+  int getWidth() {
     if ( isVideo )
       return video.width;
     else
       return image.width;
   }
 
-  int getMapHeight() {
+  int getHeight() {
     if ( isVideo )
       return video.height;
     else
