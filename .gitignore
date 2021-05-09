@@ -1,5 +1,5 @@
 # Campaign assets dir
-/data/campaign/
+/dungeoneering/data/campaign/
 
 # VS Code dirs
 /.vscode/
@@ -12,4 +12,4 @@
 /releases/
 
 # Generate icons script output dir
-/data/icons/orig/output/
+/dungeoneering/data/icons/orig/output/
