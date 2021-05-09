@@ -6,7 +6,7 @@
 /out/
 
 # Processing export application dirs
-/application.*/
+/dungeoneering/application.*/
 
 # Releases dir
 /releases/
