@@ -1,6 +1,7 @@
 import javax.activation.MimetypesFileTypeMap;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.awt.Point;
 import uibooster.*;
 
@@ -2122,7 +2123,7 @@ public class UserInterface {
     JSONObject sceneJson = new JSONObject();
 
     JSONObject mapJson = new JSONObject();
-    mapJson.setString("filePath", map.getFilePath().replaceAll("\\\\", "/").replaceFirst("^" + sketchPath, ""));
+    mapJson.setString("filePath", map.getFilePath().replaceAll("\\\\", "/").replaceFirst("^(?i)" + Pattern.quote(sketchPath), ""));
     mapJson.setBoolean("fitToScreen", map.getFitToScreen());
     mapJson.setBoolean("isVideo", map.isVideo());
     sceneJson.setJSONObject("map", mapJson);
@@ -2226,7 +2227,7 @@ public class UserInterface {
       JSONObject tokenJson = new JSONObject();
 
       tokenJson.setString("name", token.getName());
-      tokenJson.setString("imagePath", token.getImagePath().replaceAll("\\\\", "/").replaceFirst("^" + sketchPath, ""));
+      tokenJson.setString("imagePath", token.getImagePath().replaceAll("\\\\", "/").replaceFirst("^(?i)" + Pattern.quote(sketchPath), ""));
 
       tokenJson.setString("size", token.getSize().getName());
 
