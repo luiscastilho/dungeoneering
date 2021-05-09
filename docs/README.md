@@ -21,7 +21,7 @@ The latest stable version along with release notes can be found on the project's
 
 ### Windows
 
-The application should work with the instructions above. If it doesn't, crate an issue please.
+The application should work with the instructions above. If it doesn't, create an issue please.
 
 ### macOS
 
@@ -42,7 +42,7 @@ To create a new scene follow these steps:
 1. Click on the map setup button (<img src="../data/icons/scene/setup/map_idle.png" width="25" height="25" alt="map setup icon" title="map setup icon">) and choose an image or video to use as a map.
 2. Click on the grid setup button (<img src="../data/icons/scene/setup/grid_idle.png" width="25" height="25" alt="grid setup icon" title="grid setup icon">) and follow the on-screen instructions to setup a grid over the map you chose.
 3. Add player (<img src="../data/icons/scene/setup/hero_idle.png" width="25" height="25" alt="add player token icon" title="add player token icon">) and DM tokens (<img src="../data/icons/scene/setup/monster_idle.png" width="25" height="25" alt="add DM token icon" title="add DM token icon">) using the corresponding buttons.
-4. Setup walls (<img src="../data/icons/scene/setup/wall_idle.png" width="25" height="25" alt="walls setup icon" title="walls setup icon">) and doors (<img src="../data/icons/scene/setup/door_idle.png" width="25" height="25" alt="doors setup icon" title="doors setup icon">) using the corresponding buttons and following the on-screen instructions. Walls and doors are used to hide parts of the map and to block token light sources. With these elements in place you will have a dynamic lighting system, were players will only see parts of the map depending on where they characters are and what they can see.
+4. Setup walls (<img src="../data/icons/scene/setup/wall_idle.png" width="25" height="25" alt="walls setup icon" title="walls setup icon">) and doors (<img src="../data/icons/scene/setup/door_idle.png" width="25" height="25" alt="doors setup icon" title="doors setup icon">) using the corresponding buttons and following the on-screen instructions. Walls and doors are used to hide parts of the map and to block token light sources. With these elements in place you will have a dynamic lighting system, where players will only see parts of the map depending on where their characters are and what they can see.
 5. If it's a combat scene, enable the initiative order widget by clicking on the combat button (<img src="../data/icons/scene/config/combat_idle.png" width="25" height="25" alt="combat icon" title="combat icon">). In this widget you can drag players or enemies to the position they should occupy based on the initiative they rolled.
 
 And that's it! Now that you have setup your scene, players and DM can drag their tokens around the map; right click on them to add conditions, light sources and sight types (e.g., darkvision); pan and zoom the map as needed; players can reveal hidden parts of the map with the dynamic lighting system; and hopefully with all that you and your group will have more fun in your RPG sessions. :)
