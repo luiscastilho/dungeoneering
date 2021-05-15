@@ -13,11 +13,11 @@
   "initiative": {
     "initiativeGroups": [
       {
-        "name": "Beholder",
+        "name": "Orsik",
         "position": 0
       },
       {
-        "name": "Orsik",
+        "name": "Beholder",
         "position": 1
       },
       {
@@ -586,7 +586,7 @@
     },
     {
       "size": "Medium",
-      "lightSources": [],
+      "lightSources": [{"name": "Candle"}],
       "imagePath": "/data/tokens/players/Lia.png",
       "sightTypes": [{"name": "Darkvision 60'"}],
       "name": "Lia",
