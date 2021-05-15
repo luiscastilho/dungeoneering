@@ -2470,7 +2470,7 @@ public class UserInterface {
         }
 
         Cell cell = grid.getCellAt(tokenRow, tokenColumn);
-        Token token = new Token(canvas, grid);
+        Token token = new Token(canvas, grid, obstacles);
         token.setup(tokenName, tokenImagePath, grid.getCellWidth(), grid.getCellHeight(), tokenSize);
         token.setCell(cell);
 

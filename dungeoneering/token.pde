@@ -4,6 +4,8 @@ class Token {
 
   Grid grid;
 
+  Obstacles obstacles;
+
   String name;
 
   String imagePath;
@@ -24,11 +26,13 @@ class Token {
 
   boolean disabled;
 
-  Token(PGraphics _canvas, Grid _grid) {
+  Token(PGraphics _canvas, Grid _grid, Obstacles _obstacles) {
 
     canvas = _canvas;
 
     grid = _grid;
+
+    obstacles = _obstacles;
 
     name = null;
 

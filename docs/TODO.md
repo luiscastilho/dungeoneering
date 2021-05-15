@@ -42,6 +42,7 @@
 - [X] Fix low FPS when panning due to shadows being recalculated
 - [X] Make UI more intuitive (and pretty)
 - [X] Conditions, light sources, etc, applied to a token should remain highlighted in the right click menu
+- [ ] Fix token images looking pixelated if zoom in is used
 - [ ] Light sources should be visible in all layers
 - [ ] Set maximum zoom and pan
 - [ ] Keep tokens inside grid when moving - larger tokens being moved to grid borders
