@@ -328,10 +328,10 @@ public class UserInterface {
     addButton("Toggle UI", appIconFolder + "ui", controllersBottomRightX, controllersBottomRightY, null, true, true);
 
     controllersBottomRightX -= squareButtonWidth + controllersSpacing;
-    addButton("Toggle touch screen mode", appIconFolder + "touch", controllersBottomRightX, controllersBottomRightY, null, true, false);
+    addButton("Toggle touch screen mode", appIconFolder + "touch", controllersBottomRightX, controllersBottomRightY, togglableControllers, true, false);
 
     controllersBottomRightX -= squareButtonWidth + controllersSpacing;
-    addButton("Toggle mute sound", appIconFolder + "mute", controllersBottomRightX, controllersBottomRightY, null, true, false);
+    addButton("Toggle mute sound", appIconFolder + "mute", controllersBottomRightX, controllersBottomRightY, togglableControllers, true, false);
 
     // Token right click menu
 

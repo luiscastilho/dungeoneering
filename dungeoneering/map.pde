@@ -115,16 +115,23 @@ class Map {
       if ( fitToScreen )
         fitToScreen();
 
+      if ( DEBUG )
+        println("DEBUG: Map: Image map loaded");
+
     } else {
 
       try {
 
         video = new Movie(sketch, filePath);
+        video.frameRate(30);
 
         if ( isMuted )
           muteVideo();
 
         video.loop();
+
+        if ( DEBUG )
+          println("DEBUG: Map: Video map loaded");
 
       } catch ( Exception e ) {
         println("ERROR: Map: Error loading and starting video");
