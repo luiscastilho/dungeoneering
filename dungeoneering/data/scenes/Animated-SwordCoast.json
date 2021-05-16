@@ -1,0 +1,118 @@
+{
+  "doors": [],
+  "dmTokens": [
+    {
+      "size": "Huge",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Giant Hill.png",
+      "sightTypes": [],
+      "name": "Hill Giant",
+      "column": 23,
+      "row": 10,
+      "conditions": []
+    },
+    {
+      "size": "Huge",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Giant Hill.png",
+      "sightTypes": [],
+      "name": "Hill Giant",
+      "column": 11,
+      "row": 5,
+      "conditions": []
+    },
+    {
+      "size": "Huge",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Giant Hill.png",
+      "sightTypes": [],
+      "name": "Hill Giant",
+      "column": 18,
+      "row": 6,
+      "conditions": []
+    },
+    {
+      "size": "Huge",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Giant Frost.png",
+      "sightTypes": [],
+      "name": "Giant Frost",
+      "column": 21,
+      "row": 3,
+      "conditions": []
+    }
+  ],
+  "initiative": {
+    "initiativeGroups": [
+      {
+        "name": "Orsik",
+        "position": 0
+      },
+      {
+        "name": "Lia",
+        "position": 1
+      },
+      {
+        "name": "Luth",
+        "position": 2
+      },
+      {
+        "name": "Giant Frost",
+        "position": 3
+      },
+      {
+        "name": "Giant Hill",
+        "position": 4
+      }
+    ],
+    "drawInitiativeOrder": true
+  },
+  "walls": [],
+  "illumination": {"lighting": "brightLigt"},
+  "grid": {
+    "cellWidth": 55,
+    "lastCellCenterY": 1009,
+    "cellHeight": 55,
+    "drawGrid": false,
+    "firstCellCenterX": 83,
+    "lastCellCenterX": 1843,
+    "firstCellCenterY": 74
+  },
+  "playerTokens": [
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/players/Orsik.png",
+      "sightTypes": [],
+      "name": "Orsik",
+      "column": 7,
+      "row": 12,
+      "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/players/Lia.png",
+      "sightTypes": [],
+      "name": "Lia",
+      "column": 6,
+      "row": 13,
+      "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/players/Luth.png",
+      "sightTypes": [],
+      "name": "Luth",
+      "column": 4,
+      "row": 12,
+      "conditions": []
+    }
+  ],
+  "map": {
+    "filePath": "/data/maps/Animated-SwordCoast-1080p30.mp4",
+    "isVideo": true,
+    "fitToScreen": false
+  }
+}

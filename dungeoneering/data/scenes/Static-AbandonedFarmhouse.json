@@ -15,7 +15,7 @@
   "dmTokens": [
     {
       "size": "Medium",
-      "lightSources": [],
+      "lightSources": [{"name": "Candle"}],
       "imagePath": "/data/tokens/dm/Goblin.png",
       "sightTypes": [{"name": "Darkvision 60'"}],
       "name": "Goblin",
@@ -25,7 +25,7 @@
     },
     {
       "size": "Medium",
-      "lightSources": [],
+      "lightSources": [{"name": "Candle"}],
       "imagePath": "/data/tokens/dm/Goblin.png",
       "sightTypes": [{"name": "Darkvision 60'"}],
       "name": "Goblin",
@@ -35,7 +35,7 @@
     },
     {
       "size": "Medium",
-      "lightSources": [],
+      "lightSources": [{"name": "Candle"}],
       "imagePath": "/data/tokens/dm/Goblin.png",
       "sightTypes": [{"name": "Darkvision 60'"}],
       "name": "Goblin",
@@ -45,7 +45,7 @@
     },
     {
       "size": "Medium",
-      "lightSources": [],
+      "lightSources": [{"name": "Candle"}],
       "imagePath": "/data/tokens/dm/Goblin.png",
       "sightTypes": [{"name": "Darkvision 60'"}],
       "name": "Goblin",
@@ -55,7 +55,7 @@
     },
     {
       "size": "Medium",
-      "lightSources": [],
+      "lightSources": [{"name": "Candle"}],
       "imagePath": "/data/tokens/dm/Goblin.png",
       "sightTypes": [{"name": "Darkvision 60'"}],
       "name": "Goblin",
@@ -65,7 +65,7 @@
     },
     {
       "size": "Medium",
-      "lightSources": [],
+      "lightSources": [{"name": "Torch"}],
       "imagePath": "/data/tokens/dm/Orc.png",
       "sightTypes": [{"name": "Darkvision 60'"}],
       "name": "Orc",
@@ -75,7 +75,7 @@
     },
     {
       "size": "Medium",
-      "lightSources": [],
+      "lightSources": [{"name": "Torch"}],
       "imagePath": "/data/tokens/dm/Orc.png",
       "sightTypes": [{"name": "Darkvision 60'"}],
       "name": "Orc",
@@ -85,7 +85,7 @@
     },
     {
       "size": "Medium",
-      "lightSources": [],
+      "lightSources": [{"name": "Torch"}],
       "imagePath": "/data/tokens/dm/Orc.png",
       "sightTypes": [{"name": "Darkvision 60'"}],
       "name": "Orc",
@@ -94,6 +94,31 @@
       "conditions": []
     }
   ],
+  "initiative": {
+    "initiativeGroups": [
+      {
+        "name": "Orsik",
+        "position": 0
+      },
+      {
+        "name": "Luth",
+        "position": 1
+      },
+      {
+        "name": "Lia",
+        "position": 2
+      },
+      {
+        "name": "Goblin",
+        "position": 3
+      },
+      {
+        "name": "Orc",
+        "position": 4
+      }
+    ],
+    "drawInitiativeOrder": true
+  },
   "walls": [
     {"vertexes": [
       [
@@ -240,37 +265,37 @@
     {
       "size": "Medium",
       "lightSources": [],
-      "imagePath": "/data/tokens/players/Orsik.png",
+      "imagePath": "/data/tokens/players/Lia.png",
       "sightTypes": [{"name": "Darkvision 60'"}],
-      "name": "Orsik",
-      "column": 2,
-      "row": 13,
-      "conditions": []
-    },
-    {
-      "size": "Medium",
-      "lightSources": [{"name": "Torch"}],
-      "imagePath": "/data/tokens/players/Luth.png",
-      "sightTypes": [],
-      "name": "Luth",
-      "column": 1,
-      "row": 14,
-      "conditions": []
+      "name": "Lia",
+      "column": 4,
+      "row": 7,
+      "conditions": [{"name": "Invisible"}]
     },
     {
       "size": "Medium",
       "lightSources": [],
-      "imagePath": "/data/tokens/players/Lia.png",
+      "imagePath": "/data/tokens/players/Luth.png",
+      "sightTypes": [],
+      "name": "Luth",
+      "column": 1,
+      "row": 13,
+      "conditions": [{"name": "Hidden"}]
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/players/Orsik.png",
       "sightTypes": [{"name": "Darkvision 60'"}],
-      "name": "Lia",
-      "column": 3,
-      "row": 14,
-      "conditions": []
+      "name": "Orsik",
+      "column": 2,
+      "row": 12,
+      "conditions": [{"name": "Hidden"}]
     }
   ],
   "map": {
-    "filePath": "/data/maps/AbandonedHouse.jpg",
-    "fitToScreen": false,
-    "isVideo": false
+    "filePath": "/data/maps/Static-AbandonedFarmhouse.jpg",
+    "isVideo": false,
+    "fitToScreen": false
   }
 }
