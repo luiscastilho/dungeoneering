@@ -250,6 +250,9 @@ class Initiative {
 
   void moveGroupTo(InitiativeGroup group, int index) {
 
+    if ( group == null )
+      return;
+
     groups.remove(group);
     groups.add(index, group);
 
@@ -262,6 +265,9 @@ class Initiative {
     for ( InitiativeGroup group: groups )
       if ( group.name.equals(groupName) )
         groupToMove = group;
+
+    if ( groupToMove == null )
+      return;
 
     groups.remove(groupToMove);
     groups.add(index, groupToMove);
@@ -354,6 +360,8 @@ class Initiative {
     boolean isHidden(Layers layerShown) {
 
       if ( layerShown == Layers.all || layerShown == layer )
+        return false;
+      if ( tokens.isEmpty() )
         return false;
 
       for ( Token token: tokens )

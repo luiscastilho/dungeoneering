@@ -98,7 +98,7 @@ class Map {
 
   }
 
-  void setup(String _filePath, boolean _fitToScreen, boolean _isVideo, boolean _isMuted) {
+  boolean setup(String _filePath, boolean _fitToScreen, boolean _isVideo, boolean _isMuted) {
 
     clear();
 
@@ -120,23 +120,47 @@ class Map {
 
     } else {
 
-      try {
+      int triesCount = 0;
+      int maxTries = 3;
+      int sleepTimeMillis = 1000;
 
-        video = new Movie(sketch, filePath);
-        video.frameRate(30);
+      while ( true ) {
 
-        if ( isMuted )
-          muteVideo();
+        try {
 
-        video.loop();
+          video = new Movie(sketch, filePath);
+          video.frameRate(30);
 
-        if ( DEBUG )
-          println("DEBUG: Map: Video map loaded");
+          if ( isMuted )
+            muteVideo();
 
-      } catch ( Exception e ) {
-        println("ERROR: Map: Error loading and starting video");
-        clear();
-        return;
+          video.loop();
+
+          if ( DEBUG )
+            println("DEBUG: Map: Video map loaded");
+
+          break;
+
+        } catch ( Exception e ) {
+
+          println("ERROR: Map: Error loading and starting video");
+
+          triesCount += 1;
+          if ( triesCount == maxTries ) {
+
+            clear();
+            return false;
+
+          } else {
+
+            try { Thread.sleep(sleepTimeMillis); }
+            catch ( InterruptedException ie ) {}
+            println("ERROR: Map: Retrying...");
+
+          }
+
+        }
+
       }
 
     }
@@ -146,6 +170,8 @@ class Map {
     scale = toScale = 1;
 
     set = true;
+
+    return true;
 
   }
 

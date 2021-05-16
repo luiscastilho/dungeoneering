@@ -1765,10 +1765,11 @@ public class UserInterface {
 
     boolean isVideo;
     boolean isMuted;
+    boolean mapLoaded;
 
     fileDialogOpen = false;
 
-    if ( mapFile == null )
+    if ( mapFile == null || !fileExists(mapFile.getAbsolutePath()) )
       return;
 
     MimetypesFileTypeMap mimetypesMap = new MimetypesFileTypeMap();
@@ -1777,14 +1778,16 @@ public class UserInterface {
     String mimetype = mimetypesMap.getContentType(mapFile);
     String type = mimetype.split("/")[0];
     if ( !type.equals("image") && !type.equals("video") ) {
-      println("Map selection: selected file is not an image or a video");
+      println("ERROR: Selected map file is not of a supported image or video type");
       return;
     }
 
     isVideo = type.equals("video");
     isMuted = getSwitchButtonState("Toggle mute sound");
 
-    map.setup(mapFile.getAbsolutePath(), false, isVideo, isMuted);
+    mapLoaded = map.setup(mapFile.getAbsolutePath(), false, isVideo, isMuted);
+    if ( !mapLoaded )
+      return;
 
     initiative.clear();
     obstacles.setIllumination(Illumination.brightLight);
@@ -2284,7 +2287,7 @@ public class UserInterface {
 
     fileDialogOpen = false;
 
-    if ( sceneFile == null )
+    if ( sceneFile == null || !fileExists(sceneFile.getAbsolutePath()) )
       return;
 
     String sketchPath = sketchPath().replaceAll("\\\\", "/");
@@ -2306,17 +2309,24 @@ public class UserInterface {
     JSONObject mapJson = sceneJson.getJSONObject("map");
     if ( mapJson != null ) {
 
-      String mapImagePath = mapJson.getString("filePath");
+      String mapFilePath = mapJson.getString("filePath");
       boolean fitToScreen = mapJson.getBoolean("fitToScreen");
       boolean isVideo = mapJson.getBoolean("isVideo");
       boolean isMuted = getSwitchButtonState("Toggle mute sound");
 
-      if ( !fileExists(mapImagePath) ) {
-        if ( fileExists(sketchPath + mapImagePath) )
-          mapImagePath = sketchPath + mapImagePath;
+      if ( !fileExists(mapFilePath) ) {
+        if ( fileExists(sketchPath + mapFilePath) ) {
+          mapFilePath = sketchPath + mapFilePath;
+        } else {
+          println("ERROR: Map file not found: " + mapFilePath);
+          abortLoadingScene(sceneFile.getAbsolutePath());
+          return;
+        }
       }
 
-      map.setup(mapImagePath, fitToScreen, isVideo, isMuted);
+      boolean mapLoaded = map.setup(mapFilePath, fitToScreen, isVideo, isMuted);
+      if ( !mapLoaded )
+        abortLoadingScene(sceneFile.getAbsolutePath());
 
       enableController("Grid setup");
       enableController("Add/Remove walls");
@@ -2465,13 +2475,21 @@ public class UserInterface {
 
         String tokenSizeName = tokenJson.getString("size", "Medium");
         Size tokenSize = resources.getSize(tokenSizeName);
+        if ( tokenSize == null ) {
+          println("ERROR: Token " + tokenName + " size not found: " + tokenSizeName);
+          continue;
+        }
 
         int tokenRow = tokenJson.getInt("row");
         int tokenColumn = tokenJson.getInt("column");
 
         if ( !fileExists(tokenImagePath) ) {
-          if ( fileExists(sketchPath + tokenImagePath) )
+          if ( fileExists(sketchPath + tokenImagePath) ) {
             tokenImagePath = sketchPath + tokenImagePath;
+          } else {
+            println("ERROR: Token " + tokenName + " image not found: " + tokenImagePath);
+            continue;
+          }
         }
 
         Cell cell = grid.getCellAt(tokenRow, tokenColumn);
@@ -2479,13 +2497,13 @@ public class UserInterface {
         token.setup(tokenName, tokenImagePath, grid.getCellWidth(), grid.getCellHeight(), tokenSize);
         token.setCell(cell);
 
-        for ( Light lightSource: getLightSourcesFromJsonArray(tokenJson.getJSONArray("lightSources")) )
+        for ( Light lightSource: getLightSourcesFromJsonArray(tokenName, tokenJson.getJSONArray("lightSources")) )
           token.toggleLightSource(new Light(lightSource.getName(), lightSource.getBrightLightRadius(), lightSource.getDimLightRadius()));
 
-        for ( Light sightType: getSightTypesFromJsonArray(tokenJson.getJSONArray("sightTypes")) )
+        for ( Light sightType: getSightTypesFromJsonArray(tokenName, tokenJson.getJSONArray("sightTypes")) )
           token.toggleSightType(new Light(sightType.getName(), sightType.getBrightLightRadius(), sightType.getDimLightRadius()));
 
-        for ( Condition condition: getConditionsFromJsonArray(tokenJson.getJSONArray("conditions"), tokenSize) )
+        for ( Condition condition: getConditionsFromJsonArray(tokenName, tokenJson.getJSONArray("conditions"), tokenSize) )
           token.toggleCondition(condition);
 
         layer.addToken(token);
@@ -2495,7 +2513,7 @@ public class UserInterface {
 
   }
 
-  ArrayList<Light> getLightSourcesFromJsonArray(JSONArray lightsArray) {
+  ArrayList<Light> getLightSourcesFromJsonArray(String tokenName, JSONArray lightsArray) {
 
     ArrayList<Light> lights = new ArrayList<Light>();
 
@@ -2506,8 +2524,12 @@ public class UserInterface {
         Light light = resources.getCommonLightSource(name);
         if ( light == null )
           light = resources.getSpellLightSource(name);
-        if ( light != null )
+        if ( light != null ) {
           lights.add(light);
+        } else {
+          println("ERROR: Token " + tokenName + " light source not found: " + name);
+          continue;
+        }
       }
     }
 
@@ -2515,7 +2537,7 @@ public class UserInterface {
 
   }
 
-  ArrayList<Light> getSightTypesFromJsonArray(JSONArray sightsArray) {
+  ArrayList<Light> getSightTypesFromJsonArray(String tokenName, JSONArray sightsArray) {
 
     ArrayList<Light> sights = new ArrayList<Light>();
 
@@ -2524,8 +2546,12 @@ public class UserInterface {
         JSONObject sightJson = sightsArray.getJSONObject(j);
         String name = sightJson.getString("name");
         Light sight = resources.getSightType(name);
-        if ( sight != null )
+        if ( sight != null ) {
           sights.add(sight);
+        } else {
+          println("ERROR: Token " + tokenName + " sight type not found: " + name);
+          continue;
+        }
       }
     }
 
@@ -2533,7 +2559,7 @@ public class UserInterface {
 
   }
 
-  ArrayList<Condition> getConditionsFromJsonArray(JSONArray conditionsArray, Size tokenSize) {
+  ArrayList<Condition> getConditionsFromJsonArray(String tokenName, JSONArray conditionsArray, Size tokenSize) {
 
     ArrayList<Condition> conditions = new ArrayList<Condition>();
 
@@ -2542,12 +2568,42 @@ public class UserInterface {
         JSONObject conditionJson = conditionsArray.getJSONObject(j);
         String name = conditionJson.getString("name");
         Condition condition = resources.getCondition(name, tokenSize);
-        if ( condition != null )
+        if ( condition != null ) {
           conditions.add(condition);
+        } else {
+          println("ERROR: Token " + tokenName + " condition not found: " + name);
+          continue;
+        }
       }
     }
 
     return conditions;
+
+  }
+
+  void abortLoadingScene(String sceneFilePath) {
+
+    map.clear();
+    grid.clear();
+    playersLayer.clear();
+    dmLayer.clear();
+    obstacles.clear();
+    initiative.clear();
+
+    enableController("Select map");
+    disableController("Grid setup");
+    disableController("Add player token");
+    disableController("Add DM token");
+    disableController("Add/Remove walls");
+    disableController("Add/Remove doors");
+    setSwitchButtonState("Toggle mute sound", false);
+    hideController("Toggle mute sound");
+
+    println("ERROR: Scene could not be loaded: " + sceneFilePath);
+
+    layerShown = Layers.players;
+
+    appState = AppStates.idle;
 
   }
 
