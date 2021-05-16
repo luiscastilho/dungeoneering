@@ -2322,6 +2322,11 @@ public class UserInterface {
       enableController("Add/Remove walls");
       enableController("Add/Remove doors");
 
+      if ( isVideo )
+        showController("Toggle mute sound");
+      else
+        hideController("Toggle mute sound");
+
     }
 
     JSONObject gridJson = sceneJson.getJSONObject("grid");
