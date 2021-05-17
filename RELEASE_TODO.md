@@ -1,8 +1,0 @@
-- [X] Add exclusive map demo scene
-- [X] Add link to Animated Dungeon Maps in video demo scenes
-- [X] Add link to Animated Dungeon Maps in README.md
-- [ ] Avoid processing-video errors to lock/crash dungeoneering
-- [ ] Set maximum zoom and pan - 2-3x
-- [ ] Create help page or UI tooltips
-- [ ] Light sources should be visible in all layers
-- [ ] Allow to click on an icon in the Initiative Order and centralize the map on/highlight that token
