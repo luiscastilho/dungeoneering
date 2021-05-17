@@ -198,6 +198,11 @@ class Map {
     if ( !zoomEnabled )
       return;
 
+    if ( toScale >= 2 && mouseWheelAmount < 0 )
+      return;
+    if ( toScale <= 0.5 && mouseWheelAmount > 0 )
+      return;
+
     float zoom = -mouseWheelAmount * .05;
     panToX -= zoom * (_mouseX - panToX);
     panToY -= zoom * (_mouseY - panToY);
