@@ -1,0 +1,182 @@
+{
+  "doors": [],
+  "dmTokens": [
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Orog.png",
+      "sightTypes": [],
+      "name": "Orog",
+      "column": 8,
+      "row": 6,
+      "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Orc.png",
+      "sightTypes": [],
+      "name": "Orc",
+      "column": 6,
+      "row": 5,
+      "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Goblin.png",
+      "sightTypes": [],
+      "name": "Goblin",
+      "column": 6,
+      "row": 7,
+      "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Goblin.png",
+      "sightTypes": [],
+      "name": "Goblin",
+      "column": 5,
+      "row": 7,
+      "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Goblin.png",
+      "sightTypes": [],
+      "name": "Goblin",
+      "column": 4,
+      "row": 8,
+      "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Goblin.png",
+      "sightTypes": [],
+      "name": "Goblin",
+      "column": 4,
+      "row": 6,
+      "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Goblin.png",
+      "sightTypes": [],
+      "name": "Goblin",
+      "column": 6,
+      "row": 8,
+      "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Goblin.png",
+      "sightTypes": [],
+      "name": "Goblin",
+      "column": 5,
+      "row": 9,
+      "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Orc.png",
+      "sightTypes": [],
+      "name": "Orc",
+      "column": 8,
+      "row": 8,
+      "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Goblin.png",
+      "sightTypes": [],
+      "name": "Goblin",
+      "column": 7,
+      "row": 9,
+      "conditions": []
+    }
+  ],
+  "initiative": {
+    "initiativeGroups": [
+      {
+        "name": "Orsik",
+        "position": 0
+      },
+      {
+        "name": "Lia",
+        "position": 1
+      },
+      {
+        "name": "Luth",
+        "position": 2
+      },
+      {
+        "name": "Orog",
+        "position": 3
+      },
+      {
+        "name": "Orc",
+        "position": 4
+      },
+      {
+        "name": "Goblin",
+        "position": 5
+      }
+    ],
+    "drawInitiativeOrder": false
+  },
+  "walls": [],
+  "illumination": {"lighting": "brightLigt"},
+  "grid": {
+    "cellWidth": 102,
+    "lastCellCenterY": 999,
+    "cellHeight": 102,
+    "drawGrid": true,
+    "firstCellCenterX": 220,
+    "lastCellCenterX": 1750,
+    "firstCellCenterY": 81
+  },
+  "playerTokens": [
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/players/Orsik.png",
+      "sightTypes": [],
+      "name": "Orsik",
+      "column": 13,
+      "row": 3,
+      "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/players/Luth.png",
+      "sightTypes": [],
+      "name": "Luth",
+      "column": 12,
+      "row": 1,
+      "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/players/Lia.png",
+      "sightTypes": [],
+      "name": "Lia",
+      "column": 15,
+      "row": 3,
+      "conditions": []
+    }
+  ],
+  "map": {
+    "filePath": "/data/maps/Static-TheOldBridge.jpg",
+    "isVideo": false,
+    "fitToScreen": false
+  }
+}

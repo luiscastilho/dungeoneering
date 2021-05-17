@@ -2649,7 +2649,6 @@ public class UserInterface {
        .setSize(logoImage.width, logoImage.height)
        .setImage(logoImage)
        .updateSize()
-       .moveTo(togglableControllers)
        .setStringValue(logoLink)
        ;
 
