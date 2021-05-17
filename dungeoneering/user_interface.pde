@@ -47,6 +47,7 @@ public class UserInterface {
   int controllersTopRightX, controllersTopRightY;
   int controllersTopRightInitialX, controllersTopRightInitialY;
   int controllersBottomRightX, controllersBottomRightY;
+  int controllersBottomRightInitialX, controllersBottomRightInitialY;
   int controllersMenuX, controllersMenuY;
   int controllersMenuInitialX, controllersMenuInitialY;
 
@@ -115,18 +116,20 @@ public class UserInterface {
     instructionsHeight = 15;
     menuBarHeight = 35;
 
-    controllersTopLeftX = int(min(canvas.width, canvas.height) * 0.05);
-    controllersTopLeftY = int(min(canvas.width, canvas.height) * 0.05);
+    controllersTopLeftX = round(min(canvas.width, canvas.height) * 0.05);
+    controllersTopLeftY = round(min(canvas.width, canvas.height) * 0.05);
     controllersTopLeftInitialX = controllersTopLeftX;
     controllersTopLeftInitialY = controllersTopLeftY;
     controllersMiddleLeftInitialX = controllersTopLeftInitialX;
     controllersMiddleLeftInitialY = controllersTopLeftInitialY + squareButtonHeight + controllerBarsSpacing + controllersSpacing;
     controllersBottomLeftInitialX = controllersMiddleLeftInitialX;
     controllersBottomLeftInitialY = controllersMiddleLeftInitialY + 5*(squareButtonHeight + controllersSpacing) + squareButtonHeight + controllerBarsSpacing + controllersSpacing;
-    controllersTopRightX = canvas.width - int(min(canvas.width, canvas.height) * 0.05);
-    controllersTopRightY = int(min(canvas.width, canvas.height) * 0.05);
-    controllersBottomRightX = controllersTopRightX;
-    controllersBottomRightY = canvas.height - controllersTopLeftY - squareButtonHeight;
+    controllersTopRightX = canvas.width - round(min(canvas.width, canvas.height) * 0.05);
+    controllersTopRightY = round(min(canvas.width, canvas.height) * 0.05);
+    controllersBottomRightX = controllersTopRightX - squareButtonWidth;
+    controllersBottomRightY = canvas.height - controllersTopRightY - squareButtonHeight;
+    controllersBottomRightInitialX = controllersBottomRightX;
+    controllersBottomRightInitialY = controllersBottomRightY;
     controllersMenuX = controllersSpacing;
     controllersMenuY = controllersSpacing;
     controllersMenuInitialX = controllersMenuX;
@@ -324,7 +327,8 @@ public class UserInterface {
 
     // Bottom right bar - UI config
 
-    controllersBottomRightX -= squareButtonWidth;
+    controllersBottomRightX = controllersBottomRightInitialX;
+    controllersBottomRightY = controllersBottomRightInitialY;
     addButton("Toggle UI", appIconFolder + "ui", controllersBottomRightX, controllersBottomRightY, null, true, true);
 
     controllersBottomRightX -= squareButtonWidth + controllersSpacing;
@@ -1785,7 +1789,7 @@ public class UserInterface {
     isVideo = type.equals("video");
     isMuted = getSwitchButtonState("Toggle mute sound");
 
-    mapLoaded = map.setup(mapFile.getAbsolutePath(), false, isVideo, isMuted);
+    mapLoaded = map.setup(mapFile.getAbsolutePath(), false, isVideo, isMuted, null, null);
     if ( !mapLoaded )
       return;
 
@@ -2313,6 +2317,7 @@ public class UserInterface {
       boolean fitToScreen = mapJson.getBoolean("fitToScreen");
       boolean isVideo = mapJson.getBoolean("isVideo");
       boolean isMuted = getSwitchButtonState("Toggle mute sound");
+      String logoFilePath = mapJson.getString("logoFilePath");
 
       if ( !fileExists(mapFilePath) ) {
         if ( fileExists(sketchPath + mapFilePath) ) {
@@ -2324,7 +2329,8 @@ public class UserInterface {
         }
       }
 
-      boolean mapLoaded = map.setup(mapFilePath, fitToScreen, isVideo, isMuted);
+      Point logoMinPosition = new Point(controllersBottomRightInitialX + squareButtonWidth, controllersBottomRightInitialY - controllersSpacing);
+      boolean mapLoaded = map.setup(mapFilePath, fitToScreen, isVideo, isMuted, logoFilePath, logoMinPosition);
       if ( !mapLoaded )
         abortLoadingScene(sceneFile.getAbsolutePath());
 
