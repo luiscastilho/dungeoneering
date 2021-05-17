@@ -25,7 +25,7 @@
       "size": "Medium",
       "lightSources": [],
       "imagePath": "/data/tokens/dm/Goblin.png",
-      "sightTypes": [{"name": "Darkvision 60'"}],
+      "sightTypes": [],
       "name": "Goblin",
       "column": 14,
       "row": 6,
@@ -75,7 +75,7 @@
       "size": "Medium",
       "lightSources": [],
       "imagePath": "/data/tokens/dm/Orc.png",
-      "sightTypes": [{"name": "Darkvision 60'"}],
+      "sightTypes": [],
       "name": "Orc",
       "column": 10,
       "row": 9,
@@ -105,7 +105,7 @@
       "size": "Medium",
       "lightSources": [],
       "imagePath": "/data/tokens/dm/Orc.png",
-      "sightTypes": [{"name": "Darkvision 60'"}],
+      "sightTypes": [],
       "name": "Orc",
       "column": 8,
       "row": 9,
@@ -125,7 +125,7 @@
       "size": "Medium",
       "lightSources": [],
       "imagePath": "/data/tokens/dm/Goblin.png",
-      "sightTypes": [{"name": "Darkvision 60'"}],
+      "sightTypes": [],
       "name": "Goblin",
       "column": 12,
       "row": 14,
@@ -145,7 +145,7 @@
       "size": "Medium",
       "lightSources": [],
       "imagePath": "/data/tokens/dm/Goblin.png",
-      "sightTypes": [{"name": "Darkvision 60'"}],
+      "sightTypes": [],
       "name": "Goblin",
       "column": 14,
       "row": 12,
@@ -195,7 +195,7 @@
       "size": "Medium",
       "lightSources": [],
       "imagePath": "/data/tokens/dm/Goblin.png",
-      "sightTypes": [{"name": "Darkvision 60'"}],
+      "sightTypes": [],
       "name": "Goblin",
       "column": 13,
       "row": 4,
@@ -235,7 +235,7 @@
       "size": "Medium",
       "lightSources": [],
       "imagePath": "/data/tokens/dm/Orc.png",
-      "sightTypes": [{"name": "Darkvision 60'"}],
+      "sightTypes": [],
       "name": "Orc",
       "column": 6,
       "row": 11,
@@ -275,7 +275,7 @@
       "size": "Medium",
       "lightSources": [],
       "imagePath": "/data/tokens/dm/Orc.png",
-      "sightTypes": [{"name": "Darkvision 60'"}],
+      "sightTypes": [],
       "name": "Orc",
       "column": 6,
       "row": 7,
@@ -355,7 +355,7 @@
       "size": "Medium",
       "lightSources": [],
       "imagePath": "/data/tokens/dm/Orc.png",
-      "sightTypes": [{"name": "Darkvision 60'"}],
+      "sightTypes": [],
       "name": "Orc",
       "column": 4,
       "row": 12,
@@ -397,16 +397,6 @@
       "imagePath": "/data/tokens/dm/Ogre.png",
       "sightTypes": [],
       "name": "Ogre",
-      "column": 18,
-      "row": 8,
-      "conditions": []
-    },
-    {
-      "size": "Large",
-      "lightSources": [],
-      "imagePath": "/data/tokens/dm/Ogre.png",
-      "sightTypes": [],
-      "name": "Ogre",
       "column": 16,
       "row": 9,
       "conditions": []
@@ -415,7 +405,7 @@
       "size": "Medium",
       "lightSources": [],
       "imagePath": "/data/tokens/dm/Orc.png",
-      "sightTypes": [{"name": "Darkvision 60'"}],
+      "sightTypes": [],
       "name": "Orc",
       "column": 5,
       "row": 4,
@@ -480,6 +470,16 @@
       "column": 15,
       "row": 9,
       "conditions": []
+    },
+    {
+      "size": "Large",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Ogre.png",
+      "sightTypes": [],
+      "name": "Ogre",
+      "column": 18,
+      "row": 8,
+      "conditions": []
     }
   ],
   "initiative": {
@@ -524,7 +524,7 @@
     "drawInitiativeOrder": true
   },
   "walls": [],
-  "illumination": {"lighting": "darkness"},
+  "illumination": {"lighting": "brightLigt"},
   "grid": {
     "cellWidth": 55,
     "lastCellCenterY": 1035,
@@ -537,7 +537,7 @@
   "playerTokens": [
     {
       "size": "Medium",
-      "lightSources": [{"name": "Candle"}],
+      "lightSources": [],
       "imagePath": "/data/tokens/dm/Militia.png",
       "sightTypes": [],
       "name": "Militia",
@@ -547,7 +547,7 @@
     },
     {
       "size": "Medium",
-      "lightSources": [{"name": "Candle"}],
+      "lightSources": [],
       "imagePath": "/data/tokens/dm/Militia.png",
       "sightTypes": [],
       "name": "Militia",
@@ -557,7 +557,7 @@
     },
     {
       "size": "Medium",
-      "lightSources": [{"name": "Candle"}],
+      "lightSources": [],
       "imagePath": "/data/tokens/dm/Militia.png",
       "sightTypes": [],
       "name": "Militia",
@@ -567,7 +567,7 @@
     },
     {
       "size": "Medium",
-      "lightSources": [{"name": "Candle"}],
+      "lightSources": [],
       "imagePath": "/data/tokens/dm/Militia.png",
       "sightTypes": [],
       "name": "Militia",
@@ -577,7 +577,7 @@
     },
     {
       "size": "Medium",
-      "lightSources": [{"name": "Candle"}],
+      "lightSources": [],
       "imagePath": "/data/tokens/dm/Militia.png",
       "sightTypes": [],
       "name": "Militia",
@@ -587,7 +587,7 @@
     },
     {
       "size": "Medium",
-      "lightSources": [{"name": "Candle"}],
+      "lightSources": [],
       "imagePath": "/data/tokens/dm/Militia.png",
       "sightTypes": [],
       "name": "Militia",
@@ -597,7 +597,7 @@
     },
     {
       "size": "Medium",
-      "lightSources": [{"name": "Candle"}],
+      "lightSources": [],
       "imagePath": "/data/tokens/dm/Militia.png",
       "sightTypes": [],
       "name": "Militia",
@@ -607,7 +607,7 @@
     },
     {
       "size": "Medium",
-      "lightSources": [{"name": "Candle"}],
+      "lightSources": [],
       "imagePath": "/data/tokens/dm/Militia.png",
       "sightTypes": [],
       "name": "Militia",
@@ -617,7 +617,7 @@
     },
     {
       "size": "Medium",
-      "lightSources": [{"name": "Candle"}],
+      "lightSources": [],
       "imagePath": "/data/tokens/dm/Militia.png",
       "sightTypes": [],
       "name": "Militia",
@@ -627,7 +627,7 @@
     },
     {
       "size": "Medium",
-      "lightSources": [{"name": "Candle"}],
+      "lightSources": [],
       "imagePath": "/data/tokens/dm/Militia.png",
       "sightTypes": [],
       "name": "Militia",
@@ -637,7 +637,7 @@
     },
     {
       "size": "Medium",
-      "lightSources": [{"name": "Candle"}],
+      "lightSources": [],
       "imagePath": "/data/tokens/dm/Militia.png",
       "sightTypes": [],
       "name": "Militia",
@@ -647,7 +647,7 @@
     },
     {
       "size": "Medium",
-      "lightSources": [{"name": "Candle"}],
+      "lightSources": [],
       "imagePath": "/data/tokens/dm/Militia.png",
       "sightTypes": [],
       "name": "Militia",
@@ -657,7 +657,7 @@
     },
     {
       "size": "Medium",
-      "lightSources": [{"name": "Candle"}],
+      "lightSources": [],
       "imagePath": "/data/tokens/dm/Militia.png",
       "sightTypes": [],
       "name": "Militia",
@@ -667,17 +667,7 @@
     },
     {
       "size": "Medium",
-      "lightSources": [{"name": "Torch"}],
-      "imagePath": "/data/tokens/dm/Militia Captain.png",
-      "sightTypes": [],
-      "name": "Militia Captain",
-      "column": 22,
-      "row": 9,
-      "conditions": []
-    },
-    {
-      "size": "Medium",
-      "lightSources": [{"name": "Candle"}],
+      "lightSources": [],
       "imagePath": "/data/tokens/dm/Militia.png",
       "sightTypes": [],
       "name": "Militia",
@@ -687,7 +677,7 @@
     },
     {
       "size": "Medium",
-      "lightSources": [{"name": "Candle"}],
+      "lightSources": [],
       "imagePath": "/data/tokens/dm/Militia.png",
       "sightTypes": [],
       "name": "Militia",
@@ -697,7 +687,37 @@
     },
     {
       "size": "Medium",
-      "lightSources": [{"name": "Candle"}],
+      "lightSources": [],
+      "imagePath": "/data/tokens/players/Lia.png",
+      "sightTypes": [],
+      "name": "Lia",
+      "column": 17,
+      "row": 6,
+      "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/players/Luth.png",
+      "sightTypes": [],
+      "name": "Luth",
+      "column": 17,
+      "row": 5,
+      "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Militia Captain.png",
+      "sightTypes": [],
+      "name": "Militia Captain",
+      "column": 22,
+      "row": 9,
+      "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
       "imagePath": "/data/tokens/dm/Militia.png",
       "sightTypes": [],
       "name": "Militia",
@@ -707,38 +727,19 @@
     },
     {
       "size": "Medium",
-      "lightSources": [{"name": "Torch"}],
+      "lightSources": [],
       "imagePath": "/data/tokens/players/Orsik.png",
-      "sightTypes": [{"name": "Darkvision 60'"}],
+      "sightTypes": [],
       "name": "Orsik",
       "column": 17,
       "row": 12,
       "conditions": []
-    },
-    {
-      "size": "Medium",
-      "lightSources": [{"name": "Torch"}],
-      "imagePath": "/data/tokens/players/Lia.png",
-      "sightTypes": [{"name": "Darkvision 60'"}],
-      "name": "Lia",
-      "column": 17,
-      "row": 6,
-      "conditions": []
-    },
-    {
-      "size": "Medium",
-      "lightSources": [{"name": "Torch"}],
-      "imagePath": "/data/tokens/players/Luth.png",
-      "sightTypes": [],
-      "name": "Luth",
-      "column": 17,
-      "row": 5,
-      "conditions": []
     }
   ],
   "map": {
-    "filePath": "/data/maps/Animated-SiegeOfBamburgh-1080p30.mp4",
+    "filePath": "/data/maps/Animated-SiegeOfBamburgh.mp4",
     "isVideo": true,
-    "fitToScreen": false
+    "fitToScreen": false,
+    "logoFilePath": "/data/logos/animatedmaps.png"
   }
 }

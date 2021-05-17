@@ -111,8 +111,9 @@
     }
   ],
   "map": {
-    "filePath": "/data/maps/Animated-SwordCoast-1080p30.mp4",
+    "filePath": "/data/maps/Animated-SwordCoast.mp4",
     "isVideo": true,
-    "fitToScreen": false
+    "fitToScreen": false,
+    "logoFilePath": "/data/logos/animatedmaps.png"
   }
 }
