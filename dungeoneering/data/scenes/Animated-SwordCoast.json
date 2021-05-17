@@ -114,6 +114,7 @@
     "filePath": "/data/maps/Animated-SwordCoast.mp4",
     "isVideo": true,
     "fitToScreen": false,
-    "logoFilePath": "/data/logos/animatedmaps.png"
+    "logoFilePath": "/data/logos/animatedmaps.png",
+    "logoLink": "https://www.patreon.com/animatedmaps"
   }
 }

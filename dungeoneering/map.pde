@@ -25,10 +25,6 @@ class Map {
   boolean panEnabled;
   boolean zoomEnabled;
 
-  String logoFilePath;
-  PImage logo;
-  Point logoStart;
-
   Map(PApplet _sketch, PGraphics _canvas, Obstacles _obstacles) {
 
     sketch = _sketch;
@@ -55,10 +51,6 @@ class Map {
 
     panEnabled = true;
     zoomEnabled = true;
-
-    logoFilePath = null;
-    logo = null;
-    logoStart = null;
 
   }
 
@@ -100,18 +92,13 @@ class Map {
         println("DEBUG: Map: Pan or zoom change");
     }
 
-    if ( logo != null && logoStart != null ) {
-      canvas.imageMode(CORNER);
-      canvas.image(logo, logoStart.x, logoStart.y);
-    }
-
     lastPanX = panX;
     lastPanY = panY;
     lastScale = scale;
 
   }
 
-  boolean setup(String _filePath, boolean _fitToScreen, boolean _isVideo, boolean _isMuted, String _logoFilePath, Point _logoMinPosition) {
+  boolean setup(String _filePath, boolean _fitToScreen, boolean _isVideo, boolean _isMuted) {
 
     clear();
 
@@ -181,27 +168,6 @@ class Map {
     panX = panToX = 0;
     panY = panToY = 0;
     scale = toScale = 1;
-
-    logoFilePath = _logoFilePath;
-
-    if ( logoFilePath != null ) {
-
-      logo = loadImage(logoFilePath);
-
-      if ( _logoMinPosition != null ) {
-        logoStart = new Point(
-          round(_logoMinPosition.x - logo.width),
-          round(_logoMinPosition.y - logo.height)
-        );
-      } else {
-        float spacing = round(min(canvas.width, canvas.height) * 0.05);
-        logoStart = new Point(
-          round(canvas.width - spacing - logo.width),
-          round(canvas.height - spacing - logo.height)
-        );
-      }
-
-    }
 
     set = true;
 
@@ -333,10 +299,6 @@ class Map {
     panX = panToX = 0;
     panY = panToY = 0;
     scale = toScale = 1;
-
-    logoFilePath = null;
-    logo = null;
-    logoStart = null;
 
     System.gc();
 

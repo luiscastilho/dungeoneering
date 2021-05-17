@@ -701,6 +701,7 @@ public class UserInterface {
     disableController("Add player token");
     disableController("Add DM token");
     hideController("Toggle mute sound");
+    removeController("Map logo");
 
   }
 
@@ -848,6 +849,14 @@ public class UserInterface {
         File mapFile = null;
         selectInput("Select a map:", "mapFileSelected", mapFile, this);
         fileDialogOpen = true;
+
+        break;
+      case "Map logo":
+
+        Button logo = (Button)controlEvent.getController();
+        String link = logo.getStringValue();
+        if ( link != null && !link.trim().isEmpty() )
+          link(link);
 
         break;
       case "Grid setup":
@@ -1789,7 +1798,7 @@ public class UserInterface {
     isVideo = type.equals("video");
     isMuted = getSwitchButtonState("Toggle mute sound");
 
-    mapLoaded = map.setup(mapFile.getAbsolutePath(), false, isVideo, isMuted, null, null);
+    mapLoaded = map.setup(mapFile.getAbsolutePath(), false, isVideo, isMuted);
     if ( !mapLoaded )
       return;
 
@@ -1805,6 +1814,7 @@ public class UserInterface {
     disableController("Add DM token");
     enableController("Add/Remove walls");
     enableController("Add/Remove doors");
+    removeController("Map logo");
 
     if ( isVideo )
       showController("Toggle mute sound");
@@ -2307,6 +2317,7 @@ public class UserInterface {
 
     setSwitchButtonState("Toggle combat mode", false);
     setSwitchButtonState("Toggle grid", false);
+    removeController("Map logo");
 
     JSONObject sceneJson = loadJSONObject(sceneFile.getAbsolutePath());
 
@@ -2318,6 +2329,7 @@ public class UserInterface {
       boolean isVideo = mapJson.getBoolean("isVideo");
       boolean isMuted = getSwitchButtonState("Toggle mute sound");
       String logoFilePath = mapJson.getString("logoFilePath");
+      String logoLink = mapJson.getString("logoLink");
 
       if ( !fileExists(mapFilePath) ) {
         if ( fileExists(sketchPath + mapFilePath) ) {
@@ -2329,8 +2341,7 @@ public class UserInterface {
         }
       }
 
-      Point logoMinPosition = new Point(controllersBottomRightInitialX + squareButtonWidth, controllersBottomRightInitialY - controllersSpacing);
-      boolean mapLoaded = map.setup(mapFilePath, fitToScreen, isVideo, isMuted, logoFilePath, logoMinPosition);
+      boolean mapLoaded = map.setup(mapFilePath, fitToScreen, isVideo, isMuted);
       if ( !mapLoaded )
         abortLoadingScene(sceneFile.getAbsolutePath());
 
@@ -2342,6 +2353,22 @@ public class UserInterface {
         showController("Toggle mute sound");
       else
         hideController("Toggle mute sound");
+
+      if ( !fileExists(logoFilePath) ) {
+        if ( fileExists(sketchPath + logoFilePath) ) {
+          logoFilePath = sketchPath + logoFilePath;
+        } else {
+          logoFilePath = null;
+        }
+      }
+
+      if ( logoFilePath != null ) {
+        Point logoMinPosition = new Point(
+          controllersBottomRightInitialX + squareButtonWidth,
+          controllersBottomRightInitialY - controllersSpacing
+        );
+        addLogoButton(logoFilePath, logoMinPosition, logoLink);
+      }
 
     }
 
@@ -2613,6 +2640,27 @@ public class UserInterface {
 
   }
 
+  void addLogoButton(String logoImagePath, Point buttonMinPosition, String logoLink) {
+
+    PImage logoImage = loadImage(logoImagePath);
+
+    Button button = cp5.addButton("Map logo")
+       .setPosition(buttonMinPosition.x - logoImage.width, buttonMinPosition.y - logoImage.height)
+       .setSize(logoImage.width, logoImage.height)
+       .setImage(logoImage)
+       .updateSize()
+       .moveTo(togglableControllers)
+       .setStringValue(logoLink)
+       ;
+
+  }
+
+  void removeController(String controllerName) {
+
+    cp5.remove(controllerName);
+
+  }
+
   void enableController(String controllerName) {
 
     controlP5.Controller controller = cp5.getController(controllerName);
@@ -2716,7 +2764,7 @@ public class UserInterface {
     float endY = startY + controller.getHeight();
 
     if ( controller.isVisible() )
-      if ( controller.isInside() || (x > startX && x < endX && y > startY && y < endY ) )
+      if ( controller.isInside() || (x > startX && x < endX && y > startY && y < endY) )
         inside = true;
 
     return inside;
@@ -2776,7 +2824,7 @@ public class UserInterface {
       File f = new File(filePath);
       if ( f.isFile() )
         exists = true;
-    } catch(Exception e) {
+    } catch( Exception e ) {
       exists = false;
     }
 
