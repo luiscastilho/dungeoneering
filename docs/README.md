@@ -58,6 +58,14 @@ Bugs can be reported through the project's [issues](https://github.com/luiscasti
 
 
 
+## Known Issues
+
+- Video and audio playback can be glitchy depending on the format/codec/framerate of the video being used. If you are having trouble with some of your video maps, try reencoding them to 1080p30. In Windows it's quite easy: use [HandBrake](https://handbrake.fr/) and in the Preset field choose General > Fast 1080p30. Let me know in the issues if it doesn't work even after reencoding.
+
+- Tokens may look pixelated if zoom in is used, even if loading high-resolution token images.
+
+
+
 ## License
 
 dungeoneering is licensed under the GPLv3. See [LICENSE.md](../LICENSE.md) for more details. dungeoneering also uses components from other open source projects. Their code and license can be found at these links:
