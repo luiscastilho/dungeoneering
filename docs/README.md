@@ -25,7 +25,7 @@ The application should work with the instructions above. If it doesn't, create a
 
 ### macOS
 
-macOS releases are created and tested in a virtual machine running Catalina. Not sure if it will work on older macOS releases but I hope so. Create an issue if it doesn't and let me know.
+Coming soon!
 
 ### Linux
 
