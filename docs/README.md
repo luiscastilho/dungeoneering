@@ -29,7 +29,7 @@ Coming soon!
 
 ### Linux
 
-Coming soon as well!
+Coming soon too!
 
 
 
