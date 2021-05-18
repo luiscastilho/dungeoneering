@@ -29,7 +29,7 @@ Coming soon!
 
 ### Linux
 
-There's an extra step to run dungeoneering in Linux - GStreamer must be installed on your system. Installation instructions can be found [here](https://gstreamer.freedesktop.org/documentation/installing/on-linux.html). If it doesn't work even with GStreamer installed, create an issue please.
+Coming soon as well!
 
 
 
