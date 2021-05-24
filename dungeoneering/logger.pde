@@ -19,8 +19,9 @@ class Logger {
 
     try {
         log_level = logLevelLookup(_log_level_name);
+        info("Logger: Log level set to " + _log_level_name);
     } catch ( Exception e ) {
-        error("Unknown log level \"" + _log_level_name + "\" - log level set to INFO");
+        error("Logger: Unknown log level \"" + _log_level_name + "\" - log level set to INFO");
         log_level = INFO;
     }
 
@@ -84,7 +85,7 @@ class Logger {
 
   void critical(String message) {
 
-    if ( log_level < CRITICAL )
+    if ( log_level > CRITICAL )
       return;
     log(CRITICAL, message);
 
@@ -92,7 +93,7 @@ class Logger {
 
   void error(String message) {
 
-    if ( log_level < ERROR )
+    if ( log_level > ERROR )
       return;
     log(ERROR, message);
 
@@ -100,7 +101,7 @@ class Logger {
 
   void warning(String message) {
 
-    if ( log_level < WARNING )
+    if ( log_level > WARNING )
       return;
     log(WARNING, message);
 
@@ -108,7 +109,7 @@ class Logger {
 
   void notice(String message) {
 
-    if ( log_level < NOTICE )
+    if ( log_level > NOTICE )
       return;
     log(NOTICE, message);
 
@@ -116,7 +117,7 @@ class Logger {
 
   void info(String message) {
 
-    if ( log_level < INFO )
+    if ( log_level > INFO )
       return;
     log(INFO, message);
 
@@ -124,7 +125,7 @@ class Logger {
 
   void debug(String message) {
 
-    if ( log_level < DEBUG )
+    if ( log_level > DEBUG )
       return;
     log(DEBUG, message);
 
@@ -132,7 +133,7 @@ class Logger {
 
   void trace(String message) {
 
-    if ( log_level < TRACE )
+    if ( log_level > TRACE )
       return;
     log(TRACE, message);
 

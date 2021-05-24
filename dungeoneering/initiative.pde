@@ -165,6 +165,7 @@ class Initiative {
 
   void toggleDrawInitiativeOrder() {
     drawInitiativeOrder = !drawInitiativeOrder;
+    logger.info("Initiative Order " + (drawInitiativeOrder ? "shown" : "hidden" ));
   }
 
   ArrayList<InitiativeGroup> getInitiativeGroups() {

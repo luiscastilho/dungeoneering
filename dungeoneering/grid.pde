@@ -234,6 +234,7 @@ class Grid {
 
   void toggleDrawGrid() {
     drawGrid = !drawGrid;
+    logger.info("Grid " + (drawGrid ? "shown" : "hidden"));
   }
 
 }

@@ -92,6 +92,8 @@ class Layer {
 
     initiative.addGroup(tokenBaseName, tokenImageFile.getAbsolutePath(), token, thisLayer);
 
+    logger.info("New token added in " + name);
+
   }
 
   void addToken(Token token) {
@@ -220,6 +222,10 @@ class Layer {
         return true;
     return false;
 
+  }
+
+  String getName() {
+    return name;
   }
 
 }

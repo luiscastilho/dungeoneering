@@ -114,7 +114,7 @@ class Map {
       if ( fitToScreen )
         fitToScreen();
 
-      logger.info("Map: Image map loaded");
+      logger.info("Image map loaded");
 
     } else {
 
@@ -134,7 +134,7 @@ class Map {
 
           video.loop();
 
-          logger.info("Map: Video map loaded");
+          logger.info("Video map loaded");
 
           break;
 
@@ -354,10 +354,12 @@ class Map {
 
   void togglePan() {
     panEnabled = !panEnabled;
+    logger.info("Map panning toggled " + (panEnabled ? "on" : "off"));
   }
 
   void toggleZoom() {
     zoomEnabled = !zoomEnabled;
+    logger.info("Map zooming toggled " + (zoomEnabled ? "on" : "off"));
   }
 
   boolean isPanEnabled() {
@@ -368,6 +370,8 @@ class Map {
 
     isMuted = !isMuted;
     muteVideo();
+
+    logger.info("Video sound toggled " + (isMuted ? "on" : "off"));
 
   }
 

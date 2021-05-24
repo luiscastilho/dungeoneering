@@ -755,6 +755,8 @@ public class UserInterface {
 
         setControllersInitialState();
 
+        logger.info("New empty scene created");
+
         break;
       case "Save scene":
 
@@ -944,6 +946,9 @@ public class UserInterface {
 
           newAppState = AppStates.idle;
 
+          if ( grid.isSet() )
+            logger.info("Grid setup");
+
         }
 
         break;
@@ -1106,12 +1111,15 @@ public class UserInterface {
         switch ( layerShown ) {
           case players:
             layerShown = Layers.dm;
+            logger.info("Layer switched to " + dmLayer.getName());
             break;
           case dm:
             layerShown = Layers.all;
+            logger.info("Layer switched to All Layers");
             break;
           case all:
             layerShown = Layers.players;
+            logger.info("Layer switched to " + playersLayer.getName());
             break;
           default:
             break;
@@ -1125,12 +1133,15 @@ public class UserInterface {
         switch ( obstacles.getIllumination() ) {
           case brightLight:
             obstacles.setIllumination(Illumination.darkness);
+            logger.info("Environment lighting switched to Darkness");
             break;
           case dimLight:
             obstacles.setIllumination(Illumination.brightLight);
+            logger.info("Environment lighting switched to Bright Light");
             break;
           case darkness:
             obstacles.setIllumination(Illumination.dimLight);
+            logger.info("Environment lighting switched to Dim Light");
             break;
           default:
             break;
@@ -1156,10 +1167,12 @@ public class UserInterface {
         if ( toggleUi.isOn() ) {
 
           togglableControllers.show();
+          logger.info("UI buttons shown");
 
         } else {
 
           togglableControllers.hide();
+          logger.info("UI buttons hidden");
 
         }
 
@@ -1179,6 +1192,7 @@ public class UserInterface {
       case "Toggle touch screen mode":
 
         cp5.isTouch = !cp5.isTouch;
+        logger.info("Touch screen mode " + (cp5.isTouch ? "enabled" : "disabled"));
 
         break;
       case "Toggle combat mode":
