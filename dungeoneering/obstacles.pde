@@ -33,9 +33,9 @@ class Obstacles {
     drawObstacles = false;
     wallWidth = 4;
     doorWidth = 8;
-    wallColor = color(0, 116, 217, 191);
-    closedDoorColor = color(255, 166, 0, 191);
-    openDoorColor = color(255, 166, 0, 127);
+    wallColor = color(#00BBE0, 191);
+    closedDoorColor = color(#F64B29, 191);
+    openDoorColor = color(#F64B29, 127);
 
     illumination = Illumination.brightLight;
 

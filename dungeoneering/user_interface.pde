@@ -146,7 +146,7 @@ public class UserInterface {
     instructionsFont = loadFont("fonts/ProcessingSansPro-Semibold-14.vlw");
     instructionsFontColor = color(255);
     instructionsFontOutlineColor = color(0);
-    instructionsVisualColor = color(0, 116, 217, 127);
+    instructionsVisualColor = color(#F64B29, 127);
     instructionsX = controllersTopLeftX;
     instructionsY = canvas.height - controllersTopLeftY;
     instructionsInitialX = instructionsX;
