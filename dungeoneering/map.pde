@@ -371,7 +371,7 @@ class Map {
     isMuted = !isMuted;
     muteVideo();
 
-    logger.info("Video sound toggled " + (isMuted ? "on" : "off"));
+    logger.info("Video sound toggled " + (isMuted ? "off" : "on"));
 
   }
 
