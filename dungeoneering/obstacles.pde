@@ -209,8 +209,8 @@ class Obstacles {
 
     recalculateShadows = _recalculateShadows;
 
-    if ( DEBUG && _recalculateShadows )
-      println("DEBUG: Obstacles: recalculating shadows");
+    if ( _recalculateShadows )
+      logger.debug("Obstacles: recalculating shadows");
 
   }
 

@@ -1209,7 +1209,7 @@ public class UserInterface {
         resourceName = "Blinded";
         conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
         if ( conditionTemplate == null ) {
-          println("Resource: Condition " + resourceName + " not found");
+          logger.error("Resource: Condition " + resourceName + " not found");
           break;
         }
 
@@ -1227,7 +1227,7 @@ public class UserInterface {
         resourceName = "Bloodied";
         conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
         if ( conditionTemplate == null ) {
-          println("Resource: Condition " + resourceName + " not found");
+          logger.error("Resource: Condition " + resourceName + " not found");
           break;
         }
 
@@ -1245,7 +1245,7 @@ public class UserInterface {
         resourceName = "Charmed";
         conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
         if ( conditionTemplate == null ) {
-          println("Resource: Condition " + resourceName + " not found");
+          logger.error("Resource: Condition " + resourceName + " not found");
           break;
         }
 
@@ -1263,7 +1263,7 @@ public class UserInterface {
         resourceName = "Dead";
         conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
         if ( conditionTemplate == null ) {
-          println("Resource: Condition " + resourceName + " not found");
+          logger.error("Resource: Condition " + resourceName + " not found");
           break;
         }
 
@@ -1281,7 +1281,7 @@ public class UserInterface {
         resourceName = "Deafened";
         conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
         if ( conditionTemplate == null ) {
-          println("Resource: Condition " + resourceName + " not found");
+          logger.error("Resource: Condition " + resourceName + " not found");
           break;
         }
 
@@ -1299,7 +1299,7 @@ public class UserInterface {
         resourceName = "Frightened";
         conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
         if ( conditionTemplate == null ) {
-          println("Resource: Condition " + resourceName + " not found");
+          logger.error("Resource: Condition " + resourceName + " not found");
           break;
         }
 
@@ -1317,7 +1317,7 @@ public class UserInterface {
         resourceName = "Grappled";
         conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
         if ( conditionTemplate == null ) {
-          println("Resource: Condition " + resourceName + " not found");
+          logger.error("Resource: Condition " + resourceName + " not found");
           break;
         }
 
@@ -1335,7 +1335,7 @@ public class UserInterface {
         resourceName = "Hidden";
         conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
         if ( conditionTemplate == null ) {
-          println("Resource: Condition " + resourceName + " not found");
+          logger.error("Resource: Condition " + resourceName + " not found");
           break;
         }
 
@@ -1353,7 +1353,7 @@ public class UserInterface {
         resourceName = "Incapacitated";
         conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
         if ( conditionTemplate == null ) {
-          println("Resource: Condition " + resourceName + " not found");
+          logger.error("Resource: Condition " + resourceName + " not found");
           break;
         }
 
@@ -1371,7 +1371,7 @@ public class UserInterface {
         resourceName = "Invisible";
         conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
         if ( conditionTemplate == null ) {
-          println("Resource: Condition " + resourceName + " not found");
+          logger.error("Resource: Condition " + resourceName + " not found");
           break;
         }
 
@@ -1389,7 +1389,7 @@ public class UserInterface {
         resourceName = "Paralyzed";
         conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
         if ( conditionTemplate == null ) {
-          println("Resource: Condition " + resourceName + " not found");
+          logger.error("Resource: Condition " + resourceName + " not found");
           break;
         }
 
@@ -1407,7 +1407,7 @@ public class UserInterface {
         resourceName = "Petrified";
         conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
         if ( conditionTemplate == null ) {
-          println("Resource: Condition " + resourceName + " not found");
+          logger.error("Resource: Condition " + resourceName + " not found");
           break;
         }
 
@@ -1425,7 +1425,7 @@ public class UserInterface {
         resourceName = "Poisoned";
         conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
         if ( conditionTemplate == null ) {
-          println("Resource: Condition " + resourceName + " not found");
+          logger.error("Resource: Condition " + resourceName + " not found");
           break;
         }
 
@@ -1443,7 +1443,7 @@ public class UserInterface {
         resourceName = "Prone";
         conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
         if ( conditionTemplate == null ) {
-          println("Resource: Condition " + resourceName + " not found");
+          logger.error("Resource: Condition " + resourceName + " not found");
           break;
         }
 
@@ -1461,7 +1461,7 @@ public class UserInterface {
         resourceName = "Restrained";
         conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
         if ( conditionTemplate == null ) {
-          println("Resource: Condition " + resourceName + " not found");
+          logger.error("Resource: Condition " + resourceName + " not found");
           break;
         }
 
@@ -1479,7 +1479,7 @@ public class UserInterface {
         resourceName = "Stunned";
         conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
         if ( conditionTemplate == null ) {
-          println("Resource: Condition " + resourceName + " not found");
+          logger.error("Resource: Condition " + resourceName + " not found");
           break;
         }
 
@@ -1497,7 +1497,7 @@ public class UserInterface {
         resourceName = "Unconscious";
         conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
         if ( conditionTemplate == null ) {
-          println("Resource: Condition " + resourceName + " not found");
+          logger.error("Resource: Condition " + resourceName + " not found");
           break;
         }
 
@@ -1515,7 +1515,7 @@ public class UserInterface {
         resourceName = "Candle";
         lightTemplate = resources.getCommonLightSource(resourceName);
         if ( lightTemplate == null ) {
-          println("Resource: Common light source " + resourceName + " not found");
+          logger.error("Resource: Common light source " + resourceName + " not found");
           break;
         }
 
@@ -1532,7 +1532,7 @@ public class UserInterface {
         resourceName = "Torch";
         lightTemplate = resources.getCommonLightSource(resourceName);
         if ( lightTemplate == null ) {
-          println("Resource: Common light source " + resourceName + " not found");
+          logger.error("Resource: Common light source " + resourceName + " not found");
           break;
         }
 
@@ -1549,7 +1549,7 @@ public class UserInterface {
         resourceName = "Lamp";
         lightTemplate = resources.getCommonLightSource(resourceName);
         if ( lightTemplate == null ) {
-          println("Resource: Common light source " + resourceName + " not found");
+          logger.error("Resource: Common light source " + resourceName + " not found");
           break;
         }
 
@@ -1566,7 +1566,7 @@ public class UserInterface {
         resourceName = "Hooded Lantern";
         lightTemplate = resources.getCommonLightSource(resourceName);
         if ( lightTemplate == null ) {
-          println("Resource: Common light source " + resourceName + " not found");
+          logger.error("Resource: Common light source " + resourceName + " not found");
           break;
         }
 
@@ -1583,7 +1583,7 @@ public class UserInterface {
         resourceName = "Light";
         lightTemplate = resources.getSpellLightSource(resourceName);
         if ( lightTemplate == null ) {
-          println("Resource: Spell light source " + resourceName + " not found");
+          logger.error("Resource: Spell light source " + resourceName + " not found");
           break;
         }
 
@@ -1600,7 +1600,7 @@ public class UserInterface {
         resourceName = "Daylight";
         lightTemplate = resources.getCommonLightSource(resourceName);
         if ( lightTemplate == null ) {
-          println("Resource: Spell light source " + resourceName + " not found");
+          logger.error("Resource: Spell light source " + resourceName + " not found");
           break;
         }
 
@@ -1617,7 +1617,7 @@ public class UserInterface {
         resourceName = "Darkvision 60'";
         lightTemplate = resources.getSightType(resourceName);
         if ( lightTemplate == null ) {
-          println("Resource: Sight type " + resourceName + " not found");
+          logger.error("Resource: Sight type " + resourceName + " not found");
           break;
         }
 
@@ -1634,7 +1634,7 @@ public class UserInterface {
         resourceName = "Tiny";
         sizeTemplate = resources.getSize(resourceName);
         if ( sizeTemplate == null ) {
-          println("Resource: Size " + resourceName + " not found");
+          logger.error("Resource: Size " + resourceName + " not found");
           break;
         }
 
@@ -1651,7 +1651,7 @@ public class UserInterface {
         resourceName = "Small";
         sizeTemplate = resources.getSize(resourceName);
         if ( sizeTemplate == null ) {
-          println("Resource: Size " + resourceName + " not found");
+          logger.error("Resource: Size " + resourceName + " not found");
           break;
         }
 
@@ -1668,7 +1668,7 @@ public class UserInterface {
         resourceName = "Medium";
         sizeTemplate = resources.getSize(resourceName);
         if ( sizeTemplate == null ) {
-          println("Resource: Size " + resourceName + " not found");
+          logger.error("Resource: Size " + resourceName + " not found");
           break;
         }
 
@@ -1685,7 +1685,7 @@ public class UserInterface {
         resourceName = "Large";
         sizeTemplate = resources.getSize(resourceName);
         if ( sizeTemplate == null ) {
-          println("Resource: Size " + resourceName + " not found");
+          logger.error("Resource: Size " + resourceName + " not found");
           break;
         }
 
@@ -1702,7 +1702,7 @@ public class UserInterface {
         resourceName = "Huge";
         sizeTemplate = resources.getSize(resourceName);
         if ( sizeTemplate == null ) {
-          println("Resource: Size " + resourceName + " not found");
+          logger.error("Resource: Size " + resourceName + " not found");
           break;
         }
 
@@ -1719,7 +1719,7 @@ public class UserInterface {
         resourceName = "Gargantuan";
         sizeTemplate = resources.getSize(resourceName);
         if ( sizeTemplate == null ) {
-          println("Resource: Size " + resourceName + " not found");
+          logger.error("Resource: Size " + resourceName + " not found");
           break;
         }
 
@@ -1791,7 +1791,7 @@ public class UserInterface {
     String mimetype = mimetypesMap.getContentType(mapFile);
     String type = mimetype.split("/")[0];
     if ( !type.equals("image") && !type.equals("video") ) {
-      println("ERROR: Selected map file is not of a supported image or video type");
+      logger.error("Selected map file is not of a supported image or video type");
       return;
     }
 
@@ -2230,7 +2230,7 @@ public class UserInterface {
 
     saveJSONObject(sceneJson, sceneFolder.getAbsolutePath() + "\\" + mapBaseName + ".json");
 
-    println("Scene saved to: " + sceneFolder.getAbsolutePath() + "\\" + mapBaseName + ".json");
+    logger.info("Scene saved to: " + sceneFolder.getAbsolutePath() + "\\" + mapBaseName + ".json");
 
   }
 
@@ -2335,7 +2335,7 @@ public class UserInterface {
         if ( fileExists(sketchPath + mapFilePath) ) {
           mapFilePath = sketchPath + mapFilePath;
         } else {
-          println("ERROR: Map file not found: " + mapFilePath);
+          logger.error("Map file not found: " + mapFilePath);
           abortLoadingScene(sceneFile.getAbsolutePath());
           return;
         }
@@ -2487,7 +2487,7 @@ public class UserInterface {
 
     }
 
-    println("Scene loaded from: " + sceneFile.getAbsolutePath());
+    logger.info("Scene loaded from: " + sceneFile.getAbsolutePath());
 
     layerShown = Layers.players;
 
@@ -2509,7 +2509,7 @@ public class UserInterface {
         String tokenSizeName = tokenJson.getString("size", "Medium");
         Size tokenSize = resources.getSize(tokenSizeName);
         if ( tokenSize == null ) {
-          println("ERROR: Token " + tokenName + " size not found: " + tokenSizeName);
+          logger.error("Token " + tokenName + " size not found: " + tokenSizeName);
           continue;
         }
 
@@ -2520,7 +2520,7 @@ public class UserInterface {
           if ( fileExists(sketchPath + tokenImagePath) ) {
             tokenImagePath = sketchPath + tokenImagePath;
           } else {
-            println("ERROR: Token " + tokenName + " image not found: " + tokenImagePath);
+            logger.error("Token " + tokenName + " image not found: " + tokenImagePath);
             continue;
           }
         }
@@ -2560,7 +2560,7 @@ public class UserInterface {
         if ( light != null ) {
           lights.add(light);
         } else {
-          println("ERROR: Token " + tokenName + " light source not found: " + name);
+          logger.error("Token " + tokenName + " light source not found: " + name);
           continue;
         }
       }
@@ -2582,7 +2582,7 @@ public class UserInterface {
         if ( sight != null ) {
           sights.add(sight);
         } else {
-          println("ERROR: Token " + tokenName + " sight type not found: " + name);
+          logger.error("Token " + tokenName + " sight type not found: " + name);
           continue;
         }
       }
@@ -2604,7 +2604,7 @@ public class UserInterface {
         if ( condition != null ) {
           conditions.add(condition);
         } else {
-          println("ERROR: Token " + tokenName + " condition not found: " + name);
+          logger.error("Token " + tokenName + " condition not found: " + name);
           continue;
         }
       }
@@ -2632,7 +2632,7 @@ public class UserInterface {
     setSwitchButtonState("Toggle mute sound", false);
     hideController("Toggle mute sound");
 
-    println("ERROR: Scene could not be loaded: " + sceneFilePath);
+    logger.error("Scene could not be loaded: " + sceneFilePath);
 
     layerShown = Layers.players;
 

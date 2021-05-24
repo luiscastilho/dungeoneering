@@ -108,8 +108,7 @@ class Token {
 
   void recalculateShadows() {
 
-    if ( DEBUG )
-      println("DEBUG: Token " + name + ": recalculating shadows");
+    logger.debug("Token " + name + ": recalculating shadows");
 
     for ( Light lightSource: lightSources )
       recalculateShadows(lightSource, "Light source");
@@ -137,8 +136,7 @@ class Token {
         wall.calculateShadows(light, shadows);
         wallsReached += 1;
       }
-    if ( DEBUG )
-      println("DEBUG: Token " + name + ": " + type + " " + light.getName() + ": " + wallsReached + "/" + obstacles.getWalls().size() + " walls reached");
+    logger.debug("Token " + name + ": " + type + " " + light.getName() + ": " + wallsReached + "/" + obstacles.getWalls().size() + " walls reached");
 
     int doorsReached = 0;
     for ( Door door: obstacles.getDoors() )
@@ -146,8 +144,7 @@ class Token {
         door.calculateShadows(light, shadows);
         doorsReached += 1;
       }
-    if ( DEBUG )
-      println("DEBUG: Token " + name + ": " + type + " " + light.getName() + ": " + doorsReached + "/" + obstacles.getDoors().size() + " doors reached");
+    logger.debug("Token " + name + ": " + type + " " + light.getName() + ": " + doorsReached + "/" + obstacles.getDoors().size() + " doors reached");
 
     shadows.endDraw();
     obstacles.blendShadows();
@@ -340,8 +337,7 @@ class Token {
 
         lightSources.remove(activeLightSource);
 
-        if ( DEBUG )
-          println("DEBUG: Token " + name + ": Light source " + activeLightSource.getName() + " removed");
+        logger.debug("Token " + name + ": Light source " + activeLightSource.getName() + " removed");
         return;
 
       }
@@ -349,8 +345,7 @@ class Token {
     lightSources.add(light);
     recenterLightSources();
 
-    if ( DEBUG )
-      println("DEBUG: Token " + name + ": Light source " + light.getName() + " added");
+    logger.debug("Token " + name + ": Light source " + light.getName() + " added");
 
   }
 
@@ -361,8 +356,7 @@ class Token {
 
         sightTypes.remove(activeSightType);
 
-        if ( DEBUG )
-          println("DEBUG: Token " + name + ": Sight type " + activeSightType.getName() + " removed");
+        logger.debug("Token " + name + ": Sight type " + activeSightType.getName() + " removed");
         return;
 
       }
@@ -370,8 +364,7 @@ class Token {
     sightTypes.add(sight);
     recenterLightSources();
 
-    if ( DEBUG )
-      println("DEBUG: Token " + name + ": Sight type " + sight.getName() + " added");
+    logger.debug("Token " + name + ": Sight type " + sight.getName() + " added");
 
   }
 
@@ -393,8 +386,7 @@ class Token {
 
         }
 
-        if ( DEBUG )
-          println("DEBUG: Token " + name + ": Condition " + condition.getName() + " removed");
+        logger.debug("Token " + name + ": Condition " + condition.getName() + " removed");
         return;
 
       }
@@ -403,8 +395,7 @@ class Token {
     if ( condition.disablesTarget() )
       disabled = true;
 
-    if ( DEBUG )
-      println("DEBUG: Token " + name + ": Condition " + condition.getName() + " added");
+    logger.debug("Token " + name + ": Condition " + condition.getName() + " added");
 
   }
 
@@ -425,8 +416,7 @@ class Token {
 
     recenterLightSources();
 
-    if ( DEBUG )
-      println("DEBUG: Token " + name + ": Size set to " + size.getName());
+    logger.debug("Token " + name + ": Size set to " + size.getName());
 
   }
 

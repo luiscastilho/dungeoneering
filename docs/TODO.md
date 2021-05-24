@@ -42,6 +42,7 @@
 - [X] Fix low FPS when panning due to shadows being recalculated
 - [X] Make UI more intuitive (and pretty)
 - [X] Conditions, light sources, etc, applied to a token should remain highlighted in the right click menu
+- [ ] Scenes saved and later loaded should work on any screen resolution
 - [ ] Fix token images looking pixelated if zoom in is used
 - [ ] Light sources should be visible in all layers
 - [ ] Set maximum zoom and pan
@@ -63,3 +64,7 @@
 - [ ] Multiple maps linked (NSEW)
 - [ ] Show movement path
 - [ ] Don't allow tokens to stop on top of another tokens - move it back to previous cell
+- [ ] Create scene selection screen with thumbnails
+- [ ] Create map selection screen with thumbnails
+- [ ] Create token selection screen with thumbnails
+- [ ] Allow DMs to load the same scene PCs are seeing in a secondary screen

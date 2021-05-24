@@ -66,8 +66,7 @@ class Layer {
 
   void recalculateShadows() {
 
-    if ( DEBUG )
-      println("DEBUG: " + name + ": recalculating shadows");
+    logger.debug(name + ": recalculating shadows");
 
     for ( Token token: tokens )
       token.recalculateShadows();

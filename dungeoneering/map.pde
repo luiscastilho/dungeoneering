@@ -76,7 +76,7 @@ class Map {
       try {
         canvas.image(video, canvas.width/2, canvas.height/2);
       } catch ( Exception e ) {
-        println("ERROR: Map: Error displaying video frame");
+        logger.error("Map: Error displaying video frame");
       }
 
     }
@@ -88,8 +88,7 @@ class Map {
 
       obstacles.setRecalculateShadows(true);
 
-      if ( DEBUG )
-        println("DEBUG: Map: Pan or zoom change");
+      logger.debug("Map: Pan or zoom change");
     }
 
     lastPanX = panX;
@@ -115,8 +114,7 @@ class Map {
       if ( fitToScreen )
         fitToScreen();
 
-      if ( DEBUG )
-        println("DEBUG: Map: Image map loaded");
+      logger.info("Map: Image map loaded");
 
     } else {
 
@@ -136,14 +134,13 @@ class Map {
 
           video.loop();
 
-          if ( DEBUG )
-            println("DEBUG: Map: Video map loaded");
+          logger.info("Map: Video map loaded");
 
           break;
 
         } catch ( Exception e ) {
 
-          println("ERROR: Map: Error loading and starting video");
+          logger.error("Map: Error loading and starting video");
 
           triesCount += 1;
           if ( triesCount == maxTries ) {
@@ -155,7 +152,7 @@ class Map {
 
             try { Thread.sleep(sleepTimeMillis); }
             catch ( InterruptedException ie ) {}
-            println("ERROR: Map: Retrying...");
+            logger.error("Map: Retrying...");
 
           }
 
@@ -287,7 +284,7 @@ class Map {
         video.dispose();
 
       } catch ( Exception e ) {
-        println("ERROR: Map: Error stopping and disposing of video");
+        logger.error("Map: Error stopping and disposing of video");
       }
 
     }
@@ -388,7 +385,7 @@ class Map {
           video.volume(volume);
 
       } catch ( Exception e ) {
-        println("ERROR: Map: Error setting video volume");
+        logger.error("Map: Error setting video volume");
       }
 
     }

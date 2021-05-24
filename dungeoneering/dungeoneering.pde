@@ -4,7 +4,7 @@ import ch.bildspur.postfx.builder.*;
 import ch.bildspur.postfx.pass.*;
 import ch.bildspur.postfx.*;
 
-boolean DEBUG;
+Logger logger;
 
 AppStates appState;
 
@@ -42,7 +42,7 @@ void setup() {
   smooth();
   frameRate(60);
 
-  DEBUG = true;
+  logger = new Logger("DEBUG");
 
   appState = AppStates.idle;
 
@@ -162,12 +162,10 @@ void draw() {
     System.gc();
     System.runFinalization();
 
-    if ( DEBUG ) {
-      long totalMemory = Runtime.getRuntime().totalMemory();
-      long usedMemory = totalMemory - Runtime.getRuntime().freeMemory();
-      float usedMemoryPercent = (100*(float)usedMemory/totalMemory);
-      println("DEBUG: FPS: " + nf(frameRate, 2, 2) + " / " + "Memory usage: " + nf(usedMemoryPercent, 2, 2) + "%");
-    }
+    long totalMemory = Runtime.getRuntime().totalMemory();
+    long usedMemory = totalMemory - Runtime.getRuntime().freeMemory();
+    float usedMemoryPercent = (100*(float)usedMemory/totalMemory);
+    logger.debug("FPS: " + nf(frameRate, 2, 2) + " / " + "Memory usage: " + nf(usedMemoryPercent, 2, 2) + "%");
 
   }
 
@@ -382,7 +380,7 @@ void movieEvent(Movie movie) {
       if ( movie.available() )
         movie.read();
     } catch ( Exception e ) {
-      println("ERROR: Map: Error reading video frame");
+      logger.error("Map: Error reading video frame");
     }
 
 }
