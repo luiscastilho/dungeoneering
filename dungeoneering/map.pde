@@ -81,7 +81,7 @@ class Map {
 
     }
 
-    if ( Math.abs(panX - lastPanX) > 0.1 || Math.abs(panY - lastPanY) > 0.1 || Math.abs(scale - lastScale) > 0.1 ) {
+    if ( abs(panX - lastPanX) > 0.1 || abs(panY - lastPanY) > 0.1 || abs(scale - lastScale) > 0.1 ) {
       obstacles.setCurrentPanX(panX);
       obstacles.setCurrentPanY(panY);
       obstacles.setCurrentScale(scale);
@@ -89,6 +89,8 @@ class Map {
       obstacles.setRecalculateShadows(true);
 
       logger.debug("Map: Pan or zoom change");
+      logger.trace("Map: Current pan: " + panX + ", " + panY);
+      logger.trace("Map: Current scale: " + scale);
     }
 
     lastPanX = panX;
@@ -295,6 +297,53 @@ class Map {
     logger.trace("Canvas point " + canvasPoint + " mapped to map point " + mapPoint + "");
 
     return mapPoint;
+
+  }
+
+  // Similar to mapCanvasToMap, but maps a point in the map to a
+  // point in canvas.
+  Point mapMapToCanvas(Point mapPoint) {
+
+    Point canvasPoint = new Point();
+    float widthRatio, heightRatio;
+    int widthDiff, heightDiff;
+
+    // Ratio between map and canvas, to check if map fits into canvas,
+    // is taller and wider, etc
+    widthRatio = getWidth() / float(canvas.width);
+    heightRatio = getHeight() / float(canvas.height);
+
+    // Absolute difference between canvas and map sizes
+    widthDiff = abs(canvas.width - getWidth());
+    heightDiff = abs(canvas.height - getHeight());
+
+    // Map fits into canvas
+    if ( widthRatio <= 1 && heightRatio <= 1 ) {
+      canvasPoint.x = mapPoint.x + widthDiff/2;
+      canvasPoint.y = mapPoint.y + heightDiff/2;
+    }
+
+    // Map is taller and wider
+    else if ( widthRatio > 1 && heightRatio > 1 ) {
+      canvasPoint.x = mapPoint.x - widthDiff/2;
+      canvasPoint.y = mapPoint.y - heightDiff/2;
+    }
+
+    // Map is taller than canvas - portrait
+    else if ( widthRatio < heightRatio ) {
+      canvasPoint.x = mapPoint.x + widthDiff/2;
+      canvasPoint.y = mapPoint.y - heightDiff/2;
+    }
+
+    // Map is wider than canvas - landscape
+    else if ( widthRatio > heightRatio ) {
+      canvasPoint.x = mapPoint.x - widthDiff/2;
+      canvasPoint.y = mapPoint.y + heightDiff/2;
+    }
+
+    logger.trace("Map point " + mapPoint + " mapped to canvas point " + canvasPoint + "");
+
+    return canvasPoint;
 
   }
 

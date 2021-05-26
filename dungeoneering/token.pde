@@ -136,7 +136,7 @@ class Token {
         wall.calculateShadows(light, shadows);
         wallsReached += 1;
       }
-    logger.debug("Token " + name + ": " + type + " " + light.getName() + ": " + wallsReached + "/" + obstacles.getWalls().size() + " walls reached");
+    logger.trace("Token " + name + ": " + type + " " + light.getName() + ": " + wallsReached + "/" + obstacles.getWalls().size() + " walls reached");
 
     int doorsReached = 0;
     for ( Door door: obstacles.getDoors() )
@@ -144,7 +144,7 @@ class Token {
         door.calculateShadows(light, shadows);
         doorsReached += 1;
       }
-    logger.debug("Token " + name + ": " + type + " " + light.getName() + ": " + doorsReached + "/" + obstacles.getDoors().size() + " doors reached");
+    logger.trace("Token " + name + ": " + type + " " + light.getName() + ": " + doorsReached + "/" + obstacles.getDoors().size() + " doors reached");
 
     shadows.endDraw();
     obstacles.blendShadows();

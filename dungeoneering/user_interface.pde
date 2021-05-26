@@ -2043,14 +2043,29 @@ public class UserInterface {
     if ( newWall == null )
       newWall = new Wall(canvas);
 
-    newWall.addVertex(map.transformX(_mouseX), map.transformY(_mouseY));
+    // Vertex with canvas coordinates ignoring current transformations (pan and scale), used to draw vertex on canvas
+    Point canvasVertex = new Point(
+      map.transformX(_mouseX),
+      map.transformY(_mouseY)
+    );
+
+    // Vertex with map coordinates, used when scene is saved/loaded
+    Point mapVertex = map.mapCanvasToMap(canvasVertex);
+
+    newWall.addVertex(
+      canvasVertex.x, canvasVertex.y,
+      mapVertex.x, mapVertex.y
+    );
 
     if ( newWall.isSet() ) {
 
       obstacles.addWall(newWall);
 
       newWall = new Wall(canvas);
-      newWall.addVertex(map.transformX(_mouseX), map.transformY(_mouseY));
+      newWall.addVertex(
+        canvasVertex.x, canvasVertex.y,
+        mapVertex.x, mapVertex.y
+      );
 
     }
 
@@ -2070,7 +2085,19 @@ public class UserInterface {
     if ( isInside(_mouseX, _mouseY) )
       return;
 
-    newDoor.addVertex(map.transformX(_mouseX), map.transformY(_mouseY));
+    // Vertex with canvas coordinates ignoring current transformations (pan and scale), used to draw vertex on canvas
+    Point canvasVertex = new Point(
+      map.transformX(_mouseX),
+      map.transformY(_mouseY)
+    );
+
+    // Vertex with map coordinates, used when scene is saved/loaded
+    Point mapVertex = map.mapCanvasToMap(canvasVertex);
+
+    newDoor.addVertex(
+      canvasVertex.x, canvasVertex.y,
+      mapVertex.x, mapVertex.y
+    );
 
   }
 
@@ -2228,18 +2255,22 @@ public class UserInterface {
     JSONObject sceneJson = new JSONObject();
 
     JSONObject mapJson = new JSONObject();
-    mapJson.setString("filePath", map.getFilePath().replaceAll("\\\\", "/").replaceFirst("^(?i)" + Pattern.quote(sketchPath), ""));
-    mapJson.setBoolean("fitToScreen", map.getFitToScreen());
-    mapJson.setBoolean("isVideo", map.isVideo());
+    if ( map.isSet() ) {
+      mapJson.setString("filePath", map.getFilePath().replaceAll("\\\\", "/").replaceFirst("^(?i)" + Pattern.quote(sketchPath), ""));
+      mapJson.setBoolean("fitToScreen", map.getFitToScreen());
+      mapJson.setBoolean("isVideo", map.isVideo());
+    }
     sceneJson.setJSONObject("map", mapJson);
 
     JSONObject gridJson = new JSONObject();
-    gridJson.setInt("firstCellCenterX", grid.getMapGridFirstCellCenter().x);
-    gridJson.setInt("firstCellCenterY", grid.getMapGridFirstCellCenter().y);
-    gridJson.setInt("lastCellCenterX", grid.getMapGridLastCellCenter().x);
-    gridJson.setInt("lastCellCenterY", grid.getMapGridLastCellCenter().y);
-    gridJson.setInt("cellWidth", grid.getCellWidth());
-    gridJson.setInt("cellHeight", grid.getCellHeight());
+    if ( grid.isSet() ) {
+      gridJson.setInt("firstCellCenterX", grid.getMapGridFirstCellCenter().x);
+      gridJson.setInt("firstCellCenterY", grid.getMapGridFirstCellCenter().y);
+      gridJson.setInt("lastCellCenterX", grid.getMapGridLastCellCenter().x);
+      gridJson.setInt("lastCellCenterY", grid.getMapGridLastCellCenter().y);
+      gridJson.setInt("cellWidth", grid.getCellWidth());
+      gridJson.setInt("cellHeight", grid.getCellHeight());
+    }
     gridJson.setBoolean("drawGrid", grid.getDrawGrid());
     sceneJson.setJSONObject("grid", gridJson);
 
@@ -2264,7 +2295,7 @@ public class UserInterface {
     obstaclesIndex = 0;
     for ( Wall wall: obstacles.getWalls() ) {
       JSONObject wallJson = new JSONObject();
-      ArrayList<PVector> wallVertexes = wall.getVertexes();
+      ArrayList<PVector> wallVertexes = wall.getMapVertexes();
       JSONArray wallVertexesJson = new JSONArray();
       for ( PVector wallVertex: wallVertexes ) {
         JSONArray wallVertexJson = new JSONArray();
@@ -2283,7 +2314,7 @@ public class UserInterface {
     for ( Door door: obstacles.getDoors() ) {
       JSONObject doorJson = new JSONObject();
       doorJson.setBoolean("closed", door.getClosed());
-      ArrayList<PVector> doorVertexes = door.getVertexes();
+      ArrayList<PVector> doorVertexes = door.getMapVertexes();
       JSONArray doorVertexesJson = new JSONArray();
       for ( PVector doorVertex: doorVertexes ) {
         JSONArray doorVertexJson = new JSONArray();
@@ -2414,11 +2445,11 @@ public class UserInterface {
     JSONObject mapJson = sceneJson.getJSONObject("map");
     if ( mapJson != null ) {
 
-      String mapFilePath = mapJson.getString("filePath");
-      boolean fitToScreen = mapJson.getBoolean("fitToScreen");
-      boolean isVideo = mapJson.getBoolean("isVideo");
-      String logoFilePath = mapJson.getString("logoFilePath");
-      String logoLink = mapJson.getString("logoLink");
+      String mapFilePath = mapJson.getString("filePath", "");
+      boolean fitToScreen = mapJson.getBoolean("fitToScreen", false);
+      boolean isVideo = mapJson.getBoolean("isVideo", false);
+      String logoFilePath = mapJson.getString("logoFilePath", "");
+      String logoLink = mapJson.getString("logoLink", "");
 
       if ( !fileExists(mapFilePath) ) {
         if ( fileExists(sketchPath + mapFilePath) ) {
@@ -2445,6 +2476,8 @@ public class UserInterface {
       else
         hideController("Toggle mute sound");
 
+      // Show logo image as link, if available
+
       if ( !fileExists(logoFilePath) ) {
         if ( fileExists(sketchPath + logoFilePath) ) {
           logoFilePath = sketchPath + logoFilePath;
@@ -2466,13 +2499,13 @@ public class UserInterface {
     JSONObject gridJson = sceneJson.getJSONObject("grid");
     if ( gridJson != null ) {
 
-      int firstCellCenterX = gridJson.getInt("firstCellCenterX");
-      int firstCellCenterY = gridJson.getInt("firstCellCenterY");
-      int lastCellCenterX = gridJson.getInt("lastCellCenterX");
-      int lastCellCenterY = gridJson.getInt("lastCellCenterY");
-      int cellWidth = gridJson.getInt("cellWidth");
-      int cellHeight = gridJson.getInt("cellHeight");
-      boolean drawGrid = gridJson.getBoolean("drawGrid");
+      int firstCellCenterX = gridJson.getInt("firstCellCenterX", 0);
+      int firstCellCenterY = gridJson.getInt("firstCellCenterY", 0);
+      int lastCellCenterX = gridJson.getInt("lastCellCenterX", 0);
+      int lastCellCenterY = gridJson.getInt("lastCellCenterY", 0);
+      int cellWidth = gridJson.getInt("cellWidth", 0);
+      int cellHeight = gridJson.getInt("cellHeight", 0);
+      boolean drawGrid = gridJson.getBoolean("drawGrid", false);
 
       Point mapFirstCellCenter = new Point(firstCellCenterX, firstCellCenterY);
       Point mapLastCellCenter = new Point(lastCellCenterX, lastCellCenterY);
@@ -2533,9 +2566,19 @@ public class UserInterface {
         JSONArray wallVertexesJson = wallJson.getJSONArray("vertexes");
         for ( int j = 0; j < wallVertexesJson.size(); j++ ) {
           JSONArray wallVertexJson = wallVertexesJson.getJSONArray(j);
-          int vertexX = wallVertexJson.getInt(0);
-          int vertexY = wallVertexJson.getInt(1);
-          wall.addVertex(vertexX, vertexY);
+
+          // Vertex with map coordinates
+          Point mapVertex = new Point(
+            wallVertexJson.getInt(0),
+            wallVertexJson.getInt(1)
+          );
+          // Vertex with canvas coordinates
+          Point canvasVertex = map.mapMapToCanvas(mapVertex);
+
+          wall.addVertex(
+            canvasVertex.x, canvasVertex.y,
+            mapVertex.x, mapVertex.y
+          );
         }
 
         obstacles.addWall(wall);
@@ -2554,9 +2597,20 @@ public class UserInterface {
         JSONArray doorVertexesJson = doorJson.getJSONArray("vertexes");
         for ( int j = 0; j < doorVertexesJson.size(); j++ ) {
           JSONArray doorVertexJson = doorVertexesJson.getJSONArray(j);
-          int vertexX = doorVertexJson.getInt(0);
-          int vertexY = doorVertexJson.getInt(1);
-          door.addVertex(vertexX, vertexY);
+
+          // Vertex with map coordinates
+          Point mapVertex = new Point(
+            doorVertexJson.getInt(0),
+            doorVertexJson.getInt(1)
+          );
+          // Vertex with canvas coordinates
+          Point canvasVertex = map.mapMapToCanvas(mapVertex);
+
+          door.addVertex(
+            canvasVertex.x, canvasVertex.y,
+            mapVertex.x, mapVertex.y
+          );
+
         }
 
         obstacles.addDoor(door);
@@ -2737,6 +2791,12 @@ public class UserInterface {
 
   void addLogoButton(String logoImagePath, Point buttonMinPosition, String logoLink) {
 
+    if ( logoImagePath == null || logoImagePath.trim().isEmpty() )
+      return;
+
+    if ( buttonMinPosition == null )
+      return;
+
     PImage logoImage = loadImage(logoImagePath);
 
     Button button = cp5.addButton("Map logo")
@@ -2911,6 +2971,9 @@ public class UserInterface {
   }
 
   boolean fileExists(String filePath) {
+
+    if ( filePath == null || filePath.trim().isEmpty() )
+      return false;
 
     boolean exists = false;
 
