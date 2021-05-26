@@ -583,7 +583,7 @@ public class UserInterface {
     instructionsY = instructionsInitialY;
 
     cp5.addTextlabel("Grid instructions - 2nd line")
-       .setText("Once you draw this square, you can adjust its size using W, A, S, D and the arrow keys.")
+       .setText("Once you draw this square, you can adjust its size using W, A, S, D and ↑, ←, ↓, → keys.")
        .setPosition(instructionsX, instructionsY)
        .setColorValue(instructionsFontColor)
        .setFont(instructionsFont)
