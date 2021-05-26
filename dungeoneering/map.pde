@@ -99,6 +99,10 @@ class Map {
 
   boolean setup(String _filePath, boolean _fitToScreen, boolean _isVideo, boolean _isMuted) {
 
+    int triesCount;
+    int maxTries;
+    int sleepTimeMillis;
+
     clear();
 
     isVideo = _isVideo;
@@ -118,10 +122,10 @@ class Map {
 
     } else {
 
-      int triesCount = 0;
-      int maxTries = 3;
-      int sleepTimeMillis = 1000;
+      maxTries = 5;
+      sleepTimeMillis = 1000;
 
+      triesCount = 0;
       while ( true ) {
 
         try {
@@ -135,7 +139,6 @@ class Map {
           video.loop();
 
           logger.info("Video map loaded");
-
           break;
 
         } catch ( Exception e ) {
@@ -155,6 +158,31 @@ class Map {
             logger.error("Map: Retrying...");
 
           }
+
+        }
+
+      }
+
+      triesCount = 0;
+      while ( true ) {
+
+        if ( getWidth() > 0 && getHeight() > 0 ) {
+
+          break;
+
+        } else {
+
+          logger.warning("Map: Map returned zero width/height. Waiting to check again...");
+          try { Thread.sleep(sleepTimeMillis); }
+          catch ( InterruptedException ie ) {}
+
+        }
+
+        triesCount += 1;
+        if ( triesCount == maxTries ) {
+
+          clear();
+          return false;
 
         }
 
@@ -212,66 +240,70 @@ class Map {
     if ( isVideo )
       return;
 
-    float ratioWidth = image.width / float(canvas.width);
-    float ratioHeight = image.height / float(canvas.height);
-    if ( ratioWidth > ratioHeight )
+    float widthRatio = image.width / float(canvas.width);
+    float heightRatio = image.height / float(canvas.height);
+    if ( widthRatio > heightRatio )
       image.resize(canvas.width, 0);
     else
       image.resize(0, canvas.height);
 
   }
 
-  Point mapCanvasToImage(Point p) {
+  // Maps a point in canvas to a point in the map. For example,
+  // considering a 100x100 map centralized in a 200x200 canvas,
+  // point 100,100 in the canvas would be mapped to point 50,50
+  // in the map.
+  Point mapCanvasToMap(Point canvasPoint) {
 
-    Point mappedPoint = new Point();
-    int x, y;
-    int mapWidth, mapHeight;
-    float ratioWidth, ratioHeight;
+    Point mapPoint = new Point();
+    float widthRatio, heightRatio;
     int widthDiff, heightDiff;
 
-    x = p.x;
-    y = p.y;
+    // Ratio between map and canvas, to check if map fits into canvas,
+    // is taller and wider, etc
+    widthRatio = getWidth() / float(canvas.width);
+    heightRatio = getHeight() / float(canvas.height);
 
-    mapWidth = mapHeight = 0;
-    if ( isVideo ) {
-      mapWidth = video.width;
-      mapHeight = video.height;
-    } else {
-      mapWidth = image.width;
-      mapHeight = image.height;
+    // Absolute difference between canvas and map sizes
+    widthDiff = abs(canvas.width - getWidth());
+    heightDiff = abs(canvas.height - getHeight());
+
+    // Map fits into canvas
+    if ( widthRatio <= 1 && heightRatio <= 1 ) {
+      mapPoint.x = canvasPoint.x - widthDiff/2;
+      mapPoint.y = canvasPoint.y - heightDiff/2;
     }
 
-    ratioWidth = mapWidth / float(canvas.width);
-    ratioHeight = mapHeight / float(canvas.height);
-
-    widthDiff = abs(canvas.width - mapWidth);
-    heightDiff = abs(canvas.height - mapHeight);
-
-    // fits into canvas
-    if ( ratioWidth <= 1 && ratioHeight <= 1 ) {
-      mappedPoint.x = x - widthDiff/2;
-      mappedPoint.y = y - heightDiff/2;
+    // Map is taller and wider
+    else if ( widthRatio > 1 && heightRatio > 1 ) {
+      mapPoint.x = canvasPoint.x + widthDiff/2;
+      mapPoint.y = canvasPoint.y + heightDiff/2;
     }
 
-    // taller and wider
-    else if ( ratioWidth > 1 && ratioHeight > 1 ) {
-      mappedPoint.x = x + widthDiff/2;
-      mappedPoint.y = y + heightDiff/2;
+    // Map is taller than canvas - portrait
+    else if ( widthRatio < heightRatio ) {
+      mapPoint.x = canvasPoint.x - widthDiff/2;
+      mapPoint.y = canvasPoint.y + heightDiff/2;
     }
 
-    // portrait, taller than canvas
-    else if ( ratioWidth < ratioHeight ) {
-      mappedPoint.x = x - widthDiff/2;
-      mappedPoint.y = y + heightDiff/2;
+    // Map is wider than canvas - landscape
+    else if ( widthRatio > heightRatio ) {
+      mapPoint.x = canvasPoint.x + widthDiff/2;
+      mapPoint.y = canvasPoint.y - heightDiff/2;
     }
 
-    // landscape, wider than canvas
-    else if ( ratioWidth > ratioHeight ) {
-      mappedPoint.x = x + widthDiff/2;
-      mappedPoint.y = y - heightDiff/2;
-    }
+    logger.trace("Canvas point " + canvasPoint + " mapped to map point " + mapPoint + "");
 
-    return mappedPoint;
+    return mapPoint;
+
+  }
+
+  int getCanvasMapWidthDiff() {
+    return canvas.width - getWidth();
+  }
+
+  int getCanvasMapHeightDiff() {
+    return canvas.height - getHeight();
   }
 
   void clear() {

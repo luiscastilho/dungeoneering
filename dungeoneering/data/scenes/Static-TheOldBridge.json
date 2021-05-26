@@ -8,77 +8,7 @@
       "sightTypes": [],
       "name": "Orog",
       "column": 8,
-      "row": 6,
-      "conditions": []
-    },
-    {
-      "size": "Medium",
-      "lightSources": [],
-      "imagePath": "/data/tokens/dm/Orc.png",
-      "sightTypes": [],
-      "name": "Orc",
-      "column": 6,
-      "row": 5,
-      "conditions": []
-    },
-    {
-      "size": "Medium",
-      "lightSources": [],
-      "imagePath": "/data/tokens/dm/Goblin.png",
-      "sightTypes": [],
-      "name": "Goblin",
-      "column": 6,
       "row": 7,
-      "conditions": []
-    },
-    {
-      "size": "Medium",
-      "lightSources": [],
-      "imagePath": "/data/tokens/dm/Goblin.png",
-      "sightTypes": [],
-      "name": "Goblin",
-      "column": 5,
-      "row": 7,
-      "conditions": []
-    },
-    {
-      "size": "Medium",
-      "lightSources": [],
-      "imagePath": "/data/tokens/dm/Goblin.png",
-      "sightTypes": [],
-      "name": "Goblin",
-      "column": 4,
-      "row": 8,
-      "conditions": []
-    },
-    {
-      "size": "Medium",
-      "lightSources": [],
-      "imagePath": "/data/tokens/dm/Goblin.png",
-      "sightTypes": [],
-      "name": "Goblin",
-      "column": 4,
-      "row": 6,
-      "conditions": []
-    },
-    {
-      "size": "Medium",
-      "lightSources": [],
-      "imagePath": "/data/tokens/dm/Goblin.png",
-      "sightTypes": [],
-      "name": "Goblin",
-      "column": 6,
-      "row": 8,
-      "conditions": []
-    },
-    {
-      "size": "Medium",
-      "lightSources": [],
-      "imagePath": "/data/tokens/dm/Goblin.png",
-      "sightTypes": [],
-      "name": "Goblin",
-      "column": 5,
-      "row": 9,
       "conditions": []
     },
     {
@@ -88,7 +18,17 @@
       "sightTypes": [],
       "name": "Orc",
       "column": 8,
-      "row": 8,
+      "row": 9,
+      "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Orc.png",
+      "sightTypes": [],
+      "name": "Orc",
+      "column": 6,
+      "row": 6,
       "conditions": []
     },
     {
@@ -98,7 +38,67 @@
       "sightTypes": [],
       "name": "Goblin",
       "column": 7,
+      "row": 10,
+      "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Goblin.png",
+      "sightTypes": [],
+      "name": "Goblin",
+      "column": 5,
+      "row": 10,
+      "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Goblin.png",
+      "sightTypes": [],
+      "name": "Goblin",
+      "column": 6,
       "row": 9,
+      "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Goblin.png",
+      "sightTypes": [],
+      "name": "Goblin",
+      "column": 6,
+      "row": 8,
+      "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Goblin.png",
+      "sightTypes": [],
+      "name": "Goblin",
+      "column": 5,
+      "row": 8,
+      "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Goblin.png",
+      "sightTypes": [],
+      "name": "Goblin",
+      "column": 4,
+      "row": 9,
+      "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Goblin.png",
+      "sightTypes": [],
+      "name": "Goblin",
+      "column": 4,
+      "row": 7,
       "conditions": []
     }
   ],
@@ -135,12 +135,12 @@
   "illumination": {"lighting": "brightLigt"},
   "grid": {
     "cellWidth": 102,
-    "lastCellCenterY": 999,
+    "lastCellCenterY": 1118,
     "cellHeight": 102,
     "drawGrid": true,
-    "firstCellCenterX": 220,
-    "lastCellCenterX": 1750,
-    "firstCellCenterY": 81
+    "firstCellCenterX": 98,
+    "lastCellCenterX": 1628,
+    "firstCellCenterY": 98
   },
   "playerTokens": [
     {
@@ -150,17 +150,7 @@
       "sightTypes": [],
       "name": "Orsik",
       "column": 13,
-      "row": 3,
-      "conditions": []
-    },
-    {
-      "size": "Medium",
-      "lightSources": [],
-      "imagePath": "/data/tokens/players/Luth.png",
-      "sightTypes": [],
-      "name": "Luth",
-      "column": 12,
-      "row": 1,
+      "row": 4,
       "conditions": []
     },
     {
@@ -170,7 +160,17 @@
       "sightTypes": [],
       "name": "Lia",
       "column": 15,
-      "row": 3,
+      "row": 4,
+      "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/players/Luth.png",
+      "sightTypes": [],
+      "name": "Luth",
+      "column": 12,
+      "row": 2,
       "conditions": []
     }
   ],

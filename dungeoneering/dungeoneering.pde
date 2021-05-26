@@ -59,7 +59,7 @@ void setup() {
 
   map = new Map(this, canvas, obstacles);
 
-  grid = new Grid(canvas);
+  grid = new Grid(canvas, map);
 
   initiative = new Initiative(initiativeCanvas);
 
@@ -375,13 +375,14 @@ void keyPressed() {
 
 void movieEvent(Movie movie) {
 
-  if ( !userInterface.isFileDialogOpen() )
+  if ( !userInterface.isFileDialogOpen() ) {
     try {
       if ( movie.available() )
         movie.read();
     } catch ( Exception e ) {
       logger.error("Map: Error reading video frame");
     }
+  }
 
 }
 

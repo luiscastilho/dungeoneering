@@ -556,12 +556,12 @@
   "illumination": {"lighting": "darkness"},
   "grid": {
     "cellWidth": 72,
-    "lastCellCenterY": 984,
+    "lastCellCenterY": 976,
     "cellHeight": 72,
     "drawGrid": false,
-    "firstCellCenterX": 297,
-    "lastCellCenterX": 1593,
-    "firstCellCenterY": 48
+    "firstCellCenterX": 77,
+    "lastCellCenterX": 1373,
+    "firstCellCenterY": 40
   },
   "playerTokens": [
     {

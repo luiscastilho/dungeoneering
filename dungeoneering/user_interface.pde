@@ -63,6 +63,7 @@ public class UserInterface {
 
   int gridHelperX, gridHelperY;
   int gridHelperToX, gridHelperToY;
+  boolean gridHelperStarted;
   boolean gridHelperSet;
 
   Group togglableControllers;
@@ -154,6 +155,7 @@ public class UserInterface {
 
     gridHelperX = gridHelperToX = 0;
     gridHelperY = gridHelperToY = 0;
+    gridHelperStarted = false;
     gridHelperSet = false;
 
     togglableControllers = null;
@@ -916,6 +918,7 @@ public class UserInterface {
 
           gridHelperX = gridHelperToX = 0;
           gridHelperY = gridHelperToY = 0;
+          gridHelperStarted = false;
           gridHelperSet = false;
           gridInstructions1stLine.show();
           gridInstructions2ndLine.show();
@@ -1837,55 +1840,96 @@ public class UserInterface {
 
   }
 
-  void gridHelperSetup(int x, int y, boolean start, boolean done) {
+  // Method called during grid setup, either by mouse click, mouse drag or mouse release
+  void gridHelperSetup(int _mouseX, int _mouseY, boolean start, boolean done) {
 
-    if ( isInside(x, y) )
+    if ( isInside(_mouseX, _mouseY) )
       return;
 
+    // Mouse click
     if ( start ) {
 
+      // Clear previous grid
       grid.clear();
 
-      gridHelperX = gridHelperToX = max(x, 0);
-      gridHelperY = gridHelperToY = max(y, 0);
+      // Check if grid helper start point is inside the map
+      Point gridHelperStart = map.mapCanvasToMap(new Point(_mouseX, _mouseY));
+      if (
+        gridHelperStart.x < 0 || gridHelperStart.x > map.getWidth() ||
+        gridHelperStart.y < 0 || gridHelperStart.y > map.getHeight()
+      ) {
+        resetGridHelper();
+        return;
+      }
+
+      // Mark grid helper as started
+      gridHelperX = gridHelperToX = max(_mouseX, 0);
+      gridHelperY = gridHelperToY = max(_mouseY, 0);
+      gridHelperStarted = true;
       gridHelperSet = false;
 
+    // Mouse drag
     } else {
 
-      gridHelperToX = max(x, 0);
-      gridHelperToY = max(y, 0);
+      // Continue only if grid helper start point was inside the map
+      if ( !gridHelperStarted )
+        return;
+
+      // Check if grid helper end point is inside the map
+      Point gridHelperEnd = map.mapCanvasToMap(new Point(_mouseX, _mouseY));
+      if (
+        gridHelperEnd.x < 0 || gridHelperEnd.x > map.getWidth() ||
+        gridHelperEnd.y < 0 || gridHelperEnd.y > map.getHeight()
+      ) {
+        resetGridHelper();
+        return;
+      }
+
+      // Mark grid helper as finished
+      gridHelperToX = max(_mouseX, 0);
+      gridHelperToY = max(_mouseY, 0);
       gridHelperSet = true;
 
     }
 
+    // Mouse release
     if ( done ) {
 
-      if ( abs(gridHelperX-gridHelperToX) < 10 || abs(gridHelperY-gridHelperToY) < 10 ) {
-
-        gridHelperX = gridHelperToX = 0;
-        gridHelperY = gridHelperToY = 0;
-        gridHelperSet = false;
+      // Continue only if grid helper was properly started and finished
+      if ( !gridHelperStarted || !gridHelperSet ) {
+        resetGridHelper();
         return;
-
       }
 
-      Point mappedStartPos = map.mapCanvasToImage(new Point(gridHelperX, gridHelperY));
-      Point mappedEndPos = map.mapCanvasToImage(new Point(gridHelperToX, gridHelperToY));
-      int xDiff = gridHelperX-mappedStartPos.x;
-      int yDiff = gridHelperY-mappedStartPos.y;
-      grid.setupFromHelper(mappedStartPos.x, mappedStartPos.y, mappedEndPos.x, mappedEndPos.y, map.getWidth(), map.getHeight(), xDiff, yDiff);
+      // Continue only if cell size is at least 20x20
+      if ( abs(gridHelperX-gridHelperToX) < 60 || abs(gridHelperY-gridHelperToY) < 60 ) {
+        resetGridHelper();
+        return;
+      }
+
+      // Map helper start and end points, which are points with canvas coordinates, to points with map coordinates
+      // These new points will be used to calculate cell coordinates in the map space
+      Point mapSpaceGridHelper = map.mapCanvasToMap(new Point(gridHelperX, gridHelperY));
+      Point mapSpaceGridHelperTo = map.mapCanvasToMap(new Point(gridHelperToX, gridHelperToY));
+
+      // Setup a grid
+      grid.setupFromHelper(mapSpaceGridHelper, mapSpaceGridHelperTo);
 
     }
 
   }
 
+  // Method called during grid setup by key presses, to adjust either grid helper top left corner or bottom right corner
   void gridHelperSetupAdjustment(int xAdjustment, int yAdjustment, boolean toPosition) {
 
+    // Continue only if grid helper has already been drawn
     if ( !gridHelperSet )
       return;
 
+    // Clear previous grid
     grid.clear();
 
+    // Adjust either grid helper start point or end point
     if ( toPosition ) {
       gridHelperToX += xAdjustment;
       gridHelperToY += yAdjustment;
@@ -1894,20 +1938,48 @@ public class UserInterface {
       gridHelperY += yAdjustment;
     }
 
-    if ( abs(gridHelperX-gridHelperToX) < 10 || abs(gridHelperY-gridHelperToY) < 10 ) {
-
-      gridHelperX = gridHelperToX = 0;
-      gridHelperY = gridHelperToY = 0;
-      gridHelperSet = false;
+    // Check if grid helper start point is inside the map
+    Point gridHelperStart = map.mapCanvasToMap(new Point(gridHelperX, gridHelperY));
+    if (
+      gridHelperStart.x < 0 || gridHelperStart.x > map.getWidth() ||
+      gridHelperStart.y < 0 || gridHelperStart.y > map.getHeight()
+    ) {
+      resetGridHelper();
       return;
-
     }
 
-    Point mappedStartPos = map.mapCanvasToImage(new Point(gridHelperX, gridHelperY));
-    Point mappedEndPos = map.mapCanvasToImage(new Point(gridHelperToX, gridHelperToY));
-    int xDiff = gridHelperX-mappedStartPos.x;
-    int yDiff = gridHelperY-mappedStartPos.y;
-    grid.setupFromHelper(mappedStartPos.x, mappedStartPos.y, mappedEndPos.x, mappedEndPos.y, map.getWidth(), map.getHeight(), xDiff, yDiff);
+    // Check if grid helper end point is inside the map
+    Point gridHelperEnd = map.mapCanvasToMap(new Point(gridHelperToX, gridHelperToY));
+    if (
+      gridHelperEnd.x < 0 || gridHelperEnd.x > map.getWidth() ||
+      gridHelperEnd.y < 0 || gridHelperEnd.y > map.getHeight()
+    ) {
+      resetGridHelper();
+      return;
+    }
+
+    // Continue only if cell size is at least 20x20
+    if ( abs(gridHelperX-gridHelperToX) < 60 || abs(gridHelperY-gridHelperToY) < 60 ) {
+      resetGridHelper();
+      return;
+    }
+
+    // Map helper start and end points, which are points with canvas coordinates, to points with map coordinates
+    // These new points will be used to calculate cell coordinates in the map space
+    Point mapSpaceGridHelper = map.mapCanvasToMap(new Point(gridHelperX, gridHelperY));
+    Point mapSpaceGridHelperTo = map.mapCanvasToMap(new Point(gridHelperToX, gridHelperToY));
+
+    // Setup a grid
+    grid.setupFromHelper(mapSpaceGridHelper, mapSpaceGridHelperTo);
+
+  }
+
+  void resetGridHelper() {
+
+    gridHelperX = gridHelperToX = 0;
+    gridHelperY = gridHelperToY = 0;
+    gridHelperStarted = false;
+    gridHelperSet = false;
 
   }
 
@@ -2151,6 +2223,8 @@ public class UserInterface {
     int initiativeGroupsIndex;
     int obstaclesIndex;
 
+    logger.info("Saving scene to folder: " + sceneFolder.getAbsolutePath());
+
     JSONObject sceneJson = new JSONObject();
 
     JSONObject mapJson = new JSONObject();
@@ -2160,10 +2234,10 @@ public class UserInterface {
     sceneJson.setJSONObject("map", mapJson);
 
     JSONObject gridJson = new JSONObject();
-    gridJson.setInt("firstCellCenterX", grid.getFirstCellCenter().x);
-    gridJson.setInt("firstCellCenterY", grid.getFirstCellCenter().y);
-    gridJson.setInt("lastCellCenterX", grid.getLastCellCenter().x);
-    gridJson.setInt("lastCellCenterY", grid.getLastCellCenter().y);
+    gridJson.setInt("firstCellCenterX", grid.getMapGridFirstCellCenter().x);
+    gridJson.setInt("firstCellCenterY", grid.getMapGridFirstCellCenter().y);
+    gridJson.setInt("lastCellCenterX", grid.getMapGridLastCellCenter().x);
+    gridJson.setInt("lastCellCenterY", grid.getMapGridLastCellCenter().y);
     gridJson.setInt("cellWidth", grid.getCellWidth());
     gridJson.setInt("cellHeight", grid.getCellHeight());
     gridJson.setBoolean("drawGrid", grid.getDrawGrid());
@@ -2318,6 +2392,8 @@ public class UserInterface {
     if ( sceneFile == null || !fileExists(sceneFile.getAbsolutePath()) )
       return;
 
+    logger.info("Loading scene from: " + sceneFile.getAbsolutePath());
+
     String sketchPath = sketchPath().replaceAll("\\\\", "/");
 
     appState = AppStates.sceneLoad;
@@ -2341,7 +2417,6 @@ public class UserInterface {
       String mapFilePath = mapJson.getString("filePath");
       boolean fitToScreen = mapJson.getBoolean("fitToScreen");
       boolean isVideo = mapJson.getBoolean("isVideo");
-      boolean isMuted = getSwitchButtonState("Toggle mute sound");
       String logoFilePath = mapJson.getString("logoFilePath");
       String logoLink = mapJson.getString("logoLink");
 
@@ -2354,6 +2429,8 @@ public class UserInterface {
           return;
         }
       }
+
+      boolean isMuted = getSwitchButtonState("Toggle mute sound");
 
       boolean mapLoaded = map.setup(mapFilePath, fitToScreen, isVideo, isMuted);
       if ( !mapLoaded )
@@ -2396,7 +2473,11 @@ public class UserInterface {
       int cellWidth = gridJson.getInt("cellWidth");
       int cellHeight = gridJson.getInt("cellHeight");
       boolean drawGrid = gridJson.getBoolean("drawGrid");
-      grid.setup(firstCellCenterX, firstCellCenterY, lastCellCenterX, lastCellCenterY, cellWidth, cellHeight, false);
+
+      Point mapFirstCellCenter = new Point(firstCellCenterX, firstCellCenterY);
+      Point mapLastCellCenter = new Point(lastCellCenterX, lastCellCenterY);
+
+      grid.setup(mapFirstCellCenter, mapLastCellCenter, cellWidth, cellHeight, false);
 
       if ( drawGrid )
         setSwitchButtonState("Toggle grid", true);
