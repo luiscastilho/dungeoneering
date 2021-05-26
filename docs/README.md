@@ -60,9 +60,11 @@ Bugs can be reported through the project's [issues](https://github.com/luiscasti
 
 ## Known Issues
 
-- Video and audio playback can be glitchy depending on the format/codec/framerate of the video being used. If you are having trouble with some of your video maps, try reencoding them to 1080p30. In Windows it's quite easy: use [HandBrake](https://handbrake.fr/) and in the Preset field choose General > Fast 1080p30. Let me know in the issues if it doesn't work even after reencoding.
+- Video and audio playback can be glitchy depending on the format/codec/framerate of the video being used. If you are having trouble with some of your video maps, try reencoding them to 1080p30. In Windows it's quite easy: use [HandBrake](https://handbrake.fr/) and in the Preset field choose General > Fast 1080p30. Create an issue please if it doesn't work even after reencoding.
 
 - Tokens may look pixelated if zoom in is used, even if loading high-resolution token images.
+
+- Scenes are resolution specific right now. If a scene is saved in a 1080p resolution screen, it will look shifted if loaded in a 4k resolution screen - grid, tokens, walls and doors will be the wrong place, detached from the underlying map.
 
 
 
