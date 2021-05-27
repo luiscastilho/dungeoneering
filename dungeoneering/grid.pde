@@ -4,28 +4,32 @@ class Grid {
 
   PGraphics canvas;
 
-  ArrayList<ArrayList<Cell>> grid;
+  Map map;
+
+  ArrayList<ArrayList<Cell>> mapGrid;
+  ArrayList<ArrayList<Cell>> canvasGrid;
 
   boolean set;
 
-  int firstCenterX, firstCenterY;
-  int lastCenterX, lastCenterY;
   int cellWidth, cellHeight;
+  int rowsCount, columnsCount;
 
   boolean drawGrid;
   color gridColor;
 
-  Grid(PGraphics _canvas) {
+  Grid(PGraphics _canvas, Map _map) {
 
     canvas = _canvas;
 
-    grid = new ArrayList<ArrayList<Cell>>();
+    map = _map;
+
+    mapGrid = new ArrayList<ArrayList<Cell>>();
+    canvasGrid = new ArrayList<ArrayList<Cell>>();
 
     set = false;
 
-    firstCenterX = firstCenterY = 0;
-    lastCenterX = lastCenterY = 0;
     cellWidth = cellHeight = 0;
+    rowsCount = columnsCount = 0;
 
     drawGrid = false;
     gridColor = color(0, 159);
@@ -37,46 +41,74 @@ class Grid {
     if ( !drawGrid )
       return;
 
-    for ( ArrayList<Cell> row: grid )
+    for ( ArrayList<Cell> row: canvasGrid )
       for ( Cell cell: row )
         cell.draw(gridColor);
 
   }
 
-  void setup(int _firstCenterX, int _firstCenterY, int _lastCenterX, int _lastCenterY, int _cellWidth, int _cellHeight, boolean _drawGrid) {
+  // Setup the map grid using previously saved coordinates for the first and
+  // last map grid cells, as well as the cells' width and height.
+  void setup(Point _mapFirstCenter, Point _mapLastCenter, int _cellWidth, int _cellHeight, boolean _drawGrid) {
 
-    if ( abs(_firstCenterX-_lastCenterX) < 10 || abs(_firstCenterY-_lastCenterY) < 10 || _cellWidth < 10 || _cellHeight < 10 )
+    // Abort if cell size is smaller than 20x20
+    if ( _cellWidth < 20 || _cellHeight < 20 )
       return;
 
-    int centerX, centerY;
-    int rowCount, columnCount;
+    Point currentCenter = new Point();
+    int rowIndex, columnIndex;
+    int canvasMapWidthDiff, canvasMapHeightDiff;
 
-    firstCenterX = _firstCenterX;
-    firstCenterY = _firstCenterY;
-    lastCenterX = _lastCenterX;
-    lastCenterY = _lastCenterY;
     cellWidth = _cellWidth;
     cellHeight = _cellHeight;
 
-    centerY = firstCenterY;
-    rowCount = 0;
-    while ( centerY <= lastCenterY ) {
+    // Setup map grid - grid with map coordinates
+
+    // For each map coordinates from first to last, create a cell and add it to map grid
+    currentCenter.y = _mapFirstCenter.y;
+    rowIndex = 0;
+    while ( currentCenter.y <= _mapLastCenter.y ) {
 
       ArrayList<Cell> row = new ArrayList<Cell>();
-      centerX = firstCenterX;
+      currentCenter.x = _mapFirstCenter.x;
 
-      columnCount = 0;
-      while ( centerX <= lastCenterX ) {
-        row.add(new Cell(canvas, centerX, centerY, cellWidth, cellHeight, rowCount, columnCount));
-        centerX += cellWidth;
-        columnCount += 1;
+      columnIndex = 0;
+      while ( currentCenter.x <= _mapLastCenter.x ) {
+        row.add(new Cell(canvas, currentCenter.x, currentCenter.y, cellWidth, cellHeight, rowIndex, columnIndex));
+        currentCenter.x += cellWidth;
+        columnIndex += 1;
       }
 
-      grid.add(row);
-      centerY += cellHeight;
-      rowCount += 1;
+      mapGrid.add(row);
+      currentCenter.y += cellHeight;
+      rowIndex += 1;
 
     }
+
+    // Setup canvas grid - grid with canvas coordinates
+
+    // Get size difference to be added to map grid cell coordinates
+    canvasMapWidthDiff = round(map.getCanvasMapWidthDiff()/2f);
+    canvasMapHeightDiff = round(map.getCanvasMapHeightDiff()/2f);
+
+    // For each cell in the map grid
+    rowIndex = columnIndex = 0;
+    for ( ArrayList<Cell> mapRow: mapGrid ) {
+      ArrayList<Cell> canvasRow = new ArrayList<Cell>();
+      columnIndex = 0;
+      for ( Cell mapCell: mapRow ) {
+        Point mapCellCenter = mapCell.getCenter();
+        // Add a cell in the canvas grid with the same coordinates plus the size difference between canvas and map
+        canvasRow.add(new Cell(canvas, mapCellCenter.x + canvasMapWidthDiff, mapCellCenter.y + canvasMapHeightDiff, cellWidth, cellHeight, rowIndex, columnIndex));
+        columnIndex += 1;
+      }
+      canvasGrid.add(canvasRow);
+      rowIndex += 1;
+    }
+
+    // Update rows and columns count
+    rowsCount = rowIndex;
+    columnsCount = columnIndex;
 
     drawGrid = _drawGrid;
 
@@ -84,53 +116,111 @@ class Grid {
 
   }
 
-  void setupFromHelper(int x, int y, int toX, int toY, int mapWidth, int mapHeight, int xDiff, int yDiff) {
+  // Setup the map grid using helper points with map coordinates. After that,
+  // setup the canvas grid - the one that's actually drawn - using the map grid
+  // and adding to it's coordinates the canvas-map size difference.
+  void setupFromHelper(Point helperFirstCorner, Point helperSecondCorner) {
 
-    if ( abs(x-toX) < 10 || abs(y-toY) < 10 )
+    // Abort if cell size is smaller than 20x20
+    if ( abs(helperFirstCorner.x-helperSecondCorner.x) < 60 || abs(helperFirstCorner.y-helperSecondCorner.y) < 60 )
       return;
 
     int helperWidth, helperHeight;
-    int cornerX, cornerY;
-    int centerX, centerY;
-    int rowCount, columnCount;
+    Point firstCorner = new Point();
+    Point mapFirstCenter = new Point();
+    Point currentCenter = new Point();
+    int rowIndex, columnIndex;
+    int canvasMapWidthDiff, canvasMapHeightDiff;
 
-    helperWidth = abs(x-toX);
-    helperHeight = abs(y-toY);
+    // Calculate helper size
+    helperWidth = abs(helperFirstCorner.x-helperSecondCorner.x);
+    helperHeight = abs(helperFirstCorner.y-helperSecondCorner.y);
+
+    // Calculate cell size
     cellWidth = round(helperWidth/3f);
     cellHeight = round(helperHeight/3f);
 
-    cornerX = min(x, toX);
-    while ( cornerX - cellWidth > 0 )
-      cornerX = cornerX - cellWidth;
+    logger.trace("Cell size: " + cellWidth + "x" + cellHeight);
 
-    cornerY = min(y, toY);
-    while ( cornerY - cellHeight > 0 )
-      cornerY = cornerY - cellHeight;
+    // Based on helper top corner, find grid's top corner x coordinate
+    firstCorner.x = min(helperFirstCorner.x, helperSecondCorner.x);
+    while ( firstCorner.x - cellWidth > 0 )
+      firstCorner.x -= cellWidth;
 
-    firstCenterX = cornerX + round(cellWidth/2f) + xDiff;
-    firstCenterY = cornerY + round(cellHeight/2f) + yDiff;
+    // Based on helper top corner, find grid's top corner y coordinate
+    firstCorner.y = min(helperFirstCorner.y, helperSecondCorner.y);
+    while ( firstCorner.y - cellHeight > 0 )
+      firstCorner.y -= cellHeight;
 
-    centerY = firstCenterY;
-    rowCount = 0;
-    while ( centerY <= mapHeight + yDiff - round(cellHeight/2f) ) {
+    // Based on grid's top corner, calculate grid's first cell center
+    mapFirstCenter = new Point(
+      firstCorner.x + round(cellWidth/2f),
+      firstCorner.y + round(cellHeight/2f)
+    );
 
+    logger.trace("First cell center in map: " + mapFirstCenter);
+
+    // Setup map grid - grid with map coordinates
+
+    // Continue while the current cell center y coordinate plus half the cell height is still inside the map
+    currentCenter.y = mapFirstCenter.y;
+    rowIndex = columnIndex = 0;
+    while ( currentCenter.y + round(cellHeight/2f) <= map.getHeight() ) {
+
+      // Create a row for cells with this center y coordinate
       ArrayList<Cell> row = new ArrayList<Cell>();
-      centerX = firstCenterX;
 
-      columnCount = 0;
-      while ( centerX <= mapWidth + xDiff - round(cellWidth/2f) ) {
-        row.add(new Cell(canvas, centerX, centerY, cellWidth, cellHeight, rowCount, columnCount));
-        lastCenterX = centerX;
-        lastCenterY = centerY;
-        centerX += cellWidth;
-        columnCount += 1;
+      // Continue while the current cell center x coordinate plus half the cell width is still inside the map
+      currentCenter.x = mapFirstCenter.x;
+      columnIndex = 0;
+      while ( currentCenter.x + round(cellWidth/2f) <= map.getWidth() ) {
+
+        // Create a cell in the row created above
+        row.add(new Cell(canvas, currentCenter.x, currentCenter.y, cellWidth, cellHeight, rowIndex, columnIndex));
+
+        // Update the current cell center x coordinate
+        currentCenter.x += cellWidth;
+
+        // Update the current column index
+        columnIndex += 1;
+
       }
 
-      grid.add(row);
-      centerY += cellHeight;
-      rowCount += 1;
+      // Add populated row to grid
+      mapGrid.add(row);
+
+      // Update the current cell center y coordinate
+      currentCenter.y += cellHeight;
+
+      // Update the current row index
+      rowIndex += 1;
 
     }
+
+    // Setup canvas grid - grid with canvas coordinates
+
+    // Get size difference to be added to map grid cell coordinates
+    canvasMapWidthDiff = round(map.getCanvasMapWidthDiff()/2f);
+    canvasMapHeightDiff = round(map.getCanvasMapHeightDiff()/2f);
+
+    // For each cell in the map grid
+    rowIndex = 0;
+    for ( ArrayList<Cell> mapRow: mapGrid ) {
+      ArrayList<Cell> canvasRow = new ArrayList<Cell>();
+      columnIndex = 0;
+      for ( Cell mapCell: mapRow ) {
+        Point mapCellCenter = mapCell.getCenter();
+        // Add a cell in the canvas grid with the same coordinates plus the size difference between canvas and map
+        canvasRow.add(new Cell(canvas, mapCellCenter.x + canvasMapWidthDiff, mapCellCenter.y + canvasMapHeightDiff, cellWidth, cellHeight, rowIndex, columnIndex));
+        columnIndex += 1;
+      }
+      canvasGrid.add(canvasRow);
+      rowIndex += 1;
+    }
+
+    // Update rows and columns count
+    rowsCount = rowIndex;
+    columnsCount = columnIndex;
 
     set = true;
 
@@ -141,7 +231,7 @@ class Grid {
     int rowCount, columnCount;
 
     rowCount = 0;
-    for ( ArrayList<Cell> cellsRow: grid ) {
+    for ( ArrayList<Cell> cellsRow: canvasGrid ) {
 
       columnCount = 0;
       for ( Cell cell: cellsRow ) {
@@ -167,7 +257,7 @@ class Grid {
     int startX, startY, screenStartX, screenStartY;
     int endX, endY, screenEndX, screenEndY;
 
-    for ( ArrayList<Cell> row: grid ) {
+    for ( ArrayList<Cell> row: canvasGrid ) {
       for ( Cell cell: row ) {
 
         startX = cell.getCenter().x - round(cellWidth/2f);
@@ -192,32 +282,42 @@ class Grid {
 
   void clear() {
 
-    grid = new ArrayList<ArrayList<Cell>>();
+    mapGrid = new ArrayList<ArrayList<Cell>>();
+    canvasGrid = new ArrayList<ArrayList<Cell>>();
 
     set = false;
 
-    firstCenterX = firstCenterY = 0;
-    lastCenterX = lastCenterY = 0;
     cellWidth = cellHeight = 0;
+    rowsCount = columnsCount = 0;
 
     System.gc();
 
-  }
-
-  ArrayList<ArrayList<Cell>> getCells() {
-    return grid;
   }
 
   boolean isSet() {
     return set;
   }
 
-  Point getFirstCellCenter() {
-    return new Point(firstCenterX, firstCenterY);
+  Point getMapGridFirstCellCenter() {
+
+    if ( !set )
+      return null;
+
+    Cell firstCell = mapGrid.get(0).get(0);
+
+    return new Point(firstCell.getCenter().x, firstCell.getCenter().y);
+
   }
 
-  Point getLastCellCenter() {
-    return new Point(lastCenterX, lastCenterY);
+  Point getMapGridLastCellCenter() {
+
+    if ( !set )
+      return null;
+
+    Cell lastCell = mapGrid.get(rowsCount - 1).get(columnsCount - 1);
+
+    return new Point(lastCell.getCenter().x, lastCell.getCenter().y);
+
   }
 
   int getCellWidth() {

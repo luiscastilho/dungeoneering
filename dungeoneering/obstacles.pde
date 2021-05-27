@@ -239,11 +239,11 @@ class Obstacles {
 
     for ( Wall wall: walls ) {
 
-      if ( wall.getVertexes().size() > 2 )
+      if ( wall.getCanvasVertexes().size() > 2 )
         continue;
 
-      PVector start = wall.getVertexes().get(0);
-      PVector end = wall.getVertexes().get(1);
+      PVector start = wall.getCanvasVertexes().get(0);
+      PVector end = wall.getCanvasVertexes().get(1);
 
       float sqDistanceToWall = pointToLineSqDistance(start, end, new PVector(_mouseX, _mouseY));
 
@@ -270,11 +270,11 @@ class Obstacles {
 
     for ( Door door: doors ) {
 
-      if ( door.getVertexes().size() > 2 )
+      if ( door.getCanvasVertexes().size() > 2 )
         continue;
 
-      PVector start = door.getVertexes().get(0);
-      PVector end = door.getVertexes().get(1);
+      PVector start = door.getCanvasVertexes().get(0);
+      PVector end = door.getCanvasVertexes().get(1);
 
       float sqDistanceToDoor = pointToLineSqDistance(start, end, new PVector(_mouseX, _mouseY));
 

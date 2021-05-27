@@ -2,7 +2,8 @@ class Wall {
 
   PGraphics canvas;
 
-  ArrayList<PVector> vertexes;
+  ArrayList<PVector> canvasVertexes;
+  ArrayList<PVector> mapVertexes;
 
   PVector minVertex;
   PVector maxVertex;
@@ -15,7 +16,8 @@ class Wall {
 
     canvas = _canvas;
 
-    vertexes = new ArrayList<PVector>();
+    canvasVertexes = new ArrayList<PVector>();
+    mapVertexes = new ArrayList<PVector>();
 
     minVertex = null;
     maxVertex = null;
@@ -33,7 +35,7 @@ class Wall {
     canvas.strokeCap(SQUARE);
     canvas.noFill();
     canvas.beginShape(LINES);
-    for ( PVector vertex: vertexes )
+    for ( PVector vertex: canvasVertexes )
       canvas.vertex(vertex.x, vertex.y);
     canvas.endShape();
 
@@ -41,10 +43,10 @@ class Wall {
 
   void drawNewEdge(color wallColor, int wallWidth, int newVertexX, int newVertexY) {
 
-    if ( vertexes.isEmpty() )
+    if ( canvasVertexes.isEmpty() )
       return;
 
-    PVector lastVertex = vertexes.get(vertexes.size() - 1);
+    PVector lastVertex = canvasVertexes.get(canvasVertexes.size() - 1);
 
     canvas.stroke(wallColor);
     canvas.strokeWeight(wallWidth);
@@ -64,7 +66,7 @@ class Wall {
 
     float distance;
 
-    for ( PVector v: vertexes ) {
+    for ( PVector v: canvasVertexes ) {
       distance = light.getPosition().dist(v);
       if ( distance < light.getDimLightRadius() || distance < light.getBrightLightRadius() )
         return true;
@@ -86,9 +88,9 @@ class Wall {
     PVector lightCenter = light.getPosition();
     int lightRadius = max(light.getBrightLightRadius(), light.getDimLightRadius());
 
-    for ( PVector i: vertexes ) {
+    for ( PVector i: canvasVertexes ) {
 
-      for ( PVector j: vertexes ) {
+      for ( PVector j: canvasVertexes ) {
 
         if ( i.equals(j) )
           continue;
@@ -126,8 +128,8 @@ class Wall {
 
     float angle = 0;
 
-    for ( PVector i: vertexes ) {
-      for ( PVector j: vertexes ) {
+    for ( PVector i: canvasVertexes ) {
+      for ( PVector j: canvasVertexes ) {
 
         if ( i.equals(j) )
           continue;
@@ -163,20 +165,25 @@ class Wall {
 
   }
 
-  void addVertex(int x, int y) {
+  void addVertex(int canvasX, int canvasY, int mapX, int mapY) {
 
-    vertexes.add(new PVector(x, y));
+    canvasVertexes.add(new PVector(canvasX, canvasY));
+    mapVertexes.add(new PVector(mapX, mapY));
 
   }
 
   boolean isSet() {
 
-    return vertexes.size() > 1;
+    return canvasVertexes.size() > 1;
 
   }
 
-  ArrayList<PVector> getVertexes() {
-    return vertexes;
+  ArrayList<PVector> getCanvasVertexes() {
+    return canvasVertexes;
+  }
+
+  ArrayList<PVector> getMapVertexes() {
+    return mapVertexes;
   }
 
 }
