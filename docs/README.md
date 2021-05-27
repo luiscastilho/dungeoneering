@@ -35,7 +35,7 @@ Coming soon too!
 
 ## How to Use It
 
-To see how a scene looks like once it's composed you can load one of the example scenes that come with the application. Click on the load scene button ([<img src="../dungeoneering/data/icons/app/load_idle.png" width="20" height="20" alt="load scene icon" title="load scene icon">](#how-to-use-it)) and choose a scene (`*.json` files) from the `data/scenes` folder.
+To see how a scene looks like once it's composed you can load one of the demo scenes that come with the application. Click on the load scene button ([<img src="../dungeoneering/data/icons/app/load_idle.png" width="20" height="20" alt="load scene icon" title="load scene icon">](#how-to-use-it)) and choose a scene (`*.json` files) from the `data/scenes` folder.
 
 To create a new scene follow the steps below. It might be better to do this when preparing an RPG session and not during it, since your players might get bored while they wait.
 
@@ -63,8 +63,6 @@ Bugs can be reported through the project's [issues](https://github.com/luiscasti
 - Video and audio playback can be glitchy depending on the format/codec/framerate of the video being used. If you are having trouble with some of your video maps, try reencoding them to 1080p30. In Windows it's quite easy: use [HandBrake](https://handbrake.fr/) and in the Preset field choose General > Fast 1080p30. Create an issue please if it doesn't work even after reencoding.
 
 - Tokens may look pixelated if zoom in is used, even if loading high-resolution token images.
-
-- Scenes are resolution specific right now. If a scene is saved in a 1080p resolution screen, it will look shifted if loaded in a 4k resolution screen - grid, tokens, walls and doors will be the wrong place, detached from the underlying map.
 
 
 
