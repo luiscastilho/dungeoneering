@@ -100,7 +100,7 @@ class Wall {
         float lineB = j.x - i.x;
         float lineC = (i.x - j.x) * i.y + (j.y - i.y) * i.x;
 
-        // calculate distance between this line and the light radius
+        // calculate distance between this line and the light center
         double dist = (Math.abs(lineA * lightCenter.x + lineB * lightCenter.y + lineC)) /
                         Math.sqrt(lineA * lineA + lineB * lineB);
 
