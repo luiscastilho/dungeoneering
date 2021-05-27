@@ -2,12 +2,12 @@
   "doors": [{
     "vertexes": [
       [
-        711,
-        513
+        351,
+        404
       ],
       [
-        711,
-        566
+        351,
+        460
       ]
     ],
     "closed": true
@@ -21,16 +21,6 @@
       "name": "Goblin",
       "column": 5,
       "row": 2,
-      "conditions": []
-    },
-    {
-      "size": "Medium",
-      "lightSources": [{"name": "Candle"}],
-      "imagePath": "/data/tokens/dm/Goblin.png",
-      "sightTypes": [{"name": "Darkvision 60'"}],
-      "name": "Goblin",
-      "column": 2,
-      "row": 3,
       "conditions": []
     },
     {
@@ -92,6 +82,16 @@
       "column": 11,
       "row": 4,
       "conditions": []
+    },
+    {
+      "size": "Medium",
+      "lightSources": [{"name": "Candle"}],
+      "imagePath": "/data/tokens/dm/Goblin.png",
+      "sightTypes": [{"name": "Darkvision 60'"}],
+      "name": "Goblin",
+      "column": 2,
+      "row": 3,
+      "conditions": []
     }
   ],
   "initiative": {
@@ -122,132 +122,122 @@
   "walls": [
     {"vertexes": [
       [
-        427,
-        389
+        68,
+        124
       ],
       [
-        428,
-        515
+        69,
+        247
       ]
     ]},
     {"vertexes": [
       [
-        428,
-        513
+        68,
+        283
       ],
       [
-        497,
-        513
+        68,
+        406
       ]
     ]},
     {"vertexes": [
       [
-        528,
-        513
+        68,
+        406
       ],
       [
-        609,
-        513
+        135,
+        406
       ]
     ]},
     {"vertexes": [
       [
-        644,
-        513
+        168,
+        405
       ],
       [
-        712,
-        513
+        248,
+        405
       ]
     ]},
     {"vertexes": [
       [
-        711,
-        513
+        281,
+        405
       ],
       [
-        711,
-        520
+        352,
+        405
       ]
     ]},
     {"vertexes": [
       [
-        711,
-        562
+        351,
+        455
       ],
       [
-        711,
-        627
+        351,
+        518
       ]
     ]},
     {"vertexes": [
       [
-        711,
-        625
+        351,
+        518
       ],
       [
-        835,
-        625
+        473,
+        517
       ]
     ]},
     {"vertexes": [
       [
-        865,
-        625
+        507,
+        517
       ],
       [
-        1158,
-        625
+        797,
+        517
       ]
     ]},
     {"vertexes": [
       [
-        1156,
-        625
+        797,
+        517
       ],
       [
-        1156,
-        231
+        797,
+        124
       ]
     ]},
     {"vertexes": [
       [
-        1156,
-        233
+        797,
+        124
       ],
       [
-        1094,
-        233
+        734,
+        124
       ]
     ]},
     {"vertexes": [
       [
-        1054,
-        233
+        693,
+        124
       ],
       [
-        807,
-        233
+        449,
+        124
       ]
     ]},
     {"vertexes": [
       [
-        777,
-        233
+        415,
+        125
       ],
       [
-        426,
-        233
-      ]
-    ]},
-    {"vertexes": [
-      [
-        428,
-        233
-      ],
-      [
-        428,
-        359
+        66,
+        125
       ]
     ]}
   ],
