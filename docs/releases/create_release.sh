@@ -62,14 +62,9 @@ echo " done"
 
 # Copy release files to version dir
 
-echo -n "  Copy release filess to dungeoneering-$version-win64..."
+echo -n "  Copy release files to dungeoneering-$version-win64..."
 cp docs/releases/*.txt releases/$version/dungeoneering-$version-win64/
-echo " done"
-
-# Create a VERSION.txt file in version dir
-
-echo -n "  Create VERSION.txt file in dungeoneering-$version-win64..."
-echo "$version" > releases/$version/dungeoneering-$version-win64/VERSION.txt
+cp docs/CHANGELOG.md releases/$version/dungeoneering-$version-win64/CHANGELOG.txt
 echo " done"
 
 # Copy libraries to lib dir and then remove platform specific files

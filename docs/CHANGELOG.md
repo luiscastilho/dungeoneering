@@ -5,7 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.2] - 2014-05-28
+## [1.1.0] - 2021-05-29
+
+### Added
+
+- Added tooltips to UI buttons, including conditions, light sources, etc., in the right-click menu
+
+## [1.0.2] - 2021-05-28
 
 ### Fixed
 
@@ -30,7 +36,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Visual initiative order widget to help in combats
 - An [exclusive video map](https://github.com/luiscastilho/dungeoneering/blob/main/dungeoneering/data/maps/Animated-SwordCoast.mp4) from [Animated Dungeon Maps](https://www.patreon.com/animatedmaps)
 
-[unreleased]: https://github.com/luiscastilho/dungeoneering/compare/v1.0.2...HEAD
+[unreleased]: https://github.com/luiscastilho/dungeoneering/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/luiscastilho/dungeoneering/compare/v1.0.2...v1.1.0
 [1.0.2]: https://github.com/luiscastilho/dungeoneering/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/luiscastilho/dungeoneering/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/luiscastilho/dungeoneering/releases/tag/v1.0.0
