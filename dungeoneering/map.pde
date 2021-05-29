@@ -155,8 +155,7 @@ class Map {
 
           } else {
 
-            try { Thread.sleep(sleepTimeMillis); }
-            catch ( InterruptedException ie ) {}
+            delay(sleepTimeMillis);
             logger.error("Map: Retrying...");
 
           }
@@ -174,9 +173,8 @@ class Map {
 
         } else {
 
-          logger.warning("Map: Map returned zero width/height. Waiting to check again...");
-          try { Thread.sleep(sleepTimeMillis); }
-          catch ( InterruptedException ie ) {}
+          logger.warning("Map: Map returned zero width/height. Waiting to retry...");
+          delay(sleepTimeMillis);
 
         }
 
