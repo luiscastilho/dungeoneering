@@ -19,6 +19,7 @@ class Token {
 
   Size size;
 
+  Light lineOfSight;
   ArrayList<Light> sightTypes;
   ArrayList<Light> lightSources;
 
@@ -92,7 +93,7 @@ class Token {
 
   }
 
-  void setup(String _name, String _imagePath, int cellWidth, int cellHeight, Size _size) {
+  void setup(String _name, String _imagePath, int cellWidth, int cellHeight, Size _size, Light _lineOfSight) {
 
     name = _name;
 
@@ -102,26 +103,43 @@ class Token {
     image = loadImage(imagePath);
     image.resize(round(cellWidth * size.getResizeFactor()), round(cellHeight * size.getResizeFactor()));
 
+    lineOfSight = _lineOfSight;
+
     set = true;
 
   }
 
-  void recalculateShadows() {
+  void recalculateShadows(ShadowTypes shadowsToRecalculate) {
 
     logger.debug("Token " + name + ": recalculating shadows");
 
-    for ( Light lightSource: lightSources )
-      recalculateShadows(lightSource, "Light source");
-
-    if ( !disabled )
-      for ( Light sightType: sightTypes )
-        recalculateShadows(sightType, "Sight type");
+    switch ( shadowsToRecalculate ) {
+      case lightSources:
+        for ( Light lightSource: lightSources ) {
+          recalculateShadows(lightSource, "Light source");
+          obstacles.blendLightSources();
+        }
+        break;
+      case linesOfSight:
+        if ( !disabled ) {
+          recalculateShadows(lineOfSight, "Sight type");
+          obstacles.blendLinesOfSight();
+        }
+        break;
+      case sightTypes:
+        if ( !disabled )
+          for ( Light sightType: sightTypes ) {
+            recalculateShadows(sightType, "Sight type");
+            obstacles.blendSightTypes();
+          }
+        break;
+    }
 
   }
 
   void recalculateShadows(Light light, String type) {
 
-    PGraphics shadows = obstacles.getCurrentShadowsCanvas();
+    PGraphics shadows = obstacles.getTemporaryShadowsCanvas();
 
     shadows.beginDraw();
     shadows.background(0);
@@ -147,7 +165,6 @@ class Token {
     logger.trace("Token " + name + ": " + type + " " + light.getName() + ": " + doorsReached + "/" + obstacles.getDoors().size() + " doors reached");
 
     shadows.endDraw();
-    obstacles.blendShadows();
 
   }
 
@@ -265,7 +282,8 @@ class Token {
         break;
     }
 
-    // set light sources and sight types center
+    // set line of sight, light sources and sight types center
+    lineOfSight.setPosition(tokenCenterX, tokenCenterY);
     for ( Light light: lightSources )
       light.setPosition(tokenCenterX, tokenCenterY);
     for ( Light sight: sightTypes )

@@ -69,7 +69,7 @@ class Resources {
     commonLightSources.put("Hooded Lantern", createLight("Hooded Lantern", 30, 60));
     commonLightSources.put("Lamp", createLight("Lamp", 15, 45));
     commonLightSources.put("Torch", createLight("Torch", 20, 40));
-    commonLightSources.put("Daylight", createLight("Daylight", 150, 0));
+    commonLightSources.put("Daylight", createLight("Daylight", 1000, 0));
 
   }
 
@@ -85,6 +85,7 @@ class Resources {
 
   void setSightTypes() {
 
+    sightTypes.put("Line of Sight", createLight("Line of Sight", 1000, 0));
     sightTypes.put("Blindsight 30'", createLight("Blindsight 30'", 30, 0));
     sightTypes.put("Blindsight 60'", createLight("Blindsight 60'", 60, 0));
     sightTypes.put("Blindsight 120'", createLight("Blindsight 120'", 120, 0));

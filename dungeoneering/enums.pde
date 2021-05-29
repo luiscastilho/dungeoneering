@@ -20,6 +20,14 @@ enum Layers {
 
 };
 
+enum ShadowTypes {
+
+  lightSources,
+  linesOfSight,
+  sightTypes;
+
+};
+
 enum Illumination {
 
   brightLight(255),

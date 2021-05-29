@@ -2676,7 +2676,9 @@ public class UserInterface {
 
         Cell cell = grid.getCellAt(tokenRow, tokenColumn);
         Token token = new Token(canvas, grid, obstacles);
-        token.setup(tokenName, tokenImagePath, grid.getCellWidth(), grid.getCellHeight(), tokenSize);
+        Light lineOfSightTemplate = resources.getSightType("Line of Sight");
+        Light tokenLineOfSight = new Light(lineOfSightTemplate.getName(), lineOfSightTemplate.getBrightLightRadius(), lineOfSightTemplate.getDimLightRadius());
+        token.setup(tokenName, tokenImagePath, grid.getCellWidth(), grid.getCellHeight(), tokenSize, tokenLineOfSight);
         token.setCell(cell);
 
         for ( Light lightSource: getLightSourcesFromJsonArray(tokenName, tokenJson.getJSONArray("lightSources")) )

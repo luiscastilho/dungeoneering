@@ -13,8 +13,16 @@ class Obstacles {
 
   Illumination illumination;
 
+  // Accumulates all lights and shadows, serves as a mask to be applied over the entire scene
   PGraphics allShadows;
-  PGraphics currentShadows;
+  // Temporary canvas, used to draw shadows before they are blended into other canvases
+  PGraphics temporaryShadows;
+  // Accumulates light sources
+  PGraphics lightSources;
+  // Accumulates lines of sight, used as a mask to be applied over the light sources canvas
+  PGraphics linesOfSight;
+  // Accumulates sight types
+  PGraphics sightTypes;
 
   float currentPanX, currentPanY;
   float currentScale;
@@ -40,16 +48,34 @@ class Obstacles {
     illumination = Illumination.brightLight;
 
     allShadows = createGraphics(canvas.width, canvas.height, P2D);
-    allShadows.smooth();
+    allShadows.noSmooth();
     allShadows.beginDraw();
     allShadows.background(illumination.getColor());
     allShadows.endDraw();
 
-    currentShadows = createGraphics(canvas.width, canvas.height, P2D);
-    currentShadows.smooth();
-    currentShadows.beginDraw();
-    currentShadows.background(illumination.getColor());
-    currentShadows.endDraw();
+    temporaryShadows = createGraphics(canvas.width, canvas.height, P2D);
+    temporaryShadows.noSmooth();
+    temporaryShadows.beginDraw();
+    temporaryShadows.background(illumination.getColor());
+    temporaryShadows.endDraw();
+
+    lightSources = createGraphics(canvas.width, canvas.height, P2D);
+    lightSources.noSmooth();
+    lightSources.beginDraw();
+    lightSources.background(0);
+    lightSources.endDraw();
+
+    linesOfSight = createGraphics(canvas.width, canvas.height, P2D);
+    linesOfSight.noSmooth();
+    linesOfSight.beginDraw();
+    linesOfSight.background(0);
+    linesOfSight.endDraw();
+
+    sightTypes = createGraphics(canvas.width, canvas.height, P2D);
+    sightTypes.noSmooth();
+    sightTypes.beginDraw();
+    sightTypes.background(0);
+    sightTypes.endDraw();
 
     currentPanX = 0;
     currentPanY = 0;
@@ -64,7 +90,9 @@ class Obstacles {
     if (canvas != null && allShadows != null)
       try {
         canvas.mask(allShadows);
-      } catch(Exception e) {}
+      } catch(Exception e) {
+        logger.error("Obstacles: Error applying shadows mask");
+      }
 
     if ( drawObstacles ) {
 
@@ -106,12 +134,73 @@ class Obstacles {
 
   }
 
+  void blendLightSources() {
+
+    lightSources.beginDraw();
+    lightSources.blendMode(LIGHTEST);
+    lightSources.image(temporaryShadows, 0, 0);
+    lightSources.blendMode(BLEND);
+    lightSources.endDraw();
+
+  }
+
+  void blendSightTypes() {
+
+    sightTypes.beginDraw();
+    sightTypes.blendMode(LIGHTEST);
+    sightTypes.image(temporaryShadows, 0, 0);
+    sightTypes.blendMode(BLEND);
+    sightTypes.endDraw();
+
+  }
+
+  void blendLinesOfSight() {
+
+    linesOfSight.beginDraw();
+    linesOfSight.blendMode(LIGHTEST);
+    linesOfSight.image(temporaryShadows, 0, 0);
+    linesOfSight.blendMode(BLEND);
+    linesOfSight.endDraw();
+
+  }
+
   void blendShadows() {
 
-    allShadows.beginDraw();
-    allShadows.blendMode(LIGHTEST);
-    allShadows.image(currentShadows, 0, 0);
-    allShadows.endDraw();
+    if ( illumination == Illumination.brightLight )
+      return;
+
+    lightSources.beginDraw();
+    lightSources.mask(linesOfSight);
+    lightSources.endDraw();
+
+    switch ( illumination ) {
+      case darkness:
+
+        allShadows.beginDraw();
+        allShadows.image(lightSources, 0, 0);
+        allShadows.blendMode(LIGHTEST);
+        allShadows.image(sightTypes, 0, 0);
+        allShadows.blendMode(BLEND);
+        allShadows.endDraw();
+
+        break;
+      case dimLight:
+
+        allShadows.beginDraw();
+        allShadows.image(lightSources, 0, 0);
+        allShadows.blendMode(LIGHTEST);
+        allShadows.noStroke();
+        allShadows.fill(illumination.getColor());
+        allShadows.rect(0, 0, allShadows.width, allShadows.height);
+        allShadows.blendMode(BLEND);
+        allShadows.endDraw();
+
+        break;
+      default:
+        break;
+    }
+
+    blurShadows();
 
   }
 
@@ -128,6 +217,26 @@ class Obstacles {
     allShadows.beginDraw();
     allShadows.background(illumination.getColor());
     allShadows.endDraw();
+
+    temporaryShadows.beginDraw();
+    temporaryShadows.background(0);
+    temporaryShadows.endDraw();
+
+    lightSources.beginDraw();
+    lightSources.background(0);
+    lightSources.endDraw();
+
+    linesOfSight.beginDraw();
+    linesOfSight.background(0);
+    linesOfSight.endDraw();
+
+    sightTypes.beginDraw();
+    sightTypes.background(0);
+    sightTypes.endDraw();
+
+    // No need to recalculate shadows if environment lighting is bright light
+    if ( illumination == Illumination.brightLight )
+      recalculateShadows = false;
 
   }
 
@@ -169,12 +278,8 @@ class Obstacles {
     return doorWidth;
   }
 
-  PGraphics getCurrentShadowsCanvas() {
-    return currentShadows;
-  }
-
-  PGraphics getAllShadowsCanvas() {
-    return allShadows;
+  PGraphics getTemporaryShadowsCanvas() {
+    return temporaryShadows;
   }
 
   void setCurrentPanX(float _currentPanX) {
@@ -209,7 +314,7 @@ class Obstacles {
 
     recalculateShadows = _recalculateShadows;
 
-    if ( _recalculateShadows )
+    if ( recalculateShadows )
       logger.debug("Obstacles: recalculating shadows");
 
   }

@@ -8,6 +8,8 @@ class Layer {
 
   Obstacles obstacles;
 
+  Resources resources;
+
   Initiative initiative;
 
   ArrayList<Token> tokens;
@@ -16,13 +18,15 @@ class Layer {
 
   Layers thisLayer;
 
-  Layer(PGraphics _canvas, Grid _grid, Obstacles _obstacles, Initiative _initiative, String _name, Layers _thisLayer) {
+  Layer(PGraphics _canvas, Grid _grid, Obstacles _obstacles, Resources _resources, Initiative _initiative, String _name, Layers _thisLayer) {
 
     canvas = _canvas;
 
     grid = _grid;
 
     obstacles = _obstacles;
+
+    resources = _resources;
 
     initiative = _initiative;
 
@@ -64,13 +68,12 @@ class Layer {
 
   }
 
-  void recalculateShadows() {
+  void recalculateShadows(ShadowTypes shadowsToRecalculate) {
 
     logger.debug(name + ": recalculating shadows");
 
     for ( Token token: tokens )
-      token.recalculateShadows();
-    obstacles.blurShadows();
+      token.recalculateShadows(shadowsToRecalculate);
 
   }
 
@@ -85,7 +88,9 @@ class Layer {
       currentCell = grid.getCellAt(0, 0);
 
     Token token = new Token(canvas, grid, obstacles);
-    token.setup(tokenBaseName, tokenImageFile.getAbsolutePath(), grid.getCellWidth(), grid.getCellHeight(), resources.getSize("Medium"));
+    Light lineOfSightTemplate = resources.getSightType("Line of Sight");
+    Light lineOfSight = new Light(lineOfSightTemplate.getName(), lineOfSightTemplate.getBrightLightRadius(), lineOfSightTemplate.getDimLightRadius());
+    token.setup(tokenBaseName, tokenImageFile.getAbsolutePath(), grid.getCellWidth(), grid.getCellHeight(), resources.getSize("Medium"), lineOfSight);
     token.setCell(currentCell);
     token.setBeingMoved(true);
     tokens.add(token);

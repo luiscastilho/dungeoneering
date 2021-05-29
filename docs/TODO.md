@@ -42,9 +42,9 @@
 - [X] Fix low FPS when panning due to shadows being recalculated
 - [X] Make UI more intuitive (and pretty)
 - [X] Conditions, light sources, etc, applied to a token should remain highlighted in the right click menu
-- [ ] Scenes saved and later loaded should work on any screen resolution
+- [X] Scenes saved and later loaded should work on any screen resolution
+- [X] Light sources should be visible in all layers
 - [ ] Fix token images looking pixelated if zoom in is used
-- [ ] Light sources should be visible in all layers
 - [ ] Set maximum zoom and pan
 - [ ] Keep tokens inside grid when moving - larger tokens being moved to grid borders
 - [ ] Keep right click menu inside canvas - right click in tokens near the grid borders

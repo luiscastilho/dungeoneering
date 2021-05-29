@@ -63,11 +63,11 @@ void setup() {
 
   initiative = new Initiative(initiativeCanvas);
 
-  playersLayer = new Layer(canvas, grid, obstacles, initiative, "Players Layer", Layers.players);
-  dmLayer = new Layer(canvas, grid, obstacles, initiative, "DM Layer", Layers.dm);
-  layerShown = Layers.players;
-
   resources = new Resources(canvas, grid);
+
+  playersLayer = new Layer(canvas, grid, obstacles, resources, initiative, "Players Layer", Layers.players);
+  dmLayer = new Layer(canvas, grid, obstacles, resources, initiative, "DM Layer", Layers.dm);
+  layerShown = Layers.players;
 
   userInterface = new UserInterface(canvas, cp5, map, grid, obstacles, playersLayer, dmLayer, resources, initiative);
 
@@ -108,19 +108,38 @@ void draw() {
   switch ( layerShown ) {
     case players:
 
-      if ( obstacles.getRecalculateShadows() )
-        playersLayer.recalculateShadows();
+      if ( obstacles.getRecalculateShadows() ) {
+        // Gather light sources from all layers
+        dmLayer.recalculateShadows(ShadowTypes.lightSources);
+        playersLayer.recalculateShadows(ShadowTypes.lightSources);
+        // Gather lines of sight of the layer being shown, to be used as a mask to hide/reveal light sources
+        playersLayer.recalculateShadows(ShadowTypes.linesOfSight);
+        // Gather sight types of the layer being shown
+        playersLayer.recalculateShadows(ShadowTypes.sightTypes);
+        // Compose final shadows with all of the above
+        obstacles.blendShadows();
+      }
 
+      // Draw layer not being shown first
       dmLayer.draw(layerShown);
+      // Draw shadows to hide/reveal areas and tokens depending on the obstacles present
       obstacles.draw();
+      // Draw layer being shown
       playersLayer.draw(layerShown);
 
       break;
     case dm:
 
-      if ( obstacles.getRecalculateShadows() )
-        dmLayer.recalculateShadows();
+      if ( obstacles.getRecalculateShadows() ) {
+        // Same as above, with opposite layer
+        playersLayer.recalculateShadows(ShadowTypes.lightSources);
+        dmLayer.recalculateShadows(ShadowTypes.lightSources);
+        dmLayer.recalculateShadows(ShadowTypes.linesOfSight);
+        dmLayer.recalculateShadows(ShadowTypes.sightTypes);
+        obstacles.blendShadows();
+      }
 
+      // Same as above, with opposite layer
       playersLayer.draw(layerShown);
       obstacles.draw();
       dmLayer.draw(layerShown);
@@ -130,11 +149,22 @@ void draw() {
     default:
 
       if ( obstacles.getRecalculateShadows() ) {
-        playersLayer.recalculateShadows();
-        dmLayer.recalculateShadows();
+        // Gather light sources from all layers
+        playersLayer.recalculateShadows(ShadowTypes.lightSources);
+        dmLayer.recalculateShadows(ShadowTypes.lightSources);
+        // Gather lines of sight from all layers, to be used as a mask to reveal/hide light sources
+        playersLayer.recalculateShadows(ShadowTypes.linesOfSight);
+        dmLayer.recalculateShadows(ShadowTypes.linesOfSight);
+        // Gather sight types from all layers
+        playersLayer.recalculateShadows(ShadowTypes.sightTypes);
+        dmLayer.recalculateShadows(ShadowTypes.sightTypes);
+        // Compose final shadows with all of the above
+        obstacles.blendShadows();
       }
 
+      // Draw shadows first, to hide/reveal areas depending on the obstacles present
       obstacles.draw();
+      // Then draw all layers
       playersLayer.draw(layerShown);
       dmLayer.draw(layerShown);
 
