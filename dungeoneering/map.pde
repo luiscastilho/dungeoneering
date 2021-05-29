@@ -466,8 +466,7 @@ class Map {
 
       try {
 
-        if ( video.playbin != null )
-          video.volume(volume);
+        video.volume(volume);
 
       } catch ( Exception e ) {
         logger.error("Map: Error setting video volume");

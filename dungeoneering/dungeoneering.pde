@@ -10,8 +10,9 @@ AppStates appState;
 
 ControlP5 cp5;
 
-PGraphics canvas;
+PGraphics mainCanvas;
 PGraphics initiativeCanvas;
+PGraphics uiCanvas;
 
 PostFX postFx;
 Obstacles obstacles;
@@ -47,29 +48,33 @@ void setup() {
   appState = AppStates.idle;
 
   cp5 = new ControlP5(this);
+  cp5.setAutoDraw(false);
 
-  canvas = createGraphics(width, height, P2D);
-  canvas.smooth();
+  mainCanvas = createGraphics(width, height, P2D);
+  mainCanvas.smooth();
 
   initiativeCanvas = createGraphics(width, height, P2D);
   initiativeCanvas.smooth();
 
+  uiCanvas = createGraphics(width, height, P2D);
+  uiCanvas.smooth();
+
   postFx = new PostFX(this);
-  obstacles = new Obstacles(canvas, postFx);
+  obstacles = new Obstacles(mainCanvas, postFx);
 
-  map = new Map(this, canvas, obstacles);
+  map = new Map(this, mainCanvas, obstacles);
 
-  grid = new Grid(canvas, map);
+  grid = new Grid(mainCanvas, map);
 
   initiative = new Initiative(initiativeCanvas);
 
-  resources = new Resources(canvas, grid);
+  resources = new Resources(mainCanvas, grid);
 
-  playersLayer = new Layer(canvas, grid, obstacles, resources, initiative, "Players Layer", Layers.players);
-  dmLayer = new Layer(canvas, grid, obstacles, resources, initiative, "DM Layer", Layers.dm);
+  playersLayer = new Layer(mainCanvas, grid, obstacles, resources, initiative, "Players Layer", Layers.players);
+  dmLayer = new Layer(mainCanvas, grid, obstacles, resources, initiative, "DM Layer", Layers.dm);
   layerShown = Layers.players;
 
-  userInterface = new UserInterface(canvas, cp5, map, grid, obstacles, playersLayer, dmLayer, resources, initiative);
+  userInterface = new UserInterface(mainCanvas, cp5, map, grid, obstacles, playersLayer, dmLayer, resources, initiative);
 
   backgroundColor = color(0);
 
@@ -89,22 +94,49 @@ void draw() {
 
       textFont(loadingFont);
       outlineText(this.getGraphics(), loadingMessage, loadingFontColor, loadingFontOutlineColor, round(width/2 - textWidth(loadingMessage)/2), round(height/2));
+
+      drawUi();
+      image(uiCanvas, 0, 0, width, height);
+
       return;
 
     default:
       break;
   }
 
-  canvas.beginDraw();
-  canvas.background(backgroundColor);
+  drawScene();
+  image(mainCanvas, 0, 0, width, height);
 
+  drawInitiative();
+  image(initiativeCanvas, 0, 0, width, height);
+
+  drawUi();
+  image(uiCanvas, 0, 0, width, height);
+
+  if ( frameCount % 180 == 0 ) {
+
+    appUpkeep();
+
+  }
+
+}
+
+void drawScene() {
+
+  mainCanvas.beginDraw();
+  mainCanvas.background(backgroundColor);
+
+  // Draw map
   map.draw();
 
+  // Draw grid
   grid.draw();
 
+  // Reset shadows so they can be recalculated below
   if ( obstacles.getRecalculateShadows() )
     obstacles.resetShadows();
 
+  // Draw tokens
   switch ( layerShown ) {
     case players:
 
@@ -171,33 +203,50 @@ void draw() {
       break;
   }
 
+  // Set shadows as already recalculated
   if ( obstacles.getRecalculateShadows() )
     obstacles.setRecalculateShadows(false);
 
-  userInterface.draw();
+  // Draw UI setup helpers if any are active
+  userInterface.drawSetupHelpers();
 
-  canvas.endDraw();
-  image(canvas, 0, 0, width, height);
+  mainCanvas.endDraw();
+
+}
+
+void drawInitiative() {
 
   initiativeCanvas.beginDraw();
   initiativeCanvas.background(0, 0);
-
   initiative.draw(layerShown);
-
   initiativeCanvas.endDraw();
-  image(initiativeCanvas, 0, 0, width, height);
 
-  if ( frameCount % 180 == 0 ) {
+}
 
-    System.gc();
-    System.runFinalization();
+void drawUi() {
 
-    long totalMemory = Runtime.getRuntime().totalMemory();
-    long usedMemory = totalMemory - Runtime.getRuntime().freeMemory();
-    float usedMemoryPercent = (100*(float)usedMemory/totalMemory);
-    logger.debug("FPS: " + nf(frameRate, 2, 2) + " / " + "Memory usage: " + nf(usedMemoryPercent, 2, 2) + "%");
+  uiCanvas.beginDraw();
+  uiCanvas.background(0, 0);
+  // Draw controlP5 controllers
+  cp5.draw(uiCanvas);
+  // Draw UI tooltips
+  userInterface.drawTooltips(uiCanvas);
+  uiCanvas.endDraw();
 
-  }
+}
+
+void appUpkeep() {
+
+  System.gc();
+  System.runFinalization();
+
+  if ( logger.getLogLevel() > Logger.DEBUG )
+    return;
+
+  long totalMemory = Runtime.getRuntime().totalMemory();
+  long usedMemory = totalMemory - Runtime.getRuntime().freeMemory();
+  float usedMemoryPercent = (100*(float)usedMemory/totalMemory);
+  logger.debug("FPS: " + nf(frameRate, 2, 2) + " / " + "Memory usage: " + nf(usedMemoryPercent, 2, 2) + "%");
 
 }
 

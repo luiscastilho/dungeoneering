@@ -30,18 +30,32 @@ enum ShadowTypes {
 
 enum Illumination {
 
-  brightLight(255),
-  dimLight(47),
-  darkness(0);
+  brightLight(255, "Bright Light"),
+  dimLight(47, "Dim Light"),
+  darkness(0, "Darkness");
 
   private final int envLightColor;
+  private final String envLightName;
 
-  private Illumination(final int _envLightColor) {
+  private Illumination(final int _envLightColor, final String _envLightName) {
       envLightColor = _envLightColor;
+      envLightName = _envLightName;
   }
 
   int getColor() {
     return envLightColor;
   }
 
+  String getName() {
+    return envLightName;
+  }
+
 }
+
+enum TooltipStates {
+
+  Wait,
+  FadeIn,
+  Show;
+
+};

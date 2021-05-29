@@ -80,6 +80,13 @@ public class UserInterface {
   HashMap<String, String> sightTypeToController;
   HashMap<String, String> sizeToController;
 
+  // Maps controllers to tooltips
+  HashMap<String, UserInterfaceTooltip> controllerToTooltip;
+
+  // Keeps track of previous mouse over events on controllers
+  // Used to reset tooltip timers
+  List<ControllerInterface<?>> previousMouseOverControllers;
+
   boolean fileDialogOpen;
 
   UserInterface(PGraphics _canvas, ControlP5 _cp5, Map _map, Grid _grid, Obstacles _obstacles, Layer _playersLayer, Layer _dmLayer, Resources _resources, Initiative _initiative) {
@@ -171,6 +178,9 @@ public class UserInterface {
     sightTypeToController = new HashMap<String, String>();
     sizeToController = new HashMap<String, String>();
 
+    controllerToTooltip = new HashMap<String, UserInterfaceTooltip>();
+    previousMouseOverControllers = new ArrayList<ControllerInterface<?>>();
+
     fileDialogOpen = false;
 
     setupControllers();
@@ -180,7 +190,7 @@ public class UserInterface {
 
   }
 
-  void draw() {
+  void drawSetupHelpers() {
 
     switch ( appState ) {
       case gridSetup:
@@ -223,6 +233,38 @@ public class UserInterface {
         break;
       default:
         break;
+    }
+
+  }
+
+  void drawTooltips(PGraphics uiCanvas) {
+
+    List<ControllerInterface<?>> mouseOverControllers = cp5.getMouseOverList();
+
+    // Draw tooltip for controllers in mouse-over list
+    for ( ControllerInterface controller: mouseOverControllers ) {
+      if ( controller.isVisible() && controller.isMouseOver() ) {
+        UserInterfaceTooltip tooltip = controllerToTooltip.get(controller.getName());
+        if ( tooltip != null )
+          tooltip.draw(uiCanvas);
+      }
+    }
+
+    // If mouse-over list changed
+    if ( !previousMouseOverControllers.equals(mouseOverControllers) ) {
+
+      // Reset tooltip for controllers that were in the previous list
+      for ( ControllerInterface controller: previousMouseOverControllers ) {
+        UserInterfaceTooltip tooltip = controllerToTooltip.get(controller.getName());
+        if ( tooltip != null )
+          tooltip.reset();
+      }
+
+      // Reset previous list and populate it with controllers from current mouse-over list
+      previousMouseOverControllers.clear();
+      for ( ControllerInterface controller: mouseOverControllers )
+        previousMouseOverControllers.add(controller);
+
     }
 
   }
@@ -310,10 +352,10 @@ public class UserInterface {
     addButton("Toggle grid", sceneConfigIconFolder + "grid", controllersTopLeftX, controllersTopLeftY, togglableControllers, true, false);
 
     controllersTopLeftX += squareButtonWidth + controllersSpacing;
-    addButton("Switch layer", sceneConfigIconFolder + "layers", controllersTopLeftX, controllersTopLeftY, togglableControllers);
+    addButton("Switch active layer", sceneConfigIconFolder + "layers", controllersTopLeftX, controllersTopLeftY, togglableControllers);
 
     controllersTopLeftX += squareButtonWidth + controllersSpacing;
-    addButton("Switch lighting", sceneConfigIconFolder + "lighting", controllersTopLeftX, controllersTopLeftY, togglableControllers);
+    addButton("Switch environment lighting", sceneConfigIconFolder + "lighting", controllersTopLeftX, controllersTopLeftY, togglableControllers);
 
     // Disabled - map pan and zoom enabled by default
     // addButton("Toggle camera pan", sceneConfigIconFolder + "pan", controllersTopLeftX, controllersTopLeftY, togglableControllers, true, false);
@@ -345,27 +387,42 @@ public class UserInterface {
                             .setBackgroundHeight(controllersSpacing)   // item height
                             .setColorBackground(idleBackgroundColor)
                             .setColorForeground(mouseOverBackgroundColor)
+                            .setFont(instructionsFont)
                             ;
+    conditionMenuControllers.getCaptionLabel().align(LEFT, CENTER).toUpperCase(false);
+
     lightSourceMenuControllers.setHeight(menuBarHeight)                // menu bar height
                               .setBackgroundHeight(controllersSpacing) // item height
                               .setColorBackground(idleBackgroundColor)
                               .setColorForeground(mouseOverBackgroundColor)
+                              .setFont(instructionsFont)
                               ;
+    lightSourceMenuControllers.getCaptionLabel().align(LEFT, CENTER).toUpperCase(false);
+
     sightTypeMenuControllers.setHeight(menuBarHeight)                  // menu bar height
                             .setBackgroundHeight(controllersSpacing)   // item height
                             .setColorBackground(idleBackgroundColor)
                             .setColorForeground(mouseOverBackgroundColor)
+                            .setFont(instructionsFont)
                             ;
+    sightTypeMenuControllers.getCaptionLabel().align(LEFT, CENTER).toUpperCase(false);
+
     sizeMenuControllers.setHeight(menuBarHeight)                       // menu bar height
                        .setBackgroundHeight(controllersSpacing)        // item height
                        .setColorBackground(idleBackgroundColor)
                        .setColorForeground(mouseOverBackgroundColor)
+                       .setFont(instructionsFont)
                        ;
+    sizeMenuControllers.getCaptionLabel().align(LEFT, CENTER).toUpperCase(false);
+
     otherMenuControllers.setHeight(menuBarHeight)                      // menu bar height
                         .setBackgroundHeight(controllersSpacing)       // item height
                         .setColorBackground(idleBackgroundColor)
                         .setColorForeground(mouseOverBackgroundColor)
+                        .setFont(instructionsFont)
                         ;
+    otherMenuControllers.getCaptionLabel().align(LEFT, CENTER).toUpperCase(false);
+
     tokenMenu = cp5.addAccordion("Right click menu")
        .setPosition(0, 0)
        .setWidth((menuItemsPerLine+1)*controllersSpacing + menuItemsPerLine*squareButtonWidth)  // menu bar and items width
@@ -385,154 +442,154 @@ public class UserInterface {
     conditionMenuControllers.setBackgroundHeight(conditionMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY = controllersMenuInitialY;
-    addButton("Toggle condition blinded", tokenConditionsIconFolder + "blinded", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
-    conditionToController.put("Blinded", "Toggle condition blinded");
+    addButton("Blinded", tokenConditionsIconFolder + "blinded", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
+    conditionToController.put("Blinded", "Blinded");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition bloodied", tokenConditionsIconFolder + "bloodied", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
-    conditionToController.put("Bloodied", "Toggle condition bloodied");
+    addButton("Bloodied", tokenConditionsIconFolder + "bloodied", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
+    conditionToController.put("Bloodied", "Bloodied");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition charmed", tokenConditionsIconFolder + "charmed", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
-    conditionToController.put("Charmed", "Toggle condition charmed");
+    addButton("Charmed", tokenConditionsIconFolder + "charmed", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
+    conditionToController.put("Charmed", "Charmed");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition dead", tokenConditionsIconFolder + "dead", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
-    conditionToController.put("Dead", "Toggle condition dead");
+    addButton("Dead", tokenConditionsIconFolder + "dead", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
+    conditionToController.put("Dead", "Dead");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition deafened", tokenConditionsIconFolder + "deafened", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
-    conditionToController.put("Deafened", "Toggle condition deafened");
+    addButton("Deafened", tokenConditionsIconFolder + "deafened", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
+    conditionToController.put("Deafened", "Deafened");
 
     // new line
     conditionMenuControllers.setBackgroundHeight(conditionMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY += squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition frightened", tokenConditionsIconFolder + "frightened", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
-    conditionToController.put("Frightened", "Toggle condition frightened");
+    addButton("Frightened", tokenConditionsIconFolder + "frightened", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
+    conditionToController.put("Frightened", "Frightened");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition grappled", tokenConditionsIconFolder + "grappled", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
-    conditionToController.put("Grappled", "Toggle condition grappled");
+    addButton("Grappled", tokenConditionsIconFolder + "grappled", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
+    conditionToController.put("Grappled", "Grappled");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition hidden", tokenConditionsIconFolder + "hidden", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
-    conditionToController.put("Hidden", "Toggle condition hidden");
+    addButton("Hidden", tokenConditionsIconFolder + "hidden", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
+    conditionToController.put("Hidden", "Hidden");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition incapacitated", tokenConditionsIconFolder + "incapacitated", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
-    conditionToController.put("Incapacitated", "Toggle condition incapacitated");
+    addButton("Incapacitated", tokenConditionsIconFolder + "incapacitated", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
+    conditionToController.put("Incapacitated", "Incapacitated");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition invisible", tokenConditionsIconFolder + "invisible", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
-    conditionToController.put("Invisible", "Toggle condition invisible");
+    addButton("Invisible", tokenConditionsIconFolder + "invisible", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
+    conditionToController.put("Invisible", "Invisible");
 
     // new line
     conditionMenuControllers.setBackgroundHeight(conditionMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY += squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition paralyzed", tokenConditionsIconFolder + "paralyzed", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
-    conditionToController.put("Paralyzed", "Toggle condition paralyzed");
+    addButton("Paralyzed", tokenConditionsIconFolder + "paralyzed", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
+    conditionToController.put("Paralyzed", "Paralyzed");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition petrified", tokenConditionsIconFolder + "petrified", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
-    conditionToController.put("Petrified", "Toggle condition petrified");
+    addButton("Petrified", tokenConditionsIconFolder + "petrified", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
+    conditionToController.put("Petrified", "Petrified");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition poisoned", tokenConditionsIconFolder + "poisoned", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
-    conditionToController.put("Poisoned", "Toggle condition poisoned");
+    addButton("Poisoned", tokenConditionsIconFolder + "poisoned", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
+    conditionToController.put("Poisoned", "Poisoned");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition prone", tokenConditionsIconFolder + "prone", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
-    conditionToController.put("Prone", "Toggle condition prone");
+    addButton("Prone", tokenConditionsIconFolder + "prone", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
+    conditionToController.put("Prone", "Prone");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition restrained", tokenConditionsIconFolder + "restrained", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
-    conditionToController.put("Restrained", "Toggle condition restrained");
+    addButton("Restrained", tokenConditionsIconFolder + "restrained", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
+    conditionToController.put("Restrained", "Restrained");
 
     // new line
     conditionMenuControllers.setBackgroundHeight(conditionMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY += squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition stunned", tokenConditionsIconFolder + "stunned", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
-    conditionToController.put("Stunned", "Toggle condition stunned");
+    addButton("Stunned", tokenConditionsIconFolder + "stunned", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
+    conditionToController.put("Stunned", "Stunned");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Toggle condition unconscious", tokenConditionsIconFolder + "unconscious", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
-    conditionToController.put("Unconscious", "Toggle condition unconscious");
+    addButton("Unconscious", tokenConditionsIconFolder + "unconscious", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
+    conditionToController.put("Unconscious", "Unconscious");
 
     // first line in menu item
     lightSourceMenuControllers.setBackgroundHeight(lightSourceMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY = controllersMenuInitialY;
-    addButton("Toggle light source candle", tokenCommonLightSourcesIconFolder + "candle", controllersMenuX, controllersMenuY, lightSourceMenuControllers, true, false);
-    lightSourceToController.put("Candle", "Toggle light source candle");
+    addButton("Candle", tokenCommonLightSourcesIconFolder + "candle", controllersMenuX, controllersMenuY, lightSourceMenuControllers, true, false);
+    lightSourceToController.put("Candle", "Candle");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Toggle light source torch", tokenCommonLightSourcesIconFolder + "torch", controllersMenuX, controllersMenuY, lightSourceMenuControllers, true, false);
-    lightSourceToController.put("Torch", "Toggle light source torch");
+    addButton("Torch", tokenCommonLightSourcesIconFolder + "torch", controllersMenuX, controllersMenuY, lightSourceMenuControllers, true, false);
+    lightSourceToController.put("Torch", "Torch");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Toggle light source lamp", tokenCommonLightSourcesIconFolder + "lamp", controllersMenuX, controllersMenuY, lightSourceMenuControllers, true, false);
-    lightSourceToController.put("Lamp", "Toggle light source lamp");
+    addButton("Lamp", tokenCommonLightSourcesIconFolder + "lamp", controllersMenuX, controllersMenuY, lightSourceMenuControllers, true, false);
+    lightSourceToController.put("Lamp", "Lamp");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Toggle light source hooded lantern", tokenCommonLightSourcesIconFolder + "hooded_lantern", controllersMenuX, controllersMenuY, lightSourceMenuControllers, true, false);
-    lightSourceToController.put("Hooded Lantern", "Toggle light source hooded lantern");
+    addButton("Hooded lantern", tokenCommonLightSourcesIconFolder + "hooded_lantern", controllersMenuX, controllersMenuY, lightSourceMenuControllers, true, false);
+    lightSourceToController.put("Hooded Lantern", "Hooded lantern");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Toggle light source light", tokenSpellLightSourcesIconFolder + "light", controllersMenuX, controllersMenuY, lightSourceMenuControllers, true, false);
-    lightSourceToController.put("Light", "Toggle light source light");
+    addButton("Daylight", tokenCommonLightSourcesIconFolder + "daylight", controllersMenuX, controllersMenuY, lightSourceMenuControllers, true, false);
+    lightSourceToController.put("Daylight", "Daylight");
 
     // new line
     lightSourceMenuControllers.setBackgroundHeight(lightSourceMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY += squareButtonWidth + controllersSpacing;
-    addButton("Toggle light source daylight", tokenCommonLightSourcesIconFolder + "daylight", controllersMenuX, controllersMenuY, lightSourceMenuControllers, true, false);
-    lightSourceToController.put("Daylight", "Toggle light source daylight");
+    addButton("Light spell", tokenSpellLightSourcesIconFolder + "light", controllersMenuX, controllersMenuY, lightSourceMenuControllers, true, false);
+    lightSourceToController.put("Light", "Light spell");
 
     // first line in menu item
     sightTypeMenuControllers.setBackgroundHeight(sightTypeMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY = controllersMenuInitialY;
-    addButton("Toggle sight type darkvision 60'", tokenSightTypesIconFolder + "darkvision", controllersMenuX, controllersMenuY, sightTypeMenuControllers, true, false);
-    sightTypeToController.put("Darkvision 60'", "Toggle sight type darkvision 60'");
+    addButton("Darkvision 60'", tokenSightTypesIconFolder + "darkvision", controllersMenuX, controllersMenuY, sightTypeMenuControllers, true, false);
+    sightTypeToController.put("Darkvision 60'", "Darkvision 60'");
 
     // first line in menu item
     sizeMenuControllers.setBackgroundHeight(sizeMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY = controllersMenuInitialY;
-    addButton("Set size tiny", tokenSizesIconFolder + "tiny", controllersMenuX, controllersMenuY, sizeMenuControllers, true, false);
-    sizeToController.put("Tiny", "Set size tiny");
+    addButton("Tiny", tokenSizesIconFolder + "tiny", controllersMenuX, controllersMenuY, sizeMenuControllers, true, false);
+    sizeToController.put("Tiny", "Tiny");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Set size small", tokenSizesIconFolder + "small", controllersMenuX, controllersMenuY, sizeMenuControllers, true, false);
-    sizeToController.put("Small", "Set size small");
+    addButton("Small", tokenSizesIconFolder + "small", controllersMenuX, controllersMenuY, sizeMenuControllers, true, false);
+    sizeToController.put("Small", "Small");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Set size medium", tokenSizesIconFolder + "medium", controllersMenuX, controllersMenuY, sizeMenuControllers, true, false);
-    sizeToController.put("Medium", "Set size medium");
+    addButton("Medium", tokenSizesIconFolder + "medium", controllersMenuX, controllersMenuY, sizeMenuControllers, true, false);
+    sizeToController.put("Medium", "Medium");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Set size large", tokenSizesIconFolder + "large", controllersMenuX, controllersMenuY, sizeMenuControllers, true, false);
-    sizeToController.put("Large", "Set size large");
+    addButton("Large", tokenSizesIconFolder + "large", controllersMenuX, controllersMenuY, sizeMenuControllers, true, false);
+    sizeToController.put("Large", "Large");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Set size huge", tokenSizesIconFolder + "huge", controllersMenuX, controllersMenuY, sizeMenuControllers, true, false);
-    sizeToController.put("Huge", "Set size huge");
+    addButton("Huge", tokenSizesIconFolder + "huge", controllersMenuX, controllersMenuY, sizeMenuControllers, true, false);
+    sizeToController.put("Huge", "Huge");
 
     // new line
     sizeMenuControllers.setBackgroundHeight(sizeMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY += squareButtonWidth + controllersSpacing;
-    addButton("Set size gargantuan", tokenSizesIconFolder + "gargantuan", controllersMenuX, controllersMenuY, sizeMenuControllers, true, false);
-    sizeToController.put("Gargantuan", "Set size gargantuan");
+    addButton("Gargantuan", tokenSizesIconFolder + "gargantuan", controllersMenuX, controllersMenuY, sizeMenuControllers, true, false);
+    sizeToController.put("Gargantuan", "Gargantuan");
 
     // first line in menu item
     otherMenuControllers.setBackgroundHeight(otherMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY = controllersMenuInitialY;
-    addButton("Switch token layer", tokenSetupIconFolder + "switch_layer", controllersMenuX, controllersMenuY, otherMenuControllers);
+    addButton("Change token layer", tokenSetupIconFolder + "switch_layer", controllersMenuX, controllersMenuY, otherMenuControllers);
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
     addButton("Remove token", tokenSetupIconFolder + "remove", controllersMenuX, controllersMenuY, otherMenuControllers);
@@ -692,6 +749,8 @@ public class UserInterface {
       button.setBroadcast(true);
 
     }
+
+    controllerToTooltip.put(buttonName, new UserInterfaceTooltip(buttonName, mouseOverBackgroundColor, instructionsFontColor));
 
   }
 
@@ -1109,7 +1168,7 @@ public class UserInterface {
         }
 
         break;
-      case "Switch layer":
+      case "Switch active layer":
 
         switch ( layerShown ) {
           case players:
@@ -1131,24 +1190,23 @@ public class UserInterface {
         obstacles.setRecalculateShadows(true);
 
         break;
-      case "Switch lighting":
+      case "Switch environment lighting":
 
         switch ( obstacles.getIllumination() ) {
           case brightLight:
             obstacles.setIllumination(Illumination.darkness);
-            logger.info("Environment lighting switched to Darkness");
             break;
           case dimLight:
             obstacles.setIllumination(Illumination.brightLight);
-            logger.info("Environment lighting switched to Bright Light");
             break;
           case darkness:
             obstacles.setIllumination(Illumination.dimLight);
-            logger.info("Environment lighting switched to Dim Light");
             break;
           default:
             break;
         }
+
+        logger.info("Environment lighting switched to " + obstacles.getIllumination().getName());
 
         obstacles.setRecalculateShadows(true);
 
@@ -1218,7 +1276,7 @@ public class UserInterface {
         menuItemClicked = true;
 
         break;
-      case "Toggle condition blinded":
+      case "Blinded":
 
         if ( rightClickedToken == null )
           break;
@@ -1236,7 +1294,7 @@ public class UserInterface {
         hideMenu(0, 0);
 
         break;
-      case "Toggle condition bloodied":
+      case "Bloodied":
 
         if ( rightClickedToken == null )
           break;
@@ -1254,7 +1312,7 @@ public class UserInterface {
         hideMenu(0, 0);
 
         break;
-      case "Toggle condition charmed":
+      case "Charmed":
 
         if ( rightClickedToken == null )
           break;
@@ -1272,7 +1330,7 @@ public class UserInterface {
         hideMenu(0, 0);
 
         break;
-      case "Toggle condition dead":
+      case "Dead":
 
         if ( rightClickedToken == null )
           break;
@@ -1290,7 +1348,7 @@ public class UserInterface {
         hideMenu(0, 0);
 
         break;
-      case "Toggle condition deafened":
+      case "Deafened":
 
         if ( rightClickedToken == null )
           break;
@@ -1308,7 +1366,7 @@ public class UserInterface {
         hideMenu(0, 0);
 
         break;
-      case "Toggle condition frightened":
+      case "Frightened":
 
         if ( rightClickedToken == null )
           break;
@@ -1326,7 +1384,7 @@ public class UserInterface {
         hideMenu(0, 0);
 
         break;
-      case "Toggle condition grappled":
+      case "Grappled":
 
         if ( rightClickedToken == null )
           break;
@@ -1344,7 +1402,7 @@ public class UserInterface {
         hideMenu(0, 0);
 
         break;
-      case "Toggle condition hidden":
+      case "Hidden":
 
         if ( rightClickedToken == null )
           break;
@@ -1362,7 +1420,7 @@ public class UserInterface {
         hideMenu(0, 0);
 
         break;
-      case "Toggle condition incapacitated":
+      case "Incapacitated":
 
         if ( rightClickedToken == null )
           break;
@@ -1380,7 +1438,7 @@ public class UserInterface {
         hideMenu(0, 0);
 
         break;
-      case "Toggle condition invisible":
+      case "Invisible":
 
         if ( rightClickedToken == null )
           break;
@@ -1398,7 +1456,7 @@ public class UserInterface {
         hideMenu(0, 0);
 
         break;
-      case "Toggle condition paralyzed":
+      case "Paralyzed":
 
         if ( rightClickedToken == null )
           break;
@@ -1416,7 +1474,7 @@ public class UserInterface {
         hideMenu(0, 0);
 
         break;
-      case "Toggle condition petrified":
+      case "Petrified":
 
         if ( rightClickedToken == null )
           break;
@@ -1434,7 +1492,7 @@ public class UserInterface {
         hideMenu(0, 0);
 
         break;
-      case "Toggle condition poisoned":
+      case "Poisoned":
 
         if ( rightClickedToken == null )
           break;
@@ -1452,7 +1510,7 @@ public class UserInterface {
         hideMenu(0, 0);
 
         break;
-      case "Toggle condition prone":
+      case "Prone":
 
         if ( rightClickedToken == null )
           break;
@@ -1470,7 +1528,7 @@ public class UserInterface {
         hideMenu(0, 0);
 
         break;
-      case "Toggle condition restrained":
+      case "Restrained":
 
         if ( rightClickedToken == null )
           break;
@@ -1488,7 +1546,7 @@ public class UserInterface {
         hideMenu(0, 0);
 
         break;
-      case "Toggle condition stunned":
+      case "Stunned":
 
         if ( rightClickedToken == null )
           break;
@@ -1506,7 +1564,7 @@ public class UserInterface {
         hideMenu(0, 0);
 
         break;
-      case "Toggle condition unconscious":
+      case "Unconscious":
 
         if ( rightClickedToken == null )
           break;
@@ -1524,7 +1582,7 @@ public class UserInterface {
         hideMenu(0, 0);
 
         break;
-      case "Toggle light source candle":
+      case "Candle":
 
         if ( rightClickedToken == null )
           break;
@@ -1541,7 +1599,7 @@ public class UserInterface {
         hideMenu(0, 0);
 
         break;
-      case "Toggle light source torch":
+      case "Torch":
 
         if ( rightClickedToken == null )
           break;
@@ -1558,7 +1616,7 @@ public class UserInterface {
         hideMenu(0, 0);
 
         break;
-      case "Toggle light source lamp":
+      case "Lamp":
 
         if ( rightClickedToken == null )
           break;
@@ -1575,7 +1633,7 @@ public class UserInterface {
         hideMenu(0, 0);
 
         break;
-      case "Toggle light source hooded lantern":
+      case "Hooded lantern":
 
         if ( rightClickedToken == null )
           break;
@@ -1592,7 +1650,7 @@ public class UserInterface {
         hideMenu(0, 0);
 
         break;
-      case "Toggle light source light":
+      case "Light spell":
 
         if ( rightClickedToken == null )
           break;
@@ -1609,7 +1667,7 @@ public class UserInterface {
         hideMenu(0, 0);
 
         break;
-      case "Toggle light source daylight":
+      case "Daylight":
 
         if ( rightClickedToken == null )
           break;
@@ -1626,7 +1684,7 @@ public class UserInterface {
         hideMenu(0, 0);
 
         break;
-      case "Toggle sight type darkvision 60'":
+      case "Darkvision 60'":
 
         if ( rightClickedToken == null )
           break;
@@ -1643,7 +1701,7 @@ public class UserInterface {
         hideMenu(0, 0);
 
         break;
-      case "Set size tiny":
+      case "Tiny":
 
         if ( rightClickedToken == null )
           break;
@@ -1660,7 +1718,7 @@ public class UserInterface {
         hideMenu(0, 0);
 
         break;
-      case "Set size small":
+      case "Small":
 
         if ( rightClickedToken == null )
           break;
@@ -1677,7 +1735,7 @@ public class UserInterface {
         hideMenu(0, 0);
 
         break;
-      case "Set size medium":
+      case "Medium":
 
         if ( rightClickedToken == null )
           break;
@@ -1694,7 +1752,7 @@ public class UserInterface {
         hideMenu(0, 0);
 
         break;
-      case "Set size large":
+      case "Large":
 
         if ( rightClickedToken == null )
           break;
@@ -1711,7 +1769,7 @@ public class UserInterface {
         hideMenu(0, 0);
 
         break;
-      case "Set size huge":
+      case "Huge":
 
         if ( rightClickedToken == null )
           break;
@@ -1728,7 +1786,7 @@ public class UserInterface {
         hideMenu(0, 0);
 
         break;
-      case "Set size gargantuan":
+      case "Gargantuan":
 
         if ( rightClickedToken == null )
           break;
@@ -1745,7 +1803,7 @@ public class UserInterface {
         hideMenu(0, 0);
 
         break;
-      case "Switch token layer":
+      case "Change token layer":
 
         if ( rightClickedToken == null )
           break;
@@ -1804,7 +1862,7 @@ public class UserInterface {
 
     MimetypesFileTypeMap mimetypesMap = new MimetypesFileTypeMap();
     mimetypesMap.addMimeTypes("image png tif tiff jpg jpeg bmp gif");
-    mimetypesMap.addMimeTypes("video/mp4 mp4 m4v");
+    mimetypesMap.addMimeTypes("video/mp4 mp4 m4v webm");
     String mimetype = mimetypesMap.getContentType(mapFile);
     String type = mimetype.split("/")[0];
     if ( !type.equals("image") && !type.equals("video") ) {
@@ -2809,6 +2867,8 @@ public class UserInterface {
        .setStringValue(logoLink)
        ;
 
+    controllerToTooltip.put("Map logo", new UserInterfaceTooltip("Click to access website", mouseOverBackgroundColor, instructionsFontColor));
+
   }
 
   void removeController(String controllerName) {
@@ -2912,6 +2972,9 @@ public class UserInterface {
 
   boolean isInside(controlP5.Controller controller, int x, int y) {
 
+    if ( !controller.isVisible() )
+      return false;
+
     boolean inside = false;
 
     float startX = controller.getPosition()[0];
@@ -2919,9 +2982,8 @@ public class UserInterface {
     float endX = startX + controller.getWidth();
     float endY = startY + controller.getHeight();
 
-    if ( controller.isVisible() )
-      if ( controller.isInside() || (x > startX && x < endX && y > startY && y < endY) )
-        inside = true;
+    if ( controller.isInside() || (x > startX && x < endX && y > startY && y < endY) )
+      inside = true;
 
     return inside;
 

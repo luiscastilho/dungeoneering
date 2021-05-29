@@ -11,25 +11,25 @@ class Logger {
   static final int DEBUG = 2;
   static final int TRACE = 1;
 
-  int log_level;
+  int logLevel;
 
   DateTimeFormatter dateTimeformatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-  Logger(String _log_level_name) {
+  Logger(String _logLevelName) {
 
     try {
-        log_level = logLevelLookup(_log_level_name);
-        info("Logger: Log level set to " + _log_level_name);
+        logLevel = logLevelLookup(_logLevelName);
+        info("Logger: Log level set to " + _logLevelName);
     } catch ( Exception e ) {
-        error("Logger: Unknown log level \"" + _log_level_name + "\" - log level set to INFO");
-        log_level = INFO;
+        error("Logger: Unknown log level \"" + _logLevelName + "\" - log level set to INFO");
+        logLevel = INFO;
     }
 
   }
 
-  Integer logLevelLookup(String _log_level_name) throws Exception {
+  Integer logLevelLookup(String _logLevelName) throws Exception {
 
-    switch ( _log_level_name ) {
+    switch ( _logLevelName ) {
       case "CRITICAL":
         return CRITICAL;
       case "ERROR":
@@ -45,14 +45,14 @@ class Logger {
       case "TRACE":
         return TRACE;
       default:
-        throw new Exception("Unknown log level " + _log_level_name);
+        throw new Exception("Unknown log level " + _logLevelName);
     }
 
   }
 
-  String logLevelNameLookup(int _log_level) throws Exception {
+  String logLevelNameLookup(int _logLevel) throws Exception {
 
-    switch ( _log_level ) {
+    switch ( _logLevel ) {
       case CRITICAL:
         return "CRITICAL";
       case ERROR:
@@ -68,16 +68,20 @@ class Logger {
       case TRACE:
         return "TRACE";
       default:
-        throw new Exception("Unknown log level " + _log_level);
+        throw new Exception("Unknown log level " + _logLevel);
     }
 
   }
 
-  void log(int log_level, String message) {
+  int getLogLevel() {
+    return logLevel;
+  }
+
+  void log(int messageLogLevel, String message) {
 
     try {
       String dateTime = dateTimeformatter.format(LocalDateTime.now());
-      String logLevelName = logLevelNameLookup(log_level);
+      String logLevelName = logLevelNameLookup(messageLogLevel);
       println("[" + dateTime + "] " + logLevelName + ": " + message);
     } catch ( Exception e ) {}
 
@@ -85,7 +89,7 @@ class Logger {
 
   void critical(String message) {
 
-    if ( log_level > CRITICAL )
+    if ( logLevel > CRITICAL )
       return;
     log(CRITICAL, message);
 
@@ -93,7 +97,7 @@ class Logger {
 
   void error(String message) {
 
-    if ( log_level > ERROR )
+    if ( logLevel > ERROR )
       return;
     log(ERROR, message);
 
@@ -101,7 +105,7 @@ class Logger {
 
   void warning(String message) {
 
-    if ( log_level > WARNING )
+    if ( logLevel > WARNING )
       return;
     log(WARNING, message);
 
@@ -109,7 +113,7 @@ class Logger {
 
   void notice(String message) {
 
-    if ( log_level > NOTICE )
+    if ( logLevel > NOTICE )
       return;
     log(NOTICE, message);
 
@@ -117,7 +121,7 @@ class Logger {
 
   void info(String message) {
 
-    if ( log_level > INFO )
+    if ( logLevel > INFO )
       return;
     log(INFO, message);
 
@@ -125,7 +129,7 @@ class Logger {
 
   void debug(String message) {
 
-    if ( log_level > DEBUG )
+    if ( logLevel > DEBUG )
       return;
     log(DEBUG, message);
 
@@ -133,7 +137,7 @@ class Logger {
 
   void trace(String message) {
 
-    if ( log_level > TRACE )
+    if ( logLevel > TRACE )
       return;
     log(TRACE, message);
 
