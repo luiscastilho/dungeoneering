@@ -1,17 +1,32 @@
 {
-  "doors": [{
-    "vertexes": [
-      [
-        351,
-        404
+  "doors": [
+    {
+      "vertexes": [
+        [
+          351,
+          404
+        ],
+        [
+          351,
+          460
+        ]
       ],
-      [
-        351,
-        460
-      ]
-    ],
-    "closed": true
-  }],
+      "closed": true
+    },
+    {
+      "vertexes": [
+        [
+          689,
+          124
+        ],
+        [
+          738,
+          124
+        ]
+      ],
+      "closed": true
+    }
+  ],
   "dmTokens": [
     {
       "size": "Medium",
