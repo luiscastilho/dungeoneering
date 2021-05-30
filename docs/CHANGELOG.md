@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog][1], and this project adheres to
 [Semantic Versioning][2].
 
+## [1.1.1] - 2021-05-30
+
+### Changed
+
+- Wall segments setup can now be stopped by double clicking so you can continue
+adding segments in another spot on the map
+- Doors segments are now added one at a time
+
 ## [1.1.0] - 2021-05-29
 
 ### Added
@@ -40,7 +48,8 @@ same resolution where they were created
 - Visual initiative order widget to help in combats
 - An [exclusive video map][3] from [Animated Dungeon Maps][4]
 
-[unreleased]: https://github.com/luiscastilho/dungeoneering/compare/v1.1.0...HEAD
+[unreleased]: https://github.com/luiscastilho/dungeoneering/compare/v1.1.1...HEAD
+[1.1.1]: https://github.com/luiscastilho/dungeoneering/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/luiscastilho/dungeoneering/compare/v1.0.2...v1.1.0
 [1.0.2]: https://github.com/luiscastilho/dungeoneering/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/luiscastilho/dungeoneering/compare/v1.0.0...v1.0.1
