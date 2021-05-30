@@ -676,7 +676,7 @@ public class UserInterface {
     instructionsY -= instructionsHeight + controllersSpacing;
 
     cp5.addTextlabel("Wall instructions - 1st line")
-       .setText("Draw a new wall, adding vertexes to it by left clicking.")
+       .setText("Draw a new wall, adding vertexes to it by left clicking. Double click to stop adding wall segments after the current one.")
        .setPosition(instructionsX, instructionsY)
        .setColorValue(instructionsFontColor)
        .setFont(instructionsFont)
