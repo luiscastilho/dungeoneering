@@ -2867,7 +2867,7 @@ public class UserInterface {
        .setStringValue(logoLink)
        ;
 
-    controllerToTooltip.put("Map logo", new UserInterfaceTooltip("Click to access website", mouseOverBackgroundColor, instructionsFontColor));
+    controllerToTooltip.put("Map logo", new UserInterfaceTooltip("Click to visit website", mouseOverBackgroundColor, instructionsFontColor));
 
   }
 
