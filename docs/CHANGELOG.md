@@ -11,7 +11,7 @@ The format is based on [Keep a Changelog][1], and this project adheres to
 
 - Wall segments setup can now be stopped by double clicking so you can continue
 adding segments in another spot on the map
-- Doors segments are now added one at a time
+- Door segments are now added one at a time
 
 ## [1.1.0] - 2021-05-29
 
