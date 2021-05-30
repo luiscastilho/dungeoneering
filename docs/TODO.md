@@ -45,17 +45,19 @@
 - [X] Scenes saved and later loaded should work on any screen resolution
 - [X] Light sources should be visible in all layers
 - [X] Show tooltips over UI buttons, including the ones in the right click menu
+- [ ] Allow DMs to load and manipulate the same scene PCs are seeing in a secondary screen
 - [ ] Fix token images looking pixelated if zoom in is used
 - [ ] Set maximum zoom and pan
 - [ ] Keep tokens inside grid when moving - larger tokens being moved to grid borders
-- [ ] Keep right click menu inside canvas - right click in tokens near the grid borders
+- [ ] Keep right click menu inside canvas - right click in tokens near grid borders
 - [ ] For larger tokens, remember token cell being dragged
-- [ ] Don't allow move over walls/closed doors
+- [ ] Don't allow tokens to move over walls/closed doors
 - [ ] Don't allow tokens to move over tokens in other layers
 - [ ] Allow to click on an icon in the Initiative Order and centralize the map on/highlight that token
 - [ ] When setting up walls and doors, add an icon over walls/doors already created
 - [ ] Allow doors to be locked - only DM can unlock them
-- [ ] Allow to add light sources not associated with player or DM tokens
+- [ ] Allow to add environment light sources, not associated with player or DM tokens
+- [ ] Add more D&D 5e spell light sources to right click menu
 - [ ] Add D&D 5e obscurement sources to right click menu
 - [ ] Add D&D 5e spell effects - fireball, etc
 - [ ] Allow to automatically move a token placed on a givan cell to another cell (stairs, secret passages, etc)
@@ -63,8 +65,7 @@
 - [ ] FoW/revealed/visited by room
 - [ ] Multiple maps linked (NSEW)
 - [ ] Show movement path
-- [ ] Don't allow tokens to stop on top of another tokens - move it back to previous cell
+- [ ] Don't allow tokens to stop on top of other tokens - move it back to previous cell
 - [ ] Create scene selection screen with thumbnails
 - [ ] Create map selection screen with thumbnails
 - [ ] Create token selection screen with thumbnails
-- [ ] Allow DMs to load the same scene PCs are seeing in a secondary screen
