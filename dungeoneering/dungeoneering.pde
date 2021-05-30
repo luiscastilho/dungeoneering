@@ -37,6 +37,8 @@ PFont loadingFont;
 String loadingMessage;
 color loadingFontColor, loadingFontOutlineColor;
 
+int previousClickTime;
+
 void setup() {
 
   fullScreen(P2D);
@@ -82,6 +84,8 @@ void setup() {
   loadingMessage = "Loading...";
   loadingFontColor = color(255);
   loadingFontOutlineColor = color(0);
+
+  previousClickTime = 0;
 
 }
 
@@ -335,6 +339,15 @@ void mouseDragged() {
 
 void mouseReleased() {
 
+  int currentClickTime;
+  boolean doubleClick;
+
+  currentClickTime = millis();
+  doubleClick = false;
+  if ( currentClickTime - previousClickTime < 500 )
+    doubleClick = true;
+  previousClickTime = currentClickTime;
+
   if ( userInterface.isInside(mouseX, mouseY) )
     return;
 
@@ -364,7 +377,7 @@ void mouseReleased() {
     case wallSetup:
 
       if ( mouseButton == LEFT )
-        userInterface.newWallSetup(mouseX, mouseY);
+        userInterface.newWallSetup(mouseX, mouseY, doubleClick);
 
       if ( mouseButton == RIGHT )
         userInterface.removeWall(mouseX, mouseY);

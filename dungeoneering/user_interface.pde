@@ -1061,6 +1061,8 @@ public class UserInterface {
 
           cursor(ARROW);
 
+          newWall = null;
+
           newAppState = AppStates.idle;
 
         }
@@ -1085,20 +1087,17 @@ public class UserInterface {
           dmLayer.reset();
           obstacles.toggleDrawObstacles();
 
-          newDoor = new Door(canvas);
-
           doorInstructions1stLine.show();
           doorInstructions2ndLine.show();
 
           PImage cursorCross = loadImage("cursors/cursor_cross_32.png");
           cursor(cursorCross);
 
+          newDoor = null;
+
           newAppState = AppStates.doorSetup;
 
         } else {
-
-          if ( newDoor.isSet() )
-            obstacles.addDoor(newDoor);
 
           enableController("Select map");
           enableController("Grid setup");
@@ -1115,6 +1114,8 @@ public class UserInterface {
           doorInstructions2ndLine.hide();
 
           cursor(ARROW);
+
+          newDoor = null;
 
           newAppState = AppStates.idle;
 
@@ -2093,10 +2094,16 @@ public class UserInterface {
 
   }
 
-  void newWallSetup(int _mouseX, int _mouseY) {
+  void newWallSetup(int _mouseX, int _mouseY, boolean isDoubleClick) {
 
     if ( isInside(_mouseX, _mouseY) )
       return;
+
+    // Double click to stop adding new wall segments
+    if ( isDoubleClick ) {
+      newWall = null;
+      return;
+    }
 
     if ( newWall == null )
       newWall = new Wall(canvas);
@@ -2115,10 +2122,14 @@ public class UserInterface {
       mapVertex.x, mapVertex.y
     );
 
+    // If wall has two vertexes already
     if ( newWall.isSet() ) {
 
+      // Add it to obstacles
       obstacles.addWall(newWall);
+      logger.trace("New wall added");
 
+      // Create a new wall segment, its first vertex will be the last vertex of the previous segment
       newWall = new Wall(canvas);
       newWall.addVertex(
         canvasVertex.x, canvasVertex.y,
@@ -2143,6 +2154,9 @@ public class UserInterface {
     if ( isInside(_mouseX, _mouseY) )
       return;
 
+    if ( newDoor == null )
+      newDoor = new Door(canvas);
+
     // Vertex with canvas coordinates ignoring current transformations (pan and scale), used to draw vertex on canvas
     Point canvasVertex = new Point(
       map.transformX(_mouseX),
@@ -2156,6 +2170,18 @@ public class UserInterface {
       canvasVertex.x, canvasVertex.y,
       mapVertex.x, mapVertex.y
     );
+
+    // If door has two vertexes already
+    if ( newDoor.isSet() ) {
+
+      // Add it to obstacles
+      obstacles.addDoor(newDoor);
+      logger.trace("New door added");
+
+      // Finish this setup
+      newDoor = null;
+
+    }
 
   }
 
