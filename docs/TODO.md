@@ -44,6 +44,7 @@
 - [X] Conditions, light sources, etc, applied to a token should remain highlighted in the right click menu
 - [X] Scenes saved and later loaded should work on any screen resolution
 - [X] Light sources should be visible in all layers
+- [X] Show tooltips over UI buttons, including the ones in the right click menu
 - [ ] Fix token images looking pixelated if zoom in is used
 - [ ] Set maximum zoom and pan
 - [ ] Keep tokens inside grid when moving - larger tokens being moved to grid borders
@@ -55,7 +56,6 @@
 - [ ] When setting up walls and doors, add an icon over walls/doors already created
 - [ ] Allow doors to be locked - only DM can unlock them
 - [ ] Allow to add light sources not associated with player or DM tokens
-- [ ] Show tooltips over UI buttons, including the ones in the right click menu
 - [ ] Add D&D 5e obscurement sources to right click menu
 - [ ] Add D&D 5e spell effects - fireball, etc
 - [ ] Allow to automatically move a token placed on a givan cell to another cell (stairs, secret passages, etc)
