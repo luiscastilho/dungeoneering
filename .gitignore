@@ -13,3 +13,6 @@
 
 # Generate icons script output dir
 /dungeoneering/data/icons/orig/output/
+
+# Temp dir
+/untracked/
