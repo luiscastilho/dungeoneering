@@ -634,15 +634,11 @@ public class UserInterface {
 
     // Bottom left messages
 
-    // Roll20 "Grid Alignment Tool" instructions:
-    //   This tool allows you to quickly size your map background to match the Roll20 grid on the current page.
-    //   Instructions: Click and drag to create a box the size of 3 x 3 grid cells on the map background you are using.
-
     instructionsX = instructionsInitialX;
     instructionsY = instructionsInitialY;
 
     cp5.addTextlabel("Grid instructions - 2nd line")
-       .setText("Once you draw this square, you can adjust its size using W, A, S, D and ↑, ←, ↓, → keys.")
+       .setText("Once you draw this square, you can adjust its size and position using keys W, A, S, D (top left corner) and ↑, ←, ↓, → (bottom right corner).")
        .setPosition(instructionsX, instructionsY)
        .setColorValue(instructionsFontColor)
        .setFont(instructionsFont)
@@ -665,7 +661,7 @@ public class UserInterface {
     instructionsY = instructionsInitialY;
 
     cp5.addTextlabel("Wall instructions - 2nd line")
-       .setText("Right click over any wall to remove it.")
+       .setText("Right click on any wall to remove it.")
        .setPosition(instructionsX, instructionsY)
        .setColorValue(instructionsFontColor)
        .setFont(instructionsFont)
@@ -676,7 +672,7 @@ public class UserInterface {
     instructionsY -= instructionsHeight + controllersSpacing;
 
     cp5.addTextlabel("Wall instructions - 1st line")
-       .setText("Draw a new wall, adding vertexes to it by left clicking. Double click to stop adding wall segments after the current one.")
+       .setText("Draw new wall segments, adding vertexes by left clicking. Double click to stop adding wall segments after the current one.")
        .setPosition(instructionsX, instructionsY)
        .setColorValue(instructionsFontColor)
        .setFont(instructionsFont)
@@ -688,7 +684,7 @@ public class UserInterface {
     instructionsY = instructionsInitialY;
 
     cp5.addTextlabel("Door instructions - 2nd line")
-       .setText("Right click over any door to remove it.")
+       .setText("Right click on any door to remove it.")
        .setPosition(instructionsX, instructionsY)
        .setColorValue(instructionsFontColor)
        .setFont(instructionsFont)
@@ -699,7 +695,7 @@ public class UserInterface {
     instructionsY -= instructionsHeight + controllersSpacing;
 
     cp5.addTextlabel("Door instructions - 1st line")
-       .setText("Draw a new door, adding vertexes to it by left clicking.")
+       .setText("Draw new doors, adding vertexes by left clicking.")
        .setPosition(instructionsX, instructionsY)
        .setColorValue(instructionsFontColor)
        .setFont(instructionsFont)
