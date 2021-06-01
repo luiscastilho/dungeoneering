@@ -1,1 +1,4 @@
 theme: jekyll-theme-minimal
+title: dungeoneering
+description: A minimalistic virtual tabletop (VTT) that can be used as a combat grid or as a dungeon exploration tool, made for local tabletop RPG sessions.
+show_downloads: true
