@@ -41,7 +41,7 @@ int previousClickTime;
 
 void setup() {
 
-  fullScreen(P2D);
+  fullScreen(P2D, 2);
   smooth();
   frameRate(60);
 

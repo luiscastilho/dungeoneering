@@ -79,8 +79,10 @@ echo " done"
 
 echo -n "  Remove unnecessary files from dungeoneering-$version-win64..."
 rm releases/$version/dungeoneering-$version-win64/source/dungeoneering.java
-rm -r releases/$version/dungeoneering-$version-win64/data/campaign/
 rm -r releases/$version/dungeoneering-$version-win64/data/icons/orig/
+if [ -d releases/$version/dungeoneering-$version-win64/data/campaign/ ]; then
+    rm -r releases/$version/dungeoneering-$version-win64/data/campaign/
+fi
 echo " done"
 
 # Create release zip file
