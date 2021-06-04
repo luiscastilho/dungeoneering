@@ -46,6 +46,9 @@
 - [X] Light sources should be visible in all layers
 - [X] Show tooltips over UI buttons, including the ones in the right click menu
 - [ ] Allow DMs to load and manipulate the same scene PCs are seeing in a secondary screen
+- [ ] Allow to add environment light sources, not associated with player or DM tokens
+- [ ] Add more D&D 5e spell light sources to right click menu
+- [ ] Add more D&D 5e sight types to right click menu
 - [ ] Fix token images looking pixelated if zoom in is used
 - [ ] Set maximum zoom and pan
 - [ ] Keep tokens inside grid when moving - larger tokens being moved to grid borders
@@ -56,13 +59,11 @@
 - [ ] Allow to click on an icon in the Initiative Order and centralize the map on/highlight that token
 - [ ] When setting up walls and doors, add an icon over walls/doors already created
 - [ ] Allow doors to be locked - only DM can unlock them
-- [ ] Allow to add environment light sources, not associated with player or DM tokens
-- [ ] Add more D&D 5e spell light sources to right click menu
 - [ ] Add D&D 5e obscurement sources to right click menu
 - [ ] Add D&D 5e spell effects - fireball, etc
 - [ ] Allow to automatically move a token placed on a givan cell to another cell (stairs, secret passages, etc)
 - [ ] Allow to load images as free floating objects on top of map
-- [ ] FoW/revealed/visited by room
+- [ ] Manual FoW - areas revealed when a player reaches/illuminates it
 - [ ] Multiple maps linked (NSEW)
 - [ ] Show movement path
 - [ ] Don't allow tokens to stop on top of other tokens - move it back to previous cell
