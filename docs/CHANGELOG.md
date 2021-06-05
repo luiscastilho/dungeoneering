@@ -9,7 +9,7 @@ The format is based on [Keep a Changelog][1], and this project adheres to
 
 ### Fixed
 
-- Run on fullscreen in second screen, if present
+- Run in fullscreen on second screen, if present
 
 ## [1.1.1] - 2021-05-30
 
