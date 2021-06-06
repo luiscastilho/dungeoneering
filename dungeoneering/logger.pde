@@ -42,7 +42,7 @@ class Logger {
     // Initial log level set to TRACE, redefined below
     logLevel = 1;
 
-    logsDir = sketchPath().replaceAll("\\\\", "/") + "/../log";
+    logsDir = sketchPath().replaceAll("\\\\", "/") + "/log";
 
     logFilesConfig = RotationConfig
       .builder()
