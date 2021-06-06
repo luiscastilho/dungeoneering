@@ -429,6 +429,10 @@ void mouseWheel(MouseEvent event) {
 
 void keyPressed() {
 
+  // Disable exiting the application when ESC is pressed
+  if ( key == ESC )
+    key = 0;
+
   switch ( appState ) {
     case gridSetup:
 
