@@ -3,6 +3,7 @@ import processing.video.*;
 import ch.bildspur.postfx.builder.*;
 import ch.bildspur.postfx.pass.*;
 import ch.bildspur.postfx.*;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 
 Logger logger;
 
@@ -37,6 +38,8 @@ PFont loadingFont;
 String loadingMessage;
 color loadingFontColor, loadingFontOutlineColor;
 
+int upkeepInterval;
+
 int previousClickTime;
 
 void setup() {
@@ -47,45 +50,77 @@ void setup() {
 
   logger = new Logger("DEBUG");
 
-  appState = AppStates.idle;
+  try {
 
-  cp5 = new ControlP5(this);
-  cp5.setAutoDraw(false);
+    logger.info("Setup: dungeoneering initialization started");
 
-  mainCanvas = createGraphics(width, height, P2D);
-  mainCanvas.smooth();
+    appState = AppStates.idle;
 
-  initiativeCanvas = createGraphics(width, height, P2D);
-  initiativeCanvas.smooth();
+    cp5 = new ControlP5(this);
+    cp5.setAutoDraw(false);
 
-  uiCanvas = createGraphics(width, height, P2D);
-  uiCanvas.smooth();
+    logger.debug("Setup: controlP5 initialization done");
 
-  postFx = new PostFX(this);
-  obstacles = new Obstacles(mainCanvas, postFx);
+    mainCanvas = createGraphics(width, height, P2D);
+    mainCanvas.smooth();
 
-  map = new Map(this, mainCanvas, obstacles);
+    initiativeCanvas = createGraphics(width, height, P2D);
+    initiativeCanvas.smooth();
 
-  grid = new Grid(mainCanvas, map);
+    uiCanvas = createGraphics(width, height, P2D);
+    uiCanvas.smooth();
 
-  initiative = new Initiative(initiativeCanvas);
+    logger.debug("Setup: canvases initialization done");
 
-  resources = new Resources(mainCanvas, grid);
+    postFx = new PostFX(this);
+    obstacles = new Obstacles(mainCanvas, postFx);
 
-  playersLayer = new Layer(mainCanvas, grid, obstacles, resources, initiative, "Players Layer", Layers.players);
-  dmLayer = new Layer(mainCanvas, grid, obstacles, resources, initiative, "DM Layer", Layers.dm);
-  layerShown = Layers.players;
+    logger.debug("Setup: obstacles initialization done");
 
-  userInterface = new UserInterface(mainCanvas, cp5, map, grid, obstacles, playersLayer, dmLayer, resources, initiative);
+    map = new Map(this, mainCanvas, obstacles);
 
-  backgroundColor = color(0);
+    logger.debug("Setup: map initialization done");
 
-  loadingFont = loadFont("fonts/ProcessingSansPro-Semibold-18.vlw");
-  loadingMessage = "Loading...";
-  loadingFontColor = color(255);
-  loadingFontOutlineColor = color(0);
+    grid = new Grid(mainCanvas, map);
 
-  previousClickTime = 0;
+    logger.debug("Setup: grid initialization done");
+
+    initiative = new Initiative(initiativeCanvas);
+
+    logger.debug("Setup: initiative initialization done");
+
+    resources = new Resources(mainCanvas, grid);
+
+    logger.debug("Setup: resources initialization done");
+
+    playersLayer = new Layer(mainCanvas, grid, obstacles, resources, initiative, "Players Layer", Layers.players);
+    dmLayer = new Layer(mainCanvas, grid, obstacles, resources, initiative, "DM Layer", Layers.dm);
+    layerShown = Layers.players;
+
+    logger.debug("Setup: layers initialization done");
+
+    userInterface = new UserInterface(mainCanvas, cp5, map, grid, obstacles, playersLayer, dmLayer, resources, initiative);
+
+    logger.debug("Setup: UI initialization done");
+
+    backgroundColor = color(0);
+
+    loadingFont = loadFont("fonts/ProcessingSansPro-Semibold-18.vlw");
+    loadingMessage = "Loading...";
+    loadingFontColor = color(255);
+    loadingFontOutlineColor = color(0);
+
+    upkeepInterval = 5;
+
+    previousClickTime = 0;
+
+    logger.info("Setup: dungeoneering initialization done");
+
+  } catch ( Exception e ) {
+    logger.error("Setup: Error initializing dungeoneering");
+    logger.error(ExceptionUtils.getStackTrace(e));
+    exit();
+  }
 
 }
 
@@ -117,7 +152,7 @@ void draw() {
   drawUi();
   image(uiCanvas, 0, 0, width, height);
 
-  if ( frameCount % 180 == 0 ) {
+  if ( frameCount % (upkeepInterval * 60) == 0 ) {
 
     appUpkeep();
 
@@ -244,13 +279,10 @@ void appUpkeep() {
   System.gc();
   System.runFinalization();
 
-  if ( logger.getLogLevel() > Logger.DEBUG )
-    return;
-
   long totalMemory = Runtime.getRuntime().totalMemory();
   long usedMemory = totalMemory - Runtime.getRuntime().freeMemory();
   float usedMemoryPercent = (100*(float)usedMemory/totalMemory);
-  logger.debug("FPS: " + nf(frameRate, 2, 2) + " / " + "Memory usage: " + nf(usedMemoryPercent, 2, 2) + "%");
+  logger.debug("Stats: FPS: " + nf(frameRate, 2, 2) + " / " + "Memory usage: " + nf(usedMemoryPercent, 2, 2) + "%");
 
 }
 
@@ -259,7 +291,15 @@ void controlEvent(ControlEvent controlEvent) {
   if ( userInterface == null )
     return;
 
-  appState = userInterface.controllerEvent(controlEvent);
+  try {
+
+    appState = userInterface.controllerEvent(controlEvent);
+
+  } catch ( Exception e ) {
+    logger.error("UserInterface: Error handling controller event");
+    logger.error(ExceptionUtils.getStackTrace(e));
+    throw e;
+  }
 
 }
 
@@ -438,7 +478,7 @@ void keyPressed() {
 
       if ( key == CODED ) {
 
-        // adjust grid helper end point
+        // Adjust grid helper bottom right corner
         if ( keyCode == UP )
           userInterface.gridHelperSetupAdjustment(0, -1, true);
         else if ( keyCode == RIGHT )
@@ -450,14 +490,14 @@ void keyPressed() {
 
       } else {
 
-        // adjust grid helper start point
-        if ( key == 'w' )
+        // Adjust grid helper top left corner
+        if ( key == 'w' || key == 'W' )
           userInterface.gridHelperSetupAdjustment(0, -1, false);
-        else if ( key == 'd' )
+        else if ( key == 'd' || key == 'D' )
           userInterface.gridHelperSetupAdjustment(1, 0, false);
-        else if ( key == 's' )
+        else if ( key == 's' || key == 'S' )
           userInterface.gridHelperSetupAdjustment(0, 1, false);
-        else if ( key == 'a' )
+        else if ( key == 'a' || key == 'A' )
           userInterface.gridHelperSetupAdjustment(-1, 0, false);
 
       }

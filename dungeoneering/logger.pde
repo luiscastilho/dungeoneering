@@ -1,5 +1,22 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import com.vlkan.rfos.RotationConfig;
+import com.vlkan.rfos.RotatingFileOutputStream;
+import java.nio.charset.StandardCharsets;
+import org.apache.commons.lang3.exception.ExceptionUtils;
+
+import com.vlkan.rfos.policy.RotationPolicy;
+import java.io.File;
+import java.time.Instant;
+import java.io.OutputStream;
+import java.io.FileFilter;
+import java.util.Arrays;
+import org.apache.commons.io.comparator.LastModifiedFileComparator;
+import org.apache.commons.io.filefilter.AndFileFilter;
+import org.apache.commons.io.filefilter.FileFileFilter;
+import org.apache.commons.io.filefilter.WildcardFileFilter;
 
 class Logger {
 
@@ -15,14 +32,43 @@ class Logger {
 
   DateTimeFormatter dateTimeformatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
+  String logsDir;
+  RotationConfig logFilesConfig;
+  String lineSeparator;
+  boolean writeLogFile;
+
   Logger(String _logLevelName) {
+
+    // Initial log level set to TRACE, redefined below
+    logLevel = 1;
+
+    logsDir = sketchPath().replaceAll("\\\\", "/") + "/../log";
+
+    logFilesConfig = RotationConfig
+      .builder()
+      .file(logsDir + "/dungeoneering.log")
+      .filePattern(logsDir + "/dungeoneering-%d{yyyyMMdd-HHmmss-SSS}.log")
+      .policy(new SizeBasedRotationPolicy(500 * 1024)) // 500KB
+      .callback(new LoggingRotationCallbackKeepLast(5)) // Keep last 5 rotated log files
+      .build();
+
+    lineSeparator = System.getProperty("line.separator");
+
+    try {
+      Files.createDirectories(Paths.get(logsDir));
+      if ( Files.isDirectory(Paths.get(logsDir)) )
+        writeLogFile = true;
+    } catch ( Exception e ) {
+      writeLogFile = false;
+      error("Logger: Couldn't create log dir - logging to console only");
+    }
 
     try {
         logLevel = logLevelLookup(_logLevelName);
         info("Logger: Log level set to " + _logLevelName);
     } catch ( Exception e ) {
-        error("Logger: Unknown log level \"" + _logLevelName + "\" - log level set to INFO");
         logLevel = INFO;
+        error("Logger: Unknown log level \"" + _logLevelName + "\" - log level set to INFO");
     }
 
   }
@@ -80,10 +126,33 @@ class Logger {
   void log(int messageLogLevel, String message) {
 
     try {
+
       String dateTime = dateTimeformatter.format(LocalDateTime.now());
       String logLevelName = logLevelNameLookup(messageLogLevel);
-      println("[" + dateTime + "] " + logLevelName + ": " + message);
-    } catch ( Exception e ) {}
+      String logLine = "[" + dateTime + "] " + logLevelName + ": " + message;
+      println(logLine);
+
+      if ( writeLogFile ) {
+
+        RotatingFileOutputStream logFile = null;
+        try {
+          logFile = new RotatingFileOutputStream(logFilesConfig);
+          logFile.write(logLine.getBytes(StandardCharsets.UTF_8));
+          logFile.write(lineSeparator.getBytes(StandardCharsets.UTF_8));
+        } catch ( Exception e ) {
+          println("ERROR: Logger: error writing log to file");
+          println(ExceptionUtils.getStackTrace(e));
+        } finally {
+          if ( logFile != null )
+            logFile.close();
+        }
+
+      }
+
+    } catch ( Exception e ) {
+      println("ERROR: Logger: error printing log");
+      println(ExceptionUtils.getStackTrace(e));
+    }
 
   }
 
@@ -140,6 +209,54 @@ class Logger {
     if ( logLevel > TRACE )
       return;
     log(TRACE, message);
+
+  }
+
+  class LoggingRotationCallbackKeepLast implements RotationCallback {
+
+    int keepLastN;
+
+    LoggingRotationCallbackKeepLast(int _keepLastN) {
+
+      keepLastN = _keepLastN;
+
+    }
+
+    @Override
+    void onTrigger(RotationPolicy policy, Instant instant) {}
+
+    @Override
+    void onOpen(RotationPolicy policy, Instant instant, OutputStream stream) {}
+
+    @Override
+    void onClose(RotationPolicy policy, Instant instant, OutputStream stream) {}
+
+    @Override
+    void onSuccess(RotationPolicy policy, Instant instant, File file) {
+
+      try {
+
+        File logsDir = new File(Logger.this.logsDir);
+        File[] rotatedLogFiles = logsDir.listFiles((FileFilter) new AndFileFilter(FileFileFilter.FILE, new WildcardFileFilter("dungeoneering-*.log")));
+
+        if ( rotatedLogFiles.length > keepLastN ) {
+
+          Arrays.sort(rotatedLogFiles, LastModifiedFileComparator.LASTMODIFIED_REVERSE);
+          for ( int i = keepLastN; i < rotatedLogFiles.length; i++ )
+            rotatedLogFiles[i].delete();
+
+        }
+
+      } catch ( Exception e ) {
+        logger.error("Logger: Error rotating log files");
+        logger.error(ExceptionUtils.getStackTrace(e));
+        throw e;
+      }
+
+    }
+
+    @Override
+    void onFailure(RotationPolicy policy, Instant instant, File file, Exception error) {}
 
   }
 

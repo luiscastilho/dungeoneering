@@ -140,7 +140,7 @@ class Grid {
     cellWidth = round(helperWidth/3f);
     cellHeight = round(helperHeight/3f);
 
-    logger.trace("Cell size: " + cellWidth + "x" + cellHeight);
+    logger.trace("Grid: Cell size: " + cellWidth + "x" + cellHeight);
 
     // Based on helper top corner, find grid's top corner x coordinate
     firstCorner.x = min(helperFirstCorner.x, helperSecondCorner.x);
@@ -158,7 +158,7 @@ class Grid {
       firstCorner.y + round(cellHeight/2f)
     );
 
-    logger.trace("First cell center in map: " + mapFirstCenter);
+    logger.trace("Grid: First cell center in map: " + mapFirstCenter);
 
     // Setup map grid - grid with map coordinates
 
@@ -334,7 +334,7 @@ class Grid {
 
   void toggleDrawGrid() {
     drawGrid = !drawGrid;
-    logger.info("Grid " + (drawGrid ? "shown" : "hidden"));
+    logger.info("Grid: Grid " + (drawGrid ? "shown" : "hidden"));
   }
 
 }

@@ -111,7 +111,7 @@ class Token {
 
   void recalculateShadows(ShadowTypes shadowsToRecalculate) {
 
-    logger.debug("Token " + name + ": recalculating shadows");
+    logger.trace("Token: " + name + ": recalculating shadows");
 
     switch ( shadowsToRecalculate ) {
       case lightSources:
@@ -154,7 +154,7 @@ class Token {
         wall.calculateShadows(light, shadows);
         wallsReached += 1;
       }
-    logger.trace("Token " + name + ": " + type + " " + light.getName() + ": " + wallsReached + "/" + obstacles.getWalls().size() + " walls reached");
+    logger.trace("Token: " + name + ": " + type + " " + light.getName() + ": " + wallsReached + "/" + obstacles.getWalls().size() + " walls reached");
 
     int doorsReached = 0;
     for ( Door door: obstacles.getDoors() )
@@ -162,7 +162,7 @@ class Token {
         door.calculateShadows(light, shadows);
         doorsReached += 1;
       }
-    logger.trace("Token " + name + ": " + type + " " + light.getName() + ": " + doorsReached + "/" + obstacles.getDoors().size() + " doors reached");
+    logger.trace("Token: " + name + ": " + type + " " + light.getName() + ": " + doorsReached + "/" + obstacles.getDoors().size() + " doors reached");
 
     shadows.endDraw();
 
@@ -295,10 +295,23 @@ class Token {
 
     beingMoved = _beingMoved;
 
-    if ( beingMoved )
+    if ( beingMoved ) {
+
       prevCell = cell;
-    else
+
+    } else {
+
+      if ( cell != prevCell )
+        logger.debug(
+          "Token: " + name + ": Moved from " +
+          prevCell.getRow() + "," + prevCell.getColumn() +
+          " to " +
+          cell.getRow() + "," + cell.getColumn()
+          );
+
       prevCell = null;
+
+    }
 
   }
 
@@ -355,7 +368,7 @@ class Token {
 
         lightSources.remove(activeLightSource);
 
-        logger.debug("Token " + name + ": Light source " + activeLightSource.getName() + " removed");
+        logger.debug("Token: " + name + ": Light source " + activeLightSource.getName() + " removed");
         return;
 
       }
@@ -363,7 +376,7 @@ class Token {
     lightSources.add(light);
     recenterLightSources();
 
-    logger.debug("Token " + name + ": Light source " + light.getName() + " added");
+    logger.debug("Token: " + name + ": Light source " + light.getName() + " added");
 
   }
 
@@ -374,7 +387,7 @@ class Token {
 
         sightTypes.remove(activeSightType);
 
-        logger.debug("Token " + name + ": Sight type " + activeSightType.getName() + " removed");
+        logger.debug("Token: " + name + ": Sight type " + activeSightType.getName() + " removed");
         return;
 
       }
@@ -382,7 +395,7 @@ class Token {
     sightTypes.add(sight);
     recenterLightSources();
 
-    logger.debug("Token " + name + ": Sight type " + sight.getName() + " added");
+    logger.debug("Token: " + name + ": Sight type " + sight.getName() + " added");
 
   }
 
@@ -404,7 +417,7 @@ class Token {
 
         }
 
-        logger.debug("Token " + name + ": Condition " + condition.getName() + " removed");
+        logger.debug("Token: " + name + ": Condition " + condition.getName() + " removed");
         return;
 
       }
@@ -413,7 +426,7 @@ class Token {
     if ( condition.disablesTarget() )
       disabled = true;
 
-    logger.debug("Token " + name + ": Condition " + condition.getName() + " added");
+    logger.debug("Token: " + name + ": Condition " + condition.getName() + " added");
 
   }
 
@@ -434,7 +447,7 @@ class Token {
 
     recenterLightSources();
 
-    logger.debug("Token " + name + ": Size set to " + size.getName());
+    logger.debug("Token: " + name + ": Size set to " + size.getName());
 
   }
 

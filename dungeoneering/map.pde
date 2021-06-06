@@ -1,4 +1,5 @@
 import java.awt.Point;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 
 class Map {
 
@@ -88,7 +89,7 @@ class Map {
 
       obstacles.setRecalculateShadows(true);
 
-      logger.debug("Map: Pan or zoom change");
+      logger.trace("Map: Pan or zoom change");
       logger.trace("Map: Current pan: " + panX + ", " + panY);
       logger.trace("Map: Current scale: " + scale);
     }
@@ -114,13 +115,30 @@ class Map {
 
     if ( !isVideo ) {
 
-      image = loadImage(filePath);
+      try {
+
+        image = loadImage(filePath);
+
+      } catch ( Exception e ) {
+        logger.error("Map: Error loading image map");
+        logger.error(ExceptionUtils.getStackTrace(e));
+        clear();
+        return false;
+      }
+
+      if ( getWidth() <= 0 || getHeight() <= 0 ) {
+
+        logger.error("Map: Error loading image map");
+        clear();
+        return false;
+
+      }
 
       fitToScreen = _fitToScreen;
       if ( fitToScreen )
         fitToScreen();
 
-      logger.info("Image map loaded");
+      logger.info("Map: Image map loaded");
 
     } else {
 
@@ -140,12 +158,11 @@ class Map {
 
           video.loop();
 
-          logger.info("Video map loaded");
           break;
 
         } catch ( Exception e ) {
 
-          logger.error("Map: Error loading and starting video");
+          logger.error("Map: Error loading and starting video map");
 
           triesCount += 1;
           if ( triesCount == maxTries ) {
@@ -173,7 +190,7 @@ class Map {
 
         } else {
 
-          logger.warning("Map: Map returned zero width/height. Waiting to retry...");
+          logger.warning("Map: Video map returned zero width/height. Waiting to retry...");
           delay(sleepTimeMillis);
 
         }
@@ -181,12 +198,15 @@ class Map {
         triesCount += 1;
         if ( triesCount == maxTries ) {
 
+          logger.warning("Map: Error loading and starting video map");
           clear();
           return false;
 
         }
 
       }
+
+      logger.info("Map: Video map loaded");
 
     }
 
@@ -292,7 +312,7 @@ class Map {
       mapPoint.y = canvasPoint.y - heightDiff/2;
     }
 
-    logger.trace("Canvas point " + canvasPoint + " mapped to map point " + mapPoint + "");
+    logger.trace("Map: Canvas point " + canvasPoint + " mapped to map point " + mapPoint + "");
 
     return mapPoint;
 
@@ -339,7 +359,7 @@ class Map {
       canvasPoint.y = mapPoint.y + heightDiff/2;
     }
 
-    logger.trace("Map point " + mapPoint + " mapped to canvas point " + canvasPoint + "");
+    logger.trace("Map: Map point " + mapPoint + " mapped to canvas point " + canvasPoint + "");
 
     return canvasPoint;
 
@@ -433,12 +453,12 @@ class Map {
 
   void togglePan() {
     panEnabled = !panEnabled;
-    logger.info("Map panning toggled " + (panEnabled ? "on" : "off"));
+    logger.info("Map: Map panning toggled " + (panEnabled ? "on" : "off"));
   }
 
   void toggleZoom() {
     zoomEnabled = !zoomEnabled;
-    logger.info("Map zooming toggled " + (zoomEnabled ? "on" : "off"));
+    logger.info("Map: Map zooming toggled " + (zoomEnabled ? "on" : "off"));
   }
 
   boolean isPanEnabled() {
@@ -450,7 +470,7 @@ class Map {
     isMuted = !isMuted;
     muteVideo();
 
-    logger.info("Video sound toggled " + (isMuted ? "off" : "on"));
+    logger.info("Map: Video sound toggled " + (isMuted ? "off" : "on"));
 
   }
 

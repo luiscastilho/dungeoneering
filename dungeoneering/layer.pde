@@ -70,7 +70,7 @@ class Layer {
 
   void recalculateShadows(ShadowTypes shadowsToRecalculate) {
 
-    logger.debug(name + ": recalculating shadows");
+    logger.trace("Layer: " + name + ": recalculating shadows");
 
     for ( Token token: tokens )
       token.recalculateShadows(shadowsToRecalculate);
@@ -97,7 +97,7 @@ class Layer {
 
     initiative.addGroup(tokenBaseName, tokenImageFile.getAbsolutePath(), token, thisLayer);
 
-    logger.info("New token added in " + name);
+    logger.info("Layer: New token added in " + name);
 
   }
 

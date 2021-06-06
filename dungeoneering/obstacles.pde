@@ -315,7 +315,7 @@ class Obstacles {
     recalculateShadows = _recalculateShadows;
 
     if ( recalculateShadows )
-      logger.debug("Obstacles: recalculating shadows");
+      logger.trace("Obstacles: recalculating shadows");
 
   }
 
