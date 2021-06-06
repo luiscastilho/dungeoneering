@@ -74,6 +74,8 @@ dungeoneering is licensed under the GPLv3. See [LICENSE.md](../LICENSE.md) for m
 - [ControlP5](https://github.com/sojamo/controlp5) ([Forked](https://github.com/luiscastilho/controlp5) and customized)
 - [PostFX for Processing](https://github.com/cansik/processing-postfx)
 - [UiBooster](https://github.com/Milchreis/uibooster-for-processing)
+- [Apache Commons](https://commons.apache.org/)
+- [rotating-fos](https://github.com/vy/rotating-fos)
 
 
 

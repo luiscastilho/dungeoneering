@@ -8,3 +8,5 @@ and license can be found at these links:
 - ControlP5: https://github.com/sojamo/controlp5
 - PostFX for Processing: https://github.com/cansik/processing-postfx
 - UiBooster: https://github.com/Milchreis/uibooster-for-processing
+- Apache Commons: https://commons.apache.org/
+- rotating-fos: https://github.com/vy/rotating-fos
