@@ -15,7 +15,7 @@
 /dungeoneering/data/icons/orig/output/
 
 # Logs dir
-/log/
+log/
 
 # Temp dir
 /untracked/
