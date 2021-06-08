@@ -125,6 +125,10 @@ header {
   -webkit-font-smoothing:subpixel-antialiased;
 }
 
+header ul, header p {
+  margin:0 0 40px;
+}
+
 ul.downloads {
   list-style:none;
   height:40px;
@@ -276,19 +280,19 @@ footer {
   header ul.downloads {
     position:absolute;
     right:50px;
-    top:52px;
+    top:55px;
   }
 
   header .support-title {
     position:absolute;
     right:180px;
-    top:115px;
+    top:135px;
   }
 
   header ul.support-list {
     position:absolute;
     right:60px;
-    top:146px;
+    top:165px;
   }
 
 }
