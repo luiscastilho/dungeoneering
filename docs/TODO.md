@@ -1,5 +1,7 @@
 # TODO list
 
+List of features to implement and known bugs to fix:
+
 - [X] Shadows respecting pan and zoom
 - [X] Multiple lights and shadows
 - [X] Enemies in a separate layer
