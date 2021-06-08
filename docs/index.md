@@ -94,12 +94,12 @@ There are a few demo scenes bundled with the application. The assets used in the
 
 Thanks to my awesome RPG group that supported me in developing this application and were patient enough to playtest it in our sessions.
 
-[![Claw token](images/playtesters/claw.png "Claw, Tabaxi Sorcerer (Wild Magic)")](#thanks)
-[![Gruk token](images/playtesters/gruk.png "Gruk, Dwarf Fighter (Eldritch Knight)")](#thanks)
-[![Labard token](images/playtesters/labard.png "Labard, Halfling Rogue (Assassin)")](#thanks)
-[![Lander token](images/playtesters/lander.png "Lander, Human Cleric (Forge Domain)")](#thanks)
-[![Naven token](images/playtesters/naven.png "Naven, Half-Elf Paladin (Oath of the Ancients)")](#thanks)
-[![Sora token](images/playtesters/sora.png "Sora, Human Monk (Way of the Long Death)")](#thanks)
+![Claw token](images/playtesters/claw.png "Claw, Tabaxi Sorcerer (Wild Magic)")
+![Gruk token](images/playtesters/gruk.png "Gruk, Dwarf Fighter (Eldritch Knight)")
+![Labard token](images/playtesters/labard.png "Labard, Halfling Rogue (Assassin)")
+![Lander token](images/playtesters/lander.png "Lander, Human Cleric (Forge Domain)")
+![Naven token](images/playtesters/naven.png "Naven, Half-Elf Paladin (Oath of the Ancients)")
+![Sora token](images/playtesters/sora.png "Sora, Human Monk (Way of the Long Death)")
 
 And thanks to [Animated Dungeon Maps](https://www.patreon.com/animatedmaps "Animated Dungeon Maps Patreon page") for letting me use some of his maps on the demo scenes and even lending me an [exclusive map](https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/maps/Animated-SwordCoast.mp4). Much appreciated!
 
