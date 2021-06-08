@@ -1,6 +1,6 @@
 theme: jekyll-theme-minimal
 baseurl: /dungeoneering
-logo: /docs/logo/dungeoneering-logo-black-v1.png
+logo: {{site.baseurl}}/docs/logo/dungeoneering-logo-black-v1.png
 title: dungeoneering
 description: A minimalistic virtual tabletop (VTT) that can be used as a combat grid or as a dungeon exploration tool, made for local tabletop RPG sessions.
 show_downloads: "true"

@@ -104,4 +104,4 @@ Thanks to my awesome RPG group that supported me in developing this application 
 
 And thanks to [Animated Dungeon Maps](https://www.patreon.com/animatedmaps "Animated Dungeon Maps Patreon page") for letting me use some of his maps on the demo scenes and even lending me an [exclusive map](../dungeoneering/data/maps/Animated-SwordCoast.mp4). Much appreciated! :+1:
 
-[![](images/logos/animated-dungeon-maps.png)](https://www.patreon.com/animatedmaps "Animated Dungeon Maps Patreon page")
+[![Animated Dungeon Maps logo](images/logos/animated-dungeon-maps.png)](https://www.patreon.com/animatedmaps "Animated Dungeon Maps Patreon page")
