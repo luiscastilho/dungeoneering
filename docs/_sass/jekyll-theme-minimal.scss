@@ -272,12 +272,12 @@ footer {
     padding:15px;
   }
 
-  .downloads {
-    width:99%;
+  ul.downloads {
+    width:98%;
   }
 
-  .downloads li, .downloads li + li + li {
-    width:33%;
+  .downloads li {
+    width:49%;
   }
 }
 

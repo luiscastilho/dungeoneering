@@ -83,9 +83,9 @@ dungeoneering is licensed under the GPLv3. See [LICENSE.md](https://github.com/l
 There are a few demo scenes bundled with the application. The assets used in these scenes can be found at or created using the following links.
 
 - The two awesome animated maps are from [Animated Dungeon Maps](https://www.patreon.com/animatedmaps "Animated Dungeon Maps Patreon page").
-- The [Abandoned Farmhouse map](https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/maps/Static-AbandonedFarmhouse.jpg) is from Mike Schley, available in this [D&D article](https://dnd.wizards.com/articles/features/schley-stack "D&D Schley Stack article").
-- The [Beholder Lair map](https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/maps/Static-BeholderLair.jpg) is from [Antal Kéninger](https://www.artstation.com/kena "Antal Kéninger ArtStation profile").
-- The [The Old Bridge map](https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/maps/Static-TheOldBridge.jpg) is from [Sliph](https://www.patreon.com/sliph "Sliph Patreon").
+- The [Abandoned Farmhouse map](https://github.com/luiscastilho/dungeoneering/blob/main/dungeoneering/data/maps/Static-AbandonedFarmhouse.jpg) is from Mike Schley, available in this [D&D article](https://dnd.wizards.com/articles/features/schley-stack "D&D Schley Stack article").
+- The [Beholder Lair map](https://github.com/luiscastilho/dungeoneering/blob/main/dungeoneering/data/maps/Static-BeholderLair.jpg) is from [Antal Kéninger](https://www.artstation.com/kena "Antal Kéninger ArtStation profile").
+- The [The Old Bridge map](https://github.com/luiscastilho/dungeoneering/blob/main/dungeoneering/data/maps/Static-TheOldBridge.jpg) is from [Sliph](https://www.patreon.com/sliph "Sliph Patreon").
 - All tokens were created using [RollAdvantage's Token Stamp tool](https://rolladvantage.com/tokenstamp/ "Token Stamp tool") with D&D 5th edition images.
 
 
@@ -101,6 +101,6 @@ Thanks to my awesome RPG group that supported me in developing this application 
 ![Naven token](images/playtesters/naven.png "Naven, Half-Elf Paladin (Oath of the Ancients)")
 ![Sora token](images/playtesters/sora.png "Sora, Human Monk (Way of the Long Death)")
 
-And thanks to [Animated Dungeon Maps](https://www.patreon.com/animatedmaps "Animated Dungeon Maps Patreon page") for letting me use some of his maps on the demo scenes and even lending me an [exclusive map](https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/maps/Animated-SwordCoast.mp4). Much appreciated!
+And thanks to [Animated Dungeon Maps](https://www.patreon.com/animatedmaps "Animated Dungeon Maps Patreon page") for letting me use some of his maps on the demo scenes and even lending me an [exclusive map](https://github.com/luiscastilho/dungeoneering/blob/main/dungeoneering/data/maps/Animated-SwordCoast.mp4). Much appreciated!
 
 [![Animated Dungeon Maps logo](images/logos/animated-dungeon-maps.png)](https://www.patreon.com/animatedmaps "Animated Dungeon Maps Patreon page")
