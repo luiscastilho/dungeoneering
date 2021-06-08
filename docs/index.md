@@ -51,7 +51,7 @@ And that's it! Now that you have setup your scene, players and DM can drag their
 
 ## Contributing
 
-dungeoneering code can be loaded, edited and run directly in [Processing](https://processing.org/) IDE. Clone this repository and open the `dungeoneering.pde` file in Processing.
+dungeoneering code can be loaded, edited and run directly in [Processing](https://processing.org/){:target="_blank"} IDE. Clone this repository and open the `dungeoneering.pde` file in Processing.
 
 Bugs can be reported through the project's [issues](https://github.com/luiscastilho/dungeoneering/issues) page. Also, there's a list of features to implement and known bugs to fix in the [TODO list](TODO.md).
 
@@ -59,7 +59,7 @@ Bugs can be reported through the project's [issues](https://github.com/luiscasti
 
 ## Known Issues
 
-- Video and audio playback can be glitchy depending on the format/codec/framerate of the video being used. If you are having trouble with some of your video maps, try reencoding them to 1080p30. In Windows it's quite easy: use [HandBrake](https://handbrake.fr/) and in the Preset field choose General > Fast 1080p30. Create an issue please if it doesn't work even after reencoding.
+- Video and audio playback can be glitchy depending on the format/codec/framerate of the video being used. If you are having trouble with some of your video maps, try reencoding them to 1080p30. In Windows it's quite easy: use [HandBrake](https://handbrake.fr/){:target="_blank"} and in the Preset field choose General > Fast 1080p30. Create an issue please if it doesn't work even after reencoding.
 
 - Tokens may look pixelated if zoom in is used, even if loading high-resolution token images.
 
@@ -67,14 +67,14 @@ Bugs can be reported through the project's [issues](https://github.com/luiscasti
 
 ## License
 
-dungeoneering is licensed under the GPLv3. See [LICENSE](LICENSE.md) for more details. dungeoneering also uses components from other open source projects. Their code and license can be found at these links:
+dungeoneering is licensed under the GPLv3. See [LICENSE](https://github.com/luiscastilho/dungeoneering/blob/main/LICENSE.md) for more details. dungeoneering also uses components from other open source projects. Their code and license can be found at these links:
 
-- [Processing](https://github.com/processing/processing)
-- [ControlP5](https://github.com/sojamo/controlp5) ([Forked](https://github.com/luiscastilho/controlp5) and customized)
-- [PostFX for Processing](https://github.com/cansik/processing-postfx)
-- [UiBooster](https://github.com/Milchreis/uibooster-for-processing)
-- [Apache Commons](https://commons.apache.org/)
-- [rotating-fos](https://github.com/vy/rotating-fos)
+- [Processing](https://github.com/processing/processing){:target="_blank"}
+- [ControlP5](https://github.com/sojamo/controlp5){:target="_blank"} ([Forked](https://github.com/luiscastilho/controlp5){:target="_blank"} and customized)
+- [PostFX for Processing](https://github.com/cansik/processing-postfx){:target="_blank"}
+- [UiBooster](https://github.com/Milchreis/uibooster-for-processing){:target="_blank"}
+- [Apache Commons](https://commons.apache.org/){:target="_blank"}
+- [rotating-fos](https://github.com/vy/rotating-fos){:target="_blank"}
 
 
 
@@ -82,11 +82,11 @@ dungeoneering is licensed under the GPLv3. See [LICENSE](LICENSE.md) for more de
 
 There are a few demo scenes bundled with the application. The assets used in these scenes can be found at or created using the following links.
 
-- The two awesome animated maps are from [Animated Dungeon Maps](https://www.patreon.com/animatedmaps "Animated Dungeon Maps Patreon page").
-- The [Abandoned Farmhouse map](https://github.com/luiscastilho/dungeoneering/blob/main/dungeoneering/data/maps/Static-AbandonedFarmhouse.jpg) is from Mike Schley, available in this [D&D article](https://dnd.wizards.com/articles/features/schley-stack "D&D Schley Stack article").
-- The [Beholder Lair map](https://github.com/luiscastilho/dungeoneering/blob/main/dungeoneering/data/maps/Static-BeholderLair.jpg) is from [Antal Kéninger](https://www.artstation.com/kena "Antal Kéninger ArtStation profile").
-- The [The Old Bridge map](https://github.com/luiscastilho/dungeoneering/blob/main/dungeoneering/data/maps/Static-TheOldBridge.jpg) is from [Sliph](https://www.patreon.com/sliph "Sliph Patreon").
-- All tokens were created using [RollAdvantage's Token Stamp tool](https://rolladvantage.com/tokenstamp/ "Token Stamp tool") with D&D 5th edition images.
+- The two awesome animated maps are from [Animated Dungeon Maps](https://www.patreon.com/animatedmaps "Animated Dungeon Maps Patreon page"){:target="_blank"}.
+- The [Abandoned Farmhouse map](https://github.com/luiscastilho/dungeoneering/blob/main/dungeoneering/data/maps/Static-AbandonedFarmhouse.jpg){:target="_blank"} is from Mike Schley, available in this [D&D article](https://dnd.wizards.com/articles/features/schley-stack "D&D Schley Stack article"){:target="_blank"}.
+- The [Beholder Lair map](https://github.com/luiscastilho/dungeoneering/blob/main/dungeoneering/data/maps/Static-BeholderLair.jpg){:target="_blank"} is from [Antal Kéninger](https://www.artstation.com/kena "Antal Kéninger ArtStation profile"){:target="_blank"}.
+- The [The Old Bridge map](https://github.com/luiscastilho/dungeoneering/blob/main/dungeoneering/data/maps/Static-TheOldBridge.jpg){:target="_blank"} is from [Sliph](https://www.patreon.com/sliph "Sliph Patreon"){:target="_blank"}.
+- All tokens were created using [RollAdvantage's Token Stamp tool](https://rolladvantage.com/tokenstamp/ "Token Stamp tool"){:target="_blank"} with D&D 5th edition images.
 
 
 
@@ -101,6 +101,6 @@ Thanks to my awesome RPG group that supported me in developing this application 
 ![Naven token](images/playtesters/naven.png "Naven, Half-Elf Paladin (Oath of the Ancients)")
 ![Sora token](images/playtesters/sora.png "Sora, Human Monk (Way of the Long Death)")
 
-And thanks to [Animated Dungeon Maps](https://www.patreon.com/animatedmaps "Animated Dungeon Maps Patreon page") for letting me use some of his maps on the demo scenes and even lending me an [exclusive map](https://github.com/luiscastilho/dungeoneering/blob/main/dungeoneering/data/maps/Animated-SwordCoast.mp4). Much appreciated!
+And thanks to [Animated Dungeon Maps](https://www.patreon.com/animatedmaps "Animated Dungeon Maps Patreon page"){:target="_blank"} for letting me use some of his maps on the demo scenes and even lending me an [exclusive map](https://github.com/luiscastilho/dungeoneering/blob/main/dungeoneering/data/maps/Animated-SwordCoast.mp4){:target="_blank"}. Much appreciated!
 
-[![Animated Dungeon Maps logo](images/logos/animated-dungeon-maps.png)](https://www.patreon.com/animatedmaps "Animated Dungeon Maps Patreon page")
+[![Animated Dungeon Maps logo](images/logos/animated-dungeon-maps.png)](https://www.patreon.com/animatedmaps "Animated Dungeon Maps Patreon page"){:target="_blank"}

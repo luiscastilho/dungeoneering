@@ -4,3 +4,4 @@ logo: https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/docs/log
 title: dungeoneering
 description: A minimalistic virtual tabletop (VTT) that can be used as a combat grid or as a dungeon exploration tool, made for local tabletop RPG sessions.
 show_downloads: "true"
+markdown: kramdown
