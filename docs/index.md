@@ -83,10 +83,10 @@ dungeoneering is licensed under the GPLv3. See [LICENSE](https://github.com/luis
 There are a few demo scenes bundled with the application. The assets used in these scenes can be found at or created using the following links.
 
 - The two awesome animated maps are from [Animated Dungeon Maps](https://www.patreon.com/animatedmaps "Animated Dungeon Maps Patreon page"){:target="_blank"}.
-- The [Abandoned Farmhouse map](https://github.com/luiscastilho/dungeoneering/blob/main/dungeoneering/data/maps/Static-AbandonedFarmhouse.jpg){:target="_blank"} is from Mike Schley, available in this [D&D article](https://dnd.wizards.com/articles/features/schley-stack "D&D Schley Stack article"){:target="_blank"}.
-- The [Beholder Lair map](https://github.com/luiscastilho/dungeoneering/blob/main/dungeoneering/data/maps/Static-BeholderLair.jpg){:target="_blank"} is from [Antal Kéninger](https://www.artstation.com/kena "Antal Kéninger ArtStation profile"){:target="_blank"}.
-- The [The Old Bridge map](https://github.com/luiscastilho/dungeoneering/blob/main/dungeoneering/data/maps/Static-TheOldBridge.jpg){:target="_blank"} is from [Sliph](https://www.patreon.com/sliph "Sliph Patreon"){:target="_blank"}.
-- All tokens were created using [RollAdvantage's Token Stamp tool](https://rolladvantage.com/tokenstamp/ "Token Stamp tool"){:target="_blank"} with D&D 5th edition images.
+- The <a class="lightbox-link farmhouse" title="Abandoned Farmhouse map">Abandoned Farmhouse map</a> is from Mike Schley, available in this [D&D article](https://dnd.wizards.com/articles/features/schley-stack "D&D Schley Stack article"){:target="_blank"}.
+- The <a class="lightbox-link beholder" title="Beholder Lair map">Beholder Lair map</a> is from [Antal Kéninger](https://www.artstation.com/kena "Antal Kéninger ArtStation profile"){:target="_blank"}.
+- The <a class="lightbox-link bridge" title="The Old Bridge map">The Old Bridge map</a> is from [Sliph](https://www.patreon.com/sliph "Sliph Patreon"){:target="_blank"}.
+- All tokens were created using [Token Stamp tool](https://rolladvantage.com/tokenstamp/ "Token Stamp tool"){:target="_blank"} with D&D 5th edition images.
 
 
 
