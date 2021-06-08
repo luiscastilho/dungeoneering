@@ -277,6 +277,19 @@ footer {
     right:50px;
     top:52px;
   }
+
+  header .support-title {
+    position:absolute;
+    right:180px;
+    top:115px;
+  }
+
+  header ul.support-list {
+    position:absolute;
+    right:50px;
+    top:144px;
+  }
+
 }
 
 @media print, screen and (max-width: 720px) {
@@ -288,7 +301,7 @@ footer {
     padding:0;
   }
 
-  header ul, header p.view {
+  header ul, header ul.downloads, header .support-title, header ul.support-list, header p.view {
     position:static;
   }
 
@@ -302,7 +315,8 @@ footer {
     padding:15px;
   }
 
-  ul.downloads {
+  header ul.downloads {
+    position:inherit;
     width:98%;
   }
 
