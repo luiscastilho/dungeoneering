@@ -189,6 +189,36 @@ strong {
   color:#222;
 }
 
+.support-title {
+  margin: 0 0 15px;
+}
+
+ul.support-list {
+  list-style: none;
+  padding:0;
+}
+
+.support-list li {
+  height:32px;
+  margin-bottom:5px;
+}
+
+.support-icon {
+  display:inline-block;
+  height:32px;
+  margin-right:5px;
+}
+
+.support-link {
+  display:inline-block;
+  line-height:32px;
+  vertical-align:top;
+}
+
+.support-link strong {
+  color:#F64B29;
+}
+
 section {
   width:500px;
   float:right;
@@ -242,7 +272,7 @@ footer {
     display:inline;
   }
 
-  header ul {
+  header ul.downloads {
     position:absolute;
     right:50px;
     top:52px;
