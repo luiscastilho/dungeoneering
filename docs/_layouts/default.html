@@ -14,6 +14,8 @@
     <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
     <![endif]-->
+    <link rel="stylesheet" href="assets/css/simpleLightbox.min.css">
+    <script src="assets/js/simpleLightbox.min.js"></script>
   </head>
   <body>
     <div class="wrapper">
@@ -59,5 +61,6 @@
       ga('send', 'pageview');
     </script>
     {% endif %}
+    <script>$('.lightbox').simpleLightbox();</script>
   </body>
 </html>
