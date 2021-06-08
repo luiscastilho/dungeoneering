@@ -8,13 +8,13 @@ The main goal here is to make an application with all the basic features needed 
 
 ## Latest Version
 
-The latest stable version along with release notes can be found on the project's [releases](https://github.com/luiscastilho/dungeoneering/releases) page. There's also a [changelog](CHANGELOG.md).
+The latest stable version can be downloaded in this page - Download Latest Version link. It's also available, along with release notes, on the project's [releases](https://github.com/luiscastilho/dungeoneering/releases) page. There's also a [changelog](CHANGELOG.md) with all notable changes made to this project.
 
 
 
 ## Installation
 
-1. In the [releases](https://github.com/luiscastilho/dungeoneering/releases) page, download the appropriate ZIP file for your operating system.
+1. In this page or in the [releases](https://github.com/luiscastilho/dungeoneering/releases) page, download the appropriate ZIP file for your operating system.
 2. Extract all files to a folder of your choice — `Documents/dungeoneering` for example.
 3. Run `dungeoneering.exe`, `dungeoneering.app`, or `dungeoneering` depending on your operating system.
 
