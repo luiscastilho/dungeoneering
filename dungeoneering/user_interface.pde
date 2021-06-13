@@ -3251,4 +3251,30 @@ public class UserInterface {
     return fileDialogOpen;
   }
 
+  void showNewVersionDialog(String newVersion) {
+
+    logger.info("CheckForUpdates: New version available - " + newVersion);
+
+    uiDialogs.showConfirmDialog(
+        "A new dungeoneering version is available - " + newVersion + ". Download it now?",
+        "New version available",
+        new Runnable() {
+          public void run() {
+            uiConfirmDialogAnswer = true;
+          }
+        },
+        new Runnable() {
+          public void run() {
+            uiConfirmDialogAnswer = false;
+          }
+        }
+    );
+
+    if ( !uiConfirmDialogAnswer )
+      return;
+
+    link("https://github.com/luiscastilho/dungeoneering/releases/tag/" + newVersion);
+
+  }
+
 }

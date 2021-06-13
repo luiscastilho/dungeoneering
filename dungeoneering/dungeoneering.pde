@@ -42,6 +42,9 @@ int upkeepInterval;
 
 int previousClickTime;
 
+String appVersion;
+boolean checkedForUpdates;
+
 void setup() {
 
   fullScreen(P2D, 2);
@@ -113,6 +116,9 @@ void setup() {
     upkeepInterval = 5;
 
     previousClickTime = 0;
+
+    appVersion = "v1.1.3";
+    checkedForUpdates = false;
 
     logger.info("Setup: dungeoneering initialization done");
 
@@ -279,10 +285,36 @@ void appUpkeep() {
   System.gc();
   System.runFinalization();
 
+  if ( !checkedForUpdates )
+    checkForUpdates();
+
   long totalMemory = Runtime.getRuntime().totalMemory();
   long usedMemory = totalMemory - Runtime.getRuntime().freeMemory();
   float usedMemoryPercent = (100*(float)usedMemory/totalMemory);
   logger.debug("Stats: FPS: " + nf(frameRate, 2, 2) + " / " + "Memory usage: " + nf(usedMemoryPercent, 2, 2) + "%");
+
+}
+
+void checkForUpdates() {
+
+  // Retrieve latest_version file from GitHub repository, main branch
+  String[] latest_version_contents = loadStrings("https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/docs/latest_version");
+
+  // If latest_version could be retrieved, compare it to application version
+  if ( latest_version_contents != null ) {
+
+    String latest_version = latest_version_contents[0];
+    if ( !appVersion.equals(latest_version) )
+      userInterface.showNewVersionDialog(latest_version);
+
+  } else {
+
+    logger.error("CheckForUpdates: Couldn't retrieve latest version from GitHub");
+
+  }
+
+  // Mark that we have already checked for updates
+  checkedForUpdates = true;
 
 }
 
