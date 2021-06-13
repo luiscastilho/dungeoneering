@@ -6,6 +6,7 @@ import com.vlkan.rfos.RotationConfig;
 import com.vlkan.rfos.RotatingFileOutputStream;
 import java.nio.charset.StandardCharsets;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.apache.commons.lang3.SystemUtils;
 
 import com.vlkan.rfos.policy.RotationPolicy;
 import java.io.File;
@@ -37,12 +38,17 @@ class Logger {
   String lineSeparator;
   boolean writeLogFile;
 
-  Logger(String _logLevelName) {
+  Logger(String _logLevelName, int _platform) {
 
     // Initial log level set to TRACE, redefined below
     logLevel = 1;
 
-    logsDir = sketchPath().replaceAll("\\\\", "/") + "/log";
+    if ( _platform == MACOSX )
+      logsDir = SystemUtils.getUserHome().getAbsolutePath() + "/Documents/dungeoneering/log";
+    else if ( _platform == WINDOWS )
+      logsDir = sketchPath().replaceAll("\\\\", "/") + "/log";
+    else
+      logsDir = sketchPath() + "/log";
 
     logFilesConfig = RotationConfig
       .builder()

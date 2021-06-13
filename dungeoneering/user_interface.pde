@@ -90,7 +90,9 @@ public class UserInterface {
 
   boolean fileDialogOpen;
 
-  UserInterface(PGraphics _canvas, ControlP5 _cp5, Map _map, Grid _grid, Obstacles _obstacles, Layer _playersLayer, Layer _dmLayer, Resources _resources, Initiative _initiative) {
+  int platform;
+
+  UserInterface(PGraphics _canvas, ControlP5 _cp5, Map _map, Grid _grid, Obstacles _obstacles, Layer _playersLayer, Layer _dmLayer, Resources _resources, Initiative _initiative, int _platform) {
 
     canvas = _canvas;
 
@@ -183,6 +185,8 @@ public class UserInterface {
     previousMouseOverControllers = new ArrayList<ControllerInterface<?>>();
 
     fileDialogOpen = false;
+
+    platform = _platform;
 
     logger.debug("Setup: UI controllers setup started");
 
@@ -2382,8 +2386,6 @@ public class UserInterface {
       if ( map.getFilePath() == null )
         return;
 
-      String sketchPath = sketchPath().replaceAll("\\\\", "/");
-
       int initiativeGroupsIndex;
       int obstaclesIndex;
 
@@ -2393,7 +2395,7 @@ public class UserInterface {
 
       JSONObject mapJson = new JSONObject();
       if ( map.isSet() ) {
-        mapJson.setString("filePath", map.getFilePath().replaceAll("\\\\", "/").replaceFirst("^(?i)" + Pattern.quote(sketchPath), ""));
+        mapJson.setString("filePath", getImageSavePath(map.getFilePath()));
         mapJson.setBoolean("fitToScreen", map.getFitToScreen());
         mapJson.setBoolean("isVideo", map.isVideo());
       }
@@ -2431,8 +2433,8 @@ public class UserInterface {
 
       logger.debug("UserInterface: Initiative saved");
 
-      sceneJson.setJSONArray("playerTokens", getTokensJsonArray(playersLayer.getTokens(), sketchPath));
-      sceneJson.setJSONArray("dmTokens", getTokensJsonArray(dmLayer.getTokens(), sketchPath));
+      sceneJson.setJSONArray("playerTokens", getTokensJsonArray(playersLayer.getTokens()));
+      sceneJson.setJSONArray("dmTokens", getTokensJsonArray(dmLayer.getTokens()));
 
       logger.debug("UserInterface: Tokens saved");
 
@@ -2498,9 +2500,15 @@ public class UserInterface {
       String[] mapFileNameTokens = mapFileName.split("\\.(?=[^\\.]+$)");
       String mapBaseName = mapFileNameTokens[0];
 
-      saveJSONObject(sceneJson, sceneFolder.getAbsolutePath() + "\\" + mapBaseName + ".json");
+      String sceneSavePath = sceneFolder.getAbsolutePath() + File.separator + mapBaseName + ".json";
+      boolean sceneSaved = saveJSONObject(sceneJson, sceneSavePath);
 
-      logger.info("UserInterface: Scene saved to: " + sceneFolder.getAbsolutePath() + "\\" + mapBaseName + ".json");
+      if ( sceneSaved ) {
+        logger.info("UserInterface: Scene saved to: " + sceneSavePath);
+      } else {
+        logger.error("UserInterface: Scene could not be saved: " + sceneSavePath);
+        uiDialogs.showErrorDialog("Scene could not be saved: " + sceneSavePath, "Error saving scene");
+      }
 
     } catch ( Exception e ) {
       logger.error("UserInterface: Error saving scene");
@@ -2510,7 +2518,7 @@ public class UserInterface {
 
   }
 
-  JSONArray getTokensJsonArray(ArrayList<Token> tokens, String sketchPath) {
+  JSONArray getTokensJsonArray(ArrayList<Token> tokens) {
 
     JSONArray tokensArray = new JSONArray();
     int tokensIndex = 0;
@@ -2520,7 +2528,7 @@ public class UserInterface {
       JSONObject tokenJson = new JSONObject();
 
       tokenJson.setString("name", token.getName());
-      tokenJson.setString("imagePath", token.getImagePath().replaceAll("\\\\", "/").replaceFirst("^(?i)" + Pattern.quote(sketchPath), ""));
+      tokenJson.setString("imagePath", getImageSavePath(token.getImagePath()));
 
       tokenJson.setString("size", token.getSize().getName());
 
@@ -2573,6 +2581,35 @@ public class UserInterface {
 
   }
 
+  String getImageSavePath(String imageAbsolutePath) {
+
+    if ( imageAbsolutePath == null || imageAbsolutePath.trim().isEmpty() )
+      return "";
+
+    String imageSavePath = null;
+
+    // Check if image path is inside sketchPath()
+    if ( imageAbsolutePath != imageAbsolutePath.replaceFirst("^(?i)" + Pattern.quote(sketchPath()), "") ) {
+
+      // If it is, remove sketchPath() from image path
+      imageSavePath = imageAbsolutePath.replaceFirst("^(?i)" + Pattern.quote(sketchPath()), "");
+
+      // If file separator is "\", replace it by "/", to facilitate when loading a scene
+      if ( File.separatorChar == '\\' )
+        imageSavePath = imageSavePath.replaceAll("\\\\", "/");
+
+    // If image is not inside sketchPath()
+    } else {
+
+      // Return its absolute path
+      imageSavePath = imageAbsolutePath;
+
+    }
+
+    return imageSavePath;
+
+  }
+
   void loadScene(File sceneFile) {
 
     try {
@@ -2583,8 +2620,6 @@ public class UserInterface {
         return;
 
       logger.info("UserInterface: Loading scene from: " + sceneFile.getAbsolutePath());
-
-      String sketchPath = sketchPath().replaceAll("\\\\", "/");
 
       appState = AppStates.sceneLoad;
 
@@ -2612,16 +2647,15 @@ public class UserInterface {
         String logoFilePath = mapJson.getString("logoFilePath", "");
         String logoLink = mapJson.getString("logoLink", "");
 
-        if ( !fileExists(mapFilePath) ) {
-          if ( fileExists(sketchPath + mapFilePath) ) {
-            mapFilePath = sketchPath + mapFilePath;
-          } else {
-            logger.error("UserInterface: Map file not found: " + mapFilePath);
-            logger.error("UserInterface: Scene could not be loaded: " + sceneFile.getAbsolutePath());
-            reset();
-            uiDialogs.showErrorDialog("Map file not found: " + mapFilePath, "Error loading scene");
-            return;
-          }
+        String mapLoadPath = getImageLoadPath(mapFilePath);
+        if ( !mapLoadPath.isEmpty() ) {
+          mapFilePath = mapLoadPath;
+        } else {
+          logger.error("UserInterface: Map file not found: " + mapFilePath);
+          logger.error("UserInterface: Scene could not be loaded: " + sceneFile.getAbsolutePath());
+          reset();
+          uiDialogs.showErrorDialog("Map file not found: " + mapFilePath, "Error loading scene");
+          return;
         }
 
         boolean isMuted = getSwitchButtonState("Toggle mute sound");
@@ -2631,7 +2665,7 @@ public class UserInterface {
           logger.error("UserInterface: Map could not be loaded");
           logger.error("UserInterface: Scene could not be loaded: " + sceneFile.getAbsolutePath());
           reset();
-          uiDialogs.showErrorDialog("Map could not be loaded", "Error loading scene");
+          uiDialogs.showErrorDialog("Map could not be loaded: " + mapFilePath, "Error loading scene");
           return;
         }
 
@@ -2646,12 +2680,11 @@ public class UserInterface {
 
         // Show logo image as link, if available
 
-        if ( !fileExists(logoFilePath) ) {
-          if ( fileExists(sketchPath + logoFilePath) ) {
-            logoFilePath = sketchPath + logoFilePath;
-          } else {
-            logoFilePath = null;
-          }
+        String logoLoadPath = getImageLoadPath(logoFilePath);
+        if ( !logoLoadPath.isEmpty() ) {
+          logoFilePath = logoLoadPath;
+        } else {
+          logoFilePath = null;
         }
 
         if ( logoFilePath != null ) {
@@ -2698,8 +2731,8 @@ public class UserInterface {
 
       if ( grid.isSet() ) {
 
-        setTokensFromJsonArray(playersLayer, sceneJson.getJSONArray("playerTokens"), sketchPath);
-        setTokensFromJsonArray(dmLayer, sceneJson.getJSONArray("dmTokens"), sketchPath);
+        setTokensFromJsonArray(playersLayer, sceneJson.getJSONArray("playerTokens"));
+        setTokensFromJsonArray(dmLayer, sceneJson.getJSONArray("dmTokens"));
 
         enableController("Add player token");
         enableController("Add DM token");
@@ -2842,7 +2875,7 @@ public class UserInterface {
 
   }
 
-  void setTokensFromJsonArray(Layer layer, JSONArray tokensArray, String sketchPath) {
+  void setTokensFromJsonArray(Layer layer, JSONArray tokensArray) {
 
     if ( tokensArray != null ) {
       for ( int i = 0; i < tokensArray.size(); i++ ) {
@@ -2861,13 +2894,12 @@ public class UserInterface {
         int tokenRow = tokenJson.getInt("row");
         int tokenColumn = tokenJson.getInt("column");
 
-        if ( !fileExists(tokenImagePath) ) {
-          if ( fileExists(sketchPath + tokenImagePath) ) {
-            tokenImagePath = sketchPath + tokenImagePath;
-          } else {
-            logger.error("UserInterface: Token " + tokenName + " image not found: " + tokenImagePath);
-            continue;
-          }
+        String tokenImageLoadPath = getImageLoadPath(tokenImagePath);
+        if ( !tokenImageLoadPath.isEmpty() ) {
+          tokenImagePath = tokenImageLoadPath;
+        } else {
+          logger.error("UserInterface: Token " + tokenName + " image not found: " + tokenImagePath);
+          continue;
         }
 
         Cell cell = grid.getCellAt(tokenRow, tokenColumn);
@@ -2958,6 +2990,56 @@ public class UserInterface {
     }
 
     return conditions;
+
+  }
+
+  String getImageLoadPath(String imagePathFromJson) {
+
+    if ( imagePathFromJson == null || imagePathFromJson.trim().isEmpty() )
+      return "";
+
+    String imageLoadPath = null;
+    String imagePathInDataFolder = null;
+
+    // If image exists in original path, it's an absolute path
+    if ( fileExists(imagePathFromJson) ) {
+
+      // Return this path without change
+      imageLoadPath = imagePathFromJson;
+
+    // If not, check if image path is inside /data
+    } else if ( imagePathFromJson != imagePathFromJson.replaceFirst("^(?i)" + Pattern.quote("/data/"), "") ) {
+
+      // If it is, check if image indeed exists inside /data
+      imagePathInDataFolder = imagePathFromJson.replaceFirst("^(?i)" + Pattern.quote("/data/"), "");
+      if ( fileExists(dataPath(imagePathInDataFolder)) ) {
+
+        // Return image's absolute path, returned by dataPath()
+        imageLoadPath = dataPath(imagePathInDataFolder);
+
+      }
+
+    // If not, check if it's a macOS and if image path is inside /dungeoneering.app/Contents/Java/data/
+    } else if ( platform == MACOSX && imagePathFromJson != imagePathFromJson.replaceFirst("^(?i)" + Pattern.quote("/dungeoneering.app/Contents/Java/data/"), "") ) {
+
+      // If it is, check if image indeed exists inside /dungeoneering.app/Contents/Java/data/
+      imagePathInDataFolder = imagePathFromJson.replaceFirst("^(?i)" + Pattern.quote("/dungeoneering.app/Contents/Java/data/"), "");
+      if ( fileExists(dataPath(imagePathInDataFolder)) ) {
+
+        // Return image's absolute path, returned by dataPath()
+        imageLoadPath = dataPath(imagePathInDataFolder);
+
+      }
+
+    // If not
+    } else {
+
+      // Image could not be found, return an empty path
+      imageLoadPath = "";
+
+    }
+
+    return imageLoadPath;
 
   }
 

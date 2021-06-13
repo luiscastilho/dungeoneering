@@ -48,7 +48,7 @@ void setup() {
   smooth();
   frameRate(60);
 
-  logger = new Logger("DEBUG");
+  logger = new Logger("DEBUG", this.platform);
 
   try {
 
@@ -99,7 +99,7 @@ void setup() {
 
     logger.debug("Setup: layers initialization done");
 
-    userInterface = new UserInterface(mainCanvas, cp5, map, grid, obstacles, playersLayer, dmLayer, resources, initiative);
+    userInterface = new UserInterface(mainCanvas, cp5, map, grid, obstacles, playersLayer, dmLayer, resources, initiative, this.platform);
 
     logger.debug("Setup: UI initialization done");
 
