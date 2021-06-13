@@ -2588,17 +2588,23 @@ public class UserInterface {
 
     String imageSavePath = null;
 
-    // Check if image path is inside sketchPath()
-    if ( imageAbsolutePath != imageAbsolutePath.replaceFirst("^(?i)" + Pattern.quote(sketchPath()), "") ) {
+    // Check if it's a macOS and if image path is inside sketchPath() + /dungeoneering.app/Contents/Java
+    if ( platform == MACOSX && imageAbsolutePath != imageAbsolutePath.replaceFirst("^(?i)" + Pattern.quote(sketchPath() + "/dungeoneering.app/Contents/Java/"), "") ) {
+
+      // If it is, remove sketchPath() + /dungeoneering.app/Contents/Java from image path
+      imageSavePath = imageAbsolutePath.replaceFirst("^(?i)" + Pattern.quote(sketchPath() + "/dungeoneering.app/Contents/Java"), "");
+
+    // If not, check if image path is inside sketchPath()
+    } else if ( imageAbsolutePath != imageAbsolutePath.replaceFirst("^(?i)" + Pattern.quote(sketchPath()), "") ) {
 
       // If it is, remove sketchPath() from image path
       imageSavePath = imageAbsolutePath.replaceFirst("^(?i)" + Pattern.quote(sketchPath()), "");
 
-      // If file separator is "\", replace it by "/", to facilitate when loading a scene
-      if ( File.separatorChar == '\\' )
+      // If it's a Windows and file separator is "\", replace it by "/", to facilitate when loading a scene
+      if ( platform == WINDOWS && File.separatorChar == '\\' )
         imageSavePath = imageSavePath.replaceAll("\\\\", "/");
 
-    // If image is not inside sketchPath()
+    // If image is not inside sketchPath() at all
     } else {
 
       // Return its absolute path
