@@ -27,14 +27,10 @@
 
         <p>{{ site.description | default: site.github.project_tagline }}</p>
 
-        {% if site.github.is_user_page %}
-        <p class="view"><a href="{{ site.github.owner_url }}">View My GitHub Profile</a></p>
-        {% endif %}
-
         {% if site.show_downloads %}
+        <h4 class="downloads-title">Download latest version</h4>
         <ul class="downloads">
-          <li><a href="https://github.com/luiscastilho/dungeoneering/releases/download/v1.1.3/dungeoneering-v1.1.3-win64.zip">Download <strong>Latest Version</strong></a></li>
-          <li><a href="{{ site.github.repository_url }}">View On <strong>GitHub</strong></a></li>
+          <li><a href="https://github.com/luiscastilho/dungeoneering/releases/download/v1.1.3/dungeoneering-v1.1.3-win64.zip"><strong>Windows</strong></a></li>
         </ul>
         {% endif %}
 
@@ -63,7 +59,13 @@
 
       </section>
       <footer>
+
+        {% if site.github.is_project_page %}
+        <p class="view"><a href="{{ site.github.repository_url }}">View the project on GitHub <small>{{ site.github.repository_nwo }}</small></a></p>
+        {% endif %}
+
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+
       </footer>
     </div>
     <script src="{{ "/assets/js/scale.fix.js" | relative_url }}"></script>
