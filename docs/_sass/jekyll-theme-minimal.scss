@@ -250,6 +250,10 @@ footer {
   -webkit-font-smoothing:subpixel-antialiased;
 }
 
+.hidden {
+  display:none;
+}
+
 @media print, screen and (max-width: 960px) {
 
   div.wrapper {
