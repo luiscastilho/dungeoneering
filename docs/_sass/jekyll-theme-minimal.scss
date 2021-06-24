@@ -141,15 +141,15 @@ ul.downloads {
 }
 
 .downloads li {
-  width:100%;
+  width:33%;
   float:left;
   border-right:1px solid #e0e0e0;
   height:40px;
 }
 
 .downloads li:last-child {
-    border-right:none;
-  }
+  border-right:none;
+}
 
 .downloads li:first-child a {
   border-radius:5px 0 0 5px;
@@ -165,7 +165,7 @@ ul.downloads {
   color:#F64B29;
   display:block;
   text-align:center;
-  padding-top:6px;
+  padding-top:3px;
   height:34px;
 }
 
@@ -181,11 +181,6 @@ ul.downloads {
 strong {
   color:#222;
   font-weight:700;
-}
-
-.downloads li + li + li {
-  border-right:none;
-  width:100%;
 }
 
 .downloads a strong {
