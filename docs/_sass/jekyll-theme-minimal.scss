@@ -277,6 +277,10 @@ footer {
     display:inline;
   }
 
+  header .description {
+    margin: 0 0 55px;
+  }
+
   header .downloads-title {
     position:absolute;
     right:155px;
@@ -299,6 +303,10 @@ footer {
     position:absolute;
     right:60px;
     top:199px;
+  }
+
+  header ul:last-child {
+    margin-bottom:25px;
   }
 
 }
