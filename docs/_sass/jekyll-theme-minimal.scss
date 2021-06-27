@@ -249,6 +249,18 @@ footer {
   display:none;
 }
 
+@media print, screen and (min-width: 721px) and (max-width: 960px) {
+
+  header .description {
+    margin:0 0 55px;
+  }
+
+  header ul:last-child {
+    margin-bottom:25px;
+  }
+
+}
+
 @media print, screen and (max-width: 960px) {
 
   div.wrapper {
@@ -277,10 +289,6 @@ footer {
     display:inline;
   }
 
-  header .description {
-    margin: 0 0 55px;
-  }
-
   header .downloads-title {
     position:absolute;
     right:155px;
@@ -303,10 +311,6 @@ footer {
     position:absolute;
     right:60px;
     top:199px;
-  }
-
-  header ul:last-child {
-    margin-bottom:25px;
   }
 
 }
