@@ -22,10 +22,10 @@
     <div class="wrapper">
       <header>
         {% if site.logo %}
-          <a href="/dungeoneering/"><img src="{{site.logo | relative_url}}" alt="Logo" /></a>
+          <a class="logo-link" href="/dungeoneering/"><img class="logo-image" src="{{site.logo | relative_url}}" alt="Logo" /></a>
         {% endif %}
 
-        <p>{{ site.description | default: site.github.project_tagline }}</p>
+        <p class="description">{{ site.description | default: site.github.project_tagline }}</p>
 
         {% if site.show_downloads %}
         <h4 class="downloads-title">Download latest version</h4>
