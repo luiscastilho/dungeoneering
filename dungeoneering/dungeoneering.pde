@@ -49,7 +49,6 @@ void setup() {
 
   fullScreen(P2D, 2);
   smooth();
-  frameRate(60);
 
   logger = new Logger("DEBUG", this.platform);
 
@@ -127,6 +126,12 @@ void setup() {
     logger.error(ExceptionUtils.getStackTrace(e));
     exit();
   }
+
+  // Set framerate as the last step in setup to avoid an exception in Processing PSurfaceJOGL
+  // Otherwise it will throw a RuntimeException if setup doesn't finish in 5s or less
+  // In exported versions, dungeoneering won't finish loading and will get stuck in a grey screen
+  // Source: https://github.com/processing/processing/issues/4468#issuecomment-228532848
+  frameRate(60);
 
 }
 
@@ -306,6 +311,8 @@ void checkForUpdates() {
     String latest_version = latest_version_contents[0];
     if ( !appVersion.equals(latest_version) )
       userInterface.showNewVersionDialog(latest_version);
+    else
+      logger.info("CheckForUpdates: dungeoneering is running the latest version");
 
   } else {
 
