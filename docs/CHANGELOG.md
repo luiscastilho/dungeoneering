@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog][1], and this project adheres to
 [Semantic Versioning][2].
 
+## [1.2.1] - 2021-07-04
+
+### Fixed
+
+- Avoid error during setup, which would get the application stuck in a grey
+screen - Thanks @Finister-Finn and @Bazzatron19 for reporting and for helping
+me debug this problem
+
 ## [1.2.0] - 2021-06-23
 
 ### Added
