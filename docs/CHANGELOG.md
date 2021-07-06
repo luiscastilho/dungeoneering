@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog][1], and this project adheres to
 [Semantic Versioning][2].
 
-## [1.2.1] - 2021-07-04
+## [1.2.1] - 2021-07-05
 
 ### Fixed
 
@@ -93,7 +93,8 @@ same resolution where they were created
 - Visual initiative order widget to help in combats
 - An [exclusive video map][3] from [Animated Dungeon Maps][4]
 
-[unreleased]: https://github.com/luiscastilho/dungeoneering/compare/v1.2.0...HEAD
+[unreleased]: https://github.com/luiscastilho/dungeoneering/compare/v1.2.1...HEAD
+[1.2.1]: https://github.com/luiscastilho/dungeoneering/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/luiscastilho/dungeoneering/compare/v1.1.3...v1.2.0
 [1.1.3]: https://github.com/luiscastilho/dungeoneering/compare/v1.1.2...v1.1.3
 [1.1.2]: https://github.com/luiscastilho/dungeoneering/compare/v1.1.1...v1.1.2
