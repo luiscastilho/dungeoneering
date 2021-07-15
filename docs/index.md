@@ -34,6 +34,16 @@ To run dungeoneering on Linux, you will need to install Gstreamer v0.10. It's an
 
 ## How to Use It
 
+Here's a video showing how to create a scene from scratch in dungeoneering:
+
+<div class="video-wrap">
+  <div class="video-container">
+    <iframe src="https://www.youtube.com/embed/mLLleHoVkdk" allowfullscreen="" frameborder="0"></iframe>
+  </div>
+</div>
+
+If you prefer a text description instead of a video, read on.
+
 To see how a scene looks like once it's composed you can load one of the demo scenes that come with the application. Click on the load scene button (<img src="https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/icons/app/load_idle.png" width="20" height="20" alt="load scene icon" title="load scene icon">) and choose a scene (`*.json` files) from the `data/scenes` folder.
 
 To create a new scene follow the steps below. It might be better to do this when preparing an RPG session and not during it, since your players might get bored while they wait.
