@@ -17,6 +17,8 @@ class Grid {
   boolean drawGrid;
   color gridColor;
 
+  SimpleIntegerProperty gridVersion;
+
   Grid(PGraphics _canvas, Map _map) {
 
     canvas = _canvas;
@@ -33,6 +35,8 @@ class Grid {
 
     drawGrid = false;
     gridColor = color(0, 159);
+
+    gridVersion = new SimpleIntegerProperty(1);
 
   }
 
@@ -290,6 +294,8 @@ class Grid {
     cellWidth = cellHeight = 0;
     rowsCount = columnsCount = 0;
 
+    gridVersion.set(1);
+
     System.gc();
 
   }
@@ -335,6 +341,17 @@ class Grid {
   void toggleDrawGrid() {
     drawGrid = !drawGrid;
     logger.info("Grid: Grid " + (drawGrid ? "shown" : "hidden"));
+  }
+
+  void addSceneUpdateListener(ChangeListener<Number> _sceneUpdateListener) {
+    logger.debug("Adding listener to grid version");
+    gridVersion.addListener(_sceneUpdateListener);
+  }
+
+  void incrementGridVersion() {
+    logger.debug("Incrementing grid version from " + gridVersion.getValue() + " to " + (gridVersion.getValue()+1));
+    gridVersion.set(gridVersion.getValue() + 1);
+    logger.debug("Grid version: " + gridVersion.getValue());
   }
 
 }

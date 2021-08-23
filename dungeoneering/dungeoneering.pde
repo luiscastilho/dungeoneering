@@ -1,13 +1,22 @@
-import controlP5.*;
-import processing.video.*;
+import ch.bildspur.postfx.*;
 import ch.bildspur.postfx.builder.*;
 import ch.bildspur.postfx.pass.*;
-import ch.bildspur.postfx.*;
+import com.hazelcast.core.Hazelcast;
+import com.hazelcast.core.HazelcastInstance;
+import controlP5.*;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import processing.video.*;
 
 Logger logger;
 
-AppStates appState;
+AppMode appMode;
+Config sharedDataconfig;
+HazelcastInstance sharedDataInstance;
+IMap<String, String> sharedData;
+String localAddress;
+int dmModePort, playersModePort;
+
+AppState appState;
 
 ControlP5 cp5;
 
@@ -24,7 +33,7 @@ Grid grid;
 
 Layer playersLayer;
 Layer dmLayer;
-Layers layerShown;
+LayerShown layerShown;
 
 Resources resources;
 
@@ -47,7 +56,8 @@ boolean checkedForUpdates;
 
 void setup() {
 
-  fullScreen(P2D, 2);
+  fullScreen(P2D, 1);
+  // fullScreen(P2D, 2);
   smooth();
 
   logger = new Logger("DEBUG", this.platform);
@@ -56,7 +66,70 @@ void setup() {
 
     logger.info("Setup: dungeoneering initialization started");
 
-    appState = AppStates.idle;
+    appMode = AppMode.dm;
+    // appMode = AppMode.players;
+
+    logger.info("Setup: initializing dungeoneering in " + appMode.toString());
+
+    dmModePort = 50005;
+    playersModePort = 60006;
+    localAddress = "127.0.0.1";
+
+    // Create Hazelcast config based on app mode - DM or Players
+    sharedDataconfig = new Config();
+    sharedDataconfig.setClusterName("dungeoneering");
+    if ( appMode == AppMode.dm ) {
+      sharedDataconfig.getNetworkConfig().setPublicAddress(localAddress).setPort(dmModePort);
+      sharedDataconfig.setInstanceName("dm-app");
+    } else {
+      sharedDataconfig.getNetworkConfig().setPublicAddress(localAddress).setPort(playersModePort);
+      sharedDataconfig.setInstanceName("players-app");
+    }
+
+    // Instantiate Hazelcast
+    sharedDataInstance = Hazelcast.newHazelcastInstance(sharedDataconfig);
+
+    // Create shared map: String -> String
+    // "fromDmApp" -> scene in JSON format sent by DM's App, as String
+    // "fromPlayersApp" -> scene in JSON format sent by Players' App, as String
+    sharedData = sharedDataInstance.getMap("shared");
+
+    // Add listener to map, so it will process shared data when it's added or updated
+    sharedData.addEntryListener(new EntryAdapter<String, String>() {
+
+      @Override
+      public void entryAdded(EntryEvent<String, String> event) {
+        logger.debug("Entry " + event.getKey() + " added");
+        logger.trace("Entry " + event.getKey() + " added: from " + event.getOldValue() + " to " + event.getValue());
+        processSharedData(event.getKey());
+      }
+
+      @Override
+      public void entryUpdated(EntryEvent<String, String> event) {
+        logger.debug("Entry " + event.getKey() + " updated");
+        logger.trace("Entry " + event.getKey() + " updated: from " + event.getOldValue() + " to " + event.getValue());
+        processSharedData(event.getKey());
+      }
+
+    }, true );
+
+    sharedDataInstance.getCluster().addMembershipListener(new MembershipListener() {
+
+        @Override
+        public void memberAdded(MembershipEvent event) {
+          logger.debug("Cluster member added: " + event.toString());
+          showPlayerControllersInDmApp();
+        }
+
+        @Override
+        public void memberRemoved(MembershipEvent event) {
+          logger.debug("Cluster member removed: " + event.toString());
+          hidePlayerControllersInDmApp();
+        }
+
+    });
+
+    appState = AppState.idle;
 
     cp5 = new ControlP5(this);
     cp5.setAutoDraw(false);
@@ -95,13 +168,13 @@ void setup() {
 
     logger.debug("Setup: resources initialization done");
 
-    playersLayer = new Layer(mainCanvas, grid, obstacles, resources, initiative, "Players Layer", Layers.players);
-    dmLayer = new Layer(mainCanvas, grid, obstacles, resources, initiative, "DM Layer", Layers.dm);
-    layerShown = Layers.players;
+    playersLayer = new Layer(mainCanvas, grid, obstacles, resources, initiative, "Players' Layer", LayerShown.players);
+    dmLayer = new Layer(mainCanvas, grid, obstacles, resources, initiative, "DM's Layer", LayerShown.dm);
+    layerShown = LayerShown.players;
 
     logger.debug("Setup: layers initialization done");
 
-    userInterface = new UserInterface(mainCanvas, cp5, map, grid, obstacles, playersLayer, dmLayer, resources, initiative, this.platform);
+    userInterface = new UserInterface(mainCanvas, cp5, map, grid, obstacles, playersLayer, dmLayer, resources, initiative, this.platform, sharedDataInstance, sharedData);
 
     logger.debug("Setup: UI initialization done");
 
@@ -192,12 +265,12 @@ void drawScene() {
 
       if ( obstacles.getRecalculateShadows() ) {
         // Gather light sources from all layers
-        dmLayer.recalculateShadows(ShadowTypes.lightSources);
-        playersLayer.recalculateShadows(ShadowTypes.lightSources);
+        dmLayer.recalculateShadows(ShadowType.lightSources);
+        playersLayer.recalculateShadows(ShadowType.lightSources);
         // Gather lines of sight of the layer being shown, to be used as a mask to hide/reveal light sources
-        playersLayer.recalculateShadows(ShadowTypes.linesOfSight);
+        playersLayer.recalculateShadows(ShadowType.linesOfSight);
         // Gather sight types of the layer being shown
-        playersLayer.recalculateShadows(ShadowTypes.sightTypes);
+        playersLayer.recalculateShadows(ShadowType.sightTypes);
         // Compose final shadows with all of the above
         obstacles.blendShadows();
       }
@@ -214,10 +287,10 @@ void drawScene() {
 
       if ( obstacles.getRecalculateShadows() ) {
         // Same as above, with opposite layer
-        playersLayer.recalculateShadows(ShadowTypes.lightSources);
-        dmLayer.recalculateShadows(ShadowTypes.lightSources);
-        dmLayer.recalculateShadows(ShadowTypes.linesOfSight);
-        dmLayer.recalculateShadows(ShadowTypes.sightTypes);
+        playersLayer.recalculateShadows(ShadowType.lightSources);
+        dmLayer.recalculateShadows(ShadowType.lightSources);
+        dmLayer.recalculateShadows(ShadowType.linesOfSight);
+        dmLayer.recalculateShadows(ShadowType.sightTypes);
         obstacles.blendShadows();
       }
 
@@ -232,14 +305,14 @@ void drawScene() {
 
       if ( obstacles.getRecalculateShadows() ) {
         // Gather light sources from all layers
-        playersLayer.recalculateShadows(ShadowTypes.lightSources);
-        dmLayer.recalculateShadows(ShadowTypes.lightSources);
+        playersLayer.recalculateShadows(ShadowType.lightSources);
+        dmLayer.recalculateShadows(ShadowType.lightSources);
         // Gather lines of sight from all layers, to be used as a mask to reveal/hide light sources
-        playersLayer.recalculateShadows(ShadowTypes.linesOfSight);
-        dmLayer.recalculateShadows(ShadowTypes.linesOfSight);
+        playersLayer.recalculateShadows(ShadowType.linesOfSight);
+        dmLayer.recalculateShadows(ShadowType.linesOfSight);
         // Gather sight types from all layers
-        playersLayer.recalculateShadows(ShadowTypes.sightTypes);
-        dmLayer.recalculateShadows(ShadowTypes.sightTypes);
+        playersLayer.recalculateShadows(ShadowType.sightTypes);
+        dmLayer.recalculateShadows(ShadowType.sightTypes);
         // Compose final shadows with all of the above
         obstacles.blendShadows();
       }
@@ -283,6 +356,13 @@ void drawUi() {
   userInterface.drawTooltips(uiCanvas);
   uiCanvas.endDraw();
 
+}
+
+void changeAppState(AppState newAppState) {
+  if ( appState != newAppState ) {
+    logger.info("App state changed from " + appState.toString() + " to " + newAppState.toString());
+    appState = newAppState;
+  }
 }
 
 void appUpkeep() {
@@ -332,7 +412,7 @@ void controlEvent(ControlEvent controlEvent) {
 
   try {
 
-    appState = userInterface.controllerEvent(controlEvent);
+    changeAppState(userInterface.controllerEvent(controlEvent));
 
   } catch ( Exception e ) {
     logger.error("UserInterface: Error handling controller event");
@@ -380,11 +460,11 @@ void mouseDragged() {
         userInterface.hideMenu(mouseX, mouseY);
 
         if ( userInterface.isInsideInitiativeOrder() )
-          appState = userInterface.changeInitiativeOrder(mouseX, false);
+          changeAppState(userInterface.changeInitiativeOrder(mouseX, false));
         else if ( userInterface.isOverToken(mouseX, mouseY) )
-          appState = userInterface.moveToken(mouseX, mouseY, false);
+          changeAppState(userInterface.moveToken(mouseX, mouseY, false));
         else
-          appState = userInterface.panMap(mouseX, pmouseX, mouseY, pmouseY, false);
+          changeAppState(userInterface.panMap(mouseX, pmouseX, mouseY, pmouseY, false));
 
       }
 
@@ -399,9 +479,9 @@ void mouseDragged() {
 
       if ( mouseButton == LEFT )
         if ( userInterface.isInsideInitiativeOrder() )
-          appState = userInterface.changeInitiativeOrder(mouseX, false);
+          changeAppState(userInterface.changeInitiativeOrder(mouseX, false));
         else
-          appState = userInterface.changeInitiativeOrder(mouseX, true);
+          changeAppState(userInterface.changeInitiativeOrder(mouseX, true));
 
       break;
     case mapPan:
@@ -434,7 +514,7 @@ void mouseReleased() {
     case idle:
 
       if ( mouseButton == LEFT )
-        userInterface.openDoor(mouseX, mouseY);
+        userInterface.toggleDoor(mouseX, mouseY);
 
       if ( mouseButton == RIGHT )
         userInterface.showMenu(mouseX, mouseY);
@@ -450,7 +530,7 @@ void mouseReleased() {
     case tokenMovement:
 
       if ( mouseButton == LEFT )
-        appState = userInterface.moveToken(mouseX, mouseY, true);
+        changeAppState(userInterface.moveToken(mouseX, mouseY, true));
 
       break;
     case wallSetup:
@@ -474,13 +554,13 @@ void mouseReleased() {
     case initiativeOrderSetup:
 
       if ( mouseButton == LEFT )
-        appState = userInterface.changeInitiativeOrder(mouseX, true);
+        changeAppState(userInterface.changeInitiativeOrder(mouseX, true));
 
       break;
     case mapPan:
 
       if ( mouseButton == LEFT )
-        appState = userInterface.panMap(mouseX, pmouseX, mouseY, pmouseY, true);
+        changeAppState(userInterface.panMap(mouseX, pmouseX, mouseY, pmouseY, true));
 
       break;
     default:
@@ -572,5 +652,58 @@ void outlineText(PGraphics canvas, String text, color textColor, color outlineCo
 
   canvas.fill(textColor);
   canvas.text(text, x, y);
+
+}
+
+void processSharedData(String fromApp) {
+
+  if ( fromApp == null || fromApp.trim().isEmpty() )
+    return;
+
+  // Ignore messages sent by this app
+  if ( appMode == AppMode.dm && fromApp.equals("fromDmApp") )
+    return;
+  if ( appMode == AppMode.players && fromApp.equals("fromPlayersApp") )
+    return;
+
+  try {
+
+    // JSONObject is shared as String
+    String sharedJsonObjectAsString = sharedData.get(fromApp);
+    if ( sharedJsonObjectAsString == null || sharedJsonObjectAsString.trim().isEmpty() ) {
+      logger.debug("UserInterface: Received shared data is empty");
+      return;
+    }
+
+    // Convert String to JSONObject
+    JSONObject sceneJson = JSONObject.parse(sharedJsonObjectAsString);
+
+    logger.info("UserInterface: Received shared data from app in " + appMode.toString());
+
+    // Sync scene with received JSON
+    userInterface.syncScene(sceneJson);
+
+  } catch ( Exception e ) {
+    logger.error("UserInterface: Error handling shared data");
+    logger.error(ExceptionUtils.getStackTrace(e));
+  }
+
+}
+
+void showPlayerControllersInDmApp() {
+
+  if ( appMode == AppMode.players )
+    return;
+
+  userInterface.showPlayerControllersInDmApp();
+
+}
+
+void hidePlayerControllersInDmApp() {
+
+  if ( appMode == AppMode.players )
+    return;
+
+  userInterface.hidePlayerControllersInDmApp();
 
 }

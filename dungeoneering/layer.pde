@@ -1,4 +1,6 @@
 import java.awt.Point;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.UUID;
 
 class Layer {
 
@@ -12,13 +14,15 @@ class Layer {
 
   Initiative initiative;
 
-  ArrayList<Token> tokens;
+  CopyOnWriteArrayList<Token> tokens;
 
   String name;
 
-  Layers thisLayer;
+  LayerShown thisLayer;
 
-  Layer(PGraphics _canvas, Grid _grid, Obstacles _obstacles, Resources _resources, Initiative _initiative, String _name, Layers _thisLayer) {
+  SimpleIntegerProperty layerVersion;
+
+  Layer(PGraphics _canvas, Grid _grid, Obstacles _obstacles, Resources _resources, Initiative _initiative, String _name, LayerShown _thisLayer) {
 
     canvas = _canvas;
 
@@ -30,17 +34,19 @@ class Layer {
 
     initiative = _initiative;
 
-    tokens = new ArrayList<Token>();
+    tokens = new CopyOnWriteArrayList<Token>();
 
     name = _name;
 
     thisLayer = _thisLayer;
 
+    layerVersion = new SimpleIntegerProperty(1);
+
   }
 
-  void draw(Layers layerShown) {
+  void draw(LayerShown layerShown) {
 
-    boolean concealHidden = layerShown != Layers.all && layerShown != thisLayer;
+    boolean concealHidden = layerShown != LayerShown.all && layerShown != thisLayer;
 
     switch ( appState ) {
       case tokenSetup:
@@ -68,20 +74,24 @@ class Layer {
 
   }
 
-  void recalculateShadows(ShadowTypes shadowsToRecalculate) {
+  void recalculateShadows(ShadowType shadowsToRecalculate) {
 
-    logger.trace("Layer: " + name + ": recalculating shadows");
+    logger.debug("Layer: " + name + ": recalculating " + shadowsToRecalculate.toString() + " shadows");
 
     for ( Token token: tokens )
       token.recalculateShadows(shadowsToRecalculate);
 
+    logger.debug("Layer: " + name + ": done recalculating " + shadowsToRecalculate.toString() + " shadows");
+
   }
 
-  void addToken(File tokenImageFile) {
+  void addToken(File tokenImageFile, ChangeListener<Number> sceneUpdateListener) {
 
     String tokenFileName = tokenImageFile.getName();
     String[] tokenFileNameTokens = tokenFileName.split("\\.(?=[^\\.]+$)");
     String tokenBaseName = tokenFileNameTokens[0];
+    UUID tokenId = UUID.randomUUID();
+    int tokenVersion = 1;
 
     Cell currentCell = grid.getCellAt(new Point(mouseX, mouseY));
     if ( currentCell == null )
@@ -90,12 +100,14 @@ class Layer {
     Token token = new Token(canvas, grid, obstacles);
     Light lineOfSightTemplate = resources.getSightType("Line of Sight");
     Light lineOfSight = new Light(lineOfSightTemplate.getName(), lineOfSightTemplate.getBrightLightRadius(), lineOfSightTemplate.getDimLightRadius());
-    token.setup(tokenBaseName, tokenImageFile.getAbsolutePath(), grid.getCellWidth(), grid.getCellHeight(), resources.getSize("Medium"), lineOfSight);
+    token.setup(tokenBaseName, tokenId, tokenVersion, sceneUpdateListener, tokenImageFile.getAbsolutePath(), grid.getCellWidth(), grid.getCellHeight(), resources.getSize("Medium"), lineOfSight);
     token.setCell(currentCell);
     token.setBeingMoved(true);
     tokens.add(token);
 
     initiative.addGroup(tokenBaseName, tokenImageFile.getAbsolutePath(), token, thisLayer);
+
+    incrementLayerVersion();
 
     logger.info("Layer: New token added in " + name);
 
@@ -107,6 +119,8 @@ class Layer {
 
     initiative.addGroup(token.getName(), token.getImagePath(), token, thisLayer);
 
+    incrementLayerVersion();
+
   }
 
   void setTokenCell(Token token, int _mouseX, int _mouseY) {
@@ -116,7 +130,7 @@ class Layer {
 
   }
 
-  AppStates moveToken(int _mouseX, int _mouseY, boolean done) {
+  AppState moveToken(int _mouseX, int _mouseY, boolean done) {
 
    if ( tokens.isEmpty() )
       return appState;
@@ -141,25 +155,50 @@ class Layer {
 
     if ( done ) {
 
-      token.setBeingMoved(false);
-      obstacles.setRecalculateShadows(true);
-      return AppStates.idle;
+      if ( token.setBeingMoved(false) ) {
+        token.incrementVersion();
+        obstacles.setRecalculateShadows(true);
+      }
+      return AppState.idle;
 
     }
 
-    return AppStates.tokenMovement;
+    return AppState.tokenMovement;
+
+  }
+
+  void moveToken(Token token, Cell cell) {
+
+    if ( token == null || cell == null )
+      return;
+
+    if ( token.setCell(cell) ) {
+
+      token.incrementVersion();
+      obstacles.setRecalculateShadows(true);
+
+    }
 
   }
 
   void removeToken(Token tokenToRemove) {
 
+    removeToken(tokenToRemove, true);
+
+  }
+
+  void removeToken(Token tokenToRemove, boolean incrementLayerVersion) {
+
     tokens.remove(tokenToRemove);
 
     initiative.removeGroup(tokenToRemove.getName(), tokenToRemove);
 
+    if ( incrementLayerVersion )
+      incrementLayerVersion();
+
   }
 
-  ArrayList<Token> getTokens() {
+  CopyOnWriteArrayList<Token> getTokens() {
     return tokens;
   }
 
@@ -194,7 +233,9 @@ class Layer {
 
   void clear() {
 
-    tokens = new ArrayList<Token>();
+    tokens = new CopyOnWriteArrayList<Token>();
+
+    layerVersion.set(1);
 
     System.gc();
 
@@ -231,6 +272,32 @@ class Layer {
 
   String getName() {
     return name;
+  }
+
+  void addSceneUpdateListener(ChangeListener<Number> _sceneUpdateListener) {
+    logger.debug("Adding listener to " + name + " version");
+    layerVersion.addListener(_sceneUpdateListener);
+  }
+
+  void incrementLayerVersion() {
+    logger.debug("Incrementing " + name + " version from " + layerVersion.getValue() + " to " + (layerVersion.getValue()+1));
+    layerVersion.set(layerVersion.getValue() + 1);
+    logger.debug(name + " version: " + layerVersion.getValue());
+  }
+
+  Token getTokenById(UUID tokenID) {
+
+    Token tokenFound = null;
+
+    for ( Token token: tokens ) {
+      if ( token.getId().equals(tokenID) ) {
+        tokenFound = token;
+        break;
+      }
+    }
+
+    return tokenFound;
+
   }
 
 }

@@ -1,3 +1,5 @@
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 class Condition {
 
   PGraphics canvas;
@@ -189,6 +191,33 @@ class Condition {
 
   boolean isCentered() {
     return centered;
+  }
+
+  @Override
+  public int hashCode() {
+    return new HashCodeBuilder(13, 31).
+    append(name).
+    append(imagePath).
+    append(disablesTarget).
+    append(hidesTarget).
+    append(centered).
+    append(size.getName()).
+    append(maxConditionsPerToken).
+    toHashCode();
+  }
+
+  @Override
+  boolean equals(Object o) {
+    if ( o == this )
+        return true;
+    if ( !(o instanceof Condition) )
+        return false;
+    Condition other = (Condition)o;
+    boolean sameName = (this.getName().equals(other.getName()));
+    boolean sameDisablesTargetProperty = (this.disablesTarget() == other.disablesTarget());
+    boolean sameHidesTargetProperty = (this.hidesTarget() == other.hidesTarget());
+    boolean sameCenteredProperty = (this.isCentered() == other.isCentered());
+    return sameName && sameDisablesTargetProperty && sameHidesTargetProperty && sameCenteredProperty;
   }
 
 }

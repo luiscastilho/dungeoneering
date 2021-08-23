@@ -1,30 +1,110 @@
-enum AppStates {
+enum AppMode {
 
-  idle,
-  sceneLoad,
-  gridSetup,
-  tokenSetup,
-  tokenMovement,
-  wallSetup,
-  doorSetup,
-  initiativeOrderSetup,
-  mapPan;
-
-};
-
-enum Layers {
-
-  all,
-  players,
-  dm;
+  players {
+    public String toString() {
+        return "Players mode";
+    }
+  },
+  dm {
+    public String toString() {
+        return "DM mode";
+    }
+  };
 
 };
 
-enum ShadowTypes {
+enum AppState {
 
-  lightSources,
-  linesOfSight,
-  sightTypes;
+  idle {
+    public String toString() {
+        return "Idle";
+    }
+  },
+  sceneLoad {
+    public String toString() {
+        return "Scene Load";
+    }
+  },
+  sceneSync {
+    public String toString() {
+        return "Scene Sync";
+    }
+  },
+  gridSetup {
+    public String toString() {
+        return "Grid Setup";
+    }
+  },
+  tokenSetup {
+    public String toString() {
+        return "Token Setup";
+    }
+  },
+  tokenMovement {
+    public String toString() {
+        return "Token Movement";
+    }
+  },
+  wallSetup {
+    public String toString() {
+        return "Wall Setup";
+    }
+  },
+  doorSetup {
+    public String toString() {
+        return "Door Setup";
+    }
+  },
+  initiativeOrderSetup {
+    public String toString() {
+        return "Initiative Order Setup";
+    }
+  },
+  mapPan {
+    public String toString() {
+        return "Map Pan";
+    }
+  };
+
+};
+
+enum LayerShown {
+
+  all {
+    public String toString() {
+        return "All layers";
+    }
+  },
+  players {
+    public String toString() {
+        return "Players' layer";
+    }
+  },
+  dm {
+    public String toString() {
+        return "DM's layer";
+    }
+  };
+
+};
+
+enum ShadowType {
+
+  lightSources {
+    public String toString() {
+        return "light source";
+    }
+  },
+  linesOfSight {
+    public String toString() {
+        return "line of sight";
+    }
+  },
+  sightTypes {
+    public String toString() {
+        return "sight type";
+    }
+  };
 
 };
 
@@ -52,7 +132,7 @@ enum Illumination {
 
 }
 
-enum TooltipStates {
+enum TooltipState {
 
   Wait,
   FadeIn,

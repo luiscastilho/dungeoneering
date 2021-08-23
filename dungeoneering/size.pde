@@ -1,3 +1,5 @@
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 class Size {
 
   String name;
@@ -24,6 +26,28 @@ class Size {
 
   boolean isCentered() {
     return centered;
+  }
+
+  @Override
+  public int hashCode() {
+    return new HashCodeBuilder(19, 31).
+    append(name).
+    append(resizeFactor).
+    append(centered).
+    toHashCode();
+  }
+
+  @Override
+  boolean equals(Object o) {
+    if ( o == this )
+        return true;
+    if ( !(o instanceof Size) )
+        return false;
+    Size other = (Size)o;
+    boolean sameName = (this.getName().equals(other.getName()));
+    boolean sameCenteredProperty = (this.isCentered() == other.isCentered());
+    boolean sameResizeFactorProperty = (this.resizeFactor == other.resizeFactor);
+    return sameName && sameCenteredProperty;
   }
 
 }

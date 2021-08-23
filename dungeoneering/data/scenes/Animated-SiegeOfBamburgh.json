@@ -8,8 +8,10 @@
       "sightTypes": [],
       "name": "Goblin",
       "column": 14,
+      "id": "d184e592-1ed4-4812-b6f2-57f9e1736367",
       "row": 8,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -18,8 +20,10 @@
       "sightTypes": [],
       "name": "Goblin",
       "column": 12,
+      "id": "17467332-737f-4255-9933-ae17299ab808",
       "row": 12,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -28,8 +32,10 @@
       "sightTypes": [],
       "name": "Goblin",
       "column": 14,
+      "id": "3f4449e9-a349-4eff-9632-b302b8201c8c",
       "row": 6,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -38,8 +44,10 @@
       "sightTypes": [],
       "name": "Goblin",
       "column": 13,
+      "id": "f6c580b2-0a7d-490d-b491-03195ee4c5a7",
       "row": 7,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -48,8 +56,10 @@
       "sightTypes": [],
       "name": "Orc",
       "column": 12,
+      "id": "623f4bc5-748c-4032-91fc-d29544254453",
       "row": 10,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -58,8 +68,10 @@
       "sightTypes": [],
       "name": "Orc",
       "column": 12,
+      "id": "71d5008d-73b3-4fc7-9899-82ef7c247e47",
       "row": 8,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -68,8 +80,10 @@
       "sightTypes": [],
       "name": "Orc",
       "column": 11,
+      "id": "6a100959-dc5c-4d13-bfb5-d7aaa09c93dc",
       "row": 8,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -78,8 +92,10 @@
       "sightTypes": [],
       "name": "Orc",
       "column": 10,
+      "id": "468fb05e-de1d-44b7-b085-574a3cfec0c9",
       "row": 9,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -88,8 +104,10 @@
       "sightTypes": [],
       "name": "Orc",
       "column": 9,
+      "id": "6be0cc4b-e68f-461c-aa8e-450f575701f2",
       "row": 8,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -98,8 +116,10 @@
       "sightTypes": [],
       "name": "Orc",
       "column": 9,
+      "id": "a3f8c580-7dde-44b0-9161-d6fadc8c70a6",
       "row": 9,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -108,8 +128,10 @@
       "sightTypes": [],
       "name": "Orc",
       "column": 8,
+      "id": "d1398019-d896-4b68-abc9-0f07ba0f695e",
       "row": 9,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -118,8 +140,10 @@
       "sightTypes": [],
       "name": "Orc",
       "column": 7,
+      "id": "14d35442-f606-474f-97bb-48da90a4e85c",
       "row": 10,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -128,8 +152,10 @@
       "sightTypes": [],
       "name": "Goblin",
       "column": 12,
+      "id": "b5e84bdd-9fc2-4563-924b-ede153417b25",
       "row": 14,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -138,8 +164,10 @@
       "sightTypes": [],
       "name": "Goblin",
       "column": 13,
+      "id": "6df62de7-ef06-4d3d-9545-78e69a3289e3",
       "row": 13,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -148,8 +176,10 @@
       "sightTypes": [],
       "name": "Goblin",
       "column": 14,
+      "id": "658846e8-8824-404b-89e3-cd0ebb300c02",
       "row": 12,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -158,8 +188,10 @@
       "sightTypes": [],
       "name": "Goblin",
       "column": 14,
+      "id": "d71000b4-b99a-48b2-a093-a10629d20be3",
       "row": 11,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -168,8 +200,10 @@
       "sightTypes": [],
       "name": "Goblin",
       "column": 14,
+      "id": "e2fffd1c-4627-49c4-a440-716da2656f17",
       "row": 5,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -178,8 +212,10 @@
       "sightTypes": [],
       "name": "Goblin",
       "column": 13,
+      "id": "9ec051c8-52e3-4e9d-acda-4aea2c02d810",
       "row": 6,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -188,8 +224,10 @@
       "sightTypes": [],
       "name": "Goblin",
       "column": 14,
+      "id": "6b6fcb30-6340-4ae9-a288-26313a0038c7",
       "row": 14,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -198,8 +236,10 @@
       "sightTypes": [],
       "name": "Goblin",
       "column": 13,
+      "id": "e99a44c3-4563-4a09-8070-a2e386021f4f",
       "row": 4,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -208,8 +248,10 @@
       "sightTypes": [],
       "name": "Orc",
       "column": 11,
+      "id": "718f2684-27af-40c7-9e10-e01d8e4fa906",
       "row": 9,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -218,8 +260,10 @@
       "sightTypes": [],
       "name": "Orc",
       "column": 7,
+      "id": "d729827a-31a8-4801-a51a-da99a90d0e70",
       "row": 8,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -228,8 +272,10 @@
       "sightTypes": [],
       "name": "Orc",
       "column": 6,
+      "id": "068b2054-7b51-41ae-a934-59f0c40d20e9",
       "row": 9,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -238,8 +284,10 @@
       "sightTypes": [],
       "name": "Orc",
       "column": 6,
+      "id": "55b43766-229b-4ded-81b0-7b8e73b2063a",
       "row": 11,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -248,8 +296,10 @@
       "sightTypes": [],
       "name": "Orc",
       "column": 8,
+      "id": "9617ef51-69c8-4d60-a3df-4dc8fe454524",
       "row": 10,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -258,8 +308,10 @@
       "sightTypes": [],
       "name": "Orc",
       "column": 10,
+      "id": "a6ac9f95-7dcf-487c-8795-4222beea3d23",
       "row": 10,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -268,8 +320,10 @@
       "sightTypes": [],
       "name": "Goblin",
       "column": 13,
+      "id": "4e39583f-9f54-475f-8be6-003489f9c9e8",
       "row": 9,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -278,8 +332,10 @@
       "sightTypes": [],
       "name": "Orc",
       "column": 6,
+      "id": "5d26eb64-ee80-4593-8d7f-696d9ff2ac5b",
       "row": 7,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -288,8 +344,10 @@
       "sightTypes": [],
       "name": "Orc",
       "column": 5,
+      "id": "fdeccbd3-b922-4e99-ae8d-d5dd328ae92d",
       "row": 10,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -298,8 +356,10 @@
       "sightTypes": [],
       "name": "Orc",
       "column": 5,
+      "id": "4d021fd8-a5a2-4574-8441-14079bd5701e",
       "row": 8,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -308,8 +368,10 @@
       "sightTypes": [],
       "name": "Orc",
       "column": 5,
+      "id": "28476922-4bcb-4bbc-8969-39190e618e47",
       "row": 6,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -318,8 +380,10 @@
       "sightTypes": [],
       "name": "Goblin",
       "column": 13,
+      "id": "58c25704-dc8a-4a33-949a-a55ecf289528",
       "row": 15,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -328,8 +392,10 @@
       "sightTypes": [],
       "name": "Goblin",
       "column": 15,
+      "id": "e2e64330-90c3-4f6e-8f33-960ffdbf77d5",
       "row": 15,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -338,8 +404,10 @@
       "sightTypes": [],
       "name": "Goblin",
       "column": 12,
+      "id": "3bdddd41-2912-4d60-94e8-145557bfa43e",
       "row": 5,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -348,8 +416,10 @@
       "sightTypes": [],
       "name": "Orc",
       "column": 5,
+      "id": "56da2534-da90-4156-b979-caaefd533228",
       "row": 11,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -358,8 +428,10 @@
       "sightTypes": [],
       "name": "Orc",
       "column": 4,
+      "id": "c36fcb2d-c7c0-47da-869b-c24681f529b0",
       "row": 12,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -368,8 +440,10 @@
       "sightTypes": [],
       "name": "Orc",
       "column": 7,
+      "id": "66cde064-03c0-4f73-9956-97448bea2dfb",
       "row": 6,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -378,8 +452,10 @@
       "sightTypes": [],
       "name": "Orc",
       "column": 6,
+      "id": "0be4727f-65f9-40da-b1e1-e12c9b71afb2",
       "row": 5,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -388,8 +464,10 @@
       "sightTypes": [],
       "name": "Orc",
       "column": 6,
+      "id": "8f69df3a-5260-42e3-8b96-2e8fab983b7f",
       "row": 13,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Large",
@@ -398,8 +476,10 @@
       "sightTypes": [],
       "name": "Ogre",
       "column": 16,
+      "id": "2eab17ce-6715-43e6-923f-1ee252d589bb",
       "row": 9,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -408,8 +488,10 @@
       "sightTypes": [],
       "name": "Orc",
       "column": 5,
+      "id": "b6cb0167-05ad-4c4b-baa4-3a611f80bdae",
       "row": 4,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -418,8 +500,10 @@
       "sightTypes": [],
       "name": "Goblin",
       "column": 15,
+      "id": "a7c7cc42-6408-4ff0-a767-4209aaec232b",
       "row": 3,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -428,8 +512,10 @@
       "sightTypes": [],
       "name": "Goblin",
       "column": 15,
+      "id": "57227613-0a1e-4680-9ea7-7e22a9b9b1b3",
       "row": 7,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -438,8 +524,10 @@
       "sightTypes": [],
       "name": "Goblin",
       "column": 13,
+      "id": "d1d554f9-3af0-4828-b8e7-553b9f0b7307",
       "row": 10,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -448,8 +536,10 @@
       "sightTypes": [],
       "name": "Goblin",
       "column": 13,
+      "id": "bb59df21-e713-46a6-a2d3-3f8b164f30aa",
       "row": 11,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -458,8 +548,10 @@
       "sightTypes": [],
       "name": "Orc",
       "column": 5,
+      "id": "0923f4ce-fdde-496f-b1dd-c42caa28181f",
       "row": 14,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -468,8 +560,10 @@
       "sightTypes": [],
       "name": "Orc War Chief",
       "column": 15,
+      "id": "50e9872f-8506-40ed-9630-714d23cca34f",
       "row": 9,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Large",
@@ -478,8 +572,10 @@
       "sightTypes": [],
       "name": "Ogre",
       "column": 18,
+      "id": "c67b54e0-cb99-43a8-ac72-f9aced21d0c5",
       "row": 8,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     }
   ],
   "initiative": {
@@ -542,8 +638,10 @@
       "sightTypes": [],
       "name": "Militia",
       "column": 21,
+      "id": "f9897681-7181-4f7c-b6fc-69078667725e",
       "row": 6,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -552,8 +650,10 @@
       "sightTypes": [],
       "name": "Militia",
       "column": 21,
+      "id": "bd137a84-d48a-4395-8ef6-d0e2165cb5c5",
       "row": 12,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -562,8 +662,10 @@
       "sightTypes": [],
       "name": "Militia",
       "column": 20,
+      "id": "c394dbe8-134c-4b6d-84c6-2d6d77315aeb",
       "row": 4,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -572,8 +674,10 @@
       "sightTypes": [],
       "name": "Militia",
       "column": 20,
+      "id": "9730bedf-37e9-40e2-9f40-47a81d04f906",
       "row": 14,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -582,8 +686,10 @@
       "sightTypes": [],
       "name": "Militia",
       "column": 20,
+      "id": "804f8b4a-8540-429e-b232-b72422866699",
       "row": 13,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -592,8 +698,10 @@
       "sightTypes": [],
       "name": "Militia",
       "column": 20,
+      "id": "db45b028-e918-4199-90bd-7f4d60fb2939",
       "row": 5,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -602,8 +710,10 @@
       "sightTypes": [],
       "name": "Militia",
       "column": 20,
+      "id": "94d3f2b3-6afd-42d9-a123-e8ff7a41c814",
       "row": 17,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -612,8 +722,10 @@
       "sightTypes": [],
       "name": "Militia",
       "column": 20,
+      "id": "1b04e734-26aa-4a4b-b47c-f9a600581716",
       "row": 1,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -622,8 +734,10 @@
       "sightTypes": [],
       "name": "Militia",
       "column": 25,
+      "id": "90484215-3e42-4143-98f8-f9a37e74e947",
       "row": 8,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -632,8 +746,10 @@
       "sightTypes": [],
       "name": "Militia",
       "column": 25,
+      "id": "5731a0e6-1017-4a2c-b809-da835b889cbc",
       "row": 10,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -642,8 +758,10 @@
       "sightTypes": [],
       "name": "Militia",
       "column": 26,
+      "id": "28ab8794-40a4-4c04-8e01-55187acdb8b8",
       "row": 10,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -652,8 +770,10 @@
       "sightTypes": [],
       "name": "Militia",
       "column": 26,
+      "id": "eb7d4670-6daf-4547-97a2-2fe565c99a9b",
       "row": 8,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -662,8 +782,10 @@
       "sightTypes": [],
       "name": "Militia",
       "column": 26,
+      "id": "d131b875-648a-4a0a-832e-1c6822b0c05f",
       "row": 9,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -672,8 +794,10 @@
       "sightTypes": [],
       "name": "Militia",
       "column": 25,
+      "id": "a5fa8204-1db2-40d7-aa9e-c0f2ed9f90e1",
       "row": 9,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -682,8 +806,10 @@
       "sightTypes": [],
       "name": "Militia",
       "column": 22,
+      "id": "8b69bff6-e163-45c8-aa89-4348dd79e68e",
       "row": 7,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -692,8 +818,10 @@
       "sightTypes": [],
       "name": "Lia",
       "column": 17,
+      "id": "b19397a6-8d8c-496c-91bc-d9aec5574e23",
       "row": 6,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -702,8 +830,10 @@
       "sightTypes": [],
       "name": "Luth",
       "column": 17,
+      "id": "acc0783d-785c-46dc-b025-d67279464bc5",
       "row": 5,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -712,8 +842,10 @@
       "sightTypes": [],
       "name": "Militia Captain",
       "column": 22,
+      "id": "748e88e1-cab3-42b4-ab75-0093a13ec10e",
       "row": 9,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -722,8 +854,10 @@
       "sightTypes": [],
       "name": "Militia",
       "column": 22,
+      "id": "d3601658-1747-4c23-aa4e-5bff95718474",
       "row": 11,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -732,15 +866,15 @@
       "sightTypes": [],
       "name": "Orsik",
       "column": 17,
+      "id": "ed64e638-be08-45dd-97a1-389c35b419f4",
       "row": 12,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     }
   ],
   "map": {
     "filePath": "/data/maps/Animated-SiegeOfBamburgh.mp4",
     "isVideo": true,
-    "fitToScreen": false,
-    "logoFilePath": "/data/logos/animated-dungeon-maps.png",
-    "logoLink": "https://www.patreon.com/animatedmaps"
+    "fitToScreen": false
   }
 }

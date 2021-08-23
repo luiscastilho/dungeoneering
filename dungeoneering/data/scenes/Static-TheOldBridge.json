@@ -8,8 +8,10 @@
       "sightTypes": [],
       "name": "Orog",
       "column": 8,
+      "id": "a1390365-b83c-41f6-89b5-fb5405f019ca",
       "row": 7,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -18,8 +20,10 @@
       "sightTypes": [],
       "name": "Orc",
       "column": 8,
+      "id": "ca93a2c5-5094-40ba-bcb5-fcfdbdf49820",
       "row": 9,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -28,8 +32,10 @@
       "sightTypes": [],
       "name": "Orc",
       "column": 6,
+      "id": "8fad7c8a-e264-4a64-88fa-a48a77808807",
       "row": 6,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -38,8 +44,10 @@
       "sightTypes": [],
       "name": "Goblin",
       "column": 7,
+      "id": "2dca6f29-27fb-48ab-99fb-76dbdd5578e0",
       "row": 10,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -48,8 +56,10 @@
       "sightTypes": [],
       "name": "Goblin",
       "column": 5,
+      "id": "1a44592e-30dd-4f7d-b70c-430cd624d45b",
       "row": 10,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -58,8 +68,10 @@
       "sightTypes": [],
       "name": "Goblin",
       "column": 6,
+      "id": "648260d4-fe74-44e5-90f9-894287681117",
       "row": 9,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -68,8 +80,10 @@
       "sightTypes": [],
       "name": "Goblin",
       "column": 6,
+      "id": "68a9a830-7d37-4ecc-abda-4caa813ba932",
       "row": 8,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -78,8 +92,10 @@
       "sightTypes": [],
       "name": "Goblin",
       "column": 5,
+      "id": "e5351b24-378a-4a6a-bea1-02eb0375f719",
       "row": 8,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -88,8 +104,10 @@
       "sightTypes": [],
       "name": "Goblin",
       "column": 4,
+      "id": "b27b5578-33d3-4070-aa53-b2571e8ca03e",
       "row": 9,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -98,8 +116,10 @@
       "sightTypes": [],
       "name": "Goblin",
       "column": 4,
+      "id": "028b4361-6c4d-49d0-817f-dd2a32ec8826",
       "row": 7,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     }
   ],
   "initiative": {
@@ -150,8 +170,10 @@
       "sightTypes": [],
       "name": "Orsik",
       "column": 13,
+      "id": "b8cb47a7-9e45-4aa3-a17c-b1ee44139f15",
       "row": 4,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -160,8 +182,10 @@
       "sightTypes": [],
       "name": "Lia",
       "column": 15,
+      "id": "c2e29899-4844-4b35-906c-7e83804e953e",
       "row": 4,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -170,8 +194,10 @@
       "sightTypes": [],
       "name": "Luth",
       "column": 12,
+      "id": "fedc8eda-c5de-4736-9509-6b35f7340232",
       "row": 2,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     }
   ],
   "map": {

@@ -2,7 +2,7 @@ import java.awt.Point;
 
 public class UserInterfaceTooltip {
 
-  TooltipStates tooltipState;
+  TooltipState tooltipState;
 
   String message;
 
@@ -28,7 +28,7 @@ public class UserInterfaceTooltip {
 
   UserInterfaceTooltip(String _message, color _backgroundColor, color _textColor) {
 
-    tooltipState = TooltipStates.Wait;
+    tooltipState = TooltipState.Wait;
 
     message = _message;
 
@@ -63,7 +63,7 @@ public class UserInterfaceTooltip {
           waitStartTime = millis();
 
         if ( millis() > waitStartTime + waitDelay * 1000 )
-          tooltipState = TooltipStates.FadeIn;
+          tooltipState = TooltipState.FadeIn;
 
         break;
       case FadeIn:
@@ -75,7 +75,7 @@ public class UserInterfaceTooltip {
 
         if ( fadeInAlpha > 0.95 ) {
           fadeInAlpha = 1f;
-          tooltipState = TooltipStates.Show;
+          tooltipState = TooltipState.Show;
         }
 
         drawTooltip(uiCanvas);
@@ -121,7 +121,7 @@ public class UserInterfaceTooltip {
 
   void reset() {
 
-    tooltipState = TooltipStates.Wait;
+    tooltipState = TooltipState.Wait;
 
     position.x = position.y = 0;
 

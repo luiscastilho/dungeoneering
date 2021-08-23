@@ -1,3 +1,7 @@
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.UUID;
+import javafx.beans.property.SimpleIntegerProperty;
+
 class Token {
 
   PGraphics canvas;
@@ -8,6 +12,9 @@ class Token {
 
   String name;
 
+  UUID id;
+  SimpleIntegerProperty version;
+
   String imagePath;
   PImage image;
 
@@ -15,15 +22,15 @@ class Token {
   boolean beingMoved;
 
   Cell cell, prevCell;
-  ArrayList<Cell> extraCells;
+  CopyOnWriteArrayList<Cell> extraCells;
 
   Size size;
 
   Light lineOfSight;
-  ArrayList<Light> sightTypes;
-  ArrayList<Light> lightSources;
+  CopyOnWriteArrayList<Light> sightTypes;
+  CopyOnWriteArrayList<Light> lightSources;
 
-  ArrayList<Condition> conditions;
+  CopyOnWriteArrayList<Condition> conditions;
 
   boolean disabled;
 
@@ -37,6 +44,9 @@ class Token {
 
     name = null;
 
+    id = null;
+    version = null;
+
     imagePath = null;
     image = null;
 
@@ -45,14 +55,14 @@ class Token {
 
     cell = null;
     prevCell = null;
-    extraCells = new ArrayList<Cell>();
+    extraCells = new CopyOnWriteArrayList<Cell>();
 
     size = null;
 
-    sightTypes = new ArrayList<Light>();
-    lightSources = new ArrayList<Light>();
+    sightTypes = new CopyOnWriteArrayList<Light>();
+    lightSources = new CopyOnWriteArrayList<Light>();
 
-    conditions = new ArrayList<Condition>();
+    conditions = new CopyOnWriteArrayList<Condition>();
 
     disabled = false;
 
@@ -93,15 +103,19 @@ class Token {
 
   }
 
-  void setup(String _name, String _imagePath, int cellWidth, int cellHeight, Size _size, Light _lineOfSight) {
+  void setup(String _name, UUID _id, int _version, ChangeListener<Number> _sceneUpdateListener, String _imagePath, int _cellWidth, int _cellHeight, Size _size, Light _lineOfSight) {
 
     name = _name;
+
+    id = _id;
+    version = new SimpleIntegerProperty(_version);
+    version.addListener(_sceneUpdateListener);
 
     size = _size;
 
     imagePath = _imagePath;
     image = loadImage(imagePath);
-    image.resize(round(cellWidth * size.getResizeFactor()), round(cellHeight * size.getResizeFactor()));
+    image.resize(round(_cellWidth * size.getResizeFactor()), round(_cellHeight * size.getResizeFactor()));
 
     lineOfSight = _lineOfSight;
 
@@ -109,9 +123,9 @@ class Token {
 
   }
 
-  void recalculateShadows(ShadowTypes shadowsToRecalculate) {
+  void recalculateShadows(ShadowType shadowsToRecalculate) {
 
-    logger.trace("Token: " + name + ": recalculating shadows");
+    logger.debug("Token: " + name + ": recalculating shadows");
 
     switch ( shadowsToRecalculate ) {
       case lightSources:
@@ -168,82 +182,87 @@ class Token {
 
   }
 
-  void setCell( Cell _cell ) {
+  boolean setCell(Cell _cell) {
 
-    if ( _cell != null ) {
-      cell = _cell;
+    if ( _cell == null )
+      return false;
 
-      recenterLightSources();
+    if ( cell != null && cell.equals(_cell) )
+      return false;
 
-      // set extra cells occupied based on size
-      int cellRow = cell.getRow();
-      int cellColumn = cell.getColumn();
+    cell = _cell;
 
-      switch ( size.getName() ) {
-        case "Tiny":
-        case "Small":
-        case "Medium":
+    recenterLightSources();
 
-          // no extra cells occupied
-          extraCells.clear();
+    // set extra cells occupied based on size
+    int cellRow = cell.getRow();
+    int cellColumn = cell.getColumn();
 
-          break;
-        case "Large":
+    switch ( size.getName() ) {
+      case "Tiny":
+      case "Small":
+      case "Medium":
 
-          // three extra cells occupied:
-          // X 1
-          // 2 3
-          extraCells.clear();
-          extraCells.add(grid.getCellAt(cellRow, cellColumn+1));
-          extraCells.add(grid.getCellAt(cellRow+1, cellColumn));
-          extraCells.add(grid.getCellAt(cellRow+1, cellColumn+1));
+        // no extra cells occupied
+        extraCells.clear();
 
-          break;
-        case "Huge":
+        break;
+      case "Large":
 
-          // eight extra cells occupied:
-          // 1 2 3
-          // 4 X 5
-          // 6 7 8
-          extraCells.clear();
-          extraCells.add(grid.getCellAt(cellRow-1, cellColumn-1));
-          extraCells.add(grid.getCellAt(cellRow-1, cellColumn));
-          extraCells.add(grid.getCellAt(cellRow-1, cellColumn+1));
-          extraCells.add(grid.getCellAt(cellRow, cellColumn-1));
-          extraCells.add(grid.getCellAt(cellRow, cellColumn+1));
-          extraCells.add(grid.getCellAt(cellRow+1, cellColumn-1));
-          extraCells.add(grid.getCellAt(cellRow+1, cellColumn));
-          extraCells.add(grid.getCellAt(cellRow+1, cellColumn+1));
+        // three extra cells occupied:
+        // X 1
+        // 2 3
+        extraCells.clear();
+        extraCells.add(grid.getCellAt(cellRow, cellColumn+1));
+        extraCells.add(grid.getCellAt(cellRow+1, cellColumn));
+        extraCells.add(grid.getCellAt(cellRow+1, cellColumn+1));
 
-          break;
-        case "Gargantuan":
+        break;
+      case "Huge":
 
-          // fifteen extra cells occupied:
-          //  X  1  2  3
-          //  4  5  6  7
-          //  8  9 10 11
-          // 12 13 14 15
-          extraCells.clear();
-          extraCells.add(grid.getCellAt(cellRow, cellColumn+1));
-          extraCells.add(grid.getCellAt(cellRow, cellColumn+2));
-          extraCells.add(grid.getCellAt(cellRow, cellColumn+3));
-          extraCells.add(grid.getCellAt(cellRow+1, cellColumn));
-          extraCells.add(grid.getCellAt(cellRow+1, cellColumn+1));
-          extraCells.add(grid.getCellAt(cellRow+1, cellColumn+2));
-          extraCells.add(grid.getCellAt(cellRow+1, cellColumn+3));
-          extraCells.add(grid.getCellAt(cellRow+2, cellColumn));
-          extraCells.add(grid.getCellAt(cellRow+2, cellColumn+1));
-          extraCells.add(grid.getCellAt(cellRow+2, cellColumn+2));
-          extraCells.add(grid.getCellAt(cellRow+2, cellColumn+3));
-          extraCells.add(grid.getCellAt(cellRow+3, cellColumn));
-          extraCells.add(grid.getCellAt(cellRow+3, cellColumn+1));
-          extraCells.add(grid.getCellAt(cellRow+3, cellColumn+2));
-          extraCells.add(grid.getCellAt(cellRow+3, cellColumn+3));
+        // eight extra cells occupied:
+        // 1 2 3
+        // 4 X 5
+        // 6 7 8
+        extraCells.clear();
+        extraCells.add(grid.getCellAt(cellRow-1, cellColumn-1));
+        extraCells.add(grid.getCellAt(cellRow-1, cellColumn));
+        extraCells.add(grid.getCellAt(cellRow-1, cellColumn+1));
+        extraCells.add(grid.getCellAt(cellRow, cellColumn-1));
+        extraCells.add(grid.getCellAt(cellRow, cellColumn+1));
+        extraCells.add(grid.getCellAt(cellRow+1, cellColumn-1));
+        extraCells.add(grid.getCellAt(cellRow+1, cellColumn));
+        extraCells.add(grid.getCellAt(cellRow+1, cellColumn+1));
 
-          break;
-      }
+        break;
+      case "Gargantuan":
 
+        // fifteen extra cells occupied:
+        //  X  1  2  3
+        //  4  5  6  7
+        //  8  9 10 11
+        // 12 13 14 15
+        extraCells.clear();
+        extraCells.add(grid.getCellAt(cellRow, cellColumn+1));
+        extraCells.add(grid.getCellAt(cellRow, cellColumn+2));
+        extraCells.add(grid.getCellAt(cellRow, cellColumn+3));
+        extraCells.add(grid.getCellAt(cellRow+1, cellColumn));
+        extraCells.add(grid.getCellAt(cellRow+1, cellColumn+1));
+        extraCells.add(grid.getCellAt(cellRow+1, cellColumn+2));
+        extraCells.add(grid.getCellAt(cellRow+1, cellColumn+3));
+        extraCells.add(grid.getCellAt(cellRow+2, cellColumn));
+        extraCells.add(grid.getCellAt(cellRow+2, cellColumn+1));
+        extraCells.add(grid.getCellAt(cellRow+2, cellColumn+2));
+        extraCells.add(grid.getCellAt(cellRow+2, cellColumn+3));
+        extraCells.add(grid.getCellAt(cellRow+3, cellColumn));
+        extraCells.add(grid.getCellAt(cellRow+3, cellColumn+1));
+        extraCells.add(grid.getCellAt(cellRow+3, cellColumn+2));
+        extraCells.add(grid.getCellAt(cellRow+3, cellColumn+3));
+
+        break;
     }
+
+    return true;
 
   }
 
@@ -291,17 +310,20 @@ class Token {
 
   }
 
-  void setBeingMoved(boolean _beingMoved) {
+  boolean setBeingMoved(boolean _beingMoved) {
 
     beingMoved = _beingMoved;
 
     if ( beingMoved ) {
 
       prevCell = cell;
+      return true;
 
     } else {
 
-      if ( cell != prevCell )
+      boolean tokenWasMoved = !cell.equals(prevCell);
+
+      if ( tokenWasMoved )
         logger.debug(
           "Token: " + name + ": Moved from " +
           prevCell.getRow() + "," + prevCell.getColumn() +
@@ -310,6 +332,8 @@ class Token {
           );
 
       prevCell = null;
+
+      return tokenWasMoved;
 
     }
 
@@ -337,6 +361,18 @@ class Token {
     return name;
   }
 
+  UUID getId() {
+    return id;
+  }
+
+  String getStringId() {
+    return id.toString();
+  }
+
+  int getVersion() {
+    return version.getValue();
+  }
+
   String getImagePath() {
     return imagePath;
   }
@@ -345,15 +381,15 @@ class Token {
     return cell;
   }
 
-  ArrayList<Light> getLightSources() {
+  CopyOnWriteArrayList<Light> getLightSources() {
     return lightSources;
   }
 
-  ArrayList<Light> getSightTypes() {
+  CopyOnWriteArrayList<Light> getSightTypes() {
     return sightTypes;
   }
 
-  ArrayList<Condition> getConditions() {
+  CopyOnWriteArrayList<Condition> getConditions() {
     return conditions;
   }
 
@@ -367,6 +403,7 @@ class Token {
       if ( activeLightSource.getName().equals(light.getName()) ) {
 
         lightSources.remove(activeLightSource);
+        incrementVersion();
 
         logger.debug("Token: " + name + ": Light source " + activeLightSource.getName() + " removed");
         return;
@@ -375,6 +412,7 @@ class Token {
 
     lightSources.add(light);
     recenterLightSources();
+    incrementVersion();
 
     logger.debug("Token: " + name + ": Light source " + light.getName() + " added");
 
@@ -386,6 +424,7 @@ class Token {
       if ( activeSightType.getName().equals(sight.getName()) ) {
 
         sightTypes.remove(activeSightType);
+        incrementVersion();
 
         logger.debug("Token: " + name + ": Sight type " + activeSightType.getName() + " removed");
         return;
@@ -394,6 +433,7 @@ class Token {
 
     sightTypes.add(sight);
     recenterLightSources();
+    incrementVersion();
 
     logger.debug("Token: " + name + ": Sight type " + sight.getName() + " added");
 
@@ -405,6 +445,7 @@ class Token {
       if ( activeCondition.getName().equals(condition.getName()) ) {
 
         conditions.remove(condition);
+        incrementVersion();
 
         if ( disabled ) {
 
@@ -425,6 +466,7 @@ class Token {
     conditions.add(condition);
     if ( condition.disablesTarget() )
       disabled = true;
+    incrementVersion();
 
     logger.debug("Token: " + name + ": Condition " + condition.getName() + " added");
 
@@ -432,9 +474,16 @@ class Token {
 
   void setSize(Size _size, Resources resources) {
 
-    ArrayList<Condition> resizedConditions = new ArrayList<Condition>();
+    if ( _size == null )
+      return;
+
+    if ( size != null && size.equals(_size) )
+      return;
+
+    CopyOnWriteArrayList<Condition> resizedConditions = new CopyOnWriteArrayList<Condition>();
 
     size = _size;
+    incrementVersion();
 
     image = loadImage(imagePath);
     image.resize(round(cell.getCellWidth() * size.getResizeFactor()), round(cell.getCellHeight() * size.getResizeFactor()));
@@ -472,6 +521,12 @@ class Token {
 
     return false;
 
+  }
+
+  void incrementVersion() {
+    logger.debug("Incrementing " + name + " token version from " + version.getValue() + " to " + (version.getValue()+1));
+    version.set(version.getValue() + 1);
+    logger.debug(name + " token version: " + version.getValue());
   }
 
 }

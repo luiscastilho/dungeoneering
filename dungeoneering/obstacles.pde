@@ -1,17 +1,20 @@
+import java.util.concurrent.CopyOnWriteArrayList;
+
 class Obstacles {
 
   PGraphics canvas;
 
   PostFX postFx;
 
-  ArrayList<Wall> walls;
-  ArrayList<Door> doors;
+  CopyOnWriteArrayList<Wall> walls;
+  CopyOnWriteArrayList<Door> doors;
 
   boolean drawObstacles;
   int wallWidth, doorWidth;
   color wallColor, closedDoorColor, openDoorColor;
 
   Illumination illumination;
+  Illumination playersAppIllumination;
 
   // Accumulates all lights and shadows, serves as a mask to be applied over the entire scene
   PGraphics allShadows;
@@ -27,6 +30,9 @@ class Obstacles {
   float currentPanX, currentPanY;
   float currentScale;
 
+  SimpleIntegerProperty wallsVersion;
+  SimpleIntegerProperty doorsVersion;
+
   boolean recalculateShadows;
 
   Obstacles(PGraphics _canvas, PostFX _postFx) {
@@ -35,8 +41,8 @@ class Obstacles {
 
     postFx = _postFx;
 
-    walls = new ArrayList<Wall>();
-    doors = new ArrayList<Door>();
+    walls = new CopyOnWriteArrayList<Wall>();
+    doors = new CopyOnWriteArrayList<Door>();
 
     drawObstacles = false;
     wallWidth = 4;
@@ -46,6 +52,7 @@ class Obstacles {
     openDoorColor = color(#F64B29, 127);
 
     illumination = Illumination.brightLight;
+    playersAppIllumination = Illumination.darkness;
 
     allShadows = createGraphics(canvas.width, canvas.height, P2D);
     allShadows.noSmooth();
@@ -81,6 +88,9 @@ class Obstacles {
     currentPanY = 0;
     currentScale = 1;
 
+    wallsVersion = new SimpleIntegerProperty(1);
+    doorsVersion = new SimpleIntegerProperty(1);
+
     recalculateShadows = false;
 
   }
@@ -109,6 +119,7 @@ class Obstacles {
   void addWall(Wall _wall) {
 
     walls.add(_wall);
+    incrementWallsVersion();
     setRecalculateShadows(true);
 
   }
@@ -116,6 +127,7 @@ class Obstacles {
   void removeWall(Wall _wall) {
 
     walls.remove(_wall);
+    incrementWallsVersion();
     setRecalculateShadows(true);
 
   }
@@ -123,6 +135,7 @@ class Obstacles {
   void addDoor(Door _door) {
 
     doors.add(_door);
+    incrementDoorsVersion();
     setRecalculateShadows(true);
 
   }
@@ -130,6 +143,7 @@ class Obstacles {
   void removeDoor(Door _door) {
 
     doors.remove(_door);
+    incrementDoorsVersion();
     setRecalculateShadows(true);
 
   }
@@ -238,23 +252,29 @@ class Obstacles {
     if ( illumination == Illumination.brightLight )
       recalculateShadows = false;
 
+    logger.debug("Obstacles: shadows reset");
+
   }
 
   void clear() {
 
-    walls = new ArrayList<Wall>();
-    doors = new ArrayList<Door>();
+    walls = new CopyOnWriteArrayList<Wall>();
+    doors = new CopyOnWriteArrayList<Door>();
+
+    wallsVersion.set(1);
+    doorsVersion.set(1);
+
     recalculateShadows = true;
 
     System.gc();
 
   }
 
-  ArrayList<Wall> getWalls() {
+  CopyOnWriteArrayList<Wall> getWalls() {
     return walls;
   }
 
-  ArrayList<Door> getDoors() {
+  CopyOnWriteArrayList<Door> getDoors() {
     return doors;
   }
 
@@ -315,7 +335,7 @@ class Obstacles {
     recalculateShadows = _recalculateShadows;
 
     if ( recalculateShadows )
-      logger.trace("Obstacles: recalculating shadows");
+      logger.debug("Obstacles: recalculating shadows");
 
   }
 
@@ -323,8 +343,16 @@ class Obstacles {
     return illumination;
   }
 
+  Illumination getPlayersAppIllumination() {
+    return playersAppIllumination;
+  }
+
   void setIllumination(Illumination _illumination) {
     illumination = _illumination;
+  }
+
+  void setPlayersAppIllumination(Illumination _illumination) {
+    playersAppIllumination = _illumination;
   }
 
   boolean getDrawObstacles() {
@@ -336,8 +364,6 @@ class Obstacles {
   }
 
   Wall getClosestWall(int _mouseX, int _mouseY, int maxDistance) {
-
-    ArrayList<Wall> walls = obstacles.getWalls();
 
     float distanceToClosestWall = Integer.MAX_VALUE;
     Wall closestWall = null;
@@ -367,8 +393,6 @@ class Obstacles {
   }
 
   Door getClosestDoor(int _mouseX, int _mouseY, int maxDistance) {
-
-    ArrayList<Door> doors = obstacles.getDoors();
 
     float distanceToClosestDoor = Integer.MAX_VALUE;
     Door closestDoor = null;
@@ -419,6 +443,55 @@ class Obstacles {
     // its near line segment between A and B
     return sq(ux*vy-uy*vx) / len;  // (u X v)^2 / len
 
+  }
+
+  Wall getWallById(UUID wallID) {
+
+    Wall wallFound = null;
+
+    for ( Wall wall: walls ) {
+      if ( wall.getId().equals(wallID) ) {
+        wallFound = wall;
+        break;
+      }
+    }
+
+    return wallFound;
+
+  }
+
+  Door getDoorById(UUID doorID) {
+
+    Door doorFound = null;
+
+    for ( Door door: doors ) {
+      if ( door.getId().equals(doorID) ) {
+        doorFound = door;
+        break;
+      }
+    }
+
+    return doorFound;
+
+  }
+
+  void addSceneUpdateListener(ChangeListener<Number> _sceneUpdateListener) {
+    logger.debug("Adding listener to walls version");
+    wallsVersion.addListener(_sceneUpdateListener);
+    logger.debug("Adding listener to doors version");
+    doorsVersion.addListener(_sceneUpdateListener);
+  }
+
+  void incrementWallsVersion() {
+    logger.debug("Incrementing walls version from " + wallsVersion.getValue() + " to " + (wallsVersion.getValue()+1));
+    wallsVersion.set(wallsVersion.getValue() + 1);
+    logger.debug("Walls version: " + wallsVersion.getValue());
+  }
+
+  void incrementDoorsVersion() {
+    logger.debug("Incrementing doors version from " + doorsVersion.getValue() + " to " + (doorsVersion.getValue()+1));
+    doorsVersion.set(doorsVersion.getValue() + 1);
+    logger.debug("Doors version: " + doorsVersion.getValue());
   }
 
 }

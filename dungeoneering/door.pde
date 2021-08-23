@@ -2,8 +2,8 @@ class Door extends Wall {
 
   boolean closed;
 
-  Door(PGraphics _canvas) {
-    super(_canvas);
+  Door(PGraphics _canvas, UUID _id) {
+    super(_canvas, _id);
 
     closed = true;
 

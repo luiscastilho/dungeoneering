@@ -1,3 +1,5 @@
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 class Light {
 
   PVector position;
@@ -50,12 +52,46 @@ class Light {
     return name;
   }
 
+  color getBrightLightColor() {
+    return brightLightColor;
+  }
+
   int getBrightLightRadius() {
     return brightLightRadius;
   }
 
+  color getDimLightColor() {
+    return dimLightColor;
+  }
+
   int getDimLightRadius() {
     return dimLightRadius;
+  }
+
+  @Override
+  public int hashCode() {
+    return new HashCodeBuilder(17, 31).
+    append(name).
+    append(brightLightColor).
+    append(brightLightRadius).
+    append(dimLightColor).
+    append(dimLightRadius).
+    toHashCode();
+  }
+
+  @Override
+  boolean equals(Object o) {
+    if ( o == this )
+        return true;
+    if ( !(o instanceof Light) )
+        return false;
+    Light other = (Light)o;
+    boolean sameName = (this.getName().equals(other.getName()));
+    boolean sameBrightColor = (this.getBrightLightColor() == other.getBrightLightColor());
+    boolean sameBrightColorRadius = (this.getBrightLightRadius() == other.getBrightLightRadius());
+    boolean sameDimColor = (this.getDimLightColor() == other.getDimLightColor());
+    boolean sameDimColorRadius = (this.getDimLightRadius() == other.getDimLightRadius());
+    return sameName && sameBrightColor && sameBrightColorRadius && sameDimColor && sameDimColorRadius;
   }
 
 }

@@ -8,8 +8,10 @@
       "sightTypes": [],
       "name": "Hill Giant",
       "column": 23,
+      "id": "a76dfcff-d4fa-4a15-83f0-94b6f3e3fb59",
       "row": 10,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Huge",
@@ -18,8 +20,10 @@
       "sightTypes": [],
       "name": "Hill Giant",
       "column": 11,
+      "id": "f9c4eb6b-c32c-47bf-ab5f-018f31243c5e",
       "row": 5,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Huge",
@@ -28,8 +32,10 @@
       "sightTypes": [],
       "name": "Hill Giant",
       "column": 18,
+      "id": "09d593e5-9fef-439b-ae1e-20076169e198",
       "row": 6,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Huge",
@@ -38,8 +44,10 @@
       "sightTypes": [],
       "name": "Giant Frost",
       "column": 21,
+      "id": "57a9c512-436b-4aaf-9733-17fbed6afc47",
       "row": 3,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     }
   ],
   "initiative": {
@@ -86,8 +94,10 @@
       "sightTypes": [],
       "name": "Orsik",
       "column": 7,
+      "id": "cd2ffbe2-63c1-4dbc-9a90-bff437644966",
       "row": 12,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -96,8 +106,10 @@
       "sightTypes": [],
       "name": "Lia",
       "column": 6,
+      "id": "7b3d3490-e9a9-4d0a-8ba4-7cd9c3451be5",
       "row": 13,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     },
     {
       "size": "Medium",
@@ -106,15 +118,15 @@
       "sightTypes": [],
       "name": "Luth",
       "column": 4,
+      "id": "f36a35a3-e1ac-41ff-9e2c-886e3ebacb79",
       "row": 12,
-      "conditions": []
+      "conditions": [],
+      "version": 1
     }
   ],
   "map": {
     "filePath": "/data/maps/Animated-SwordCoast.mp4",
     "isVideo": true,
-    "fitToScreen": false,
-    "logoFilePath": "/data/logos/animated-dungeon-maps.png",
-    "logoLink": "https://www.patreon.com/animatedmaps"
+    "fitToScreen": false
   }
 }

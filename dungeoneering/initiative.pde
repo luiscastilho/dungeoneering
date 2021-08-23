@@ -1,8 +1,10 @@
+import java.util.concurrent.CopyOnWriteArrayList;
+
 class Initiative {
 
   PGraphics canvas;
 
-  ArrayList<InitiativeGroup> groups;
+  CopyOnWriteArrayList<InitiativeGroup> groups;
 
   int imagesSpacing;
   int xOffset, yOffset;
@@ -18,13 +20,15 @@ class Initiative {
 
   boolean drawInitiativeOrder;
 
+  SimpleIntegerProperty initiativeVersion;
+
   boolean set;
 
   Initiative(PGraphics _canvas) {
 
     canvas = _canvas;
 
-    groups = new ArrayList<InitiativeGroup>();
+    groups = new CopyOnWriteArrayList<InitiativeGroup>();
 
     imagesSpacing = 5;
     xOffset = yOffset = int(min(canvas.width, canvas.height) * 0.05);
@@ -42,11 +46,13 @@ class Initiative {
 
     drawInitiativeOrder = false;
 
+    initiativeVersion = new SimpleIntegerProperty(1);
+
     set = true;
 
   }
 
-  void draw(Layers layerShown) {
+  void draw(LayerShown layerShown) {
 
     if ( !drawInitiativeOrder )
       return;
@@ -96,11 +102,13 @@ class Initiative {
 
   void clear() {
 
-    groups = new ArrayList<InitiativeGroup>();
+    groups = new CopyOnWriteArrayList<InitiativeGroup>();
+
+    initiativeVersion.set(1);
 
   }
 
-  void addGroup(String groupName, String groupImagePath, Token token, Layers layer) {
+  void addGroup(String groupName, String groupImagePath, Token token, LayerShown layer) {
 
     set = false;
 
@@ -168,7 +176,7 @@ class Initiative {
     logger.info("Initiative: Initiative Order " + (drawInitiativeOrder ? "shown" : "hidden" ));
   }
 
-  ArrayList<InitiativeGroup> getInitiativeGroups() {
+  CopyOnWriteArrayList<InitiativeGroup> getInitiativeGroups() {
     return groups;
   }
 
@@ -188,7 +196,7 @@ class Initiative {
 
   }
 
-  AppStates changeInitiativeOrder(int _mouseX, boolean done) {
+  AppState changeInitiativeOrder(int _mouseX, boolean done) {
 
     InitiativeGroup group = null;
 
@@ -208,11 +216,12 @@ class Initiative {
     if ( done ) {
 
       group.setBeingMoved(false);
-      return AppStates.idle;
+      incrementInitiativeVersion();
+      return AppState.idle;
 
     }
 
-    return AppStates.initiativeOrderSetup;
+    return AppState.initiativeOrderSetup;
 
   }
 
@@ -233,6 +242,27 @@ class Initiative {
 
     return groups.get(getIndexAt(_mouseX));
 
+  }
+
+  InitiativeGroup getGroupByName(String groupName) {
+
+    if ( groups.isEmpty() )
+      return null;
+    if ( groupName == null || groupName.trim().isEmpty() )
+      return null;
+
+    InitiativeGroup found = null;
+
+    for ( InitiativeGroup group: groups )
+      if ( group.getName().equals(groupName) )
+        found = group;
+
+    return found;
+
+  }
+
+  int getGroupPosition(InitiativeGroup group) {
+    return groups.indexOf(group);
   }
 
   int getIndexAt(int _mouseX) {
@@ -297,6 +327,17 @@ class Initiative {
 
   }
 
+  void addSceneUpdateListener(ChangeListener<Number> _sceneUpdateListener) {
+    logger.debug("Adding listener to initiative version");
+    initiativeVersion.addListener(_sceneUpdateListener);
+  }
+
+  void incrementInitiativeVersion() {
+    logger.debug("Incrementing initiative version from " + initiativeVersion.getValue() + " to " + (initiativeVersion.getValue()+1));
+    initiativeVersion.set(initiativeVersion.getValue() + 1);
+    logger.debug("Initiative version: " + initiativeVersion.getValue());
+  }
+
   class InitiativeGroup {
 
     String name;
@@ -304,19 +345,19 @@ class Initiative {
     String imagePath;
     PImage image;
 
-    ArrayList<Token> tokens;
-    Layers layer;
+    CopyOnWriteArrayList<Token> tokens;
+    LayerShown layer;
 
     boolean beingMoved;
 
-    InitiativeGroup(String _name, String _imagePath, int _imageSize, Layers _layer) {
+    InitiativeGroup(String _name, String _imagePath, int _imageSize, LayerShown _layer) {
 
       name = _name;
 
       imagePath = _imagePath;
       resizeImage(_imageSize);
 
-      tokens = new ArrayList<Token>();
+      tokens = new CopyOnWriteArrayList<Token>();
       layer = _layer;
 
       beingMoved = false;
@@ -358,9 +399,9 @@ class Initiative {
       return tokens.size();
     }
 
-    boolean isHidden(Layers layerShown) {
+    boolean isHidden(LayerShown layerShown) {
 
-      if ( layerShown == Layers.all || layerShown == layer )
+      if ( layerShown == LayerShown.all || layerShown == layer )
         return false;
       if ( tokens.isEmpty() )
         return false;
@@ -373,7 +414,7 @@ class Initiative {
 
     }
 
-    Layers getLayer() {
+    LayerShown getLayer() {
       return layer;
     }
 

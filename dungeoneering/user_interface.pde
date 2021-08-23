@@ -1,14 +1,24 @@
-import javax.activation.MimetypesFileTypeMap;
+import java.awt.Point;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
-import java.awt.Point;
-import uibooster.*;
+import java.util.UUID;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javax.activation.MimetypesFileTypeMap;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import uibooster.*;
 
 public class UserInterface {
 
   PGraphics canvas;
+
+  HazelcastInstance sharedDataInstance;
+  IMap<String, String> sharedData;
+  ChangeListener<Number> sceneUpdateListener;
 
   ControlP5 cp5;
 
@@ -36,10 +46,10 @@ public class UserInterface {
   int controllerBarsSpacing;
   int controllersSpacing;
 
-  int squareButtonWidth;
-  int squareButtonHeight;
+  int squareButtonWidth, squareButtonHeight;
   int instructionsHeight;
   int menuBarHeight;
+  int toggleWidth, toggleHeight;
 
   int controllersTopLeftX, controllersTopLeftY;
   int controllersTopLeftInitialX, controllersTopLeftInitialY;
@@ -58,6 +68,7 @@ public class UserInterface {
   color idleBackgroundColor, mouseOverBackgroundColor, mouseClickBackgroundColor, disabledBackgroundColor;
 
   PFont instructionsFont;
+  PFont instructionsFontSmall;
   color instructionsFontColor, instructionsFontOutlineColor, instructionsVisualColor;
   int instructionsX, instructionsY;
   int instructionsInitialX, instructionsInitialY;
@@ -92,24 +103,50 @@ public class UserInterface {
 
   int platform;
 
-  UserInterface(PGraphics _canvas, ControlP5 _cp5, Map _map, Grid _grid, Obstacles _obstacles, Layer _playersLayer, Layer _dmLayer, Resources _resources, Initiative _initiative, int _platform) {
+  ArrayList<String> allowedControllersInPlayersMode;
+  ArrayList<String> allowedControllerGroupsInPlayersMode;
+
+  UserInterface(PGraphics _canvas, ControlP5 _cp5, Map _map, Grid _grid, Obstacles _obstacles, Layer _playersLayer, Layer _dmLayer, Resources _resources, Initiative _initiative, int _platform, HazelcastInstance _sharedDataInstance, IMap<String, String> _sharedData) {
 
     canvas = _canvas;
+
+    sharedDataInstance = _sharedDataInstance;
+    sharedData = _sharedData;
+
+    sceneUpdateListener = new ChangeListener<Number>() {
+
+      @Override
+      public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+        logger.debug("Version changed from " + oldValue + " to " + newValue);
+        pushSceneSync(false);
+      }
+
+    };
 
     cp5 = _cp5;
 
     map = _map;
 
     grid = _grid;
+    grid.addSceneUpdateListener(sceneUpdateListener);
 
     obstacles = _obstacles;
+    obstacles.addSceneUpdateListener(sceneUpdateListener);
 
     playersLayer = _playersLayer;
+    playersLayer.addSceneUpdateListener(sceneUpdateListener);
+
     dmLayer = _dmLayer;
+    dmLayer.addSceneUpdateListener(sceneUpdateListener);
 
     resources = _resources;
 
     initiative = _initiative;
+    initiative.addSceneUpdateListener(sceneUpdateListener);
+    if ( appMode == AppMode.players )
+      initiative.toggleDrawInitiativeOrder();
+
+    platform = _platform;
 
     uiDialogs = new UiBooster();
     uiConfirmDialogAnswer = false;
@@ -122,10 +159,11 @@ public class UserInterface {
     controllerBarsSpacing = 50;
     controllersSpacing = 5;
 
-    squareButtonWidth = 50;
-    squareButtonHeight = 50;
+    squareButtonWidth = squareButtonHeight = 50;
     instructionsHeight = 15;
     menuBarHeight = 35;
+    toggleWidth = 40;
+    toggleHeight = 20;
 
     controllersTopLeftX = round(min(canvas.width, canvas.height) * 0.05);
     controllersTopLeftY = round(min(canvas.width, canvas.height) * 0.05);
@@ -155,6 +193,7 @@ public class UserInterface {
     disabledBackgroundColor = #6F6F6F;
 
     instructionsFont = loadFont("fonts/ProcessingSansPro-Semibold-14.vlw");
+    instructionsFontSmall = loadFont("fonts/ProcessingSansPro-Semibold-12.vlw");
     instructionsFontColor = color(255);
     instructionsFontOutlineColor = color(0);
     instructionsVisualColor = color(#F64B29, 127);
@@ -186,7 +225,17 @@ public class UserInterface {
 
     fileDialogOpen = false;
 
-    platform = _platform;
+    allowedControllersInPlayersMode = new ArrayList<String>();
+    allowedControllersInPlayersMode.add("Quit");
+    allowedControllersInPlayersMode.add("Toggle UI");
+    allowedControllersInPlayersMode.add("Toggle touch screen mode");
+    allowedControllersInPlayersMode.add("Toggle mute sound");
+
+    allowedControllerGroupsInPlayersMode = new ArrayList<String>();
+    allowedControllerGroupsInPlayersMode.add("Conditions");
+    allowedControllerGroupsInPlayersMode.add("Light Sources");
+    allowedControllerGroupsInPlayersMode.add("Sight Types");
+    allowedControllerGroupsInPlayersMode.add("Sizes");
 
     logger.debug("Setup: UI controllers setup started");
 
@@ -305,15 +354,15 @@ public class UserInterface {
     // Right click menu controller groups
 
     conditionMenuControllers = cp5.addGroup("Conditions")
-                                    .setBackgroundColor(color(0, 127));
+      .setBackgroundColor(color(0, 127));
     lightSourceMenuControllers = cp5.addGroup("Light Sources")
-                                    .setBackgroundColor(color(0, 127));
+      .setBackgroundColor(color(0, 127));
     sightTypeMenuControllers = cp5.addGroup("Sight Types")
-                                    .setBackgroundColor(color(0, 127));
+      .setBackgroundColor(color(0, 127));
     sizeMenuControllers = cp5.addGroup("Sizes")
-                                    .setBackgroundColor(color(0, 127));
-    otherMenuControllers = cp5.addGroup("Other")
-                              .setBackgroundColor(color(0, 127));
+      .setBackgroundColor(color(0, 127));
+    otherMenuControllers = cp5.addGroup("Settings")
+      .setBackgroundColor(color(0, 127));
 
     // Icon paths
     appIconFolder = "app/";
@@ -374,6 +423,48 @@ public class UserInterface {
     controllersTopLeftX += squareButtonWidth + controllersSpacing;
     addButton("Switch environment lighting", sceneConfigIconFolder + "lighting", controllersTopLeftX, controllersTopLeftY, togglableControllers);
 
+    controllersTopLeftX += (squareButtonWidth - toggleWidth) / 2;
+    controllersTopLeftY += squareButtonHeight + controllersSpacing;
+    cp5.addToggle("Switch environment lighting toggle")
+      .setPosition(controllersTopLeftX, controllersTopLeftY)
+      .setSize(toggleWidth, toggleHeight)
+      .setColorBackground(idleBackgroundColor)
+      .setColorActive(mouseClickBackgroundColor)
+      .setValue(true)
+      .setMode(ControlP5.SWITCH)
+      .setLabelVisible(false)
+      .moveTo(togglableControllers)
+      .lock()
+      .hide()
+      ;
+
+    controllerToTooltip.put("Switch environment lighting toggle", new UserInterfaceTooltip("Switch lighting in which app?", mouseOverBackgroundColor, instructionsFontColor));
+
+    controllersTopLeftX -= 12;
+    controllersTopLeftY += toggleHeight + controllersSpacing/2;
+    cp5.addTextlabel("Switch environment lighting DM label")
+      .setText("DM")
+      .setPosition(controllersTopLeftX, controllersTopLeftY)
+      .setColorValue(instructionsFontColor)
+      .setFont(instructionsFontSmall)
+      .setOutlineText(true)
+      .moveTo(togglableControllers)
+      .lock()
+      .hide()
+      ;
+
+    controllersTopLeftX += toggleWidth - controllersSpacing/2;
+    cp5.addTextlabel("Switch environment lighting Players label")
+      .setText("Players")
+      .setPosition(controllersTopLeftX, controllersTopLeftY)
+      .setColorValue(instructionsFontColor)
+      .setFont(instructionsFontSmall)
+      .setOutlineText(true)
+      .moveTo(togglableControllers)
+      .lock()
+      .hide()
+      ;
+
     // Disabled - map pan and zoom enabled by default
     // addButton("Toggle camera pan", sceneConfigIconFolder + "pan", controllersTopLeftX, controllersTopLeftY, togglableControllers, true, false);
     // addButton("Toggle camera zoom", sceneConfigIconFolder + "zoom", controllersTopLeftX, controllersTopLeftY, togglableControllers, true, false);
@@ -400,60 +491,67 @@ public class UserInterface {
 
     // Token right click menu
 
-    conditionMenuControllers.setHeight(menuBarHeight)                  // menu bar height
-                            .setBackgroundHeight(controllersSpacing)   // item height
-                            .setColorBackground(idleBackgroundColor)
-                            .setColorForeground(mouseOverBackgroundColor)
-                            .setFont(instructionsFont)
-                            ;
+    conditionMenuControllers.setHeight(menuBarHeight) // menu bar height
+      .setBackgroundHeight(controllersSpacing)        // item height
+      .setColorBackground(idleBackgroundColor)
+      .setColorForeground(mouseOverBackgroundColor)
+      .setFont(instructionsFont)
+      ;
     conditionMenuControllers.getCaptionLabel().align(LEFT, CENTER).toUpperCase(false);
 
-    lightSourceMenuControllers.setHeight(menuBarHeight)                // menu bar height
-                              .setBackgroundHeight(controllersSpacing) // item height
-                              .setColorBackground(idleBackgroundColor)
-                              .setColorForeground(mouseOverBackgroundColor)
-                              .setFont(instructionsFont)
-                              ;
+    lightSourceMenuControllers.setHeight(menuBarHeight) // menu bar height
+      .setBackgroundHeight(controllersSpacing)          // item height
+      .setColorBackground(idleBackgroundColor)
+      .setColorForeground(mouseOverBackgroundColor)
+      .setFont(instructionsFont)
+      ;
     lightSourceMenuControllers.getCaptionLabel().align(LEFT, CENTER).toUpperCase(false);
 
-    sightTypeMenuControllers.setHeight(menuBarHeight)                  // menu bar height
-                            .setBackgroundHeight(controllersSpacing)   // item height
-                            .setColorBackground(idleBackgroundColor)
-                            .setColorForeground(mouseOverBackgroundColor)
-                            .setFont(instructionsFont)
-                            ;
+    sightTypeMenuControllers.setHeight(menuBarHeight) // menu bar height
+      .setBackgroundHeight(controllersSpacing)        // item height
+      .setColorBackground(idleBackgroundColor)
+      .setColorForeground(mouseOverBackgroundColor)
+      .setFont(instructionsFont)
+      ;
     sightTypeMenuControllers.getCaptionLabel().align(LEFT, CENTER).toUpperCase(false);
 
-    sizeMenuControllers.setHeight(menuBarHeight)                       // menu bar height
-                       .setBackgroundHeight(controllersSpacing)        // item height
-                       .setColorBackground(idleBackgroundColor)
-                       .setColorForeground(mouseOverBackgroundColor)
-                       .setFont(instructionsFont)
-                       ;
+    sizeMenuControllers.setHeight(menuBarHeight) // menu bar height
+      .setBackgroundHeight(controllersSpacing)   // item height
+      .setColorBackground(idleBackgroundColor)
+      .setColorForeground(mouseOverBackgroundColor)
+      .setFont(instructionsFont)
+      ;
     sizeMenuControllers.getCaptionLabel().align(LEFT, CENTER).toUpperCase(false);
 
-    otherMenuControllers.setHeight(menuBarHeight)                      // menu bar height
-                        .setBackgroundHeight(controllersSpacing)       // item height
-                        .setColorBackground(idleBackgroundColor)
-                        .setColorForeground(mouseOverBackgroundColor)
-                        .setFont(instructionsFont)
-                        ;
+    otherMenuControllers.setHeight(menuBarHeight) // menu bar height
+      .setBackgroundHeight(controllersSpacing)    // item height
+      .setColorBackground(idleBackgroundColor)
+      .setColorForeground(mouseOverBackgroundColor)
+      .setFont(instructionsFont)
+      ;
     otherMenuControllers.getCaptionLabel().align(LEFT, CENTER).toUpperCase(false);
 
     tokenMenu = cp5.addAccordion("Right click menu")
-       .setPosition(0, 0)
-       .setWidth((menuItemsPerLine+1)*controllersSpacing + menuItemsPerLine*squareButtonWidth)  // menu bar and items width
-       .setMinItemHeight(controllersSpacing)                                                    // min item height
-       .addItem(conditionMenuControllers)
-       .addItem(lightSourceMenuControllers)
-       .addItem(sightTypeMenuControllers)
-       .addItem(sizeMenuControllers)
-       .addItem(otherMenuControllers)
-       .updateItems()
-       .setCollapseMode(Accordion.SINGLE)
-       .open(0)
-       .hide()
-       ;
+      .setPosition(0, 0)
+      .setWidth((menuItemsPerLine+1)*controllersSpacing + menuItemsPerLine*squareButtonWidth) // menu bar and items width
+      .setMinItemHeight(controllersSpacing)                                                   // min item height
+      .updateItems()
+      .setCollapseMode(Accordion.SINGLE)
+      .hide()
+      ;
+
+    if ( controllerGroupIsAllowed(conditionMenuControllers) )
+      tokenMenu.addItem(conditionMenuControllers);
+    if ( controllerGroupIsAllowed(lightSourceMenuControllers) )
+      tokenMenu.addItem(lightSourceMenuControllers);
+    if ( controllerGroupIsAllowed(sightTypeMenuControllers) )
+      tokenMenu.addItem(sightTypeMenuControllers);
+    if ( controllerGroupIsAllowed(sizeMenuControllers) )
+      tokenMenu.addItem(sizeMenuControllers);
+    if ( controllerGroupIsAllowed(otherMenuControllers) )
+      tokenMenu.addItem(otherMenuControllers);
+
+    tokenMenu.open(0);
 
     // first line in menu item
     conditionMenuControllers.setBackgroundHeight(conditionMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
@@ -616,38 +714,42 @@ public class UserInterface {
     instructionsX = controllersTopLeftInitialX;
     instructionsY = controllersTopLeftInitialY - instructionsHeight - controllersSpacing;
 
-    cp5.addTextlabel("Scenes management label")
-       .setText("Scenes management")
-       .setPosition(instructionsX, instructionsY)
-       .setColorValue(instructionsFontColor)
-       .setFont(instructionsFont)
-       .setOutlineText(true)
-       .moveTo(togglableControllers);
-       ;
+    if ( appMode == AppMode.dm ) {
 
-    instructionsX = controllersMiddleLeftInitialX;
-    instructionsY = controllersMiddleLeftInitialY - instructionsHeight - controllersSpacing;
+      cp5.addTextlabel("Scenes management label")
+        .setText("Scenes management")
+        .setPosition(instructionsX, instructionsY)
+        .setColorValue(instructionsFontColor)
+        .setFont(instructionsFont)
+        .setOutlineText(true)
+        .moveTo(togglableControllers);
+        ;
 
-    cp5.addTextlabel("Scene setup label")
-       .setText("Scene setup")
-       .setPosition(instructionsX, instructionsY)
-       .setColorValue(instructionsFontColor)
-       .setFont(instructionsFont)
-       .setOutlineText(true)
-       .moveTo(togglableControllers);
-       ;
+      instructionsX = controllersMiddleLeftInitialX;
+      instructionsY = controllersMiddleLeftInitialY - instructionsHeight - controllersSpacing;
 
-    instructionsX = controllersBottomLeftInitialX;
-    instructionsY = controllersBottomLeftInitialY - instructionsHeight - controllersSpacing;
+      cp5.addTextlabel("Scene setup label")
+        .setText("Scene setup")
+        .setPosition(instructionsX, instructionsY)
+        .setColorValue(instructionsFontColor)
+        .setFont(instructionsFont)
+        .setOutlineText(true)
+        .moveTo(togglableControllers);
+        ;
 
-    cp5.addTextlabel("Scene configuration label")
-       .setText("Scene configuration")
-       .setPosition(instructionsX, instructionsY)
-       .setColorValue(instructionsFontColor)
-       .setFont(instructionsFont)
-       .setOutlineText(true)
-       .moveTo(togglableControllers);
-       ;
+      instructionsX = controllersBottomLeftInitialX;
+      instructionsY = controllersBottomLeftInitialY - instructionsHeight - controllersSpacing;
+
+      cp5.addTextlabel("Scene configuration label")
+        .setText("Scene configuration")
+        .setPosition(instructionsX, instructionsY)
+        .setColorValue(instructionsFontColor)
+        .setFont(instructionsFont)
+        .setOutlineText(true)
+        .moveTo(togglableControllers);
+        ;
+
+    }
 
     // Bottom left messages
 
@@ -655,70 +757,70 @@ public class UserInterface {
     instructionsY = instructionsInitialY;
 
     cp5.addTextlabel("Grid instructions - 2nd line")
-       .setText("Once you draw this square, you can adjust its size and position using keys W, A, S, D (top left corner) and ↑, ←, ↓, → (bottom right corner).")
-       .setPosition(instructionsX, instructionsY)
-       .setColorValue(instructionsFontColor)
-       .setFont(instructionsFont)
-       .setOutlineText(true)
-       .hide()
-       ;
+      .setText("Once you draw this square, you can adjust its size and position using keys W, A, S, D (top left corner) and ↑, ←, ↓, → (bottom right corner).")
+      .setPosition(instructionsX, instructionsY)
+      .setColorValue(instructionsFontColor)
+      .setFont(instructionsFont)
+      .setOutlineText(true)
+      .hide()
+      ;
 
     instructionsY -= instructionsHeight + controllersSpacing;
 
     cp5.addTextlabel("Grid instructions - 1st line")
-       .setText("Click and drag to create a square the size of 3 x 3 grid cells on the map background you are using.")
-       .setPosition(instructionsX, instructionsY)
-       .setColorValue(instructionsFontColor)
-       .setFont(instructionsFont)
-       .setOutlineText(true)
-       .hide()
-       ;
+      .setText("Click and drag to create a square the size of 3 x 3 grid cells on the map background you are using.")
+      .setPosition(instructionsX, instructionsY)
+      .setColorValue(instructionsFontColor)
+      .setFont(instructionsFont)
+      .setOutlineText(true)
+      .hide()
+      ;
 
     instructionsX = instructionsInitialX;
     instructionsY = instructionsInitialY;
 
     cp5.addTextlabel("Wall instructions - 2nd line")
-       .setText("Right click on any wall to remove it.")
-       .setPosition(instructionsX, instructionsY)
-       .setColorValue(instructionsFontColor)
-       .setFont(instructionsFont)
-       .setOutlineText(true)
-       .hide()
-       ;
+      .setText("Right click on any wall to remove it.")
+      .setPosition(instructionsX, instructionsY)
+      .setColorValue(instructionsFontColor)
+      .setFont(instructionsFont)
+      .setOutlineText(true)
+      .hide()
+      ;
 
     instructionsY -= instructionsHeight + controllersSpacing;
 
     cp5.addTextlabel("Wall instructions - 1st line")
-       .setText("Draw new wall segments, adding vertexes by left clicking. Double click to stop adding wall segments after the current one.")
-       .setPosition(instructionsX, instructionsY)
-       .setColorValue(instructionsFontColor)
-       .setFont(instructionsFont)
-       .setOutlineText(true)
-       .hide()
-       ;
+      .setText("Draw new wall segments, adding vertexes by left clicking. Double click to stop adding wall segments after the current one.")
+      .setPosition(instructionsX, instructionsY)
+      .setColorValue(instructionsFontColor)
+      .setFont(instructionsFont)
+      .setOutlineText(true)
+      .hide()
+      ;
 
     instructionsX = instructionsInitialX;
     instructionsY = instructionsInitialY;
 
     cp5.addTextlabel("Door instructions - 2nd line")
-       .setText("Right click on any door to remove it.")
-       .setPosition(instructionsX, instructionsY)
-       .setColorValue(instructionsFontColor)
-       .setFont(instructionsFont)
-       .setOutlineText(true)
-       .hide()
-       ;
+      .setText("Right click on any door to remove it.")
+      .setPosition(instructionsX, instructionsY)
+      .setColorValue(instructionsFontColor)
+      .setFont(instructionsFont)
+      .setOutlineText(true)
+      .hide()
+      ;
 
     instructionsY -= instructionsHeight + controllersSpacing;
 
     cp5.addTextlabel("Door instructions - 1st line")
-       .setText("Draw new doors, adding vertexes by left clicking.")
-       .setPosition(instructionsX, instructionsY)
-       .setColorValue(instructionsFontColor)
-       .setFont(instructionsFont)
-       .setOutlineText(true)
-       .hide()
-       ;
+      .setText("Draw new doors, adding vertexes by left clicking.")
+      .setPosition(instructionsX, instructionsY)
+      .setColorValue(instructionsFontColor)
+      .setFont(instructionsFont)
+      .setOutlineText(true)
+      .hide()
+      ;
 
     tokenMenu.updateItems();
 
@@ -734,7 +836,21 @@ public class UserInterface {
 
   void addButton(String buttonName, String imageBaseName, int buttonPositionX, int buttonPositionY, ControllerGroup buttonGroup, boolean isSwitch, boolean switchInitialState) {
 
-    PImage[] buttonImages = {loadImage("icons/" + imageBaseName + "_idle.png"), loadImage("icons/" + imageBaseName + "_over.png"), loadImage("icons/" + imageBaseName + "_click.png")};
+    // If app is running in Players mode, check if button should be added to UI
+    if ( appMode == AppMode.players ) {
+
+      boolean controllerAllowed = controllerIsAllowed(buttonName);
+      boolean controllerGroupAllowed = controllerGroupIsAllowed(buttonGroup);
+      if ( !(controllerAllowed || controllerGroupAllowed) )
+        return;
+
+    }
+
+    PImage[] buttonImages = {
+      loadImage("icons/" + imageBaseName + "_idle.png"),
+      loadImage("icons/" + imageBaseName + "_over.png"),
+      loadImage("icons/" + imageBaseName + "_click.png")
+    };
     for ( PImage img: buttonImages )
       if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
         img.resize(squareButtonWidth, squareButtonHeight);
@@ -796,20 +912,20 @@ public class UserInterface {
 
     setControllersInitialState();
 
-    layerShown = Layers.players;
+    layerShown = LayerShown.players;
 
-    appState = AppStates.idle;
+    changeAppState(AppState.idle);
 
   }
 
-  AppStates controllerEvent(ControlEvent controlEvent) {
+  AppState controllerEvent(ControlEvent controlEvent) {
 
     String resourceName;
     Condition conditionTemplate;
     Light lightTemplate;
     Size sizeTemplate;
 
-    AppStates newAppState = appState;
+    AppState newAppState = appState;
 
     String controllerName = "";
     if ( controlEvent.isController() )
@@ -823,18 +939,18 @@ public class UserInterface {
         if ( map.isSet() ) {
 
           uiDialogs.showConfirmDialog(
-              "This will reset the current scene. Confirm?",
-              "Create new scene",
-              new Runnable() {
-                public void run() {
-                  uiConfirmDialogAnswer = true;
-                }
-              },
-              new Runnable() {
-                public void run() {
-                  uiConfirmDialogAnswer = false;
-                }
+            "This will reset the current scene. Confirm?",
+            "Create new scene",
+            new Runnable() {
+              public void run() {
+                uiConfirmDialogAnswer = true;
               }
+            },
+            new Runnable() {
+              public void run() {
+                uiConfirmDialogAnswer = false;
+              }
+            }
           );
 
           if ( !uiConfirmDialogAnswer )
@@ -859,18 +975,18 @@ public class UserInterface {
         if ( map.isSet() ) {
 
           uiDialogs.showConfirmDialog(
-              "This will replace the current scene. Confirm?",
-              "Load scene",
-              new Runnable() {
-                public void run() {
-                  uiConfirmDialogAnswer = true;
-                }
-              },
-              new Runnable() {
-                public void run() {
-                  uiConfirmDialogAnswer = false;
-                }
+            "This will replace the current scene. Confirm?",
+            "Load scene",
+            new Runnable() {
+              public void run() {
+                uiConfirmDialogAnswer = true;
               }
+            },
+            new Runnable() {
+              public void run() {
+                uiConfirmDialogAnswer = false;
+              }
+            }
           );
 
           if ( !uiConfirmDialogAnswer )
@@ -886,18 +1002,18 @@ public class UserInterface {
       case "Quit":
 
         uiDialogs.showConfirmDialog(
-            "Quit dungeoneering?",
-            "Quit",
-            new Runnable() {
-              public void run() {
-                uiConfirmDialogAnswer = true;
-              }
-            },
-            new Runnable() {
-              public void run() {
-                uiConfirmDialogAnswer = false;
-              }
+          "Quit dungeoneering?",
+          "Quit",
+          new Runnable() {
+            public void run() {
+              uiConfirmDialogAnswer = true;
             }
+          },
+          new Runnable() {
+            public void run() {
+              uiConfirmDialogAnswer = false;
+            }
+          }
         );
 
         if ( !uiConfirmDialogAnswer )
@@ -910,6 +1026,8 @@ public class UserInterface {
         grid.clear();
         map.clear();
 
+        sharedDataInstance.shutdown();
+
         logger.info("UserInterface: Exiting dungeoneering");
 
         exit();
@@ -920,18 +1038,18 @@ public class UserInterface {
         if ( map.isSet() ) {
 
           uiDialogs.showConfirmDialog(
-              "This will reset the current scene. Confirm?",
-              "Select new map",
-              new Runnable() {
-                public void run() {
-                  uiConfirmDialogAnswer = true;
-                }
-              },
-              new Runnable() {
-                public void run() {
-                  uiConfirmDialogAnswer = false;
-                }
+            "This will reset the current scene. Confirm?",
+            "Select new map",
+            new Runnable() {
+              public void run() {
+                uiConfirmDialogAnswer = true;
               }
+            },
+            new Runnable() {
+              public void run() {
+                uiConfirmDialogAnswer = false;
+              }
+            }
           );
 
           if ( !uiConfirmDialogAnswer )
@@ -963,18 +1081,18 @@ public class UserInterface {
           if ( grid.isSet() ) {
 
             uiDialogs.showConfirmDialog(
-                "This will reset the current scene, leaving only the selected map. Confirm?",
-                "New grid setup",
-                new Runnable() {
-                  public void run() {
-                    uiConfirmDialogAnswer = true;
-                  }
-                },
-                new Runnable() {
-                  public void run() {
-                    uiConfirmDialogAnswer = false;
-                  }
+              "This will reset the current scene, leaving only the selected map. Confirm?",
+              "New grid setup",
+              new Runnable() {
+                public void run() {
+                  uiConfirmDialogAnswer = true;
                 }
+              },
+              new Runnable() {
+                public void run() {
+                  uiConfirmDialogAnswer = false;
+                }
+              }
             );
 
             if ( !uiConfirmDialogAnswer ) {
@@ -1015,7 +1133,7 @@ public class UserInterface {
           PImage cursorCross = loadImage("cursors/cursor_cross_32.png");
           cursor(cursorCross);
 
-          newAppState = AppStates.gridSetup;
+          newAppState = AppState.gridSetup;
 
         } else {
 
@@ -1038,7 +1156,7 @@ public class UserInterface {
 
           cursor(ARROW);
 
-          newAppState = AppStates.idle;
+          newAppState = AppState.idle;
 
           logger.info("UserInterface: Grid setup done");
 
@@ -1072,7 +1190,7 @@ public class UserInterface {
 
           newWall = null;
 
-          newAppState = AppStates.wallSetup;
+          newAppState = AppState.wallSetup;
 
         } else {
 
@@ -1096,7 +1214,7 @@ public class UserInterface {
 
           logger.info("UserInterface: Walls setup done");
 
-          newAppState = AppStates.idle;
+          newAppState = AppState.idle;
 
         }
 
@@ -1128,7 +1246,7 @@ public class UserInterface {
 
           newDoor = null;
 
-          newAppState = AppStates.doorSetup;
+          newAppState = AppState.doorSetup;
 
         } else {
 
@@ -1152,7 +1270,7 @@ public class UserInterface {
 
           logger.info("UserInterface: Doors setup done");
 
-          newAppState = AppStates.idle;
+          newAppState = AppState.idle;
 
         }
 
@@ -1185,7 +1303,7 @@ public class UserInterface {
           disableController("Add/Remove doors");
           disableController("Toggle UI");
 
-          newAppState = AppStates.tokenSetup;
+          newAppState = AppState.tokenSetup;
 
         } else {
 
@@ -1201,7 +1319,7 @@ public class UserInterface {
 
           logger.info("UserInterface: Token setup done");
 
-          newAppState = AppStates.idle;
+          newAppState = AppState.idle;
 
         }
 
@@ -1210,16 +1328,16 @@ public class UserInterface {
 
         switch ( layerShown ) {
           case players:
-            layerShown = Layers.dm;
-            logger.info("UserInterface: Layer switched to " + dmLayer.getName());
+            layerShown = LayerShown.dm;
+            logger.info("UserInterface: Layer switched to " + LayerShown.dm.toString());
             break;
           case dm:
-            layerShown = Layers.all;
-            logger.info("UserInterface: Layer switched to All Layers");
+            layerShown = LayerShown.all;
+            logger.info("UserInterface: Layer switched to " + LayerShown.all.toString());
             break;
           case all:
-            layerShown = Layers.players;
-            logger.info("UserInterface: Layer switched to " + playersLayer.getName());
+            layerShown = LayerShown.players;
+            logger.info("UserInterface: Layer switched to " + LayerShown.players.toString());
             break;
           default:
             break;
@@ -1230,28 +1348,74 @@ public class UserInterface {
         break;
       case "Switch environment lighting":
 
-        switch ( obstacles.getIllumination() ) {
+        boolean switchLightingInWhichApp = getToggleState("Switch environment lighting toggle");
+
+        Illumination appIllumination = null;
+        if ( switchLightingInWhichApp )
+          appIllumination = obstacles.getIllumination();
+        else
+          appIllumination = obstacles.getPlayersAppIllumination();
+
+        if ( !switchLightingInWhichApp ) {
+          if ( appIllumination == Illumination.dimLight || appIllumination == Illumination.darkness ) {
+
+            uiDialogs.showConfirmDialog(
+              "This will change environment lighting in Players' App and might reveal\nparts of the map and enemies to players. Confirm?",
+              "Switch environment lighting in Players' App",
+              new Runnable() {
+                public void run() {
+                  uiConfirmDialogAnswer = true;
+                }
+              },
+              new Runnable() {
+                public void run() {
+                  uiConfirmDialogAnswer = false;
+                }
+              }
+            );
+
+            if ( !uiConfirmDialogAnswer )
+              break;
+
+          }
+        }
+
+        switch ( appIllumination ) {
           case brightLight:
-            obstacles.setIllumination(Illumination.darkness);
+            if ( switchLightingInWhichApp )
+              obstacles.setIllumination(Illumination.darkness);
+            else
+              obstacles.setPlayersAppIllumination(Illumination.darkness);
             break;
           case dimLight:
-            obstacles.setIllumination(Illumination.brightLight);
+            if ( switchLightingInWhichApp )
+              obstacles.setIllumination(Illumination.brightLight);
+            else
+              obstacles.setPlayersAppIllumination(Illumination.brightLight);
             break;
           case darkness:
-            obstacles.setIllumination(Illumination.dimLight);
+            if ( switchLightingInWhichApp )
+              obstacles.setIllumination(Illumination.dimLight);
+            else
+              obstacles.setPlayersAppIllumination(Illumination.dimLight);
             break;
           default:
             break;
         }
 
-        logger.info("UserInterface: Environment lighting switched to " + obstacles.getIllumination().getName());
-
-        obstacles.setRecalculateShadows(true);
+        if ( switchLightingInWhichApp ) {
+          logger.info("UserInterface: Environment lighting switched to " + obstacles.getIllumination().getName());
+          obstacles.setRecalculateShadows(true);
+        } else {
+          logger.info("UserInterface: Players' App environment lighting switched to " + obstacles.getPlayersAppIllumination().getName());
+          pushSceneSync(false);
+        }
 
         break;
       case "Toggle grid":
 
         grid.toggleDrawGrid();
+        grid.incrementGridVersion();
 
         break;
       case "Toggle walls":
@@ -1297,6 +1461,7 @@ public class UserInterface {
       case "Toggle combat mode":
 
         initiative.toggleDrawInitiativeOrder();
+        initiative.incrementInitiativeVersion();
 
         break;
       case "Toggle mute sound":
@@ -1309,7 +1474,7 @@ public class UserInterface {
       case "Light Sources":
       case "Sight Types":
       case "Sizes":
-      case "Other":
+      case "Settings":
 
         menuItemClicked = true;
 
@@ -1848,12 +2013,14 @@ public class UserInterface {
 
         if ( playersLayer.hasToken(rightClickedToken) ) {
 
-          playersLayer.removeToken(rightClickedToken);
+          logger.info("Switching token " + rightClickedToken.getName() + " from " + playersLayer.getName() + " to " + dmLayer.getName());
+          playersLayer.removeToken(rightClickedToken, false);
           dmLayer.addToken(rightClickedToken);
 
         } else {
 
-          dmLayer.removeToken(rightClickedToken);
+          logger.info("Switching token " + rightClickedToken.getName() + " from " + dmLayer.getName() + " to " + playersLayer.getName());
+          dmLayer.removeToken(rightClickedToken, false);
           playersLayer.addToken(rightClickedToken);
 
         }
@@ -1869,10 +2036,12 @@ public class UserInterface {
 
         if ( playersLayer.hasToken(rightClickedToken) ) {
 
+          logger.info("Removing token " + rightClickedToken.getName() + " from " + playersLayer.getName());
           playersLayer.removeToken(rightClickedToken);
 
         } else {
 
+          logger.info("Removing token " + rightClickedToken.getName() + " from " + dmLayer.getName());
           dmLayer.removeToken(rightClickedToken);
 
         }
@@ -2104,7 +2273,7 @@ public class UserInterface {
     if ( tokenImageFile == null )
       return;
 
-    playersLayer.addToken(tokenImageFile);
+    playersLayer.addToken(tokenImageFile, sceneUpdateListener);
 
   }
 
@@ -2115,18 +2284,19 @@ public class UserInterface {
     if ( tokenImageFile == null )
       return;
 
-    dmLayer.addToken(tokenImageFile);
+    dmLayer.addToken(tokenImageFile, sceneUpdateListener);
 
   }
 
-  AppStates moveToken(int _mouseX, int _mouseY, boolean done) {
+  AppState moveToken(int _mouseX, int _mouseY, boolean done) {
 
-    AppStates newState = appState;
+    AppState newState = appState;
 
     if ( playersLayer.getToken(_mouseX, _mouseY) != null ) {
       newState = playersLayer.moveToken(_mouseX, _mouseY, done);
     } else {
-      newState = dmLayer.moveToken(_mouseX, _mouseY, done);
+      if ( appMode == AppMode.dm )
+        newState = dmLayer.moveToken(_mouseX, _mouseY, done);
     }
 
     if ( done ) {
@@ -2160,8 +2330,12 @@ public class UserInterface {
       return;
     }
 
-    if ( newWall == null )
-      newWall = new Wall(canvas);
+    if ( newWall == null ) {
+
+      UUID wallId = UUID.randomUUID();
+      newWall = new Wall(canvas, wallId);
+
+    }
 
     // Vertex with canvas coordinates ignoring current transformations (pan and scale), used to draw vertex on canvas
     Point canvasVertex = new Point(
@@ -2185,7 +2359,8 @@ public class UserInterface {
       logger.trace("UserInterface: New wall added");
 
       // Create a new wall segment, its first vertex will be the last vertex of the previous segment
-      newWall = new Wall(canvas);
+      UUID wallId = UUID.randomUUID();
+      newWall = new Wall(canvas, wallId);
       newWall.addVertex(
         canvasVertex.x, canvasVertex.y,
         mapVertex.x, mapVertex.y
@@ -2209,8 +2384,12 @@ public class UserInterface {
     if ( isInside(_mouseX, _mouseY) )
       return;
 
-    if ( newDoor == null )
-      newDoor = new Door(canvas);
+    if ( newDoor == null ) {
+
+      UUID doorId = UUID.randomUUID();
+      newDoor = new Door(canvas, doorId);
+
+    }
 
     // Vertex with canvas coordinates ignoring current transformations (pan and scale), used to draw vertex on canvas
     Point canvasVertex = new Point(
@@ -2249,13 +2428,14 @@ public class UserInterface {
 
   }
 
-  void openDoor(int _mouseX, int _mouseY) {
+  void toggleDoor(int _mouseX, int _mouseY) {
 
     Door doorToToggle = obstacles.getClosestDoor(map.transformX(_mouseX), map.transformY(_mouseY), 20);
 
     if ( doorToToggle != null ) {
 
       doorToToggle.toggle();
+      obstacles.incrementDoorsVersion();
       obstacles.setRecalculateShadows(true);
 
     }
@@ -2277,7 +2457,8 @@ public class UserInterface {
 
     token = playersLayer.getToken(_mouseX, _mouseY);
     if ( token == null )
-      token = dmLayer.getToken(_mouseX, _mouseY);
+      if ( appMode == AppMode.dm )
+        token = dmLayer.getToken(_mouseX, _mouseY);
     if ( token == null )
       return;
 
@@ -2346,13 +2527,13 @@ public class UserInterface {
 
   }
 
-  AppStates changeInitiativeOrder(int _mouseX, boolean done) {
+  AppState changeInitiativeOrder(int _mouseX, boolean done) {
 
     return initiative.changeInitiativeOrder(_mouseX, done);
 
   }
 
-  AppStates panMap(int _mouseX, int _pmouseX, int _mouseY, int _pmouseY, boolean done) {
+  AppState panMap(int _mouseX, int _pmouseX, int _mouseY, int _pmouseY, boolean done) {
 
     if ( map == null || !map.isSet() || !map.isPanEnabled() )
       return appState;
@@ -2360,9 +2541,9 @@ public class UserInterface {
     map.pan(_mouseX, _pmouseX, _mouseY, _pmouseY);
 
     if ( done )
-      return AppStates.idle;
+      return AppState.idle;
     else
-      return AppStates.mapPan;
+      return AppState.mapPan;
 
   }
 
@@ -2381,17 +2562,77 @@ public class UserInterface {
 
       fileDialogOpen = false;
 
-      if ( sceneFolder == null )
+      if ( sceneFolder == null || sceneFolder.getAbsolutePath().isEmpty() )
         return;
-      if ( map.getFilePath() == null )
+      if ( map.getFilePath() == null || map.getFilePath().isEmpty() )
         return;
+
+      File mapFile = new File(map.getFilePath());
+      String mapFileName = mapFile.getName();
+      String[] mapFileNameTokens = mapFileName.split("\\.(?=[^\\.]+$)");
+      String mapBaseName = mapFileNameTokens[0];
+      String sceneFile = mapBaseName + ".json";
+
+      saveScene(sceneFolder, sceneFile);
+
+    } catch ( Exception e ) {
+      logger.error("UserInterface: Error saving scene");
+      logger.error(ExceptionUtils.getStackTrace(e));
+      throw e;
+    }
+
+  }
+
+  void saveScene(File sceneFolder, String sceneFileName) {
+
+    try {
+
+      fileDialogOpen = false;
+
+      if ( sceneFolder == null || sceneFolder.getAbsolutePath().isEmpty() )
+        return;
+      if ( sceneFileName == null || sceneFileName.isEmpty() )
+        return;
+      if ( map.getFilePath() == null || map.getFilePath().isEmpty() )
+        return;
+
+      logger.info("UserInterface: Saving scene to folder: " + sceneFolder.getAbsolutePath());
+
+      JSONObject sceneJson = sceneToJson(false, false);
+
+      String sceneSavePath = sceneFolder.getAbsolutePath() + File.separator + sceneFileName;
+      boolean sceneSaved = saveJSONObject(sceneJson, sceneSavePath);
+
+      if ( sceneSaved ) {
+        logger.info("UserInterface: Scene saved to: " + sceneSavePath);
+      } else {
+        logger.error("UserInterface: Scene could not be saved: " + sceneSavePath);
+        uiDialogs.showErrorDialog("Scene could not be saved: " + sceneSavePath, "Error saving scene");
+      }
+
+    } catch ( Exception e ) {
+      logger.error("UserInterface: Error saving scene");
+      logger.error(ExceptionUtils.getStackTrace(e));
+      throw e;
+    }
+
+  }
+
+  JSONObject sceneToJson(boolean addReloadSceneFlag, boolean useSwitchLightingAppToggle) {
+
+    JSONObject sceneJson = null;
+
+    try {
+
+      logger.debug("UserInterface: Converting scene to JSON");
 
       int initiativeGroupsIndex;
       int obstaclesIndex;
 
-      logger.info("UserInterface: Saving scene to folder: " + sceneFolder.getAbsolutePath());
+      sceneJson = new JSONObject();
 
-      JSONObject sceneJson = new JSONObject();
+      if ( addReloadSceneFlag )
+        sceneJson.setBoolean("reloadScene", true);
 
       JSONObject mapJson = new JSONObject();
       if ( map.isSet() ) {
@@ -2433,8 +2674,8 @@ public class UserInterface {
 
       logger.debug("UserInterface: Initiative saved");
 
-      sceneJson.setJSONArray("playerTokens", getTokensJsonArray(playersLayer.getTokens()));
-      sceneJson.setJSONArray("dmTokens", getTokensJsonArray(dmLayer.getTokens()));
+      sceneJson.setJSONArray("playerTokens", getTokensJsonArray(playersLayer));
+      sceneJson.setJSONArray("dmTokens", getTokensJsonArray(dmLayer));
 
       logger.debug("UserInterface: Tokens saved");
 
@@ -2442,9 +2683,9 @@ public class UserInterface {
       obstaclesIndex = 0;
       for ( Wall wall: obstacles.getWalls() ) {
         JSONObject wallJson = new JSONObject();
-        ArrayList<PVector> wallVertexes = wall.getMapVertexes();
+        wallJson.setString("id", wall.getStringId());
         JSONArray wallVertexesJson = new JSONArray();
-        for ( PVector wallVertex: wallVertexes ) {
+        for ( PVector wallVertex: wall.getMapVertexes() ) {
           JSONArray wallVertexJson = new JSONArray();
           wallVertexJson.append(wallVertex.x);
           wallVertexJson.append(wallVertex.y);
@@ -2462,10 +2703,10 @@ public class UserInterface {
       obstaclesIndex = 0;
       for ( Door door: obstacles.getDoors() ) {
         JSONObject doorJson = new JSONObject();
+        doorJson.setString("id", door.getStringId());
         doorJson.setBoolean("closed", door.getClosed());
-        ArrayList<PVector> doorVertexes = door.getMapVertexes();
         JSONArray doorVertexesJson = new JSONArray();
-        for ( PVector doorVertex: doorVertexes ) {
+        for ( PVector doorVertex: door.getMapVertexes() ) {
           JSONArray doorVertexJson = new JSONArray();
           doorVertexJson.append(doorVertex.x);
           doorVertexJson.append(doorVertex.y);
@@ -2480,7 +2721,12 @@ public class UserInterface {
       logger.debug("UserInterface: Doors saved");
 
       JSONObject illuminationJson = new JSONObject();
-      switch ( obstacles.getIllumination() ) {
+      Illumination appIllumination = null;
+      if ( useSwitchLightingAppToggle )
+        appIllumination = obstacles.getPlayersAppIllumination();
+      else
+        appIllumination = obstacles.getIllumination();
+      switch ( appIllumination ) {
         case brightLight:
           illuminationJson.setString("lighting", "brightLigt");
           break;
@@ -2495,39 +2741,30 @@ public class UserInterface {
 
       logger.debug("UserInterface: Environment lighting saved");
 
-      File mapFile = new File(map.getFilePath());
-      String mapFileName = mapFile.getName();
-      String[] mapFileNameTokens = mapFileName.split("\\.(?=[^\\.]+$)");
-      String mapBaseName = mapFileNameTokens[0];
+      logger.debug("UserInterface: Scene converted to JSON");
 
-      String sceneSavePath = sceneFolder.getAbsolutePath() + File.separator + mapBaseName + ".json";
-      boolean sceneSaved = saveJSONObject(sceneJson, sceneSavePath);
-
-      if ( sceneSaved ) {
-        logger.info("UserInterface: Scene saved to: " + sceneSavePath);
-      } else {
-        logger.error("UserInterface: Scene could not be saved: " + sceneSavePath);
-        uiDialogs.showErrorDialog("Scene could not be saved: " + sceneSavePath, "Error saving scene");
-      }
+      return sceneJson;
 
     } catch ( Exception e ) {
-      logger.error("UserInterface: Error saving scene");
+      logger.error("UserInterface: Error converting scene to JSON");
       logger.error(ExceptionUtils.getStackTrace(e));
       throw e;
     }
 
   }
 
-  JSONArray getTokensJsonArray(ArrayList<Token> tokens) {
+  JSONArray getTokensJsonArray(Layer layer) {
 
     JSONArray tokensArray = new JSONArray();
     int tokensIndex = 0;
 
-    for ( Token token: tokens ) {
+    for ( Token token: layer.getTokens() ) {
 
       JSONObject tokenJson = new JSONObject();
 
       tokenJson.setString("name", token.getName());
+      tokenJson.setString("id", token.getStringId());
+      tokenJson.setInt("version", token.getVersion());
       tokenJson.setString("imagePath", getImageSavePath(token.getImagePath()));
 
       tokenJson.setString("size", token.getSize().getName());
@@ -2536,9 +2773,9 @@ public class UserInterface {
       tokenJson.setInt("row", cell.getRow());
       tokenJson.setInt("column", cell.getColumn());
 
-      tokenJson.setJSONArray("lightSources", getLightsJsonArray(token.getLightSources()));
-      tokenJson.setJSONArray("sightTypes", getLightsJsonArray(token.getSightTypes()));
-      tokenJson.setJSONArray("conditions", getConditionsJsonArray(token.getConditions()));
+      tokenJson.setJSONArray("lightSources", getLightSourcesJsonArray(token));
+      tokenJson.setJSONArray("sightTypes", getSightTypesJsonArray(token));
+      tokenJson.setJSONArray("conditions", getConditionsJsonArray(token));
 
       tokensArray.setJSONObject(tokensIndex, tokenJson);
       tokensIndex += 1;
@@ -2549,28 +2786,44 @@ public class UserInterface {
 
   }
 
-  JSONArray getLightsJsonArray(ArrayList<Light> lights) {
+  JSONArray getLightSourcesJsonArray(Token token) {
 
-    JSONArray tokenLightsArray = new JSONArray();
-    int lightsIndex = 0;
+    JSONArray tokenLightSourcesArray = new JSONArray();
+    int lightSourcesIndex = 0;
 
-    for ( Light light: lights ) {
-      JSONObject lightJson = new JSONObject();
-      lightJson.setString("name", light.getName());
-      tokenLightsArray.setJSONObject(lightsIndex, lightJson);
-      lightsIndex += 1;
+    for ( Light lightSource: token.getLightSources() ) {
+      JSONObject lightSourceJson = new JSONObject();
+      lightSourceJson.setString("name", lightSource.getName());
+      tokenLightSourcesArray.setJSONObject(lightSourcesIndex, lightSourceJson);
+      lightSourcesIndex += 1;
     }
 
-    return tokenLightsArray;
+    return tokenLightSourcesArray;
 
   }
 
-  JSONArray getConditionsJsonArray(ArrayList<Condition> conditions) {
+  JSONArray getSightTypesJsonArray(Token token) {
+
+    JSONArray tokenSightTypesArray = new JSONArray();
+    int sightTypesIndex = 0;
+
+    for ( Light sightType: token.getSightTypes() ) {
+      JSONObject sightTypeJson = new JSONObject();
+      sightTypeJson.setString("name", sightType.getName());
+      tokenSightTypesArray.setJSONObject(sightTypesIndex, sightTypeJson);
+      sightTypesIndex += 1;
+    }
+
+    return tokenSightTypesArray;
+
+  }
+
+  JSONArray getConditionsJsonArray(Token token) {
 
     JSONArray tokenConditionsArray = new JSONArray();
     int conditionsIndex = 0;
 
-    for ( Condition condition: conditions ) {
+    for ( Condition condition: token.getConditions() ) {
       JSONObject conditionJson = new JSONObject();
       conditionJson.setString("name", condition.getName());
       tokenConditionsArray.setJSONObject(conditionsIndex, conditionJson);
@@ -2627,7 +2880,33 @@ public class UserInterface {
 
       logger.info("UserInterface: Loading scene from: " + sceneFile.getAbsolutePath());
 
-      appState = AppStates.sceneLoad;
+      JSONObject sceneJson = loadJSONObject(sceneFile.getAbsolutePath());
+
+      sceneFromJson(sceneJson);
+
+      logger.info("UserInterface: Scene loaded from: " + sceneFile.getAbsolutePath());
+
+      // If loading a scene in DM's app, send it to Players' app as well
+      if ( appMode == AppMode.dm ) {
+        logger.info("UserInterface: Pushing loaded scene to Players' App");
+        pushSceneSync(true);
+      }
+
+    } catch ( Exception e ) {
+      logger.error("UserInterface: Error loading scene");
+      logger.error(ExceptionUtils.getStackTrace(e));
+      throw e;
+    }
+
+  }
+
+  void sceneFromJson(JSONObject sceneJson) {
+
+    try {
+
+      logger.debug("UserInterface: Loading scene from JSON");
+
+      changeAppState(AppState.sceneLoad);
 
       map.clear();
       grid.clear();
@@ -2641,8 +2920,6 @@ public class UserInterface {
       setSwitchButtonState("Toggle combat mode", false);
       setSwitchButtonState("Toggle grid", false);
       removeController("Map logo");
-
-      JSONObject sceneJson = loadJSONObject(sceneFile.getAbsolutePath());
 
       JSONObject mapJson = sceneJson.getJSONObject("map");
       if ( mapJson != null ) {
@@ -2658,7 +2935,7 @@ public class UserInterface {
           mapFilePath = mapLoadPath;
         } else {
           logger.error("UserInterface: Map file not found: " + mapFilePath);
-          logger.error("UserInterface: Scene could not be loaded: " + sceneFile.getAbsolutePath());
+          logger.error("UserInterface: Scene could not be loaded from JSON");
           reset();
           uiDialogs.showErrorDialog("Map file not found: " + mapFilePath, "Error loading scene");
           return;
@@ -2669,7 +2946,7 @@ public class UserInterface {
         boolean mapLoaded = map.setup(mapFilePath, fitToScreen, isVideo, isMuted);
         if ( !mapLoaded ) {
           logger.error("UserInterface: Map could not be loaded");
-          logger.error("UserInterface: Scene could not be loaded: " + sceneFile.getAbsolutePath());
+          logger.error("UserInterface: Scene could not be loaded from JSON");
           reset();
           uiDialogs.showErrorDialog("Map could not be loaded: " + mapFilePath, "Error loading scene");
           return;
@@ -2781,27 +3058,10 @@ public class UserInterface {
 
         for ( int i = 0; i < wallsArray.size(); i++ ) {
 
-          Wall wall = new Wall(canvas);
           JSONObject wallJson = wallsArray.getJSONObject(i);
-          JSONArray wallVertexesJson = wallJson.getJSONArray("vertexes");
-          for ( int j = 0; j < wallVertexesJson.size(); j++ ) {
-            JSONArray wallVertexJson = wallVertexesJson.getJSONArray(j);
-
-            // Vertex with map coordinates
-            Point mapVertex = new Point(
-              wallVertexJson.getInt(0),
-              wallVertexJson.getInt(1)
-            );
-            // Vertex with canvas coordinates
-            Point canvasVertex = map.mapMapToCanvas(mapVertex);
-
-            wall.addVertex(
-              canvasVertex.x, canvasVertex.y,
-              mapVertex.x, mapVertex.y
-            );
-          }
-
-          obstacles.addWall(wall);
+          Wall wall = createWallFromJsonObject(wallJson);
+          if ( wall != null )
+            obstacles.addWall(wall);
 
         }
 
@@ -2814,30 +3074,10 @@ public class UserInterface {
 
         for ( int i = 0; i < doorsArray.size(); i++ ) {
 
-          Door door = new Door(canvas);
           JSONObject doorJson = doorsArray.getJSONObject(i);
-          boolean closed = doorJson.getBoolean("closed");
-          door.setClosed(closed);
-          JSONArray doorVertexesJson = doorJson.getJSONArray("vertexes");
-          for ( int j = 0; j < doorVertexesJson.size(); j++ ) {
-            JSONArray doorVertexJson = doorVertexesJson.getJSONArray(j);
-
-            // Vertex with map coordinates
-            Point mapVertex = new Point(
-              doorVertexJson.getInt(0),
-              doorVertexJson.getInt(1)
-            );
-            // Vertex with canvas coordinates
-            Point canvasVertex = map.mapMapToCanvas(mapVertex);
-
-            door.addVertex(
-              canvasVertex.x, canvasVertex.y,
-              mapVertex.x, mapVertex.y
-            );
-
-          }
-
-          obstacles.addDoor(door);
+          Door door = createDoorFromJsonObject(doorJson);
+          if ( door != null )
+            obstacles.addDoor(door);
 
         }
 
@@ -2865,16 +3105,16 @@ public class UserInterface {
 
       }
 
-      layerShown = Layers.players;
+      layerShown = LayerShown.players;
 
       obstacles.setRecalculateShadows(true);
 
-      appState = AppStates.idle;
+      changeAppState(AppState.idle);
 
-      logger.info("UserInterface: Scene loaded from: " + sceneFile.getAbsolutePath());
+      logger.debug("UserInterface: Scene loaded from JSON");
 
     } catch ( Exception e ) {
-      logger.error("UserInterface: Error loading scene");
+      logger.error("UserInterface: Error loading scene from JSON");
       logger.error(ExceptionUtils.getStackTrace(e));
       throw e;
     }
@@ -2883,51 +3123,195 @@ public class UserInterface {
 
   void setTokensFromJsonArray(Layer layer, JSONArray tokensArray) {
 
-    if ( tokensArray != null ) {
-      for ( int i = 0; i < tokensArray.size(); i++ ) {
+    if ( tokensArray == null )
+      return;
 
-        JSONObject tokenJson = tokensArray.getJSONObject(i);
-        String tokenName = tokenJson.getString("name");
-        String tokenImagePath = tokenJson.getString("imagePath");
+    for ( int i = 0; i < tokensArray.size(); i++ ) {
 
-        String tokenSizeName = tokenJson.getString("size", "Medium");
-        Size tokenSize = resources.getSize(tokenSizeName);
-        if ( tokenSize == null ) {
-          logger.error("UserInterface: Token " + tokenName + " size not found: " + tokenSizeName);
-          continue;
-        }
-
-        int tokenRow = tokenJson.getInt("row");
-        int tokenColumn = tokenJson.getInt("column");
-
-        String tokenImageLoadPath = getImageLoadPath(tokenImagePath);
-        if ( !tokenImageLoadPath.isEmpty() ) {
-          tokenImagePath = tokenImageLoadPath;
-        } else {
-          logger.error("UserInterface: Token " + tokenName + " image not found: " + tokenImagePath);
-          continue;
-        }
-
-        Cell cell = grid.getCellAt(tokenRow, tokenColumn);
-        Token token = new Token(canvas, grid, obstacles);
-        Light lineOfSightTemplate = resources.getSightType("Line of Sight");
-        Light tokenLineOfSight = new Light(lineOfSightTemplate.getName(), lineOfSightTemplate.getBrightLightRadius(), lineOfSightTemplate.getDimLightRadius());
-        token.setup(tokenName, tokenImagePath, grid.getCellWidth(), grid.getCellHeight(), tokenSize, tokenLineOfSight);
-        token.setCell(cell);
-
-        for ( Light lightSource: getLightSourcesFromJsonArray(tokenName, tokenJson.getJSONArray("lightSources")) )
-          token.toggleLightSource(new Light(lightSource.getName(), lightSource.getBrightLightRadius(), lightSource.getDimLightRadius()));
-
-        for ( Light sightType: getSightTypesFromJsonArray(tokenName, tokenJson.getJSONArray("sightTypes")) )
-          token.toggleSightType(new Light(sightType.getName(), sightType.getBrightLightRadius(), sightType.getDimLightRadius()));
-
-        for ( Condition condition: getConditionsFromJsonArray(tokenName, tokenJson.getJSONArray("conditions"), tokenSize) )
-          token.toggleCondition(condition);
-
+      JSONObject tokenJson = tokensArray.getJSONObject(i);
+      Token token = createTokenFromJsonObject(layer, tokenJson);
+      if ( token != null )
         layer.addToken(token);
 
-      }
     }
+
+  }
+
+  Token createTokenFromJsonObject(Layer layer, JSONObject tokenJson) {
+
+    if ( tokenJson == null )
+      return null;
+
+    Token token = null;
+
+    try {
+
+      String tokenName = tokenJson.getString("name");
+
+      UUID tokenId = null;
+      String tokenIdAsString = tokenJson.getString("id");
+      if ( tokenIdAsString == null || tokenIdAsString.trim().isEmpty() ) {
+        logger.warning("UserInterface: JSON token " + tokenName + " has no ID, generating one");
+        tokenId = UUID.randomUUID();
+      } else {
+        tokenId = UUID.fromString(tokenIdAsString);
+      }
+
+      // Don't load version, let it be calculated from initial conditions, light sources, etc
+      int tokenVersion = 1;
+
+      String tokenImagePath = tokenJson.getString("imagePath");
+
+      String tokenSizeName = tokenJson.getString("size", "Medium");
+      Size tokenSize = resources.getSize(tokenSizeName);
+      if ( tokenSize == null ) {
+        logger.error("UserInterface: Token " + tokenName + " size not found: " + tokenSizeName);
+        return null;
+      }
+
+      int tokenRow = tokenJson.getInt("row");
+      int tokenColumn = tokenJson.getInt("column");
+
+      String tokenImageLoadPath = getImageLoadPath(tokenImagePath);
+      if ( !tokenImageLoadPath.isEmpty() ) {
+        tokenImagePath = tokenImageLoadPath;
+      } else {
+        logger.error("UserInterface: Token " + tokenName + " image not found: " + tokenImagePath);
+        return null;
+      }
+
+      token = new Token(canvas, grid, obstacles);
+      Cell cell = grid.getCellAt(tokenRow, tokenColumn);
+      Light lineOfSightTemplate = resources.getSightType("Line of Sight");
+      Light tokenLineOfSight = new Light(lineOfSightTemplate.getName(), lineOfSightTemplate.getBrightLightRadius(), lineOfSightTemplate.getDimLightRadius());
+      token.setup(tokenName, tokenId, tokenVersion, sceneUpdateListener, tokenImagePath, grid.getCellWidth(), grid.getCellHeight(), tokenSize, tokenLineOfSight);
+      token.setCell(cell);
+
+      for ( Light lightSource: getLightSourcesFromJsonArray(tokenName, tokenJson.getJSONArray("lightSources")) )
+        token.toggleLightSource(new Light(lightSource.getName(), lightSource.getBrightLightRadius(), lightSource.getDimLightRadius()));
+
+      for ( Light sightType: getSightTypesFromJsonArray(tokenName, tokenJson.getJSONArray("sightTypes")) )
+        token.toggleSightType(new Light(sightType.getName(), sightType.getBrightLightRadius(), sightType.getDimLightRadius()));
+
+      for ( Condition condition: getConditionsFromJsonArray(tokenName, tokenJson.getJSONArray("conditions"), tokenSize) )
+        token.toggleCondition(condition);
+
+    } catch ( Exception e ) {
+      logger.error("UserInterface: Error setting token from JSON");
+      logger.error(ExceptionUtils.getStackTrace(e));
+      token = null;
+    }
+
+    return token;
+
+  }
+
+  Wall createWallFromJsonObject(JSONObject wallJson) {
+
+    if ( wallJson == null )
+      return null;
+
+    Wall wall = null;
+
+    try {
+
+      UUID wallId = null;
+      String wallIdAsString = wallJson.getString("id");
+      if ( wallIdAsString == null || wallIdAsString.isEmpty() ) {
+        logger.warning("UserInterface: JSON wall has no ID, generating one");
+        wallId = UUID.randomUUID();
+      } else {
+        wallId = UUID.fromString(wallJson.getString("id"));
+      }
+
+      wall = new Wall(canvas, wallId);
+
+      JSONArray wallVertexesJson = wallJson.getJSONArray("vertexes");
+      for ( int j = 0; j < wallVertexesJson.size(); j++ ) {
+        JSONArray wallVertexJson = wallVertexesJson.getJSONArray(j);
+
+        // Vertex with map coordinates
+        Point mapVertex = new Point(
+          wallVertexJson.getInt(0),
+          wallVertexJson.getInt(1)
+        );
+        // Vertex with canvas coordinates
+        Point canvasVertex = map.mapMapToCanvas(mapVertex);
+
+        wall.addVertex(
+          canvasVertex.x, canvasVertex.y,
+          mapVertex.x, mapVertex.y
+        );
+      }
+
+      if ( wall.getCanvasVertexes().size() < 2 || wall.getMapVertexes().size() < 2 ) {
+        logger.error("UserInterface: Wall has less than two vertexes, must have at least two");
+        return null;
+      }
+
+    } catch ( Exception e ) {
+      logger.error("UserInterface: Error setting wall from JSON");
+      logger.error(ExceptionUtils.getStackTrace(e));
+      wall = null;
+    }
+
+    return wall;
+
+  }
+
+  Door createDoorFromJsonObject(JSONObject doorJson) {
+
+    if ( doorJson == null )
+      return null;
+
+    Door door = null;
+
+    try {
+
+      UUID doorId = null;
+      String doorIdAsString = doorJson.getString("id");
+      if ( doorIdAsString == null || doorIdAsString.isEmpty() ) {
+        logger.warning("UserInterface: JSON door has no ID, generating one");
+        doorId = UUID.randomUUID();
+      } else {
+        doorId = UUID.fromString(doorJson.getString("id"));
+      }
+
+      door = new Door(canvas, doorId);
+
+      boolean closed = doorJson.getBoolean("closed");
+      door.setClosed(closed);
+
+      JSONArray doorVertexesJson = doorJson.getJSONArray("vertexes");
+      for ( int j = 0; j < doorVertexesJson.size(); j++ ) {
+        JSONArray doorVertexJson = doorVertexesJson.getJSONArray(j);
+
+        // Vertex with map coordinates
+        Point mapVertex = new Point(
+          doorVertexJson.getInt(0),
+          doorVertexJson.getInt(1)
+        );
+        // Vertex with canvas coordinates
+        Point canvasVertex = map.mapMapToCanvas(mapVertex);
+
+        door.addVertex(
+          canvasVertex.x, canvasVertex.y,
+          mapVertex.x, mapVertex.y
+        );
+      }
+
+      if ( door.getCanvasVertexes().size() < 2 || door.getMapVertexes().size() < 2 ) {
+        logger.error("UserInterface: Door has less than two vertexes, must have at least two");
+        return null;
+      }
+
+    } catch ( Exception e ) {
+      logger.error("UserInterface: Error setting door from JSON");
+      logger.error(ExceptionUtils.getStackTrace(e));
+      door = null;
+    }
+
+    return door;
 
   }
 
@@ -2935,19 +3319,20 @@ public class UserInterface {
 
     ArrayList<Light> lights = new ArrayList<Light>();
 
-    if ( lightsArray != null ) {
-      for ( int j = 0; j < lightsArray.size(); j++ ) {
-        JSONObject lightJson = lightsArray.getJSONObject(j);
-        String name = lightJson.getString("name");
-        Light light = resources.getCommonLightSource(name);
-        if ( light == null )
-          light = resources.getSpellLightSource(name);
-        if ( light != null ) {
-          lights.add(light);
-        } else {
-          logger.error("UserInterface: Token " + tokenName + " light source not found: " + name);
-          continue;
-        }
+    if ( lightsArray == null )
+      return lights;
+
+    for ( int j = 0; j < lightsArray.size(); j++ ) {
+      JSONObject lightJson = lightsArray.getJSONObject(j);
+      String name = lightJson.getString("name");
+      Light light = resources.getCommonLightSource(name);
+      if ( light == null )
+        light = resources.getSpellLightSource(name);
+      if ( light != null ) {
+        lights.add(light);
+      } else {
+        logger.error("UserInterface: Token " + tokenName + " light source not found: " + name);
+        continue;
       }
     }
 
@@ -2959,17 +3344,18 @@ public class UserInterface {
 
     ArrayList<Light> sights = new ArrayList<Light>();
 
-    if ( sightsArray != null ) {
-      for ( int j = 0; j < sightsArray.size(); j++ ) {
-        JSONObject sightJson = sightsArray.getJSONObject(j);
-        String name = sightJson.getString("name");
-        Light sight = resources.getSightType(name);
-        if ( sight != null ) {
-          sights.add(sight);
-        } else {
-          logger.error("UserInterface: Token " + tokenName + " sight type not found: " + name);
-          continue;
-        }
+    if ( sightsArray == null )
+      return sights;
+
+    for ( int j = 0; j < sightsArray.size(); j++ ) {
+      JSONObject sightJson = sightsArray.getJSONObject(j);
+      String name = sightJson.getString("name");
+      Light sight = resources.getSightType(name);
+      if ( sight != null ) {
+        sights.add(sight);
+      } else {
+        logger.error("UserInterface: Token " + tokenName + " sight type not found: " + name);
+        continue;
       }
     }
 
@@ -2981,17 +3367,18 @@ public class UserInterface {
 
     ArrayList<Condition> conditions = new ArrayList<Condition>();
 
-    if ( conditionsArray != null ) {
-      for ( int j = 0; j < conditionsArray.size(); j++ ) {
-        JSONObject conditionJson = conditionsArray.getJSONObject(j);
-        String name = conditionJson.getString("name");
-        Condition condition = resources.getCondition(name, tokenSize);
-        if ( condition != null ) {
-          conditions.add(condition);
-        } else {
-          logger.error("UserInterface: Token " + tokenName + " condition not found: " + name);
-          continue;
-        }
+    if ( conditionsArray == null )
+      return conditions;
+
+    for ( int j = 0; j < conditionsArray.size(); j++ ) {
+      JSONObject conditionJson = conditionsArray.getJSONObject(j);
+      String name = conditionJson.getString("name");
+      Condition condition = resources.getCondition(name, tokenSize);
+      if ( condition != null ) {
+        conditions.add(condition);
+      } else {
+        logger.error("UserInterface: Token " + tokenName + " condition not found: " + name);
+        continue;
       }
     }
 
@@ -3071,6 +3458,552 @@ public class UserInterface {
 
   }
 
+  void syncScene(JSONObject sceneJson) {
+
+    if ( sceneJson == null || sceneJson.toString().trim().isEmpty() )
+      return;
+
+    if ( !map.isSet() || !grid.isSet() || sceneJson.getBoolean("reloadScene", false) ) {
+
+      logger.info("UserInterface: Loading initial scene from received JSON");
+      sceneFromJson(sceneJson);
+      return;
+
+    }
+
+    try {
+
+      changeAppState(AppState.sceneSync);
+
+      logger.info("UserInterface: Syncing scene changes from received JSON");
+
+      syncGridChanges(sceneJson.getJSONObject("grid"));
+
+      syncTokenChanges(playersLayer, sceneJson.getJSONArray("playerTokens"));
+      syncTokenChanges(dmLayer, sceneJson.getJSONArray("dmTokens"));
+
+      syncInitiativeChanges(sceneJson.getJSONObject("initiative"));
+
+      syncWallChanges(sceneJson.getJSONArray("walls"));
+
+      syncDoorChanges(sceneJson.getJSONArray("doors"));
+
+      syncLighting(sceneJson.getJSONObject("illumination"));
+
+      obstacles.setRecalculateShadows(true);
+
+      changeAppState(AppState.idle);
+
+      logger.info("UserInterface: Scene synced from received JSON");
+
+    } catch ( Exception e ) {
+      logger.error("UserInterface: Error syncing scene changes");
+      logger.error(ExceptionUtils.getStackTrace(e));
+      throw e;
+    }
+
+  }
+
+  void syncGridChanges(JSONObject gridJson) {
+
+    if ( gridJson == null )
+      return;
+
+    try {
+
+      logger.debug("UserInterface: Syncing grid changes");
+
+      // Retrieve if grid should be drawn
+      boolean drawGrid = gridJson.getBoolean("drawGrid", false);
+      if ( grid.getDrawGrid() != drawGrid )
+        grid.toggleDrawGrid();
+
+      logger.debug("UserInterface: Grid changes synced");
+
+    } catch ( Exception e ) {
+      logger.error("UserInterface: Error syncing initiative group changes");
+      logger.error(ExceptionUtils.getStackTrace(e));
+      throw e;
+    }
+
+  }
+
+  void syncTokenChanges(Layer layer, JSONArray tokensArray) {
+
+    if ( tokensArray == null )
+      return;
+
+    try {
+
+      logger.debug("UserInterface: Syncing " + layer.getName() + " token changes");
+
+      ArrayList<UUID> sceneTokenIds = new ArrayList<UUID>();
+      ArrayList<UUID> syncTokenIds = new ArrayList<UUID>();
+
+      // Build list with scene token IDs, used to check if a new token was added
+      for ( Token token: layer.getTokens() ) {
+        UUID sceneTokenId = token.getId();
+        if ( sceneTokenId != null )
+          sceneTokenIds.add(sceneTokenId);
+        else
+          logger.warning("UserInterface: Error syncing " + layer.getName() + " token changes: scene token has null ID");
+      }
+
+      //
+      // Add new tokens found in received JSON
+      //
+
+      // For each token in JSONArray
+      for ( int i = 0; i < tokensArray.size(); i++ ) {
+
+        JSONObject tokenJson = tokensArray.getJSONObject(i);
+
+        // Retrieve JSON token ID
+        UUID tokenId = null;
+        String tokenIdAsString = tokenJson.getString("id");
+        if ( tokenIdAsString == null || tokenIdAsString.trim().isEmpty() ) {
+          logger.warning("UserInterface: Error syncing " + layer.getName() + " token changes: JSON token has null or empty ID");
+          continue;
+        }
+        tokenId = UUID.fromString(tokenJson.getString("id"));
+
+        // Build list with JSON token IDs, used to check if a token was removed
+        syncTokenIds.add(tokenId);
+
+        // If token is already present in scene, continue
+        if ( sceneTokenIds.contains(tokenId) )
+          continue;
+
+        // Else, create new token from JSON and add it to layer
+        Token token = createTokenFromJsonObject(layer, tokenJson);
+        if ( token != null )
+          layer.addToken(token);
+
+      }
+
+      //
+      // Remove tokens not found in received JSON
+      //
+
+      // Check if a scene token was removed in the received JSON
+      for ( UUID tokenId: sceneTokenIds ) {
+
+        // If scene token is also present in JSON, continue
+        if ( syncTokenIds.contains(tokenId) )
+          continue;
+
+        // Else, remove token
+        layer.removeToken(layer.getTokenById(tokenId));
+
+      }
+
+      //
+      // Check existing tokens for changes
+      //
+
+      // For each token in JSONArray
+      for ( int i = 0; i < tokensArray.size(); i++ ) {
+
+        JSONObject tokenJson = tokensArray.getJSONObject(i);
+
+        // Get its name, UUID and version
+        String tokenName = tokenJson.getString("name");
+        UUID tokenId = UUID.fromString(tokenJson.getString("id"));
+        int tokenVersion = tokenJson.getInt("version");
+
+        logger.debug("Sync token " + tokenName + ": " + tokenId + " v" + tokenVersion);
+
+        // For each existing token in app
+        for ( Token token: layer.getTokens() ) {
+
+          logger.debug("Scene token " + token.getName() + ": " + token.getStringId() + " v" + token.getVersion());
+
+          // If existing token has the same UUID and a different version, update it
+          if ( token.getId().equals(tokenId) ) {
+            if ( token.getVersion() < tokenVersion ) {
+
+              logger.debug("Scene token " + token.getName() + " changed: " + token.getStringId() + " v" + token.getVersion());
+
+              ArrayList<Token> tokenSceneArray = new ArrayList<Token>();
+              tokenSceneArray.add(token);
+
+              // Check if token position changed
+              Cell tokenNewCell = grid.getCellAt(tokenJson.getInt("row"), tokenJson.getInt("column"));
+              if ( !token.getCell().equals(tokenNewCell) ) {
+                logger.debug("Position changed from " + token.getCell().getRow() + "," + token.getCell().getColumn() + " to " + tokenNewCell.getRow() + "," + tokenNewCell.getColumn());
+                layer.moveToken(token, tokenNewCell);
+              }
+
+              // Check if token size changed
+              Size tokenNewSize = resources.getSize(tokenJson.getString("size"));
+              if ( !token.getSize().equals(tokenNewSize) ) {
+                logger.debug("Size changed from " + token.getSize().getName() + " to " + tokenNewSize.getName());
+                token.setSize(tokenNewSize, resources);
+              }
+
+              // Check if conditions changed
+              ArrayList<Condition> tokenNewConditions = getConditionsFromJsonArray(token.getName(), tokenJson.getJSONArray("conditions"), token.getSize());
+              CopyOnWriteArrayList<Condition> tokenConditions = token.getConditions();
+              ArrayList<Condition> conditionsToAdd = new ArrayList<Condition>();
+              ArrayList<Condition> conditionsToRemove = new ArrayList<Condition>();
+              // Check if conditions were added
+              for ( Condition condition: tokenNewConditions )
+                if ( !tokenConditions.contains(condition) ) {
+                  logger.debug("Condition " + condition.getName() + " added");
+                  conditionsToAdd.add(condition);
+                }
+              if ( !conditionsToAdd.isEmpty() )
+                for ( Condition condition: conditionsToAdd )
+                  token.toggleCondition(condition);
+              // Check if conditions were removed
+              for ( Condition condition: tokenConditions )
+                if ( !tokenNewConditions.contains(condition) ) {
+                  logger.debug("Condition " + condition.getName() + " removed");
+                  conditionsToRemove.add(condition);
+                }
+              if ( !conditionsToRemove.isEmpty() )
+                for ( Condition condition: conditionsToRemove )
+                  token.toggleCondition(condition);
+
+              // Check if light sources changed
+              ArrayList<Light> tokenNewLightSources = getLightSourcesFromJsonArray(token.getName(), tokenJson.getJSONArray("lightSources"));
+              CopyOnWriteArrayList<Light> tokenLightSources = token.getLightSources();
+              ArrayList<Light> lightSourcesToAdd = new ArrayList<Light>();
+              ArrayList<Light> lightSourcesToRemove = new ArrayList<Light>();
+              // Check if light sources were added
+              for ( Light lightSource: tokenNewLightSources )
+                if ( !tokenLightSources.contains(lightSource) ) {
+                  logger.debug("Light Source " + lightSource.getName() + " added");
+                  lightSourcesToAdd.add(lightSource);
+                }
+              if ( !lightSourcesToAdd.isEmpty() )
+                for ( Light lightSource: lightSourcesToAdd )
+                  token.toggleLightSource(lightSource);
+              // Check if light sources were removed
+              for ( Light lightSource: tokenLightSources )
+                if ( !tokenNewLightSources.contains(lightSource) ) {
+                  logger.debug("Light Source " + lightSource.getName() + " removed");
+                  lightSourcesToRemove.add(lightSource);
+                }
+              if ( !lightSourcesToRemove.isEmpty() )
+                for ( Light lightSource: lightSourcesToRemove )
+                  token.toggleLightSource(lightSource);
+
+              // Check if sight types changed
+              ArrayList<Light> tokenNewSightTypes = getSightTypesFromJsonArray(token.getName(), tokenJson.getJSONArray("sightTypes"));
+              CopyOnWriteArrayList<Light> tokenSightTypes = token.getSightTypes();
+              ArrayList<Light> sightTypesToAdd = new ArrayList<Light>();
+              ArrayList<Light> sightTypesToRemove = new ArrayList<Light>();
+              // Check if sight types were added
+              for ( Light sightType: tokenNewSightTypes )
+                if ( !tokenSightTypes.contains(sightType) ) {
+                  logger.debug("Sight Type " + sightType.getName() + " added");
+                  sightTypesToAdd.add(sightType);
+                }
+              if ( !sightTypesToAdd.isEmpty() )
+                for ( Light sightType: sightTypesToAdd )
+                  token.toggleSightType(sightType);
+              // Check if sight types were removed
+              for ( Light sightType: tokenSightTypes )
+                if ( !tokenNewSightTypes.contains(sightType) ) {
+                  logger.debug("Sight Type " + sightType.getName() + " removed");
+                  sightTypesToRemove.add(sightType);
+                }
+              if ( !sightTypesToRemove.isEmpty() )
+                for ( Light sightType: sightTypesToRemove )
+                  token.toggleSightType(sightType);
+
+            }
+          }
+
+        }
+
+      }
+
+      logger.debug("UserInterface: " + layer.getName() + " token changes synced");
+
+    } catch ( Exception e ) {
+      logger.error("UserInterface: Error syncing " + layer.getName() + " token changes");
+      logger.error(ExceptionUtils.getStackTrace(e));
+      throw e;
+    }
+
+  }
+
+  void syncInitiativeChanges(JSONObject initiativeJson) {
+
+    if ( initiativeJson == null )
+      return;
+
+    try {
+
+      logger.debug("UserInterface: Syncing initiative group changes");
+
+      // Retrieve if initiative order should be drawn
+      boolean drawInitiativeOrder = initiativeJson.getBoolean("drawInitiativeOrder");
+      if ( initiative.getDrawInitiativeOrder() != drawInitiativeOrder )
+        initiative.toggleDrawInitiativeOrder();
+
+      // Check if a initiative group changed position in the received JSON
+      JSONArray initiativeGroupsArray = initiativeJson.getJSONArray("initiativeGroups");
+      for ( int i = 0; i < initiativeGroupsArray.size(); i++ ) {
+
+        JSONObject initiativeGroupJson = initiativeGroupsArray.getJSONObject(i);
+
+        // Retrieve JSON initiative group fields
+        String jsonGroupName = initiativeGroupJson.getString("name");
+        int jsonGroupPosition = initiativeGroupJson.getInt("position");
+
+        logger.debug("Sync initiative group: " + jsonGroupName + " at position " + jsonGroupPosition);
+
+        // Retrieve scene initiative group fields
+        Initiative.InitiativeGroup sceneGroup = initiative.getGroupByName(jsonGroupName);
+        int sceneGroupPosition = initiative.getGroupPosition(sceneGroup);
+
+        logger.debug("Scene initiative group: " + sceneGroup.getName() + " at position " + sceneGroupPosition);
+
+        // If scene initiative group is already in the same position as JSON, continue
+        if ( sceneGroupPosition == jsonGroupPosition )
+          continue;
+
+        // If not, move scene initiative group to JSON position
+        logger.debug("Position changed from " + sceneGroupPosition + " to " + jsonGroupPosition);
+        initiative.moveGroupTo(jsonGroupName, jsonGroupPosition);
+
+      }
+
+      logger.debug("UserInterface: Initiative group changes synced");
+
+    } catch ( Exception e ) {
+      logger.error("UserInterface: Error syncing initiative group changes");
+      logger.error(ExceptionUtils.getStackTrace(e));
+      throw e;
+    }
+
+  }
+
+  void syncWallChanges(JSONArray wallsJson) {
+
+    if ( wallsJson == null )
+      return;
+
+    try {
+
+      logger.debug("UserInterface: Syncing wall changes");
+
+      ArrayList<UUID> sceneWallIds = new ArrayList<UUID>();
+      ArrayList<UUID> syncWallIds = new ArrayList<UUID>();
+
+      // Build list with scene wall IDs, used to check if a new wall was added
+      for ( Wall wall: obstacles.getWalls() ) {
+        UUID sceneWallId = wall.getId();
+        if ( sceneWallId != null )
+          sceneWallIds.add(sceneWallId);
+        else
+          logger.warning("UserInterface: Error syncing wall changes: scene wall has null ID");
+      }
+
+      // Check if there's a new wall in the received JSON
+      for ( int i = 0; i < wallsJson.size(); i++ ) {
+
+        JSONObject wallJson = wallsJson.getJSONObject(i);
+
+        // Retrieve JSON wall ID
+        UUID wallId = null;
+        String wallIdAsString = wallJson.getString("id");
+        if ( wallIdAsString == null || wallIdAsString.trim().isEmpty() ) {
+          logger.warning("UserInterface: Error syncing wall changes: JSON wall has null or empty ID");
+          continue;
+        }
+        wallId = UUID.fromString(wallJson.getString("id"));
+
+        logger.debug("Sync wall: " + wallId.toString());
+
+        // Build list with JSON wall IDs, used to check if a wall was removed
+        syncWallIds.add(wallId);
+
+        // If wall is already present in scene, continue
+        if ( sceneWallIds.contains(wallId) )
+          continue;
+
+        // Else, create new wall from JSON and add it to obstacles
+        Wall wall = createWallFromJsonObject(wallJson);
+        if ( wall != null )
+          obstacles.addWall(wall);
+
+      }
+
+      // Check if a scene wall was removed in the received JSON
+      for ( UUID wallId: sceneWallIds ) {
+
+        logger.debug("Scene wall: " + wallId.toString());
+
+        // If scene wall is also present in JSON, continue
+        if ( syncWallIds.contains(wallId) )
+          continue;
+
+        // Else, remove wall
+        obstacles.removeWall(obstacles.getWallById(wallId));
+
+      }
+
+      logger.debug("UserInterface: Wall changes synced");
+
+    } catch ( Exception e ) {
+      logger.error("UserInterface: Error syncing wall changes");
+      logger.error(ExceptionUtils.getStackTrace(e));
+      throw e;
+    }
+
+  }
+
+  void syncDoorChanges(JSONArray doorsJson) {
+
+    if ( doorsJson == null )
+      return;
+
+    try {
+
+      logger.debug("UserInterface: Syncing door changes");
+
+      HashMap<UUID, Boolean> sceneDoorIdAndStatus = new HashMap<UUID, Boolean>();
+      HashMap<UUID, Boolean> syncDoorIdAndStatus = new HashMap<UUID, Boolean>();
+      ArrayList<Door> doorsToRemove = new ArrayList<Door>();
+
+      // Build list with scene doors, used to check if a new door was added
+      for ( Door door: obstacles.getDoors() ) {
+        UUID sceneDoorId = door.getId();
+        boolean sceneDoorIsClosed = door.getClosed();
+        if ( sceneDoorId != null )
+          sceneDoorIdAndStatus.put(sceneDoorId, sceneDoorIsClosed);
+        else
+          logger.warning("UserInterface: Error syncing door changes: scene door has null ID");
+      }
+
+      // Check if there's a new door in the received JSON
+      for ( int i = 0; i < doorsJson.size(); i++ ) {
+
+        JSONObject doorJson = doorsJson.getJSONObject(i);
+
+        // Retrieve JSON door ID
+        UUID doorId = null;
+        String doorIdAsString = doorJson.getString("id");
+        if ( doorIdAsString == null || doorIdAsString.trim().isEmpty() ) {
+          logger.warning("UserInterface: Error syncing door changes: JSON door has null or empty ID");
+          continue;
+        }
+        doorId = UUID.fromString(doorJson.getString("id"));
+
+        // Retrieve if JSON door is closed
+        boolean doorIsClosed = doorJson.getBoolean("closed");
+
+        logger.debug("Sync door: " + doorId.toString());
+
+        // Build list with JSON doors, used to check if a door was removed
+        syncDoorIdAndStatus.put(doorId, doorIsClosed);
+
+        // If door is already present in scene, continue
+        if ( sceneDoorIdAndStatus.containsKey(doorId) )
+          continue;
+
+        // Else, create new door from JSON and add it to obstacles
+        Door door = createDoorFromJsonObject(doorJson);
+        if ( door != null )
+          obstacles.addDoor(door);
+
+      }
+
+      // Check if a scene door was removed in the received JSON
+      for ( UUID doorId: sceneDoorIdAndStatus.keySet() ) {
+
+        logger.debug("Scene door: " + doorId.toString());
+
+        // If scene door is also present in JSON, continue
+        if ( syncDoorIdAndStatus.containsKey(doorId) )
+          continue;
+
+        // Else, remove door
+        obstacles.removeDoor(obstacles.getDoorById(doorId));
+
+      }
+
+      // Check if a door was opened or closed
+      for ( UUID sceneDoorId: sceneDoorIdAndStatus.keySet() ) {
+
+        boolean sceneDoorIsClosed = sceneDoorIdAndStatus.get(sceneDoorId);
+        boolean syncDoorIsClosed = syncDoorIdAndStatus.get(sceneDoorId);
+
+        if ( sceneDoorIsClosed != syncDoorIsClosed )
+          obstacles.getDoorById(sceneDoorId).toggle();
+
+      }
+
+      logger.debug("UserInterface: Door changes synced");
+
+    } catch ( Exception e ) {
+      logger.error("UserInterface: Error syncing door changes");
+      logger.error(ExceptionUtils.getStackTrace(e));
+      throw e;
+    }
+
+  }
+
+  void syncLighting(JSONObject illuminationJson) {
+
+    if ( illuminationJson == null )
+      return;
+
+    try {
+
+      logger.debug("UserInterface: Syncing illumination changes");
+
+      // Retrieve current environment illumination
+      String lighting = illuminationJson.getString("lighting");
+      switch ( lighting ) {
+        case "brightLigt":
+          obstacles.setIllumination(Illumination.brightLight);
+          break;
+        case "dimLight":
+          obstacles.setIllumination(Illumination.dimLight);
+          break;
+        case "darkness":
+          obstacles.setIllumination(Illumination.darkness);
+          break;
+      }
+
+      logger.debug("UserInterface: Illumination changes synced");
+
+    } catch ( Exception e ) {
+      logger.error("UserInterface: Error syncing illumination changes");
+      logger.error(ExceptionUtils.getStackTrace(e));
+      throw e;
+    }
+
+  }
+
+  void pushSceneSync(boolean addReloadSceneFlag) {
+
+    if ( appState == AppState.sceneLoad ) {
+      logger.warning("pushSceneSync(): Scene being loaded. Ignoring.");
+      return;
+    }
+    if ( appState == AppState.sceneSync ) {
+      logger.warning("pushSceneSync(): Scene being synced. Ignoring.");
+      return;
+    }
+
+    logger.warning("pushSceneSync(): Pushing scene from " + appMode.toString());
+
+    JSONObject sceneJson = sceneToJson(addReloadSceneFlag, true);
+    String sceneJsonAsString = sceneJson.toString();
+
+    if ( appMode == AppMode.dm )
+      sharedData.put("fromDmApp", sceneJsonAsString);
+    else
+      sharedData.put("fromPlayersApp", sceneJsonAsString);
+
+  }
+
   void removeController(String controllerName) {
 
     cp5.remove(controllerName);
@@ -3080,6 +4013,10 @@ public class UserInterface {
   void enableController(String controllerName) {
 
     controlP5.Controller controller = cp5.getController(controllerName);
+
+    if ( controller == null ) {
+      return;
+    }
 
     String controllerImageBaseName = controller.getStringValue();
     PImage[] controllerImages = {loadImage("icons/" + controllerImageBaseName + "_idle.png"), loadImage("icons/" + controllerImageBaseName + "_over.png"), loadImage("icons/" + controllerImageBaseName + "_click.png")};
@@ -3096,6 +4033,10 @@ public class UserInterface {
 
     controlP5.Controller controller = cp5.getController(controllerName);
 
+    if ( controller == null ) {
+      return;
+    }
+
     String controllerImageBaseName = controller.getStringValue();
     PImage controllerImage = loadImage("icons/" + controllerImageBaseName + "_disabled.png");
     if ( controllerImage.width != squareButtonWidth || controllerImage.height != squareButtonHeight )
@@ -3109,6 +4050,11 @@ public class UserInterface {
   void showController(String controllerName) {
 
     controlP5.Controller controller = cp5.getController(controllerName);
+
+    if ( controller == null ) {
+      return;
+    }
+
     controller.unlock();
     controller.show();
 
@@ -3117,6 +4063,11 @@ public class UserInterface {
   void hideController(String controllerName) {
 
     controlP5.Controller controller = cp5.getController(controllerName);
+
+    if ( controller == null ) {
+      return;
+    }
+
     controller.lock();
     controller.hide();
 
@@ -3125,7 +4076,26 @@ public class UserInterface {
   boolean getSwitchButtonState(String buttonName) {
 
     Button button = (Button)cp5.getController(buttonName);
+
+    if ( button == null ) {
+      return false;
+    }
+
     return button.isOn();
+
+  }
+
+  boolean getToggleState(String buttonName) {
+
+    if ( buttonName == null || buttonName.trim().isEmpty() )
+      return true;
+
+    Toggle toggle = (Toggle)cp5.getController(buttonName);
+
+    if ( toggle == null || !toggle.isVisible() )
+      return true;
+
+    return toggle.getState();
 
   }
 
@@ -3138,6 +4108,10 @@ public class UserInterface {
   void setSwitchButtonState(String buttonName, boolean buttonState, boolean broadcastButtonPress) {
 
     Button button = (Button)cp5.getController(buttonName);
+
+    if ( button == null ) {
+      return;
+    }
 
     if ( !broadcastButtonPress )
       button.setBroadcast(false);
@@ -3172,7 +4146,7 @@ public class UserInterface {
 
   boolean isInside(controlP5.Controller controller, int x, int y) {
 
-    if ( !controller.isVisible() )
+    if ( controller == null || !controller.isVisible() )
       return false;
 
     boolean inside = false;
@@ -3204,15 +4178,15 @@ public class UserInterface {
     boolean inside = false;
 
     int openItemHeight = 0;
-    if ( conditionMenuControllers.isOpen() )
+    if ( controllerIsAllowed(conditionMenuControllers.getName()) && conditionMenuControllers.isOpen() )
       openItemHeight = conditionMenuControllers.getBackgroundHeight();
-    else if ( lightSourceMenuControllers.isOpen() )
+    else if ( controllerIsAllowed(lightSourceMenuControllers.getName()) && lightSourceMenuControllers.isOpen() )
       openItemHeight = lightSourceMenuControllers.getBackgroundHeight();
-    else if ( sightTypeMenuControllers.isOpen() )
+    else if ( controllerIsAllowed(sightTypeMenuControllers.getName()) && sightTypeMenuControllers.isOpen() )
       openItemHeight = sightTypeMenuControllers.getBackgroundHeight();
-    else if ( sizeMenuControllers.isOpen() )
+    else if ( controllerIsAllowed(sizeMenuControllers.getName()) && sizeMenuControllers.isOpen() )
       openItemHeight = sizeMenuControllers.getBackgroundHeight();
-    else if ( otherMenuControllers.isOpen() )
+    else if ( controllerIsAllowed(otherMenuControllers.getName()) && otherMenuControllers.isOpen() )
       openItemHeight = otherMenuControllers.getBackgroundHeight();
 
     // menu bar
@@ -3262,24 +4236,68 @@ public class UserInterface {
     logger.info("CheckForUpdates: New version available - " + newVersion);
 
     uiDialogs.showConfirmDialog(
-        "A new dungeoneering version is available - " + newVersion + ". Download it now?",
-        "New version available",
-        new Runnable() {
-          public void run() {
-            uiConfirmDialogAnswer = true;
-          }
-        },
-        new Runnable() {
-          public void run() {
-            uiConfirmDialogAnswer = false;
-          }
+      "A new dungeoneering version is available - " + newVersion + ". Download it now?",
+      "New version available",
+      new Runnable() {
+        public void run() {
+          uiConfirmDialogAnswer = true;
         }
+      },
+      new Runnable() {
+        public void run() {
+          uiConfirmDialogAnswer = false;
+        }
+      }
     );
 
     if ( !uiConfirmDialogAnswer )
       return;
 
     link("https://github.com/luiscastilho/dungeoneering/releases/tag/" + newVersion);
+
+  }
+
+  boolean controllerIsAllowed(String buttonName) {
+
+    if ( appMode == AppMode.dm )
+      return true;
+
+    boolean controllerAllowed = buttonName != null && !buttonName.trim().isEmpty() && allowedControllersInPlayersMode.contains(buttonName);
+
+    return controllerAllowed;
+
+  }
+
+  boolean controllerGroupIsAllowed(ControllerGroup buttonGroup) {
+
+    if ( appMode == AppMode.dm )
+      return true;
+
+    boolean controllerGroupAllowed = buttonGroup != null && !buttonGroup.getName().trim().isEmpty() && allowedControllerGroupsInPlayersMode.contains(buttonGroup.getName());
+
+    return controllerGroupAllowed;
+
+  }
+
+  void showPlayerControllersInDmApp() {
+
+    if ( appMode == AppMode.players )
+      return;
+
+    showController("Switch environment lighting toggle");
+    showController("Switch environment lighting DM label");
+    showController("Switch environment lighting Players label");
+
+  }
+
+  void hidePlayerControllersInDmApp() {
+
+    if ( appMode == AppMode.players )
+      return;
+
+    hideController("Switch environment lighting toggle");
+    hideController("Switch environment lighting DM label");
+    hideController("Switch environment lighting Players label");
 
   }
 

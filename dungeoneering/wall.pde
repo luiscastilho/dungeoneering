@@ -1,9 +1,11 @@
 class Wall {
 
+  UUID id;
+
   PGraphics canvas;
 
-  ArrayList<PVector> canvasVertexes;
-  ArrayList<PVector> mapVertexes;
+  CopyOnWriteArrayList<PVector> canvasVertexes;
+  CopyOnWriteArrayList<PVector> mapVertexes;
 
   PVector minVertex;
   PVector maxVertex;
@@ -12,12 +14,14 @@ class Wall {
 
   int magnitude;
 
-  Wall(PGraphics _canvas) {
+  Wall(PGraphics _canvas, UUID _id) {
 
     canvas = _canvas;
 
-    canvasVertexes = new ArrayList<PVector>();
-    mapVertexes = new ArrayList<PVector>();
+    id = _id;
+
+    canvasVertexes = new CopyOnWriteArrayList<PVector>();
+    mapVertexes = new CopyOnWriteArrayList<PVector>();
 
     minVertex = null;
     maxVertex = null;
@@ -178,12 +182,20 @@ class Wall {
 
   }
 
-  ArrayList<PVector> getCanvasVertexes() {
+  CopyOnWriteArrayList<PVector> getCanvasVertexes() {
     return canvasVertexes;
   }
 
-  ArrayList<PVector> getMapVertexes() {
+  CopyOnWriteArrayList<PVector> getMapVertexes() {
     return mapVertexes;
+  }
+
+  UUID getId() {
+    return id;
+  }
+
+  String getStringId() {
+    return id.toString();
   }
 
 }

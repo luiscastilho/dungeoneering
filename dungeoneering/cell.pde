@@ -1,4 +1,5 @@
 import java.awt.Point;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 class Cell {
 
@@ -75,6 +76,31 @@ class Cell {
 
   int getCellHeight() {
     return cellHeight;
+  }
+
+  @Override
+  public int hashCode() {
+    return new HashCodeBuilder(11, 31).
+    append(centerX).
+    append(centerY).
+    append(cellWidth).
+    append(cellHeight).
+    append(row).
+    append(column).
+    toHashCode();
+  }
+
+  @Override
+  boolean equals(Object o) {
+    if ( o == this )
+        return true;
+    if ( !(o instanceof Cell) )
+        return false;
+    Cell other = (Cell)o;
+    boolean samePosition = (this.getRow() == other.getRow() && this.getColumn() == other.getColumn());
+    boolean sameCenter = (this.getCenter().equals(other.getCenter()));
+    boolean sameDimensions = (this.getCellWidth() == other.getCellWidth() && this.getCellHeight() == other.getCellHeight());
+    return samePosition && sameCenter && sameDimensions;
   }
 
 }
