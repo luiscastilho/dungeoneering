@@ -1,5 +1,3 @@
-import java.awt.Point;
-
 class Grid {
 
   PGraphics canvas;
@@ -351,7 +349,6 @@ class Grid {
   void incrementGridVersion() {
     logger.debug("Incrementing grid version from " + gridVersion.getValue() + " to " + (gridVersion.getValue()+1));
     gridVersion.set(gridVersion.getValue() + 1);
-    logger.debug("Grid version: " + gridVersion.getValue());
   }
 
 }

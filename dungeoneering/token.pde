@@ -1,7 +1,3 @@
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.UUID;
-import javafx.beans.property.SimpleIntegerProperty;
-
 class Token {
 
   PGraphics canvas;
@@ -125,7 +121,7 @@ class Token {
 
   void recalculateShadows(ShadowType shadowsToRecalculate) {
 
-    logger.debug("Token: " + name + ": recalculating shadows");
+    logger.trace("Token: " + name + ": recalculating shadows");
 
     switch ( shadowsToRecalculate ) {
       case lightSources:
@@ -526,7 +522,6 @@ class Token {
   void incrementVersion() {
     logger.debug("Incrementing " + name + " token version from " + version.getValue() + " to " + (version.getValue()+1));
     version.set(version.getValue() + 1);
-    logger.debug(name + " token version: " + version.getValue());
   }
 
 }

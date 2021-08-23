@@ -1,7 +1,3 @@
-import java.awt.Point;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.UUID;
-
 class Layer {
 
   PGraphics canvas;
@@ -76,12 +72,12 @@ class Layer {
 
   void recalculateShadows(ShadowType shadowsToRecalculate) {
 
-    logger.debug("Layer: " + name + ": recalculating " + shadowsToRecalculate.toString() + " shadows");
+    logger.trace("Layer: " + name + ": recalculating " + shadowsToRecalculate.toString() + " shadows");
 
     for ( Token token: tokens )
       token.recalculateShadows(shadowsToRecalculate);
 
-    logger.debug("Layer: " + name + ": done recalculating " + shadowsToRecalculate.toString() + " shadows");
+    logger.trace("Layer: " + name + ": done recalculating " + shadowsToRecalculate.toString() + " shadows");
 
   }
 
@@ -282,7 +278,6 @@ class Layer {
   void incrementLayerVersion() {
     logger.debug("Incrementing " + name + " version from " + layerVersion.getValue() + " to " + (layerVersion.getValue()+1));
     layerVersion.set(layerVersion.getValue() + 1);
-    logger.debug(name + " version: " + layerVersion.getValue());
   }
 
   Token getTokenById(UUID tokenID) {

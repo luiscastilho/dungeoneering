@@ -1,5 +1,3 @@
-import java.util.concurrent.CopyOnWriteArrayList;
-
 class Initiative {
 
   PGraphics canvas;
@@ -335,7 +333,6 @@ class Initiative {
   void incrementInitiativeVersion() {
     logger.debug("Incrementing initiative version from " + initiativeVersion.getValue() + " to " + (initiativeVersion.getValue()+1));
     initiativeVersion.set(initiativeVersion.getValue() + 1);
-    logger.debug("Initiative version: " + initiativeVersion.getValue());
   }
 
   class InitiativeGroup {

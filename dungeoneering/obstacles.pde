@@ -1,5 +1,3 @@
-import java.util.concurrent.CopyOnWriteArrayList;
-
 class Obstacles {
 
   PGraphics canvas;
@@ -252,7 +250,7 @@ class Obstacles {
     if ( illumination == Illumination.brightLight )
       recalculateShadows = false;
 
-    logger.debug("Obstacles: shadows reset");
+    logger.trace("Obstacles: shadows reset");
 
   }
 
@@ -335,7 +333,7 @@ class Obstacles {
     recalculateShadows = _recalculateShadows;
 
     if ( recalculateShadows )
-      logger.debug("Obstacles: recalculating shadows");
+      logger.trace("Obstacles: recalculating shadows");
 
   }
 
@@ -485,13 +483,11 @@ class Obstacles {
   void incrementWallsVersion() {
     logger.debug("Incrementing walls version from " + wallsVersion.getValue() + " to " + (wallsVersion.getValue()+1));
     wallsVersion.set(wallsVersion.getValue() + 1);
-    logger.debug("Walls version: " + wallsVersion.getValue());
   }
 
   void incrementDoorsVersion() {
     logger.debug("Incrementing doors version from " + doorsVersion.getValue() + " to " + (doorsVersion.getValue()+1));
     doorsVersion.set(doorsVersion.getValue() + 1);
-    logger.debug("Doors version: " + doorsVersion.getValue());
   }
 
 }

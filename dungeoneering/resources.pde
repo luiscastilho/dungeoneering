@@ -1,5 +1,3 @@
-import java.util.Map;
-
 class Resources {
 
   PGraphics canvas;

@@ -1,17 +1,3 @@
-import java.awt.Point;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
-import java.util.regex.Pattern;
-import java.util.UUID;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javax.activation.MimetypesFileTypeMap;
-import org.apache.commons.lang3.exception.ExceptionUtils;
-import uibooster.*;
-
 public class UserInterface {
 
   PGraphics canvas;
@@ -110,14 +96,17 @@ public class UserInterface {
 
     canvas = _canvas;
 
+    // Hazelcast instance
     sharedDataInstance = _sharedDataInstance;
+    // Shared map between DM's and Players' Apps
     sharedData = _sharedData;
 
+    // Listener that detects changes in scene and push changes to the other app - DM or Players
     sceneUpdateListener = new ChangeListener<Number>() {
 
       @Override
       public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-        logger.debug("Version changed from " + oldValue + " to " + newValue);
+        logger.trace("Version changed from " + oldValue + " to " + newValue);
         pushSceneSync(false);
       }
 
@@ -3521,7 +3510,7 @@ public class UserInterface {
       logger.debug("UserInterface: Grid changes synced");
 
     } catch ( Exception e ) {
-      logger.error("UserInterface: Error syncing initiative group changes");
+      logger.error("UserInterface: Error syncing grid changes");
       logger.error(ExceptionUtils.getStackTrace(e));
       throw e;
     }

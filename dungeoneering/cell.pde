@@ -1,6 +1,3 @@
-import java.awt.Point;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
 class Cell {
 
   PGraphics canvas;

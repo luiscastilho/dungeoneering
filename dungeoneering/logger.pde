@@ -1,24 +1,3 @@
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import com.vlkan.rfos.RotationConfig;
-import com.vlkan.rfos.RotatingFileOutputStream;
-import java.nio.charset.StandardCharsets;
-import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.apache.commons.lang3.SystemUtils;
-
-import com.vlkan.rfos.policy.RotationPolicy;
-import java.io.File;
-import java.time.Instant;
-import java.io.OutputStream;
-import java.io.FileFilter;
-import java.util.Arrays;
-import org.apache.commons.io.comparator.LastModifiedFileComparator;
-import org.apache.commons.io.filefilter.AndFileFilter;
-import org.apache.commons.io.filefilter.FileFileFilter;
-import org.apache.commons.io.filefilter.WildcardFileFilter;
-
 class Logger {
 
   static final int CRITICAL = 7;
