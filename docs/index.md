@@ -69,6 +69,8 @@ Bugs can be reported through the project's [issues](https://github.com/luiscasti
 
 ## Known Issues
 
+- Dialog windows appear behind the full-screen application, forcing users to switch between open windows to find the dialog that was just opened.
+
 - Video and audio playback can be glitchy depending on the format/codec/framerate of the video being used. If you are having trouble with some of your video maps, try reencoding them to 1080p30. In Windows it's quite easy: use [HandBrake](https://handbrake.fr/){:target="_blank"} and in the Preset field choose General > Fast 1080p30. Create an issue please if it doesn't work even after reencoding.
 
 - Tokens may look pixelated if zoom in is used, even if loading high-resolution token images.
