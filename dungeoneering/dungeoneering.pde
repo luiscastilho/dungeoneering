@@ -90,7 +90,7 @@ void setup() {
   // fullScreen(P2D, 2);
   smooth();
 
-  logger = new Logger("DEBUG", this.platform);
+  logger = new Logger("DEBUG", PApplet.platform);
 
   try {
 
@@ -204,7 +204,7 @@ void setup() {
 
     logger.debug("Setup: layers initialization done");
 
-    userInterface = new UserInterface(mainCanvas, cp5, map, grid, obstacles, playersLayer, dmLayer, resources, initiative, this.platform, sharedDataInstance, sharedData);
+    userInterface = new UserInterface(mainCanvas, cp5, map, grid, obstacles, playersLayer, dmLayer, resources, initiative, PApplet.platform, sharedDataInstance, sharedData);
 
     logger.debug("Setup: UI initialization done");
 

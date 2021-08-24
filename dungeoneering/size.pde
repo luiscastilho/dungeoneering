@@ -30,7 +30,6 @@ class Size {
   public int hashCode() {
     return new HashCodeBuilder(19, 31).
     append(name).
-    append(resizeFactor).
     append(centered).
     toHashCode();
   }
@@ -44,7 +43,6 @@ class Size {
     Size other = (Size)o;
     boolean sameName = (this.getName().equals(other.getName()));
     boolean sameCenteredProperty = (this.isCentered() == other.isCentered());
-    boolean sameResizeFactorProperty = (this.resizeFactor == other.resizeFactor);
     return sameName && sameCenteredProperty;
   }
 

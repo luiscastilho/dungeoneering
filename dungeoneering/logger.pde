@@ -222,7 +222,7 @@ class Logger {
       try {
 
         File logsDir = new File(Logger.this.logsDir);
-        File[] rotatedLogFiles = logsDir.listFiles((FileFilter) new AndFileFilter(FileFileFilter.FILE, new WildcardFileFilter("dungeoneering-*.log")));
+        File[] rotatedLogFiles = logsDir.listFiles((FileFilter) new AndFileFilter(FileFileFilter.INSTANCE, new WildcardFileFilter("dungeoneering-*.log")));
 
         if ( rotatedLogFiles.length > keepLastN ) {
 

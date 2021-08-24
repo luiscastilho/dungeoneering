@@ -3118,7 +3118,7 @@ public class UserInterface {
     for ( int i = 0; i < tokensArray.size(); i++ ) {
 
       JSONObject tokenJson = tokensArray.getJSONObject(i);
-      Token token = createTokenFromJsonObject(layer, tokenJson);
+      Token token = createTokenFromJsonObject(tokenJson);
       if ( token != null )
         layer.addToken(token);
 
@@ -3126,7 +3126,7 @@ public class UserInterface {
 
   }
 
-  Token createTokenFromJsonObject(Layer layer, JSONObject tokenJson) {
+  Token createTokenFromJsonObject(JSONObject tokenJson) {
 
     if ( tokenJson == null )
       return null;
@@ -3186,7 +3186,7 @@ public class UserInterface {
         token.toggleCondition(condition);
 
     } catch ( Exception e ) {
-      logger.error("UserInterface: Error setting token from JSON");
+      logger.error("UserInterface: Error creating token from JSON");
       logger.error(ExceptionUtils.getStackTrace(e));
       token = null;
     }
@@ -3239,7 +3239,7 @@ public class UserInterface {
       }
 
     } catch ( Exception e ) {
-      logger.error("UserInterface: Error setting wall from JSON");
+      logger.error("UserInterface: Error creating wall from JSON");
       logger.error(ExceptionUtils.getStackTrace(e));
       wall = null;
     }
@@ -3295,7 +3295,7 @@ public class UserInterface {
       }
 
     } catch ( Exception e ) {
-      logger.error("UserInterface: Error setting door from JSON");
+      logger.error("UserInterface: Error creating door from JSON");
       logger.error(ExceptionUtils.getStackTrace(e));
       door = null;
     }
@@ -3435,7 +3435,7 @@ public class UserInterface {
 
     PImage logoImage = loadImage(logoImagePath);
 
-    Button button = cp5.addButton("Map logo")
+    cp5.addButton("Map logo")
        .setPosition(buttonMinPosition.x - logoImage.width, buttonMinPosition.y - logoImage.height)
        .setSize(logoImage.width, logoImage.height)
        .setImage(logoImage)
@@ -3564,7 +3564,7 @@ public class UserInterface {
           continue;
 
         // Else, create new token from JSON and add it to layer
-        Token token = createTokenFromJsonObject(layer, tokenJson);
+        Token token = createTokenFromJsonObject(tokenJson);
         if ( token != null )
           layer.addToken(token);
 
@@ -3857,7 +3857,6 @@ public class UserInterface {
 
       HashMap<UUID, Boolean> sceneDoorIdAndStatus = new HashMap<UUID, Boolean>();
       HashMap<UUID, Boolean> syncDoorIdAndStatus = new HashMap<UUID, Boolean>();
-      ArrayList<Door> doorsToRemove = new ArrayList<Door>();
 
       // Build list with scene doors, used to check if a new door was added
       for ( Door door: obstacles.getDoors() ) {
