@@ -400,8 +400,15 @@ void appUpkeep() {
   System.gc();
   System.runFinalization();
 
-  if ( !checkedForUpdates )
-    checkForUpdates();
+  if ( !checkedForUpdates ) {
+
+    // Check for updates in a separate thread
+    thread("checkForUpdates");
+
+    // Mark that we have already checked for updates
+    checkedForUpdates = true;
+
+  }
 
   long totalMemory = Runtime.getRuntime().totalMemory();
   long usedMemory = totalMemory - Runtime.getRuntime().freeMemory();
@@ -429,9 +436,6 @@ void checkForUpdates() {
     logger.error("CheckForUpdates: Couldn't retrieve latest version from GitHub");
 
   }
-
-  // Mark that we have already checked for updates
-  checkedForUpdates = true;
 
 }
 
