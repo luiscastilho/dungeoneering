@@ -130,6 +130,8 @@ class Initiative {
 
     }
 
+    incrementInitiativeVersion();
+
     set = true;
 
   }
@@ -158,6 +160,8 @@ class Initiative {
         groupToRemove.removeToken(token);
 
       }
+
+      incrementInitiativeVersion();
 
     }
 

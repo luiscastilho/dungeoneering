@@ -47,8 +47,8 @@ List of features to implement and known bugs to fix:
 - [X] Scenes saved and later loaded should work on any screen resolution
 - [X] Light sources should be visible in all layers
 - [X] Show tooltips over UI buttons, including the ones in the right click menu
-- [ ] Add just player tokens automatically to initiative and add a right click menu option to add DM tokens to initiative
-- [ ] Allow DMs to load and manipulate the same scene PCs are seeing in a secondary screen
+- [X] Add a right click menu option to toggle tokens in initiative
+- [X] Allow DMs to load and manipulate the same scene PCs are seeing in a secondary screen
 - [ ] Allow to add environment light sources, not associated with player or DM tokens
 - [ ] Add more D&D 5e spell light sources to right click menu
 - [ ] Add more D&D 5e sight types to right click menu

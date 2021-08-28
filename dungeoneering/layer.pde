@@ -101,8 +101,6 @@ class Layer {
     token.setBeingMoved(true);
     tokens.add(token);
 
-    initiative.addGroup(tokenBaseName, tokenImageFile.getAbsolutePath(), token, thisLayer);
-
     incrementLayerVersion();
 
     logger.info("Layer: New token added in " + name);
@@ -113,9 +111,31 @@ class Layer {
 
     tokens.add(token);
 
-    initiative.addGroup(token.getName(), token.getImagePath(), token, thisLayer);
-
     incrementLayerVersion();
+
+  }
+
+  void toggleTokenGroupInInitiative(Token tokenGroup) {
+
+    if ( tokenGroup == null )
+      return;
+
+    String tokenGroupName = tokenGroup.getName();
+
+    if ( tokenGroupName == null || tokenGroupName.trim().isEmpty() )
+      return;
+
+    boolean tokenGroupInInitiative = initiative.getGroupByName(tokenGroupName) != null;
+
+    if ( tokenGroupInInitiative ) {
+      for ( Token tokenToRemove: tokens )
+        if ( tokenToRemove.getName().equals(tokenGroupName) )
+          initiative.removeGroup(tokenToRemove.getName(), tokenToRemove);
+    } else {
+      for ( Token tokenToAdd: tokens )
+        if ( tokenToAdd.getName().equals(tokenGroupName) )
+          initiative.addGroup(tokenToAdd.getName(), tokenToAdd.getImagePath(), tokenToAdd, thisLayer);
+    }
 
   }
 
@@ -259,6 +279,9 @@ class Layer {
 
   boolean hasToken(Token tokenToCheck) {
 
+    if ( tokenToCheck == null )
+      return false;
+
     for ( Token token: tokens )
       if ( token.equals(tokenToCheck) )
         return true;
@@ -292,6 +315,18 @@ class Layer {
     }
 
     return tokenFound;
+
+  }
+
+  Token getTokenByName(String tokenNameToCheck) {
+
+    if ( tokenNameToCheck == null || tokenNameToCheck.trim().isEmpty() )
+      return null;
+
+    for ( Token token: tokens )
+      if ( token.getName().equals(tokenNameToCheck) )
+        return token;
+    return null;
 
   }
 
