@@ -96,68 +96,73 @@ void setup() {
 
     logger.info("Setup: dungeoneering initialization started");
 
-    appMode = AppMode.dm;
+    appMode = AppMode.standalone;
+    // appMode = AppMode.dm;
     // appMode = AppMode.players;
 
     logger.info("Setup: initializing dungeoneering in " + appMode.toString());
 
-    dmModePort = 50005;
-    playersModePort = 60006;
-    localAddress = "127.0.0.1";
+    if ( appMode == AppMode.dm || appMode == AppMode.players ) {
 
-    // Create Hazelcast config based on app mode - DM or Players
-    sharedDataconfig = new Config();
-    sharedDataconfig.setClusterName("dungeoneering");
-    if ( appMode == AppMode.dm ) {
-      sharedDataconfig.getNetworkConfig().setPublicAddress(localAddress).setPort(dmModePort);
-      sharedDataconfig.setInstanceName("dm-app");
-    } else {
-      sharedDataconfig.getNetworkConfig().setPublicAddress(localAddress).setPort(playersModePort);
-      sharedDataconfig.setInstanceName("players-app");
+      dmModePort = 50005;
+      playersModePort = 60006;
+      localAddress = "127.0.0.1";
+
+      // Create Hazelcast config based on app mode - DM or Players
+      sharedDataconfig = new Config();
+      sharedDataconfig.setClusterName("dungeoneering");
+      if ( appMode == AppMode.dm ) {
+        sharedDataconfig.getNetworkConfig().setPublicAddress(localAddress).setPort(dmModePort);
+        sharedDataconfig.setInstanceName("dm-app");
+      } else {
+        sharedDataconfig.getNetworkConfig().setPublicAddress(localAddress).setPort(playersModePort);
+        sharedDataconfig.setInstanceName("players-app");
+      }
+
+      // Instantiate Hazelcast
+      sharedDataInstance = Hazelcast.newHazelcastInstance(sharedDataconfig);
+
+      // Create shared map: String -> String
+      // "fromDmApp" -> scene in JSON format sent by DM's App, as String
+      // "fromPlayersApp" -> scene in JSON format sent by Players' App, as String
+      sharedData = sharedDataInstance.getMap("shared");
+
+      // Add listener to map, so it will process shared data when it's added or updated
+      sharedData.addEntryListener(new EntryAdapter<String, String>() {
+
+        @Override
+        public void entryAdded(EntryEvent<String, String> event) {
+          logger.debug("Entry " + event.getKey() + " added");
+          logger.trace("Entry " + event.getKey() + " added: from " + event.getOldValue() + " to " + event.getValue());
+          processSharedData(event.getKey());
+        }
+
+        @Override
+        public void entryUpdated(EntryEvent<String, String> event) {
+          logger.debug("Entry " + event.getKey() + " updated");
+          logger.trace("Entry " + event.getKey() + " updated: from " + event.getOldValue() + " to " + event.getValue());
+          processSharedData(event.getKey());
+        }
+
+      }, true );
+
+      sharedDataInstance.getCluster().addMembershipListener(new MembershipListener() {
+
+          @Override
+          public void memberAdded(MembershipEvent event) {
+            logger.debug("Cluster member added: " + event.toString());
+            showPlayerControllersInDmApp();
+          }
+
+          @Override
+          public void memberRemoved(MembershipEvent event) {
+            logger.debug("Cluster member removed: " + event.toString());
+            hidePlayerControllersInDmApp();
+          }
+
+      });
+
     }
-
-    // Instantiate Hazelcast
-    sharedDataInstance = Hazelcast.newHazelcastInstance(sharedDataconfig);
-
-    // Create shared map: String -> String
-    // "fromDmApp" -> scene in JSON format sent by DM's App, as String
-    // "fromPlayersApp" -> scene in JSON format sent by Players' App, as String
-    sharedData = sharedDataInstance.getMap("shared");
-
-    // Add listener to map, so it will process shared data when it's added or updated
-    sharedData.addEntryListener(new EntryAdapter<String, String>() {
-
-      @Override
-      public void entryAdded(EntryEvent<String, String> event) {
-        logger.debug("Entry " + event.getKey() + " added");
-        logger.trace("Entry " + event.getKey() + " added: from " + event.getOldValue() + " to " + event.getValue());
-        processSharedData(event.getKey());
-      }
-
-      @Override
-      public void entryUpdated(EntryEvent<String, String> event) {
-        logger.debug("Entry " + event.getKey() + " updated");
-        logger.trace("Entry " + event.getKey() + " updated: from " + event.getOldValue() + " to " + event.getValue());
-        processSharedData(event.getKey());
-      }
-
-    }, true );
-
-    sharedDataInstance.getCluster().addMembershipListener(new MembershipListener() {
-
-        @Override
-        public void memberAdded(MembershipEvent event) {
-          logger.debug("Cluster member added: " + event.toString());
-          showPlayerControllersInDmApp();
-        }
-
-        @Override
-        public void memberRemoved(MembershipEvent event) {
-          logger.debug("Cluster member removed: " + event.toString());
-          hidePlayerControllersInDmApp();
-        }
-
-    });
 
     appState = AppState.idle;
 
@@ -691,6 +696,9 @@ void outlineText(PGraphics canvas, String text, color textColor, color outlineCo
 
 void processSharedData(String fromApp) {
 
+  if ( appMode == AppMode.standalone )
+    return;
+
   if ( fromApp == null || fromApp.trim().isEmpty() )
     return;
 
@@ -726,6 +734,8 @@ void processSharedData(String fromApp) {
 
 void showPlayerControllersInDmApp() {
 
+  if ( appMode == AppMode.standalone )
+    return;
   if ( appMode == AppMode.players )
     return;
 
@@ -735,6 +745,8 @@ void showPlayerControllersInDmApp() {
 
 void hidePlayerControllersInDmApp() {
 
+  if ( appMode == AppMode.standalone )
+    return;
   if ( appMode == AppMode.players )
     return;
 

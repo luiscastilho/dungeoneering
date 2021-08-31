@@ -132,8 +132,6 @@ public class UserInterface {
 
     initiative = _initiative;
     initiative.addSceneUpdateListener(sceneUpdateListener);
-    if ( appMode == AppMode.players )
-      initiative.toggleDrawInitiativeOrder();
 
     platform = _platform;
 
@@ -710,7 +708,7 @@ public class UserInterface {
     instructionsX = controllersTopLeftInitialX;
     instructionsY = controllersTopLeftInitialY - instructionsHeight - controllersSpacing;
 
-    if ( appMode == AppMode.dm ) {
+    if ( appMode == AppMode.standalone || appMode == AppMode.dm ) {
 
       cp5.addTextlabel("Scenes management label")
         .setText("Scenes management")
@@ -1022,7 +1020,8 @@ public class UserInterface {
         grid.clear();
         map.clear();
 
-        sharedDataInstance.shutdown();
+        if ( appMode == AppMode.dm || appMode == AppMode.players )
+          sharedDataInstance.shutdown();
 
         logger.info("UserInterface: Exiting dungeoneering");
 
@@ -2324,7 +2323,7 @@ public class UserInterface {
     if ( playersLayer.getToken(_mouseX, _mouseY) != null ) {
       newState = playersLayer.moveToken(_mouseX, _mouseY, done);
     } else {
-      if ( appMode == AppMode.dm )
+      if ( appMode == AppMode.standalone || appMode == AppMode.dm )
         newState = dmLayer.moveToken(_mouseX, _mouseY, done);
     }
 
@@ -2486,7 +2485,7 @@ public class UserInterface {
 
     token = playersLayer.getToken(_mouseX, _mouseY);
     if ( token == null )
-      if ( appMode == AppMode.dm )
+      if ( appMode == AppMode.standalone || appMode == AppMode.dm )
         token = dmLayer.getToken(_mouseX, _mouseY);
     if ( token == null )
       return;
@@ -3511,6 +3510,9 @@ public class UserInterface {
 
   void syncScene(JSONObject sceneJson) {
 
+    if ( appMode == AppMode.standalone )
+      return;
+
     if ( sceneJson == null || sceneJson.toString().trim().isEmpty() )
       return;
 
@@ -4033,6 +4035,9 @@ public class UserInterface {
 
   void pushSceneSync(boolean addReloadSceneFlag) {
 
+    if ( appMode == AppMode.standalone )
+      return;
+
     if ( appState == AppState.sceneLoad ) {
       logger.warning("pushSceneSync(): Scene being loaded. Ignoring.");
       return;
@@ -4309,6 +4314,8 @@ public class UserInterface {
 
   boolean controllerIsAllowed(String buttonName) {
 
+    if ( appMode == AppMode.standalone )
+      return true;
     if ( appMode == AppMode.dm )
       return true;
 
@@ -4320,6 +4327,8 @@ public class UserInterface {
 
   boolean controllerGroupIsAllowed(ControllerGroup buttonGroup) {
 
+    if ( appMode == AppMode.standalone )
+      return true;
     if ( appMode == AppMode.dm )
       return true;
 
@@ -4331,6 +4340,8 @@ public class UserInterface {
 
   void showPlayerControllersInDmApp() {
 
+    if ( appMode == AppMode.standalone )
+      return;
     if ( appMode == AppMode.players )
       return;
 
@@ -4342,6 +4353,8 @@ public class UserInterface {
 
   void hidePlayerControllersInDmApp() {
 
+    if ( appMode == AppMode.standalone )
+      return;
     if ( appMode == AppMode.players )
       return;
 

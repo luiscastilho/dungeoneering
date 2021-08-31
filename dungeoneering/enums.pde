@@ -1,13 +1,18 @@
 enum AppMode {
 
+  dm {
+    public String toString() {
+        return "DM mode";
+    }
+  },
   players {
     public String toString() {
         return "Players mode";
     }
   },
-  dm {
+  standalone {
     public String toString() {
-        return "DM mode";
+        return "Standalone mode";
     }
   };
 
