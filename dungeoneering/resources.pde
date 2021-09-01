@@ -84,9 +84,12 @@ class Resources {
   void setSightTypes() {
 
     sightTypes.put("Line of Sight", createLight("Line of Sight", 1000, 0));
+    sightTypes.put("Blindsight 10'", createLight("Blindsight 10'", 10, 0));
     sightTypes.put("Blindsight 30'", createLight("Blindsight 30'", 30, 0));
     sightTypes.put("Blindsight 60'", createLight("Blindsight 60'", 60, 0));
+    sightTypes.put("Blindsight 90'", createLight("Blindsight 90'", 90, 0));
     sightTypes.put("Blindsight 120'", createLight("Blindsight 120'", 120, 0));
+    sightTypes.put("Darkvision 10'", createLight("Darkvision 10'", 0, 10));
     sightTypes.put("Darkvision 30'", createLight("Darkvision 30'", 0, 30));
     sightTypes.put("Darkvision 60'", createLight("Darkvision 60'", 0, 60));
     sightTypes.put("Darkvision 90'", createLight("Darkvision 90'", 0, 90));

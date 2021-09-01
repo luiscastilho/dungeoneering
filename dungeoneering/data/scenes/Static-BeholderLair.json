@@ -4,7 +4,7 @@
     "size": "Large",
     "lightSources": [],
     "imagePath": "/data/tokens/dm/Beholder.png",
-    "sightTypes": [{"name": "Darkvision 60'"}],
+    "sightTypes": [{"name": "Darkvision 120'"}],
     "name": "Beholder",
     "column": 8,
     "id": "e9771f1c-6bef-422f-9b17-294cba851b2c",

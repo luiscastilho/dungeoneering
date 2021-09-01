@@ -640,8 +640,8 @@ public class UserInterface {
     lightSourceToController.put("Lamp", "Lamp");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Hooded lantern", tokenCommonLightSourcesIconFolder + "hooded_lantern", controllersMenuX, controllersMenuY, lightSourceMenuControllers, true, false);
-    lightSourceToController.put("Hooded Lantern", "Hooded lantern");
+    addButton("Hooded Lantern", tokenCommonLightSourcesIconFolder + "hooded_lantern", controllersMenuX, controllersMenuY, lightSourceMenuControllers, true, false);
+    lightSourceToController.put("Hooded Lantern", "Hooded Lantern");
 
     controllersMenuX += squareButtonWidth + controllersSpacing;
     addButton("Daylight", tokenCommonLightSourcesIconFolder + "daylight", controllersMenuX, controllersMenuY, lightSourceMenuControllers, true, false);
@@ -658,8 +658,54 @@ public class UserInterface {
     sightTypeMenuControllers.setBackgroundHeight(sightTypeMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY = controllersMenuInitialY;
-    addButton("Darkvision 60'", tokenSightTypesIconFolder + "darkvision", controllersMenuX, controllersMenuY, sightTypeMenuControllers, true, false);
+    addButton("Blindsight 10'", tokenSightTypesIconFolder + "blindsight_10", controllersMenuX, controllersMenuY, sightTypeMenuControllers, true, false);
+    sightTypeToController.put("Blindsight 10'", "Blindsight 10'");
+
+    controllersMenuX += squareButtonWidth + controllersSpacing;
+    addButton("Blindsight 30'", tokenSightTypesIconFolder + "blindsight_30", controllersMenuX, controllersMenuY, sightTypeMenuControllers, true, false);
+    sightTypeToController.put("Blindsight 30'", "Blindsight 30'");
+
+    controllersMenuX += squareButtonWidth + controllersSpacing;
+    addButton("Blindsight 60'", tokenSightTypesIconFolder + "blindsight_60", controllersMenuX, controllersMenuY, sightTypeMenuControllers, true, false);
+    sightTypeToController.put("Blindsight 60'", "Blindsight 60'");
+
+    controllersMenuX += squareButtonWidth + controllersSpacing;
+    addButton("Blindsight 90'", tokenSightTypesIconFolder + "blindsight_90", controllersMenuX, controllersMenuY, sightTypeMenuControllers, true, false);
+    sightTypeToController.put("Blindsight 90'", "Blindsight 90'");
+
+    controllersMenuX += squareButtonWidth + controllersSpacing;
+    addButton("Blindsight 120'", tokenSightTypesIconFolder + "blindsight_120", controllersMenuX, controllersMenuY, sightTypeMenuControllers, true, false);
+    sightTypeToController.put("Blindsight 120'", "Blindsight 120'");
+
+    // new line
+    sightTypeMenuControllers.setBackgroundHeight(sightTypeMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
+    controllersMenuX = controllersMenuInitialX;
+    controllersMenuY += squareButtonWidth + controllersSpacing;
+    addButton("Darkvision 10'", tokenSightTypesIconFolder + "darkvision_10", controllersMenuX, controllersMenuY, sightTypeMenuControllers, true, false);
+    sightTypeToController.put("Darkvision 10'", "Darkvision 10'");
+
+    controllersMenuX += squareButtonWidth + controllersSpacing;
+    addButton("Darkvision 30'", tokenSightTypesIconFolder + "darkvision_30", controllersMenuX, controllersMenuY, sightTypeMenuControllers, true, false);
+    sightTypeToController.put("Darkvision 30'", "Darkvision 30'");
+
+    controllersMenuX += squareButtonWidth + controllersSpacing;
+    addButton("Darkvision 60'", tokenSightTypesIconFolder + "darkvision_60", controllersMenuX, controllersMenuY, sightTypeMenuControllers, true, false);
     sightTypeToController.put("Darkvision 60'", "Darkvision 60'");
+
+    controllersMenuX += squareButtonWidth + controllersSpacing;
+    addButton("Darkvision 90'", tokenSightTypesIconFolder + "darkvision_90", controllersMenuX, controllersMenuY, sightTypeMenuControllers, true, false);
+    sightTypeToController.put("Darkvision 90'", "Darkvision 90'");
+
+    controllersMenuX += squareButtonWidth + controllersSpacing;
+    addButton("Darkvision 120'", tokenSightTypesIconFolder + "darkvision_120", controllersMenuX, controllersMenuY, sightTypeMenuControllers, true, false);
+    sightTypeToController.put("Darkvision 120'", "Darkvision 120'");
+
+    // new line
+    sightTypeMenuControllers.setBackgroundHeight(sightTypeMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
+    controllersMenuX = controllersMenuInitialX;
+    controllersMenuY += squareButtonWidth + controllersSpacing;
+    addButton("Truesight 120'", tokenSightTypesIconFolder + "truesight_120", controllersMenuX, controllersMenuY, sightTypeMenuControllers, true, false);
+    sightTypeToController.put("Truesight 120'", "Truesight 120'");
 
     // first line in menu item
     sizeMenuControllers.setBackgroundHeight(sizeMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
@@ -1475,317 +1521,28 @@ public class UserInterface {
 
         break;
       case "Blinded":
-
-        if ( rightClickedToken == null )
-          break;
-
-        resourceName = "Blinded";
-        conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
-        if ( conditionTemplate == null ) {
-          logger.error("Resource: Condition " + resourceName + " not found");
-          break;
-        }
-
-        rightClickedToken.toggleCondition(conditionTemplate);
-        if ( conditionTemplate.disablesTarget() )
-          obstacles.setRecalculateShadows(true);
-        hideMenu(0, 0);
-
-        break;
       case "Bloodied":
-
-        if ( rightClickedToken == null )
-          break;
-
-        resourceName = "Bloodied";
-        conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
-        if ( conditionTemplate == null ) {
-          logger.error("Resource: Condition " + resourceName + " not found");
-          break;
-        }
-
-        rightClickedToken.toggleCondition(conditionTemplate);
-        if ( conditionTemplate.disablesTarget() )
-          obstacles.setRecalculateShadows(true);
-        hideMenu(0, 0);
-
-        break;
       case "Burned":
-
-        if ( rightClickedToken == null )
-          break;
-
-        resourceName = "Burned";
-        conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
-        if ( conditionTemplate == null ) {
-          logger.error("Resource: Condition " + resourceName + " not found");
-          break;
-        }
-
-        rightClickedToken.toggleCondition(conditionTemplate);
-        if ( conditionTemplate.disablesTarget() )
-          obstacles.setRecalculateShadows(true);
-        hideMenu(0, 0);
-
-        break;
       case "Charmed":
-
-        if ( rightClickedToken == null )
-          break;
-
-        resourceName = "Charmed";
-        conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
-        if ( conditionTemplate == null ) {
-          logger.error("Resource: Condition " + resourceName + " not found");
-          break;
-        }
-
-        rightClickedToken.toggleCondition(conditionTemplate);
-        if ( conditionTemplate.disablesTarget() )
-          obstacles.setRecalculateShadows(true);
-        hideMenu(0, 0);
-
-        break;
       case "Dead":
-
-        if ( rightClickedToken == null )
-          break;
-
-        resourceName = "Dead";
-        conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
-        if ( conditionTemplate == null ) {
-          logger.error("Resource: Condition " + resourceName + " not found");
-          break;
-        }
-
-        rightClickedToken.toggleCondition(conditionTemplate);
-        if ( conditionTemplate.disablesTarget() )
-          obstacles.setRecalculateShadows(true);
-        hideMenu(0, 0);
-
-        break;
       case "Deafened":
-
-        if ( rightClickedToken == null )
-          break;
-
-        resourceName = "Deafened";
-        conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
-        if ( conditionTemplate == null ) {
-          logger.error("Resource: Condition " + resourceName + " not found");
-          break;
-        }
-
-        rightClickedToken.toggleCondition(conditionTemplate);
-        if ( conditionTemplate.disablesTarget() )
-          obstacles.setRecalculateShadows(true);
-        hideMenu(0, 0);
-
-        break;
       case "Frightened":
-
-        if ( rightClickedToken == null )
-          break;
-
-        resourceName = "Frightened";
-        conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
-        if ( conditionTemplate == null ) {
-          logger.error("Resource: Condition " + resourceName + " not found");
-          break;
-        }
-
-        rightClickedToken.toggleCondition(conditionTemplate);
-        if ( conditionTemplate.disablesTarget() )
-          obstacles.setRecalculateShadows(true);
-        hideMenu(0, 0);
-
-        break;
       case "Grappled":
-
-        if ( rightClickedToken == null )
-          break;
-
-        resourceName = "Grappled";
-        conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
-        if ( conditionTemplate == null ) {
-          logger.error("Resource: Condition " + resourceName + " not found");
-          break;
-        }
-
-        rightClickedToken.toggleCondition(conditionTemplate);
-        if ( conditionTemplate.disablesTarget() )
-          obstacles.setRecalculateShadows(true);
-        hideMenu(0, 0);
-
-        break;
       case "Hidden":
-
-        if ( rightClickedToken == null )
-          break;
-
-        resourceName = "Hidden";
-        conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
-        if ( conditionTemplate == null ) {
-          logger.error("Resource: Condition " + resourceName + " not found");
-          break;
-        }
-
-        rightClickedToken.toggleCondition(conditionTemplate);
-        if ( conditionTemplate.disablesTarget() )
-          obstacles.setRecalculateShadows(true);
-        hideMenu(0, 0);
-
-        break;
       case "Incapacitated":
-
-        if ( rightClickedToken == null )
-          break;
-
-        resourceName = "Incapacitated";
-        conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
-        if ( conditionTemplate == null ) {
-          logger.error("Resource: Condition " + resourceName + " not found");
-          break;
-        }
-
-        rightClickedToken.toggleCondition(conditionTemplate);
-        if ( conditionTemplate.disablesTarget() )
-          obstacles.setRecalculateShadows(true);
-        hideMenu(0, 0);
-
-        break;
       case "Invisible":
-
-        if ( rightClickedToken == null )
-          break;
-
-        resourceName = "Invisible";
-        conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
-        if ( conditionTemplate == null ) {
-          logger.error("Resource: Condition " + resourceName + " not found");
-          break;
-        }
-
-        rightClickedToken.toggleCondition(conditionTemplate);
-        if ( conditionTemplate.disablesTarget() )
-          obstacles.setRecalculateShadows(true);
-        hideMenu(0, 0);
-
-        break;
       case "Paralyzed":
-
-        if ( rightClickedToken == null )
-          break;
-
-        resourceName = "Paralyzed";
-        conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
-        if ( conditionTemplate == null ) {
-          logger.error("Resource: Condition " + resourceName + " not found");
-          break;
-        }
-
-        rightClickedToken.toggleCondition(conditionTemplate);
-        if ( conditionTemplate.disablesTarget() )
-          obstacles.setRecalculateShadows(true);
-        hideMenu(0, 0);
-
-        break;
       case "Petrified":
-
-        if ( rightClickedToken == null )
-          break;
-
-        resourceName = "Petrified";
-        conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
-        if ( conditionTemplate == null ) {
-          logger.error("Resource: Condition " + resourceName + " not found");
-          break;
-        }
-
-        rightClickedToken.toggleCondition(conditionTemplate);
-        if ( conditionTemplate.disablesTarget() )
-          obstacles.setRecalculateShadows(true);
-        hideMenu(0, 0);
-
-        break;
       case "Poisoned":
-
-        if ( rightClickedToken == null )
-          break;
-
-        resourceName = "Poisoned";
-        conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
-        if ( conditionTemplate == null ) {
-          logger.error("Resource: Condition " + resourceName + " not found");
-          break;
-        }
-
-        rightClickedToken.toggleCondition(conditionTemplate);
-        if ( conditionTemplate.disablesTarget() )
-          obstacles.setRecalculateShadows(true);
-        hideMenu(0, 0);
-
-        break;
       case "Prone":
-
-        if ( rightClickedToken == null )
-          break;
-
-        resourceName = "Prone";
-        conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
-        if ( conditionTemplate == null ) {
-          logger.error("Resource: Condition " + resourceName + " not found");
-          break;
-        }
-
-        rightClickedToken.toggleCondition(conditionTemplate);
-        if ( conditionTemplate.disablesTarget() )
-          obstacles.setRecalculateShadows(true);
-        hideMenu(0, 0);
-
-        break;
       case "Restrained":
-
-        if ( rightClickedToken == null )
-          break;
-
-        resourceName = "Restrained";
-        conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
-        if ( conditionTemplate == null ) {
-          logger.error("Resource: Condition " + resourceName + " not found");
-          break;
-        }
-
-        rightClickedToken.toggleCondition(conditionTemplate);
-        if ( conditionTemplate.disablesTarget() )
-          obstacles.setRecalculateShadows(true);
-        hideMenu(0, 0);
-
-        break;
       case "Stunned":
-
-        if ( rightClickedToken == null )
-          break;
-
-        resourceName = "Stunned";
-        conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
-        if ( conditionTemplate == null ) {
-          logger.error("Resource: Condition " + resourceName + " not found");
-          break;
-        }
-
-        rightClickedToken.toggleCondition(conditionTemplate);
-        if ( conditionTemplate.disablesTarget() )
-          obstacles.setRecalculateShadows(true);
-        hideMenu(0, 0);
-
-        break;
       case "Unconscious":
 
         if ( rightClickedToken == null )
           break;
 
-        resourceName = "Unconscious";
+        resourceName = controllerName;
         conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
         if ( conditionTemplate == null ) {
           logger.error("Resource: Condition " + resourceName + " not found");
@@ -1799,62 +1556,15 @@ public class UserInterface {
 
         break;
       case "Candle":
-
-        if ( rightClickedToken == null )
-          break;
-
-        resourceName = "Candle";
-        lightTemplate = resources.getCommonLightSource(resourceName);
-        if ( lightTemplate == null ) {
-          logger.error("Resource: Common light source " + resourceName + " not found");
-          break;
-        }
-
-        rightClickedToken.toggleLightSource(new Light(lightTemplate.getName(), lightTemplate.getBrightLightRadius(), lightTemplate.getDimLightRadius()));
-        obstacles.setRecalculateShadows(true);
-        hideMenu(0, 0);
-
-        break;
       case "Torch":
-
-        if ( rightClickedToken == null )
-          break;
-
-        resourceName = "Torch";
-        lightTemplate = resources.getCommonLightSource(resourceName);
-        if ( lightTemplate == null ) {
-          logger.error("Resource: Common light source " + resourceName + " not found");
-          break;
-        }
-
-        rightClickedToken.toggleLightSource(new Light(lightTemplate.getName(), lightTemplate.getBrightLightRadius(), lightTemplate.getDimLightRadius()));
-        obstacles.setRecalculateShadows(true);
-        hideMenu(0, 0);
-
-        break;
       case "Lamp":
+      case "Hooded Lantern":
+      case "Daylight":
 
         if ( rightClickedToken == null )
           break;
 
-        resourceName = "Lamp";
-        lightTemplate = resources.getCommonLightSource(resourceName);
-        if ( lightTemplate == null ) {
-          logger.error("Resource: Common light source " + resourceName + " not found");
-          break;
-        }
-
-        rightClickedToken.toggleLightSource(new Light(lightTemplate.getName(), lightTemplate.getBrightLightRadius(), lightTemplate.getDimLightRadius()));
-        obstacles.setRecalculateShadows(true);
-        hideMenu(0, 0);
-
-        break;
-      case "Hooded lantern":
-
-        if ( rightClickedToken == null )
-          break;
-
-        resourceName = "Hooded Lantern";
+        resourceName = controllerName;
         lightTemplate = resources.getCommonLightSource(resourceName);
         if ( lightTemplate == null ) {
           logger.error("Resource: Common light source " + resourceName + " not found");
@@ -1883,29 +1593,22 @@ public class UserInterface {
         hideMenu(0, 0);
 
         break;
-      case "Daylight":
-
-        if ( rightClickedToken == null )
-          break;
-
-        resourceName = "Daylight";
-        lightTemplate = resources.getCommonLightSource(resourceName);
-        if ( lightTemplate == null ) {
-          logger.error("Resource: Spell light source " + resourceName + " not found");
-          break;
-        }
-
-        rightClickedToken.toggleLightSource(new Light(lightTemplate.getName(), lightTemplate.getBrightLightRadius(), lightTemplate.getDimLightRadius()));
-        obstacles.setRecalculateShadows(true);
-        hideMenu(0, 0);
-
-        break;
+      case "Blindsight 10'":
+      case "Blindsight 30'":
+      case "Blindsight 60'":
+      case "Blindsight 90'":
+      case "Blindsight 120'":
+      case "Darkvision 10'":
+      case "Darkvision 30'":
       case "Darkvision 60'":
+      case "Darkvision 90'":
+      case "Darkvision 120'":
+      case "Truesight 120'":
 
         if ( rightClickedToken == null )
           break;
 
-        resourceName = "Darkvision 60'";
+        resourceName = controllerName;
         lightTemplate = resources.getSightType(resourceName);
         if ( lightTemplate == null ) {
           logger.error("Resource: Sight type " + resourceName + " not found");
@@ -1918,96 +1621,16 @@ public class UserInterface {
 
         break;
       case "Tiny":
-
-        if ( rightClickedToken == null )
-          break;
-
-        resourceName = "Tiny";
-        sizeTemplate = resources.getSize(resourceName);
-        if ( sizeTemplate == null ) {
-          logger.error("Resource: Size " + resourceName + " not found");
-          break;
-        }
-
-        rightClickedToken.setSize(new Size(sizeTemplate.getName(), sizeTemplate.getResizeFactor(), sizeTemplate.isCentered()), resources);
-        obstacles.setRecalculateShadows(true);
-        hideMenu(0, 0);
-
-        break;
       case "Small":
-
-        if ( rightClickedToken == null )
-          break;
-
-        resourceName = "Small";
-        sizeTemplate = resources.getSize(resourceName);
-        if ( sizeTemplate == null ) {
-          logger.error("Resource: Size " + resourceName + " not found");
-          break;
-        }
-
-        rightClickedToken.setSize(new Size(sizeTemplate.getName(), sizeTemplate.getResizeFactor(), sizeTemplate.isCentered()), resources);
-        obstacles.setRecalculateShadows(true);
-        hideMenu(0, 0);
-
-        break;
       case "Medium":
-
-        if ( rightClickedToken == null )
-          break;
-
-        resourceName = "Medium";
-        sizeTemplate = resources.getSize(resourceName);
-        if ( sizeTemplate == null ) {
-          logger.error("Resource: Size " + resourceName + " not found");
-          break;
-        }
-
-        rightClickedToken.setSize(new Size(sizeTemplate.getName(), sizeTemplate.getResizeFactor(), sizeTemplate.isCentered()), resources);
-        obstacles.setRecalculateShadows(true);
-        hideMenu(0, 0);
-
-        break;
       case "Large":
-
-        if ( rightClickedToken == null )
-          break;
-
-        resourceName = "Large";
-        sizeTemplate = resources.getSize(resourceName);
-        if ( sizeTemplate == null ) {
-          logger.error("Resource: Size " + resourceName + " not found");
-          break;
-        }
-
-        rightClickedToken.setSize(new Size(sizeTemplate.getName(), sizeTemplate.getResizeFactor(), sizeTemplate.isCentered()), resources);
-        obstacles.setRecalculateShadows(true);
-        hideMenu(0, 0);
-
-        break;
       case "Huge":
-
-        if ( rightClickedToken == null )
-          break;
-
-        resourceName = "Huge";
-        sizeTemplate = resources.getSize(resourceName);
-        if ( sizeTemplate == null ) {
-          logger.error("Resource: Size " + resourceName + " not found");
-          break;
-        }
-
-        rightClickedToken.setSize(new Size(sizeTemplate.getName(), sizeTemplate.getResizeFactor(), sizeTemplate.isCentered()), resources);
-        obstacles.setRecalculateShadows(true);
-        hideMenu(0, 0);
-
-        break;
       case "Gargantuan":
 
         if ( rightClickedToken == null )
           break;
 
-        resourceName = "Gargantuan";
+        resourceName = controllerName;
         sizeTemplate = resources.getSize(resourceName);
         if ( sizeTemplate == null ) {
           logger.error("Resource: Size " + resourceName + " not found");
@@ -2019,6 +1642,7 @@ public class UserInterface {
         hideMenu(0, 0);
 
         break;
+
       case "Change token layer":
 
         if ( rightClickedToken == null )
