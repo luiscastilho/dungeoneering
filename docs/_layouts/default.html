@@ -1,82 +1,34 @@
 <!DOCTYPE html>
 <html lang="{{ site.lang | default: "en-US" }}">
   <head>
-    <title>dungeoneering | Minimalistic virtual tabletop (VTT) for local RPG sessions</title>
-    <link rel="shortcut icon" type="image/png" href="images/logos/favicon.png">
-
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-{% seo %}
+    {% seo %}
 
-    <link rel="stylesheet" href="{{ "/assets/css/style.css?v=" | append: site.github.build_revision | relative_url }}">
+    <link rel="stylesheet" href="{{ "assets/css/style.css?v=" | append: site.github.build_revision | relative_url }}">
     <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
     <![endif]-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="assets/css/simpleLightbox.min.css">
-    <script src="assets/js/simpleLightbox.min.js"></script>
+
+    {% include head-custom.html %}
+
   </head>
   <body>
     <div class="wrapper">
       <header>
         {% if site.logo %}
-          <a class="logo-link" href="/dungeoneering/"><img class="logo-image" src="{{site.logo | relative_url}}" alt="Logo" /></a>
+          <a class="logo-link" href="/"><img class="logo-image" src="{{site.logo | relative_url}}" alt="Logo" /></a>
         {% endif %}
 
         <p class="description">{{ site.description | default: site.github.project_tagline }}</p>
 
         {% if site.show_downloads %}
-        <h4 class="downloads-title">Download latest version</h4>
-        <ul class="downloads">
-          <li>
-            <a href="https://github.com/luiscastilho/dungeoneering/releases/latest/download/dungeoneering-windows64.zip">
-              <span class="download-icon">
-                <img src="assets/img/windows32.png" alt="Windows logo" width="18" height="18">
-              </span><span class="download-text">
-                <strong>Windows</strong>
-              </span>
-            </a>
-          </li>
-          <li>
-            <a href="https://github.com/luiscastilho/dungeoneering/releases/latest/download/dungeoneering-linux64.zip">
-              <span class="download-icon">
-                <img src="assets/img/linux32.png" alt="Linux logo" width="18" height="18">
-              </span><span class="download-text">
-                <strong>Linux</strong>
-              </span>
-            </a>
-          </li>
-          <li>
-            <a href="https://github.com/luiscastilho/dungeoneering/releases/latest/download/dungeoneering-macos.zip">
-              <span class="download-icon">
-                <img src="assets/img/macos32.png" alt="macOS logo" width="18" height="18">
-              </span><span class="download-text">
-                <strong>macOS</strong>
-              </span>
-            </a>
-          </li>
-        </ul>
+          {% include downloads.html %}
         {% endif %}
 
-        <h4 class="support-title">Support this project</h4>
-        <ul class="support-list">
-          <li>
-            <span class="support-icon">
-              <img alt="ko_fi" src="https://github.githubassets.com/images/modules/site/icons/funding_platforms/ko_fi.svg" width="24" height="24">
-            </span><span class="support-link">
-              <a target="_blank" href="https://ko-fi.com/dungeoneering"><span>ko-fi.com/dungeoneering</span></a>
-            </span>
-          </li>
-          <li>
-            <span class="support-icon">
-              <img alt="patreon" src="https://github.githubassets.com/images/modules/site/icons/funding_platforms/patreon.svg" width="24" height="24">
-            </span><span class="support-link">
-              <a target="_blank" href="https://patreon.com/dungeoneering_vtt"><span>patreon.com/dungeoneering_vtt</span></a>
-            </span>
-          </li>
-        </ul>
+        {% include support.html %}
 
       </header>
       <section>
@@ -94,34 +46,7 @@
 
       </footer>
     </div>
-    <script src="{{ "/assets/js/scale.fix.js" | relative_url }}"></script>
-    {% if site.google_analytics %}
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-      ga('create', '{{ site.google_analytics }}', 'auto');
-      ga('send', 'pageview');
-    </script>
-    {% endif %}
-    <script>
-      $('.lightbox').simpleLightbox();
-      $('.lightbox-link.farmhouse').on('click', function() {
-        SimpleLightbox.open({
-          items: ['https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/maps/Static-AbandonedFarmhouse.jpg']
-        });
-      });
-      $('.lightbox-link.beholder').on('click', function() {
-        SimpleLightbox.open({
-          items: ['https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/maps/Static-BeholderLair.jpg']
-        });
-      });
-      $('.lightbox-link.bridge').on('click', function() {
-        SimpleLightbox.open({
-          items: ['https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/maps/Static-TheOldBridge.jpg']
-        });
-      });
-    </script>
+    <script src="{{ "assets/js/scale.fix.js" | relative_url }}"></script>
+    {% include lightbox-script.html %}
   </body>
 </html>

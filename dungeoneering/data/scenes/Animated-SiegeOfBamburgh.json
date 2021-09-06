@@ -875,6 +875,8 @@
   "map": {
     "filePath": "/data/maps/Animated-SiegeOfBamburgh.mp4",
     "isVideo": true,
-    "fitToScreen": false
+    "fitToScreen": false,
+    "logoFilePath": "/data/logos/animated-dungeon-maps.png",
+    "logoLink": "https://www.patreon.com/animatedmaps"
   }
 }
