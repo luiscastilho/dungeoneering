@@ -49,9 +49,12 @@ List of features to implement and known bugs to fix:
 - [X] Show tooltips over UI buttons, including the ones in the right click menu
 - [X] Add a right click menu option to toggle tokens in initiative
 - [X] Allow DMs to load and manipulate the same scene PCs are seeing in a secondary screen
+- [X] Add more D&D 5e sight types to right click menu
 - [ ] Allow to add environment light sources, not associated with player or DM tokens
+- [ ] Create scene selection screen with thumbnails
+- [ ] Create map selection screen with thumbnails
+- [ ] Create token selection screen with thumbnails
 - [ ] Add more D&D 5e spell light sources to right click menu
-- [ ] Add more D&D 5e sight types to right click menu
 - [ ] Fix token images looking pixelated if zoom in is used
 - [ ] Set maximum zoom and pan
 - [ ] Keep tokens inside grid when moving - larger tokens being moved to grid borders
@@ -70,6 +73,3 @@ List of features to implement and known bugs to fix:
 - [ ] Multiple maps linked (NSEW)
 - [ ] Show movement path
 - [ ] Don't allow tokens to stop on top of other tokens - move it back to previous cell
-- [ ] Create scene selection screen with thumbnails
-- [ ] Create map selection screen with thumbnails
-- [ ] Create token selection screen with thumbnails
