@@ -1,7 +1,7 @@
 # Known Issues
 
-- Dialog windows appear behind the full-screen application, forcing users to
-swtich between open windows to find the dialog that was just opened.
+- Dialog windows may appear behind the full-screen application, forcing users
+to swtich between open windows to find the dialog that was just opened.
 
 - Video and audio playback can be glitchy depending on the format/codec/
 framerate of the video being used. If you are having trouble with some of your

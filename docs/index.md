@@ -61,7 +61,7 @@ And that's it! Now that you have setup your scene, players and DM can drag their
 
 ## Contributing
 
-dungeoneering code can be loaded, edited and run directly in [Processing](https://processing.org/){:target="_blank"} IDE. Clone this repository and open the `dungeoneering.pde` file in Processing.
+dungeoneering code can be loaded, edited and run directly in [Processing](https://processing.org/){:target="_blank"} IDE (v3.x). Clone this repository and open the `dungeoneering.pde` file in Processing.
 
 Bugs can be reported through the project's [issues](https://github.com/luiscastilho/dungeoneering/issues) page. Also, there's a list of features to implement and known bugs to fix in the [TODO list](TODO.md).
 
@@ -69,7 +69,7 @@ Bugs can be reported through the project's [issues](https://github.com/luiscasti
 
 ## Known Issues
 
-- Dialog windows appear behind the full-screen application, forcing users to switch between open windows to find the dialog that was just opened.
+- Dialog windows may appear behind the full-screen application, forcing users to switch between open windows to find the dialog that was just opened.
 
 - Video and audio playback can be glitchy depending on the format/codec/framerate of the video being used. If you are having trouble with some of your video maps, try reencoding them to 1080p30. In Windows it's quite easy: use [HandBrake](https://handbrake.fr/){:target="_blank"} and in the Preset field choose General > Fast 1080p30. Create an issue please if it doesn't work even after reencoding.
 
@@ -97,7 +97,8 @@ There are a few demo scenes bundled with the application. The assets used in the
 - The two awesome animated maps are from [Animated Dungeon Maps](https://www.patreon.com/animatedmaps "Animated Dungeon Maps Patreon page"){:target="_blank"}.
 - The <a class="lightbox-link farmhouse" title="Abandoned Farmhouse map">Abandoned Farmhouse map</a> is from Mike Schley, available in this [D&D article](https://dnd.wizards.com/articles/features/schley-stack "D&D Schley Stack article"){:target="_blank"}.
 - The <a class="lightbox-link beholder" title="Beholder Lair map">Beholder Lair map</a> is from [Antal Kéninger](https://www.artstation.com/kena "Antal Kéninger ArtStation profile"){:target="_blank"}.
-- The <a class="lightbox-link bridge" title="The Old Bridge map">The Old Bridge map</a> is from [Sliph](https://www.patreon.com/sliph "Sliph Patreon"){:target="_blank"}.
+- The <a class="lightbox-link illusionist" title="Dungeons of the Grand Illusionist map">Dungeons of the Grand Illusionist map</a> is from [Dyson Logos](https://www.patreon.com/dysonlogos "Dyson Logos Patreon page"){:target="_blank"}.
+- The <a class="lightbox-link bridge" title="The Old Bridge map">The Old Bridge map</a> is from [Sliph](https://www.patreon.com/sliph "Sliph Patreon page"){:target="_blank"}.
 - All tokens were created using [Token Stamp tool](https://rolladvantage.com/tokenstamp/ "Token Stamp tool"){:target="_blank"} with D&D 5th edition images.
 
 
