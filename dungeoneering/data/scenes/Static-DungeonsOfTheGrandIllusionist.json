@@ -1,0 +1,10825 @@
+{
+  "doors": [
+    {
+      "vertexes": [
+        [
+          1612,
+          837
+        ],
+        [
+          1613,
+          979
+        ]
+      ],
+      "closed": true,
+      "id": "52abb05b-6ad0-4a86-b265-8c1d83f0ed3f"
+    },
+    {
+      "vertexes": [
+        [
+          1754,
+          1257
+        ],
+        [
+          1832,
+          1332
+        ]
+      ],
+      "closed": true,
+      "id": "eababc7d-493a-469a-9d95-a803a003a1d6"
+    },
+    {
+      "vertexes": [
+        [
+          2103,
+          1462
+        ],
+        [
+          2245,
+          1461
+        ]
+      ],
+      "closed": true,
+      "id": "559305ac-1d1f-47d8-a046-93b4ab6a2595"
+    },
+    {
+      "vertexes": [
+        [
+          2792,
+          835
+        ],
+        [
+          2793,
+          983
+        ]
+      ],
+      "closed": true,
+      "id": "7ba501d6-b6f5-4afd-876b-57a8314484fa"
+    },
+    {
+      "vertexes": [
+        [
+          1531,
+          2389
+        ],
+        [
+          1531,
+          2524
+        ]
+      ],
+      "closed": true,
+      "id": "8c1340c3-15fe-4ae5-aee1-9f1f8ca8220b"
+    },
+    {
+      "vertexes": [
+        [
+          2314,
+          2240
+        ],
+        [
+          2314,
+          2392
+        ]
+      ],
+      "closed": true,
+      "id": "1979af29-8be0-4d2b-83b1-78e8f42d7e79"
+    },
+    {
+      "vertexes": [
+        [
+          806,
+          2057
+        ],
+        [
+          882,
+          2139
+        ]
+      ],
+      "closed": true,
+      "id": "4e517698-70f8-4506-b68a-543f80fab83d"
+    },
+    {
+      "vertexes": [
+        [
+          428,
+          2024
+        ],
+        [
+          567,
+          2025
+        ]
+      ],
+      "closed": true,
+      "id": "c7647749-d9b1-487e-b218-e8eb93548d95"
+    },
+    {
+      "vertexes": [
+        [
+          858,
+          2379
+        ],
+        [
+          858,
+          2520
+        ]
+      ],
+      "closed": true,
+      "id": "49dd4d89-17fb-4f9c-b340-7a02955a4a17"
+    },
+    {
+      "vertexes": [
+        [
+          2025,
+          3645
+        ],
+        [
+          2024,
+          3782
+        ]
+      ],
+      "closed": true,
+      "id": "39c51864-d89d-4de8-add8-bde05a764a10"
+    },
+    {
+      "vertexes": [
+        [
+          3764,
+          2805
+        ],
+        [
+          3764,
+          2958
+        ]
+      ],
+      "closed": true,
+      "id": "9d452787-c0cb-45ae-9bc7-a6d185d9fbca"
+    },
+    {
+      "vertexes": [
+        [
+          3763,
+          3080
+        ],
+        [
+          3763,
+          3226
+        ]
+      ],
+      "closed": true,
+      "id": "d8a761be-a413-4e14-9708-1dc59623d356"
+    },
+    {
+      "vertexes": [
+        [
+          1546,
+          1694
+        ],
+        [
+          1684,
+          1694
+        ]
+      ],
+      "closed": true,
+      "id": "d10b8f8e-d712-4155-816c-cb97c182c5f0"
+    },
+    {
+      "vertexes": [
+        [
+          1411,
+          1818
+        ],
+        [
+          1411,
+          1957
+        ]
+      ],
+      "closed": true,
+      "id": "d25ac786-f2a5-4994-9da1-97dc117dcf1b"
+    }
+  ],
+  "dmTokens": [
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Troglodyte.png",
+      "sightTypes": [],
+      "name": "Troglodyte",
+      "column": 38,
+      "id": "1e42691d-b15c-46fd-b323-693ad0bf7e72",
+      "row": 44,
+      "conditions": [{"name": "Hidden"}],
+      "version": 2
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Troglodyte.png",
+      "sightTypes": [],
+      "name": "Troglodyte",
+      "column": 54,
+      "id": "1d81acb9-fca4-49c0-8754-d8dc1b60d706",
+      "row": 28,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Troglodyte.png",
+      "sightTypes": [],
+      "name": "Troglodyte",
+      "column": 53,
+      "id": "bd078248-4c99-4587-8076-26d871e6c584",
+      "row": 30,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Troglodyte.png",
+      "sightTypes": [],
+      "name": "Troglodyte",
+      "column": 58,
+      "id": "591413ae-fa24-4387-bf45-90f97391583a",
+      "row": 16,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Kobold.png",
+      "sightTypes": [],
+      "name": "Kobold",
+      "column": 13,
+      "id": "fc10f74a-6a73-484e-a0be-9d639ff9c62b",
+      "row": 33,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Kobold.png",
+      "sightTypes": [],
+      "name": "Kobold",
+      "column": 13,
+      "id": "3b54e91e-1329-4f8c-ad64-b8303ed4475e",
+      "row": 34,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Kobold.png",
+      "sightTypes": [],
+      "name": "Kobold",
+      "column": 16,
+      "id": "3a5e6ba5-7cde-4769-9854-6d3ba3c0e19c",
+      "row": 27,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Kobold.png",
+      "sightTypes": [],
+      "name": "Kobold",
+      "column": 13,
+      "id": "1525341c-68d7-4691-b20f-18783c19b64a",
+      "row": 26,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Kobold.png",
+      "sightTypes": [],
+      "name": "Kobold",
+      "column": 6,
+      "id": "c9c767cd-bd23-4b69-8144-3b8be174b29d",
+      "row": 35,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Kobold.png",
+      "sightTypes": [],
+      "name": "Kobold",
+      "column": 5,
+      "id": "7c918ab0-6853-4288-87ed-b061e319ddce",
+      "row": 34,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Kobold.png",
+      "sightTypes": [],
+      "name": "Kobold",
+      "column": 10,
+      "id": "b09caced-67b6-4c81-803f-b6a96579cf69",
+      "row": 30,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Kobold.png",
+      "sightTypes": [],
+      "name": "Kobold",
+      "column": 13,
+      "id": "5b5b0ec5-05b6-4c0d-9bb2-df72e5968a9a",
+      "row": 23,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Kobold.png",
+      "sightTypes": [],
+      "name": "Kobold",
+      "column": 13,
+      "id": "95bd1a69-d5e3-413b-a6f4-ffe7e46a8a11",
+      "row": 24,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Kobold.png",
+      "sightTypes": [],
+      "name": "Kobold",
+      "column": 17,
+      "id": "35d4df57-f977-444d-9768-1526671a4677",
+      "row": 22,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Kobold.png",
+      "sightTypes": [],
+      "name": "Kobold",
+      "column": 18,
+      "id": "45f3e589-72c8-4fbd-84b6-15998fe19c8c",
+      "row": 41,
+      "conditions": [{"name": "Hidden"}],
+      "version": 2
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Kobold.png",
+      "sightTypes": [],
+      "name": "Kobold",
+      "column": 12,
+      "id": "7970d224-c7eb-461c-8057-3ee1fc1aa997",
+      "row": 37,
+      "conditions": [{"name": "Hidden"}],
+      "version": 2
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Zombie.png",
+      "sightTypes": [],
+      "name": "Zombie",
+      "column": 33,
+      "id": "c4a8acc1-5062-4dd3-a5a0-4931eece6325",
+      "row": 53,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Wizard.png",
+      "sightTypes": [],
+      "name": "Wizard",
+      "column": 25,
+      "id": "fb942306-cfb2-4c63-8435-18e809085151",
+      "row": 51,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Skeleton.png",
+      "sightTypes": [],
+      "name": "Skeleton",
+      "column": 37,
+      "id": "e278070a-1bf7-4ce6-b1d3-01de34c0b4a6",
+      "row": 31,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Skeleton.png",
+      "sightTypes": [],
+      "name": "Skeleton",
+      "column": 35,
+      "id": "483920cc-ce20-46d7-a982-ce2506e042d5",
+      "row": 31,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Skeleton.png",
+      "sightTypes": [],
+      "name": "Skeleton",
+      "column": 37,
+      "id": "0f2248c9-2fc1-4bd4-8006-146cd6978286",
+      "row": 33,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Kobold.png",
+      "sightTypes": [],
+      "name": "Kobold",
+      "column": 10,
+      "id": "22461973-55ec-4166-a80b-ea72e34dbc84",
+      "row": 35,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Kobold.png",
+      "sightTypes": [],
+      "name": "Kobold",
+      "column": 8,
+      "id": "35dad7b9-0161-4fd2-824e-4c22af467fdc",
+      "row": 35,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Kobold.png",
+      "sightTypes": [],
+      "name": "Kobold",
+      "column": 8,
+      "id": "f9407eb9-f7c6-4a1c-8e42-b255c08a9450",
+      "row": 32,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Kobold.png",
+      "sightTypes": [],
+      "name": "Kobold",
+      "column": 6,
+      "id": "1c2e8caa-c116-4771-baee-29a5b9fc1edc",
+      "row": 31,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Troglodyte.png",
+      "sightTypes": [],
+      "name": "Troglodyte",
+      "column": 55,
+      "id": "e4521ce4-17ff-476c-8a7b-1c680aa0cf1c",
+      "row": 30,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Troglodyte.png",
+      "sightTypes": [],
+      "name": "Troglodyte",
+      "column": 59,
+      "id": "d06c3647-f46b-4847-a6e7-70d8a7de9bb3",
+      "row": 19,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Troglodyte.png",
+      "sightTypes": [],
+      "name": "Troglodyte",
+      "column": 57,
+      "id": "453b59b3-4b27-4e80-bbbd-1dded7530a40",
+      "row": 20,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Troglodyte.png",
+      "sightTypes": [],
+      "name": "Troglodyte",
+      "column": 57,
+      "id": "0bfecd28-c876-4ca0-8a85-e9961eeff8e1",
+      "row": 18,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Troglodyte.png",
+      "sightTypes": [],
+      "name": "Troglodyte",
+      "column": 50,
+      "id": "f8f1192c-b5d7-4a3a-ad4a-17ccc2f8a076",
+      "row": 30,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Troglodyte.png",
+      "sightTypes": [],
+      "name": "Troglodyte",
+      "column": 55,
+      "id": "40e4892e-5f20-4690-813f-c338208f1a98",
+      "row": 20,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Troglodyte.png",
+      "sightTypes": [],
+      "name": "Troglodyte",
+      "column": 44,
+      "id": "5b3ad8c1-9dc7-402b-946d-55249e9ff926",
+      "row": 37,
+      "conditions": [{"name": "Hidden"}],
+      "version": 2
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Troglodyte.png",
+      "sightTypes": [],
+      "name": "Troglodyte",
+      "column": 59,
+      "id": "f94b3dd7-1574-4e50-977a-da4a20e29c79",
+      "row": 17,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Huge",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Giant Hill.png",
+      "sightTypes": [],
+      "name": "Giant Hill",
+      "column": 46,
+      "id": "e4e021ed-1ceb-4b7a-a23a-1da505c28f65",
+      "row": 12,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Huge",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Giant Hill.png",
+      "sightTypes": [],
+      "name": "Giant Hill",
+      "column": 52,
+      "id": "0da3753e-5c1f-497e-9c6c-bb057e4da77e",
+      "row": 7,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Huge",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Black Dragon.png",
+      "sightTypes": [],
+      "name": "Black Dragon",
+      "column": 15,
+      "id": "6fcd7fc0-4154-46b8-81c7-88201eb927f0",
+      "row": 11,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Zombie.png",
+      "sightTypes": [],
+      "name": "Zombie",
+      "column": 31,
+      "id": "3c63b53a-ff2c-418b-b792-6e8fa0e336e9",
+      "row": 52,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Orc.png",
+      "sightTypes": [],
+      "name": "Orc",
+      "column": 51,
+      "id": "b4bbb881-9f34-44aa-8aee-94af53ce522f",
+      "row": 38,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Orc.png",
+      "sightTypes": [],
+      "name": "Orc",
+      "column": 49,
+      "id": "37847e74-e432-46fb-908b-f6696d7883a6",
+      "row": 38,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Orc.png",
+      "sightTypes": [],
+      "name": "Orc",
+      "column": 51,
+      "id": "37ec1c3d-4118-455b-831c-5fdc29d0e6cb",
+      "row": 46,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Orc.png",
+      "sightTypes": [],
+      "name": "Orc",
+      "column": 49,
+      "id": "8b707345-ce83-484e-84e5-6df8a7473d74",
+      "row": 46,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Orc.png",
+      "sightTypes": [],
+      "name": "Orc",
+      "column": 56,
+      "id": "c9490df3-a125-43cd-8eb0-61af64d3b8b0",
+      "row": 47,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Orc.png",
+      "sightTypes": [],
+      "name": "Orc",
+      "column": 55,
+      "id": "a53a99b2-07c1-43e7-9199-d94d3ade72b6",
+      "row": 47,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Orc.png",
+      "sightTypes": [],
+      "name": "Orc",
+      "column": 49,
+      "id": "caeca2ac-7f6d-4324-8826-43a3cf14b020",
+      "row": 40,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Orc.png",
+      "sightTypes": [],
+      "name": "Orc",
+      "column": 54,
+      "id": "2ab2a595-c78d-4d1e-bb49-1531f02a5936",
+      "row": 38,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Skeleton.png",
+      "sightTypes": [],
+      "name": "Skeleton",
+      "column": 21,
+      "id": "3e9b82c0-4774-48ce-8a73-21ac4cbf686c",
+      "row": 41,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Skeleton.png",
+      "sightTypes": [],
+      "name": "Skeleton",
+      "column": 19,
+      "id": "8b6ea023-4247-433e-8e2d-91f7d1487fa6",
+      "row": 41,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Skeleton.png",
+      "sightTypes": [],
+      "name": "Skeleton",
+      "column": 20,
+      "id": "8f33f8a0-46b0-4e32-a92c-1988695b1722",
+      "row": 42,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Skeleton.png",
+      "sightTypes": [],
+      "name": "Skeleton",
+      "column": 22,
+      "id": "3015aacb-065a-48b1-919c-bd30f745178f",
+      "row": 43,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Skeleton.png",
+      "sightTypes": [],
+      "name": "Skeleton",
+      "column": 21,
+      "id": "125fc92a-2d02-4502-9c2e-6de106913143",
+      "row": 45,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Zombie.png",
+      "sightTypes": [],
+      "name": "Zombie",
+      "column": 27,
+      "id": "680358db-4e3c-4d74-9237-8d525d1a2999",
+      "row": 55,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Zombie.png",
+      "sightTypes": [],
+      "name": "Zombie",
+      "column": 30,
+      "id": "ea92af33-ad1c-4db7-9bfd-9c69b890a0f5",
+      "row": 54,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Zombie.png",
+      "sightTypes": [],
+      "name": "Zombie",
+      "column": 32,
+      "id": "a2f8625f-fc7b-40f4-8b05-4b77d71bd8b4",
+      "row": 50,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Zombie.png",
+      "sightTypes": [],
+      "name": "Zombie",
+      "column": 34,
+      "id": "f0cc0d25-6631-4d18-bb09-3a0465cd2210",
+      "row": 51,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Zombie.png",
+      "sightTypes": [],
+      "name": "Zombie",
+      "column": 32,
+      "id": "1ee8b476-474b-4b7b-b2e0-0bb891284f04",
+      "row": 55,
+      "conditions": [],
+      "version": 2
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Skeleton.png",
+      "sightTypes": [],
+      "name": "Skeleton",
+      "column": 36,
+      "id": "7ef71b7e-12e9-41d4-9d0b-ee172c6990d9",
+      "row": 32,
+      "conditions": [],
+      "version": 2
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Skeleton.png",
+      "sightTypes": [],
+      "name": "Skeleton",
+      "column": 34,
+      "id": "8bc762fd-d44e-41e7-9116-035c70120e16",
+      "row": 34,
+      "conditions": [],
+      "version": 2
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Skeleton.png",
+      "sightTypes": [],
+      "name": "Skeleton",
+      "column": 35,
+      "id": "54335e32-6b7c-498d-b157-d72ee848fc83",
+      "row": 35,
+      "conditions": [],
+      "version": 2
+    },
+    {
+      "size": "Large",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Beholder Undead.png",
+      "sightTypes": [],
+      "name": "Beholder Undead",
+      "column": 24,
+      "id": "bbc7d8e3-0ed9-4aa7-b895-0dcc5fab70f1",
+      "row": 32,
+      "conditions": [],
+      "version": 4
+    }
+  ],
+  "initiative": {
+    "initiativeGroups": [],
+    "drawInitiativeOrder": false
+  },
+  "walls": [
+    {
+      "vertexes": [
+        [
+          558,
+          700
+        ],
+        [
+          849,
+          421
+        ]
+      ],
+      "id": "9552f6fb-dcf2-4d6b-8fd8-86e96e5f9acd"
+    },
+    {
+      "vertexes": [
+        [
+          849,
+          421
+        ],
+        [
+          1259,
+          421
+        ]
+      ],
+      "id": "e89bc3d4-dbd0-4e20-8fe0-18375ac6dc2a"
+    },
+    {
+      "vertexes": [
+        [
+          1259,
+          421
+        ],
+        [
+          1352,
+          532
+        ]
+      ],
+      "id": "9bef9b8f-8c12-4200-9a1d-31349d9d58f4"
+    },
+    {
+      "vertexes": [
+        [
+          1352,
+          532
+        ],
+        [
+          1542,
+          706
+        ]
+      ],
+      "id": "21ec2068-1e33-4cab-960b-26eee2db4308"
+    },
+    {
+      "vertexes": [
+        [
+          1542,
+          706
+        ],
+        [
+          1547,
+          839
+        ]
+      ],
+      "id": "82ae0367-f1b6-404f-af51-0508601684cf"
+    },
+    {
+      "vertexes": [
+        [
+          1547,
+          839
+        ],
+        [
+          1683,
+          841
+        ]
+      ],
+      "id": "12fc0023-0050-4739-a0bd-8463a81c9a13"
+    },
+    {
+      "vertexes": [
+        [
+          1683,
+          841
+        ],
+        [
+          1686,
+          701
+        ]
+      ],
+      "id": "42dcfe52-a4d5-4792-a861-b7c507ce2c33"
+    },
+    {
+      "vertexes": [
+        [
+          1686,
+          701
+        ],
+        [
+          1918,
+          464
+        ]
+      ],
+      "id": "f76cd4b2-6f24-47a3-bd1a-e2d7dabf83ac"
+    },
+    {
+      "vertexes": [
+        [
+          559,
+          698
+        ],
+        [
+          560,
+          1124
+        ]
+      ],
+      "id": "8feee6ed-f371-4c5c-beff-b57bb8fdd6d4"
+    },
+    {
+      "vertexes": [
+        [
+          560,
+          1124
+        ],
+        [
+          634,
+          1193
+        ]
+      ],
+      "id": "01613642-277a-481d-a023-bb330c076d14"
+    },
+    {
+      "vertexes": [
+        [
+          634,
+          1193
+        ],
+        [
+          416,
+          1426
+        ]
+      ],
+      "id": "5ddc104d-9a64-4200-80fd-6e34f26512d3"
+    },
+    {
+      "vertexes": [
+        [
+          559,
+          1542
+        ],
+        [
+          765,
+          1343
+        ]
+      ],
+      "id": "01809f68-9fac-4a39-a6c3-74802be616b3"
+    },
+    {
+      "vertexes": [
+        [
+          762,
+          1345
+        ],
+        [
+          821,
+          1397
+        ]
+      ],
+      "id": "1ca1afcb-afaf-452b-98fd-65201405a351"
+    },
+    {
+      "vertexes": [
+        [
+          821,
+          1397
+        ],
+        [
+          1262,
+          1395
+        ]
+      ],
+      "id": "9ccc3223-00fc-472e-82a2-c6f736237fe5"
+    },
+    {
+      "vertexes": [
+        [
+          1262,
+          1395
+        ],
+        [
+          1542,
+          1124
+        ]
+      ],
+      "id": "90e1367f-4aaf-4754-aa87-6fd5f2c6e8a7"
+    },
+    {
+      "vertexes": [
+        [
+          1542,
+          1124
+        ],
+        [
+          1543,
+          979
+        ]
+      ],
+      "id": "20e7bd2d-2a41-4d32-ba1d-290e56a738b7"
+    },
+    {
+      "vertexes": [
+        [
+          1543,
+          979
+        ],
+        [
+          1681,
+          978
+        ]
+      ],
+      "id": "6dc00bf9-d4a6-4d8c-b2e6-4a4f9cb44a16"
+    },
+    {
+      "vertexes": [
+        [
+          1681,
+          978
+        ],
+        [
+          1682,
+          1123
+        ]
+      ],
+      "id": "0c918bbb-8cd5-4a0b-b293-f3ba2c4e83d1"
+    },
+    {
+      "vertexes": [
+        [
+          1682,
+          1123
+        ],
+        [
+          1792,
+          1223
+        ]
+      ],
+      "id": "0112b01b-cfcb-4ab4-af99-17ee4aa778dc"
+    },
+    {
+      "vertexes": [
+        [
+          1792,
+          1223
+        ],
+        [
+          1721,
+          1292
+        ]
+      ],
+      "id": "44780f03-4451-4b95-b1a7-25dde906e7ce"
+    },
+    {
+      "vertexes": [
+        [
+          1721,
+          1292
+        ],
+        [
+          1683,
+          1262
+        ]
+      ],
+      "id": "a1db702a-82c3-436c-8e08-bd1e4d70a415"
+    },
+    {
+      "vertexes": [
+        [
+          1683,
+          1262
+        ],
+        [
+          1551,
+          1267
+        ]
+      ],
+      "id": "fdd8cabe-f09c-4f1d-8cd6-243ab3a70312"
+    },
+    {
+      "vertexes": [
+        [
+          1551,
+          1267
+        ],
+        [
+          1400,
+          1402
+        ]
+      ],
+      "id": "fae160f9-c9c6-4019-b3da-a3b3492e8d2a"
+    },
+    {
+      "vertexes": [
+        [
+          1400,
+          1402
+        ],
+        [
+          1401,
+          1543
+        ]
+      ],
+      "id": "09c12558-83f7-44a3-868e-407b39f2ba13"
+    },
+    {
+      "vertexes": [
+        [
+          1400,
+          1540
+        ],
+        [
+          1546,
+          1680
+        ]
+      ],
+      "id": "185e71d4-ee05-4d8f-a04e-0634611180f0"
+    },
+    {
+      "vertexes": [
+        [
+          1546,
+          1680
+        ],
+        [
+          1546,
+          1710
+        ]
+      ],
+      "id": "d81f1c9f-3c8e-44b8-9290-8b9670499a7f"
+    },
+    {
+      "vertexes": [
+        [
+          1546,
+          1710
+        ],
+        [
+          1537,
+          1721
+        ]
+      ],
+      "id": "37d5fc03-a2a3-4e4d-9eaa-0d4fbd4fa4de"
+    },
+    {
+      "vertexes": [
+        [
+          1537,
+          1721
+        ],
+        [
+          1534,
+          1820
+        ]
+      ],
+      "id": "833d6052-2c56-437e-8422-01d4bf899ce0"
+    },
+    {
+      "vertexes": [
+        [
+          1534,
+          1820
+        ],
+        [
+          1401,
+          1818
+        ]
+      ],
+      "id": "4241733e-766a-46f4-a1c6-7d83ee62db36"
+    },
+    {
+      "vertexes": [
+        [
+          1401,
+          1818
+        ],
+        [
+          1400,
+          1687
+        ]
+      ],
+      "id": "44f2a5ae-928b-456c-9aff-eeb690c15e23"
+    },
+    {
+      "vertexes": [
+        [
+          1400,
+          1687
+        ],
+        [
+          1259,
+          1530
+        ]
+      ],
+      "id": "fa1dbf65-c9a7-4337-af0d-a111b4598159"
+    },
+    {
+      "vertexes": [
+        [
+          1259,
+          1530
+        ],
+        [
+          979,
+          1538
+        ]
+      ],
+      "id": "cfcff7b2-eab1-44dd-b6f7-e690ac9991a9"
+    },
+    {
+      "vertexes": [
+        [
+          979,
+          1538
+        ],
+        [
+          834,
+          1685
+        ]
+      ],
+      "id": "9fd876d6-51f0-425c-a401-6837a2550296"
+    },
+    {
+      "vertexes": [
+        [
+          834,
+          1685
+        ],
+        [
+          842,
+          1962
+        ]
+      ],
+      "id": "40011f89-def7-4bee-8878-0b2745596fe0"
+    },
+    {
+      "vertexes": [
+        [
+          1862,
+          1300
+        ],
+        [
+          1798,
+          1360
+        ]
+      ],
+      "id": "e5106dea-32f4-429a-b147-7f4e1bd44ee9"
+    },
+    {
+      "vertexes": [
+        [
+          1798,
+          1360
+        ],
+        [
+          1827,
+          1398
+        ]
+      ],
+      "id": "9b1db8b4-6048-48c9-8f87-9675b1b12940"
+    },
+    {
+      "vertexes": [
+        [
+          1827,
+          1398
+        ],
+        [
+          1818,
+          1550
+        ]
+      ],
+      "id": "4f2d4d76-2ef1-48db-8a08-ef006dd2ea30"
+    },
+    {
+      "vertexes": [
+        [
+          1818,
+          1550
+        ],
+        [
+          1683,
+          1675
+        ]
+      ],
+      "id": "5a116b00-466f-4cad-b7a9-9b7ce1623581"
+    },
+    {
+      "vertexes": [
+        [
+          1683,
+          1675
+        ],
+        [
+          1676,
+          1927
+        ]
+      ],
+      "id": "c7e5c621-5cd4-40a9-86d9-e66d2b2face4"
+    },
+    {
+      "vertexes": [
+        [
+          1676,
+          1927
+        ],
+        [
+          1639,
+          1961
+        ]
+      ],
+      "id": "77ce7064-c7c8-417d-aef8-1e7279584b27"
+    },
+    {
+      "vertexes": [
+        [
+          1639,
+          1961
+        ],
+        [
+          1383,
+          1957
+        ]
+      ],
+      "id": "2b227fa1-aec7-4e32-9657-67c9093a0852"
+    },
+    {
+      "vertexes": [
+        [
+          1859,
+          1301
+        ],
+        [
+          1957,
+          1395
+        ]
+      ],
+      "id": "62d92108-a819-4200-be22-0e11d831f186"
+    },
+    {
+      "vertexes": [
+        [
+          1957,
+          1395
+        ],
+        [
+          2104,
+          1394
+        ]
+      ],
+      "id": "c2391009-f16a-4253-b668-399885c7a15b"
+    },
+    {
+      "vertexes": [
+        [
+          2104,
+          1394
+        ],
+        [
+          2102,
+          1539
+        ]
+      ],
+      "id": "63254796-8f6a-41ee-a785-340c0aeb749f"
+    },
+    {
+      "vertexes": [
+        [
+          2102,
+          1539
+        ],
+        [
+          1950,
+          1684
+        ]
+      ],
+      "id": "3724be6d-40bb-4ca7-b1cf-57bcf8ead589"
+    },
+    {
+      "vertexes": [
+        [
+          1950,
+          1684
+        ],
+        [
+          1862,
+          1688
+        ]
+      ],
+      "id": "8c572362-8012-412a-9bba-26b32506604b"
+    },
+    {
+      "vertexes": [
+        [
+          1862,
+          1688
+        ],
+        [
+          1842,
+          1700
+        ]
+      ],
+      "id": "913efa40-856c-45be-9ff5-5ffd2afbf8bb"
+    },
+    {
+      "vertexes": [
+        [
+          1842,
+          1700
+        ],
+        [
+          1823,
+          1730
+        ]
+      ],
+      "id": "5d1da46c-ec85-434d-82a5-b666ec342a79"
+    },
+    {
+      "vertexes": [
+        [
+          1823,
+          1730
+        ],
+        [
+          1816,
+          1932
+        ]
+      ],
+      "id": "0c75e878-45f2-4f02-b0e9-0973a4793827"
+    },
+    {
+      "vertexes": [
+        [
+          2314,
+          422
+        ],
+        [
+          2378,
+          425
+        ]
+      ],
+      "id": "d85042a6-8b19-435b-8bb0-8a52223ec9a3"
+    },
+    {
+      "vertexes": [
+        [
+          2378,
+          425
+        ],
+        [
+          2657,
+          712
+        ]
+      ],
+      "id": "9045b516-7c38-43e2-98bc-cefa054cb891"
+    },
+    {
+      "vertexes": [
+        [
+          2657,
+          712
+        ],
+        [
+          2662,
+          839
+        ]
+      ],
+      "id": "3153793a-2915-462e-9253-f910c4a43691"
+    },
+    {
+      "vertexes": [
+        [
+          2662,
+          839
+        ],
+        [
+          2939,
+          833
+        ]
+      ],
+      "id": "8fd29eb4-5a0e-4fa5-a41c-209b170f12fa"
+    },
+    {
+      "vertexes": [
+        [
+          2939,
+          833
+        ],
+        [
+          2972,
+          811
+        ]
+      ],
+      "id": "e26984a6-bdb0-43bc-b5ce-4e45fa467231"
+    },
+    {
+      "vertexes": [
+        [
+          2972,
+          811
+        ],
+        [
+          2970,
+          766
+        ]
+      ],
+      "id": "e9dd412a-9aa8-448c-97dc-09b4bbe2e7d9"
+    },
+    {
+      "vertexes": [
+        [
+          2970,
+          766
+        ],
+        [
+          3064,
+          612
+        ]
+      ],
+      "id": "0b37c9d1-45db-476c-a7e6-7a45bd2add8c"
+    },
+    {
+      "vertexes": [
+        [
+          3064,
+          612
+        ],
+        [
+          3106,
+          615
+        ]
+      ],
+      "id": "c6a3a1ba-49a1-491c-bc06-fba408223ce5"
+    },
+    {
+      "vertexes": [
+        [
+          3106,
+          615
+        ],
+        [
+          3207,
+          602
+        ]
+      ],
+      "id": "03061943-b756-430b-a3b0-9328955cdb5d"
+    },
+    {
+      "vertexes": [
+        [
+          3207,
+          602
+        ],
+        [
+          3243,
+          618
+        ]
+      ],
+      "id": "84e064cb-9eb8-4f9b-95e6-c99a5533855d"
+    },
+    {
+      "vertexes": [
+        [
+          3243,
+          618
+        ],
+        [
+          3252,
+          696
+        ]
+      ],
+      "id": "3753cb71-9b3e-4a1a-9dbd-36e2c329b6b6"
+    },
+    {
+      "vertexes": [
+        [
+          3252,
+          696
+        ],
+        [
+          3318,
+          711
+        ]
+      ],
+      "id": "e5c4c0b5-8e5f-4617-917d-ac7c61c334d1"
+    },
+    {
+      "vertexes": [
+        [
+          3318,
+          711
+        ],
+        [
+          3363,
+          750
+        ]
+      ],
+      "id": "058cecba-a58a-4d6c-98ab-3feb7c7b1f2d"
+    },
+    {
+      "vertexes": [
+        [
+          2855,
+          983
+        ],
+        [
+          2654,
+          983
+        ]
+      ],
+      "id": "1c983ae5-a37c-48cb-9d5e-ff57127c4e08"
+    },
+    {
+      "vertexes": [
+        [
+          2654,
+          983
+        ],
+        [
+          2659,
+          1123
+        ]
+      ],
+      "id": "de279277-19c3-4323-b5d2-8083d085fa36"
+    },
+    {
+      "vertexes": [
+        [
+          2659,
+          1123
+        ],
+        [
+          2592,
+          1198
+        ]
+      ],
+      "id": "c0da9da3-9648-43bc-9db9-37cfb14bdfd7"
+    },
+    {
+      "vertexes": [
+        [
+          2592,
+          1198
+        ],
+        [
+          2655,
+          1233
+        ]
+      ],
+      "id": "d5e2f958-9a1e-4fcc-b590-606c248dc5e3"
+    },
+    {
+      "vertexes": [
+        [
+          2655,
+          1233
+        ],
+        [
+          2683,
+          1254
+        ]
+      ],
+      "id": "538fa6ea-29c3-43f9-8a45-fc5f91e2d2bf"
+    },
+    {
+      "vertexes": [
+        [
+          2683,
+          1254
+        ],
+        [
+          2736,
+          1274
+        ]
+      ],
+      "id": "156b5ea0-1012-4946-b19b-a3118eec0caf"
+    },
+    {
+      "vertexes": [
+        [
+          2736,
+          1274
+        ],
+        [
+          2816,
+          1271
+        ]
+      ],
+      "id": "9a371691-1198-4fcd-9af5-f9eafee1fb8a"
+    },
+    {
+      "vertexes": [
+        [
+          2816,
+          1271
+        ],
+        [
+          2837,
+          1269
+        ]
+      ],
+      "id": "f73fa3e3-b5fd-48a4-bdb4-a87cfba07054"
+    },
+    {
+      "vertexes": [
+        [
+          2837,
+          1269
+        ],
+        [
+          2858,
+          1281
+        ]
+      ],
+      "id": "7a8be9ae-ee7d-4fc4-991c-e08f83b12fb5"
+    },
+    {
+      "vertexes": [
+        [
+          2858,
+          1281
+        ],
+        [
+          2891,
+          1283
+        ]
+      ],
+      "id": "2ca50bbb-385a-4b38-8fea-6adc307f1b67"
+    },
+    {
+      "vertexes": [
+        [
+          2891,
+          1283
+        ],
+        [
+          2903,
+          1292
+        ]
+      ],
+      "id": "6d47120c-8553-4c84-b885-aecc129a4b9e"
+    },
+    {
+      "vertexes": [
+        [
+          2903,
+          1292
+        ],
+        [
+          2905,
+          1318
+        ]
+      ],
+      "id": "59ddeb97-09e3-4e23-a96c-4d0aef3905e4"
+    },
+    {
+      "vertexes": [
+        [
+          2905,
+          1318
+        ],
+        [
+          2938,
+          1371
+        ]
+      ],
+      "id": "f1708ca8-e801-4ead-a42b-201c69eea743"
+    },
+    {
+      "vertexes": [
+        [
+          2938,
+          1371
+        ],
+        [
+          2976,
+          1371
+        ]
+      ],
+      "id": "9f757818-2973-4ec4-8911-0f67f0f0c3a4"
+    },
+    {
+      "vertexes": [
+        [
+          2976,
+          1371
+        ],
+        [
+          3008,
+          1370
+        ]
+      ],
+      "id": "71714f35-1f83-49a5-a06a-c91f3350a111"
+    },
+    {
+      "vertexes": [
+        [
+          3008,
+          1370
+        ],
+        [
+          3077,
+          1339
+        ]
+      ],
+      "id": "6370976a-4f1c-4c88-a396-542344a3bc65"
+    },
+    {
+      "vertexes": [
+        [
+          3077,
+          1339
+        ],
+        [
+          3060,
+          1286
+        ]
+      ],
+      "id": "f3d1d42e-d423-4c6e-95ab-8c7e6c1dd5d8"
+    },
+    {
+      "vertexes": [
+        [
+          3060,
+          1286
+        ],
+        [
+          3066,
+          1231
+        ]
+      ],
+      "id": "6e682ef1-c6d8-4c87-9f58-9f9450776a63"
+    },
+    {
+      "vertexes": [
+        [
+          3066,
+          1231
+        ],
+        [
+          3051,
+          1187
+        ]
+      ],
+      "id": "8281f81e-264e-41ae-9621-5ce98d5614a6"
+    },
+    {
+      "vertexes": [
+        [
+          3051,
+          1187
+        ],
+        [
+          2918,
+          1142
+        ]
+      ],
+      "id": "48cf3d1b-a854-4507-ae6b-41a7c9a96310"
+    },
+    {
+      "vertexes": [
+        [
+          2918,
+          1142
+        ],
+        [
+          2889,
+          1111
+        ]
+      ],
+      "id": "0a9f0db8-a39c-47a7-8478-4768022496a7"
+    },
+    {
+      "vertexes": [
+        [
+          2889,
+          1111
+        ],
+        [
+          2875,
+          1073
+        ]
+      ],
+      "id": "f72e3134-55ff-40e6-ac99-1165341d5389"
+    },
+    {
+      "vertexes": [
+        [
+          2875,
+          1073
+        ],
+        [
+          2891,
+          1049
+        ]
+      ],
+      "id": "587377c6-8097-468d-bb7f-123f1650513a"
+    },
+    {
+      "vertexes": [
+        [
+          2891,
+          1049
+        ],
+        [
+          2880,
+          1013
+        ]
+      ],
+      "id": "d8f76831-6cda-4817-9045-ea0deffe55a8"
+    },
+    {
+      "vertexes": [
+        [
+          2880,
+          1013
+        ],
+        [
+          2866,
+          990
+        ]
+      ],
+      "id": "3bbf9996-efd1-485c-a0f0-7e39a812cee3"
+    },
+    {
+      "vertexes": [
+        [
+          2866,
+          990
+        ],
+        [
+          2849,
+          983
+        ]
+      ],
+      "id": "a9488fef-8961-4033-aa8a-8ee0a514d2e7"
+    },
+    {
+      "vertexes": [
+        [
+          2245,
+          1400
+        ],
+        [
+          2247,
+          1542
+        ]
+      ],
+      "id": "57ffef73-12e9-40f2-9b66-4679f0528910"
+    },
+    {
+      "vertexes": [
+        [
+          2247,
+          1542
+        ],
+        [
+          2382,
+          1679
+        ]
+      ],
+      "id": "070548cd-e417-4678-9eb3-51242184d63b"
+    },
+    {
+      "vertexes": [
+        [
+          2382,
+          1679
+        ],
+        [
+          2389,
+          1776
+        ]
+      ],
+      "id": "0329dd1f-6458-4725-8d6b-78121041a8ce"
+    },
+    {
+      "vertexes": [
+        [
+          2389,
+          1776
+        ],
+        [
+          2384,
+          1832
+        ]
+      ],
+      "id": "c59cc2b7-0b4b-4bf9-b329-7ba15b3174fa"
+    },
+    {
+      "vertexes": [
+        [
+          2384,
+          1832
+        ],
+        [
+          2241,
+          1956
+        ]
+      ],
+      "id": "b5aef7ab-a8bc-4552-ac27-08f3c391053c"
+    },
+    {
+      "vertexes": [
+        [
+          2241,
+          1956
+        ],
+        [
+          2097,
+          1957
+        ]
+      ],
+      "id": "a6da45cd-08c3-4208-bc9d-c0cbb0ff0b97"
+    },
+    {
+      "vertexes": [
+        [
+          2097,
+          1957
+        ],
+        [
+          1963,
+          1817
+        ]
+      ],
+      "id": "d56ab072-c4ae-4e88-a801-426dbf3e1e9a"
+    },
+    {
+      "vertexes": [
+        [
+          1963,
+          1817
+        ],
+        [
+          1958,
+          1834
+        ]
+      ],
+      "id": "0852001e-49ef-4842-9ab5-4d1b40052524"
+    },
+    {
+      "vertexes": [
+        [
+          1958,
+          1834
+        ],
+        [
+          1964,
+          2096
+        ]
+      ],
+      "id": "96a8fa5f-c065-4c8c-92f7-515f6890860c"
+    },
+    {
+      "vertexes": [
+        [
+          1964,
+          2096
+        ],
+        [
+          2104,
+          2097
+        ]
+      ],
+      "id": "d2af41ee-2b36-477f-9e14-a0bbba974683"
+    },
+    {
+      "vertexes": [
+        [
+          2104,
+          2097
+        ],
+        [
+          2249,
+          2243
+        ]
+      ],
+      "id": "109f39e0-effb-4e22-9102-bbf7aaec33ce"
+    },
+    {
+      "vertexes": [
+        [
+          2245,
+          1402
+        ],
+        [
+          2390,
+          1394
+        ]
+      ],
+      "id": "2574b19c-69ab-456e-b6ff-6acc8f2e0614"
+    },
+    {
+      "vertexes": [
+        [
+          2390,
+          1394
+        ],
+        [
+          2525,
+          1257
+        ]
+      ],
+      "id": "ca1d9f11-e7c2-4465-8d7f-190a44410ffc"
+    },
+    {
+      "vertexes": [
+        [
+          2525,
+          1257
+        ],
+        [
+          2552,
+          1270
+        ]
+      ],
+      "id": "73626345-3ebd-4f4e-a6b7-6fd6ba889bff"
+    },
+    {
+      "vertexes": [
+        [
+          2552,
+          1270
+        ],
+        [
+          2567,
+          1301
+        ]
+      ],
+      "id": "8c020f14-6438-45ad-82ac-7b027cfc38b9"
+    },
+    {
+      "vertexes": [
+        [
+          2567,
+          1301
+        ],
+        [
+          2587,
+          1309
+        ]
+      ],
+      "id": "40d384b2-e955-47e6-9e95-0b32e5e2d0fd"
+    },
+    {
+      "vertexes": [
+        [
+          2587,
+          1309
+        ],
+        [
+          2623,
+          1353
+        ]
+      ],
+      "id": "4e0fe6dc-c11f-4513-9141-e5cc8b11691a"
+    },
+    {
+      "vertexes": [
+        [
+          2623,
+          1353
+        ],
+        [
+          2649,
+          1372
+        ]
+      ],
+      "id": "f5b11112-72bc-4cb9-8362-a89f38f433b4"
+    },
+    {
+      "vertexes": [
+        [
+          2649,
+          1372
+        ],
+        [
+          2671,
+          1382
+        ]
+      ],
+      "id": "83ae511b-5973-4a4a-b397-f7c4795639bf"
+    },
+    {
+      "vertexes": [
+        [
+          2671,
+          1382
+        ],
+        [
+          2710,
+          1385
+        ]
+      ],
+      "id": "7b7b6eca-b434-42b9-b8d9-315a88f4ddc4"
+    },
+    {
+      "vertexes": [
+        [
+          2710,
+          1385
+        ],
+        [
+          2746,
+          1376
+        ]
+      ],
+      "id": "466094c0-5c32-4b31-a2fe-4f9a84af3aac"
+    },
+    {
+      "vertexes": [
+        [
+          2746,
+          1376
+        ],
+        [
+          2811,
+          1381
+        ]
+      ],
+      "id": "3aa39540-28bd-409f-b061-74a386f02897"
+    },
+    {
+      "vertexes": [
+        [
+          2811,
+          1381
+        ],
+        [
+          2828,
+          1411
+        ]
+      ],
+      "id": "f156c24a-9eee-46d1-9f61-e3e584abb453"
+    },
+    {
+      "vertexes": [
+        [
+          2828,
+          1411
+        ],
+        [
+          2838,
+          1445
+        ]
+      ],
+      "id": "89f547ea-19cd-45bf-a4b0-52882e3f2d01"
+    },
+    {
+      "vertexes": [
+        [
+          2838,
+          1445
+        ],
+        [
+          2836,
+          1472
+        ]
+      ],
+      "id": "4b10abac-d93b-41d1-9f48-6d44133565c1"
+    },
+    {
+      "vertexes": [
+        [
+          2836,
+          1472
+        ],
+        [
+          2854,
+          1486
+        ]
+      ],
+      "id": "2cb9f5a1-eb0f-4601-ad4c-9a93f973b92a"
+    },
+    {
+      "vertexes": [
+        [
+          2854,
+          1486
+        ],
+        [
+          2874,
+          1490
+        ]
+      ],
+      "id": "93692d0a-f4bc-4327-b2c3-f12551be18b0"
+    },
+    {
+      "vertexes": [
+        [
+          2874,
+          1490
+        ],
+        [
+          2933,
+          1497
+        ]
+      ],
+      "id": "008f7cdb-373f-4fb2-833e-61e70bff7062"
+    },
+    {
+      "vertexes": [
+        [
+          2933,
+          1497
+        ],
+        [
+          2999,
+          1519
+        ]
+      ],
+      "id": "a690330b-ff6d-49e5-a445-055a8fc38f46"
+    },
+    {
+      "vertexes": [
+        [
+          2999,
+          1519
+        ],
+        [
+          3027,
+          1509
+        ]
+      ],
+      "id": "35ffb6e0-948f-4ff2-bc16-fd217a78c3a4"
+    },
+    {
+      "vertexes": [
+        [
+          3027,
+          1509
+        ],
+        [
+          3070,
+          1474
+        ]
+      ],
+      "id": "de680b66-63cc-454a-b21f-a2b26c435719"
+    },
+    {
+      "vertexes": [
+        [
+          3070,
+          1474
+        ],
+        [
+          3128,
+          1441
+        ]
+      ],
+      "id": "31245dab-567b-40ec-8fd5-3022c321aa2a"
+    },
+    {
+      "vertexes": [
+        [
+          3128,
+          1441
+        ],
+        [
+          3147,
+          1442
+        ]
+      ],
+      "id": "06e18c5f-f490-4e98-b541-f43970086e78"
+    },
+    {
+      "vertexes": [
+        [
+          3147,
+          1442
+        ],
+        [
+          3183,
+          1451
+        ]
+      ],
+      "id": "d6897499-d217-445f-873d-d27aa78dd0bd"
+    },
+    {
+      "vertexes": [
+        [
+          3183,
+          1451
+        ],
+        [
+          3201,
+          1487
+        ]
+      ],
+      "id": "f6ddcde9-6dd5-4dd8-bcae-1ec832c07eb1"
+    },
+    {
+      "vertexes": [
+        [
+          3201,
+          1487
+        ],
+        [
+          3207,
+          1514
+        ]
+      ],
+      "id": "500e5b7c-ac14-457a-a761-ac128fcde86f"
+    },
+    {
+      "vertexes": [
+        [
+          3207,
+          1514
+        ],
+        [
+          3194,
+          1546
+        ]
+      ],
+      "id": "0b626421-a383-45c6-802a-acd1de003db2"
+    },
+    {
+      "vertexes": [
+        [
+          3194,
+          1546
+        ],
+        [
+          3191,
+          1590
+        ]
+      ],
+      "id": "c0a60112-ead9-428f-b773-40a88d00dad8"
+    },
+    {
+      "vertexes": [
+        [
+          3191,
+          1590
+        ],
+        [
+          3208,
+          1612
+        ]
+      ],
+      "id": "db6d66f5-1fce-4b0f-8beb-4c757093839c"
+    },
+    {
+      "vertexes": [
+        [
+          3208,
+          1612
+        ],
+        [
+          3221,
+          1655
+        ]
+      ],
+      "id": "3a6cfac2-91a1-41e9-aded-6d1493738d93"
+    },
+    {
+      "vertexes": [
+        [
+          3221,
+          1655
+        ],
+        [
+          3252,
+          1675
+        ]
+      ],
+      "id": "2f99a201-915f-49e2-9cbc-ee4b6e42e734"
+    },
+    {
+      "vertexes": [
+        [
+          3252,
+          1675
+        ],
+        [
+          3292,
+          1667
+        ]
+      ],
+      "id": "d87844ed-2d93-4ee4-bda5-c1ec55e59edd"
+    },
+    {
+      "vertexes": [
+        [
+          3292,
+          1667
+        ],
+        [
+          3318,
+          1679
+        ]
+      ],
+      "id": "cde934ec-e1d2-4b15-970a-d22a268f3a6a"
+    },
+    {
+      "vertexes": [
+        [
+          3318,
+          1679
+        ],
+        [
+          3340,
+          1695
+        ]
+      ],
+      "id": "3cdedaf8-af6f-45bc-b246-afcc7d9b52be"
+    },
+    {
+      "vertexes": [
+        [
+          3340,
+          1695
+        ],
+        [
+          3356,
+          1725
+        ]
+      ],
+      "id": "d7cef084-44f2-4755-bc81-832d47437261"
+    },
+    {
+      "vertexes": [
+        [
+          3356,
+          1725
+        ],
+        [
+          3372,
+          1742
+        ]
+      ],
+      "id": "40a6afad-0a64-4402-a402-25dbee2a7381"
+    },
+    {
+      "vertexes": [
+        [
+          3372,
+          1742
+        ],
+        [
+          3370,
+          1774
+        ]
+      ],
+      "id": "ffae031d-ec40-4d68-b977-e1bdeeae1327"
+    },
+    {
+      "vertexes": [
+        [
+          3370,
+          1774
+        ],
+        [
+          3358,
+          1835
+        ]
+      ],
+      "id": "0cae5cd7-a07d-4091-939b-7f4e73bc1cb6"
+    },
+    {
+      "vertexes": [
+        [
+          3358,
+          1835
+        ],
+        [
+          3332,
+          1914
+        ]
+      ],
+      "id": "51c090f4-4c32-4346-8da0-328e04e18ab4"
+    },
+    {
+      "vertexes": [
+        [
+          3332,
+          1914
+        ],
+        [
+          3328,
+          1957
+        ]
+      ],
+      "id": "be98c6b5-0a49-47ee-a80f-00a84a3742a7"
+    },
+    {
+      "vertexes": [
+        [
+          3328,
+          1957
+        ],
+        [
+          3330,
+          1984
+        ]
+      ],
+      "id": "7b8987e5-20aa-493a-bafd-ff29042da12f"
+    },
+    {
+      "vertexes": [
+        [
+          3330,
+          1984
+        ],
+        [
+          3348,
+          2017
+        ]
+      ],
+      "id": "49c2e710-7e65-4c9d-a990-8966ab8cafdd"
+    },
+    {
+      "vertexes": [
+        [
+          3348,
+          2017
+        ],
+        [
+          3379,
+          2030
+        ]
+      ],
+      "id": "44144b66-c600-4847-919f-9a52d4f7c76c"
+    },
+    {
+      "vertexes": [
+        [
+          3379,
+          2030
+        ],
+        [
+          3426,
+          2025
+        ]
+      ],
+      "id": "84767c42-cfef-4820-849d-2b2c1d08d271"
+    },
+    {
+      "vertexes": [
+        [
+          416,
+          1425
+        ],
+        [
+          429,
+          2017
+        ]
+      ],
+      "id": "59e9357f-0c8b-4de0-b1fc-205586d78ae0"
+    },
+    {
+      "vertexes": [
+        [
+          560,
+          1541
+        ],
+        [
+          566,
+          2105
+        ]
+      ],
+      "id": "e92b1322-bd1d-4acd-9e32-86210b76e9ea"
+    },
+    {
+      "vertexes": [
+        [
+          566,
+          2105
+        ],
+        [
+          701,
+          2108
+        ]
+      ],
+      "id": "b8ad3fa1-09e6-472d-93a4-172a4499c7ed"
+    },
+    {
+      "vertexes": [
+        [
+          701,
+          2108
+        ],
+        [
+          723,
+          2133
+        ]
+      ],
+      "id": "910abdd2-02fa-40be-8695-2f4d64f5bb59"
+    },
+    {
+      "vertexes": [
+        [
+          723,
+          2133
+        ],
+        [
+          796,
+          2070
+        ]
+      ],
+      "id": "a4dc6bfd-66bb-45c5-a58c-6ee568a54330"
+    },
+    {
+      "vertexes": [
+        [
+          796,
+          2070
+        ],
+        [
+          864,
+          1989
+        ]
+      ],
+      "id": "4a3cb1bd-059b-4a63-b5d6-d653bf9fb638"
+    },
+    {
+      "vertexes": [
+        [
+          864,
+          1989
+        ],
+        [
+          842,
+          1961
+        ]
+      ],
+      "id": "34693748-863b-4ac2-91f7-e101cdeb22d1"
+    },
+    {
+      "vertexes": [
+        [
+          429,
+          2013
+        ],
+        [
+          428,
+          2105
+        ]
+      ],
+      "id": "f2e23b68-dbec-4367-8906-3b2c4305c895"
+    },
+    {
+      "vertexes": [
+        [
+          428,
+          2105
+        ],
+        [
+          349,
+          2168
+        ]
+      ],
+      "id": "9bd3159c-a2f9-4829-840e-9a3696063ffc"
+    },
+    {
+      "vertexes": [
+        [
+          349,
+          2168
+        ],
+        [
+          278,
+          2245
+        ]
+      ],
+      "id": "719c38cc-0405-4956-8ac4-bca988abe241"
+    },
+    {
+      "vertexes": [
+        [
+          1386,
+          1957
+        ],
+        [
+          1320,
+          2019
+        ]
+      ],
+      "id": "900aab32-72ab-4d19-b8ed-e1651133e333"
+    },
+    {
+      "vertexes": [
+        [
+          1320,
+          2019
+        ],
+        [
+          1252,
+          2105
+        ]
+      ],
+      "id": "29cb432c-a323-4a4f-947b-a8dcc4da0d02"
+    },
+    {
+      "vertexes": [
+        [
+          1252,
+          2105
+        ],
+        [
+          983,
+          2099
+        ]
+      ],
+      "id": "e01bfddd-88be-401c-bcdb-da10838fc1fb"
+    },
+    {
+      "vertexes": [
+        [
+          983,
+          2099
+        ],
+        [
+          947,
+          2067
+        ]
+      ],
+      "id": "45d74c89-9d45-486d-b625-63812e8d0b24"
+    },
+    {
+      "vertexes": [
+        [
+          947,
+          2067
+        ],
+        [
+          813,
+          2213
+        ]
+      ],
+      "id": "8dbdecfd-5fb9-4bd2-b18c-8b3140285710"
+    },
+    {
+      "vertexes": [
+        [
+          813,
+          2213
+        ],
+        [
+          845,
+          2245
+        ]
+      ],
+      "id": "45ce472e-000e-4f6d-8f0a-a672551e40c5"
+    },
+    {
+      "vertexes": [
+        [
+          845,
+          2245
+        ],
+        [
+          846,
+          2381
+        ]
+      ],
+      "id": "1d5505e0-77db-4fd8-b2fe-f7900ab26ccf"
+    },
+    {
+      "vertexes": [
+        [
+          846,
+          2381
+        ],
+        [
+          1121,
+          2384
+        ]
+      ],
+      "id": "635fa765-41da-4a0d-8bd5-3329515844a1"
+    },
+    {
+      "vertexes": [
+        [
+          1121,
+          2384
+        ],
+        [
+          1125,
+          2265
+        ]
+      ],
+      "id": "c2147468-ab0c-4846-bdd8-af0571551537"
+    },
+    {
+      "vertexes": [
+        [
+          1125,
+          2265
+        ],
+        [
+          1149,
+          2245
+        ]
+      ],
+      "id": "471f40b2-3553-4208-bd5b-8a5feb68393b"
+    },
+    {
+      "vertexes": [
+        [
+          1149,
+          2245
+        ],
+        [
+          1238,
+          2251
+        ]
+      ],
+      "id": "ef7b4991-abd5-4dfd-8794-56486ba0acb7"
+    },
+    {
+      "vertexes": [
+        [
+          1238,
+          2251
+        ],
+        [
+          1259,
+          2275
+        ]
+      ],
+      "id": "25c7a834-20a9-4189-b72d-87879b6bb212"
+    },
+    {
+      "vertexes": [
+        [
+          1259,
+          2275
+        ],
+        [
+          1258,
+          2388
+        ]
+      ],
+      "id": "79f78ce6-0fce-4fe9-a54b-1d32564b061c"
+    },
+    {
+      "vertexes": [
+        [
+          1258,
+          2388
+        ],
+        [
+          1342,
+          2393
+        ]
+      ],
+      "id": "07f29ed3-2c43-4325-bf48-7d87b0717e3f"
+    },
+    {
+      "vertexes": [
+        [
+          1342,
+          2393
+        ],
+        [
+          1546,
+          2389
+        ]
+      ],
+      "id": "fb1767a7-59e6-40c0-9d5c-323f9ace71a2"
+    },
+    {
+      "vertexes": [
+        [
+          1546,
+          2389
+        ],
+        [
+          1541,
+          2242
+        ]
+      ],
+      "id": "0b874e5b-bdde-42bd-b6b0-dd5841dcc9d2"
+    },
+    {
+      "vertexes": [
+        [
+          1541,
+          2242
+        ],
+        [
+          1683,
+          2099
+        ]
+      ],
+      "id": "8798900f-00a0-4845-9c3e-ac84622c49fc"
+    },
+    {
+      "vertexes": [
+        [
+          1683,
+          2099
+        ],
+        [
+          1820,
+          2104
+        ]
+      ],
+      "id": "b87b7160-4537-47b2-961c-d14213865585"
+    },
+    {
+      "vertexes": [
+        [
+          1820,
+          2104
+        ],
+        [
+          1816,
+          1926
+        ]
+      ],
+      "id": "2466de01-7f7e-45e4-8e7c-40ffab3b6ebf"
+    },
+    {
+      "vertexes": [
+        [
+          280,
+          2241
+        ],
+        [
+          285,
+          2516
+        ]
+      ],
+      "id": "aef2182d-df31-42aa-83ae-a2195f2346de"
+    },
+    {
+      "vertexes": [
+        [
+          285,
+          2516
+        ],
+        [
+          346,
+          2598
+        ]
+      ],
+      "id": "a945823d-7fdc-485f-8b17-0076b21a22a2"
+    },
+    {
+      "vertexes": [
+        [
+          346,
+          2598
+        ],
+        [
+          408,
+          2667
+        ]
+      ],
+      "id": "1104b865-333a-40fc-905f-ad69a1cc9113"
+    },
+    {
+      "vertexes": [
+        [
+          408,
+          2667
+        ],
+        [
+          472,
+          2662
+        ]
+      ],
+      "id": "ccf4dabb-d805-4f0c-afe4-fd26b1d762aa"
+    },
+    {
+      "vertexes": [
+        [
+          472,
+          2662
+        ],
+        [
+          537,
+          2670
+        ]
+      ],
+      "id": "b508dda8-0fc4-4939-a9c9-edc37d1c4a31"
+    },
+    {
+      "vertexes": [
+        [
+          537,
+          2670
+        ],
+        [
+          714,
+          2663
+        ]
+      ],
+      "id": "c6687fe4-a0d2-4a27-ae7f-b0a375382ff5"
+    },
+    {
+      "vertexes": [
+        [
+          714,
+          2663
+        ],
+        [
+          751,
+          2631
+        ]
+      ],
+      "id": "e5b41083-0d63-4a8e-bc03-17365879e4bb"
+    },
+    {
+      "vertexes": [
+        [
+          751,
+          2631
+        ],
+        [
+          802,
+          2670
+        ]
+      ],
+      "id": "77b5d2bf-583c-453b-84cf-e3208febe097"
+    },
+    {
+      "vertexes": [
+        [
+          802,
+          2670
+        ],
+        [
+          792,
+          2734
+        ]
+      ],
+      "id": "42617b25-7ed4-4ae1-be60-40cd38fb2ac6"
+    },
+    {
+      "vertexes": [
+        [
+          792,
+          2734
+        ],
+        [
+          764,
+          2752
+        ]
+      ],
+      "id": "14d812ac-a6b7-4c0d-91e0-83cd3c74b9ac"
+    },
+    {
+      "vertexes": [
+        [
+          764,
+          2752
+        ],
+        [
+          765,
+          2776
+        ]
+      ],
+      "id": "33f4494b-df28-428b-8ecc-5af812a0f16f"
+    },
+    {
+      "vertexes": [
+        [
+          765,
+          2776
+        ],
+        [
+          665,
+          2867
+        ]
+      ],
+      "id": "6ef7704c-eacf-45d7-b855-b51218e04368"
+    },
+    {
+      "vertexes": [
+        [
+          665,
+          2867
+        ],
+        [
+          677,
+          2902
+        ]
+      ],
+      "id": "ed44c275-7d1e-426f-8e1d-2bc92a4a5ce0"
+    },
+    {
+      "vertexes": [
+        [
+          677,
+          2902
+        ],
+        [
+          700,
+          2932
+        ]
+      ],
+      "id": "686bab7a-f9e9-47fa-9035-25ba3a6cf323"
+    },
+    {
+      "vertexes": [
+        [
+          700,
+          2932
+        ],
+        [
+          669,
+          2971
+        ]
+      ],
+      "id": "2d4f39a8-cbc2-4fb2-ad19-fee03fc7f8a4"
+    },
+    {
+      "vertexes": [
+        [
+          669,
+          2971
+        ],
+        [
+          638,
+          2996
+        ]
+      ],
+      "id": "accec14f-eef9-4a4e-b4bb-c36baf6c6e4a"
+    },
+    {
+      "vertexes": [
+        [
+          638,
+          2996
+        ],
+        [
+          614,
+          3022
+        ]
+      ],
+      "id": "8ce75555-24b3-4cfb-a09d-6f59611a0902"
+    },
+    {
+      "vertexes": [
+        [
+          840,
+          2518
+        ],
+        [
+          1123,
+          2529
+        ]
+      ],
+      "id": "6ef7302e-888a-46c6-aa0e-59de1d5f8e53"
+    },
+    {
+      "vertexes": [
+        [
+          1123,
+          2529
+        ],
+        [
+          1264,
+          2528
+        ]
+      ],
+      "id": "033fbd46-c585-41ff-b663-5aade8dfdf2a"
+    },
+    {
+      "vertexes": [
+        [
+          1264,
+          2528
+        ],
+        [
+          1542,
+          2524
+        ]
+      ],
+      "id": "7f2550a1-53f7-4b11-a807-61be63574a76"
+    },
+    {
+      "vertexes": [
+        [
+          1542,
+          2524
+        ],
+        [
+          1542,
+          2660
+        ]
+      ],
+      "id": "c78a08c2-6449-492e-bc31-f00dbb6e9cbb"
+    },
+    {
+      "vertexes": [
+        [
+          1542,
+          2660
+        ],
+        [
+          1705,
+          2798
+        ]
+      ],
+      "id": "bd6e7e70-c7af-406f-99bf-844603772d2b"
+    },
+    {
+      "vertexes": [
+        [
+          842,
+          2517
+        ],
+        [
+          844,
+          2533
+        ]
+      ],
+      "id": "9247e7c1-4131-437a-bf06-c5bc8809eaf8"
+    },
+    {
+      "vertexes": [
+        [
+          844,
+          2533
+        ],
+        [
+          833,
+          2551
+        ]
+      ],
+      "id": "794a7ced-0b41-4a3a-88eb-bddceba1d9a6"
+    },
+    {
+      "vertexes": [
+        [
+          833,
+          2551
+        ],
+        [
+          859,
+          2584
+        ]
+      ],
+      "id": "1eec7840-bf9c-41a4-99e2-1ee1a432cb5e"
+    },
+    {
+      "vertexes": [
+        [
+          859,
+          2584
+        ],
+        [
+          916,
+          2588
+        ]
+      ],
+      "id": "42d44c42-c556-4cf7-bcf6-cfdeb6273413"
+    },
+    {
+      "vertexes": [
+        [
+          916,
+          2588
+        ],
+        [
+          930,
+          2602
+        ]
+      ],
+      "id": "b32f521b-e718-4d45-9063-c184b4c23de0"
+    },
+    {
+      "vertexes": [
+        [
+          930,
+          2602
+        ],
+        [
+          927,
+          2645
+        ]
+      ],
+      "id": "75d5c1fc-2713-4338-8339-931f6ffda2a1"
+    },
+    {
+      "vertexes": [
+        [
+          927,
+          2645
+        ],
+        [
+          936,
+          2663
+        ]
+      ],
+      "id": "e6c7cd56-b170-4c33-8b69-23392aeb8a29"
+    },
+    {
+      "vertexes": [
+        [
+          936,
+          2663
+        ],
+        [
+          951,
+          2722
+        ]
+      ],
+      "id": "16cee367-5fbd-4214-a096-30921d7ee7d7"
+    },
+    {
+      "vertexes": [
+        [
+          951,
+          2722
+        ],
+        [
+          969,
+          2742
+        ]
+      ],
+      "id": "111cc512-c46e-42be-a70a-2dda010e9544"
+    },
+    {
+      "vertexes": [
+        [
+          969,
+          2742
+        ],
+        [
+          999,
+          2782
+        ]
+      ],
+      "id": "df43cb16-e4e1-4e91-8917-653efaebdff7"
+    },
+    {
+      "vertexes": [
+        [
+          999,
+          2782
+        ],
+        [
+          992,
+          2866
+        ]
+      ],
+      "id": "3189974b-eca6-468b-8007-7ba9d36f69f2"
+    },
+    {
+      "vertexes": [
+        [
+          992,
+          2866
+        ],
+        [
+          979,
+          2888
+        ]
+      ],
+      "id": "300959d5-f220-4528-8810-17e623ca562e"
+    },
+    {
+      "vertexes": [
+        [
+          979,
+          2888
+        ],
+        [
+          980,
+          2919
+        ]
+      ],
+      "id": "4c40c2d4-a590-49af-9799-b2c3afda4bcb"
+    },
+    {
+      "vertexes": [
+        [
+          980,
+          2919
+        ],
+        [
+          990,
+          2936
+        ]
+      ],
+      "id": "3571d5cf-504e-434d-b4ae-ad477e794e96"
+    },
+    {
+      "vertexes": [
+        [
+          990,
+          2936
+        ],
+        [
+          1010,
+          2956
+        ]
+      ],
+      "id": "1622c640-3396-4708-ae37-fe6bbaf2662c"
+    },
+    {
+      "vertexes": [
+        [
+          1010,
+          2956
+        ],
+        [
+          1065,
+          2986
+        ]
+      ],
+      "id": "22a72b38-744b-48fd-89ad-127254e57e29"
+    },
+    {
+      "vertexes": [
+        [
+          1065,
+          2986
+        ],
+        [
+          1146,
+          2975
+        ]
+      ],
+      "id": "7be20555-c6de-4caa-9d48-0530e97454ac"
+    },
+    {
+      "vertexes": [
+        [
+          1146,
+          2975
+        ],
+        [
+          1189,
+          2981
+        ]
+      ],
+      "id": "2ed2cec5-3953-4b2e-8b81-592cf1369611"
+    },
+    {
+      "vertexes": [
+        [
+          1189,
+          2981
+        ],
+        [
+          1227,
+          2973
+        ]
+      ],
+      "id": "957cdfb9-899e-4a30-909e-c6fff65ab34d"
+    },
+    {
+      "vertexes": [
+        [
+          1227,
+          2973
+        ],
+        [
+          1263,
+          2950
+        ]
+      ],
+      "id": "277b6fe3-281f-4e10-99cf-810b722ff28a"
+    },
+    {
+      "vertexes": [
+        [
+          1263,
+          2950
+        ],
+        [
+          1278,
+          2934
+        ]
+      ],
+      "id": "e8758b88-6b41-4353-a4d0-b821eccca77a"
+    },
+    {
+      "vertexes": [
+        [
+          1278,
+          2934
+        ],
+        [
+          1288,
+          2908
+        ]
+      ],
+      "id": "ebdd6353-3664-46eb-bf04-880072ea8f82"
+    },
+    {
+      "vertexes": [
+        [
+          1288,
+          2908
+        ],
+        [
+          1375,
+          2835
+        ]
+      ],
+      "id": "8bcdfce0-52d4-464b-8b68-0110d545461f"
+    },
+    {
+      "vertexes": [
+        [
+          1375,
+          2835
+        ],
+        [
+          1429,
+          2825
+        ]
+      ],
+      "id": "de135485-6b9d-46be-b2dd-9ec2b7f7ffc9"
+    },
+    {
+      "vertexes": [
+        [
+          1429,
+          2825
+        ],
+        [
+          1466,
+          2845
+        ]
+      ],
+      "id": "76eb8ddd-f59f-440a-96d2-d1152224686d"
+    },
+    {
+      "vertexes": [
+        [
+          1466,
+          2845
+        ],
+        [
+          1492,
+          2871
+        ]
+      ],
+      "id": "1b5b37fe-db47-4ab1-a738-47a1e6d08cc2"
+    },
+    {
+      "vertexes": [
+        [
+          1492,
+          2871
+        ],
+        [
+          1516,
+          2897
+        ]
+      ],
+      "id": "27667325-4fa0-4f2c-8b6e-b982ce3a7275"
+    },
+    {
+      "vertexes": [
+        [
+          1516,
+          2897
+        ],
+        [
+          1584,
+          2937
+        ]
+      ],
+      "id": "b1a0f92e-7aff-4368-ad95-e0671077480d"
+    },
+    {
+      "vertexes": [
+        [
+          1584,
+          2937
+        ],
+        [
+          1609,
+          3002
+        ]
+      ],
+      "id": "472c0cf9-07a5-436a-a0a3-94d52018319a"
+    },
+    {
+      "vertexes": [
+        [
+          615,
+          3020
+        ],
+        [
+          621,
+          3055
+        ]
+      ],
+      "id": "f99bc172-f96a-4bf9-84ac-9dd66f95dc08"
+    },
+    {
+      "vertexes": [
+        [
+          621,
+          3055
+        ],
+        [
+          656,
+          3107
+        ]
+      ],
+      "id": "ed611f9f-16b8-4682-a23a-b8d04d949be1"
+    },
+    {
+      "vertexes": [
+        [
+          656,
+          3107
+        ],
+        [
+          683,
+          3153
+        ]
+      ],
+      "id": "79fab559-063b-4e2a-8f1c-c357edd3e6e0"
+    },
+    {
+      "vertexes": [
+        [
+          683,
+          3153
+        ],
+        [
+          742,
+          3204
+        ]
+      ],
+      "id": "f4cc7d08-5099-4e32-9e79-c914112a7c3e"
+    },
+    {
+      "vertexes": [
+        [
+          742,
+          3204
+        ],
+        [
+          788,
+          3247
+        ]
+      ],
+      "id": "d622f932-50ce-4eac-89d3-2216a81e0b50"
+    },
+    {
+      "vertexes": [
+        [
+          788,
+          3247
+        ],
+        [
+          809,
+          3266
+        ]
+      ],
+      "id": "76041402-a5e6-4215-b5e1-fe4d3641efad"
+    },
+    {
+      "vertexes": [
+        [
+          809,
+          3266
+        ],
+        [
+          826,
+          3287
+        ]
+      ],
+      "id": "2288f4ed-5f11-4e33-acbe-30a97e53a277"
+    },
+    {
+      "vertexes": [
+        [
+          826,
+          3287
+        ],
+        [
+          842,
+          3317
+        ]
+      ],
+      "id": "e23156fb-82e8-4c95-a3bb-d4afb90ad9a7"
+    },
+    {
+      "vertexes": [
+        [
+          842,
+          3317
+        ],
+        [
+          869,
+          3328
+        ]
+      ],
+      "id": "4be33051-3446-4d9e-8277-a53cc0a78cc5"
+    },
+    {
+      "vertexes": [
+        [
+          869,
+          3328
+        ],
+        [
+          943,
+          3297
+        ]
+      ],
+      "id": "2ad3190d-7116-44f1-bc55-4d13490e544a"
+    },
+    {
+      "vertexes": [
+        [
+          943,
+          3297
+        ],
+        [
+          996,
+          3273
+        ]
+      ],
+      "id": "79094ba3-6d92-4915-8d51-2dd895319dfc"
+    },
+    {
+      "vertexes": [
+        [
+          996,
+          3273
+        ],
+        [
+          1036,
+          3233
+        ]
+      ],
+      "id": "84062ecd-6f61-456f-8cf3-926dcbbf9a91"
+    },
+    {
+      "vertexes": [
+        [
+          1036,
+          3233
+        ],
+        [
+          1044,
+          3195
+        ]
+      ],
+      "id": "d9e3d9e2-b9c3-499b-8c00-d37d7868f5fa"
+    },
+    {
+      "vertexes": [
+        [
+          1044,
+          3195
+        ],
+        [
+          1139,
+          3103
+        ]
+      ],
+      "id": "5e8df805-e9bf-4750-ac73-d4f028cb44d5"
+    },
+    {
+      "vertexes": [
+        [
+          1139,
+          3103
+        ],
+        [
+          1196,
+          3082
+        ]
+      ],
+      "id": "75ede67b-a8b8-4320-b0c4-c764aa99c78f"
+    },
+    {
+      "vertexes": [
+        [
+          1196,
+          3082
+        ],
+        [
+          1237,
+          3079
+        ]
+      ],
+      "id": "52e2d96c-997d-4477-88c8-91fd8d797807"
+    },
+    {
+      "vertexes": [
+        [
+          1237,
+          3079
+        ],
+        [
+          1261,
+          3096
+        ]
+      ],
+      "id": "03cfbc1d-5b90-48ae-ab16-eb8df85bde09"
+    },
+    {
+      "vertexes": [
+        [
+          1261,
+          3096
+        ],
+        [
+          1266,
+          3110
+        ]
+      ],
+      "id": "0b4ffa86-17e2-4729-9fad-50598aad2132"
+    },
+    {
+      "vertexes": [
+        [
+          1266,
+          3110
+        ],
+        [
+          1258,
+          3127
+        ]
+      ],
+      "id": "61f59446-37b4-4168-b1eb-5f807cce3a17"
+    },
+    {
+      "vertexes": [
+        [
+          1258,
+          3127
+        ],
+        [
+          1286,
+          3183
+        ]
+      ],
+      "id": "e3a8ad15-5506-4642-b73e-c48295bc1dcc"
+    },
+    {
+      "vertexes": [
+        [
+          1286,
+          3183
+        ],
+        [
+          1328,
+          3185
+        ]
+      ],
+      "id": "cd31e9ed-f472-4ffc-9e62-5a8b586bfae8"
+    },
+    {
+      "vertexes": [
+        [
+          1328,
+          3185
+        ],
+        [
+          1374,
+          3166
+        ]
+      ],
+      "id": "e1221559-91fe-4896-a4a4-773856495d84"
+    },
+    {
+      "vertexes": [
+        [
+          1374,
+          3166
+        ],
+        [
+          1387,
+          3175
+        ]
+      ],
+      "id": "9919a2a1-a47b-4ff9-af2e-4d26f1711310"
+    },
+    {
+      "vertexes": [
+        [
+          1387,
+          3175
+        ],
+        [
+          1428,
+          3309
+        ]
+      ],
+      "id": "305620d7-aee4-43f7-9951-4c2d5cf2dbe3"
+    },
+    {
+      "vertexes": [
+        [
+          1428,
+          3309
+        ],
+        [
+          1362,
+          3381
+        ]
+      ],
+      "id": "60bbd0fb-84cb-459b-b7fd-69266d3c9b9a"
+    },
+    {
+      "vertexes": [
+        [
+          1362,
+          3381
+        ],
+        [
+          1343,
+          3397
+        ]
+      ],
+      "id": "a14db38e-0460-4bae-b9e6-91d4b3227f51"
+    },
+    {
+      "vertexes": [
+        [
+          1343,
+          3397
+        ],
+        [
+          1313,
+          3410
+        ]
+      ],
+      "id": "c057f19c-c8c1-4e46-8817-09e19e25b818"
+    },
+    {
+      "vertexes": [
+        [
+          1313,
+          3410
+        ],
+        [
+          1299,
+          3400
+        ]
+      ],
+      "id": "dee52aa8-c7d3-4379-b06e-8829a57ff578"
+    },
+    {
+      "vertexes": [
+        [
+          1299,
+          3400
+        ],
+        [
+          1275,
+          3406
+        ]
+      ],
+      "id": "1384b870-882b-468f-a52f-35bc87d363ab"
+    },
+    {
+      "vertexes": [
+        [
+          1275,
+          3406
+        ],
+        [
+          1257,
+          3421
+        ]
+      ],
+      "id": "e4315db4-c123-4dab-afe4-5d9ce33c39fa"
+    },
+    {
+      "vertexes": [
+        [
+          1257,
+          3421
+        ],
+        [
+          1245,
+          3445
+        ]
+      ],
+      "id": "f9ce7619-6e3e-4ff0-9ca4-98b2bf8851ad"
+    },
+    {
+      "vertexes": [
+        [
+          1245,
+          3445
+        ],
+        [
+          1219,
+          3479
+        ]
+      ],
+      "id": "ecbc30d3-278b-4d32-804d-247a4435502e"
+    },
+    {
+      "vertexes": [
+        [
+          1219,
+          3479
+        ],
+        [
+          1195,
+          3496
+        ]
+      ],
+      "id": "398609df-7689-40cb-8cde-12f033d5faa0"
+    },
+    {
+      "vertexes": [
+        [
+          1195,
+          3496
+        ],
+        [
+          1192,
+          3513
+        ]
+      ],
+      "id": "c27a37e9-6176-4226-9786-17bb1d9d7f37"
+    },
+    {
+      "vertexes": [
+        [
+          1192,
+          3513
+        ],
+        [
+          1176,
+          3529
+        ]
+      ],
+      "id": "dd2ff82d-18ba-4b37-9e6c-6f04cb7ae345"
+    },
+    {
+      "vertexes": [
+        [
+          1176,
+          3529
+        ],
+        [
+          1148,
+          3538
+        ]
+      ],
+      "id": "66ed46a3-c505-4478-95d8-4d2596e772e8"
+    },
+    {
+      "vertexes": [
+        [
+          1148,
+          3538
+        ],
+        [
+          1125,
+          3541
+        ]
+      ],
+      "id": "93dc27e7-ddd2-4dda-a906-d0a368eb7c36"
+    },
+    {
+      "vertexes": [
+        [
+          1125,
+          3541
+        ],
+        [
+          1114,
+          3553
+        ]
+      ],
+      "id": "0648fd53-cc3c-4701-806d-1d42b5ce2a14"
+    },
+    {
+      "vertexes": [
+        [
+          1114,
+          3553
+        ],
+        [
+          1102,
+          3670
+        ]
+      ],
+      "id": "7f7b5a58-00cb-499e-bc90-0ad4cb284a94"
+    },
+    {
+      "vertexes": [
+        [
+          1102,
+          3670
+        ],
+        [
+          1131,
+          3719
+        ]
+      ],
+      "id": "a7a751b9-86a0-464d-b138-5b60df20ff61"
+    },
+    {
+      "vertexes": [
+        [
+          1131,
+          3719
+        ],
+        [
+          1151,
+          3836
+        ]
+      ],
+      "id": "fb151fcb-1d7d-4843-88a0-f74c7314497d"
+    },
+    {
+      "vertexes": [
+        [
+          1608,
+          3000
+        ],
+        [
+          1652,
+          3079
+        ]
+      ],
+      "id": "8a70d7b3-90d7-4dbe-b63a-6fa575b978ec"
+    },
+    {
+      "vertexes": [
+        [
+          1652,
+          3079
+        ],
+        [
+          1672,
+          3150
+        ]
+      ],
+      "id": "1e9c2097-74ab-4007-85c8-8dd9d53f77fd"
+    },
+    {
+      "vertexes": [
+        [
+          1672,
+          3150
+        ],
+        [
+          1685,
+          3172
+        ]
+      ],
+      "id": "15d08150-7483-4d2e-9ad9-db0363457283"
+    },
+    {
+      "vertexes": [
+        [
+          1685,
+          3172
+        ],
+        [
+          1671,
+          3263
+        ]
+      ],
+      "id": "9367f9a2-13c3-4991-8810-f2ddee03ab35"
+    },
+    {
+      "vertexes": [
+        [
+          1671,
+          3263
+        ],
+        [
+          1658,
+          3276
+        ]
+      ],
+      "id": "638c29cd-105c-4fb0-bf45-602bf87a9a6d"
+    },
+    {
+      "vertexes": [
+        [
+          1658,
+          3276
+        ],
+        [
+          1616,
+          3288
+        ]
+      ],
+      "id": "68b150d5-5b3c-4cff-8636-66733dd7a7d1"
+    },
+    {
+      "vertexes": [
+        [
+          1616,
+          3288
+        ],
+        [
+          1582,
+          3325
+        ]
+      ],
+      "id": "c367a3af-7a58-4616-9db3-c727b50241ba"
+    },
+    {
+      "vertexes": [
+        [
+          1582,
+          3325
+        ],
+        [
+          1563,
+          3353
+        ]
+      ],
+      "id": "cac6cf9f-e6e7-407d-8d85-72aa0a5616b7"
+    },
+    {
+      "vertexes": [
+        [
+          1563,
+          3353
+        ],
+        [
+          1553,
+          3380
+        ]
+      ],
+      "id": "df7e3bd8-451e-40d0-b907-93e25565ec1f"
+    },
+    {
+      "vertexes": [
+        [
+          1553,
+          3380
+        ],
+        [
+          1553,
+          3420
+        ]
+      ],
+      "id": "904b9631-6328-44d7-ad54-281e3c3bc208"
+    },
+    {
+      "vertexes": [
+        [
+          1553,
+          3420
+        ],
+        [
+          1512,
+          3481
+        ]
+      ],
+      "id": "3192eecd-2056-41d3-803d-0671f06f7c6d"
+    },
+    {
+      "vertexes": [
+        [
+          1512,
+          3481
+        ],
+        [
+          1439,
+          3489
+        ]
+      ],
+      "id": "aa81cefc-c443-4b7f-8ee4-6c3c784e71ef"
+    },
+    {
+      "vertexes": [
+        [
+          1439,
+          3489
+        ],
+        [
+          1397,
+          3533
+        ]
+      ],
+      "id": "1a5e2a53-8ff9-46a2-9171-39249752078c"
+    },
+    {
+      "vertexes": [
+        [
+          1397,
+          3533
+        ],
+        [
+          1374,
+          3618
+        ]
+      ],
+      "id": "e2d8936e-4a8c-486b-b1ac-32af885d7bf1"
+    },
+    {
+      "vertexes": [
+        [
+          1374,
+          3618
+        ],
+        [
+          1377,
+          3646
+        ]
+      ],
+      "id": "2b2a8cb9-08f0-4111-86e9-c7482fd4c8b4"
+    },
+    {
+      "vertexes": [
+        [
+          1377,
+          3646
+        ],
+        [
+          1415,
+          3709
+        ]
+      ],
+      "id": "ec89a19e-b737-4888-b612-c4a8e3b45618"
+    },
+    {
+      "vertexes": [
+        [
+          1415,
+          3709
+        ],
+        [
+          1452,
+          3788
+        ]
+      ],
+      "id": "ca5db630-02ca-4cdc-af58-5bcc0c8953bd"
+    },
+    {
+      "vertexes": [
+        [
+          1452,
+          3788
+        ],
+        [
+          1511,
+          3806
+        ]
+      ],
+      "id": "f50e7539-9871-439d-b9f5-7989915a974d"
+    },
+    {
+      "vertexes": [
+        [
+          2085,
+          3640
+        ],
+        [
+          2011,
+          3647
+        ]
+      ],
+      "id": "06396a71-8024-40a3-987e-dd9f6e1c6df9"
+    },
+    {
+      "vertexes": [
+        [
+          2011,
+          3647
+        ],
+        [
+          1962,
+          3637
+        ]
+      ],
+      "id": "47c8653a-d4e0-42a3-a93f-5fa7dba31054"
+    },
+    {
+      "vertexes": [
+        [
+          1962,
+          3637
+        ],
+        [
+          1957,
+          3363
+        ]
+      ],
+      "id": "407909b9-ae0e-4c61-906c-3b8d261adb4f"
+    },
+    {
+      "vertexes": [
+        [
+          1957,
+          3363
+        ],
+        [
+          1810,
+          3366
+        ]
+      ],
+      "id": "5ee7e9c6-cb7d-4613-b5c8-ff1eef439d80"
+    },
+    {
+      "vertexes": [
+        [
+          1810,
+          3366
+        ],
+        [
+          1682,
+          3506
+        ]
+      ],
+      "id": "fa2d4ee6-a0cf-458c-8ca6-7ea3234fe796"
+    },
+    {
+      "vertexes": [
+        [
+          1682,
+          3506
+        ],
+        [
+          1690,
+          3782
+        ]
+      ],
+      "id": "1c0dc589-8914-4d86-be99-763ac5b3217a"
+    },
+    {
+      "vertexes": [
+        [
+          1690,
+          3782
+        ],
+        [
+          1978,
+          3781
+        ]
+      ],
+      "id": "950b2a14-8285-4fac-92d5-558f2d7b1c7f"
+    },
+    {
+      "vertexes": [
+        [
+          1976,
+          3781
+        ],
+        [
+          2096,
+          3782
+        ]
+      ],
+      "id": "186af872-9cbc-43af-8136-f65ce2b19be1"
+    },
+    {
+      "vertexes": [
+        [
+          2096,
+          3782
+        ],
+        [
+          2120,
+          3802
+        ]
+      ],
+      "id": "d1849f48-9928-4a88-a30d-f9debdd8349a"
+    },
+    {
+      "vertexes": [
+        [
+          2120,
+          3802
+        ],
+        [
+          2121,
+          3828
+        ]
+      ],
+      "id": "3e9a03b0-f04c-45b1-8df6-eb08410dcced"
+    },
+    {
+      "vertexes": [
+        [
+          2121,
+          3828
+        ],
+        [
+          2097,
+          3859
+        ]
+      ],
+      "id": "9f2d03fd-0728-4f72-961f-9830793f3a8d"
+    },
+    {
+      "vertexes": [
+        [
+          2097,
+          3859
+        ],
+        [
+          2075,
+          3879
+        ]
+      ],
+      "id": "13a33f10-b3b4-4475-9e81-52e21e52fc47"
+    },
+    {
+      "vertexes": [
+        [
+          2075,
+          3879
+        ],
+        [
+          2041,
+          3883
+        ]
+      ],
+      "id": "2e72fb47-96c5-44cc-a2fa-bb0babccf24e"
+    },
+    {
+      "vertexes": [
+        [
+          2041,
+          3883
+        ],
+        [
+          2022,
+          3883
+        ]
+      ],
+      "id": "7848afc8-44d4-4145-9a9a-46cf354a6514"
+    },
+    {
+      "vertexes": [
+        [
+          2022,
+          3883
+        ],
+        [
+          1971,
+          3863
+        ]
+      ],
+      "id": "af7b9a4a-a430-4750-858b-21ed1de9dc30"
+    },
+    {
+      "vertexes": [
+        [
+          1971,
+          3863
+        ],
+        [
+          1852,
+          3899
+        ]
+      ],
+      "id": "6ef9a107-c77e-4a5d-9594-da57602024c8"
+    },
+    {
+      "vertexes": [
+        [
+          1852,
+          3899
+        ],
+        [
+          1820,
+          3898
+        ]
+      ],
+      "id": "f9d775f9-5083-4168-81e7-f933223c5225"
+    },
+    {
+      "vertexes": [
+        [
+          1820,
+          3898
+        ],
+        [
+          1783,
+          3911
+        ]
+      ],
+      "id": "266a89c0-6a74-4fb5-becb-ffc659783038"
+    },
+    {
+      "vertexes": [
+        [
+          1783,
+          3911
+        ],
+        [
+          1756,
+          3928
+        ]
+      ],
+      "id": "340ae9e8-6c37-4c3a-8c05-82937b578c77"
+    },
+    {
+      "vertexes": [
+        [
+          1756,
+          3928
+        ],
+        [
+          1721,
+          3921
+        ]
+      ],
+      "id": "8da59861-75d0-4ff7-985a-8cea9692b899"
+    },
+    {
+      "vertexes": [
+        [
+          1721,
+          3921
+        ],
+        [
+          1693,
+          3907
+        ]
+      ],
+      "id": "59bad4d8-d313-4cf1-a824-da1a2297cff7"
+    },
+    {
+      "vertexes": [
+        [
+          1693,
+          3907
+        ],
+        [
+          1672,
+          3876
+        ]
+      ],
+      "id": "7265d05a-056e-49dd-ad6b-8921279674c6"
+    },
+    {
+      "vertexes": [
+        [
+          1672,
+          3876
+        ],
+        [
+          1612,
+          3870
+        ]
+      ],
+      "id": "c3e240b2-1baf-4abc-ad6d-8e07f65b2313"
+    },
+    {
+      "vertexes": [
+        [
+          1612,
+          3870
+        ],
+        [
+          1576,
+          3865
+        ]
+      ],
+      "id": "b01eb03a-5726-4f0b-9e42-9c8d657b571d"
+    },
+    {
+      "vertexes": [
+        [
+          1576,
+          3865
+        ],
+        [
+          1547,
+          3846
+        ]
+      ],
+      "id": "a19549a8-8744-4251-99f4-569c233d581f"
+    },
+    {
+      "vertexes": [
+        [
+          1547,
+          3846
+        ],
+        [
+          1507,
+          3804
+        ]
+      ],
+      "id": "9e065177-0af9-4141-83ef-a3147987ba3d"
+    },
+    {
+      "vertexes": [
+        [
+          1151,
+          3833
+        ],
+        [
+          1171,
+          3893
+        ]
+      ],
+      "id": "84c1af23-1a30-4dbe-a460-79d864bf5e7d"
+    },
+    {
+      "vertexes": [
+        [
+          1171,
+          3893
+        ],
+        [
+          1209,
+          3910
+        ]
+      ],
+      "id": "246f1331-941f-42d8-8276-66873ece951c"
+    },
+    {
+      "vertexes": [
+        [
+          1209,
+          3910
+        ],
+        [
+          1266,
+          3910
+        ]
+      ],
+      "id": "40570b62-d8ed-49a2-b0d6-f3c59d3c5842"
+    },
+    {
+      "vertexes": [
+        [
+          1266,
+          3910
+        ],
+        [
+          1324,
+          3938
+        ]
+      ],
+      "id": "30b338cb-c6f8-4eda-a9bd-7d4556f33a9d"
+    },
+    {
+      "vertexes": [
+        [
+          1324,
+          3938
+        ],
+        [
+          1347,
+          3947
+        ]
+      ],
+      "id": "ebe582e0-e82c-43ec-bae9-d6e79d3e5866"
+    },
+    {
+      "vertexes": [
+        [
+          1347,
+          3947
+        ],
+        [
+          1432,
+          3924
+        ]
+      ],
+      "id": "9154f2df-8487-4a21-9179-8e734462aebb"
+    },
+    {
+      "vertexes": [
+        [
+          1432,
+          3924
+        ],
+        [
+          1457,
+          3938
+        ]
+      ],
+      "id": "e214e159-e60f-4fe2-bc25-ba65354cdabc"
+    },
+    {
+      "vertexes": [
+        [
+          1457,
+          3938
+        ],
+        [
+          1490,
+          3968
+        ]
+      ],
+      "id": "1233b1d1-d576-444c-8667-67ed43b8d42c"
+    },
+    {
+      "vertexes": [
+        [
+          1490,
+          3968
+        ],
+        [
+          1541,
+          3974
+        ]
+      ],
+      "id": "2a372ed4-f6f4-4d90-aa36-64a7507903a0"
+    },
+    {
+      "vertexes": [
+        [
+          1541,
+          3974
+        ],
+        [
+          1552,
+          3991
+        ]
+      ],
+      "id": "2757ee8f-daa4-44ab-81a5-97bc73928195"
+    },
+    {
+      "vertexes": [
+        [
+          1552,
+          3991
+        ],
+        [
+          1570,
+          3998
+        ]
+      ],
+      "id": "7cf0ac2f-e232-4661-ab4c-e08e33861e33"
+    },
+    {
+      "vertexes": [
+        [
+          1570,
+          3998
+        ],
+        [
+          1580,
+          4041
+        ]
+      ],
+      "id": "60bffb6b-24f7-42e7-adc0-6cf2688dd1cc"
+    },
+    {
+      "vertexes": [
+        [
+          1580,
+          4041
+        ],
+        [
+          1607,
+          4053
+        ]
+      ],
+      "id": "c1ff7280-b555-4689-9af1-e875712c1d8e"
+    },
+    {
+      "vertexes": [
+        [
+          1607,
+          4053
+        ],
+        [
+          1644,
+          4060
+        ]
+      ],
+      "id": "c8f7025d-f2fd-4ad4-a508-00f27e50262c"
+    },
+    {
+      "vertexes": [
+        [
+          1644,
+          4060
+        ],
+        [
+          1674,
+          4063
+        ]
+      ],
+      "id": "ef69b631-2346-4b54-8d59-cf495d3c2b16"
+    },
+    {
+      "vertexes": [
+        [
+          1674,
+          4063
+        ],
+        [
+          1713,
+          4075
+        ]
+      ],
+      "id": "4d1dcdef-6081-42c5-a562-a5f4eb00ec0f"
+    },
+    {
+      "vertexes": [
+        [
+          1713,
+          4075
+        ],
+        [
+          1746,
+          4067
+        ]
+      ],
+      "id": "e08f51fa-4bd5-49d4-9627-c6d23cb1dc27"
+    },
+    {
+      "vertexes": [
+        [
+          1746,
+          4067
+        ],
+        [
+          1747,
+          4043
+        ]
+      ],
+      "id": "3b816bb1-afc0-4770-8d83-e6f8b18a551b"
+    },
+    {
+      "vertexes": [
+        [
+          1747,
+          4043
+        ],
+        [
+          1783,
+          4043
+        ]
+      ],
+      "id": "cba38680-4a8f-4569-b226-f3b9a147d74e"
+    },
+    {
+      "vertexes": [
+        [
+          1783,
+          4043
+        ],
+        [
+          1801,
+          4063
+        ]
+      ],
+      "id": "1fcf5c57-49c9-4b59-977f-11c093f87667"
+    },
+    {
+      "vertexes": [
+        [
+          1801,
+          4063
+        ],
+        [
+          1840,
+          4074
+        ]
+      ],
+      "id": "18a45ebe-b2e9-4b38-8c41-382f22f60c97"
+    },
+    {
+      "vertexes": [
+        [
+          1840,
+          4074
+        ],
+        [
+          1872,
+          4086
+        ]
+      ],
+      "id": "c987f765-d815-4cf1-98cd-a7e8435c3aa0"
+    },
+    {
+      "vertexes": [
+        [
+          1872,
+          4086
+        ],
+        [
+          1911,
+          4090
+        ]
+      ],
+      "id": "cbaa006a-1b03-4d28-b794-b26fb3428320"
+    },
+    {
+      "vertexes": [
+        [
+          1911,
+          4090
+        ],
+        [
+          1951,
+          4092
+        ]
+      ],
+      "id": "51d0006a-a3f4-4889-8e94-c6e0a67e2ef8"
+    },
+    {
+      "vertexes": [
+        [
+          1951,
+          4092
+        ],
+        [
+          2006,
+          4073
+        ]
+      ],
+      "id": "682c03fd-7f92-4d84-89a9-ef3949507717"
+    },
+    {
+      "vertexes": [
+        [
+          2006,
+          4073
+        ],
+        [
+          2029,
+          4050
+        ]
+      ],
+      "id": "766ed1ef-becd-4c11-891c-6c6e8aeed296"
+    },
+    {
+      "vertexes": [
+        [
+          2029,
+          4050
+        ],
+        [
+          2095,
+          4023
+        ]
+      ],
+      "id": "378d49e3-b532-4732-9b89-3ce5f3df8dfc"
+    },
+    {
+      "vertexes": [
+        [
+          2095,
+          4023
+        ],
+        [
+          2173,
+          4051
+        ]
+      ],
+      "id": "f3f278ec-f674-497f-b214-a90b33a1df9b"
+    },
+    {
+      "vertexes": [
+        [
+          2173,
+          4051
+        ],
+        [
+          2224,
+          4047
+        ]
+      ],
+      "id": "c197dafe-64cd-4ded-8001-8ebfaad5d26c"
+    },
+    {
+      "vertexes": [
+        [
+          2224,
+          4047
+        ],
+        [
+          2322,
+          4126
+        ]
+      ],
+      "id": "be2eefcd-80ee-44a0-af0e-4aa02614ca5e"
+    },
+    {
+      "vertexes": [
+        [
+          2322,
+          4126
+        ],
+        [
+          2335,
+          4195
+        ]
+      ],
+      "id": "1e12de80-bf60-4425-84bc-cc2a90250931"
+    },
+    {
+      "vertexes": [
+        [
+          2335,
+          4195
+        ],
+        [
+          2379,
+          4233
+        ]
+      ],
+      "id": "b245f7d1-88f7-4770-a9ee-15ab99fabcf4"
+    },
+    {
+      "vertexes": [
+        [
+          2379,
+          4233
+        ],
+        [
+          2392,
+          4261
+        ]
+      ],
+      "id": "a179d29b-69f4-4510-be92-642963347a76"
+    },
+    {
+      "vertexes": [
+        [
+          2392,
+          4261
+        ],
+        [
+          2392,
+          4334
+        ]
+      ],
+      "id": "c9854551-58d4-487e-86fa-3c2312d64198"
+    },
+    {
+      "vertexes": [
+        [
+          2392,
+          4334
+        ],
+        [
+          2388,
+          4369
+        ]
+      ],
+      "id": "36a0512f-9e27-42f7-9db0-2a375da7560e"
+    },
+    {
+      "vertexes": [
+        [
+          2388,
+          4369
+        ],
+        [
+          2395,
+          4479
+        ]
+      ],
+      "id": "53f74b6e-19ff-4018-93f2-12bbc705d130"
+    },
+    {
+      "vertexes": [
+        [
+          2083,
+          3640
+        ],
+        [
+          2105,
+          3618
+        ]
+      ],
+      "id": "52fa7bfb-3e59-449c-a8a8-1d9a65146648"
+    },
+    {
+      "vertexes": [
+        [
+          2105,
+          3618
+        ],
+        [
+          2105,
+          3605
+        ]
+      ],
+      "id": "5ef0646b-a6de-48fa-8a3d-f72eaa003647"
+    },
+    {
+      "vertexes": [
+        [
+          2105,
+          3605
+        ],
+        [
+          2088,
+          3570
+        ]
+      ],
+      "id": "ebca6022-3663-46e8-99f5-6275f1bbc99e"
+    },
+    {
+      "vertexes": [
+        [
+          2088,
+          3570
+        ],
+        [
+          2092,
+          3529
+        ]
+      ],
+      "id": "9c4671bf-fe19-4a7f-8246-47d64a08a491"
+    },
+    {
+      "vertexes": [
+        [
+          2092,
+          3529
+        ],
+        [
+          2112,
+          3487
+        ]
+      ],
+      "id": "daaa0071-928e-45d3-be35-20c442ac48f5"
+    },
+    {
+      "vertexes": [
+        [
+          2112,
+          3487
+        ],
+        [
+          2138,
+          3479
+        ]
+      ],
+      "id": "28819a62-cb3c-4cf7-9f11-e0a551641a39"
+    },
+    {
+      "vertexes": [
+        [
+          2138,
+          3479
+        ],
+        [
+          2170,
+          3486
+        ]
+      ],
+      "id": "af43699e-b6a7-4839-ac45-d52aca372b5a"
+    },
+    {
+      "vertexes": [
+        [
+          2170,
+          3486
+        ],
+        [
+          2194,
+          3480
+        ]
+      ],
+      "id": "a6a3807c-c3f8-4f24-9c5b-741155de04c9"
+    },
+    {
+      "vertexes": [
+        [
+          2194,
+          3480
+        ],
+        [
+          2276,
+          3424
+        ]
+      ],
+      "id": "44719cd2-5a50-49e6-be94-260b1078e61f"
+    },
+    {
+      "vertexes": [
+        [
+          2606,
+          4479
+        ],
+        [
+          2597,
+          4407
+        ]
+      ],
+      "id": "1aeda632-e5a5-4ae7-b315-b83f75abbb8a"
+    },
+    {
+      "vertexes": [
+        [
+          2597,
+          4407
+        ],
+        [
+          2531,
+          4343
+        ]
+      ],
+      "id": "ee34d5b0-f545-48bb-bd6a-119aee25ae43"
+    },
+    {
+      "vertexes": [
+        [
+          2531,
+          4343
+        ],
+        [
+          2519,
+          4306
+        ]
+      ],
+      "id": "415596c1-a2e6-4678-9875-dcd7c87242f8"
+    },
+    {
+      "vertexes": [
+        [
+          2519,
+          4306
+        ],
+        [
+          2521,
+          4204
+        ]
+      ],
+      "id": "d13343d2-af53-4605-b734-b5d340c01b5f"
+    },
+    {
+      "vertexes": [
+        [
+          2521,
+          4204
+        ],
+        [
+          2503,
+          4172
+        ]
+      ],
+      "id": "f4fee833-fdbf-46a0-a38b-4a4f4b8ce769"
+    },
+    {
+      "vertexes": [
+        [
+          2503,
+          4172
+        ],
+        [
+          2454,
+          4142
+        ]
+      ],
+      "id": "2018c654-58b5-4731-a09d-0ca4c3422a31"
+    },
+    {
+      "vertexes": [
+        [
+          2454,
+          4142
+        ],
+        [
+          2438,
+          4052
+        ]
+      ],
+      "id": "1e8c1490-f85f-4ee3-9691-990e0a082c36"
+    },
+    {
+      "vertexes": [
+        [
+          2438,
+          4052
+        ],
+        [
+          2449,
+          4031
+        ]
+      ],
+      "id": "d370a9db-d1f3-4d37-8f56-6447827e6f4d"
+    },
+    {
+      "vertexes": [
+        [
+          2449,
+          4031
+        ],
+        [
+          2491,
+          3985
+        ]
+      ],
+      "id": "b7b43767-fd56-4291-ab0b-602ddc75ce20"
+    },
+    {
+      "vertexes": [
+        [
+          2491,
+          3985
+        ],
+        [
+          2504,
+          3936
+        ]
+      ],
+      "id": "a4f43ca4-c1a8-466f-81cc-25346d4baf53"
+    },
+    {
+      "vertexes": [
+        [
+          2504,
+          3936
+        ],
+        [
+          2497,
+          3908
+        ]
+      ],
+      "id": "eb9c5cb1-92cb-4fb3-9364-ef9ab23b7982"
+    },
+    {
+      "vertexes": [
+        [
+          2497,
+          3908
+        ],
+        [
+          2462,
+          3874
+        ]
+      ],
+      "id": "8ddff1ac-ed82-417d-8cf4-8c4f4b54d42b"
+    },
+    {
+      "vertexes": [
+        [
+          2462,
+          3874
+        ],
+        [
+          2450,
+          3826
+        ]
+      ],
+      "id": "9d5589af-50c8-441d-8bcf-1bc1b069334c"
+    },
+    {
+      "vertexes": [
+        [
+          2450,
+          3826
+        ],
+        [
+          2436,
+          3793
+        ]
+      ],
+      "id": "1acbc927-3b7b-4eaa-825f-4fe8542d1191"
+    },
+    {
+      "vertexes": [
+        [
+          2436,
+          3793
+        ],
+        [
+          2466,
+          3733
+        ]
+      ],
+      "id": "a642e39e-67b2-474a-afe4-949d8d701ae6"
+    },
+    {
+      "vertexes": [
+        [
+          2466,
+          3733
+        ],
+        [
+          2464,
+          3699
+        ]
+      ],
+      "id": "9cdad305-a960-4696-b4d0-335a0df5893b"
+    },
+    {
+      "vertexes": [
+        [
+          2464,
+          3699
+        ],
+        [
+          2445,
+          3635
+        ]
+      ],
+      "id": "f0a6b9a2-7b66-4e5e-bd24-8b9938870ae1"
+    },
+    {
+      "vertexes": [
+        [
+          2445,
+          3635
+        ],
+        [
+          2408,
+          3583
+        ]
+      ],
+      "id": "86773e78-8c0b-4076-bae8-b3e916d2b9eb"
+    },
+    {
+      "vertexes": [
+        [
+          2408,
+          3583
+        ],
+        [
+          2365,
+          3567
+        ]
+      ],
+      "id": "a857c4ee-0d6b-428a-a9a9-9c832ef31ebe"
+    },
+    {
+      "vertexes": [
+        [
+          2365,
+          3567
+        ],
+        [
+          2349,
+          3532
+        ]
+      ],
+      "id": "378ca1fd-b149-4c82-a47a-2f080ef930d0"
+    },
+    {
+      "vertexes": [
+        [
+          2349,
+          3532
+        ],
+        [
+          2359,
+          3486
+        ]
+      ],
+      "id": "5cdd71bf-cffc-4549-b6be-25e883b6ebb4"
+    },
+    {
+      "vertexes": [
+        [
+          2359,
+          3486
+        ],
+        [
+          2392,
+          3468
+        ]
+      ],
+      "id": "80c32663-6254-4136-ab24-4b6c2c84b132"
+    },
+    {
+      "vertexes": [
+        [
+          2392,
+          3468
+        ],
+        [
+          2473,
+          3450
+        ]
+      ],
+      "id": "e626b41d-9c38-4e4c-8d38-5ec44b4bb7b7"
+    },
+    {
+      "vertexes": [
+        [
+          2273,
+          3428
+        ],
+        [
+          2291,
+          3380
+        ]
+      ],
+      "id": "944b7e92-07e1-4979-95bd-da6e99b8faf8"
+    },
+    {
+      "vertexes": [
+        [
+          2291,
+          3380
+        ],
+        [
+          2291,
+          3326
+        ]
+      ],
+      "id": "0f0a3aa6-e76f-4ec6-a4b3-19b4550f3ece"
+    },
+    {
+      "vertexes": [
+        [
+          2291,
+          3326
+        ],
+        [
+          2269,
+          3290
+        ]
+      ],
+      "id": "8193be0c-2643-48ed-b576-be746b67f614"
+    },
+    {
+      "vertexes": [
+        [
+          2269,
+          3290
+        ],
+        [
+          2245,
+          3270
+        ]
+      ],
+      "id": "9454a209-e281-42d1-9c64-498fdc15212a"
+    },
+    {
+      "vertexes": [
+        [
+          2245,
+          3270
+        ],
+        [
+          2233,
+          3259
+        ]
+      ],
+      "id": "c3fa1da6-4b2c-443c-a49f-6a0f04ed8816"
+    },
+    {
+      "vertexes": [
+        [
+          2233,
+          3259
+        ],
+        [
+          2228,
+          3222
+        ]
+      ],
+      "id": "e98edf5c-de60-42ec-b5e1-787130cb6287"
+    },
+    {
+      "vertexes": [
+        [
+          2228,
+          3222
+        ],
+        [
+          2292,
+          3085
+        ]
+      ],
+      "id": "864a4f54-2bc9-409b-b247-f087baf2c804"
+    },
+    {
+      "vertexes": [
+        [
+          2292,
+          3085
+        ],
+        [
+          2340,
+          3062
+        ]
+      ],
+      "id": "a2d0e9ec-9517-41db-8224-9251cab09544"
+    },
+    {
+      "vertexes": [
+        [
+          2340,
+          3062
+        ],
+        [
+          2354,
+          2981
+        ]
+      ],
+      "id": "c29e30fa-ad07-48ce-8d11-115c075a9942"
+    },
+    {
+      "vertexes": [
+        [
+          2354,
+          2981
+        ],
+        [
+          2348,
+          2958
+        ]
+      ],
+      "id": "79b65798-03e5-4a6f-bcc2-fde4d1ac7d6b"
+    },
+    {
+      "vertexes": [
+        [
+          2348,
+          2958
+        ],
+        [
+          2318,
+          2919
+        ]
+      ],
+      "id": "538864d4-ca95-42e8-90f8-bb773dcaeb53"
+    },
+    {
+      "vertexes": [
+        [
+          2318,
+          2919
+        ],
+        [
+          2363,
+          2857
+        ]
+      ],
+      "id": "8fd7d469-9a04-41ed-b894-03316606ccfc"
+    },
+    {
+      "vertexes": [
+        [
+          2363,
+          2857
+        ],
+        [
+          2481,
+          2706
+        ]
+      ],
+      "id": "128de5e9-e090-4912-bdad-4419d63ceba3"
+    },
+    {
+      "vertexes": [
+        [
+          2398,
+          3256
+        ],
+        [
+          2379,
+          3299
+        ]
+      ],
+      "id": "9a4308d1-a042-4e17-81cd-67294296996e"
+    },
+    {
+      "vertexes": [
+        [
+          2379,
+          3299
+        ],
+        [
+          2364,
+          3361
+        ]
+      ],
+      "id": "3f21ea61-e32c-4568-a5aa-7d8ad4963c98"
+    },
+    {
+      "vertexes": [
+        [
+          2364,
+          3361
+        ],
+        [
+          2381,
+          3371
+        ]
+      ],
+      "id": "e9ed2f36-dd4c-483f-9641-cf95de88c626"
+    },
+    {
+      "vertexes": [
+        [
+          2381,
+          3371
+        ],
+        [
+          2401,
+          3361
+        ]
+      ],
+      "id": "73c8c335-1536-4de1-b6fd-eb5f212ab930"
+    },
+    {
+      "vertexes": [
+        [
+          2401,
+          3361
+        ],
+        [
+          2435,
+          3316
+        ]
+      ],
+      "id": "5b35a500-f6b9-4c24-8a8d-87f791109f90"
+    },
+    {
+      "vertexes": [
+        [
+          2435,
+          3316
+        ],
+        [
+          2471,
+          3299
+        ]
+      ],
+      "id": "d302fb5e-323f-4b21-8714-9deb919cbe1e"
+    },
+    {
+      "vertexes": [
+        [
+          2471,
+          3299
+        ],
+        [
+          2472,
+          3267
+        ]
+      ],
+      "id": "1e2f76b5-6e31-4c37-9ded-9b90f0975039"
+    },
+    {
+      "vertexes": [
+        [
+          2472,
+          3267
+        ],
+        [
+          2454,
+          3253
+        ]
+      ],
+      "id": "fce446c7-cc8b-46d2-bec2-f860a18f8077"
+    },
+    {
+      "vertexes": [
+        [
+          2454,
+          3253
+        ],
+        [
+          2417,
+          3250
+        ]
+      ],
+      "id": "7e514945-ca22-4666-a2dd-9ae67080f79a"
+    },
+    {
+      "vertexes": [
+        [
+          2417,
+          3250
+        ],
+        [
+          2395,
+          3260
+        ]
+      ],
+      "id": "62f9e682-06ac-4a4b-9215-01f01d95fe2b"
+    },
+    {
+      "vertexes": [
+        [
+          2471,
+          3451
+        ],
+        [
+          2509,
+          3433
+        ]
+      ],
+      "id": "4c4e254d-e9db-4c19-a375-24186e26de0e"
+    },
+    {
+      "vertexes": [
+        [
+          2509,
+          3433
+        ],
+        [
+          2538,
+          3394
+        ]
+      ],
+      "id": "94dc7794-cd63-44bb-b4c1-9486ebbfc86b"
+    },
+    {
+      "vertexes": [
+        [
+          2538,
+          3394
+        ],
+        [
+          2550,
+          3360
+        ]
+      ],
+      "id": "d150427b-f537-4fa7-80d7-8483491cac0f"
+    },
+    {
+      "vertexes": [
+        [
+          2550,
+          3360
+        ],
+        [
+          2597,
+          3304
+        ]
+      ],
+      "id": "bb405ec8-f7e5-4cd9-b161-a819f4471a8c"
+    },
+    {
+      "vertexes": [
+        [
+          2597,
+          3304
+        ],
+        [
+          2636,
+          3283
+        ]
+      ],
+      "id": "be824d2a-0559-4c56-bc3b-c70a681277e4"
+    },
+    {
+      "vertexes": [
+        [
+          2636,
+          3283
+        ],
+        [
+          2689,
+          3280
+        ]
+      ],
+      "id": "e81f0a72-0e7c-4914-9286-c1e6da8e947a"
+    },
+    {
+      "vertexes": [
+        [
+          2689,
+          3280
+        ],
+        [
+          2732,
+          3254
+        ]
+      ],
+      "id": "f89ddf89-a0e6-401e-8995-ffc4e134e39b"
+    },
+    {
+      "vertexes": [
+        [
+          2732,
+          3254
+        ],
+        [
+          2747,
+          3220
+        ]
+      ],
+      "id": "c2991498-049f-4756-9a87-0edb0ce48e1c"
+    },
+    {
+      "vertexes": [
+        [
+          2747,
+          3220
+        ],
+        [
+          2789,
+          3196
+        ]
+      ],
+      "id": "cfa27867-5873-4a92-9be3-a7e8c9b9681e"
+    },
+    {
+      "vertexes": [
+        [
+          2789,
+          3196
+        ],
+        [
+          2831,
+          3133
+        ]
+      ],
+      "id": "6764a5ab-e83e-44cc-90d6-54fd5e435ba8"
+    },
+    {
+      "vertexes": [
+        [
+          2831,
+          3133
+        ],
+        [
+          2914,
+          3106
+        ]
+      ],
+      "id": "5955052a-7c64-4016-8c3d-7cb534979eb9"
+    },
+    {
+      "vertexes": [
+        [
+          2914,
+          3106
+        ],
+        [
+          2958,
+          3048
+        ]
+      ],
+      "id": "c74a9aad-c888-4692-89de-5c9e2afa8240"
+    },
+    {
+      "vertexes": [
+        [
+          2958,
+          3048
+        ],
+        [
+          2981,
+          3052
+        ]
+      ],
+      "id": "ee14faae-8fe0-4d84-b669-ddbf42a91e84"
+    },
+    {
+      "vertexes": [
+        [
+          2981,
+          3052
+        ],
+        [
+          3030,
+          3035
+        ]
+      ],
+      "id": "c958b01b-700d-45d1-93d3-5142ac8b79da"
+    },
+    {
+      "vertexes": [
+        [
+          3030,
+          3035
+        ],
+        [
+          3119,
+          2930
+        ]
+      ],
+      "id": "b38c0dec-091c-4fa3-8c9d-e3028b6ce37d"
+    },
+    {
+      "vertexes": [
+        [
+          3119,
+          2930
+        ],
+        [
+          3154,
+          2848
+        ]
+      ],
+      "id": "763c53c0-a21d-41f5-818e-bfcc23a0b452"
+    },
+    {
+      "vertexes": [
+        [
+          3154,
+          2848
+        ],
+        [
+          3142,
+          2816
+        ]
+      ],
+      "id": "057c1a49-acb5-49cf-8047-3e8d17c9b01e"
+    },
+    {
+      "vertexes": [
+        [
+          3142,
+          2816
+        ],
+        [
+          3226,
+          2685
+        ]
+      ],
+      "id": "e3bcbbbc-fc1c-4779-9927-11d32a0df89d"
+    },
+    {
+      "vertexes": [
+        [
+          2612,
+          2657
+        ],
+        [
+          2642,
+          2692
+        ]
+      ],
+      "id": "539d9ee0-ee70-415e-ba6c-c4649dc88528"
+    },
+    {
+      "vertexes": [
+        [
+          2642,
+          2692
+        ],
+        [
+          2632,
+          2724
+        ]
+      ],
+      "id": "20ba15f8-c1af-4cb0-977c-fc4ab469bfbb"
+    },
+    {
+      "vertexes": [
+        [
+          2632,
+          2724
+        ],
+        [
+          2584,
+          2800
+        ]
+      ],
+      "id": "551390ec-487c-433a-8c4f-6fb9cd05ce69"
+    },
+    {
+      "vertexes": [
+        [
+          2584,
+          2800
+        ],
+        [
+          2521,
+          2858
+        ]
+      ],
+      "id": "ccf30f2e-7a81-4da7-ace1-5a7d2fb5abc4"
+    },
+    {
+      "vertexes": [
+        [
+          2521,
+          2858
+        ],
+        [
+          2492,
+          2901
+        ]
+      ],
+      "id": "88a02d48-0484-4536-b60c-db640a6fba6e"
+    },
+    {
+      "vertexes": [
+        [
+          2492,
+          2901
+        ],
+        [
+          2466,
+          2955
+        ]
+      ],
+      "id": "1ad0ba84-df98-4ca2-9c97-71a23f2a00c9"
+    },
+    {
+      "vertexes": [
+        [
+          2466,
+          2955
+        ],
+        [
+          2451,
+          3007
+        ]
+      ],
+      "id": "325c6444-977f-4215-aadc-21dc2cf44050"
+    },
+    {
+      "vertexes": [
+        [
+          2451,
+          3007
+        ],
+        [
+          2471,
+          3047
+        ]
+      ],
+      "id": "89dbd421-cb53-4c4d-b876-ec6c3fb513a6"
+    },
+    {
+      "vertexes": [
+        [
+          2471,
+          3047
+        ],
+        [
+          2457,
+          3127
+        ]
+      ],
+      "id": "57d6d51a-fac6-4941-9b33-1b7f69b20b4f"
+    },
+    {
+      "vertexes": [
+        [
+          2457,
+          3127
+        ],
+        [
+          2488,
+          3145
+        ]
+      ],
+      "id": "e3dddbc9-1457-406d-9bd8-9cb54d816d38"
+    },
+    {
+      "vertexes": [
+        [
+          2488,
+          3145
+        ],
+        [
+          2517,
+          3157
+        ]
+      ],
+      "id": "ec70db06-d6a9-4efa-b03f-a85c506e2a70"
+    },
+    {
+      "vertexes": [
+        [
+          2517,
+          3157
+        ],
+        [
+          2631,
+          3169
+        ]
+      ],
+      "id": "e5f0f86b-5dfc-42e0-bd89-e4d68573c9ee"
+    },
+    {
+      "vertexes": [
+        [
+          2631,
+          3169
+        ],
+        [
+          2673,
+          3147
+        ]
+      ],
+      "id": "aeca451e-d077-495a-a213-1d354a60dec7"
+    },
+    {
+      "vertexes": [
+        [
+          2673,
+          3147
+        ],
+        [
+          2693,
+          3115
+        ]
+      ],
+      "id": "3fd08efa-5306-44b7-91ce-e542b15ad827"
+    },
+    {
+      "vertexes": [
+        [
+          2693,
+          3115
+        ],
+        [
+          2710,
+          3042
+        ]
+      ],
+      "id": "94d58c09-54e8-47cd-a12c-1b65f6e0ef29"
+    },
+    {
+      "vertexes": [
+        [
+          2710,
+          3042
+        ],
+        [
+          2752,
+          3015
+        ]
+      ],
+      "id": "3bc7b96b-c609-43b0-8f31-b589011802f4"
+    },
+    {
+      "vertexes": [
+        [
+          2752,
+          3015
+        ],
+        [
+          2837,
+          2996
+        ]
+      ],
+      "id": "96c65259-0347-4f92-a199-872b05ad8d68"
+    },
+    {
+      "vertexes": [
+        [
+          2837,
+          2996
+        ],
+        [
+          2889,
+          2972
+        ]
+      ],
+      "id": "a550cd6f-7403-4085-9d5e-ae12e2dc4de8"
+    },
+    {
+      "vertexes": [
+        [
+          2889,
+          2972
+        ],
+        [
+          2901,
+          2940
+        ]
+      ],
+      "id": "0025bfa7-3a45-4d41-8129-0ca76d95301b"
+    },
+    {
+      "vertexes": [
+        [
+          2901,
+          2940
+        ],
+        [
+          2984,
+          2870
+        ]
+      ],
+      "id": "0767b143-e074-4c5a-b172-6c141dd154a2"
+    },
+    {
+      "vertexes": [
+        [
+          2984,
+          2870
+        ],
+        [
+          3005,
+          2830
+        ]
+      ],
+      "id": "46e13ee9-b64b-4e83-9239-043c638896cb"
+    },
+    {
+      "vertexes": [
+        [
+          3005,
+          2830
+        ],
+        [
+          2995,
+          2795
+        ]
+      ],
+      "id": "6e7cb2c4-2b26-42d9-b261-f16ec5b9153b"
+    },
+    {
+      "vertexes": [
+        [
+          2995,
+          2795
+        ],
+        [
+          3008,
+          2762
+        ]
+      ],
+      "id": "c4f248a2-d299-4b1e-a036-9e8c8239a351"
+    },
+    {
+      "vertexes": [
+        [
+          3008,
+          2762
+        ],
+        [
+          3030,
+          2729
+        ]
+      ],
+      "id": "ee1df2f5-aaca-435f-9c82-8fa41e29fbc1"
+    },
+    {
+      "vertexes": [
+        [
+          3030,
+          2729
+        ],
+        [
+          3098,
+          2648
+        ]
+      ],
+      "id": "87c3bfad-4598-4966-97d3-4f6bbd0ff341"
+    },
+    {
+      "vertexes": [
+        [
+          1702,
+          2795
+        ],
+        [
+          1803,
+          2804
+        ]
+      ],
+      "id": "4819ed37-b531-48c6-9f3e-408f125c1cb5"
+    },
+    {
+      "vertexes": [
+        [
+          1803,
+          2804
+        ],
+        [
+          1897,
+          2801
+        ]
+      ],
+      "id": "cd1c7f40-97eb-4c20-aeee-de780c8b289f"
+    },
+    {
+      "vertexes": [
+        [
+          1897,
+          2801
+        ],
+        [
+          2101,
+          2799
+        ]
+      ],
+      "id": "9ecdc8c8-6c4a-401c-a27b-863290ed610e"
+    },
+    {
+      "vertexes": [
+        [
+          2101,
+          2799
+        ],
+        [
+          2238,
+          2671
+        ]
+      ],
+      "id": "cdc443eb-4fc6-460a-9fb8-7867aa9bd8be"
+    },
+    {
+      "vertexes": [
+        [
+          2238,
+          2671
+        ],
+        [
+          2242,
+          2390
+        ]
+      ],
+      "id": "78a78ba6-3cc0-46fc-8b7d-2d11b0a22a2f"
+    },
+    {
+      "vertexes": [
+        [
+          2242,
+          2390
+        ],
+        [
+          2334,
+          2392
+        ]
+      ],
+      "id": "51b06b3d-070b-49b6-ac6d-94d66b946610"
+    },
+    {
+      "vertexes": [
+        [
+          2334,
+          2392
+        ],
+        [
+          2333,
+          2442
+        ]
+      ],
+      "id": "bd7eae69-7464-4ddf-895a-e9bd967ae5fe"
+    },
+    {
+      "vertexes": [
+        [
+          2333,
+          2442
+        ],
+        [
+          2353,
+          2466
+        ]
+      ],
+      "id": "edb653e4-1335-4ea9-9608-fe033350c2e3"
+    },
+    {
+      "vertexes": [
+        [
+          2353,
+          2466
+        ],
+        [
+          2353,
+          2485
+        ]
+      ],
+      "id": "25b917eb-c666-4ae9-9ab5-e434645aac35"
+    },
+    {
+      "vertexes": [
+        [
+          2353,
+          2485
+        ],
+        [
+          2328,
+          2529
+        ]
+      ],
+      "id": "7a56edf4-724b-4d92-b9de-14b540ee9c38"
+    },
+    {
+      "vertexes": [
+        [
+          2328,
+          2529
+        ],
+        [
+          2345,
+          2544
+        ]
+      ],
+      "id": "e9df7251-3a44-4f47-a495-f6cfbc7de4c9"
+    },
+    {
+      "vertexes": [
+        [
+          2345,
+          2544
+        ],
+        [
+          2350,
+          2558
+        ]
+      ],
+      "id": "ff74d3bc-9553-455f-9fc0-aacbeacb101a"
+    },
+    {
+      "vertexes": [
+        [
+          2350,
+          2558
+        ],
+        [
+          2376,
+          2574
+        ]
+      ],
+      "id": "a71ff343-826d-44fd-a860-8b22848dbb88"
+    },
+    {
+      "vertexes": [
+        [
+          2376,
+          2574
+        ],
+        [
+          2431,
+          2566
+        ]
+      ],
+      "id": "612d2089-57d4-4a44-a59e-8f1a4acd29f1"
+    },
+    {
+      "vertexes": [
+        [
+          2431,
+          2566
+        ],
+        [
+          2449,
+          2578
+        ]
+      ],
+      "id": "355bd78d-fff0-4ad0-b922-a05d2c39aef1"
+    },
+    {
+      "vertexes": [
+        [
+          2449,
+          2578
+        ],
+        [
+          2455,
+          2592
+        ]
+      ],
+      "id": "912055a3-73ed-49a3-a4be-b8a9e6aa41b5"
+    },
+    {
+      "vertexes": [
+        [
+          2455,
+          2592
+        ],
+        [
+          2442,
+          2643
+        ]
+      ],
+      "id": "dd2ad3e6-1c59-42fe-b984-49a0b85661b1"
+    },
+    {
+      "vertexes": [
+        [
+          2442,
+          2643
+        ],
+        [
+          2453,
+          2661
+        ]
+      ],
+      "id": "00b771fb-92fb-4c67-99aa-87b7952290d3"
+    },
+    {
+      "vertexes": [
+        [
+          2453,
+          2661
+        ],
+        [
+          2469,
+          2669
+        ]
+      ],
+      "id": "8e3f0de1-fb69-462b-ab70-15841b05d928"
+    },
+    {
+      "vertexes": [
+        [
+          2469,
+          2669
+        ],
+        [
+          2479,
+          2710
+        ]
+      ],
+      "id": "6541f9cd-de1c-49cf-814e-92d6ea4fb754"
+    },
+    {
+      "vertexes": [
+        [
+          2248,
+          2241
+        ],
+        [
+          2335,
+          2241
+        ]
+      ],
+      "id": "a32789d0-9a78-492c-ac4a-b994db0ad05c"
+    },
+    {
+      "vertexes": [
+        [
+          2335,
+          2241
+        ],
+        [
+          2331,
+          2192
+        ]
+      ],
+      "id": "40996821-e554-4850-b988-76ff86e55b81"
+    },
+    {
+      "vertexes": [
+        [
+          2331,
+          2192
+        ],
+        [
+          2392,
+          2166
+        ]
+      ],
+      "id": "1d8f89f2-5294-44ed-90de-dbaf76b90dc1"
+    },
+    {
+      "vertexes": [
+        [
+          2392,
+          2166
+        ],
+        [
+          2453,
+          2099
+        ]
+      ],
+      "id": "bf6bdae2-7606-471d-9d58-34dad9d1347a"
+    },
+    {
+      "vertexes": [
+        [
+          2453,
+          2099
+        ],
+        [
+          2550,
+          2045
+        ]
+      ],
+      "id": "7ea5983a-fdaf-41b7-991c-38a24f275c16"
+    },
+    {
+      "vertexes": [
+        [
+          2550,
+          2045
+        ],
+        [
+          2590,
+          2035
+        ]
+      ],
+      "id": "c7c99ee5-7ede-4775-a9a0-6c5994d54fef"
+    },
+    {
+      "vertexes": [
+        [
+          2590,
+          2035
+        ],
+        [
+          2647,
+          2078
+        ]
+      ],
+      "id": "ebcad93b-e358-4605-8e50-b0f89c8e5d77"
+    },
+    {
+      "vertexes": [
+        [
+          2647,
+          2078
+        ],
+        [
+          2652,
+          2119
+        ]
+      ],
+      "id": "05e2b83e-98e4-4bb2-8e35-6e3471da06a5"
+    },
+    {
+      "vertexes": [
+        [
+          2652,
+          2119
+        ],
+        [
+          2664,
+          2140
+        ]
+      ],
+      "id": "d723d51e-08a1-43e8-9453-a374d9e41a7c"
+    },
+    {
+      "vertexes": [
+        [
+          2664,
+          2140
+        ],
+        [
+          2678,
+          2154
+        ]
+      ],
+      "id": "850c91b4-ac48-4c0f-9e4f-66d391d24aad"
+    },
+    {
+      "vertexes": [
+        [
+          2678,
+          2154
+        ],
+        [
+          2724,
+          2156
+        ]
+      ],
+      "id": "ce8cf0e6-8b91-41eb-98ab-001eb665b6c4"
+    },
+    {
+      "vertexes": [
+        [
+          2724,
+          2156
+        ],
+        [
+          2752,
+          2177
+        ]
+      ],
+      "id": "abb92fd1-ce22-4462-877f-7ae41e0019a8"
+    },
+    {
+      "vertexes": [
+        [
+          2752,
+          2177
+        ],
+        [
+          2772,
+          2209
+        ]
+      ],
+      "id": "96f95ba3-93c7-467f-a618-c7ba9d6a8dc8"
+    },
+    {
+      "vertexes": [
+        [
+          2772,
+          2209
+        ],
+        [
+          2769,
+          2419
+        ]
+      ],
+      "id": "40e4da81-d76d-4beb-bdbe-8a6ecc87cd12"
+    },
+    {
+      "vertexes": [
+        [
+          2769,
+          2419
+        ],
+        [
+          2758,
+          2436
+        ]
+      ],
+      "id": "011940d0-b176-42ad-a4a0-1da487cc78be"
+    },
+    {
+      "vertexes": [
+        [
+          2758,
+          2436
+        ],
+        [
+          2725,
+          2449
+        ]
+      ],
+      "id": "17da286a-81d8-40ad-aee1-70bfb39a1edf"
+    },
+    {
+      "vertexes": [
+        [
+          2725,
+          2449
+        ],
+        [
+          2670,
+          2520
+        ]
+      ],
+      "id": "ac4ae57a-f463-4b40-b654-02ea0e6e47ba"
+    },
+    {
+      "vertexes": [
+        [
+          2670,
+          2520
+        ],
+        [
+          2608,
+          2541
+        ]
+      ],
+      "id": "6e060f14-b30b-4319-a4aa-efebf3f5d210"
+    },
+    {
+      "vertexes": [
+        [
+          2608,
+          2541
+        ],
+        [
+          2585,
+          2567
+        ]
+      ],
+      "id": "1d801ffb-d81c-4116-8897-48f6a7af1f2a"
+    },
+    {
+      "vertexes": [
+        [
+          2585,
+          2567
+        ],
+        [
+          2576,
+          2607
+        ]
+      ],
+      "id": "e3eeebad-447b-40bf-be64-1f9b91ef1a02"
+    },
+    {
+      "vertexes": [
+        [
+          2576,
+          2607
+        ],
+        [
+          2588,
+          2641
+        ]
+      ],
+      "id": "5177de6f-1f0a-4fa1-86ad-7970b4f50dc9"
+    },
+    {
+      "vertexes": [
+        [
+          2588,
+          2641
+        ],
+        [
+          2616,
+          2661
+        ]
+      ],
+      "id": "90bb41da-8e4c-47ae-aa64-e4b46273a433"
+    },
+    {
+      "vertexes": [
+        [
+          3225,
+          2687
+        ],
+        [
+          3259,
+          2652
+        ]
+      ],
+      "id": "bee09bbe-07a2-4e34-a4c5-0edb588d3c5d"
+    },
+    {
+      "vertexes": [
+        [
+          3259,
+          2652
+        ],
+        [
+          3324,
+          2632
+        ]
+      ],
+      "id": "afea3fc7-03ce-474c-af4f-6942c7990c9f"
+    },
+    {
+      "vertexes": [
+        [
+          3324,
+          2632
+        ],
+        [
+          3380,
+          2592
+        ]
+      ],
+      "id": "aea33cf6-f6b6-408e-b415-7b0f55bff372"
+    },
+    {
+      "vertexes": [
+        [
+          3380,
+          2592
+        ],
+        [
+          3393,
+          2574
+        ]
+      ],
+      "id": "e4b5473a-02ab-4e9d-a612-a093e2716249"
+    },
+    {
+      "vertexes": [
+        [
+          3393,
+          2574
+        ],
+        [
+          3408,
+          2531
+        ]
+      ],
+      "id": "e0acf1ab-afee-4cc1-bea2-c98daee026de"
+    },
+    {
+      "vertexes": [
+        [
+          3408,
+          2531
+        ],
+        [
+          3403,
+          2472
+        ]
+      ],
+      "id": "a4d9c6c8-d408-4105-806a-6e1a018a9a93"
+    },
+    {
+      "vertexes": [
+        [
+          3403,
+          2472
+        ],
+        [
+          3489,
+          2402
+        ]
+      ],
+      "id": "402a6533-5e4f-4c29-b2ec-07bdf6a6728e"
+    },
+    {
+      "vertexes": [
+        [
+          3489,
+          2402
+        ],
+        [
+          3537,
+          2402
+        ]
+      ],
+      "id": "72447f28-a756-426b-a6fa-411380c5dfec"
+    },
+    {
+      "vertexes": [
+        [
+          3537,
+          2402
+        ],
+        [
+          3581,
+          2414
+        ]
+      ],
+      "id": "b5429460-141e-4471-8353-a965d43ae658"
+    },
+    {
+      "vertexes": [
+        [
+          3581,
+          2414
+        ],
+        [
+          3589,
+          2419
+        ]
+      ],
+      "id": "cb3a8993-150e-4b29-a510-47df8a355f61"
+    },
+    {
+      "vertexes": [
+        [
+          3589,
+          2419
+        ],
+        [
+          3590,
+          2428
+        ]
+      ],
+      "id": "13476e78-da04-46ad-9e36-d3ced72636ea"
+    },
+    {
+      "vertexes": [
+        [
+          3590,
+          2428
+        ],
+        [
+          3624,
+          2432
+        ]
+      ],
+      "id": "bf83baf5-26d7-43af-b29e-6c9fdd1234c9"
+    },
+    {
+      "vertexes": [
+        [
+          3624,
+          2432
+        ],
+        [
+          3670,
+          2398
+        ]
+      ],
+      "id": "72293ca4-8241-4bca-86ac-77f7c400a65c"
+    },
+    {
+      "vertexes": [
+        [
+          3670,
+          2398
+        ],
+        [
+          3690,
+          2399
+        ]
+      ],
+      "id": "c5326583-ec68-42a0-b6b3-04ff17c67761"
+    },
+    {
+      "vertexes": [
+        [
+          3690,
+          2399
+        ],
+        [
+          3724,
+          2407
+        ]
+      ],
+      "id": "1b508760-2a18-416b-a3b7-2c7dfa52dc1f"
+    },
+    {
+      "vertexes": [
+        [
+          3724,
+          2407
+        ],
+        [
+          3755,
+          2399
+        ]
+      ],
+      "id": "4a148084-c4ea-402d-8184-c1a6dfbba5c7"
+    },
+    {
+      "vertexes": [
+        [
+          3755,
+          2399
+        ],
+        [
+          3771,
+          2392
+        ]
+      ],
+      "id": "af66a9d6-a93e-492c-be44-e97796bfd1c3"
+    },
+    {
+      "vertexes": [
+        [
+          3771,
+          2392
+        ],
+        [
+          3791,
+          2405
+        ]
+      ],
+      "id": "7ce478f4-d3e8-4ce7-bc0d-aaf6e89cfb27"
+    },
+    {
+      "vertexes": [
+        [
+          3791,
+          2405
+        ],
+        [
+          3823,
+          2457
+        ]
+      ],
+      "id": "2f9883ee-f133-466a-92ab-22b5fc54989a"
+    },
+    {
+      "vertexes": [
+        [
+          3823,
+          2457
+        ],
+        [
+          3818,
+          2493
+        ]
+      ],
+      "id": "2083d100-cb32-496e-bdbc-5ea46d7a1472"
+    },
+    {
+      "vertexes": [
+        [
+          3818,
+          2493
+        ],
+        [
+          3776,
+          2526
+        ]
+      ],
+      "id": "130c08ba-3702-4ade-b97c-7dde82b6e141"
+    },
+    {
+      "vertexes": [
+        [
+          3776,
+          2526
+        ],
+        [
+          3779,
+          2806
+        ]
+      ],
+      "id": "5be50d7c-632f-4f0c-b032-f58a58e09edb"
+    },
+    {
+      "vertexes": [
+        [
+          3779,
+          2806
+        ],
+        [
+          3642,
+          2805
+        ]
+      ],
+      "id": "2d14d25b-0106-4a60-b1fc-7f671d79e968"
+    },
+    {
+      "vertexes": [
+        [
+          3642,
+          2805
+        ],
+        [
+          3627,
+          2674
+        ]
+      ],
+      "id": "7a3697d2-d2e7-4a5a-8056-a684003912ca"
+    },
+    {
+      "vertexes": [
+        [
+          3627,
+          2674
+        ],
+        [
+          3405,
+          2664
+        ]
+      ],
+      "id": "da381459-a03f-4b69-9498-97ff4857d508"
+    },
+    {
+      "vertexes": [
+        [
+          3405,
+          2664
+        ],
+        [
+          3394,
+          2677
+        ]
+      ],
+      "id": "28a01c06-930b-43ce-888d-b32ba13629e2"
+    },
+    {
+      "vertexes": [
+        [
+          3394,
+          2677
+        ],
+        [
+          3394,
+          2698
+        ]
+      ],
+      "id": "e8c41ecc-451e-499c-8cbf-dcf1cc60635d"
+    },
+    {
+      "vertexes": [
+        [
+          3394,
+          2698
+        ],
+        [
+          3362,
+          2726
+        ]
+      ],
+      "id": "483937fe-1349-4043-a16a-55fa28173c9b"
+    },
+    {
+      "vertexes": [
+        [
+          3364,
+          2723
+        ],
+        [
+          3362,
+          2898
+        ]
+      ],
+      "id": "c504388e-ab53-48bc-a90e-ccfc71ac475a"
+    },
+    {
+      "vertexes": [
+        [
+          3362,
+          2898
+        ],
+        [
+          3385,
+          2913
+        ]
+      ],
+      "id": "c0adbcb6-6b43-49a9-a349-6d3f9ba28043"
+    },
+    {
+      "vertexes": [
+        [
+          3385,
+          2913
+        ],
+        [
+          3393,
+          2927
+        ]
+      ],
+      "id": "be024165-2c35-4011-a3b5-ea78e39ebf7f"
+    },
+    {
+      "vertexes": [
+        [
+          3393,
+          2927
+        ],
+        [
+          3399,
+          2953
+        ]
+      ],
+      "id": "02be90bb-841f-4cf1-b658-cf61070e5187"
+    },
+    {
+      "vertexes": [
+        [
+          3399,
+          2953
+        ],
+        [
+          3780,
+          2957
+        ]
+      ],
+      "id": "d40dcfd9-0607-4367-aa3c-4482950e2897"
+    },
+    {
+      "vertexes": [
+        [
+          3780,
+          2957
+        ],
+        [
+          3782,
+          3080
+        ]
+      ],
+      "id": "0c160bf5-8678-467d-a7b9-4f62022c6679"
+    },
+    {
+      "vertexes": [
+        [
+          3782,
+          3080
+        ],
+        [
+          3719,
+          3083
+        ]
+      ],
+      "id": "3acc3bf0-1aa7-43aa-aff1-60ebe0737645"
+    },
+    {
+      "vertexes": [
+        [
+          3719,
+          3083
+        ],
+        [
+          3698,
+          3073
+        ]
+      ],
+      "id": "30510317-e606-4b60-bce7-5c0301552240"
+    },
+    {
+      "vertexes": [
+        [
+          3698,
+          3073
+        ],
+        [
+          3673,
+          3083
+        ]
+      ],
+      "id": "7ca1113d-f2b6-43e1-a313-748c628e3c49"
+    },
+    {
+      "vertexes": [
+        [
+          3673,
+          3083
+        ],
+        [
+          3520,
+          3087
+        ]
+      ],
+      "id": "54b2bbe4-4694-485d-a198-7250fd3d2ddc"
+    },
+    {
+      "vertexes": [
+        [
+          3520,
+          3087
+        ],
+        [
+          3469,
+          3081
+        ]
+      ],
+      "id": "038d5231-dace-4f89-a231-32f521e7d6d1"
+    },
+    {
+      "vertexes": [
+        [
+          3469,
+          3081
+        ],
+        [
+          3390,
+          3091
+        ]
+      ],
+      "id": "70216a17-457d-4e50-ba42-b45aed546c10"
+    },
+    {
+      "vertexes": [
+        [
+          3390,
+          3091
+        ],
+        [
+          3372,
+          3115
+        ]
+      ],
+      "id": "f2a69014-14d3-4a30-a138-8aa7db38870f"
+    },
+    {
+      "vertexes": [
+        [
+          3372,
+          3115
+        ],
+        [
+          3368,
+          3265
+        ]
+      ],
+      "id": "25af9a83-9677-4842-a1a5-b821360378ff"
+    },
+    {
+      "vertexes": [
+        [
+          3368,
+          3265
+        ],
+        [
+          3357,
+          3339
+        ]
+      ],
+      "id": "f6046417-07c4-4ee3-94e6-2ed2822b0070"
+    },
+    {
+      "vertexes": [
+        [
+          3357,
+          3339
+        ],
+        [
+          3382,
+          3367
+        ]
+      ],
+      "id": "acdcf942-2053-43e5-876e-a1e99a50fae2"
+    },
+    {
+      "vertexes": [
+        [
+          3382,
+          3367
+        ],
+        [
+          3441,
+          3392
+        ]
+      ],
+      "id": "1dc09fe9-86bd-4874-bad0-c273159567ce"
+    },
+    {
+      "vertexes": [
+        [
+          3441,
+          3392
+        ],
+        [
+          3483,
+          3375
+        ]
+      ],
+      "id": "75e04889-86f7-4b1f-a0ce-a8085667873e"
+    },
+    {
+      "vertexes": [
+        [
+          3483,
+          3375
+        ],
+        [
+          3641,
+          3365
+        ]
+      ],
+      "id": "8e1b35dd-9b15-4bce-9674-8e95db7137d4"
+    },
+    {
+      "vertexes": [
+        [
+          3641,
+          3365
+        ],
+        [
+          3655,
+          3241
+        ]
+      ],
+      "id": "69747141-ff70-416d-a8ea-c99a1a2cd21b"
+    },
+    {
+      "vertexes": [
+        [
+          3655,
+          3241
+        ],
+        [
+          3680,
+          3227
+        ]
+      ],
+      "id": "07ba4ad5-b3f0-4064-902b-64570c6fc6ae"
+    },
+    {
+      "vertexes": [
+        [
+          3680,
+          3227
+        ],
+        [
+          3780,
+          3226
+        ]
+      ],
+      "id": "0f51bcd2-70b5-457e-a723-b4966b95cec8"
+    },
+    {
+      "vertexes": [
+        [
+          3780,
+          3226
+        ],
+        [
+          3785,
+          3372
+        ]
+      ],
+      "id": "47fe7fba-6ee6-4db3-80f4-4239633c376a"
+    },
+    {
+      "vertexes": [
+        [
+          3785,
+          3372
+        ],
+        [
+          3801,
+          3391
+        ]
+      ],
+      "id": "341e3215-2034-4388-9b7d-42b1283babf9"
+    },
+    {
+      "vertexes": [
+        [
+          3801,
+          3391
+        ],
+        [
+          3801,
+          3434
+        ]
+      ],
+      "id": "c15dc833-4acc-4c92-a1a1-c6eb88dae571"
+    },
+    {
+      "vertexes": [
+        [
+          3801,
+          3434
+        ],
+        [
+          3782,
+          3451
+        ]
+      ],
+      "id": "005fe60c-5dc9-432c-a0a6-ed86d3417b8d"
+    },
+    {
+      "vertexes": [
+        [
+          3782,
+          3451
+        ],
+        [
+          3786,
+          3479
+        ]
+      ],
+      "id": "e1b11770-1c8e-41e4-b589-8833864452f6"
+    },
+    {
+      "vertexes": [
+        [
+          3786,
+          3479
+        ],
+        [
+          3840,
+          3506
+        ]
+      ],
+      "id": "81125c95-74d4-42a8-8667-ffc07dc1fc8b"
+    },
+    {
+      "vertexes": [
+        [
+          3840,
+          3506
+        ],
+        [
+          4063,
+          3504
+        ]
+      ],
+      "id": "e59c8b97-971c-4825-87c6-7576af7173ea"
+    },
+    {
+      "vertexes": [
+        [
+          4063,
+          3504
+        ],
+        [
+          4057,
+          2951
+        ]
+      ],
+      "id": "283b0e56-ad41-4c35-b558-6722209fc8cc"
+    },
+    {
+      "vertexes": [
+        [
+          4057,
+          2951
+        ],
+        [
+          3933,
+          2947
+        ]
+      ],
+      "id": "eab03d18-fc24-489e-b232-eab9cc7b691e"
+    },
+    {
+      "vertexes": [
+        [
+          3933,
+          2947
+        ],
+        [
+          3920,
+          2925
+        ]
+      ],
+      "id": "a95d2950-9fcd-4e1a-b50b-c022a93c181d"
+    },
+    {
+      "vertexes": [
+        [
+          3920,
+          2925
+        ],
+        [
+          3920,
+          2718
+        ]
+      ],
+      "id": "09abdb4f-2733-435f-9d2f-709025f46e6a"
+    },
+    {
+      "vertexes": [
+        [
+          3920,
+          2718
+        ],
+        [
+          3936,
+          2629
+        ]
+      ],
+      "id": "6848c61f-e5ee-4b1d-ae7f-3381b3a9feda"
+    },
+    {
+      "vertexes": [
+        [
+          3936,
+          2629
+        ],
+        [
+          3967,
+          2611
+        ]
+      ],
+      "id": "d70528f9-dd4e-4f64-8361-aa131d0a69ec"
+    },
+    {
+      "vertexes": [
+        [
+          3967,
+          2611
+        ],
+        [
+          3979,
+          2589
+        ]
+      ],
+      "id": "c8191c3d-67b0-42fd-8526-9f227175f230"
+    },
+    {
+      "vertexes": [
+        [
+          3979,
+          2589
+        ],
+        [
+          4009,
+          2509
+        ]
+      ],
+      "id": "d094b6d1-e482-45f9-bece-c8dfec067883"
+    },
+    {
+      "vertexes": [
+        [
+          3095,
+          2651
+        ],
+        [
+          3183,
+          2559
+        ]
+      ],
+      "id": "61374717-49d7-40ee-87a5-69e251e285ab"
+    },
+    {
+      "vertexes": [
+        [
+          3183,
+          2559
+        ],
+        [
+          3189,
+          2539
+        ]
+      ],
+      "id": "0f1ecbcd-4ed4-47d2-9227-c87ecf4b43a5"
+    },
+    {
+      "vertexes": [
+        [
+          3189,
+          2539
+        ],
+        [
+          3184,
+          2517
+        ]
+      ],
+      "id": "27cff646-8a78-4ff9-9627-72c2b2b28a3f"
+    },
+    {
+      "vertexes": [
+        [
+          3184,
+          2517
+        ],
+        [
+          3162,
+          2488
+        ]
+      ],
+      "id": "4480f6b2-f9aa-4f25-a11f-d7ec745b957e"
+    },
+    {
+      "vertexes": [
+        [
+          3162,
+          2488
+        ],
+        [
+          3179,
+          2430
+        ]
+      ],
+      "id": "c258643a-0684-4f67-9e44-e75afc2d6de4"
+    },
+    {
+      "vertexes": [
+        [
+          3179,
+          2430
+        ],
+        [
+          3180,
+          2374
+        ]
+      ],
+      "id": "fcdd7250-d0da-40ea-acbc-71458e8cc092"
+    },
+    {
+      "vertexes": [
+        [
+          3180,
+          2374
+        ],
+        [
+          3201,
+          2347
+        ]
+      ],
+      "id": "e0f50b21-6f7c-40fa-bfb2-94f687c15688"
+    },
+    {
+      "vertexes": [
+        [
+          3201,
+          2347
+        ],
+        [
+          3239,
+          2319
+        ]
+      ],
+      "id": "9d38b14f-094d-46cf-804f-0661e08a1de5"
+    },
+    {
+      "vertexes": [
+        [
+          3239,
+          2319
+        ],
+        [
+          3269,
+          2324
+        ]
+      ],
+      "id": "bc4048fa-6358-4bfe-8cf8-16465af2f7bc"
+    },
+    {
+      "vertexes": [
+        [
+          3269,
+          2324
+        ],
+        [
+          3299,
+          2338
+        ]
+      ],
+      "id": "39639eee-b705-466d-9c7c-09481ddad970"
+    },
+    {
+      "vertexes": [
+        [
+          3299,
+          2338
+        ],
+        [
+          3325,
+          2339
+        ]
+      ],
+      "id": "73b34c32-b36f-472c-9486-d2d72ba75967"
+    },
+    {
+      "vertexes": [
+        [
+          3325,
+          2339
+        ],
+        [
+          3363,
+          2326
+        ]
+      ],
+      "id": "da66dbb1-834c-4a42-9776-a11e5d314f12"
+    },
+    {
+      "vertexes": [
+        [
+          3363,
+          2326
+        ],
+        [
+          3471,
+          2230
+        ]
+      ],
+      "id": "45e76d2e-1ecd-40c4-b767-e07591cd8b8e"
+    },
+    {
+      "vertexes": [
+        [
+          3471,
+          2230
+        ],
+        [
+          3453,
+          2163
+        ]
+      ],
+      "id": "15af7bc9-f83a-4d90-b76e-babbd4491f96"
+    },
+    {
+      "vertexes": [
+        [
+          3453,
+          2163
+        ],
+        [
+          3454,
+          2111
+        ]
+      ],
+      "id": "deea9edf-5a58-4329-ab28-ef07ca8c8ee1"
+    },
+    {
+      "vertexes": [
+        [
+          3454,
+          2111
+        ],
+        [
+          3482,
+          2077
+        ]
+      ],
+      "id": "2d1ee019-e12c-491d-a344-5a54e0e71d7c"
+    },
+    {
+      "vertexes": [
+        [
+          3482,
+          2077
+        ],
+        [
+          3459,
+          2041
+        ]
+      ],
+      "id": "0667685a-27dc-499c-91fd-3bdfd9f3c64d"
+    },
+    {
+      "vertexes": [
+        [
+          3459,
+          2041
+        ],
+        [
+          3422,
+          2025
+        ]
+      ],
+      "id": "558cc7e4-73c5-4985-a614-182840f8d5aa"
+    },
+    {
+      "vertexes": [
+        [
+          4007,
+          2512
+        ],
+        [
+          4003,
+          2484
+        ]
+      ],
+      "id": "29b6cf10-d4e0-4b57-a798-91ad41d10d1f"
+    },
+    {
+      "vertexes": [
+        [
+          4003,
+          2484
+        ],
+        [
+          3944,
+          2429
+        ]
+      ],
+      "id": "0179666e-8996-43fb-a964-5a69ecf26f86"
+    },
+    {
+      "vertexes": [
+        [
+          3944,
+          2429
+        ],
+        [
+          3989,
+          2332
+        ]
+      ],
+      "id": "67c840a2-8171-458e-9b7e-f65d9f325764"
+    },
+    {
+      "vertexes": [
+        [
+          3989,
+          2332
+        ],
+        [
+          4033,
+          2316
+        ]
+      ],
+      "id": "4b683f8f-19d3-4d51-9291-ea8fd46e61cd"
+    },
+    {
+      "vertexes": [
+        [
+          4033,
+          2316
+        ],
+        [
+          4049,
+          2291
+        ]
+      ],
+      "id": "b8429502-38a8-49a0-af60-973b53b67551"
+    },
+    {
+      "vertexes": [
+        [
+          4049,
+          2291
+        ],
+        [
+          4055,
+          2258
+        ]
+      ],
+      "id": "7a4f7e6f-58c4-4542-ba79-cb3d9f651bc8"
+    },
+    {
+      "vertexes": [
+        [
+          4055,
+          2258
+        ],
+        [
+          4048,
+          2218
+        ]
+      ],
+      "id": "830d629f-2af2-45d9-ae09-683a636b36d9"
+    },
+    {
+      "vertexes": [
+        [
+          4048,
+          2218
+        ],
+        [
+          3989,
+          2186
+        ]
+      ],
+      "id": "77c1aff5-95dc-4f81-8c13-c198d48db7a1"
+    },
+    {
+      "vertexes": [
+        [
+          3989,
+          2186
+        ],
+        [
+          3979,
+          2158
+        ]
+      ],
+      "id": "531ba0cf-5ea6-49b4-b93a-d66ab996d75d"
+    },
+    {
+      "vertexes": [
+        [
+          3979,
+          2158
+        ],
+        [
+          3919,
+          2134
+        ]
+      ],
+      "id": "410b7edd-f81b-47c8-a2f6-dcf3bd282c9e"
+    },
+    {
+      "vertexes": [
+        [
+          3919,
+          2134
+        ],
+        [
+          3916,
+          2116
+        ]
+      ],
+      "id": "4515d993-c6dc-4ea4-ac05-57db6a3635a4"
+    },
+    {
+      "vertexes": [
+        [
+          3916,
+          2116
+        ],
+        [
+          3950,
+          2061
+        ]
+      ],
+      "id": "9081dc20-7fb0-4e68-b5a4-5535059ce9b4"
+    },
+    {
+      "vertexes": [
+        [
+          3950,
+          2061
+        ],
+        [
+          3957,
+          2017
+        ]
+      ],
+      "id": "ff0cd3f2-49db-4f3c-8a3f-caa31b4a60d6"
+    },
+    {
+      "vertexes": [
+        [
+          3957,
+          2017
+        ],
+        [
+          3988,
+          1986
+        ]
+      ],
+      "id": "d547506d-5611-456b-a6bb-fff383f62340"
+    },
+    {
+      "vertexes": [
+        [
+          3988,
+          1986
+        ],
+        [
+          4066,
+          1930
+        ]
+      ],
+      "id": "5e1efcb3-fffa-44b7-a402-611d1fedc76e"
+    },
+    {
+      "vertexes": [
+        [
+          4066,
+          1930
+        ],
+        [
+          4152,
+          1924
+        ]
+      ],
+      "id": "170d675a-3a2c-4989-8d75-a5382f9d5eba"
+    },
+    {
+      "vertexes": [
+        [
+          4152,
+          1924
+        ],
+        [
+          4194,
+          1902
+        ]
+      ],
+      "id": "75d3dba6-2d60-4ede-ba57-acda11c39022"
+    },
+    {
+      "vertexes": [
+        [
+          4194,
+          1902
+        ],
+        [
+          4234,
+          1848
+        ]
+      ],
+      "id": "7af32d90-d31e-4981-b7f6-95b5ff835663"
+    },
+    {
+      "vertexes": [
+        [
+          4234,
+          1848
+        ],
+        [
+          4283,
+          1861
+        ]
+      ],
+      "id": "7b30f4f5-e0d3-4ffe-b9f7-cff3066b4d0c"
+    },
+    {
+      "vertexes": [
+        [
+          4283,
+          1861
+        ],
+        [
+          4335,
+          1844
+        ]
+      ],
+      "id": "639b9bae-1199-4cbf-93ae-045c4784fc88"
+    },
+    {
+      "vertexes": [
+        [
+          4335,
+          1844
+        ],
+        [
+          4371,
+          1811
+        ]
+      ],
+      "id": "6e36d604-985b-449b-a936-497d05721e4a"
+    },
+    {
+      "vertexes": [
+        [
+          4371,
+          1811
+        ],
+        [
+          4417,
+          1810
+        ]
+      ],
+      "id": "b1a3abd2-a751-4b46-9716-60869781d35b"
+    },
+    {
+      "vertexes": [
+        [
+          4417,
+          1810
+        ],
+        [
+          4444,
+          1830
+        ]
+      ],
+      "id": "12ad1ead-21d5-4b53-8b6c-49825da8ba80"
+    },
+    {
+      "vertexes": [
+        [
+          4444,
+          1830
+        ],
+        [
+          4480,
+          1821
+        ]
+      ],
+      "id": "77c285b8-52ee-44ce-b3d2-7a02cd719fc1"
+    },
+    {
+      "vertexes": [
+        [
+          3562,
+          1051
+        ],
+        [
+          3542,
+          1083
+        ]
+      ],
+      "id": "0e76c36b-5ed2-4031-ba00-1e464d35405e"
+    },
+    {
+      "vertexes": [
+        [
+          3542,
+          1083
+        ],
+        [
+          3426,
+          1177
+        ]
+      ],
+      "id": "3bbd1552-976a-42c4-aa91-6d562a275d2a"
+    },
+    {
+      "vertexes": [
+        [
+          3426,
+          1177
+        ],
+        [
+          3349,
+          1256
+        ]
+      ],
+      "id": "d3a37a03-1962-4308-9b3c-286a7e75fcff"
+    },
+    {
+      "vertexes": [
+        [
+          3349,
+          1256
+        ],
+        [
+          3341,
+          1285
+        ]
+      ],
+      "id": "03570d0c-b5d7-4f77-80e1-af83f3f4235e"
+    },
+    {
+      "vertexes": [
+        [
+          3341,
+          1285
+        ],
+        [
+          3346,
+          1325
+        ]
+      ],
+      "id": "4c3aba3e-953d-4185-a868-a2cd0ca76c3f"
+    },
+    {
+      "vertexes": [
+        [
+          3346,
+          1325
+        ],
+        [
+          3297,
+          1378
+        ]
+      ],
+      "id": "f2e87557-c639-4e85-bb63-9223f6680d72"
+    },
+    {
+      "vertexes": [
+        [
+          3297,
+          1378
+        ],
+        [
+          3287,
+          1383
+        ]
+      ],
+      "id": "9603d756-2040-424e-ade3-f2956d48ebc8"
+    },
+    {
+      "vertexes": [
+        [
+          3287,
+          1383
+        ],
+        [
+          3311,
+          1414
+        ]
+      ],
+      "id": "bc98f731-1d93-477e-9ab9-7a89af035f6f"
+    },
+    {
+      "vertexes": [
+        [
+          3311,
+          1414
+        ],
+        [
+          3307,
+          1461
+        ]
+      ],
+      "id": "312f31f8-a0e2-4369-aa1a-bab9e94e28bb"
+    },
+    {
+      "vertexes": [
+        [
+          3307,
+          1461
+        ],
+        [
+          3339,
+          1540
+        ]
+      ],
+      "id": "c658dc9c-fe3f-41ee-a6f5-92b98c8d1ea7"
+    },
+    {
+      "vertexes": [
+        [
+          3339,
+          1540
+        ],
+        [
+          3360,
+          1574
+        ]
+      ],
+      "id": "fc381cc9-488b-4a8a-9a1b-f72ebdb9cb8b"
+    },
+    {
+      "vertexes": [
+        [
+          3360,
+          1574
+        ],
+        [
+          3399,
+          1574
+        ]
+      ],
+      "id": "85c41d1a-a07c-435d-94ff-d8360113706c"
+    },
+    {
+      "vertexes": [
+        [
+          3399,
+          1574
+        ],
+        [
+          3433,
+          1574
+        ]
+      ],
+      "id": "ad921fe2-53c9-4267-af1f-80b9175fd049"
+    },
+    {
+      "vertexes": [
+        [
+          3433,
+          1574
+        ],
+        [
+          3460,
+          1636
+        ]
+      ],
+      "id": "6438488e-be70-4192-9691-acd83f16e069"
+    },
+    {
+      "vertexes": [
+        [
+          3460,
+          1636
+        ],
+        [
+          3452,
+          1661
+        ]
+      ],
+      "id": "3ab64ec6-7b0c-45eb-8c8b-fac9c605cfb3"
+    },
+    {
+      "vertexes": [
+        [
+          3452,
+          1661
+        ],
+        [
+          3474,
+          1734
+        ]
+      ],
+      "id": "029972a1-f94b-46e4-ac8f-866aadcee223"
+    },
+    {
+      "vertexes": [
+        [
+          3474,
+          1734
+        ],
+        [
+          3551,
+          1718
+        ]
+      ],
+      "id": "369ac210-c7d7-4a80-9473-99ace76ee1ad"
+    },
+    {
+      "vertexes": [
+        [
+          3551,
+          1718
+        ],
+        [
+          3605,
+          1679
+        ]
+      ],
+      "id": "4c659fc8-99ea-4db7-8b7e-433ca8388220"
+    },
+    {
+      "vertexes": [
+        [
+          3605,
+          1679
+        ],
+        [
+          3607,
+          1582
+        ]
+      ],
+      "id": "4bc4c6fc-42f0-428f-a9f5-512b66430054"
+    },
+    {
+      "vertexes": [
+        [
+          3607,
+          1582
+        ],
+        [
+          3677,
+          1530
+        ]
+      ],
+      "id": "45591da8-76bf-49ec-859c-8eed0bf7debd"
+    },
+    {
+      "vertexes": [
+        [
+          3677,
+          1530
+        ],
+        [
+          3724,
+          1512
+        ]
+      ],
+      "id": "bd859679-c2b7-4825-b31f-f83d6d235603"
+    },
+    {
+      "vertexes": [
+        [
+          3724,
+          1512
+        ],
+        [
+          3736,
+          1458
+        ]
+      ],
+      "id": "533a21fd-3bc3-4f42-9415-d4cf808dcef9"
+    },
+    {
+      "vertexes": [
+        [
+          3736,
+          1458
+        ],
+        [
+          3735,
+          1334
+        ]
+      ],
+      "id": "e62c917e-7425-4224-a324-a5f03d7e42b1"
+    },
+    {
+      "vertexes": [
+        [
+          3735,
+          1334
+        ],
+        [
+          3786,
+          1193
+        ]
+      ],
+      "id": "1b386ef1-1232-4f9b-b012-eaec9109e89a"
+    },
+    {
+      "vertexes": [
+        [
+          3786,
+          1193
+        ],
+        [
+          3792,
+          1118
+        ]
+      ],
+      "id": "45af51a7-e9ff-4ce0-a3b8-f96225ca0577"
+    },
+    {
+      "vertexes": [
+        [
+          3792,
+          1118
+        ],
+        [
+          3761,
+          1092
+        ]
+      ],
+      "id": "a509bacc-8dcd-4906-9440-2eb198311899"
+    },
+    {
+      "vertexes": [
+        [
+          3761,
+          1092
+        ],
+        [
+          3741,
+          1064
+        ]
+      ],
+      "id": "37573fd0-1a24-4faa-8a4e-fc7407f8c8ab"
+    },
+    {
+      "vertexes": [
+        [
+          3741,
+          1064
+        ],
+        [
+          3696,
+          1033
+        ]
+      ],
+      "id": "cd4233be-e018-41d0-aaf2-dc011faf9cc7"
+    },
+    {
+      "vertexes": [
+        [
+          3696,
+          1033
+        ],
+        [
+          3687,
+          1004
+        ]
+      ],
+      "id": "cec91226-4961-4ffb-b2aa-580bf264a88d"
+    },
+    {
+      "vertexes": [
+        [
+          3687,
+          1004
+        ],
+        [
+          3686,
+          956
+        ]
+      ],
+      "id": "00b4aae4-6421-44af-885f-92232dd1db38"
+    },
+    {
+      "vertexes": [
+        [
+          3686,
+          956
+        ],
+        [
+          3672,
+          943
+        ]
+      ],
+      "id": "f327f5c5-6123-437a-bba3-aecff82c5b31"
+    },
+    {
+      "vertexes": [
+        [
+          3672,
+          943
+        ],
+        [
+          3608,
+          934
+        ]
+      ],
+      "id": "9789f716-b715-4247-a8bf-d22039720cd6"
+    },
+    {
+      "vertexes": [
+        [
+          3608,
+          934
+        ],
+        [
+          3554,
+          995
+        ]
+      ],
+      "id": "0dde358a-ee25-443b-8d9c-26f4c6acb1f3"
+    },
+    {
+      "vertexes": [
+        [
+          3554,
+          995
+        ],
+        [
+          3568,
+          1026
+        ]
+      ],
+      "id": "4f35b810-128d-4929-95d4-4a3db7afe933"
+    },
+    {
+      "vertexes": [
+        [
+          3568,
+          1026
+        ],
+        [
+          3559,
+          1055
+        ]
+      ],
+      "id": "5e31c406-2521-469d-a2eb-d50ea1a1a542"
+    },
+    {
+      "vertexes": [
+        [
+          4480,
+          1714
+        ],
+        [
+          4445,
+          1728
+        ]
+      ],
+      "id": "34a839da-536d-4206-9870-7275a92b185b"
+    },
+    {
+      "vertexes": [
+        [
+          4445,
+          1728
+        ],
+        [
+          4391,
+          1722
+        ]
+      ],
+      "id": "da3c4c06-1d6d-4029-9807-c8060a0955f4"
+    },
+    {
+      "vertexes": [
+        [
+          4391,
+          1722
+        ],
+        [
+          4322,
+          1713
+        ]
+      ],
+      "id": "2673679c-eac1-4351-8354-6a69bb500033"
+    },
+    {
+      "vertexes": [
+        [
+          4322,
+          1713
+        ],
+        [
+          4281,
+          1722
+        ]
+      ],
+      "id": "2b60800a-a233-4de2-9984-bf10f2baae4a"
+    },
+    {
+      "vertexes": [
+        [
+          4281,
+          1722
+        ],
+        [
+          4276,
+          1746
+        ]
+      ],
+      "id": "054a90b8-ab00-43fa-9b9a-219c435863de"
+    },
+    {
+      "vertexes": [
+        [
+          4276,
+          1746
+        ],
+        [
+          4246,
+          1765
+        ]
+      ],
+      "id": "acc35480-d286-4a65-862f-18050bd01292"
+    },
+    {
+      "vertexes": [
+        [
+          4246,
+          1765
+        ],
+        [
+          4228,
+          1750
+        ]
+      ],
+      "id": "ff823540-c174-4ec5-b440-c07c8b31ace5"
+    },
+    {
+      "vertexes": [
+        [
+          4228,
+          1750
+        ],
+        [
+          4228,
+          1725
+        ]
+      ],
+      "id": "8ebd2d3c-271e-4165-abcd-cde2699ded41"
+    },
+    {
+      "vertexes": [
+        [
+          4228,
+          1725
+        ],
+        [
+          4184,
+          1698
+        ]
+      ],
+      "id": "171e4475-479c-4d40-88a0-59c4685331b4"
+    },
+    {
+      "vertexes": [
+        [
+          4184,
+          1698
+        ],
+        [
+          4159,
+          1708
+        ]
+      ],
+      "id": "3b232ded-76c7-482a-b5d0-e2b8e844a0c2"
+    },
+    {
+      "vertexes": [
+        [
+          4159,
+          1708
+        ],
+        [
+          4142,
+          1731
+        ]
+      ],
+      "id": "e8c9f0e8-5b46-4b69-bea4-70e9ba95d3d2"
+    },
+    {
+      "vertexes": [
+        [
+          4142,
+          1731
+        ],
+        [
+          4130,
+          1738
+        ]
+      ],
+      "id": "e681531b-ca39-4f27-8aca-90e03cc464e7"
+    },
+    {
+      "vertexes": [
+        [
+          4130,
+          1738
+        ],
+        [
+          4098,
+          1734
+        ]
+      ],
+      "id": "13b2e0db-cf59-4964-8c0c-84d7c5a5beee"
+    },
+    {
+      "vertexes": [
+        [
+          4098,
+          1734
+        ],
+        [
+          4065,
+          1657
+        ]
+      ],
+      "id": "87a5d562-ed3d-4558-a3cb-200d6ddd2625"
+    },
+    {
+      "vertexes": [
+        [
+          4065,
+          1657
+        ],
+        [
+          4079,
+          1634
+        ]
+      ],
+      "id": "b48602ff-0e6b-441c-8cf0-e427bdd70561"
+    },
+    {
+      "vertexes": [
+        [
+          4079,
+          1634
+        ],
+        [
+          4104,
+          1610
+        ]
+      ],
+      "id": "11411bb1-390a-4899-ba39-ff8f189175c2"
+    },
+    {
+      "vertexes": [
+        [
+          4104,
+          1610
+        ],
+        [
+          4163,
+          1528
+        ]
+      ],
+      "id": "7a6f7174-9bd7-4514-9593-21cc19d06495"
+    },
+    {
+      "vertexes": [
+        [
+          4163,
+          1528
+        ],
+        [
+          4176,
+          1489
+        ]
+      ],
+      "id": "3c05a4b3-2014-4e3a-a71f-0998e1d992f4"
+    },
+    {
+      "vertexes": [
+        [
+          4176,
+          1489
+        ],
+        [
+          4222,
+          1479
+        ]
+      ],
+      "id": "6b43075f-1056-4109-b875-eaecdf2f4c79"
+    },
+    {
+      "vertexes": [
+        [
+          4222,
+          1479
+        ],
+        [
+          4229,
+          1437
+        ]
+      ],
+      "id": "13ae1a3f-a64b-494f-adf0-8eff93154f1c"
+    },
+    {
+      "vertexes": [
+        [
+          4229,
+          1437
+        ],
+        [
+          4217,
+          1381
+        ]
+      ],
+      "id": "4b925555-dd88-42b6-8c59-e28495f051d2"
+    },
+    {
+      "vertexes": [
+        [
+          4217,
+          1381
+        ],
+        [
+          4217,
+          1344
+        ]
+      ],
+      "id": "8f39ac85-6109-4064-a41c-0ecbdba6d307"
+    },
+    {
+      "vertexes": [
+        [
+          4217,
+          1344
+        ],
+        [
+          4200,
+          1289
+        ]
+      ],
+      "id": "a9fc7634-105a-4987-90a5-d1bfe0209cf8"
+    },
+    {
+      "vertexes": [
+        [
+          4200,
+          1289
+        ],
+        [
+          4203,
+          1253
+        ]
+      ],
+      "id": "5875f125-72a2-47a6-8437-d1eef6eaabc7"
+    },
+    {
+      "vertexes": [
+        [
+          4203,
+          1253
+        ],
+        [
+          4164,
+          1193
+        ]
+      ],
+      "id": "0136094a-71e4-4e67-ab88-39265c686a8a"
+    },
+    {
+      "vertexes": [
+        [
+          4164,
+          1193
+        ],
+        [
+          4179,
+          1161
+        ]
+      ],
+      "id": "01c0aa53-074e-4332-871a-ca4ec48f6d54"
+    },
+    {
+      "vertexes": [
+        [
+          4179,
+          1161
+        ],
+        [
+          4209,
+          1134
+        ]
+      ],
+      "id": "d6e1ae1b-a909-43ff-843c-df760588e967"
+    },
+    {
+      "vertexes": [
+        [
+          4209,
+          1134
+        ],
+        [
+          4212,
+          1113
+        ]
+      ],
+      "id": "390d5e88-efa3-4dfb-a187-aff118302a0d"
+    },
+    {
+      "vertexes": [
+        [
+          4212,
+          1113
+        ],
+        [
+          4229,
+          1072
+        ]
+      ],
+      "id": "852aec83-51f3-47e6-a239-533d27999649"
+    },
+    {
+      "vertexes": [
+        [
+          4229,
+          1072
+        ],
+        [
+          4198,
+          1016
+        ]
+      ],
+      "id": "516a4bdc-32b9-4815-9723-28bed741249b"
+    },
+    {
+      "vertexes": [
+        [
+          4198,
+          1016
+        ],
+        [
+          4157,
+          972
+        ]
+      ],
+      "id": "ccbd29bc-b89f-4738-a6d7-0c66c3469c0f"
+    },
+    {
+      "vertexes": [
+        [
+          4157,
+          972
+        ],
+        [
+          4113,
+          948
+        ]
+      ],
+      "id": "0d91120a-9ffe-4a25-b24f-5527b54188cf"
+    },
+    {
+      "vertexes": [
+        [
+          4113,
+          948
+        ],
+        [
+          4088,
+          922
+        ]
+      ],
+      "id": "1608977a-f325-4307-9cb0-cff8e32d09be"
+    },
+    {
+      "vertexes": [
+        [
+          4088,
+          922
+        ],
+        [
+          4073,
+          862
+        ]
+      ],
+      "id": "41e9ff9e-b7bc-46a5-92e7-7ccbd417f8ae"
+    },
+    {
+      "vertexes": [
+        [
+          4073,
+          862
+        ],
+        [
+          3998,
+          873
+        ]
+      ],
+      "id": "85fbb1aa-395d-451a-9137-cc3558db3db2"
+    },
+    {
+      "vertexes": [
+        [
+          3998,
+          873
+        ],
+        [
+          3905,
+          910
+        ]
+      ],
+      "id": "4361c775-9b2d-46aa-87cf-b209a4d92f62"
+    },
+    {
+      "vertexes": [
+        [
+          3905,
+          910
+        ],
+        [
+          3900,
+          966
+        ]
+      ],
+      "id": "1ebc9627-2d64-4718-9fc5-9c66aa1465bf"
+    },
+    {
+      "vertexes": [
+        [
+          3900,
+          966
+        ],
+        [
+          3868,
+          993
+        ]
+      ],
+      "id": "eb4fab0c-6b43-48fa-ad1e-61eccf286235"
+    },
+    {
+      "vertexes": [
+        [
+          3868,
+          993
+        ],
+        [
+          3856,
+          998
+        ]
+      ],
+      "id": "709a00f4-5d64-4611-8f18-c48007f037d4"
+    },
+    {
+      "vertexes": [
+        [
+          3856,
+          998
+        ],
+        [
+          3832,
+          990
+        ]
+      ],
+      "id": "c4a09710-e534-45e3-8140-8be6480973ff"
+    },
+    {
+      "vertexes": [
+        [
+          3832,
+          990
+        ],
+        [
+          3811,
+          936
+        ]
+      ],
+      "id": "31dc4dbf-6fbe-4b2c-b70c-796a682e2fd4"
+    },
+    {
+      "vertexes": [
+        [
+          3811,
+          936
+        ],
+        [
+          3796,
+          893
+        ]
+      ],
+      "id": "4d2442e8-6c69-46fd-90f8-239ca5a2795e"
+    },
+    {
+      "vertexes": [
+        [
+          3796,
+          893
+        ],
+        [
+          3768,
+          859
+        ]
+      ],
+      "id": "6db995f3-86f1-466c-ae9c-47c11855b287"
+    },
+    {
+      "vertexes": [
+        [
+          3768,
+          859
+        ],
+        [
+          3769,
+          816
+        ]
+      ],
+      "id": "6345329c-901c-4ddb-aaaf-c9d08f9d44ac"
+    },
+    {
+      "vertexes": [
+        [
+          3769,
+          816
+        ],
+        [
+          3802,
+          794
+        ]
+      ],
+      "id": "c1d7bc02-5ec9-4e20-8263-3922a23dbe46"
+    },
+    {
+      "vertexes": [
+        [
+          3360,
+          747
+        ],
+        [
+          3398,
+          759
+        ]
+      ],
+      "id": "a67aa022-ab3d-40dc-8d7e-377c5978a586"
+    },
+    {
+      "vertexes": [
+        [
+          3398,
+          759
+        ],
+        [
+          3409,
+          762
+        ]
+      ],
+      "id": "8172fdee-bf8c-4022-b5c8-02743ecfd491"
+    },
+    {
+      "vertexes": [
+        [
+          3409,
+          762
+        ],
+        [
+          3472,
+          740
+        ]
+      ],
+      "id": "a9e5ab8c-40fc-4429-9005-f69eb7afa60c"
+    },
+    {
+      "vertexes": [
+        [
+          3472,
+          740
+        ],
+        [
+          3493,
+          702
+        ]
+      ],
+      "id": "447a8520-e36c-43b5-abc1-84f8c0f3e96c"
+    },
+    {
+      "vertexes": [
+        [
+          3493,
+          702
+        ],
+        [
+          3489,
+          669
+        ]
+      ],
+      "id": "a3576580-7b39-430e-9137-c90b75765945"
+    },
+    {
+      "vertexes": [
+        [
+          3489,
+          669
+        ],
+        [
+          3444,
+          664
+        ]
+      ],
+      "id": "427877f5-1f76-4b2c-97fa-59c18ed6b453"
+    },
+    {
+      "vertexes": [
+        [
+          3444,
+          664
+        ],
+        [
+          3413,
+          597
+        ]
+      ],
+      "id": "096446a5-e7b1-43d4-9b34-39a5ee967b74"
+    },
+    {
+      "vertexes": [
+        [
+          3413,
+          597
+        ],
+        [
+          3463,
+          556
+        ]
+      ],
+      "id": "8502aae8-8337-4082-8d7d-febc4f87aef4"
+    },
+    {
+      "vertexes": [
+        [
+          3463,
+          556
+        ],
+        [
+          3503,
+          451
+        ]
+      ],
+      "id": "8489d572-78dd-4954-9645-501a0c3211f5"
+    },
+    {
+      "vertexes": [
+        [
+          3503,
+          451
+        ],
+        [
+          3544,
+          411
+        ]
+      ],
+      "id": "b2c744cc-f19d-42d4-944a-d204ad279f0a"
+    },
+    {
+      "vertexes": [
+        [
+          3544,
+          411
+        ],
+        [
+          3598,
+          372
+        ]
+      ],
+      "id": "abf02701-68e0-42c8-8a39-bf6ecbad37b4"
+    },
+    {
+      "vertexes": [
+        [
+          3598,
+          372
+        ],
+        [
+          3623,
+          334
+        ]
+      ],
+      "id": "ab3260b1-7459-4d1c-bdd4-0b5afe57aed1"
+    },
+    {
+      "vertexes": [
+        [
+          3623,
+          334
+        ],
+        [
+          3668,
+          328
+        ]
+      ],
+      "id": "a3ed2aea-1d83-4e63-82fa-0cf516c4da44"
+    },
+    {
+      "vertexes": [
+        [
+          3668,
+          328
+        ],
+        [
+          3733,
+          336
+        ]
+      ],
+      "id": "98922d82-1aae-4f80-ab96-13cd919d1456"
+    },
+    {
+      "vertexes": [
+        [
+          3733,
+          336
+        ],
+        [
+          3782,
+          342
+        ]
+      ],
+      "id": "d4845fd4-3467-4a99-a167-7e9072851695"
+    },
+    {
+      "vertexes": [
+        [
+          3782,
+          342
+        ],
+        [
+          3812,
+          362
+        ]
+      ],
+      "id": "03367086-1102-49e7-970f-51f642f80834"
+    },
+    {
+      "vertexes": [
+        [
+          3812,
+          362
+        ],
+        [
+          3822,
+          393
+        ]
+      ],
+      "id": "a40b7694-3f42-4ecf-a5c0-fd47eb8e2fff"
+    },
+    {
+      "vertexes": [
+        [
+          3822,
+          393
+        ],
+        [
+          3817,
+          439
+        ]
+      ],
+      "id": "ab17fef4-4403-44db-ad67-dfd14bbcd823"
+    },
+    {
+      "vertexes": [
+        [
+          3817,
+          439
+        ],
+        [
+          3773,
+          493
+        ]
+      ],
+      "id": "eded67c4-395d-4f6f-9517-25697d3a03df"
+    },
+    {
+      "vertexes": [
+        [
+          3773,
+          493
+        ],
+        [
+          3782,
+          534
+        ]
+      ],
+      "id": "aff0cc19-f05b-4969-aa0c-805bb1870f46"
+    },
+    {
+      "vertexes": [
+        [
+          3782,
+          534
+        ],
+        [
+          3769,
+          605
+        ]
+      ],
+      "id": "b8e038d6-9d46-4da0-8a42-2be4ffb8d60d"
+    },
+    {
+      "vertexes": [
+        [
+          3769,
+          605
+        ],
+        [
+          3803,
+          661
+        ]
+      ],
+      "id": "41b73b76-bfa9-4062-9edf-0b089bde8683"
+    },
+    {
+      "vertexes": [
+        [
+          3803,
+          661
+        ],
+        [
+          3830,
+          694
+        ]
+      ],
+      "id": "a39b4051-6bf9-4c12-9143-979c187c5273"
+    },
+    {
+      "vertexes": [
+        [
+          3830,
+          694
+        ],
+        [
+          3829,
+          730
+        ]
+      ],
+      "id": "12bb8fbd-f3dc-46e0-b9ae-8894367f56a9"
+    },
+    {
+      "vertexes": [
+        [
+          3829,
+          730
+        ],
+        [
+          3804,
+          775
+        ]
+      ],
+      "id": "9f5578b7-e982-4a70-b616-cf15358c1cd1"
+    },
+    {
+      "vertexes": [
+        [
+          3804,
+          775
+        ],
+        [
+          3799,
+          797
+        ]
+      ],
+      "id": "05a45228-225c-4895-b680-71bcba9404b6"
+    },
+    {
+      "vertexes": [
+        [
+          2316,
+          422
+        ],
+        [
+          2319,
+          394
+        ]
+      ],
+      "id": "a5d3d225-652b-496d-bd0d-acb44fe5e4e6"
+    },
+    {
+      "vertexes": [
+        [
+          2319,
+          394
+        ],
+        [
+          2341,
+          369
+        ]
+      ],
+      "id": "78cc1817-c692-495b-ae0d-8ccf6f58fd0b"
+    },
+    {
+      "vertexes": [
+        [
+          2341,
+          369
+        ],
+        [
+          2394,
+          374
+        ]
+      ],
+      "id": "b5bc498f-df74-4a64-9f57-ac91891f675c"
+    },
+    {
+      "vertexes": [
+        [
+          2394,
+          374
+        ],
+        [
+          2421,
+          348
+        ]
+      ],
+      "id": "2280fa90-8656-4ea5-ab6f-72a73b59c220"
+    },
+    {
+      "vertexes": [
+        [
+          2421,
+          348
+        ],
+        [
+          2516,
+          309
+        ]
+      ],
+      "id": "7858be38-ccb6-4be2-9f45-0c998ddc6aeb"
+    },
+    {
+      "vertexes": [
+        [
+          2516,
+          309
+        ],
+        [
+          2523,
+          292
+        ]
+      ],
+      "id": "8b453bb7-e0ca-48c4-9aa4-c5c9684403b5"
+    },
+    {
+      "vertexes": [
+        [
+          2523,
+          292
+        ],
+        [
+          2522,
+          257
+        ]
+      ],
+      "id": "fdf0c4d7-1f87-4823-88d6-0958f2a51538"
+    },
+    {
+      "vertexes": [
+        [
+          2522,
+          257
+        ],
+        [
+          2555,
+          240
+        ]
+      ],
+      "id": "84c24131-bcb0-46d4-98c5-809120323741"
+    },
+    {
+      "vertexes": [
+        [
+          2555,
+          240
+        ],
+        [
+          2603,
+          227
+        ]
+      ],
+      "id": "68fcc29c-3d6c-4625-82a4-1d35bf64b343"
+    },
+    {
+      "vertexes": [
+        [
+          2603,
+          227
+        ],
+        [
+          2647,
+          248
+        ]
+      ],
+      "id": "1918bf74-6d80-48b7-8ecd-0a3afb30fdd1"
+    },
+    {
+      "vertexes": [
+        [
+          2647,
+          248
+        ],
+        [
+          2678,
+          264
+        ]
+      ],
+      "id": "5fa649aa-cc7b-41f1-91ba-932c8f3e7111"
+    },
+    {
+      "vertexes": [
+        [
+          2678,
+          264
+        ],
+        [
+          2733,
+          267
+        ]
+      ],
+      "id": "0147cd48-8cec-49cc-956f-3e99dae922df"
+    },
+    {
+      "vertexes": [
+        [
+          2733,
+          267
+        ],
+        [
+          2811,
+          243
+        ]
+      ],
+      "id": "bf2d64f3-a62c-4fde-8f22-468db22135f9"
+    },
+    {
+      "vertexes": [
+        [
+          2811,
+          243
+        ],
+        [
+          2837,
+          216
+        ]
+      ],
+      "id": "6cdefcd6-fe88-4c5c-9e12-2ed76d58927a"
+    },
+    {
+      "vertexes": [
+        [
+          2837,
+          216
+        ],
+        [
+          2860,
+          163
+        ]
+      ],
+      "id": "a8332c32-f46b-4855-976f-b79fb18125ef"
+    },
+    {
+      "vertexes": [
+        [
+          2860,
+          163
+        ],
+        [
+          2940,
+          132
+        ]
+      ],
+      "id": "41732311-b9ac-4ed7-90cf-c92d609cb88d"
+    },
+    {
+      "vertexes": [
+        [
+          2940,
+          132
+        ],
+        [
+          3046,
+          54
+        ]
+      ],
+      "id": "04999ebe-8a56-45b3-be07-bbcba661566f"
+    },
+    {
+      "vertexes": [
+        [
+          3046,
+          54
+        ],
+        [
+          3064,
+          27
+        ]
+      ],
+      "id": "e1d8bdac-0a18-4e7b-b65f-f3e8ad18ce05"
+    },
+    {
+      "vertexes": [
+        [
+          3064,
+          27
+        ],
+        [
+          3090,
+          39
+        ]
+      ],
+      "id": "c41a7dda-7272-4935-9770-29edbbc600d2"
+    },
+    {
+      "vertexes": [
+        [
+          3090,
+          39
+        ],
+        [
+          3152,
+          0
+        ]
+      ],
+      "id": "7b59ce35-2a62-4b1b-a948-4810dbfb4400"
+    },
+    {
+      "vertexes": [
+        [
+          1916,
+          466
+        ],
+        [
+          1898,
+          445
+        ]
+      ],
+      "id": "da2077b7-4a55-4915-8f30-6e946593fa45"
+    },
+    {
+      "vertexes": [
+        [
+          1898,
+          445
+        ],
+        [
+          1880,
+          453
+        ]
+      ],
+      "id": "5ee39d19-2fa1-4a27-bc34-70f7a5fa1e4c"
+    },
+    {
+      "vertexes": [
+        [
+          1880,
+          453
+        ],
+        [
+          1863,
+          465
+        ]
+      ],
+      "id": "cb1e501e-757d-4f0d-88c4-68aedb0faf94"
+    },
+    {
+      "vertexes": [
+        [
+          1863,
+          465
+        ],
+        [
+          1829,
+          450
+        ]
+      ],
+      "id": "3c62b9d5-7cfe-430f-b76b-fe8e4f8051be"
+    },
+    {
+      "vertexes": [
+        [
+          1829,
+          450
+        ],
+        [
+          1845,
+          417
+        ]
+      ],
+      "id": "78ee1ec5-d502-4759-b44d-4421a8929ca0"
+    },
+    {
+      "vertexes": [
+        [
+          1845,
+          417
+        ],
+        [
+          1831,
+          379
+        ]
+      ],
+      "id": "10fc216d-9dd5-4294-92a8-672dde6bd4b1"
+    },
+    {
+      "vertexes": [
+        [
+          1831,
+          379
+        ],
+        [
+          1814,
+          354
+        ]
+      ],
+      "id": "bcf8d275-ea57-435b-a582-28ed85707d76"
+    },
+    {
+      "vertexes": [
+        [
+          1814,
+          354
+        ],
+        [
+          1784,
+          344
+        ]
+      ],
+      "id": "ffa21084-c212-4427-bb75-694b26a51284"
+    },
+    {
+      "vertexes": [
+        [
+          1784,
+          344
+        ],
+        [
+          1734,
+          363
+        ]
+      ],
+      "id": "8758e61d-44f4-422f-8e45-2754ed2547f1"
+    },
+    {
+      "vertexes": [
+        [
+          1734,
+          363
+        ],
+        [
+          1715,
+          356
+        ]
+      ],
+      "id": "63563894-bee4-4726-94c4-85bf57ffb4e1"
+    },
+    {
+      "vertexes": [
+        [
+          1715,
+          356
+        ],
+        [
+          1651,
+          354
+        ]
+      ],
+      "id": "35e5d43e-7d38-4a69-acbd-8910fbd433a6"
+    },
+    {
+      "vertexes": [
+        [
+          1651,
+          354
+        ],
+        [
+          1620,
+          346
+        ]
+      ],
+      "id": "62995ad9-458f-4cc6-bb58-ed81b58889cf"
+    },
+    {
+      "vertexes": [
+        [
+          1620,
+          346
+        ],
+        [
+          1578,
+          367
+        ]
+      ],
+      "id": "8fe7fffe-aa61-4ab2-86f9-3d02de2cbe2a"
+    },
+    {
+      "vertexes": [
+        [
+          1578,
+          367
+        ],
+        [
+          1535,
+          371
+        ]
+      ],
+      "id": "657f779c-b463-411f-a8f7-82927c64644f"
+    },
+    {
+      "vertexes": [
+        [
+          1535,
+          371
+        ],
+        [
+          1476,
+          347
+        ]
+      ],
+      "id": "6aafa9a4-5d27-42ac-a552-da14624a4129"
+    },
+    {
+      "vertexes": [
+        [
+          1476,
+          347
+        ],
+        [
+          1461,
+          308
+        ]
+      ],
+      "id": "6f74b2ce-e30d-45ef-8d22-b007e525207e"
+    },
+    {
+      "vertexes": [
+        [
+          1461,
+          308
+        ],
+        [
+          1379,
+          266
+        ]
+      ],
+      "id": "aaf74e10-6a90-4498-9334-7a893b414b42"
+    },
+    {
+      "vertexes": [
+        [
+          1379,
+          266
+        ],
+        [
+          1250,
+          288
+        ]
+      ],
+      "id": "650e310d-b345-4db7-8f73-fce200086d76"
+    },
+    {
+      "vertexes": [
+        [
+          1250,
+          288
+        ],
+        [
+          1183,
+          247
+        ]
+      ],
+      "id": "696138e1-2770-4169-801e-a13671ff7669"
+    },
+    {
+      "vertexes": [
+        [
+          1183,
+          247
+        ],
+        [
+          1156,
+          222
+        ]
+      ],
+      "id": "e86c0994-f380-4694-bdf8-ab4597991b6b"
+    },
+    {
+      "vertexes": [
+        [
+          1156,
+          222
+        ],
+        [
+          1136,
+          160
+        ]
+      ],
+      "id": "113fac7a-aca5-4502-875e-599a78f66f9d"
+    },
+    {
+      "vertexes": [
+        [
+          1136,
+          160
+        ],
+        [
+          1119,
+          153
+        ]
+      ],
+      "id": "a47bdf0a-1bcf-4470-9a41-7cc4ffc45c8d"
+    },
+    {
+      "vertexes": [
+        [
+          1119,
+          153
+        ],
+        [
+          1065,
+          172
+        ]
+      ],
+      "id": "ac69c379-6927-4f02-92e9-107e6c68ca29"
+    },
+    {
+      "vertexes": [
+        [
+          1065,
+          172
+        ],
+        [
+          944,
+          140
+        ]
+      ],
+      "id": "8f8aafa0-89f9-4ee0-ae8c-cede80421708"
+    },
+    {
+      "vertexes": [
+        [
+          944,
+          140
+        ],
+        [
+          883,
+          78
+        ]
+      ],
+      "id": "555cabd2-a5d9-4ecc-b222-eec84cf06dcc"
+    },
+    {
+      "vertexes": [
+        [
+          883,
+          78
+        ],
+        [
+          778,
+          80
+        ]
+      ],
+      "id": "6e12b4d4-7e9e-4022-9295-c8d8476f4645"
+    },
+    {
+      "vertexes": [
+        [
+          778,
+          80
+        ],
+        [
+          758,
+          116
+        ]
+      ],
+      "id": "983755a7-5bbd-4be9-9266-3ef1bed1cfd3"
+    },
+    {
+      "vertexes": [
+        [
+          758,
+          116
+        ],
+        [
+          744,
+          174
+        ]
+      ],
+      "id": "23ba02ef-f881-4f24-9fea-a4dda5171ac2"
+    },
+    {
+      "vertexes": [
+        [
+          744,
+          174
+        ],
+        [
+          711,
+          207
+        ]
+      ],
+      "id": "484ee870-5819-4ee8-942b-f5091e1ceceb"
+    },
+    {
+      "vertexes": [
+        [
+          711,
+          207
+        ],
+        [
+          654,
+          237
+        ]
+      ],
+      "id": "1de08a43-bf5c-4abb-9d08-01890ffed6cf"
+    },
+    {
+      "vertexes": [
+        [
+          654,
+          237
+        ],
+        [
+          535,
+          274
+        ]
+      ],
+      "id": "a447d6e3-fdf9-4ef5-be9b-1a7ec2839c57"
+    },
+    {
+      "vertexes": [
+        [
+          535,
+          274
+        ],
+        [
+          434,
+          204
+        ]
+      ],
+      "id": "0f1c2c93-c006-47e0-8076-3a886fcbc15c"
+    },
+    {
+      "vertexes": [
+        [
+          434,
+          204
+        ],
+        [
+          364,
+          155
+        ]
+      ],
+      "id": "2f56b62e-cf16-4e94-bbf9-dfbd937af747"
+    },
+    {
+      "vertexes": [
+        [
+          364,
+          155
+        ],
+        [
+          366,
+          38
+        ]
+      ],
+      "id": "0db54a9e-bb6b-4690-91d8-7cdce82d6e88"
+    },
+    {
+      "vertexes": [
+        [
+          366,
+          38
+        ],
+        [
+          344,
+          -1
+        ]
+      ],
+      "id": "a6ed7dd8-bfd4-44e3-ba89-323a2f84f13c"
+    },
+    {
+      "vertexes": [
+        [
+          2095,
+          3629
+        ],
+        [
+          2088,
+          3659
+        ]
+      ],
+      "id": "23385104-5597-4b98-a97c-49a22c7400a7"
+    },
+    {
+      "vertexes": [
+        [
+          2088,
+          3659
+        ],
+        [
+          2096,
+          3670
+        ]
+      ],
+      "id": "4b4d7460-4b32-46dd-a18d-4f0deb0da4d1"
+    },
+    {
+      "vertexes": [
+        [
+          2096,
+          3670
+        ],
+        [
+          2088,
+          3698
+        ]
+      ],
+      "id": "6b6d7ac7-754f-4836-8d7a-ed758c66eafb"
+    },
+    {
+      "vertexes": [
+        [
+          2088,
+          3698
+        ],
+        [
+          2082,
+          3723
+        ]
+      ],
+      "id": "6f548ea9-ab3d-4bf0-9270-a0808edbf8b3"
+    },
+    {
+      "vertexes": [
+        [
+          2082,
+          3723
+        ],
+        [
+          2087,
+          3745
+        ]
+      ],
+      "id": "974f0ebf-4d66-49d8-98fd-dae47ad77715"
+    },
+    {
+      "vertexes": [
+        [
+          2087,
+          3745
+        ],
+        [
+          2085,
+          3768
+        ]
+      ],
+      "id": "27489ce5-58ca-444d-a9b0-a625e3794ebf"
+    },
+    {
+      "vertexes": [
+        [
+          2085,
+          3768
+        ],
+        [
+          2101,
+          3785
+        ]
+      ],
+      "id": "41f2af75-6167-4c89-889f-c89aa6537c09"
+    }
+  ],
+  "illumination": {"lighting": "darkness"},
+  "grid": {
+    "cellWidth": 70,
+    "lastCellCenterY": 4444,
+    "cellHeight": 70,
+    "drawGrid": true,
+    "firstCellCenterX": 37,
+    "lastCellCenterX": 4377,
+    "firstCellCenterY": 104
+  },
+  "playerTokens": [
+    {
+      "size": "Medium",
+      "lightSources": [{"name": "Torch"}],
+      "imagePath": "/data/tokens/players/Lia.png",
+      "sightTypes": [{"name": "Darkvision 60'"}],
+      "name": "Lia",
+      "column": 34,
+      "id": "99fa0c3c-c0f0-4cba-909d-8620b27e37bd",
+      "row": 60,
+      "conditions": [],
+      "version": 3
+    },
+    {
+      "size": "Medium",
+      "lightSources": [{"name": "Torch"}],
+      "imagePath": "/data/tokens/players/Luth.png",
+      "sightTypes": [],
+      "name": "Luth",
+      "column": 35,
+      "id": "9e5ce7d8-b3a8-48e3-964f-4c3f052be23f",
+      "row": 61,
+      "conditions": [],
+      "version": 2
+    },
+    {
+      "size": "Medium",
+      "lightSources": [{"name": "Torch"}],
+      "imagePath": "/data/tokens/players/Orsik.png",
+      "sightTypes": [{"name": "Darkvision 60'"}],
+      "name": "Orsik",
+      "column": 35,
+      "id": "b25807c2-39af-4d63-aaa1-6dbb6203df4e",
+      "row": 59,
+      "conditions": [],
+      "version": 3
+    }
+  ],
+  "map": {
+    "logoLink": "https://www.patreon.com/dysonlogos",
+    "filePath": "/data/maps/Static-DungeonsOfTheGrandIllusionist.png",
+    "logoFilePath": "c:\\Users\\Luis\\Documents\\GitHub\\dungeoneering\\dungeoneering\\data\\logos\\dyson-logos.png",
+    "isVideo": false,
+    "fitToScreen": false
+  }
+}
