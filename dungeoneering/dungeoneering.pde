@@ -505,6 +505,10 @@ void mouseDragged() {
         else
           changeAppState(userInterface.panMap(mouseX, pmouseX, mouseY, pmouseY, false));
 
+      } else if ( mouseButton == CENTER ) {
+
+        changeAppState(userInterface.panMap(mouseX, pmouseX, mouseY, pmouseY, false));
+
       }
 
       break;
@@ -525,7 +529,16 @@ void mouseDragged() {
       break;
     case mapPan:
 
-      if ( mouseButton == LEFT )
+      if ( mouseButton == LEFT || mouseButton == CENTER )
+        userInterface.panMap(mouseX, pmouseX, mouseY, pmouseY, false);
+
+      break;
+    case wallSetup:
+    case doorSetup:
+    case tokenSetup:
+    case tokenMovement:
+
+      if ( mouseButton == CENTER )
         userInterface.panMap(mouseX, pmouseX, mouseY, pmouseY, false);
 
       break;
@@ -571,6 +584,9 @@ void mouseReleased() {
       if ( mouseButton == LEFT )
         changeAppState(userInterface.moveToken(mouseX, mouseY, true));
 
+      if ( mouseButton == CENTER )
+        userInterface.panMap(mouseX, pmouseX, mouseY, pmouseY, true);
+
       break;
     case wallSetup:
 
@@ -579,6 +595,9 @@ void mouseReleased() {
 
       if ( mouseButton == RIGHT )
         userInterface.removeWall(mouseX, mouseY);
+
+      if ( mouseButton == CENTER )
+        userInterface.panMap(mouseX, pmouseX, mouseY, pmouseY, true);
 
       break;
     case doorSetup:
@@ -589,6 +608,9 @@ void mouseReleased() {
       if ( mouseButton == RIGHT )
         userInterface.removeDoor(mouseX, mouseY);
 
+      if ( mouseButton == CENTER )
+        userInterface.panMap(mouseX, pmouseX, mouseY, pmouseY, true);
+
       break;
     case initiativeOrderSetup:
 
@@ -598,7 +620,7 @@ void mouseReleased() {
       break;
     case mapPan:
 
-      if ( mouseButton == LEFT )
+      if ( mouseButton == LEFT || mouseButton == CENTER )
         changeAppState(userInterface.panMap(mouseX, pmouseX, mouseY, pmouseY, true));
 
       break;
