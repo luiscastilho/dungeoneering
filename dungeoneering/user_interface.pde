@@ -1107,7 +1107,7 @@ public class UserInterface {
 
         Button logo = (Button)controlEvent.getController();
         String link = logo.getStringValue();
-        if ( link != null && !link.trim().isEmpty() )
+        if ( !isEmpty(link) )
           link(link);
 
         break;
@@ -1323,7 +1323,6 @@ public class UserInterface {
 
         if ( addToken.isOn() ) {
 
-          map.reset();
           playersLayer.reset();
           dmLayer.reset();
 
@@ -2291,6 +2290,12 @@ public class UserInterface {
         mapJson.setString("filePath", getImageSavePath(map.getFilePath()));
         mapJson.setBoolean("fitToScreen", map.getFitToScreen());
         mapJson.setBoolean("isVideo", map.isVideo());
+        String logoFilePath = map.getLogoFilePath();
+        String logoLink = map.getLogoLink();
+        if ( !isEmpty(logoFilePath) && !isEmpty(logoLink) ) {
+          mapJson.setString("logoFilePath", logoFilePath);
+          mapJson.setString("logoLink", logoLink);
+        }
       }
       sceneJson.setJSONObject("map", mapJson);
 
@@ -2488,7 +2493,7 @@ public class UserInterface {
 
   String getImageSavePath(String imageAbsolutePath) {
 
-    if ( imageAbsolutePath == null || imageAbsolutePath.trim().isEmpty() )
+    if ( isEmpty(imageAbsolutePath) )
       return "";
 
     String imageSavePath = null;
@@ -2627,6 +2632,7 @@ public class UserInterface {
             controllersBottomRightInitialX + squareButtonWidth,
             controllersBottomRightInitialY - controllersSpacing
           );
+          map.setLogo(logoFilePath, logoLink);
           addLogoButton(logoFilePath, logoMinPosition, logoLink);
         }
 
@@ -2824,7 +2830,7 @@ public class UserInterface {
 
       UUID tokenId = null;
       String tokenIdAsString = tokenJson.getString("id");
-      if ( tokenIdAsString == null || tokenIdAsString.trim().isEmpty() ) {
+      if ( isEmpty(tokenIdAsString) ) {
         logger.warning("UserInterface: JSON token " + tokenName + " has no ID, generating one");
         tokenId = UUID.randomUUID();
       } else {
@@ -3062,7 +3068,7 @@ public class UserInterface {
 
   String getImageLoadPath(String imagePathFromJson) {
 
-    if ( imagePathFromJson == null || imagePathFromJson.trim().isEmpty() )
+    if ( isEmpty(imagePathFromJson) )
       return "";
 
     String imageLoadPath = null;
@@ -3112,7 +3118,7 @@ public class UserInterface {
 
   void addLogoButton(String logoImagePath, Point buttonMinPosition, String logoLink) {
 
-    if ( logoImagePath == null || logoImagePath.trim().isEmpty() )
+    if ( isEmpty(logoImagePath) || isEmpty(logoLink) )
       return;
 
     if ( buttonMinPosition == null )
@@ -3137,7 +3143,7 @@ public class UserInterface {
     if ( appMode == AppMode.standalone )
       return;
 
-    if ( sceneJson == null || sceneJson.toString().trim().isEmpty() )
+    if ( sceneJson == null || isEmpty(sceneJson.toString()) )
       return;
 
     if ( !map.isSet() || !grid.isSet() || sceneJson.getBoolean("reloadScene", false) ) {
@@ -3238,7 +3244,7 @@ public class UserInterface {
         // Retrieve JSON token ID
         UUID tokenId = null;
         String tokenIdAsString = tokenJson.getString("id");
-        if ( tokenIdAsString == null || tokenIdAsString.trim().isEmpty() ) {
+        if ( isEmpty(tokenIdAsString) ) {
           logger.warning("UserInterface: Error syncing " + layer.getName() + " token changes: JSON token has null or empty ID");
           continue;
         }
@@ -3488,7 +3494,7 @@ public class UserInterface {
         // Retrieve JSON wall ID
         UUID wallId = null;
         String wallIdAsString = wallJson.getString("id");
-        if ( wallIdAsString == null || wallIdAsString.trim().isEmpty() ) {
+        if ( isEmpty(wallIdAsString) ) {
           logger.warning("UserInterface: Error syncing wall changes: JSON wall has null or empty ID");
           continue;
         }
@@ -3564,7 +3570,7 @@ public class UserInterface {
         // Retrieve JSON door ID
         UUID doorId = null;
         String doorIdAsString = doorJson.getString("id");
-        if ( doorIdAsString == null || doorIdAsString.trim().isEmpty() ) {
+        if ( isEmpty(doorIdAsString) ) {
           logger.warning("UserInterface: Error syncing door changes: JSON door has null or empty ID");
           continue;
         }
@@ -3766,7 +3772,7 @@ public class UserInterface {
 
   boolean getToggleState(String buttonName) {
 
-    if ( buttonName == null || buttonName.trim().isEmpty() )
+    if ( isEmpty(buttonName) )
       return true;
 
     Toggle toggle = (Toggle)cp5.getController(buttonName);
@@ -3889,7 +3895,7 @@ public class UserInterface {
 
   boolean fileExists(String filePath) {
 
-    if ( filePath == null || filePath.trim().isEmpty() )
+    if ( isEmpty(filePath) )
       return false;
 
     boolean exists = false;
@@ -3943,7 +3949,7 @@ public class UserInterface {
     if ( appMode == AppMode.dm )
       return true;
 
-    boolean controllerAllowed = buttonName != null && !buttonName.trim().isEmpty() && allowedControllersInPlayersMode.contains(buttonName);
+    boolean controllerAllowed = !isEmpty(buttonName) && allowedControllersInPlayersMode.contains(buttonName);
 
     return controllerAllowed;
 
@@ -3956,7 +3962,8 @@ public class UserInterface {
     if ( appMode == AppMode.dm )
       return true;
 
-    boolean controllerGroupAllowed = buttonGroup != null && !buttonGroup.getName().trim().isEmpty() && allowedControllerGroupsInPlayersMode.contains(buttonGroup.getName());
+    String buttonGroupName = buttonGroup.getName();
+    boolean controllerGroupAllowed = !isEmpty(buttonGroupName) && allowedControllerGroupsInPlayersMode.contains(buttonGroupName);
 
     return controllerGroupAllowed;
 
@@ -3986,6 +3993,10 @@ public class UserInterface {
     hideController("Switch environment lighting DM label");
     hideController("Switch environment lighting Players label");
 
+  }
+
+  boolean isEmpty(String stringToCheck) {
+     return stringToCheck == null || stringToCheck.trim().isEmpty();
   }
 
 }

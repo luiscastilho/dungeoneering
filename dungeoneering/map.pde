@@ -23,6 +23,9 @@ class Map {
   boolean panEnabled;
   boolean zoomEnabled;
 
+  String logoFilePath;
+  String logoLink;
+
   Map(PApplet _sketch, PGraphics _canvas, Obstacles _obstacles) {
 
     sketch = _sketch;
@@ -49,6 +52,9 @@ class Map {
 
     panEnabled = true;
     zoomEnabled = true;
+
+    logoFilePath = null;
+    logoLink = null;
 
   }
 
@@ -489,6 +495,19 @@ class Map {
 
     }
 
+  }
+
+  void setLogo(String _logoFilePath, String _logoLink) {
+    logoFilePath = _logoFilePath;
+    logoLink = _logoLink;
+  }
+
+  String getLogoFilePath() {
+    return logoFilePath;
+  }
+
+  String getLogoLink() {
+    return logoLink;
   }
 
 }
