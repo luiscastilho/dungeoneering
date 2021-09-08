@@ -2282,38 +2282,47 @@ public class UserInterface {
 
       sceneJson = new JSONObject();
 
-      if ( addReloadSceneFlag )
-        sceneJson.setBoolean("reloadScene", true);
+      if ( appMode == AppMode.standalone || appMode == AppMode.dm )
+        if ( addReloadSceneFlag )
+          sceneJson.setBoolean("reloadScene", true);
 
-      JSONObject mapJson = new JSONObject();
-      if ( map.isSet() ) {
-        mapJson.setString("filePath", getImageSavePath(map.getFilePath()));
-        mapJson.setBoolean("fitToScreen", map.getFitToScreen());
-        mapJson.setBoolean("isVideo", map.isVideo());
-        String logoFilePath = map.getLogoFilePath();
-        String logoLink = map.getLogoLink();
-        if ( !isEmpty(logoFilePath) && !isEmpty(logoLink) ) {
-          mapJson.setString("logoFilePath", logoFilePath);
-          mapJson.setString("logoLink", logoLink);
+      if ( appMode == AppMode.standalone || appMode == AppMode.dm ) {
+
+        JSONObject mapJson = new JSONObject();
+        if ( map.isSet() ) {
+          mapJson.setString("filePath", getImageSavePath(map.getFilePath()));
+          mapJson.setBoolean("fitToScreen", map.getFitToScreen());
+          mapJson.setBoolean("isVideo", map.isVideo());
+          String logoFilePath = map.getLogoFilePath();
+          String logoLink = map.getLogoLink();
+          if ( !isEmpty(logoFilePath) && !isEmpty(logoLink) ) {
+            mapJson.setString("logoFilePath", logoFilePath);
+            mapJson.setString("logoLink", logoLink);
+          }
         }
+        sceneJson.setJSONObject("map", mapJson);
+
+        logger.debug("UserInterface: Map converted to JSON");
+
       }
-      sceneJson.setJSONObject("map", mapJson);
 
-      logger.debug("UserInterface: Map converted to JSON");
+      if ( appMode == AppMode.standalone || appMode == AppMode.dm ) {
 
-      JSONObject gridJson = new JSONObject();
-      if ( grid.isSet() ) {
-        gridJson.setInt("firstCellCenterX", grid.getMapGridFirstCellCenter().x);
-        gridJson.setInt("firstCellCenterY", grid.getMapGridFirstCellCenter().y);
-        gridJson.setInt("lastCellCenterX", grid.getMapGridLastCellCenter().x);
-        gridJson.setInt("lastCellCenterY", grid.getMapGridLastCellCenter().y);
-        gridJson.setInt("cellWidth", grid.getCellWidth());
-        gridJson.setInt("cellHeight", grid.getCellHeight());
+        JSONObject gridJson = new JSONObject();
+        if ( grid.isSet() ) {
+          gridJson.setInt("firstCellCenterX", grid.getMapGridFirstCellCenter().x);
+          gridJson.setInt("firstCellCenterY", grid.getMapGridFirstCellCenter().y);
+          gridJson.setInt("lastCellCenterX", grid.getMapGridLastCellCenter().x);
+          gridJson.setInt("lastCellCenterY", grid.getMapGridLastCellCenter().y);
+          gridJson.setInt("cellWidth", grid.getCellWidth());
+          gridJson.setInt("cellHeight", grid.getCellHeight());
+        }
+        gridJson.setBoolean("drawGrid", grid.getDrawGrid());
+        sceneJson.setJSONObject("grid", gridJson);
+
+        logger.debug("UserInterface: Grid converted to JSON");
+
       }
-      gridJson.setBoolean("drawGrid", grid.getDrawGrid());
-      sceneJson.setJSONObject("grid", gridJson);
-
-      logger.debug("UserInterface: Grid converted to JSON");
 
       JSONObject initiativeJson = new JSONObject();
       initiativeJson.setBoolean("drawInitiativeOrder", initiative.getDrawInitiativeOrder());
@@ -2332,71 +2341,86 @@ public class UserInterface {
       logger.debug("UserInterface: Initiative converted to JSON");
 
       sceneJson.setJSONArray("playerTokens", getTokensJsonArray(playersLayer));
-      sceneJson.setJSONArray("dmTokens", getTokensJsonArray(dmLayer));
+
+      if ( appMode == AppMode.standalone || appMode == AppMode.dm )
+        sceneJson.setJSONArray("dmTokens", getTokensJsonArray(dmLayer));
 
       logger.debug("UserInterface: Tokens converted to JSON");
 
-      JSONArray wallsArray = new JSONArray();
-      obstaclesIndex = 0;
-      for ( Wall wall: obstacles.getWalls() ) {
-        JSONObject wallJson = new JSONObject();
-        wallJson.setString("id", wall.getStringId());
-        JSONArray wallVertexesJson = new JSONArray();
-        for ( PVector wallVertex: wall.getMapVertexes() ) {
-          JSONArray wallVertexJson = new JSONArray();
-          wallVertexJson.append(wallVertex.x);
-          wallVertexJson.append(wallVertex.y);
-          wallVertexesJson.append(wallVertexJson);
+      if ( appMode == AppMode.standalone || appMode == AppMode.dm ) {
+
+        JSONArray wallsArray = new JSONArray();
+        obstaclesIndex = 0;
+        for ( Wall wall: obstacles.getWalls() ) {
+          JSONObject wallJson = new JSONObject();
+          wallJson.setString("id", wall.getStringId());
+          JSONArray wallVertexesJson = new JSONArray();
+          for ( PVector wallVertex: wall.getMapVertexes() ) {
+            JSONArray wallVertexJson = new JSONArray();
+            wallVertexJson.append(wallVertex.x);
+            wallVertexJson.append(wallVertex.y);
+            wallVertexesJson.append(wallVertexJson);
+          }
+          wallJson.setJSONArray("vertexes", wallVertexesJson);
+          wallsArray.setJSONObject(obstaclesIndex, wallJson);
+          obstaclesIndex += 1;
         }
-        wallJson.setJSONArray("vertexes", wallVertexesJson);
-        wallsArray.setJSONObject(obstaclesIndex, wallJson);
-        obstaclesIndex += 1;
+        sceneJson.setJSONArray("walls", wallsArray);
+
+        logger.debug("UserInterface: Walls converted to JSON");
+
       }
-      sceneJson.setJSONArray("walls", wallsArray);
 
-      logger.debug("UserInterface: Walls converted to JSON");
+      if ( appMode == AppMode.standalone || appMode == AppMode.dm ) {
 
-      JSONArray doorsArray = new JSONArray();
-      obstaclesIndex = 0;
-      for ( Door door: obstacles.getDoors() ) {
-        JSONObject doorJson = new JSONObject();
-        doorJson.setString("id", door.getStringId());
-        doorJson.setBoolean("closed", door.getClosed());
-        JSONArray doorVertexesJson = new JSONArray();
-        for ( PVector doorVertex: door.getMapVertexes() ) {
-          JSONArray doorVertexJson = new JSONArray();
-          doorVertexJson.append(doorVertex.x);
-          doorVertexJson.append(doorVertex.y);
-          doorVertexesJson.append(doorVertexJson);
+        JSONArray doorsArray = new JSONArray();
+        obstaclesIndex = 0;
+        for ( Door door: obstacles.getDoors() ) {
+          JSONObject doorJson = new JSONObject();
+          doorJson.setString("id", door.getStringId());
+          doorJson.setBoolean("closed", door.getClosed());
+          JSONArray doorVertexesJson = new JSONArray();
+          for ( PVector doorVertex: door.getMapVertexes() ) {
+            JSONArray doorVertexJson = new JSONArray();
+            doorVertexJson.append(doorVertex.x);
+            doorVertexJson.append(doorVertex.y);
+            doorVertexesJson.append(doorVertexJson);
+          }
+          doorJson.setJSONArray("vertexes", doorVertexesJson);
+          doorsArray.setJSONObject(obstaclesIndex, doorJson);
+          obstaclesIndex += 1;
         }
-        doorJson.setJSONArray("vertexes", doorVertexesJson);
-        doorsArray.setJSONObject(obstaclesIndex, doorJson);
-        obstaclesIndex += 1;
+        sceneJson.setJSONArray("doors", doorsArray);
+
+        logger.debug("UserInterface: Doors converted to JSON");
+
       }
-      sceneJson.setJSONArray("doors", doorsArray);
 
-      logger.debug("UserInterface: Doors converted to JSON");
+      if ( appMode == AppMode.standalone || appMode == AppMode.dm ) {
 
-      JSONObject illuminationJson = new JSONObject();
-      Illumination appIllumination = null;
-      if ( useSwitchLightingAppToggle )
-        appIllumination = obstacles.getPlayersAppIllumination();
-      else
-        appIllumination = obstacles.getIllumination();
-      switch ( appIllumination ) {
-        case brightLight:
-          illuminationJson.setString("lighting", "brightLigt");
-          break;
-        case dimLight:
-          illuminationJson.setString("lighting", "dimLight");
-          break;
-        case darkness:
-          illuminationJson.setString("lighting", "darkness");
-          break;
+        JSONObject illuminationJson = new JSONObject();
+        Illumination appIllumination = null;
+        if ( useSwitchLightingAppToggle )
+          appIllumination = obstacles.getPlayersAppIllumination();
+        else
+          appIllumination = obstacles.getIllumination();
+
+        switch ( appIllumination ) {
+          case brightLight:
+            illuminationJson.setString("lighting", "brightLight");
+            break;
+          case dimLight:
+            illuminationJson.setString("lighting", "dimLight");
+            break;
+          case darkness:
+            illuminationJson.setString("lighting", "darkness");
+            break;
+        }
+        sceneJson.setJSONObject("illumination", illuminationJson);
+
+        logger.debug("UserInterface: Environment lighting converted to JSON");
+
       }
-      sceneJson.setJSONObject("illumination", illuminationJson);
-
-      logger.debug("UserInterface: Environment lighting converted to JSON");
 
       logger.debug("UserInterface: Scene converted to JSON");
 
@@ -2574,8 +2598,8 @@ public class UserInterface {
 
       logger.debug("UserInterface: Scene reset");
 
-      setSwitchButtonState("Toggle combat mode", false);
-      setSwitchButtonState("Toggle grid", false);
+      setSwitchButtonState("Toggle combat mode", false, false);
+      setSwitchButtonState("Toggle grid", false, false);
       removeController("Map logo");
 
       JSONObject mapJson = sceneJson.getJSONObject("map");
@@ -2657,7 +2681,10 @@ public class UserInterface {
         grid.setup(mapFirstCellCenter, mapLastCellCenter, cellWidth, cellHeight, false);
 
         if ( drawGrid )
-          setSwitchButtonState("Toggle grid", true);
+          if ( appMode == AppMode.standalone || appMode == AppMode.dm )
+            setSwitchButtonState("Toggle grid", true);
+          else if ( appMode == AppMode.players )
+            grid.toggleDrawGrid();
 
         logger.debug("UserInterface: Grid loaded");
 
@@ -2692,7 +2719,10 @@ public class UserInterface {
 
         boolean drawInitiativeOrder = initiativeJson.getBoolean("drawInitiativeOrder");
         if ( drawInitiativeOrder )
-          setSwitchButtonState("Toggle combat mode", true);
+          if ( appMode == AppMode.standalone || appMode == AppMode.dm )
+            setSwitchButtonState("Toggle combat mode", true);
+          else if ( appMode == AppMode.players )
+            initiative.toggleDrawInitiativeOrder();
 
         JSONArray initiativeGroupsArray = initiativeJson.getJSONArray("initiativeGroups");
         if ( initiativeGroupsArray != null ) {
@@ -2770,14 +2800,17 @@ public class UserInterface {
 
         String lighting = illuminationJson.getString("lighting");
         switch ( lighting ) {
-          case "brightLigt":
+          case "brightLight":
             obstacles.setIllumination(Illumination.brightLight);
+            obstacles.setPlayersAppIllumination(Illumination.brightLight);
             break;
           case "dimLight":
             obstacles.setIllumination(Illumination.dimLight);
+            obstacles.setPlayersAppIllumination(Illumination.dimLight);
             break;
           case "darkness":
             obstacles.setIllumination(Illumination.darkness);
+            obstacles.setPlayersAppIllumination(Illumination.darkness);
             break;
         }
 
@@ -3734,7 +3767,7 @@ public class UserInterface {
       // Retrieve current environment illumination
       String lighting = illuminationJson.getString("lighting");
       switch ( lighting ) {
-        case "brightLigt":
+        case "brightLight":
           obstacles.setIllumination(Illumination.brightLight);
           break;
         case "dimLight":

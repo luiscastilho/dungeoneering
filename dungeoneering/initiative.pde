@@ -102,6 +102,8 @@ class Initiative {
 
     groups = new CopyOnWriteArrayList<InitiativeGroup>();
 
+    drawInitiativeOrder = false;
+
     initiativeVersion.set(1);
 
   }

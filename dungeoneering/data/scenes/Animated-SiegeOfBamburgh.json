@@ -620,7 +620,7 @@
     "drawInitiativeOrder": true
   },
   "walls": [],
-  "illumination": {"lighting": "brightLigt"},
+  "illumination": {"lighting": "brightLight"},
   "grid": {
     "cellWidth": 55,
     "lastCellCenterY": 1035,

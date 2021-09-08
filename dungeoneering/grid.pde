@@ -292,6 +292,8 @@ class Grid {
     cellWidth = cellHeight = 0;
     rowsCount = columnsCount = 0;
 
+    drawGrid = false;
+
     gridVersion.set(1);
 
     System.gc();
