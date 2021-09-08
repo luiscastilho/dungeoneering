@@ -404,6 +404,9 @@ class Map {
     panY = panToY = 0;
     scale = toScale = 1;
 
+    logoFilePath = null;
+    logoLink = null;
+
     System.gc();
 
   }
