@@ -223,6 +223,7 @@ public class UserInterface {
     allowedControllerGroupsInPlayersMode.add("Light Sources");
     allowedControllerGroupsInPlayersMode.add("Sight Types");
     allowedControllerGroupsInPlayersMode.add("Sizes");
+    allowedControllerGroupsInPlayersMode.add("Settings");
 
     logger.debug("Setup: UI controllers setup started");
 
@@ -743,11 +744,15 @@ public class UserInterface {
     controllersMenuY = controllersMenuInitialY;
     addButton("Toggle initiative", tokenSetupIconFolder + "toggle_initiative", controllersMenuX, controllersMenuY, settingsMenuControllers);
 
-    controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Change token layer", tokenSetupIconFolder + "switch_layer", controllersMenuX, controllersMenuY, settingsMenuControllers);
+    if ( appMode == AppMode.standalone || appMode == AppMode.dm ) {
 
-    controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Remove token", tokenSetupIconFolder + "remove", controllersMenuX, controllersMenuY, settingsMenuControllers);
+      controllersMenuX += squareButtonWidth + controllersSpacing;
+      addButton("Change token layer", tokenSetupIconFolder + "switch_layer", controllersMenuX, controllersMenuY, settingsMenuControllers);
+
+      controllersMenuX += squareButtonWidth + controllersSpacing;
+      addButton("Remove token", tokenSetupIconFolder + "remove", controllersMenuX, controllersMenuY, settingsMenuControllers);
+
+    }
 
     // Button groups label
 
