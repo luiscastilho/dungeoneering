@@ -1705,6 +1705,12 @@ public class UserInterface {
         obstacles.setRecalculateShadows(true);
         hideMenu(0, 0);
 
+        if ( appMode == AppMode.standalone || appMode == AppMode.dm )
+          setSwitchButtonState("Toggle combat mode", true);
+        else if ( appMode == AppMode.players )
+          if ( !initiative.getDrawInitiativeOrder() )
+            initiative.toggleDrawInitiativeOrder();
+
         break;
     }
 
