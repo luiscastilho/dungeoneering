@@ -264,6 +264,12 @@ class Initiative {
   }
 
   int getGroupPosition(InitiativeGroup group) {
+
+    if ( groups.isEmpty() )
+      return -1;
+    if ( group == null )
+      return -1;
+
     return groups.indexOf(group);
   }
 
@@ -335,8 +341,12 @@ class Initiative {
   }
 
   void incrementInitiativeVersion() {
-    logger.debug("Incrementing initiative version from " + initiativeVersion.getValue() + " to " + (initiativeVersion.getValue()+1));
+    logger.trace("Incrementing initiative version from " + initiativeVersion.getValue() + " to " + (initiativeVersion.getValue()+1));
     initiativeVersion.set(initiativeVersion.getValue() + 1);
+  }
+
+  CopyOnWriteArrayList<InitiativeGroup> getGroups() {
+    return groups;
   }
 
   class InitiativeGroup {

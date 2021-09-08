@@ -520,7 +520,7 @@ class Token {
   }
 
   void incrementVersion() {
-    logger.debug("Incrementing " + name + " token version from " + version.getValue() + " to " + (version.getValue()+1));
+    logger.trace("Incrementing " + name + " token version from " + version.getValue() + " to " + (version.getValue()+1));
     version.set(version.getValue() + 1);
   }
 

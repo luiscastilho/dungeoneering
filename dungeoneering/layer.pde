@@ -299,7 +299,7 @@ class Layer {
   }
 
   void incrementLayerVersion() {
-    logger.debug("Incrementing " + name + " version from " + layerVersion.getValue() + " to " + (layerVersion.getValue()+1));
+    logger.trace("Incrementing " + name + " version from " + layerVersion.getValue() + " to " + (layerVersion.getValue()+1));
     layerVersion.set(layerVersion.getValue() + 1);
   }
 

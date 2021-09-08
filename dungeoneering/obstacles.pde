@@ -481,12 +481,12 @@ class Obstacles {
   }
 
   void incrementWallsVersion() {
-    logger.debug("Incrementing walls version from " + wallsVersion.getValue() + " to " + (wallsVersion.getValue()+1));
+    logger.trace("Incrementing walls version from " + wallsVersion.getValue() + " to " + (wallsVersion.getValue()+1));
     wallsVersion.set(wallsVersion.getValue() + 1);
   }
 
   void incrementDoorsVersion() {
-    logger.debug("Incrementing doors version from " + doorsVersion.getValue() + " to " + (doorsVersion.getValue()+1));
+    logger.trace("Incrementing doors version from " + doorsVersion.getValue() + " to " + (doorsVersion.getValue()+1));
     doorsVersion.set(doorsVersion.getValue() + 1);
   }
 

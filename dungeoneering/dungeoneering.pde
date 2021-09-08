@@ -281,115 +281,136 @@ void draw() {
 
 void drawScene() {
 
-  mainCanvas.beginDraw();
-  mainCanvas.background(backgroundColor);
+  try {
 
-  // Draw map
-  map.draw();
+    mainCanvas.beginDraw();
+    mainCanvas.background(backgroundColor);
 
-  // Draw grid
-  grid.draw();
+    // Draw map
+    map.draw();
 
-  // Reset shadows so they can be recalculated below
-  if ( obstacles.getRecalculateShadows() )
-    obstacles.resetShadows();
+    // Draw grid
+    grid.draw();
 
-  // Draw tokens
-  switch ( layerShown ) {
-    case players:
+    // Reset shadows so they can be recalculated below
+    if ( obstacles.getRecalculateShadows() )
+      obstacles.resetShadows();
 
-      if ( obstacles.getRecalculateShadows() ) {
-        // Gather light sources from all layers
-        dmLayer.recalculateShadows(ShadowType.lightSources);
-        playersLayer.recalculateShadows(ShadowType.lightSources);
-        // Gather lines of sight of the layer being shown, to be used as a mask to hide/reveal light sources
-        playersLayer.recalculateShadows(ShadowType.linesOfSight);
-        // Gather sight types of the layer being shown
-        playersLayer.recalculateShadows(ShadowType.sightTypes);
-        // Compose final shadows with all of the above
-        obstacles.blendShadows();
-      }
+    // Draw tokens
+    switch ( layerShown ) {
+      case players:
 
-      // Draw layer not being shown first
-      dmLayer.draw(layerShown);
-      // Draw shadows to hide/reveal areas and tokens depending on the obstacles present
-      obstacles.draw();
-      // Draw layer being shown
-      playersLayer.draw(layerShown);
+        if ( obstacles.getRecalculateShadows() ) {
+          // Gather light sources from all layers
+          dmLayer.recalculateShadows(ShadowType.lightSources);
+          playersLayer.recalculateShadows(ShadowType.lightSources);
+          // Gather lines of sight of the layer being shown, to be used as a mask to hide/reveal light sources
+          playersLayer.recalculateShadows(ShadowType.linesOfSight);
+          // Gather sight types of the layer being shown
+          playersLayer.recalculateShadows(ShadowType.sightTypes);
+          // Compose final shadows with all of the above
+          obstacles.blendShadows();
+        }
 
-      break;
-    case dm:
+        // Draw layer not being shown first
+        dmLayer.draw(layerShown);
+        // Draw shadows to hide/reveal areas and tokens depending on the obstacles present
+        obstacles.draw();
+        // Draw layer being shown
+        playersLayer.draw(layerShown);
 
-      if ( obstacles.getRecalculateShadows() ) {
+        break;
+      case dm:
+
+        if ( obstacles.getRecalculateShadows() ) {
+          // Same as above, with opposite layer
+          playersLayer.recalculateShadows(ShadowType.lightSources);
+          dmLayer.recalculateShadows(ShadowType.lightSources);
+          dmLayer.recalculateShadows(ShadowType.linesOfSight);
+          dmLayer.recalculateShadows(ShadowType.sightTypes);
+          obstacles.blendShadows();
+        }
+
         // Same as above, with opposite layer
-        playersLayer.recalculateShadows(ShadowType.lightSources);
-        dmLayer.recalculateShadows(ShadowType.lightSources);
-        dmLayer.recalculateShadows(ShadowType.linesOfSight);
-        dmLayer.recalculateShadows(ShadowType.sightTypes);
-        obstacles.blendShadows();
-      }
+        playersLayer.draw(layerShown);
+        obstacles.draw();
+        dmLayer.draw(layerShown);
 
-      // Same as above, with opposite layer
-      playersLayer.draw(layerShown);
-      obstacles.draw();
-      dmLayer.draw(layerShown);
+        break;
+      case all:
+      default:
 
-      break;
-    case all:
-    default:
+        if ( obstacles.getRecalculateShadows() ) {
+          // Gather light sources from all layers
+          playersLayer.recalculateShadows(ShadowType.lightSources);
+          dmLayer.recalculateShadows(ShadowType.lightSources);
+          // Gather lines of sight from all layers, to be used as a mask to reveal/hide light sources
+          playersLayer.recalculateShadows(ShadowType.linesOfSight);
+          dmLayer.recalculateShadows(ShadowType.linesOfSight);
+          // Gather sight types from all layers
+          playersLayer.recalculateShadows(ShadowType.sightTypes);
+          dmLayer.recalculateShadows(ShadowType.sightTypes);
+          // Compose final shadows with all of the above
+          obstacles.blendShadows();
+        }
 
-      if ( obstacles.getRecalculateShadows() ) {
-        // Gather light sources from all layers
-        playersLayer.recalculateShadows(ShadowType.lightSources);
-        dmLayer.recalculateShadows(ShadowType.lightSources);
-        // Gather lines of sight from all layers, to be used as a mask to reveal/hide light sources
-        playersLayer.recalculateShadows(ShadowType.linesOfSight);
-        dmLayer.recalculateShadows(ShadowType.linesOfSight);
-        // Gather sight types from all layers
-        playersLayer.recalculateShadows(ShadowType.sightTypes);
-        dmLayer.recalculateShadows(ShadowType.sightTypes);
-        // Compose final shadows with all of the above
-        obstacles.blendShadows();
-      }
+        // Draw shadows first, to hide/reveal areas depending on the obstacles present
+        obstacles.draw();
+        // Then draw all layers
+        playersLayer.draw(layerShown);
+        dmLayer.draw(layerShown);
 
-      // Draw shadows first, to hide/reveal areas depending on the obstacles present
-      obstacles.draw();
-      // Then draw all layers
-      playersLayer.draw(layerShown);
-      dmLayer.draw(layerShown);
+        break;
+    }
 
-      break;
+    // Set shadows as already recalculated
+    if ( obstacles.getRecalculateShadows() )
+      obstacles.setRecalculateShadows(false);
+
+    // Draw UI setup helpers if any are active
+    userInterface.drawSetupHelpers();
+
+    mainCanvas.endDraw();
+
+  } catch ( Exception e ) {
+    logger.error("UserInterface: Error drawing scene");
+    logger.error(ExceptionUtils.getStackTrace(e));
   }
-
-  // Set shadows as already recalculated
-  if ( obstacles.getRecalculateShadows() )
-    obstacles.setRecalculateShadows(false);
-
-  // Draw UI setup helpers if any are active
-  userInterface.drawSetupHelpers();
-
-  mainCanvas.endDraw();
 
 }
 
 void drawInitiative() {
 
-  initiativeCanvas.beginDraw();
-  initiativeCanvas.background(0, 0);
-  initiative.draw(layerShown);
-  initiativeCanvas.endDraw();
+  try {
+
+    initiativeCanvas.beginDraw();
+    initiativeCanvas.background(0, 0);
+    initiative.draw(layerShown);
+    initiativeCanvas.endDraw();
+
+  } catch ( Exception e ) {
+    logger.error("UserInterface: Error drawing initiative");
+    logger.error(ExceptionUtils.getStackTrace(e));
+  }
 
 }
 
 void drawUi() {
 
-  uiCanvas.beginDraw();
-  uiCanvas.background(0, 0);
-  // Draw controlP5 controllers
-  cp5.draw(uiCanvas);
-  // Draw UI tooltips
-  userInterface.drawTooltips(uiCanvas);
-  uiCanvas.endDraw();
+  try {
+
+    uiCanvas.beginDraw();
+    uiCanvas.background(0, 0);
+    // Draw controlP5 controllers
+    cp5.draw(uiCanvas);
+    // Draw UI tooltips
+    userInterface.drawTooltips(uiCanvas);
+    uiCanvas.endDraw();
+
+  } catch ( Exception e ) {
+    logger.error("UserInterface: Error drawing user interface");
+    logger.error(ExceptionUtils.getStackTrace(e));
+  }
 
 }
 
@@ -425,14 +446,17 @@ void appUpkeep() {
 void checkForUpdates() {
 
   // Retrieve latest_version file from GitHub repository, main branch
-  String[] latest_version_contents = loadStrings("https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/docs/latest_version");
+  String[] latestVersionContents = loadStrings("https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/docs/latest_version");
 
   // If latest_version could be retrieved, compare it to application version
-  if ( latest_version_contents != null ) {
+  if ( latestVersionContents != null ) {
 
-    String latest_version = latest_version_contents[0];
-    if ( !appVersion.equals(latest_version) )
-      userInterface.showNewVersionDialog(latest_version);
+    int appVersionNumber = int(appVersion.replace("v", "").replace(".", ""));
+
+    String latestVersion = latestVersionContents[0];
+    int latestVersionNumber = int(latestVersion.replace("v", "").replace(".", ""));
+    if ( latestVersionNumber > appVersionNumber )
+      userInterface.showNewVersionDialog(latestVersion);
     else
       logger.info("CheckForUpdates: dungeoneering is running the latest version");
 
@@ -750,6 +774,7 @@ void processSharedData(String fromApp) {
   } catch ( Exception e ) {
     logger.error("UserInterface: Error handling shared data");
     logger.error(ExceptionUtils.getStackTrace(e));
+    throw e;
   }
 
 }

@@ -2299,7 +2299,7 @@ public class UserInterface {
       }
       sceneJson.setJSONObject("map", mapJson);
 
-      logger.debug("UserInterface: Map saved");
+      logger.debug("UserInterface: Map converted to JSON");
 
       JSONObject gridJson = new JSONObject();
       if ( grid.isSet() ) {
@@ -2313,7 +2313,7 @@ public class UserInterface {
       gridJson.setBoolean("drawGrid", grid.getDrawGrid());
       sceneJson.setJSONObject("grid", gridJson);
 
-      logger.debug("UserInterface: Grid saved");
+      logger.debug("UserInterface: Grid converted to JSON");
 
       JSONObject initiativeJson = new JSONObject();
       initiativeJson.setBoolean("drawInitiativeOrder", initiative.getDrawInitiativeOrder());
@@ -2329,12 +2329,12 @@ public class UserInterface {
       initiativeJson.setJSONArray("initiativeGroups", initiativeGroupsArray);
       sceneJson.setJSONObject("initiative", initiativeJson);
 
-      logger.debug("UserInterface: Initiative saved");
+      logger.debug("UserInterface: Initiative converted to JSON");
 
       sceneJson.setJSONArray("playerTokens", getTokensJsonArray(playersLayer));
       sceneJson.setJSONArray("dmTokens", getTokensJsonArray(dmLayer));
 
-      logger.debug("UserInterface: Tokens saved");
+      logger.debug("UserInterface: Tokens converted to JSON");
 
       JSONArray wallsArray = new JSONArray();
       obstaclesIndex = 0;
@@ -2354,7 +2354,7 @@ public class UserInterface {
       }
       sceneJson.setJSONArray("walls", wallsArray);
 
-      logger.debug("UserInterface: Walls saved");
+      logger.debug("UserInterface: Walls converted to JSON");
 
       JSONArray doorsArray = new JSONArray();
       obstaclesIndex = 0;
@@ -2375,7 +2375,7 @@ public class UserInterface {
       }
       sceneJson.setJSONArray("doors", doorsArray);
 
-      logger.debug("UserInterface: Doors saved");
+      logger.debug("UserInterface: Doors converted to JSON");
 
       JSONObject illuminationJson = new JSONObject();
       Illumination appIllumination = null;
@@ -2396,7 +2396,7 @@ public class UserInterface {
       }
       sceneJson.setJSONObject("illumination", illuminationJson);
 
-      logger.debug("UserInterface: Environment lighting saved");
+      logger.debug("UserInterface: Environment lighting converted to JSON");
 
       logger.debug("UserInterface: Scene converted to JSON");
 
@@ -3262,6 +3262,8 @@ public class UserInterface {
         if ( token != null )
           layer.addToken(token);
 
+        logger.debug("UserInterface: Token " + tokenId + " added to " + layer.getName());
+
       }
 
       //
@@ -3277,6 +3279,8 @@ public class UserInterface {
 
         // Else, remove token
         layer.removeToken(layer.getTokenById(tokenId));
+
+        logger.debug("UserInterface: Token " + tokenId + " removed from " + layer.getName());
 
       }
 
@@ -3294,12 +3298,12 @@ public class UserInterface {
         UUID tokenId = UUID.fromString(tokenJson.getString("id"));
         int tokenVersion = tokenJson.getInt("version");
 
-        logger.debug("Sync token " + tokenName + ": " + tokenId + " v" + tokenVersion);
+        logger.trace("Sync token " + tokenName + ": " + tokenId + " v" + tokenVersion);
 
         // For each existing token in app
         for ( Token token: layer.getTokens() ) {
 
-          logger.debug("Scene token " + token.getName() + ": " + token.getStringId() + " v" + token.getVersion());
+          logger.trace("Scene token " + token.getName() + ": " + token.getStringId() + " v" + token.getVersion());
 
           // If existing token has the same UUID and a different version, update it
           if ( token.getId().equals(tokenId) ) {
@@ -3422,13 +3426,92 @@ public class UserInterface {
 
       logger.debug("UserInterface: Syncing initiative group changes");
 
+      ArrayList<String> sceneInitiativeGroups = new ArrayList<String>();
+      ArrayList<String> syncInitiativeGroups = new ArrayList<String>();
+
       // Retrieve if initiative order should be drawn
       boolean drawInitiativeOrder = initiativeJson.getBoolean("drawInitiativeOrder");
       if ( initiative.getDrawInitiativeOrder() != drawInitiativeOrder )
         initiative.toggleDrawInitiativeOrder();
 
-      // Check if a initiative group changed position in the received JSON
+      // Build list with scene initiative group names, used to check if a new group was added
+      for ( Initiative.InitiativeGroup initiativeGroup: initiative.getGroups() ) {
+        String groupName = initiativeGroup.getName();
+        if ( !isEmpty(groupName) )
+          sceneInitiativeGroups.add(groupName);
+        else
+          logger.warning("UserInterface: Error syncing initiative group changes: initiative group has no name");
+      }
+
       JSONArray initiativeGroupsArray = initiativeJson.getJSONArray("initiativeGroups");
+
+      // Check if there's a new initiative group in the received JSON
+      for ( int i = 0; i < initiativeGroupsArray.size(); i++ ) {
+
+        JSONObject initiativeGroupJson = initiativeGroupsArray.getJSONObject(i);
+
+        // Retrieve JSON initiative group name
+        String jsonGroupName = initiativeGroupJson.getString("name");
+        if ( isEmpty(jsonGroupName) ) {
+          logger.warning("UserInterface: Error syncing initiative group changes: JSON initiative group name is null or empty");
+          continue;
+        }
+
+        logger.trace("Sync initiative group: " + jsonGroupName);
+
+        // Build list with JSON initiative group IDs, used to check if a group was removed
+        syncInitiativeGroups.add(jsonGroupName);
+
+        // If initiative group is already present in scene, continue
+        if ( sceneInitiativeGroups.contains(jsonGroupName) )
+          continue;
+
+        // Else, retrieve token by name and add it to initiative
+        Token tokenToAdd = playersLayer.getTokenByName(jsonGroupName);
+        if ( tokenToAdd == null )
+          tokenToAdd = dmLayer.getTokenByName(jsonGroupName);
+        if ( tokenToAdd != null ) {
+          if ( playersLayer.hasToken(tokenToAdd) )
+            playersLayer.toggleTokenGroupInInitiative(tokenToAdd);
+          else
+            dmLayer.toggleTokenGroupInInitiative(tokenToAdd);
+        } else {
+          logger.warning("UserInterface: Error syncing initiative group changes: JSON initiative group name is null or empty");
+          continue;
+        }
+
+        logger.debug("UserInterface: Initiative group " + jsonGroupName + " added");
+
+      }
+
+      // Check if a scene initiative group was removed in the received JSON
+      for ( String initiativeGroupName: sceneInitiativeGroups ) {
+
+        logger.trace("Scene initiative group: " + initiativeGroupName);
+
+        // If scene initiative group is also present in JSON, continue
+        if ( syncInitiativeGroups.contains(initiativeGroupName) )
+          continue;
+
+        // Else, remove initiative group
+        Token tokenToRemove = playersLayer.getTokenByName(initiativeGroupName);
+        if ( tokenToRemove == null )
+          tokenToRemove = dmLayer.getTokenByName(initiativeGroupName);
+        if ( tokenToRemove != null ) {
+          if ( playersLayer.hasToken(tokenToRemove) )
+            playersLayer.toggleTokenGroupInInitiative(tokenToRemove);
+          else
+            dmLayer.toggleTokenGroupInInitiative(tokenToRemove);
+        } else {
+          logger.warning("UserInterface: Error syncing initiative group changes: JSON initiative group name is null or empty");
+          continue;
+        }
+
+        logger.debug("UserInterface: Initiative group " + initiativeGroupName + " removed");
+
+      }
+
+      // Check if a initiative group changed position in the received JSON
       for ( int i = 0; i < initiativeGroupsArray.size(); i++ ) {
 
         JSONObject initiativeGroupJson = initiativeGroupsArray.getJSONObject(i);
@@ -3437,21 +3520,22 @@ public class UserInterface {
         String jsonGroupName = initiativeGroupJson.getString("name");
         int jsonGroupPosition = initiativeGroupJson.getInt("position");
 
-        logger.debug("Sync initiative group: " + jsonGroupName + " at position " + jsonGroupPosition);
+        logger.trace("Sync initiative group: " + jsonGroupName + " at position " + jsonGroupPosition);
 
         // Retrieve scene initiative group fields
         Initiative.InitiativeGroup sceneGroup = initiative.getGroupByName(jsonGroupName);
         int sceneGroupPosition = initiative.getGroupPosition(sceneGroup);
 
-        logger.debug("Scene initiative group: " + sceneGroup.getName() + " at position " + sceneGroupPosition);
+        logger.trace("Scene initiative group: " + sceneGroup.getName() + " at position " + sceneGroupPosition);
 
         // If scene initiative group is already in the same position as JSON, continue
         if ( sceneGroupPosition == jsonGroupPosition )
           continue;
 
         // If not, move scene initiative group to JSON position
-        logger.debug("Position changed from " + sceneGroupPosition + " to " + jsonGroupPosition);
         initiative.moveGroupTo(jsonGroupName, jsonGroupPosition);
+
+        logger.debug("UserInterface: " + jsonGroupName + " initiative position changed from " + sceneGroupPosition + " to " + jsonGroupPosition);
 
       }
 
@@ -3500,7 +3584,7 @@ public class UserInterface {
         }
         wallId = UUID.fromString(wallJson.getString("id"));
 
-        logger.debug("Sync wall: " + wallId.toString());
+        logger.trace("Sync wall: " + wallId.toString());
 
         // Build list with JSON wall IDs, used to check if a wall was removed
         syncWallIds.add(wallId);
@@ -3514,12 +3598,14 @@ public class UserInterface {
         if ( wall != null )
           obstacles.addWall(wall);
 
+        logger.debug("UserInterface: Wall " + wallId + " added");
+
       }
 
       // Check if a scene wall was removed in the received JSON
       for ( UUID wallId: sceneWallIds ) {
 
-        logger.debug("Scene wall: " + wallId.toString());
+        logger.trace("Scene wall: " + wallId.toString());
 
         // If scene wall is also present in JSON, continue
         if ( syncWallIds.contains(wallId) )
@@ -3527,6 +3613,8 @@ public class UserInterface {
 
         // Else, remove wall
         obstacles.removeWall(obstacles.getWallById(wallId));
+
+        logger.debug("UserInterface: Wall " + wallId + " removed");
 
       }
 
@@ -3579,7 +3667,7 @@ public class UserInterface {
         // Retrieve if JSON door is closed
         boolean doorIsClosed = doorJson.getBoolean("closed");
 
-        logger.debug("Sync door: " + doorId.toString());
+        logger.trace("Sync door: " + doorId.toString());
 
         // Build list with JSON doors, used to check if a door was removed
         syncDoorIdAndStatus.put(doorId, doorIsClosed);
@@ -3593,12 +3681,14 @@ public class UserInterface {
         if ( door != null )
           obstacles.addDoor(door);
 
+        logger.debug("UserInterface: Door " + doorId + " added");
+
       }
 
       // Check if a scene door was removed in the received JSON
       for ( UUID doorId: sceneDoorIdAndStatus.keySet() ) {
 
-        logger.debug("Scene door: " + doorId.toString());
+        logger.trace("Scene door: " + doorId.toString());
 
         // If scene door is also present in JSON, continue
         if ( syncDoorIdAndStatus.containsKey(doorId) )
@@ -3606,6 +3696,8 @@ public class UserInterface {
 
         // Else, remove door
         obstacles.removeDoor(obstacles.getDoorById(doorId));
+
+        logger.debug("UserInterface: Door " + doorId + " removed");
 
       }
 
@@ -3669,11 +3761,11 @@ public class UserInterface {
       return;
 
     if ( appState == AppState.sceneLoad ) {
-      logger.warning("pushSceneSync(): Scene being loaded. Ignoring.");
+      logger.trace("pushSceneSync(): Scene being loaded. Ignoring.");
       return;
     }
     if ( appState == AppState.sceneSync ) {
-      logger.warning("pushSceneSync(): Scene being synced. Ignoring.");
+      logger.trace("pushSceneSync(): Scene being synced. Ignoring.");
       return;
     }
 
@@ -3944,6 +4036,9 @@ public class UserInterface {
 
   boolean controllerIsAllowed(String buttonName) {
 
+    if ( isEmpty(buttonName) )
+      return true;
+
     if ( appMode == AppMode.standalone )
       return true;
     if ( appMode == AppMode.dm )
@@ -3956,6 +4051,9 @@ public class UserInterface {
   }
 
   boolean controllerGroupIsAllowed(ControllerGroup buttonGroup) {
+
+    if ( buttonGroup == null )
+      return true;
 
     if ( appMode == AppMode.standalone )
       return true;

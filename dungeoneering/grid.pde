@@ -347,7 +347,7 @@ class Grid {
   }
 
   void incrementGridVersion() {
-    logger.debug("Incrementing grid version from " + gridVersion.getValue() + " to " + (gridVersion.getValue()+1));
+    logger.trace("Incrementing grid version from " + gridVersion.getValue() + " to " + (gridVersion.getValue()+1));
     gridVersion.set(gridVersion.getValue() + 1);
   }
 
