@@ -9,4 +9,4 @@ The main goal here is to make an application with all the basic features needed
 to run a tabletop RPG session. It should be easy to install, setup and run and
 should have a minimalistic, intuitive and hopefully pretty user interface.
 
-More info at: https://github.com/luiscastilho/dungeoneering
+More info at: https://dungeoneering.app/
