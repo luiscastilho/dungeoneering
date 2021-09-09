@@ -2293,6 +2293,11 @@ public class UserInterface {
 
       sceneJson = new JSONObject();
 
+      // Parts of the scene are only converted to JSON if running in DM or
+      // Standalone modes. They are not included in JSON scenes generated in
+      // Players mode because the players' app can't edit these parts, such
+      // as map, grid, DM tokens, walls, and environment lighting.
+
       if ( appMode == AppMode.standalone || appMode == AppMode.dm )
         if ( addReloadSceneFlag )
           sceneJson.setBoolean("reloadScene", true);
@@ -2382,30 +2387,26 @@ public class UserInterface {
 
       }
 
-      if ( appMode == AppMode.standalone || appMode == AppMode.dm ) {
-
-        JSONArray doorsArray = new JSONArray();
-        obstaclesIndex = 0;
-        for ( Door door: obstacles.getDoors() ) {
-          JSONObject doorJson = new JSONObject();
-          doorJson.setString("id", door.getStringId());
-          doorJson.setBoolean("closed", door.getClosed());
-          JSONArray doorVertexesJson = new JSONArray();
-          for ( PVector doorVertex: door.getMapVertexes() ) {
-            JSONArray doorVertexJson = new JSONArray();
-            doorVertexJson.append(doorVertex.x);
-            doorVertexJson.append(doorVertex.y);
-            doorVertexesJson.append(doorVertexJson);
-          }
-          doorJson.setJSONArray("vertexes", doorVertexesJson);
-          doorsArray.setJSONObject(obstaclesIndex, doorJson);
-          obstaclesIndex += 1;
+      JSONArray doorsArray = new JSONArray();
+      obstaclesIndex = 0;
+      for ( Door door: obstacles.getDoors() ) {
+        JSONObject doorJson = new JSONObject();
+        doorJson.setString("id", door.getStringId());
+        doorJson.setBoolean("closed", door.getClosed());
+        JSONArray doorVertexesJson = new JSONArray();
+        for ( PVector doorVertex: door.getMapVertexes() ) {
+          JSONArray doorVertexJson = new JSONArray();
+          doorVertexJson.append(doorVertex.x);
+          doorVertexJson.append(doorVertex.y);
+          doorVertexesJson.append(doorVertexJson);
         }
-        sceneJson.setJSONArray("doors", doorsArray);
-
-        logger.debug("UserInterface: Doors converted to JSON");
-
+        doorJson.setJSONArray("vertexes", doorVertexesJson);
+        doorsArray.setJSONObject(obstaclesIndex, doorJson);
+        obstaclesIndex += 1;
       }
+      sceneJson.setJSONArray("doors", doorsArray);
+
+      logger.debug("UserInterface: Doors converted to JSON");
 
       if ( appMode == AppMode.standalone || appMode == AppMode.dm ) {
 
