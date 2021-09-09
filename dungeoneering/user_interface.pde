@@ -2533,11 +2533,28 @@ public class UserInterface {
 
     String imageSavePath = null;
 
-    // Check if it's a macOS and if image path is inside sketchPath() + /dungeoneering.app/Contents/Java
-    if ( platform == MACOSX && imageAbsolutePath != imageAbsolutePath.replaceFirst("^(?i)" + Pattern.quote(sketchPath() + "/dungeoneering.app/Contents/Java/"), "") ) {
+    // If running on macOS
+    if ( platform == MACOSX ) {
 
-      // If it is, remove sketchPath() + /dungeoneering.app/Contents/Java from image path
-      imageSavePath = imageAbsolutePath.replaceFirst("^(?i)" + Pattern.quote(sketchPath() + "/dungeoneering.app/Contents/Java"), "");
+      // Check if image path is inside sketchPath() + /dungeoneering.app/Contents/Java
+      if ( imageAbsolutePath != imageAbsolutePath.replaceFirst("^(?i)" + Pattern.quote(sketchPath() + "/dungeoneering.app/Contents/Java/"), "") ) {
+
+        // If it is, remove sketchPath() + /dungeoneering.app/Contents/Java from image path
+        imageSavePath = imageAbsolutePath.replaceFirst("^(?i)" + Pattern.quote(sketchPath() + "/dungeoneering.app/Contents/Java"), "");
+
+       // Check if image path is inside sketchPath() + /dungeoneeringDm.app/Contents/Java
+      } else if ( imageAbsolutePath != imageAbsolutePath.replaceFirst("^(?i)" + Pattern.quote(sketchPath() + "/dungeoneeringDm.app/Contents/Java/"), "") ) {
+
+        // If it is, remove sketchPath() + /dungeoneeringDm.app/Contents/Java from image path
+        imageSavePath = imageAbsolutePath.replaceFirst("^(?i)" + Pattern.quote(sketchPath() + "/dungeoneeringDm.app/Contents/Java"), "");
+
+       // Check if image path is inside sketchPath() + /dungeoneeringPlayers.app/Contents/Java
+      } else if ( imageAbsolutePath != imageAbsolutePath.replaceFirst("^(?i)" + Pattern.quote(sketchPath() + "/dungeoneeringPlayers.app/Contents/Java/"), "") ) {
+
+        // If it is, remove sketchPath() + /dungeoneeringPlayers.app/Contents/Java from image path
+        imageSavePath = imageAbsolutePath.replaceFirst("^(?i)" + Pattern.quote(sketchPath() + "/dungeoneeringPlayers.app/Contents/Java"), "");
+
+      }
 
     // If not, check if image path is inside sketchPath()
     } else if ( imageAbsolutePath != imageAbsolutePath.replaceFirst("^(?i)" + Pattern.quote(sketchPath()), "") ) {
@@ -3136,15 +3153,44 @@ public class UserInterface {
 
       }
 
-    // If not, check if it's a macOS and if image path is inside /dungeoneering.app/Contents/Java/data/
-    } else if ( platform == MACOSX && imagePathFromJson != imagePathFromJson.replaceFirst("^(?i)" + Pattern.quote("/dungeoneering.app/Contents/Java/data/"), "") ) {
+    // If not, check if it's running on macOS
+    } else if ( platform == MACOSX ) {
 
-      // If it is, check if image indeed exists inside /dungeoneering.app/Contents/Java/data/
-      imagePathInDataFolder = imagePathFromJson.replaceFirst("^(?i)" + Pattern.quote("/dungeoneering.app/Contents/Java/data/"), "");
-      if ( fileExists(dataPath(imagePathInDataFolder)) ) {
+      // Check if image path is inside /dungeoneering.app/Contents/Java/data/
+      if ( imagePathFromJson != imagePathFromJson.replaceFirst("^(?i)" + Pattern.quote("/dungeoneering.app/Contents/Java/data/"), "") ) {
 
-        // Return image's absolute path, returned by dataPath()
-        imageLoadPath = dataPath(imagePathInDataFolder);
+        // If it is, check if image indeed exists inside /dungeoneering.app/Contents/Java/data/
+        imagePathInDataFolder = imagePathFromJson.replaceFirst("^(?i)" + Pattern.quote("/dungeoneering.app/Contents/Java/data/"), "");
+        if ( fileExists(dataPath(imagePathInDataFolder)) ) {
+
+          // Return image's absolute path, returned by dataPath()
+          imageLoadPath = dataPath(imagePathInDataFolder);
+
+        }
+
+      // Check if image path is inside /dungeoneeringDm.app/Contents/Java/data/
+      } else if ( platform == MACOSX && imagePathFromJson != imagePathFromJson.replaceFirst("^(?i)" + Pattern.quote("/dungeoneeringDm.app/Contents/Java/data/"), "") ) {
+
+        // If it is, check if image indeed exists inside /dungeoneeringDm.app/Contents/Java/data/
+        imagePathInDataFolder = imagePathFromJson.replaceFirst("^(?i)" + Pattern.quote("/dungeoneeringDm.app/Contents/Java/data/"), "");
+        if ( fileExists(dataPath(imagePathInDataFolder)) ) {
+
+          // Return image's absolute path, returned by dataPath()
+          imageLoadPath = dataPath(imagePathInDataFolder);
+
+        }
+
+      // Check if image path is inside /dungeoneeringPlayers.app/Contents/Java/data/
+      } else if ( platform == MACOSX && imagePathFromJson != imagePathFromJson.replaceFirst("^(?i)" + Pattern.quote("/dungeoneeringPlayers.app/Contents/Java/data/"), "") ) {
+
+        // If it is, check if image indeed exists inside /dungeoneeringPlayers.app/Contents/Java/data/
+        imagePathInDataFolder = imagePathFromJson.replaceFirst("^(?i)" + Pattern.quote("/dungeoneeringPlayers.app/Contents/Java/data/"), "");
+        if ( fileExists(dataPath(imagePathInDataFolder)) ) {
+
+          // Return image's absolute path, returned by dataPath()
+          imageLoadPath = dataPath(imagePathInDataFolder);
+
+        }
 
       }
 
