@@ -31,5 +31,6 @@
 <script>
   $.getJSON("https://api.github.com/repos/luiscastilho/dungeoneering/releases/latest", function(data) {
     $("#latest-version-number").html(" - " + data.tag_name);
+    $(".downloads-title").addClass('with-version');
   });
 </script>
