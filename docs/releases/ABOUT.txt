@@ -6,7 +6,7 @@ sessions. It can load static and animated maps, has a dynamic lighting system,
 offers lots of conditions that can be easily applied to tokens, and more.
 
 The main goal here is to make an application with all the basic features needed
-to run a tabletop RPG session. It should be easy to install, setup, and run and
-should have a minimalistic, intuitive, and hopefully pretty user interface.
+to run a tabletop RPG session. It should be easy to install, set up, and run
+and should have a minimalistic, intuitive, and hopefully pretty user interface.
 
 More info at: https://dungeoneering.app/

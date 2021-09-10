@@ -2,7 +2,7 @@ dungeoneering is a minimalistic virtual tabletop (VTT) that can be used as a com
 
 <a class="lightbox" href="images/screenshot.png" title="dungeoneering screenshot"><img src="images/screenshot.png" alt="dungeoneering screenshot"/></a>
 
-The main goal here is to make an application with all the basic features needed to run a tabletop RPG session. It should be easy to install, setup, and run and should have a minimalistic, intuitive, and hopefully pretty user interface.
+The main goal here is to make an application with all the basic features needed to run a tabletop RPG session. It should be easy to install, set up, and run and should have a minimalistic, intuitive, and hopefully pretty user interface.
 
 
 
