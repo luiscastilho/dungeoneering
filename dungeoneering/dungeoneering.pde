@@ -240,7 +240,7 @@ void setup() {
 
     previousClickTime = 0;
 
-    appVersion = "v1.2.1";
+    appVersion = "v1.3.0";
     checkedForUpdates = false;
 
     logger.info("Setup: dungeoneering initialization done");
