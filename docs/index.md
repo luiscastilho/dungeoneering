@@ -16,7 +16,7 @@ The latest stable version can be downloaded on this page - Download Latest Versi
 
 1. On this page or on the [releases](https://github.com/luiscastilho/dungeoneering/releases) page, download the appropriate ZIP file for your operating system.
 2. Extract all files to a folder of your choice — `Documents/dungeoneering` for example.
-3. Run `dungeoneering`, `dungeoneeringDm`, or `dungeoneeringPlayers` depending on the screen configuration you plan to use. See ["Single or Dual Screen Mode"](#single-or-dual-screen-mode) below.
+3. Run `dungeoneering`, `dungeoneeringDm`, or `dungeoneeringPlayers` depending on the screen configuration you plan to use. See ["Single or Dual Screen Modes"](#single-or-dual-screen-modes) below.
 
 ### Windows
 
@@ -61,9 +61,9 @@ And that's it! Now that you have set up your scene, players and DM can drag thei
 
 ## Single or Dual Screen Modes
 
-If you are going to use a single screen, to be shared by DM and players, run the executable called dungeoneering and you are all set.
+If you are going to use a single screen, to be shared by DM and players, run the executable called `dungeoneering` and you are all set.
 
-If you want to use two separate screens connected to the same computer, one for the DM and another one to be shared by your players, run dungeoneeringDm first, and once the application loads run dungeoneeringPlayers. The two applications should connect to each other and a scene loaded in the DM app should load in the players' app as well. After that any changes made in the scene should be replicated in both directions - a token moved by a player should move in the DM app, a condition applied by the DM should show up in the players' app, same for any other changes made in the scene.
+If you want to use two separate screens connected to the same computer, one for the DM and another one to be shared by your players, run `dungeoneeringDm` first, and once the application loads run `dungeoneeringPlayers`. The two applications should connect to each other and a scene loaded in the DM app should load in the players' app as well. After that any changes made in the scene should be replicated in both directions - a token moved by a player should move in the DM app, a condition applied by the DM should show up in the players' app, same for any other changes made in the scene.
 
 Remember to disable any network software, such as VPN or proxy, before running dungeoneering in dual screen mode. In this mode, dungeoneering uses network ports to connect the two apps and in my tests, some network software caused problems and didn't let the two apps connect properly.
 
