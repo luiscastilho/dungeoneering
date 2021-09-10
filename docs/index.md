@@ -59,7 +59,7 @@ And that's it! Now that you have set up your scene, players and DM can drag thei
 
 
 
-## Single or Dual Screen Mode
+## Single or Dual Screen Modes
 
 If you are going to use a single screen, to be shared by DM and players, run the executable called dungeoneering and you are all set.
 
