@@ -1,13 +1,13 @@
 # Known Issues
 
 - Dialog windows may appear behind the full-screen application, forcing users
-to swtich between open windows to find the dialog that was just opened.
+to switch between open windows to find the dialog that was just opened.
 
 - Video and audio playback can be glitchy depending on the format/codec/
 framerate of the video being used. If you are having trouble with some of your
-video maps, try reencoding them to 1080p30. In Windows it's quite easy: use
-[HandBrake][1] and in the Preset field choose General > Fast 1080p30. Let me
-know in the issues if it doesn't work even after reencoding.
+video maps, try re-encoding them to 1080p30. In Windows it's quite easy: use
+[HandBrake][1] and in the Preset field choose General > Fast 1080p30. Create an
+issue if it doesn't work even after re-encoding.
 
 - Tokens may look pixelated if zoom in is used, even if loading high-resolution
 token images.

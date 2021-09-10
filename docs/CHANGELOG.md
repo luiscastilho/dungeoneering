@@ -12,14 +12,14 @@ The format is based on [Keep a Changelog][1], and this project adheres to
 - Separate apps for DM and players, to be used in two separate screens
 connected to the same computer. A scene loaded in the DM's app is shared with
 the players' app and after that scene changes are shared in both directions.
-- Tokens are no longer automatically added to the initiative widget. Instead
-there's a right click menu option to toggle them in initiative.
-- Added missing sight types: blindsight, darkvision and truesight, all with a
+- Tokens are no longer automatically added to the initiative widget. Instead,
+there's a right-click menu option to toggle them in the initiative.
+- Added missing sight types: blindsight, darkvision, and truesight, all with a
 variety of ranges
 - Added a Burned condition. Useful when fighting Trolls :) or if you are hit by
 Alchemist's Fire :(
-- When adding new walls, doors or tokens, allow map panning by holding mouse
-middle button
+- When adding new walls, doors, or tokens, allow map panning by holding the
+mouse middle button
 - Added a new demo scene - Dungeons of the Grand Illusionist. This one uses a
 huge map from [Dyson Logos][5] to show that the app can be used as a dungeon
 exploration tool.
@@ -116,10 +116,10 @@ same resolution where they were created
 
 - Static (PNG, JPG, etc) and animated (MP4, M4V) maps can be loaded
 - Map can be zoomed and panned
-- A grid can be setup and adjusted over the map
+- A grid can be set up and adjusted over the map
 - Players and DM tokens can be added to the scene
-- Several conditions, light sources and sight types and can be added to tokens
-- Walls and doors can be setup over the map to block tokens' light and vision
+- Several conditions, light sources, and sight types and can be added to tokens
+- Walls and doors can be set up over the map to block tokens' light and vision
 (dynamic lighting)
 - Visual initiative order widget to help in combats
 - An [exclusive video map][3] from [Animated Dungeon Maps][4]
