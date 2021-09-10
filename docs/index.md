@@ -16,7 +16,7 @@ The latest stable version can be downloaded in this page - Download Latest Versi
 
 1. In this page or in the [releases](https://github.com/luiscastilho/dungeoneering/releases) page, download the appropriate ZIP file for your operating system.
 2. Extract all files to a folder of your choice — `Documents/dungeoneering` for example.
-3. Run `dungeoneering.exe`, `dungeoneering.app`, or `dungeoneering` depending on your operating system.
+3. Run `dungeoneering`, `dungeoneeringDm` or `dungeoneeringPlayers` depending on the screen configuration you plan to use. See ["Single or Dual Screen Mode"](#single-or-dual-screen-mode) below.
 
 ### Windows
 
@@ -24,7 +24,7 @@ The application should work with the instructions above. If it doesn't, create a
 
 ### macOS
 
-The macOS ZIP is unsigned, meaning macOS will complain about it. Once you unzip the macOS ZIP, right click on `dungeoneering` and choose Open. If asked, grant access to Documents folder since that's where dungeoneering saves its log files on macOS.
+The macOS ZIP is unsigned, meaning macOS will complain about it. Once you unzip the macOS ZIP, right click on each of the executables and choose Open. If asked, grant access to Documents folder since that's where dungeoneering saves its log files on macOS.
 
 ### Linux
 
@@ -52,10 +52,20 @@ To create a new scene follow the steps below. It might be better to do this when
 2. Click on the grid setup button (<img src="https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/icons/scene/setup/grid_idle.png" width="20" height="20" alt="grid setup icon" title="grid setup icon">) and follow the on-screen instructions to setup a grid over the map you chose.
 3. Add player (<img src="https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/icons/scene/setup/hero_idle.png" width="20" height="20" alt="add player token icon" title="add player token icon">) and DM tokens (<img src="https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/icons/scene/setup/monster_idle.png" width="20" height="20" alt="add DM token icon" title="add DM token icon">) using the corresponding buttons.
 4. Setup walls (<img src="https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/icons/scene/setup/wall_idle.png" width="20" height="20" alt="walls setup icon" title="walls setup icon">) and doors (<img src="https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/icons/scene/setup/door_idle.png" width="20" height="20" alt="doors setup icon" title="doors setup icon">) using the corresponding buttons and following the on-screen instructions. Walls and doors are used to hide parts of the map and to block token light sources. With these elements in place you will have a dynamic lighting system, where players will only see parts of the map depending on where their characters are and what they can see.
-5. If it's a combat scene, enable the initiative order widget by clicking on the combat button (<img src="https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/icons/scene/config/combat_idle.png" width="20" height="20" alt="combat icon" title="combat icon">). In this widget you can drag players or enemies to the position they should occupy based on the initiative they rolled.
+5. If it's a combat scene, first add tokens to the initiative order by right click > Settings > initiative button (<img src="https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/icons/token/settings/toggle_initiative_idle.png" width="20" height="20" alt="initiative icon" title="initiative icon">). Then enable the initiative order widget by clicking on the combat button (<img src="https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/icons/scene/config/combat_idle.png" width="20" height="20" alt="combat icon" title="combat icon">). In this widget you can drag players and enemies to the position they should occupy based on the initiative they rolled.
 6. Save your scene using the save button (<img src="https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/icons/app/save_idle.png" width="20" height="20" alt="save scene icon" title="save scene icon">) so you can load it when needed during your RPG sessions.
 
 And that's it! Now that you have setup your scene, players and DM can drag their tokens around the map; right click on them to add conditions, light sources and sight types (e.g., darkvision); pan and zoom the map as needed; players can reveal hidden parts of the map with the dynamic lighting system; and hopefully with all that you and your group will have more fun in your RPG sessions. :)
+
+
+
+## Single or Dual Screen Mode
+
+If you are going to use a single screen, to be shared by DM and players, run the executable called dungeoneering and you are all set.
+
+If you want to use two separate screens connected to the same computer, one for the DM and another one to be shared by your players, run dungeoneeringDm first and once the application loads run dungeoneeringPlayers. The two applications should connect to each other and a scene loaded in the DM app should load in the players app as well. After that any changes made in the scene should be replicated in both directions - a token moved by a player should move in the DM app, a condition applied by the DM should show up in the players app, same for any other changes made in the scene.
+
+Remember to disable any network software, such as VPN or proxy, before running dungeoneering in dual screen mode. In this mode dungeoneering uses network ports to connect the two apps and in my tests some network software caused problems and didn't let the two apps connect properly.
 
 
 
@@ -79,6 +89,8 @@ Bugs can be reported through the project's [issues](https://github.com/luiscasti
 
 ## License
 
+Copyright © 2019-2021 Luis Castilho
+
 dungeoneering is licensed under the GPLv3. See [LICENSE](https://github.com/luiscastilho/dungeoneering/blob/main/LICENSE.md) for more details. dungeoneering also uses components from other open source projects. Their code and license can be found at these links:
 
 - [Processing](https://github.com/processing/processing){:target="_blank"}
@@ -87,6 +99,7 @@ dungeoneering is licensed under the GPLv3. See [LICENSE](https://github.com/luis
 - [UiBooster](https://github.com/Milchreis/uibooster-for-processing){:target="_blank"}
 - [Apache Commons](https://commons.apache.org/){:target="_blank"}
 - [rotating-fos](https://github.com/vy/rotating-fos){:target="_blank"}
+- [Hazelcast IMDG](https://github.com/hazelcast/hazelcast){:target="_blank"}
 
 
 
@@ -105,7 +118,7 @@ There are a few demo scenes bundled with the application. The assets used in the
 
 ## Thanks
 
-Thanks to my awesome RPG group that supported me in developing this application and were patient enough to playtest it in our sessions.
+Thanks to my awesome RPG group that supported me in developing this application and were patient enough to playtest it in our sessions. :)
 
 ![Claw token](images/playtesters/claw.png "Claw, Tabaxi Sorcerer (Wild Magic)")
 ![Gruk token](images/playtesters/gruk.png "Gruk, Dwarf Fighter (Eldritch Knight)")

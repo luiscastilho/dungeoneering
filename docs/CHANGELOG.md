@@ -5,6 +5,37 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog][1], and this project adheres to
 [Semantic Versioning][2].
 
+## [1.3.0] - 2021-09-09
+
+### Added
+
+- Separate apps for DM and players, to be used in two separate screens
+connected to the same computer. A scene loaded in the DM's app is shared with
+the players' app and after that scene changes are shared in both directions.
+- Tokens are no longer automatically added to the initiative widget. Instead
+there's a right click menu option to toggle them in initiative.
+- Added missing sight types: blindsight, darkvision and truesight, all with a
+variety of ranges
+- Added a Burned condition. Useful when fighting Trolls :) or if you are hit by
+Alchemist's Fire :(
+- When adding new walls, doors or tokens, allow map panning by holding mouse
+middle button
+- Added a new demo scene - Dungeons of the Grand Illusionist. This one uses a
+huge map from [Dyson Logos][5] to show that the app can be used as a dungeon
+exploration tool.
+
+### Fixed
+
+- Check for application updates in a separate thread so the application won't
+hang if a problem occurs
+- Fixed warnings in code - deprecated code, unused variables, etc
+
+### Changed
+
+- Moved website to dungeoneering.app domain
+- Updated dependencies
+- Don't reset map pan and zoom when adding new tokens
+
 ## [1.2.1] - 2021-07-05
 
 ### Fixed
@@ -93,7 +124,8 @@ same resolution where they were created
 - Visual initiative order widget to help in combats
 - An [exclusive video map][3] from [Animated Dungeon Maps][4]
 
-[unreleased]: https://github.com/luiscastilho/dungeoneering/compare/v1.2.1...HEAD
+[unreleased]: https://github.com/luiscastilho/dungeoneering/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/luiscastilho/dungeoneering/compare/v1.2.1...v1.3.0
 [1.2.1]: https://github.com/luiscastilho/dungeoneering/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/luiscastilho/dungeoneering/compare/v1.1.3...v1.2.0
 [1.1.3]: https://github.com/luiscastilho/dungeoneering/compare/v1.1.2...v1.1.3
@@ -108,3 +140,4 @@ same resolution where they were created
 [2]: https://semver.org/spec/v2.0.0.html
 [3]: https://github.com/luiscastilho/dungeoneering/blob/main/dungeoneering/data/maps/Animated-SwordCoast.mp4
 [4]: https://www.patreon.com/animatedmaps
+[5]: https://www.patreon.com/dysonlogos
