@@ -1,4 +1,4 @@
-<h4 class="downloads-title">Download latest version</h4>
+<h4 class="downloads-title">Download latest version<span id="latest-version-number"></span></h4>
 <ul class="downloads">
   <li>
     <a href="https://github.com/luiscastilho/dungeoneering/releases/latest/download/dungeoneering-windows64.zip">
@@ -28,3 +28,8 @@
     </a>
   </li>
 </ul>
+<script>
+  $.getJSON("https://api.github.com/repos/luiscastilho/dungeoneering/releases/latest", function(data) {
+    $("#latest-version-number").html(" - " + data.tag_name);
+  });
+</script>
