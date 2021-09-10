@@ -61,6 +61,7 @@ public class UserInterface {
   int controllersTopRightInitialX, controllersTopRightInitialY;
   int controllersBottomRightX, controllersBottomRightY;
   int controllersBottomRightInitialX, controllersBottomRightInitialY;
+  int controllersLogoX, controllersLogoY;
   int controllersMenuX, controllersMenuY;
   int controllersMenuInitialX, controllersMenuInitialY;
 
@@ -182,6 +183,8 @@ public class UserInterface {
     controllersBottomRightY = canvas.height - controllersTopRightY - squareButtonHeight;
     controllersBottomRightInitialX = controllersBottomRightX;
     controllersBottomRightInitialY = controllersBottomRightY;
+    controllersLogoX = canvas.width;
+    controllersLogoY = canvas.height;
     controllersMenuX = controllersSpacing;
     controllersMenuY = controllersSpacing;
     controllersMenuInitialX = controllersMenuX;
@@ -492,6 +495,10 @@ public class UserInterface {
 
     controllersBottomRightX -= squareButtonWidth + controllersSpacing;
     addButton("Toggle mute sound", appIconFolder + "mute", controllersBottomRightX, controllersBottomRightY, togglableControllers, true, false);
+
+    // App logo
+
+    addAppLogo(controllersLogoX, controllersLogoY, togglableControllers);
 
     // Token right click menu
 
@@ -941,6 +948,24 @@ public class UserInterface {
     }
 
     controllerToTooltip.put(buttonName, new UserInterfaceTooltip(buttonName, mouseOverBackgroundColor, instructionsFontColor));
+
+  }
+
+  void addAppLogo(int buttonPositionX, int buttonPositionY, ControllerGroup buttonGroup) {
+
+    PImage logoImage = loadImage("logos/dungeoneering.png");
+
+    Button button = cp5.addButton("dungeoneering logo")
+      .setPosition(buttonPositionX - logoImage.width, buttonPositionY - logoImage.height)
+      .setSize(logoImage.width, logoImage.height)
+      .setImage(logoImage)
+      .updateSize()
+      ;
+
+    if ( buttonGroup != null )
+      button.moveTo(buttonGroup);
+
+    controllerToTooltip.put("dungeoneering logo", new UserInterfaceTooltip("Visit dungeoneering.app", mouseOverBackgroundColor, instructionsFontColor));
 
   }
 
