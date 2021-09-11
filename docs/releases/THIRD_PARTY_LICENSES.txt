@@ -1,6 +1,6 @@
 # Third Party Licenses
 
-dungeoneering is licensed under the GPLv3. See LICENSE.txt for more details.
+dungeoneering is licensed under the GPLv3. See LICENSE.txt for details.
 dungeoneering also uses components from other open-source projects. Their code
 and license can be found at these links:
 

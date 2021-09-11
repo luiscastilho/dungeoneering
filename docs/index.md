@@ -91,7 +91,7 @@ Bugs can be reported through the project's [issues](https://github.com/luiscasti
 
 Copyright © 2019-2021 Luis Castilho
 
-dungeoneering is licensed under the GPLv3. See [LICENSE](https://github.com/luiscastilho/dungeoneering/blob/main/LICENSE.md) for more details. dungeoneering also uses components from other open-source projects. Their code and license can be found at these links:
+dungeoneering is licensed under the GPLv3. See [LICENSE](https://github.com/luiscastilho/dungeoneering/blob/main/LICENSE.md) for details. dungeoneering also uses components from other open-source projects. Their code and license can be found at these links:
 
 - [Processing](https://github.com/processing/processing){:target="_blank"}
 - [ControlP5](https://github.com/sojamo/controlp5){:target="_blank"} ([Forked](https://github.com/luiscastilho/controlp5){:target="_blank"} and customized)
