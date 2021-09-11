@@ -11,3 +11,16 @@ and license can be found at these links:
 - Apache Commons: https://commons.apache.org/
 - rotating-fos: https://github.com/vy/rotating-fos
 - Hazelcast IMDG: https://github.com/hazelcast/hazelcast
+
+The icons used in the application were either released under a public-domain-
+like license (CC0[1]) or are free to use with attribution (CC BY[2]). Thanks to
+the following authors from the Noun Project[3]: Andrew Nielsen; Tokka Elkholy;
+Sweet Farm; HeadsOfBirds; Mike Rowe; Denis; Yu luck; and Patrick Morrison.
+Thanks to Lorc and Delapouite from Game-icons.net[4]. And thanks to Freepik
+from Flaticon[5].
+
+[1]: https://creativecommons.org/share-your-work/public-domain/cc0/
+[2]: https://creativecommons.org/licenses/by/4.0/
+[3]: https://thenounproject.com/
+[4]: https://game-icons.net/
+[5]: https://www.flaticon.com/

@@ -101,6 +101,8 @@ dungeoneering is licensed under the GPLv3. See [LICENSE](https://github.com/luis
 - [rotating-fos](https://github.com/vy/rotating-fos){:target="_blank"}
 - [Hazelcast IMDG](https://github.com/hazelcast/hazelcast){:target="_blank"}
 
+The icons used in the application were either released under a public-domain-like license ([CC0](https://creativecommons.org/share-your-work/public-domain/cc0/)) or are free to use with attribution ([CC BY](https://creativecommons.org/licenses/by/4.0/)). Thanks to the following authors from the [Noun Project](https://thenounproject.com/): Andrew Nielsen; Tokka Elkholy; Sweet Farm; HeadsOfBirds; Mike Rowe; Denis; Yu luck; and Patrick Morrison. Thanks to Lorc and Delapouite from [Game-icons.net](https://game-icons.net/). And thanks to Freepik from [Flaticon](https://www.flaticon.com/).
+
 
 
 ## Assets
