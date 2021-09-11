@@ -33,13 +33,13 @@
     $("#latest-version-number").html(" - " + data.tag_name);
     $(".downloads-title").addClass('with-version');
   });
-  $('.download-track').on('click', function() {
-    var os_name = $(this).text().trim();
-    var version_number = parseInt($('#latest-version-number').text().replace(/[^0-9]/g,''));
-    gtag('event', 'download', {
-      'event_category': 'application',
-      'event_label': os_name,
-      'value': version_number
-    });
-  });
+  // $('.download-track').on('click', function() {
+  //   var os_name = $(this).text().trim();
+  //   var version_number = parseInt($('#latest-version-number').text().replace(/[^0-9]/g,''));
+  //   gtag('event', 'download', {
+  //     'event_category': 'application',
+  //     'event_label': os_name,
+  //     'value': version_number
+  //   });
+  // });
 </script>
