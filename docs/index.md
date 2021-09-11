@@ -8,7 +8,7 @@ The main goal here is to make an application with all the basic features needed 
 
 ## Latest Version
 
-The latest stable version can be downloaded on this page - Download Latest Version link. It's also available, along with release notes, on the project's [releases](https://github.com/luiscastilho/dungeoneering/releases) page. There's also a [changelog](CHANGELOG.md) with all notable changes made to this project.
+The latest stable version can be downloaded on this page - links under Download Latest Version. It's also available, along with release notes, on the project's [releases](https://github.com/luiscastilho/dungeoneering/releases) page. There's also a [changelog](CHANGELOG.md) with all notable changes made to this project.
 
 
 
