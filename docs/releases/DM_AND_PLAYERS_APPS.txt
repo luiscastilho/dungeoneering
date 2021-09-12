@@ -1,4 +1,4 @@
-# Single or Dual Screen Modes
+# Single and Dual Screen Modes
 
 If you are going to use a single screen, to be shared by DM and players, run
 the executable called dungeoneering and you are all set.

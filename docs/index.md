@@ -16,7 +16,7 @@ The latest stable version can be downloaded on this page - links under Download 
 
 1. On this page or on the [releases](https://github.com/luiscastilho/dungeoneering/releases) page, download the appropriate ZIP file for your operating system.
 2. Extract all files to a folder of your choice — `Documents/dungeoneering` for example.
-3. Run `dungeoneering`, `dungeoneeringDm`, or `dungeoneeringPlayers` depending on the screen configuration you plan to use. See ["Single or Dual Screen Modes"](#single-or-dual-screen-modes) below.
+3. Run `dungeoneering`, `dungeoneeringDm`, or `dungeoneeringPlayers` depending on the screen configuration you plan to use. See ["Single and Dual Screen Modes"](#single-and-dual-screen-modes) below.
 
 ### Windows
 
@@ -59,7 +59,7 @@ And that's it! Now that you have set up your scene, players and DM can drag thei
 
 
 
-## Single or Dual Screen Modes
+## Single and Dual Screen Modes
 
 If you are going to use a single screen, to be shared by DM and players, run the executable called `dungeoneering` and you are all set.
 
