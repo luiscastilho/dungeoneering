@@ -15,7 +15,7 @@
   "initiative": {
     "initiativeGroups": [
       {
-        "name": "Orsik",
+        "name": "Helja",
         "position": 0
       },
       {
@@ -582,9 +582,9 @@
     {
       "size": "Medium",
       "lightSources": [],
-      "imagePath": "/data/tokens/players/Orsik.png",
+      "imagePath": "/data/tokens/players/Helja.png",
       "sightTypes": [{"name": "Darkvision 60'"}],
-      "name": "Orsik",
+      "name": "Helja",
       "column": 5,
       "id": "63e42aed-03de-4746-a165-3bcd65606fdb",
       "row": 11,

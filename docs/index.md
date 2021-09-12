@@ -114,7 +114,7 @@ There are a few demo scenes bundled with the application. The assets used in the
 - The <a class="lightbox-link beholder" title="Beholder Lair map">Beholder Lair map</a> is from [Antal Kéninger](https://www.artstation.com/kena "Antal Kéninger ArtStation profile"){:target="_blank"}.
 - The <a class="lightbox-link illusionist" title="Dungeons of the Grand Illusionist map">Dungeons of the Grand Illusionist map</a> is from [Dyson Logos](https://www.patreon.com/dysonlogos "Dyson Logos Patreon page"){:target="_blank"}.
 - The <a class="lightbox-link bridge" title="Old Bridge map">Old Bridge map</a> is from [Sliph](https://www.patreon.com/sliph "Sliph Patreon page"){:target="_blank"}.
-- All tokens were created using the [Token Stamp tool](https://rolladvantage.com/tokenstamp/ "Token Stamp tool"){:target="_blank"} with D&D 5th edition images.
+- All tokens were created using the [Token Stamp tool](https://rolladvantage.com/tokenstamp/ "Token Stamp tool"){:target="_blank"} with D&D 5th edition images, © Wizards of the Coast.
 
 
 

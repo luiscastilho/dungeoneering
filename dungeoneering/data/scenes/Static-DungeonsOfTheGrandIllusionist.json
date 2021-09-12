@@ -372,18 +372,6 @@
       "imagePath": "/data/tokens/dm/Kobold.png",
       "sightTypes": [],
       "name": "Kobold",
-      "column": 18,
-      "id": "45f3e589-72c8-4fbd-84b6-15998fe19c8c",
-      "row": 41,
-      "conditions": [{"name": "Hidden"}],
-      "version": 2
-    },
-    {
-      "size": "Medium",
-      "lightSources": [],
-      "imagePath": "/data/tokens/dm/Kobold.png",
-      "sightTypes": [],
-      "name": "Kobold",
       "column": 12,
       "id": "7970d224-c7eb-461c-8057-3ee1fc1aa997",
       "row": 37,
@@ -856,7 +844,7 @@
       "id": "1ee8b476-474b-4b7b-b2e0-0bb891284f04",
       "row": 55,
       "conditions": [],
-      "version": 2
+      "version": 1
     },
     {
       "size": "Medium",
@@ -868,7 +856,7 @@
       "id": "7ef71b7e-12e9-41d4-9d0b-ee172c6990d9",
       "row": 32,
       "conditions": [],
-      "version": 2
+      "version": 1
     },
     {
       "size": "Medium",
@@ -880,7 +868,7 @@
       "id": "8bc762fd-d44e-41e7-9116-035c70120e16",
       "row": 34,
       "conditions": [],
-      "version": 2
+      "version": 1
     },
     {
       "size": "Medium",
@@ -892,7 +880,7 @@
       "id": "54335e32-6b7c-498d-b157-d72ee848fc83",
       "row": 35,
       "conditions": [],
-      "version": 2
+      "version": 1
     },
     {
       "size": "Large",
@@ -904,7 +892,19 @@
       "id": "bbc7d8e3-0ed9-4aa7-b895-0dcc5fab70f1",
       "row": 32,
       "conditions": [],
-      "version": 4
+      "version": 1
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Kobold.png",
+      "sightTypes": [],
+      "name": "Kobold",
+      "column": 15,
+      "id": "45f3e589-72c8-4fbd-84b6-15998fe19c8c",
+      "row": 43,
+      "conditions": [{"name": "Hidden"}],
+      "version": 3
     }
   ],
   "initiative": {
@@ -10805,9 +10805,9 @@
     {
       "size": "Medium",
       "lightSources": [{"name": "Torch"}],
-      "imagePath": "/data/tokens/players/Orsik.png",
+      "imagePath": "/data/tokens/players/Helja.png",
       "sightTypes": [{"name": "Darkvision 60'"}],
-      "name": "Orsik",
+      "name": "Helja",
       "column": 35,
       "id": "b25807c2-39af-4d63-aaa1-6dbb6203df4e",
       "row": 59,

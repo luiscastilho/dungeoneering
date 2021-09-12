@@ -581,7 +581,7 @@
   "initiative": {
     "initiativeGroups": [
       {
-        "name": "Orsik",
+        "name": "Helja",
         "position": 0
       },
       {
@@ -593,11 +593,11 @@
         "position": 2
       },
       {
-        "name": "Militia",
+        "name": "City Watch",
         "position": 3
       },
       {
-        "name": "Militia Captain",
+        "name": "City Watch Captain",
         "position": 4
       },
       {
@@ -634,9 +634,9 @@
     {
       "size": "Medium",
       "lightSources": [],
-      "imagePath": "/data/tokens/dm/Militia.png",
+      "imagePath": "/data/tokens/dm/City Watch.png",
       "sightTypes": [],
-      "name": "Militia",
+      "name": "City Watch",
       "column": 21,
       "id": "f9897681-7181-4f7c-b6fc-69078667725e",
       "row": 6,
@@ -646,9 +646,9 @@
     {
       "size": "Medium",
       "lightSources": [],
-      "imagePath": "/data/tokens/dm/Militia.png",
+      "imagePath": "/data/tokens/dm/City Watch.png",
       "sightTypes": [],
-      "name": "Militia",
+      "name": "City Watch",
       "column": 21,
       "id": "bd137a84-d48a-4395-8ef6-d0e2165cb5c5",
       "row": 12,
@@ -658,9 +658,9 @@
     {
       "size": "Medium",
       "lightSources": [],
-      "imagePath": "/data/tokens/dm/Militia.png",
+      "imagePath": "/data/tokens/dm/City Watch.png",
       "sightTypes": [],
-      "name": "Militia",
+      "name": "City Watch",
       "column": 20,
       "id": "c394dbe8-134c-4b6d-84c6-2d6d77315aeb",
       "row": 4,
@@ -670,9 +670,9 @@
     {
       "size": "Medium",
       "lightSources": [],
-      "imagePath": "/data/tokens/dm/Militia.png",
+      "imagePath": "/data/tokens/dm/City Watch.png",
       "sightTypes": [],
-      "name": "Militia",
+      "name": "City Watch",
       "column": 20,
       "id": "9730bedf-37e9-40e2-9f40-47a81d04f906",
       "row": 14,
@@ -682,9 +682,9 @@
     {
       "size": "Medium",
       "lightSources": [],
-      "imagePath": "/data/tokens/dm/Militia.png",
+      "imagePath": "/data/tokens/dm/City Watch.png",
       "sightTypes": [],
-      "name": "Militia",
+      "name": "City Watch",
       "column": 20,
       "id": "804f8b4a-8540-429e-b232-b72422866699",
       "row": 13,
@@ -694,9 +694,9 @@
     {
       "size": "Medium",
       "lightSources": [],
-      "imagePath": "/data/tokens/dm/Militia.png",
+      "imagePath": "/data/tokens/dm/City Watch.png",
       "sightTypes": [],
-      "name": "Militia",
+      "name": "City Watch",
       "column": 20,
       "id": "db45b028-e918-4199-90bd-7f4d60fb2939",
       "row": 5,
@@ -706,9 +706,9 @@
     {
       "size": "Medium",
       "lightSources": [],
-      "imagePath": "/data/tokens/dm/Militia.png",
+      "imagePath": "/data/tokens/dm/City Watch.png",
       "sightTypes": [],
-      "name": "Militia",
+      "name": "City Watch",
       "column": 20,
       "id": "94d3f2b3-6afd-42d9-a123-e8ff7a41c814",
       "row": 17,
@@ -718,9 +718,9 @@
     {
       "size": "Medium",
       "lightSources": [],
-      "imagePath": "/data/tokens/dm/Militia.png",
+      "imagePath": "/data/tokens/dm/City Watch.png",
       "sightTypes": [],
-      "name": "Militia",
+      "name": "City Watch",
       "column": 20,
       "id": "1b04e734-26aa-4a4b-b47c-f9a600581716",
       "row": 1,
@@ -730,9 +730,9 @@
     {
       "size": "Medium",
       "lightSources": [],
-      "imagePath": "/data/tokens/dm/Militia.png",
+      "imagePath": "/data/tokens/dm/City Watch.png",
       "sightTypes": [],
-      "name": "Militia",
+      "name": "City Watch",
       "column": 25,
       "id": "90484215-3e42-4143-98f8-f9a37e74e947",
       "row": 8,
@@ -742,9 +742,9 @@
     {
       "size": "Medium",
       "lightSources": [],
-      "imagePath": "/data/tokens/dm/Militia.png",
+      "imagePath": "/data/tokens/dm/City Watch.png",
       "sightTypes": [],
-      "name": "Militia",
+      "name": "City Watch",
       "column": 25,
       "id": "5731a0e6-1017-4a2c-b809-da835b889cbc",
       "row": 10,
@@ -754,9 +754,9 @@
     {
       "size": "Medium",
       "lightSources": [],
-      "imagePath": "/data/tokens/dm/Militia.png",
+      "imagePath": "/data/tokens/dm/City Watch.png",
       "sightTypes": [],
-      "name": "Militia",
+      "name": "City Watch",
       "column": 26,
       "id": "28ab8794-40a4-4c04-8e01-55187acdb8b8",
       "row": 10,
@@ -766,9 +766,9 @@
     {
       "size": "Medium",
       "lightSources": [],
-      "imagePath": "/data/tokens/dm/Militia.png",
+      "imagePath": "/data/tokens/dm/City Watch.png",
       "sightTypes": [],
-      "name": "Militia",
+      "name": "City Watch",
       "column": 26,
       "id": "eb7d4670-6daf-4547-97a2-2fe565c99a9b",
       "row": 8,
@@ -778,9 +778,9 @@
     {
       "size": "Medium",
       "lightSources": [],
-      "imagePath": "/data/tokens/dm/Militia.png",
+      "imagePath": "/data/tokens/dm/City Watch.png",
       "sightTypes": [],
-      "name": "Militia",
+      "name": "City Watch",
       "column": 26,
       "id": "d131b875-648a-4a0a-832e-1c6822b0c05f",
       "row": 9,
@@ -790,9 +790,9 @@
     {
       "size": "Medium",
       "lightSources": [],
-      "imagePath": "/data/tokens/dm/Militia.png",
+      "imagePath": "/data/tokens/dm/City Watch.png",
       "sightTypes": [],
-      "name": "Militia",
+      "name": "City Watch",
       "column": 25,
       "id": "a5fa8204-1db2-40d7-aa9e-c0f2ed9f90e1",
       "row": 9,
@@ -802,9 +802,9 @@
     {
       "size": "Medium",
       "lightSources": [],
-      "imagePath": "/data/tokens/dm/Militia.png",
+      "imagePath": "/data/tokens/dm/City Watch.png",
       "sightTypes": [],
-      "name": "Militia",
+      "name": "City Watch",
       "column": 22,
       "id": "8b69bff6-e163-45c8-aa89-4348dd79e68e",
       "row": 7,
@@ -838,9 +838,9 @@
     {
       "size": "Medium",
       "lightSources": [],
-      "imagePath": "/data/tokens/dm/Militia Captain.png",
+      "imagePath": "/data/tokens/dm/City Watch Captain.png",
       "sightTypes": [],
-      "name": "Militia Captain",
+      "name": "City Watch Captain",
       "column": 22,
       "id": "748e88e1-cab3-42b4-ab75-0093a13ec10e",
       "row": 9,
@@ -850,9 +850,9 @@
     {
       "size": "Medium",
       "lightSources": [],
-      "imagePath": "/data/tokens/dm/Militia.png",
+      "imagePath": "/data/tokens/dm/City Watch.png",
       "sightTypes": [],
-      "name": "Militia",
+      "name": "City Watch",
       "column": 22,
       "id": "d3601658-1747-4c23-aa4e-5bff95718474",
       "row": 11,
@@ -862,9 +862,9 @@
     {
       "size": "Medium",
       "lightSources": [],
-      "imagePath": "/data/tokens/players/Orsik.png",
+      "imagePath": "/data/tokens/players/Helja.png",
       "sightTypes": [],
-      "name": "Orsik",
+      "name": "Helja",
       "column": 17,
       "id": "ed64e638-be08-45dd-97a1-389c35b419f4",
       "row": 12,
