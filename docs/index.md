@@ -1,4 +1,4 @@
-dungeoneering is a minimalistic virtual tabletop (VTT) that can be used as a combat grid or as a dungeon exploration tool, made for local tabletop RPG sessions. It can load static and animated maps, has a dynamic lighting system, offers lots of conditions that can be easily applied to tokens, and more.
+dungeoneering is a minimalistic virtual tabletop (VTT) that can be used as a combat grid or as a dungeon exploration tool, made for local, in-person tabletop RPG sessions. It can load static and animated maps, has a dynamic lighting system, offers lots of conditions that can be easily applied to tokens, and more.
 
 <a class="lightbox" href="images/screenshot.png" title="dungeoneering screenshot"><img src="images/screenshot.png" alt="dungeoneering screenshot"/></a>
 
@@ -101,7 +101,7 @@ dungeoneering is licensed under the GPLv3. See [LICENSE](https://github.com/luis
 - [rotating-fos](https://github.com/vy/rotating-fos){:target="_blank"}
 - [Hazelcast IMDG](https://github.com/hazelcast/hazelcast){:target="_blank"}
 
-The icons used in the application were either released under a public-domain-like license ([CC0](https://creativecommons.org/share-your-work/public-domain/cc0/)) or are free to use with attribution ([CC BY](https://creativecommons.org/licenses/by/4.0/)). Thanks to the following authors from the [Noun Project](https://thenounproject.com/): Andrew Nielsen; Tokka Elkholy; Sweet Farm; HeadsOfBirds; Mike Rowe; Denis; Yu luck; and Patrick Morrison. Thanks to Lorc and Delapouite from [Game-icons.net](https://game-icons.net/). And thanks to Freepik from [Flaticon](https://www.flaticon.com/).
+The icons used in the application were either released under a public-domain-like license ([CC0](https://creativecommons.org/share-your-work/public-domain/cc0/){:target="_blank"}) or are free to use with attribution ([CC BY](https://creativecommons.org/licenses/by/4.0/){:target="_blank"}). Thanks to the following authors from the [Noun Project](https://thenounproject.com/){:target="_blank"}: Andrew Nielsen; Tokka Elkholy; Sweet Farm; HeadsOfBirds; Mike Rowe; Denis; Yu luck; and Patrick Morrison. Thanks to Lorc and Delapouite from [Game-icons.net](https://game-icons.net/){:target="_blank"}. And thanks to Freepik from [Flaticon](https://www.flaticon.com/){:target="_blank"}.
 
 
 
