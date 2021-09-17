@@ -120,7 +120,7 @@ There are a few demo scenes bundled with the application. The assets used in the
 
 ## Thanks
 
-Thanks to my awesome RPG group that supported me in developing this application and were patient enough to playtest it in our sessions. :)
+Thanks to my awesome RPG group that supported me in developing this application and were patient enough to playtest it in our sessions. :heart:
 
 ![Claw token](images/playtesters/claw.png "Claw, Tabaxi Sorcerer (Wild Magic)")
 ![Gruk token](images/playtesters/gruk.png "Gruk, Dwarf Fighter (Eldritch Knight)")
@@ -129,6 +129,6 @@ Thanks to my awesome RPG group that supported me in developing this application 
 ![Naven token](images/playtesters/naven.png "Naven, Half-Elf Paladin (Oath of the Ancients)")
 ![Sora token](images/playtesters/sora.png "Sora, Human Monk (Way of the Long Death)")
 
-And thanks to [Animated Dungeon Maps](https://www.patreon.com/animatedmaps "Animated Dungeon Maps Patreon page"){:target="_blank"} for letting me use some of his maps on the demo scenes and even lending me an [exclusive map](https://github.com/luiscastilho/dungeoneering/blob/main/dungeoneering/data/maps/Animated-SwordCoast.mp4){:target="_blank"}. Much appreciated!
+And thanks to [Animated Dungeon Maps](https://www.patreon.com/animatedmaps "Animated Dungeon Maps Patreon page"){:target="_blank"} for letting me use some of his maps on the demo scenes and even lending me an [exclusive map](https://github.com/luiscastilho/dungeoneering/blob/main/dungeoneering/data/maps/Animated-SwordCoast.mp4){:target="_blank"}. Much appreciated! :+1:
 
 [![Animated Dungeon Maps logo](images/logos/partners/animated-dungeon-maps.png)](https://www.patreon.com/animatedmaps "Animated Dungeon Maps Patreon page"){:target="_blank"}
