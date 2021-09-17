@@ -101,7 +101,7 @@ dungeoneering is licensed under the GPLv3. See [LICENSE](https://github.com/luis
 - [rotating-fos](https://github.com/vy/rotating-fos){:target="_blank"}
 - [Hazelcast IMDG](https://github.com/hazelcast/hazelcast){:target="_blank"}
 
-The icons used in the application were either released under a public-domain-like license ([CC0](https://creativecommons.org/share-your-work/public-domain/cc0/){:target="_blank"}) or are free to use with attribution ([CC BY](https://creativecommons.org/licenses/by/4.0/){:target="_blank"}). Thanks to the following authors from the [Noun Project](https://thenounproject.com/){:target="_blank"}: Andrew Nielsen; Tokka Elkholy; Sweet Farm; HeadsOfBirds; Mike Rowe; Denis; Yu luck; and Patrick Morrison. Thanks to Lorc and Delapouite from [Game-icons.net](https://game-icons.net/){:target="_blank"}. And thanks to Freepik from [Flaticon](https://www.flaticon.com/){:target="_blank"}.
+The icons used in the application were either released under a public-domain-like license ([CC0](https://creativecommons.org/share-your-work/public-domain/cc0/){:target="_blank"}) or are free to use with attribution ([CC BY 3.0](https://creativecommons.org/licenses/by/3.0/){:target="_blank"}, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){:target="_blank"}). Thanks to the following authors from the [Noun Project](https://thenounproject.com/){:target="_blank"}: Andrew Nielsen; Tokka Elkholy; Sweet Farm; HeadsOfBirds; Mike Rowe; Denis; Yu luck; Patrick Morrison; and Sergey Demushkin. Thanks to Delapouite, Lorc, and sbed from [Game-icons.net](https://game-icons.net/){:target="_blank"}. And thanks to Freepik and Good Ware from [Flaticon](https://www.flaticon.com/){:target="_blank"}.
 
 
 

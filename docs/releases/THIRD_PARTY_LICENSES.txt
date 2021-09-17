@@ -13,14 +13,15 @@ and license can be found at these links:
 - Hazelcast IMDG: https://github.com/hazelcast/hazelcast
 
 The icons used in the application were either released under a public-domain-
-like license (CC0[1]) or are free to use with attribution (CC BY[2]). Thanks to
-the following authors from the Noun Project[3]: Andrew Nielsen; Tokka Elkholy;
-Sweet Farm; HeadsOfBirds; Mike Rowe; Denis; Yu luck; and Patrick Morrison.
-Thanks to Lorc and Delapouite from Game-icons.net[4]. And thanks to Freepik
-from Flaticon[5].
+like license (CC0[1]) or are free to use with attribution (CC BY 3.0[2],
+CC BY 4.0[3]). Thanks to the following authors from the Noun Project[4]: Andrew
+Nielsen; Tokka Elkholy; Sweet Farm; HeadsOfBirds; Mike Rowe; Denis; Yu luck;
+Patrick Morrison; and Sergey Demushkin. Thanks to Delapouite, Lorc, and sbed
+from Game-icons.net[5]. And thanks to Freepik and Good Ware from Flaticon[6].
 
 [1]: https://creativecommons.org/share-your-work/public-domain/cc0/
-[2]: https://creativecommons.org/licenses/by/4.0/
-[3]: https://thenounproject.com/
-[4]: https://game-icons.net/
-[5]: https://www.flaticon.com/
+[2]: https://creativecommons.org/licenses/by/3.0/
+[3]: https://creativecommons.org/licenses/by/4.0/
+[4]: https://thenounproject.com/
+[5]: https://game-icons.net/
+[6]: https://www.flaticon.com/
