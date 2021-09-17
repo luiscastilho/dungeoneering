@@ -2,7 +2,7 @@ theme: jekyll-theme-minimal
 baseurl: /
 logo: https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/docs/images/logos/dungeoneering-logo-black-v1.png
 title: dungeoneering
-description: Virtual tabletop (VTT) for local, in-person RPG sessions
+description: Virtual tabletop for local, in-person RPG sessions
 google_analytics: G-Z96XHFWYB9
 show_downloads: "true"
 markdown: kramdown
