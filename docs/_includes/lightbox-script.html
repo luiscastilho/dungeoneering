@@ -1,23 +1,31 @@
 <script>
   $('.lightbox').simpleLightbox();
   $('.lightbox-link.farmhouse').on('click', function() {
+    var caption = $(this).attr("title");
     SimpleLightbox.open({
-      items: ['https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/maps/Static-AbandonedFarmhouse.jpg']
+      items: ['https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/maps/Static-AbandonedFarmhouse.jpg'],
+      captions: [caption]
     });
   });
   $('.lightbox-link.beholder').on('click', function() {
+    var caption = $(this).attr("title");
     SimpleLightbox.open({
-      items: ['https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/maps/Static-BeholderLair.jpg']
+      items: ['https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/maps/Static-BeholderLair.jpg'],
+      captions: [caption]
     });
   });
   $('.lightbox-link.bridge').on('click', function() {
+    var caption = $(this).attr("title");
     SimpleLightbox.open({
-      items: ['https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/maps/Static-TheOldBridge.jpg']
+      items: ['https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/maps/Static-TheOldBridge.jpg'],
+      captions: [caption]
     });
   });
   $('.lightbox-link.illusionist').on('click', function() {
+    var caption = $(this).attr("title");
     SimpleLightbox.open({
-      items: ['https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/maps/Static-DungeonsOfTheGrandIllusionist.png']
+      items: ['https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/maps/Static-DungeonsOfTheGrandIllusionist.png'],
+      captions: [caption]
     });
   });
 </script>
