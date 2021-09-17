@@ -2,7 +2,7 @@
 
 dungeoneering is a minimalistic virtual tabletop (VTT) that can be used as a combat grid or as a dungeon exploration tool, made for local, in-person tabletop RPG sessions. It can load static and animated maps, has a dynamic lighting system, offers lots of conditions that can be easily applied to tokens, and more.
 
-<a class="lightbox" href="images/screenshot.png" title="dungeoneering screenshot"><img src="images/screenshot.png" alt="dungeoneering screenshot"/></a>
+<a class="lightbox" href="images/screenshot.png" title="dungeoneering virtual tabletop screenshot"><img src="images/screenshot.png" alt="dungeoneering virtual tabletop screenshot"/></a>
 
 The main goal here is to make an application with all the basic features needed to run a tabletop RPG session. It should be easy to install, set up, and run and should have a minimalistic, intuitive, and hopefully pretty user interface.
 
@@ -57,7 +57,7 @@ To create a new scene follow the steps below. It might be better to do this when
 5. If it's a combat scene, first add tokens to the initiative order widget by right-clicking on them, then choosing Settings, and then clicking on the initiative button (<img src="https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/icons/token/settings/toggle_initiative_idle.png" width="20" height="20" alt="initiative icon" title="initiative icon">). After that, enable the initiative order widget by clicking on the combat button (<img src="https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/icons/scene/config/combat_idle.png" width="20" height="20" alt="combat icon" title="combat icon">). In this widget, you can drag players and enemies to the position they should occupy based on the initiative they rolled.
 6. Save your scene using the save button (<img src="https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/icons/app/save_idle.png" width="20" height="20" alt="save scene icon" title="save scene icon">) so you can load it when needed during your RPG sessions.
 
-And that's it! Now that you have set up your scene, players and DM can drag their tokens around the map; right click on them to add conditions, light sources, and sight types (e.g., darkvision); pan and zoom the map as needed; players can reveal hidden parts of the map with the dynamic lighting system; and hopefully with all that you and your group will have more fun in your RPG sessions. :)
+And that's it! Now that you have set up your scene, players and DM will have a virtual tabletop where they can drag their tokens around the map; right click on them to add conditions, light sources, and sight types (e.g., darkvision); pan and zoom the map as needed; players can reveal hidden parts of the map with the dynamic lighting system; and hopefully with all that you and your group will have more fun in your RPG sessions. :)
 
 
 
@@ -65,7 +65,7 @@ And that's it! Now that you have set up your scene, players and DM can drag thei
 
 If you are going to use a single screen, to be shared by DM and players, run the executable called `dungeoneering` and you are all set.
 
-If you want to use two separate screens connected to the same computer, one for the DM and another one to be shared by your players, run `dungeoneeringDm` first, and once the application loads run `dungeoneeringPlayers`. The two applications should connect to each other and a scene loaded in the DM app should load in the players' app as well. After that any changes made in the scene should be replicated in both directions - a token moved by a player should move in the DM app, a condition applied by the DM should show up in the players' app, same for any other changes made in the scene.
+If you want to use two separate screens connected to the same computer, one for the DM and another one to be shared by your players, run `dungeoneeringDm` first, and once the application loads run `dungeoneeringPlayers`. The two applications should work as a single virtual tabletop, they should connect to each other and a scene loaded in the DM app should load in the players' app as well. After that any changes made in the scene should be replicated in both directions - a token moved by a player should move in the DM app, a condition applied by the DM should show up in the players' app, same for any other changes made in the scene.
 
 Remember to disable any network software, such as VPN or proxy, before running dungeoneering in dual screen mode. In this mode, dungeoneering uses network ports to connect the two apps and in my tests, some network software caused problems and didn't let the two apps connect properly.
 
