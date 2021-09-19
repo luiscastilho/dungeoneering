@@ -235,6 +235,7 @@ public class UserInterface {
     allowedControllersInPlayersMode.add("Quit");
     allowedControllersInPlayersMode.add("Toggle UI");
     allowedControllersInPlayersMode.add("Toggle touch screen mode");
+    allowedControllersInPlayersMode.add("Lock map pan and zoom");
     allowedControllersInPlayersMode.add("Toggle mute sound");
 
     allowedControllerGroupsInPlayersMode = new ArrayList<String>();
@@ -492,6 +493,9 @@ public class UserInterface {
 
     controllersBottomRightX -= squareButtonWidth + controllersSpacing;
     addButton("Toggle touch screen mode", appIconFolder + "touch", controllersBottomRightX, controllersBottomRightY, togglableControllers, true, false);
+
+    controllersBottomRightX -= squareButtonWidth + controllersSpacing;
+    addButton("Lock map pan and zoom", appIconFolder + "lock_map", controllersBottomRightX, controllersBottomRightY, togglableControllers, true, false);
 
     controllersBottomRightX -= squareButtonWidth + controllersSpacing;
     addButton("Toggle mute sound", appIconFolder + "mute", controllersBottomRightX, controllersBottomRightY, togglableControllers, true, false);
@@ -1194,6 +1198,13 @@ public class UserInterface {
 
           }
 
+          initiative.clear();
+          playersLayer.clear();
+          dmLayer.clear();
+          grid.clear();
+
+          map.reset();
+
           disableController("Select map");
           disableController("Add player token");
           disableController("Add DM token");
@@ -1202,13 +1213,6 @@ public class UserInterface {
           disableController("Toggle UI");
 
           setSwitchButtonState("Toggle grid", true);
-
-          initiative.clear();
-          playersLayer.clear();
-          dmLayer.clear();
-          grid.clear();
-
-          map.reset();
 
           gridHelperX = gridHelperToX = 0;
           gridHelperY = gridHelperToY = 0;
@@ -1556,6 +1560,14 @@ public class UserInterface {
           map.toggleMute();
 
         break;
+      case "Lock map pan and zoom":
+
+        if ( map != null && map.isSet() ) {
+          map.togglePan();
+          map.toggleZoom();
+        }
+
+        break;
       case "Conditions":
       case "Light Sources":
       case "Sight Types":
@@ -1746,11 +1758,12 @@ public class UserInterface {
         obstacles.setRecalculateShadows(true);
         hideMenu(0, 0);
 
-        if ( appMode == AppMode.standalone || appMode == AppMode.dm )
+        if ( appMode == AppMode.standalone || appMode == AppMode.dm ) {
           setSwitchButtonState("Toggle combat mode", true);
-        else if ( appMode == AppMode.players )
+        } else if ( appMode == AppMode.players ) {
           if ( !initiative.getDrawInitiativeOrder() )
             initiative.toggleDrawInitiativeOrder();
+        }
 
         break;
     }
@@ -2715,11 +2728,10 @@ public class UserInterface {
         // Show logo image as link, if available
 
         String logoLoadPath = getImageLoadPath(logoFilePath);
-        if ( !logoLoadPath.isEmpty() ) {
+        if ( !logoLoadPath.isEmpty() )
           logoFilePath = logoLoadPath;
-        } else {
+        else
           logoFilePath = null;
-        }
 
         if ( logoFilePath != null ) {
           Point logoMinPosition = new Point(
@@ -2750,11 +2762,12 @@ public class UserInterface {
 
         grid.setup(mapFirstCellCenter, mapLastCellCenter, cellWidth, cellHeight, false);
 
-        if ( drawGrid )
+        if ( drawGrid ) {
           if ( appMode == AppMode.standalone || appMode == AppMode.dm )
             setSwitchButtonState("Toggle grid", true);
           else if ( appMode == AppMode.players )
             grid.toggleDrawGrid();
+        }
 
         logger.debug("UserInterface: Grid loaded");
 
@@ -2788,11 +2801,12 @@ public class UserInterface {
       if ( initiativeJson != null ) {
 
         boolean drawInitiativeOrder = initiativeJson.getBoolean("drawInitiativeOrder");
-        if ( drawInitiativeOrder )
+        if ( drawInitiativeOrder ) {
           if ( appMode == AppMode.standalone || appMode == AppMode.dm )
             setSwitchButtonState("Toggle combat mode", true);
           else if ( appMode == AppMode.players )
             initiative.toggleDrawInitiativeOrder();
+        }
 
         JSONArray initiativeGroupsArray = initiativeJson.getJSONArray("initiativeGroups");
         if ( initiativeGroupsArray != null ) {
@@ -3923,9 +3937,8 @@ public class UserInterface {
 
     controlP5.Controller controller = cp5.getController(controllerName);
 
-    if ( controller == null ) {
+    if ( controller == null )
       return;
-    }
 
     String controllerImageBaseName = controller.getStringValue();
     PImage[] controllerImages = {loadImage("icons/" + controllerImageBaseName + "_idle.png"), loadImage("icons/" + controllerImageBaseName + "_over.png"), loadImage("icons/" + controllerImageBaseName + "_click.png")};
@@ -3942,9 +3955,8 @@ public class UserInterface {
 
     controlP5.Controller controller = cp5.getController(controllerName);
 
-    if ( controller == null ) {
+    if ( controller == null )
       return;
-    }
 
     String controllerImageBaseName = controller.getStringValue();
     PImage controllerImage = loadImage("icons/" + controllerImageBaseName + "_disabled.png");
@@ -3960,9 +3972,8 @@ public class UserInterface {
 
     controlP5.Controller controller = cp5.getController(controllerName);
 
-    if ( controller == null ) {
+    if ( controller == null )
       return;
-    }
 
     controller.unlock();
     controller.show();
@@ -3973,9 +3984,8 @@ public class UserInterface {
 
     controlP5.Controller controller = cp5.getController(controllerName);
 
-    if ( controller == null ) {
+    if ( controller == null )
       return;
-    }
 
     controller.lock();
     controller.hide();
@@ -3986,9 +3996,8 @@ public class UserInterface {
 
     Button button = (Button)cp5.getController(buttonName);
 
-    if ( button == null ) {
+    if ( button == null )
       return false;
-    }
 
     return button.isOn();
 
@@ -4018,9 +4027,8 @@ public class UserInterface {
 
     Button button = (Button)cp5.getController(buttonName);
 
-    if ( button == null ) {
+    if ( button == null )
       return;
-    }
 
     if ( !broadcastButtonPress )
       button.setBroadcast(false);
