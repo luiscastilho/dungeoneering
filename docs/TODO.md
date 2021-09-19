@@ -54,7 +54,8 @@ List of features to implement and known bugs to fix:
 - [ ] Create scene selection screen with thumbnails
 - [ ] Create map selection screen with thumbnails
 - [ ] Create token selection screen with thumbnails
-- [ ] Add more D&D 5e spell light sources to right click menu
+- [ ] Allow to load images as free floating objects on top of map
+- [ ] Add more D&D 5e spell light sources to right click menu - separate menu entry?
 - [ ] Fix token images looking pixelated if zoom in is used
 - [ ] Set maximum zoom and pan
 - [ ] Keep tokens inside grid when moving - larger tokens being moved to grid borders
@@ -68,7 +69,6 @@ List of features to implement and known bugs to fix:
 - [ ] Add D&D 5e obscurement sources to right click menu
 - [ ] Add D&D 5e spell effects - fireball, etc
 - [ ] Allow to automatically move a token placed on a givan cell to another cell (stairs, secret passages, etc)
-- [ ] Allow to load images as free floating objects on top of map
 - [ ] Manual FoW - areas revealed when a player reaches/illuminates it
 - [ ] Multiple maps linked (NSEW)
 - [ ] Show movement path
