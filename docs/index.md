@@ -1,4 +1,4 @@
-# Virtual tabletop for local, in-person RPG sessions
+# Virtual tabletop (VTT) for local, in-person RPG sessions
 
 dungeoneering is a free and slimmed down virtual tabletop (VTT) that can be used as a combat grid and as a dungeon exploration tool, made for local, in-person tabletop RPG sessions. It can load static and animated maps, has a dynamic lighting system, can be easily used with D&D 5e games, and more.
 
