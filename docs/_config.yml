@@ -1,10 +1,8 @@
 theme: jekyll-theme-minimal
 baseurl: /
 logo: https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/docs/images/logos/dungeoneering-logo-black-v1.png
-title: dungeoneering | Virtual tabletop (VTT) for local, in-person RPG sessions
-description: dungeoneering can load static and animated maps, has a dynamic lighting system, offers lots of conditions that can be easily applied to tokens, and more.
-google_analytics: G-Z96XHFWYB9
-show_downloads: "true"
+title: Virtual tabletop (VTT) for local, in-person RPG
+description: dungeoneering is a free virtual tabletop that can load static and animated maps, has a dynamic lighting system, and can be easily used with D&D 5e games.
 markdown: kramdown
 plugins:
   - jemoji

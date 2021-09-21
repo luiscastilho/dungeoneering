@@ -22,11 +22,9 @@
           <a class="logo-link" href="/"><img class="logo-image" src="{{site.logo | relative_url}}" alt="Logo" /></a>
         {% endif %}
 
-        <p class="description">{{ site.description | default: site.github.project_tagline }}</p>
+        <p class="description">{{ site.title | default: site.github.project_tagline }}</p>
 
-        {% if site.show_downloads %}
-          {% include downloads.html %}
-        {% endif %}
+        {% include downloads.html %}
 
         {% include support.html %}
 
