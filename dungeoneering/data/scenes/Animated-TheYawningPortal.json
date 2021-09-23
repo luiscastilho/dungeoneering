@@ -1,0 +1,765 @@
+{
+  "doors": [
+    {
+      "vertexes": [
+        [
+          769,
+          445
+        ],
+        [
+          769,
+          507
+        ]
+      ],
+      "closed": false,
+      "id": "de677e40-e173-43d3-a968-9b938280c593"
+    },
+    {
+      "vertexes": [
+        [
+          717,
+          277
+        ],
+        [
+          770,
+          277
+        ]
+      ],
+      "closed": true,
+      "id": "9e6e7151-d6dc-456b-b0b4-e5888d23dfef"
+    },
+    {
+      "vertexes": [
+        [
+          441,
+          277
+        ],
+        [
+          501,
+          277
+        ]
+      ],
+      "closed": true,
+      "id": "7483c101-7ab3-40f5-959a-28f88262c296"
+    },
+    {
+      "vertexes": [
+        [
+          485,
+          613
+        ],
+        [
+          557,
+          613
+        ]
+      ],
+      "closed": true,
+      "id": "30d139ce-fbcf-4e09-a8b9-272a0d78a4e9"
+    }
+  ],
+  "dmTokens": [
+    {
+      "size": "Large",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Troll.png",
+      "sightTypes": [],
+      "name": "Troll",
+      "column": 21,
+      "id": "a8120811-0cec-42cf-9f52-f7bf992c607f",
+      "row": 10,
+      "conditions": [],
+      "version": 5
+    },
+    {
+      "size": "Tiny",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Stirge.png",
+      "sightTypes": [],
+      "name": "Stirge",
+      "column": 22,
+      "id": "b06debaa-31b8-42c6-b33d-ea7f9de81103",
+      "row": 12,
+      "conditions": [],
+      "version": 1
+    },
+    {
+      "size": "Tiny",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Stirge.png",
+      "sightTypes": [],
+      "name": "Stirge",
+      "column": 20,
+      "id": "8454cfb3-9881-4a16-8154-26b8e4bde9b7",
+      "row": 11,
+      "conditions": [],
+      "version": 3
+    },
+    {
+      "size": "Tiny",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Stirge.png",
+      "sightTypes": [],
+      "name": "Stirge",
+      "column": 21,
+      "id": "f9036210-e03a-43f5-a16f-d4ded6382445",
+      "row": 9,
+      "conditions": [],
+      "version": 1
+    }
+  ],
+  "initiative": {
+    "initiativeGroups": [
+      {
+        "name": "Helja",
+        "position": 0
+      },
+      {
+        "name": "Lia",
+        "position": 1
+      },
+      {
+        "name": "Luth",
+        "position": 2
+      },
+      {
+        "name": "Durnan",
+        "position": 3
+      },
+      {
+        "name": "Troll",
+        "position": 4
+      },
+      {
+        "name": "Stirge",
+        "position": 5
+      }
+    ],
+    "drawInitiativeOrder": true
+  },
+  "walls": [
+    {
+      "vertexes": [
+        [
+          331,
+          941
+        ],
+        [
+          828,
+          943
+        ]
+      ],
+      "id": "fa72350e-e217-4e81-84a4-371570f6371d"
+    },
+    {
+      "vertexes": [
+        [
+          828,
+          943
+        ],
+        [
+          828,
+          1063
+        ]
+      ],
+      "id": "17dc818e-82d1-4fe2-a6fe-7b9d2b363891"
+    },
+    {
+      "vertexes": [
+        [
+          828,
+          1063
+        ],
+        [
+          1317,
+          1062
+        ]
+      ],
+      "id": "cd54c0e7-d048-47f0-aa04-bfa8af785c0c"
+    },
+    {
+      "vertexes": [
+        [
+          1317,
+          1062
+        ],
+        [
+          1417,
+          952
+        ]
+      ],
+      "id": "35dffaa6-44b0-43ca-acb5-af3f8c2d2711"
+    },
+    {
+      "vertexes": [
+        [
+          1417,
+          952
+        ],
+        [
+          1886,
+          953
+        ]
+      ],
+      "id": "c1744af5-ea49-45f4-8186-ce16b32404d0"
+    },
+    {
+      "vertexes": [
+        [
+          1886,
+          953
+        ],
+        [
+          1887,
+          54
+        ]
+      ],
+      "id": "21119040-69d4-403c-8f00-31b32b0f9264"
+    },
+    {
+      "vertexes": [
+        [
+          1887,
+          54
+        ],
+        [
+          994,
+          54
+        ]
+      ],
+      "id": "f79cfaab-422f-45a2-aae2-88d0ebaf0e96"
+    },
+    {
+      "vertexes": [
+        [
+          994,
+          54
+        ],
+        [
+          994,
+          279
+        ]
+      ],
+      "id": "470bc860-c3d9-40ed-95da-2e53cc3a9c51"
+    },
+    {
+      "vertexes": [
+        [
+          994,
+          279
+        ],
+        [
+          769,
+          279
+        ]
+      ],
+      "id": "99ed3164-a162-4c66-abe9-d87b81645f2f"
+    },
+    {
+      "vertexes": [
+        [
+          769,
+          279
+        ],
+        [
+          769,
+          110
+        ]
+      ],
+      "id": "47235ef9-801a-4231-9990-1aa5170f8003"
+    },
+    {
+      "vertexes": [
+        [
+          769,
+          110
+        ],
+        [
+          518,
+          111
+        ]
+      ],
+      "id": "5dedb478-fbb5-4e09-a269-cbebb0b38599"
+    },
+    {
+      "vertexes": [
+        [
+          518,
+          111
+        ],
+        [
+          517,
+          67
+        ]
+      ],
+      "id": "e98237a6-3609-4154-8259-21403112089c"
+    },
+    {
+      "vertexes": [
+        [
+          517,
+          67
+        ],
+        [
+          418,
+          67
+        ]
+      ],
+      "id": "2ae56b0d-45c3-4e1a-a475-04ac0471bce1"
+    },
+    {
+      "vertexes": [
+        [
+          418,
+          67
+        ],
+        [
+          418,
+          109
+        ]
+      ],
+      "id": "47160da4-bd5a-4acf-bd4d-57cf9bededc2"
+    },
+    {
+      "vertexes": [
+        [
+          418,
+          109
+        ],
+        [
+          327,
+          109
+        ]
+      ],
+      "id": "a23e4001-b35d-4d1b-a599-89c2ab422be6"
+    },
+    {
+      "vertexes": [
+        [
+          327,
+          109
+        ],
+        [
+          327,
+          942
+        ]
+      ],
+      "id": "03f1f243-e484-44ab-b454-6b4e794c3f3b"
+    },
+    {
+      "vertexes": [
+        [
+          327,
+          942
+        ],
+        [
+          336,
+          941
+        ]
+      ],
+      "id": "f8c80ac4-d002-4c86-baa0-c1e71c2aebe5"
+    },
+    {
+      "vertexes": [
+        [
+          660,
+          276
+        ],
+        [
+          660,
+          613
+        ]
+      ],
+      "id": "cdff1d43-14e6-4069-9f3c-b74211e88675"
+    },
+    {
+      "vertexes": [
+        [
+          660,
+          613
+        ],
+        [
+          717,
+          612
+        ]
+      ],
+      "id": "1e484435-c74b-44c0-b0d4-53f95530313d"
+    },
+    {
+      "vertexes": [
+        [
+          717,
+          612
+        ],
+        [
+          719,
+          719
+        ]
+      ],
+      "id": "07851e80-cc4d-4aeb-83c6-6e4169cc3068"
+    },
+    {
+      "vertexes": [
+        [
+          719,
+          719
+        ],
+        [
+          610,
+          835
+        ]
+      ],
+      "id": "9bb6ed51-9d27-4cec-857c-4c47e4e4705b"
+    },
+    {
+      "vertexes": [
+        [
+          610,
+          835
+        ],
+        [
+          610,
+          942
+        ]
+      ],
+      "id": "b5398cd1-240f-4fe2-a907-035f69949005"
+    },
+    {
+      "vertexes": [
+        [
+          994,
+          278
+        ],
+        [
+          1058,
+          278
+        ]
+      ],
+      "id": "6f3a3eac-9d69-4062-ac50-1558f7136701"
+    },
+    {
+      "vertexes": [
+        [
+          1146,
+          277
+        ],
+        [
+          1215,
+          277
+        ]
+      ],
+      "id": "8d400182-21f3-4a61-9652-e49ffbd0d6d4"
+    },
+    {
+      "vertexes": [
+        [
+          1215,
+          277
+        ],
+        [
+          1215,
+          54
+        ]
+      ],
+      "id": "84b9578b-5714-4b30-b38d-4f5bfb0391ee"
+    },
+    {
+      "vertexes": [
+        [
+          1439,
+          54
+        ],
+        [
+          1439,
+          161
+        ]
+      ],
+      "id": "ed59c153-486c-4a52-b1a8-5f933e7a08df"
+    },
+    {
+      "vertexes": [
+        [
+          1550,
+          54
+        ],
+        [
+          1550,
+          161
+        ]
+      ],
+      "id": "c4a3129b-36e2-4272-8c00-81415af639c4"
+    },
+    {
+      "vertexes": [
+        [
+          1660,
+          54
+        ],
+        [
+          1660,
+          162
+        ]
+      ],
+      "id": "3792e3ce-f108-4144-9fc7-34d850ff6805"
+    },
+    {
+      "vertexes": [
+        [
+          1779,
+          274
+        ],
+        [
+          1779,
+          165
+        ]
+      ],
+      "id": "c62775a0-f7bb-4a0f-a80a-fbca44976f15"
+    },
+    {
+      "vertexes": [
+        [
+          1779,
+          165
+        ],
+        [
+          1887,
+          165
+        ]
+      ],
+      "id": "647d64db-dc4d-493e-ac17-5425b3c626b5"
+    },
+    {
+      "vertexes": [
+        [
+          1778,
+          953
+        ],
+        [
+          1778,
+          831
+        ]
+      ],
+      "id": "f553ae2c-46ae-4e40-9bd0-97dd27a3e886"
+    },
+    {
+      "vertexes": [
+        [
+          1778,
+          831
+        ],
+        [
+          1886,
+          831
+        ]
+      ],
+      "id": "3b1663c3-364e-45f7-8fb8-ce9fa4bf2cfd"
+    },
+    {
+      "vertexes": [
+        [
+          1886,
+          720
+        ],
+        [
+          1767,
+          720
+        ]
+      ],
+      "id": "ddce3145-f39c-4d09-872e-b3433e4fc018"
+    },
+    {
+      "vertexes": [
+        [
+          1886,
+          609
+        ],
+        [
+          1770,
+          609
+        ]
+      ],
+      "id": "95db1362-808f-4f1d-b1f6-702530b7aa7b"
+    },
+    {
+      "vertexes": [
+        [
+          1887,
+          497
+        ],
+        [
+          1773,
+          497
+        ]
+      ],
+      "id": "75719ad6-df44-43af-8a18-1a31f9d7fde9"
+    },
+    {
+      "vertexes": [
+        [
+          770,
+          390
+        ],
+        [
+          886,
+          390
+        ]
+      ],
+      "id": "3633e760-cf65-4a0e-bc12-fa08a8d22ed1"
+    },
+    {
+      "vertexes": [
+        [
+          720,
+          276
+        ],
+        [
+          720,
+          390
+        ]
+      ],
+      "id": "8c17befc-466d-4d1e-8b2b-df21ee432cda"
+    },
+    {
+      "vertexes": [
+        [
+          769,
+          276
+        ],
+        [
+          769,
+          449
+        ]
+      ],
+      "id": "23fba2fe-8395-4ba0-927a-39bb5632b432"
+    },
+    {
+      "vertexes": [
+        [
+          769,
+          502
+        ],
+        [
+          769,
+          943
+        ]
+      ],
+      "id": "7838e36f-e18b-4d43-a2b2-358a5f9e158c"
+    },
+    {
+      "vertexes": [
+        [
+          327,
+          277
+        ],
+        [
+          444,
+          277
+        ]
+      ],
+      "id": "483dbc30-939c-44e8-965a-75f2324ac454"
+    },
+    {
+      "vertexes": [
+        [
+          494,
+          277
+        ],
+        [
+          720,
+          277
+        ]
+      ],
+      "id": "6bfb57e0-ac9e-49f3-bfa4-8a6f70afee1e"
+    },
+    {
+      "vertexes": [
+        [
+          660,
+          612
+        ],
+        [
+          553,
+          612
+        ]
+      ],
+      "id": "9dfdd850-538f-46f4-9454-d5650444c259"
+    },
+    {
+      "vertexes": [
+        [
+          491,
+          613
+        ],
+        [
+          326,
+          613
+        ]
+      ],
+      "id": "f99da0f8-3b08-41c6-bdc2-83823b12ba44"
+    }
+  ],
+  "illumination": {"lighting": "darkness"},
+  "grid": {
+    "cellWidth": 54,
+    "lastCellCenterY": 1023,
+    "cellHeight": 54,
+    "drawGrid": true,
+    "firstCellCenterX": 57,
+    "lastCellCenterX": 1893,
+    "firstCellCenterY": 51
+  },
+  "playerTokens": [
+    {
+      "size": "Medium",
+      "lightSources": [{"name": "Daylight"}],
+      "imagePath": "/data/tokens/players/Lia.png",
+      "sightTypes": [],
+      "name": "Lia",
+      "column": 17,
+      "id": "f6bded6d-dd77-4fda-8172-813ddf11a67e",
+      "row": 7,
+      "conditions": [],
+      "version": 3
+    },
+    {
+      "size": "Medium",
+      "lightSources": [{"name": "Daylight"}],
+      "imagePath": "/data/tokens/players/Helja.png",
+      "sightTypes": [],
+      "name": "Helja",
+      "column": 18,
+      "id": "d23388b4-6231-4afe-9a24-42c5e30f381c",
+      "row": 9,
+      "conditions": [],
+      "version": 3
+    },
+    {
+      "size": "Medium",
+      "lightSources": [],
+      "imagePath": "/data/tokens/dm/Durnan.png",
+      "sightTypes": [],
+      "name": "Durnan",
+      "column": 15,
+      "id": "84db15a1-776c-4c22-89cc-1987a0957033",
+      "row": 15,
+      "conditions": [],
+      "version": 6
+    },
+    {
+      "size": "Medium",
+      "lightSources": [{"name": "Daylight"}],
+      "imagePath": "/data/tokens/players/Luth.png",
+      "sightTypes": [],
+      "name": "Luth",
+      "column": 16,
+      "id": "fa4d5aca-c6a0-4cbe-9fb2-2893c2df8d7b",
+      "row": 8,
+      "conditions": [],
+      "version": 16
+    }
+  ],
+  "map": {
+    "filePath": "/data/maps/Animated-TheYawningPortal.mp4",
+    "isVideo": true,
+    "fitToScreen": false
+  }
+}
