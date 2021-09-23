@@ -10818,7 +10818,7 @@
   "map": {
     "logoLink": "https://www.patreon.com/dysonlogos",
     "filePath": "/data/maps/Static-DungeonsOfTheGrandIllusionist.png",
-    "logoFilePath": "c:\\Users\\Luis\\Documents\\GitHub\\dungeoneering\\dungeoneering\\data\\logos\\dyson-logos.png",
+    "logoFilePath": "/data/logos/dyson-logos.png",
     "isVideo": false,
     "fitToScreen": false
   }
