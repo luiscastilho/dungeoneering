@@ -6,11 +6,12 @@ the executable called dungeoneering and you are all set.
 If you want to use two separate screens connected to the same computer, one for
 the DM and another one to be shared by your players, run dungeoneeringDm first,
 and once the application loads run dungeoneeringPlayers. The two applications
-should connect to each other and a scene loaded in the DM app should load in
-the players' app as well. After that any changes made in the scene should be
-replicated in both directions - a token moved by a player should move in the DM
-app, a condition applied by the DM should show up in the players' app, same for
-any other changes made in the scene.
+should work as a single virtual tabletop, they should connect to each other and
+a scene loaded in the DM app should load in the players' app as well. After
+that any changes made in the scene should be replicated in both directions - a
+token moved by a player should move in the DM app, a condition applied by the
+DM should show up in the players' app, same for any other changes made in the
+scene.
 
 Remember to disable any network software, such as VPN or proxy, before running
 dungeoneering in dual screen mode. In this mode, dungeoneering uses network
