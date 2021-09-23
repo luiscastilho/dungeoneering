@@ -1,4 +1,4 @@
-// dungeoneering - Minimalistic virtual tabletop (VTT) for local RPG sessions
+// dungeoneering - Virtual tabletop (VTT) for local, in-person RPG sessions
 // Copyright  (C) 2019-2021  Luis Castilho
 
 // This program is free software: you can redistribute it and/or modify
