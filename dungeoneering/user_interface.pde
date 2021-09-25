@@ -109,6 +109,8 @@ public class UserInterface {
   ArrayList<String> allowedControllersInPlayersMode;
   ArrayList<String> allowedControllerGroupsInPlayersMode;
 
+  int logoMaxWidth, logoMaxHeight;
+
   UserInterface(PGraphics _canvas, ControlP5 _cp5, Map _map, Grid _grid, Obstacles _obstacles, Layer _playersLayer, Layer _dmLayer, Resources _resources, Initiative _initiative, int _platform, HazelcastInstance _sharedDataInstance, IMap<String, String> _sharedData) {
 
     canvas = _canvas;
@@ -244,6 +246,9 @@ public class UserInterface {
     allowedControllerGroupsInPlayersMode.add("Sight Types");
     allowedControllerGroupsInPlayersMode.add("Sizes");
     allowedControllerGroupsInPlayersMode.add("Settings");
+
+    logoMaxWidth = 300;
+    logoMaxHeight = 150;
 
     logger.debug("Setup: UI controllers setup started");
 
@@ -3271,6 +3276,8 @@ public class UserInterface {
       return;
 
     PImage logoImage = loadImage(logoImagePath);
+    logoImage.resize(min(logoImage.width, logoMaxWidth), 0);
+    logoImage.resize(0, min(logoImage.height, logoMaxHeight));
 
     cp5.addButton("Map logo")
        .setPosition(buttonMinPosition.x - logoImage.width, buttonMinPosition.y - logoImage.height)
