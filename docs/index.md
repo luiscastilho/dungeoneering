@@ -112,10 +112,7 @@ The icons used in the application were either released under a public-domain-lik
 There are a few demo scenes bundled with the application. The assets used in these scenes can be found at or created using the following links.
 
 - The two awesome animated maps are from [Animated Dungeon Maps](https://www.patreon.com/animatedmaps "Animated Dungeon Maps Patreon page"){:target="_blank"}.
-- The <a class="lightbox-link farmhouse" title="Abandoned Farmhouse map by Mike Schley">Abandoned Farmhouse map</a> is from Mike Schley, available in this [D&D article](https://dnd.wizards.com/articles/features/schley-stack "D&D Schley Stack article"){:target="_blank"}.
-- The <a class="lightbox-link beholder" title="Beholder Lair map by Antal Kéninger">Beholder Lair map</a> is from [Antal Kéninger](https://www.artstation.com/kena "Antal Kéninger ArtStation profile"){:target="_blank"}. Originally called The Marble Sanctum.
 - The <a class="lightbox-link illusionist" title="Dungeons of the Grand Illusionist map by Dyson Logos">Dungeons of the Grand Illusionist map</a> is from [Dyson Logos](https://www.patreon.com/dysonlogos "Dyson Logos Patreon page"){:target="_blank"}.
-- The <a class="lightbox-link bridge" title="The Old Bridge map by Sliph">Old Bridge map</a> is from [Sliph](https://www.patreon.com/sliph "Sliph Patreon page"){:target="_blank"}. Originally called Cliff Edge.
 - All tokens were created using the [Token Stamp tool](https://rolladvantage.com/tokenstamp/ "Token Stamp tool"){:target="_blank"} with D&D 5th edition images, © Wizards of the Coast.
 
 
