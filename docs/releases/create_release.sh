@@ -10,17 +10,30 @@ IFS=$'\n\t'
 
 version="${1:-}"
 platform="${2:-}"
+app_mode="${3:-}"
 root_dir="../.."
+working_dir=""
+working_subdir=""
+
+usage() {
+    echo "usage: $(basename $0) version platform [app_mode]"
+    echo "Creates a dungeoneering release"
+    echo "version should be vX.Y.Z"
+    echo "platform should be windows, linux, or macos"
+    echo "app_mode is used only in macOS and should be standalone, dm, or players"
+    exit 1
+}
 
 # Check if we have everything we need
 
 if [ -z "${version}" -o -z "${platform}" ]; then
-    echo "usage: $(basename $0) version platform"
-    exit 1
+    usage
 fi
-if [ "${platform}" != "windows" -a "${platform}" != "linux" ]; then
-    echo "usage: $(basename $0) version platform"
-    exit 1
+if [ "${platform}" != "windows" -a "${platform}" != "linux" -a "${platform}" != "macos" ]; then
+    usage
+fi
+if [ -n "${app_mode}" -a "${app_mode}" != "standalone" -a "${app_mode}" != "dm" -a "${app_mode}" != "players" ]; then
+    usage
 fi
 
 spaces_regex="[[:space:]]+"
@@ -32,6 +45,10 @@ if [[ "${platform}" =~ $spaces_regex ]]; then
     echo "ERROR: platform shouldn't contain spaces"
     exit 1
 fi
+if [[ "${app_mode}" =~ $spaces_regex ]]; then
+    echo "ERROR: app_mode shouldn't contain spaces"
+    exit 1
+fi
 
 if [ "${platform}" == "windows" -a ! -d "${root_dir}/dungeoneering/application.windows64/" ]; then
     echo "ERROR: dir application.windows64 not found"
@@ -41,6 +58,10 @@ if [ "${platform}" == "linux" -a ! -d "${root_dir}/dungeoneering/application.lin
     echo "ERROR: dir application.linux64 not found"
     exit 1
 fi
+if [ "${platform}" == "macos" -a ! -d "${root_dir}/dungeoneering/application.macosx/" ]; then
+    echo "ERROR: dir application.macosx not found"
+    exit 1
+fi
 
 if [ "${platform}" == "windows" -a -d "${root_dir}/releases/${version}/dungeoneering-windows64/" ]; then
     echo "ERROR: dir dungeoneering-windows64 already exists"
@@ -48,6 +69,10 @@ if [ "${platform}" == "windows" -a -d "${root_dir}/releases/${version}/dungeonee
 fi
 if [ "${platform}" == "linux" -a -d "${root_dir}/releases/${version}/dungeoneering-linux64/" ]; then
     echo "ERROR: dir dungeoneering-linux64 already exists"
+    exit 1
+fi
+if [ "${platform}" == "macos" -a "${app_mode}" == "standalone" -a -d "${root_dir}/releases/${version}/dungeoneering-macos/" ]; then
+    echo "ERROR: dir dungeoneering-macos already exists"
     exit 1
 fi
 
@@ -104,6 +129,24 @@ if [ "${platform}" == "linux" ]; then
     mv dungeoneering/application.linux64 releases/${version}/${working_dir}
     echo " done"
 fi
+if [ "${platform}" == "macos" ]; then
+    working_dir=dungeoneering-macos
+    if [ "${app_mode}" == "standalone" ]; then
+        working_subdir=dungeoneering.app
+    elif [ "${app_mode}" == "dm" ]; then
+        working_subdir=dungeoneeringDm.app
+    elif [ "${app_mode}" == "players" ]; then
+        working_subdir=dungeoneeringPlayers.app
+    fi
+    echo -n "  Move application.macosx to ${working_dir}..."
+    mkdir -p releases/${version}/${working_dir}
+    mv dungeoneering/application.macosx/dungeoneering* releases/${version}/${working_dir}/
+    if [ ! -d releases/${version}/${working_dir}/source ]; then
+        mv dungeoneering/application.macosx/source releases/${version}/${working_dir}/
+    fi
+    rm -r dungeoneering/application.macosx
+    echo " done"
+fi
 
 # Copy release files to version dir
 
@@ -114,20 +157,47 @@ echo " done"
 
 # Copy libraries to lib dir and then remove platform specific files
 
-echo -n "  Copy libraries to ${working_dir}/lib..."
-cp -r dungeoneering/code/* releases/${version}/${working_dir}/lib
-rm -r releases/${version}/${working_dir}/lib/macosx64/
-rm -r releases/${version}/${working_dir}/lib/windows32/
-if [ "${platform}" == "linux" ]; then
-    rm -r releases/${version}/${working_dir}/lib/windows64/
+echo -n "  Copy libraries to ${working_dir} lib or Java dir..."
+if [ "${platform}" == "windows" -o "${platform}" == "linux" ]; then
+    cp -r dungeoneering/code/* releases/${version}/${working_dir}/lib
+    rm -r releases/${version}/${working_dir}/lib/macosx64/
+    rm -r releases/${version}/${working_dir}/lib/windows32/
+    if [ "${platform}" == "linux" ]; then
+        rm -r releases/${version}/${working_dir}/lib/windows64/
+    fi
+fi
+if [ "${platform}" == "macos" ]; then
+    gcp -r dungeoneering/code/* releases/${version}/${working_dir}/${working_subdir}/Contents/Java/
+    rm -r releases/${version}/${working_dir}/${working_subdir}/Contents/Java/windows32/
+    rm -r releases/${version}/${working_dir}/${working_subdir}/Contents/Java/windows64/
+fi
+echo " done"
+
+# In macOS only, copy data to working dir
+
+if [ "${platform}" == "macos" ]; then
+    if [ ! -d releases/${version}/${working_dir}/data ]; then
+        echo -n "  Copy data to ${working_dir}..."
+        gcp -r dungeoneering/data releases/${version}/${working_dir}/
+        rm -r releases/${version}/${working_dir}/data/conditions/
+        rm -r releases/${version}/${working_dir}/data/cursors/
+        rm -r releases/${version}/${working_dir}/data/fonts/
+        rm -r releases/${version}/${working_dir}/data/icons/
+    else
+        echo -n "  Skipping copy of data to ${working_dir} - already present..."
+    fi
 fi
 echo " done"
 
 # Remove unnecessary files from version dir
 
 echo -n "  Remove unnecessary files from ${working_dir}..."
-rm releases/${version}/${working_dir}/source/dungeoneering.java
-rm -r releases/${version}/${working_dir}/data/icons/orig/
+if [ -f releases/${version}/${working_dir}/source/dungeoneering.java ]; then
+    rm releases/${version}/${working_dir}/source/dungeoneering.java
+fi
+if [ -d releases/${version}/${working_dir}/data/icons/orig/ ]; then
+    rm -r releases/${version}/${working_dir}/data/icons/orig/
+fi
 if [ -d releases/${version}/${working_dir}/data/campaign/ ]; then
     rm -r releases/${version}/${working_dir}/data/campaign/
 fi
