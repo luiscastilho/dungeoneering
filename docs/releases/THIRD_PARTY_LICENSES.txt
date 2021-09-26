@@ -19,9 +19,30 @@ Nielsen; Tokka Elkholy; Sweet Farm; HeadsOfBirds; Mike Rowe; Denis; Yu luck;
 Patrick Morrison; and Sergey Demushkin. Thanks to Delapouite, Lorc, and sbed
 from Game-icons.net[5]. And thanks to Freepik and Good Ware from Flaticon[6].
 
+# Assets
+
+There are a few demo scenes bundled with the application. The assets used in
+these scenes can be found at or created using the following links.
+
+- The Sword Coast and Siege of Bamburgh animated maps are from Animated Dungeon
+Maps[7].
+- The Yawning Portal animated map was created by 3DMAcademy[8].
+- The Abandoned Cabin map is from Mike Schley, available in this D&D
+article[9], © Wizards of the Coast.
+- The Dungeons of the Grand Illusionist map is from Dyson Logos[10].
+- The Lost Library map is from Paths Peculiar[11].
+- All tokens were created using the Token Stamp tool[12] with D&D 5th edition
+images, © Wizards of the Coast.
+
 [1]: https://creativecommons.org/share-your-work/public-domain/cc0/
 [2]: https://creativecommons.org/licenses/by/3.0/
 [3]: https://creativecommons.org/licenses/by/4.0/
 [4]: https://thenounproject.com/
 [5]: https://game-icons.net/
 [6]: https://www.flaticon.com/
+[7]: https://www.patreon.com/animatedmaps
+[8]: https://www.reddit.com/user/3DMAcademy/
+[9]: https://dnd.wizards.com/articles/features/schley-stack
+[10]: https://www.patreon.com/dysonlogos
+[11]: https://www.wistedt.net/
+[12]: https://rolladvantage.com/tokenstamp/
