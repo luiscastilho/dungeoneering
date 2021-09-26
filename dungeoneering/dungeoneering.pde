@@ -112,6 +112,7 @@ void setup() {
 
     logger.info("Setup: dungeoneering initialization started");
 
+    // This defines what application will be run - either standalone, or DM's app, or Players' app
     appMode = AppMode.standalone;
     // appMode = AppMode.dm;
     // appMode = AppMode.players;
