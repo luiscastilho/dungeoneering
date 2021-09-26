@@ -111,9 +111,11 @@ The icons used in the application were either released under a public-domain-lik
 
 There are a few demo scenes bundled with the application. The assets used in these scenes can be found at or created using the following links.
 
-- The two awesome animated maps are from [Animated Dungeon Maps](https://www.patreon.com/animatedmaps "Animated Dungeon Maps Patreon page"){:target="_blank"}.
+- The Sword Coast and Siege of Bamburgh animated maps are from [Animated Dungeon Maps](https://www.patreon.com/animatedmaps "Animated Dungeon Maps Patreon page"){:target="_blank"}.
+- The Yawning Portal animated map was created by [3DMAcademy](https://www.reddit.com/user/3DMAcademy/ "3DMAcademy Reddit user page"){:target="_blank"}.
 - The <a class="lightbox-link cabin" title="Abandoned Cabin map by Mike Schley">Abandoned Cabin map</a> is from Mike Schley, available in this [D&D article](https://dnd.wizards.com/articles/features/schley-stack "D&D Schley Stack article"){:target="_blank"}, © Wizards of the Coast.
 - The <a class="lightbox-link illusionist" title="Dungeons of the Grand Illusionist map by Dyson Logos">Dungeons of the Grand Illusionist map</a> is from [Dyson Logos](https://www.patreon.com/dysonlogos "Dyson Logos Patreon page"){:target="_blank"}.
+- The <a class="lightbox-link library" title="The Lost Library map by Paths Peculiar">Lost Library map</a> is from [Paths Peculiar](https://www.wistedt.net/ "Paths Peculiar website"){:target="_blank"}.
 - All tokens were created using the [Token Stamp tool](https://rolladvantage.com/tokenstamp/ "Token Stamp tool"){:target="_blank"} with D&D 5th edition images, © Wizards of the Coast.
 
 

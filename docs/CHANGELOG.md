@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog][1], and this project adheres to
 [Semantic Versioning][2].
 
+## [1.3.1] - 2021-09-26
+
+### Added
+
+- Added new demo scene - The Yawning Portal
+- Added new demo scene - The Lost Library
+- Added button to lock map pan and zoom
+- Added dungeoneering logo to center bottom of the screen
+
+### Fixed
+
+- Fixed grid toggle not working during scene setup
+- Fixed map logo being saved to scene JSON with it's full path
+
+### Changed
+
+- Updated application icons
+- Updated demo scene tokens
+
 ## [1.3.0] - 2021-09-09
 
 ### Added
@@ -124,7 +143,8 @@ same resolution where they were created
 - Visual initiative order widget to help in combats
 - An [exclusive video map][3] from [Animated Dungeon Maps][4]
 
-[unreleased]: https://github.com/luiscastilho/dungeoneering/compare/v1.3.0...HEAD
+[unreleased]: https://github.com/luiscastilho/dungeoneering/compare/v1.3.1...HEAD
+[1.3.1]: https://github.com/luiscastilho/dungeoneering/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/luiscastilho/dungeoneering/compare/v1.2.1...v1.3.0
 [1.2.1]: https://github.com/luiscastilho/dungeoneering/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/luiscastilho/dungeoneering/compare/v1.1.3...v1.2.0
@@ -141,3 +161,5 @@ same resolution where they were created
 [3]: https://github.com/luiscastilho/dungeoneering/blob/main/dungeoneering/data/maps/Animated-SwordCoast.mp4
 [4]: https://www.patreon.com/animatedmaps
 [5]: https://www.patreon.com/dysonlogos
+[6]: https://www.reddit.com/user/3DMAcademy/
+[7]: https://www.wistedt.net/

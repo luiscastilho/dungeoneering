@@ -241,7 +241,7 @@ void setup() {
 
     previousClickTime = 0;
 
-    appVersion = "v1.3.0";
+    appVersion = "v1.3.1";
     checkedForUpdates = false;
 
     logger.info("Setup: dungeoneering initialization done");
