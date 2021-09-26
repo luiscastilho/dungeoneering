@@ -2371,7 +2371,7 @@ public class UserInterface {
           String logoFilePath = map.getLogoFilePath();
           String logoLink = map.getLogoLink();
           if ( !isEmpty(logoFilePath) && !isEmpty(logoLink) ) {
-            mapJson.setString("logoFilePath", logoFilePath);
+            mapJson.setString("logoFilePath", getImageSavePath(logoFilePath));
             mapJson.setString("logoLink", logoLink);
           }
         }
