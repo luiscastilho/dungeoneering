@@ -2,7 +2,7 @@
 
 dungeoneering is a free and slimmed down virtual tabletop (VTT) that can be used as a combat grid and as a dungeon exploration tool, made for local, in-person tabletop RPG sessions. It can load static and animated maps, has a dynamic lighting system, can be easily used with D&D 5e games, and more.
 
-<a class="lightbox" href="images/screenshot.png" title="dungeoneering virtual tabletop screenshot"><img src="images/screenshot.png" alt="dungeoneering virtual tabletop screenshot"/></a>
+<a class="lightbox" href="assets/img/screenshot/screenshot.png" title="dungeoneering virtual tabletop screenshot"><img src="assets/img/screenshot/screenshot.png" alt="dungeoneering virtual tabletop screenshot"/></a>
 
 The main goal here is to make an application with all the basic features needed to run a tabletop RPG session. It should be easy to install, set up, and run and should have a minimalistic, intuitive, and hopefully pretty user interface.
 
@@ -122,12 +122,12 @@ There are a few demo scenes bundled with the application. The assets used in the
 
 Thanks to my awesome RPG group that supported me in developing this application and were patient enough to playtest it in our sessions. :heart:
 
-![Claw token](images/playtesters/claw.png "Claw, Tabaxi Sorcerer (Wild Magic)")
-![Gruk token](images/playtesters/gruk.png "Gruk, Dwarf Fighter (Eldritch Knight)")
-![Labard token](images/playtesters/labard.png "Labard, Halfling Rogue (Assassin)")
-![Lander token](images/playtesters/lander.png "Lander, Human Cleric (Forge Domain)")
-![Naven token](images/playtesters/naven.png "Naven, Half-Elf Paladin (Oath of the Ancients)")
-![Sora token](images/playtesters/sora.png "Sora, Human Monk (Way of the Long Death)")
+![Claw token](assets/img/playtesters/claw.png "Claw, Tabaxi Sorcerer (Wild Magic)")
+![Gruk token](assets/img/playtesters/gruk.png "Gruk, Dwarf Fighter (Eldritch Knight)")
+![Labard token](assets/img/playtesters/labard.png "Labard, Halfling Rogue (Assassin)")
+![Lander token](assets/img/playtesters/lander.png "Lander, Human Cleric (Forge Domain)")
+![Naven token](assets/img/playtesters/naven.png "Naven, Half-Elf Paladin (Oath of the Ancients)")
+![Sora token](assets/img/playtesters/sora.png "Sora, Human Monk (Way of the Long Death)")
 
 And thanks to [Animated Dungeon Maps](https://www.patreon.com/animatedmaps "Animated Dungeon Maps Patreon page"){:target="_blank"} for letting me use some of his maps on the demo scenes and even lending me an [exclusive map](https://github.com/luiscastilho/dungeoneering/blob/main/dungeoneering/data/maps/Animated-SwordCoast.mp4){:target="_blank"}. Much appreciated! :+1:
 
