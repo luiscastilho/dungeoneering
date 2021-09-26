@@ -2,7 +2,7 @@
 <browserconfig>
     <msapplication>
         <tile>
-            <square150x150logo src="https://dungeoneering.app/images/favicons/mstile-150x150.png?v=20210917"/>
+            <square150x150logo src="https://dungeoneering.app/assets/img/favicons/mstile-150x150.png?v=20210917"/>
             <TileColor>#ffffff</TileColor>
         </tile>
     </msapplication>
