@@ -185,7 +185,7 @@ public class UserInterface {
     controllersBottomRightY = canvas.height - controllersTopRightY - squareButtonHeight;
     controllersBottomRightInitialX = controllersBottomRightX;
     controllersBottomRightInitialY = controllersBottomRightY;
-    controllersLogoX = canvas.width;
+    controllersLogoX = round(canvas.width * 0.5);
     controllersLogoY = canvas.height;
     controllersMenuX = controllersSpacing;
     controllersMenuY = controllersSpacing;
@@ -965,7 +965,7 @@ public class UserInterface {
     PImage logoImage = loadImage("logos/dungeoneering.png");
 
     Button button = cp5.addButton("dungeoneering logo")
-      .setPosition(buttonPositionX - logoImage.width, buttonPositionY - logoImage.height)
+      .setPosition(buttonPositionX - round(logoImage.width * 0.5), buttonPositionY - logoImage.height - round(logoImage.height * 0.25))
       .setSize(logoImage.width, logoImage.height)
       .setImage(logoImage)
       .updateSize()
