@@ -2,10 +2,7 @@
 
 dungeoneering is a free and slimmed down virtual tabletop (VTT) that can be used as a combat grid and as a dungeon exploration tool, made for local, in-person tabletop RPG sessions. It can load static and animated maps, has a dynamic lighting system, can be easily used with D&D 5e games, and more.
 
-<a class="lightbox" href="assets/img/screenshot/screenshot.webp" title="dungeoneering virtual tabletop screenshot"><picture>
-    <img class="lazyload" data-src="/assets/img/screenshot/screenshot.jpg" alt="dungeoneering virtual tabletop screenshot"/>
-  </picture>
-</a>
+<a class="lightbox" href="assets/img/screenshot/screenshot.webp" title="dungeoneering virtual tabletop screenshot"><img class="lazyload" data-src="/assets/img/screenshot/screenshot.jpg" alt="dungeoneering virtual tabletop screenshot" /></a>
 
 The main goal here is to make an application with all the basic features needed to run a tabletop RPG session. It should be easy to install, set up, and run and should have a minimalistic, intuitive, and hopefully pretty user interface.
 
