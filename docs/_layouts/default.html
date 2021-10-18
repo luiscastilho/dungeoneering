@@ -19,7 +19,9 @@
     <div class="wrapper">
       <header>
         {% if site.logo %}
-          <a class="logo-link" href="/"><img class="logo-image" src="{{site.logo | relative_url}}" alt="Logo" /></a>
+          <a class="logo-link" href="/">
+            <img class="logo-image lazyload" data-src="{{site.logo | relative_url}}" alt="dungeoneering logo" />
+          </a>
         {% endif %}
 
         <p class="description">{{ site.title | default: site.github.project_tagline }}</p>
