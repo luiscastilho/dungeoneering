@@ -9,7 +9,7 @@ set -euo pipefail
 IFS=$'\n\t'
 
 # Convert no-transparency images to JPG
-for image_path in $(find ./icons ./screenshot -iname *.jpeg -o -iname *.png -not -path "./favicons/*"); do
+for image_path in $(find ./icons ./screenshot -iname *.jpeg -o -iname *.png); do
 
     echo -n "Converting ${image_path} to JPG..."
     image_path_no_ext="${image_path%.*}"
@@ -25,7 +25,7 @@ for image_path in $(find ./icons ./screenshot -iname *.jpeg -o -iname *.png -not
 done
 
 # Convert all images to WEBP
-for image_path in $(find . -iname *.jpeg -o -iname *.png -not -path "./favicons/*" -not -path "./screenshot/*"); do
+for image_path in $(find . -iname *.jpg -o -iname *.png -not -path "./favicons/*"); do
 
     echo -n "Converting ${image_path} to WEBP..."
     image_path_no_ext="${image_path%.*}"
