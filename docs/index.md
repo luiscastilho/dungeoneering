@@ -3,9 +3,6 @@
 dungeoneering is a free and slimmed down virtual tabletop (VTT) that can be used as a combat grid and as a dungeon exploration tool, made for local, in-person tabletop RPG sessions. It can load static and animated maps, has a dynamic lighting system, can be easily used with D&D 5e games, and more.
 
 <a class="lightbox" href="assets/img/screenshot/screenshot.webp" title="dungeoneering virtual tabletop screenshot"><picture>
-    <source type="image/webp" data-srcset="/assets/img/screenshot/screenshot.webp" />
-    <source type="image/jpeg" data-srcset="/assets/img/screenshot/screenshot.jpg" />
-    <source type="image/png" data-srcset="/assets/img/screenshot/screenshot.png" />
     <img class="lazyload" data-src="/assets/img/screenshot/screenshot.jpg" alt="dungeoneering virtual tabletop screenshot"/>
   </picture>
 </a>
@@ -56,86 +53,66 @@ Here's a video showing how to create a scene from scratch in dungeoneering:
 
 If you prefer a text description instead of a video, read on.
 
-To see how a scene looks like once it's composed you can load one of the demo scenes that come with the application. Click on the load scene button (
-  <picture>
-    <source type="image/webp" data-srcset="/assets/img/icons/load_idle.webp" />
-    <source type="image/jpeg" data-srcset="/assets/img/icons/load_idle.jpg" />
-    <source type="image/png" data-srcset="/assets/img/icons/load_idle.png" />
-    <img class="lazyload" data-src="/assets/img/icons/load_idle.jpg" width="20" height="20" alt="load scene icon" title="load scene icon">
-  </picture>
-) and choose a scene (`*.json` files) from the `data/scenes` folder.
+To see how a scene looks like once it's composed you can load one of the demo scenes that come with the application. Click on the load scene button (<picture>
+  <source type="image/webp" data-srcset="/assets/img/icons/load_idle.webp" />
+  <source type="image/jpeg" data-srcset="/assets/img/icons/load_idle.jpg" />
+  <source type="image/png" data-srcset="/assets/img/icons/load_idle.png" />
+  <img class="lazyload" data-src="/assets/img/icons/load_idle.jpg" width="20" height="20" alt="load scene icon" title="load scene icon">
+</picture>) and choose a scene (`*.json` files) from the `data/scenes` folder.
 
 To create a new scene follow the steps below. It might be better to do this when preparing an RPG session and not during it since your players might get bored while they wait.
 
-1. Click on the map setup button (
-  <picture>
+1. Click on the map setup button (<picture>
     <source type="image/webp" data-srcset="/assets/img/icons/map_idle.webp" />
     <source type="image/jpeg" data-srcset="/assets/img/icons/map_idle.jpg" />
     <source type="image/png" data-srcset="/assets/img/icons/map_idle.png" />
     <img class="lazyload" data-src="/assets/img/icons/map_idle.jpg" width="20" height="20" alt="map setup icon" title="map setup icon">
-  </picture>
-) and choose an image or video to use as a map.
-2. Click on the grid setup button (
-  <picture>
+  </picture>) and choose an image or video to use as a map.
+2. Click on the grid setup button (<picture>
     <source type="image/webp" data-srcset="/assets/img/icons/grid_idle.webp" />
     <source type="image/jpeg" data-srcset="/assets/img/icons/grid_idle.jpg" />
     <source type="image/png" data-srcset="/assets/img/icons/grid_idle.png" />
     <img class="lazyload" data-src="/assets/img/icons/grid_idle.jpg" width="20" height="20" alt="grid setup icon" title="grid setup icon">
-  </picture>
-) and follow the on-screen instructions to set up a grid over the map you chose.
-3. Add player (
-  <picture>
+  </picture>) and follow the on-screen instructions to set up a grid over the map you chose.
+3. Add player (<picture>
     <source type="image/webp" data-srcset="/assets/img/icons/hero_idle.webp" />
     <source type="image/jpeg" data-srcset="/assets/img/icons/hero_idle.jpg" />
     <source type="image/png" data-srcset="/assets/img/icons/hero_idle.png" />
     <img class="lazyload" data-src="/assets/img/icons/hero_idle.jpg" width="20" height="20" alt="add player token icon" title="add player token icon">
-  </picture>
-) and DM tokens (
-  <picture>
+  </picture>) and DM tokens (<picture>
     <source type="image/webp" data-srcset="/assets/img/icons/monster_idle.webp" />
     <source type="image/jpeg" data-srcset="/assets/img/icons/monster_idle.jpg" />
     <source type="image/png" data-srcset="/assets/img/icons/monster_idle.png" />
     <img class="lazyload" data-src="/assets/img/icons/monster_idle.jpg" width="20" height="20" alt="add DM token icon" title="add DM token icon">
-  </picture>
-) using the corresponding buttons.
-4. Setup walls (
-  <picture>
+  </picture>) using the corresponding buttons.
+4. Setup walls (<picture>
     <source type="image/webp" data-srcset="/assets/img/icons/wall_idle.webp" />
     <source type="image/jpeg" data-srcset="/assets/img/icons/wall_idle.jpg" />
     <source type="image/png" data-srcset="/assets/img/icons/wall_idle.png" />
     <img class="lazyload" data-src="/assets/img/icons/wall_idle.jpg" width="20" height="20" alt="walls setup icon" title="walls setup icon">
-  </picture>
-) and doors (
-  <picture>
+  </picture>) and doors (<picture>
     <source type="image/webp" data-srcset="/assets/img/icons/door_idle.webp" />
     <source type="image/jpeg" data-srcset="/assets/img/icons/door_idle.jpg" />
     <source type="image/png" data-srcset="/assets/img/icons/door_idle.png" />
     <img class="lazyload" data-src="/assets/img/icons/door_idle.jpg" width="20" height="20" alt="doors setup icon" title="doors setup icon">
-  </picture>
-) using the corresponding buttons and following the on-screen instructions. Walls and doors are used to hide parts of the map and to block token light sources. With these elements in place, you will have a dynamic lighting system, where players will only see parts of the map depending on where their characters are and what they can see.
-5. If it's a combat scene, first add tokens to the initiative order widget by right-clicking on them, then choosing Settings, and then clicking on the initiative button (
-  <picture>
+  </picture>) using the corresponding buttons and following the on-screen instructions. Walls and doors are used to hide parts of the map and to block token light sources. With these elements in place, you will have a dynamic lighting system, where players will only see parts of the map depending on where their characters are and what they can see.
+5. If it's a combat scene, first add tokens to the initiative order widget by right-clicking on them, then choosing Settings, and then clicking on the initiative button (<picture>
     <source type="image/webp" data-srcset="/assets/img/icons/toggle_initiative_idle.webp" />
     <source type="image/jpeg" data-srcset="/assets/img/icons/toggle_initiative_idle.jpg" />
     <source type="image/png" data-srcset="/assets/img/icons/toggle_initiative_idle.png" />
     <img class="lazyload" data-src="/assets/img/icons/toggle_initiative_idle.jpg" width="20" height="20" alt="initiative icon" title="initiative icon">
-  </picture>
-). After that, enable the initiative order widget by clicking on the combat button (
-  <picture>
+  </picture>). After that, enable the initiative order widget by clicking on the combat button (<picture>
     <source type="image/webp" data-srcset="/assets/img/icons/combat_idle.webp" />
     <source type="image/jpeg" data-srcset="/assets/img/icons/combat_idle.jpg" />
     <source type="image/png" data-srcset="/assets/img/icons/combat_idle.png" />
     <img class="lazyload" data-src="/assets/img/icons/combat_idle.jpg" width="20" height="20" alt="combat icon" title="combat icon">
-  </picture>
-). In this widget, you can drag players and enemies to the position they should occupy based on the initiative they rolled.
-6. Save your scene using the save button (
-  <picture>
+  </picture>). In this widget, you can drag players and enemies to the position they should occupy based on the initiative they rolled.
+6. Save your scene using the save button (<picture>
     <source type="image/webp" data-srcset="/assets/img/icons/save_idle.webp" />
     <source type="image/jpeg" data-srcset="/assets/img/icons/save_idle.jpg" />
     <source type="image/png" data-srcset="/assets/img/icons/save_idle.png" />
     <img class="lazyload" data-src="/assets/img/icons/save_idle.jpg" width="20" height="20" alt="save scene icon" title="save scene icon">
-  </picture>
-) so you can load it when needed during your RPG sessions.
+  </picture>) so you can load it when needed during your RPG sessions.
 
 And that's it! Now that you have set up your scene, players and DM will have a virtual tabletop where they can drag their tokens around the map; right click on them to add conditions, light sources, and sight types (e.g., darkvision); pan and zoom the map as needed; players can reveal hidden parts of the map with the dynamic lighting system; and hopefully with all that you and your group will have more fun in your RPG sessions. :)
 
@@ -238,8 +215,7 @@ Thanks to my awesome RPG group that supported me in developing this application 
 
 And thanks to [Animated Dungeon Maps](https://www.patreon.com/animatedmaps "Animated Dungeon Maps Patreon page"){:target="_blank"} for letting me use some of his maps on the demo scenes and even lending me an [exclusive map](https://github.com/luiscastilho/dungeoneering/blob/main/dungeoneering/data/maps/Animated-SwordCoast.mp4){:target="_blank"}. Much appreciated! :+1:
 
-<a href="https://www.patreon.com/animatedmaps" title="Animated Dungeon Maps Patreon page" target="_blank">
-  <picture>
+<a href="https://www.patreon.com/animatedmaps" title="Animated Dungeon Maps Patreon page" target="_blank"><picture>
     <source type="image/webp" data-srcset="/assets/img/logos/animated-dungeon-maps.webp" />
     <source type="image/png" data-srcset="/assets/img/logos/animated-dungeon-maps.png" />
     <img class="lazyload" data-src="/assets/img/logos/animated-dungeon-maps.png" alt="Animated Dungeon Maps logo">
