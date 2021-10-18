@@ -2,11 +2,11 @@
 
 dungeoneering is a free and slimmed down virtual tabletop (VTT) that can be used as a combat grid and as a dungeon exploration tool, made for local, in-person tabletop RPG sessions. It can load static and animated maps, has a dynamic lighting system, can be easily used with D&D 5e games, and more.
 
-<a class="lightbox" href="assets/img/screenshot/screenshot-1600x900.webp" title="dungeoneering virtual tabletop screenshot"><picture>
-    <source type="image/webp" data-srcset="/assets/img/screenshot/screenshot-1600x900.webp" />
-    <source type="image/jpeg" data-srcset="/assets/img/screenshot/screenshot-1600x900.jpg" />
-    <source type="image/png" data-srcset="/assets/img/screenshot/screenshot-1600x900.png" />
-    <img class="lazyload" data-src="/assets/img/screenshot/screenshot-1600x900.jpg" alt="dungeoneering virtual tabletop screenshot"/>
+<a class="lightbox" href="assets/img/screenshot/screenshot.webp" title="dungeoneering virtual tabletop screenshot"><picture>
+    <source type="image/webp" data-srcset="/assets/img/screenshot/screenshot.webp" />
+    <source type="image/jpeg" data-srcset="/assets/img/screenshot/screenshot.jpg" />
+    <source type="image/png" data-srcset="/assets/img/screenshot/screenshot.png" />
+    <img class="lazyload" data-src="/assets/img/screenshot/screenshot.jpg" alt="dungeoneering virtual tabletop screenshot"/>
   </picture>
 </a>
 
