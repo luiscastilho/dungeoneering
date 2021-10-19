@@ -25,7 +25,7 @@ for image_path in $(find ./icons ./screenshot -iname *.jpeg -o -iname *.png); do
 done
 
 # Convert all images to WEBP
-for image_path in $(find . -iname *.jpg -o -iname *.png -not -path "./favicons/*"); do
+for image_path in $(find . -iname *.jpg -o -iname *.png -not -path "./favicons/*" -not -path "./emojis/*"); do
 
     echo -n "Converting ${image_path} to WEBP..."
     image_path_no_ext="${image_path%.*}"
