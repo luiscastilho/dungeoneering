@@ -129,9 +129,9 @@ There are a few demo scenes bundled with the application. The assets used in the
 Thanks to my awesome RPG group that supported me in developing this application and were patient enough to playtest it in our sessions. :heart:
 
 <picture>
-	<source type="image/webp" data-srcset="/assets/img/playtesters/claw.webp">
-	<source type="image/png" data-srcset="/assets/img/playtesters/claw.png">
-	<img class="lazyload" data-src="/assets/img/playtesters/claw.png" alt="Claw token" title="Claw, Tabaxi Sorcerer (Wild Magic)" />
+	<source type="image/webp" srcset="" data-srcset="/assets/img/playtesters/claw.webp">
+	<source type="image/png" srcset="" data-srcset="/assets/img/playtesters/claw.png">
+	<img class="lazyload" src="" data-src="/assets/img/playtesters/claw.png" alt="Claw token" title="Claw, Tabaxi Sorcerer (Wild Magic)" />
 </picture>
 <picture>
 	<source type="image/webp" data-srcset="/assets/img/playtesters/gruk.webp">
