@@ -26,11 +26,11 @@ The application should work with the instructions above. If it doesn't, create a
 
 ### macOS
 
-The macOS ZIP is unsigned, meaning macOS will complain about it. Once you unzip the macOS ZIP, right-click on each of the executables and choose Open. If asked, grant access to the Documents folder since that's where dungeoneering saves its log files on macOS.
+The macOS ZIP is unsigned, meaning macOS will complain about it. Once you unzip it, right-click on each of the executables and choose Open. If asked, grant access to the Documents folder since that's where dungeoneering saves its log files on macOS.
 
 ### Linux
 
-To run dungeoneering on Linux, you will need to install Gstreamer v0.10. It's an older version of Gstreamer so it might be difficult to find the right packages to install. If you are using Ubuntu 18.04 or 20.04, [this script](releases/ubuntu_install_prereqs.sh) should install everything you need. If you are using another Linux distribution, create an issue please and I will try to help you.
+To run dungeoneering on Linux, you will need to install Gstreamer v0.10. It's an older version of Gstreamer so it might be difficult to find the right packages to install. If you are using Ubuntu 18.04 or 20.04, [this script](releases/ubuntu_install_prereqs.sh) should install everything you need. If you are using another Linux distribution, create an issue please and I will try to help.
 
 
 
