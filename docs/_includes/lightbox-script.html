@@ -1,38 +1,28 @@
 <script>
-  $('.lightbox').simpleLightbox();
-  $('.lightbox-link.cabin').on('click', function() {
-    var caption = $(this).attr("title");
-    SimpleLightbox.open({
-      items: ['https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/maps/Static-AbandonedCabin.jpg'],
-      captions: [caption]
-    });
-  });
-  $('.lightbox-link.beholder').on('click', function() {
-    var caption = $(this).attr("title");
-    SimpleLightbox.open({
-      items: ['https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/maps/Static-BeholderLair.jpg'],
-      captions: [caption]
-    });
-  });
-  $('.lightbox-link.cliff').on('click', function() {
-    var caption = $(this).attr("title");
-    SimpleLightbox.open({
-      items: ['https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/maps/Static-CliffEdge.jpg'],
-      captions: [caption]
-    });
-  });
-  $('.lightbox-link.illusionist').on('click', function() {
-    var caption = $(this).attr("title");
-    SimpleLightbox.open({
-      items: ['https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/maps/Static-DungeonsOfTheGrandIllusionist.png'],
-      captions: [caption]
-    });
-  });
-  $('.lightbox-link.library').on('click', function() {
-    var caption = $(this).attr("title");
-    SimpleLightbox.open({
-      items: ['https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/maps/Static-TheLostLibrary.png'],
-      captions: [caption]
-    });
-  });
+  document.onload = function() {
+
+    new SimpleLightbox( { elements: '.lightbox' } );
+
+    const lightbox_data = {
+      '.lightbox-link.cabin':       'https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/maps/Static-AbandonedCabin.jpg',
+      '.lightbox-link.cliff':       'https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/maps/Static-CliffEdge.jpg',
+      '.lightbox-link.illusionist': 'https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/maps/Static-DungeonsOfTheGrandIllusionist.png',
+      '.lightbox-link.library':     'https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/maps/Static-TheLostLibrary.png'
+    };
+
+    for ( const [selector, image_url] of Object.entries(lightbox_data) ) {
+
+      document.querySelector( selector ).addEventListener( 'click', function() {
+        var caption = this.getAttribute( 'title' );
+        SimpleLightbox.open(
+          {
+            items: [image_url],
+            captions: [caption]
+          }
+        );
+      });
+
+    }
+
+  };
 </script>
