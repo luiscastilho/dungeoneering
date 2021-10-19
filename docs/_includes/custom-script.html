@@ -2,6 +2,26 @@
 <script>
   document.onload = function() {
 
+    // Add latest version number to website text
+    async function add_version_number() {
+
+      const latest_version_url = 'https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/docs/latest_version';
+
+      let response = await fetch( latest_version_url );
+      if ( response.ok ) {
+
+        let latest_version = await response.text();
+
+        document.querySelector('#latest-version-number').innerText = ' - ' + latest_version;
+        document.querySelector("#latest-version-number-inline").innerText = '(' + latest_version + ')';
+        document.querySelector(".downloads-title").classList.add('with-version');
+
+      }
+
+    }
+    add_version_number();
+
+    // Enable lightbox on large website images and on links that reference maps
     new SimpleLightbox( { elements: '.lightbox' } );
 
     const lightbox_data = {
