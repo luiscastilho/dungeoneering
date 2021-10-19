@@ -5,5 +5,4 @@ title: Virtual tabletop (VTT) for local, in-person RPG sessions
 description: dungeoneering is a free virtual tabletop that can load static and animated maps, has a dynamic lighting system, and can be easily used with D&D 5e games.
 markdown: kramdown
 plugins:
-  - jemoji
   - jekyll-sitemap

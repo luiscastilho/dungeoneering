@@ -126,11 +126,11 @@ There are a few demo scenes bundled with the application. The assets used in the
 
 ## Thanks
 
-Thanks to my awesome RPG group that supported me in developing this application and were patient enough to playtest it in our sessions. :heart:
+Thanks to my awesome RPG group that supported me in developing this application and were patient enough to playtest it in our sessions. <img class="emoji" title=":heart:" alt=":heart:" src="https://github.githubassets.com/images/icons/emoji/unicode/2764.png" width="20" height="20" />
 
 <picture>
-	<source type="image/webp" srcset="" data-srcset="/assets/img/playtesters/claw.webp">
-	<source type="image/png" srcset="" data-srcset="/assets/img/playtesters/claw.png">
+	<source type="image/webp" srcset="-" data-srcset="/assets/img/playtesters/claw.webp">
+	<source type="image/png" srcset="-" data-srcset="/assets/img/playtesters/claw.png">
 	<img class="lazyload" src="" data-src="/assets/img/playtesters/claw.png" alt="Claw token" title="Claw, Tabaxi Sorcerer (Wild Magic)" />
 </picture>
 <picture>
@@ -159,7 +159,7 @@ Thanks to my awesome RPG group that supported me in developing this application 
 	<img class="lazyload" data-src="/assets/img/playtesters/sora.png" alt="Sora token" title="Sora, Human Monk (Way of the Long Death)" />
 </picture>
 
-And thanks to [Animated Dungeon Maps](https://www.patreon.com/animatedmaps "Animated Dungeon Maps Patreon page"){:target="_blank"} for letting me use some of his maps on the demo scenes and even lending me an [exclusive map](https://github.com/luiscastilho/dungeoneering/blob/main/dungeoneering/data/maps/Animated-SwordCoast.mp4){:target="_blank"}. Much appreciated! :+1:
+And thanks to [Animated Dungeon Maps](https://www.patreon.com/animatedmaps "Animated Dungeon Maps Patreon page"){:target="_blank"} for letting me use some of his maps on the demo scenes and even lending me an [exclusive map](https://github.com/luiscastilho/dungeoneering/blob/main/dungeoneering/data/maps/Animated-SwordCoast.mp4){:target="_blank"}. Much appreciated! <img class="emoji" title=":+1:" alt=":+1:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png" width="20" height="20" />
 
 <a href="https://www.patreon.com/animatedmaps" title="Animated Dungeon Maps Patreon page" target="_blank"><picture>
     <source type="image/webp" data-srcset="/assets/img/logos/animated-dungeon-maps.webp">
