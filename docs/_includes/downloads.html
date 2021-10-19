@@ -37,10 +37,22 @@
     </a>
   </li>
 </ul>
+<!--[if gt IE 9]><!-->
 <script>
-  $.getJSON("https://api.github.com/repos/luiscastilho/dungeoneering/releases/latest", function(data) {
-    $("#latest-version-number").html(" - " + data.tag_name);
-    $("#latest-version-number-inline").html("(" + data.tag_name + ")");
-    $(".downloads-title").addClass('with-version');
-  });
+  document.onload = function() {
+
+    const latest_version_url = 'https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/docs/latest_version';
+
+    let response = await fetch( latest_version_url );
+    if ( response.ok ) {
+
+      let latest_version = await response.text();
+
+      document.querySelector('#latest-version-number').innerText = ' - ' + latest_version;
+      document.querySelector("#latest-version-number-inline").innerText = '(' + latest_version + ')';
+      document.querySelector(".downloads-title").classList.add('with-version');
+
+    }
+  }
 </script>
+<!--<![endif]-->
