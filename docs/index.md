@@ -2,7 +2,7 @@
 
 dungeoneering is a free and slimmed down virtual tabletop (VTT) that can be used as a combat grid and as a dungeon exploration tool, made for local, in-person tabletop RPG sessions. It can load static and animated maps, has a dynamic lighting system, can be easily used with D&D 5e games, and more.
 
-<a class="lightbox" href="/assets/img/screenshot/screenshot.jpg" title="dungeoneering virtual tabletop screenshot"><img class="fit-width" src="/assets/img/screenshot/screenshot-thumb.jpg" alt="dungeoneering virtual tabletop screenshot" /></a>
+<a class="lightbox" href="/assets/img/screenshot/screenshot.jpg" title="dungeoneering virtual tabletop screenshot"><img class="fit-width" src="/assets/img/screenshot/screenshot-thumb.jpg" alt="dungeoneering virtual tabletop screenshot" width="850" height="478" /></a>
 
 The main goal here is to make an application with all the basic features needed to run a tabletop RPG session. It should be easy to install, set up, and run and should have a minimalistic, intuitive, and hopefully pretty user interface.
 
@@ -131,32 +131,32 @@ Thanks to my awesome RPG group that supported me in developing this application 
 <picture>
 	<source type="image/webp" data-srcset="/assets/img/playtesters/claw.webp">
 	<source type="image/png" data-srcset="/assets/img/playtesters/claw.png">
-	<img class="token-image lazyload" data-src="/assets/img/playtesters/claw.png" alt="Claw token" title="Claw, Tabaxi Sorcerer (Wild Magic)" />
+	<img class="token-image lazyload" data-src="/assets/img/playtesters/claw.png" alt="Claw token" title="Claw, Tabaxi Sorcerer (Wild Magic)" width="135" height="135" />
 </picture>
 <picture>
 	<source type="image/webp" data-srcset="/assets/img/playtesters/gruk.webp">
 	<source type="image/png" data-srcset="/assets/img/playtesters/gruk.png">
-	<img class="token-image lazyload" data-src="/assets/img/playtesters/gruk.png" alt="Gruk token" title="Gruk, Dwarf Fighter (Eldritch Knight)" />
+	<img class="token-image lazyload" data-src="/assets/img/playtesters/gruk.png" alt="Gruk token" title="Gruk, Dwarf Fighter (Eldritch Knight)" width="135" height="135" />
 </picture>
 <picture>
 	<source type="image/webp" data-srcset="/assets/img/playtesters/labard.webp">
 	<source type="image/png" data-srcset="/assets/img/playtesters/labard.png">
-	<img class="token-image lazyload" data-src="/assets/img/playtesters/labard.png" alt="Labard token" title="Labard, Halfling Rogue (Assassin)" />
+	<img class="token-image lazyload" data-src="/assets/img/playtesters/labard.png" alt="Labard token" title="Labard, Halfling Rogue (Assassin)" width="135" height="135" />
 </picture>
 <picture>
 	<source type="image/webp" data-srcset="/assets/img/playtesters/lander.webp">
 	<source type="image/png" data-srcset="/assets/img/playtesters/lander.png">
-	<img class="token-image lazyload" data-src="/assets/img/playtesters/lander.png" alt="Lander token" title="Lander, Human Cleric (Forge Domain)" />
+	<img class="token-image lazyload" data-src="/assets/img/playtesters/lander.png" alt="Lander token" title="Lander, Human Cleric (Forge Domain)" width="135" height="135" />
 </picture>
 <picture>
 	<source type="image/webp" data-srcset="/assets/img/playtesters/naven.webp">
 	<source type="image/png" data-srcset="/assets/img/playtesters/naven.png">
-	<img class="token-image lazyload" data-src="/assets/img/playtesters/naven.png" alt="Naven token" title="Naven, Half-Elf Paladin (Oath of the Ancients)" />
+	<img class="token-image lazyload" data-src="/assets/img/playtesters/naven.png" alt="Naven token" title="Naven, Half-Elf Paladin (Oath of the Ancients)" width="135" height="135" />
 </picture>
 <picture>
 	<source type="image/webp" data-srcset="/assets/img/playtesters/sora.webp">
 	<source type="image/png" data-srcset="/assets/img/playtesters/sora.png">
-	<img class="token-image lazyload" data-src="/assets/img/playtesters/sora.png" alt="Sora token" title="Sora, Human Monk (Way of the Long Death)" />
+	<img class="token-image lazyload" data-src="/assets/img/playtesters/sora.png" alt="Sora token" title="Sora, Human Monk (Way of the Long Death)" width="135" height="135" />
 </picture>
 
 And thanks to [Animated Dungeon Maps](https://www.patreon.com/animatedmaps "Animated Dungeon Maps Patreon page"){:target="_blank"} for letting me use some of his maps on the demo scenes and even lending me an [exclusive map](https://github.com/luiscastilho/dungeoneering/blob/main/dungeoneering/data/maps/Animated-SwordCoast.mp4){:target="_blank"}. Much appreciated! <img class="emoji lazyload" data-src="/assets/img/emojis/plus-one.png" width="20" height="20" alt=":+1:" title=":+1:" />
@@ -164,6 +164,6 @@ And thanks to [Animated Dungeon Maps](https://www.patreon.com/animatedmaps "Anim
 <a href="https://www.patreon.com/animatedmaps" title="Animated Dungeon Maps Patreon page" target="_blank"><picture>
     <source type="image/webp" data-srcset="/assets/img/logos/animated-dungeon-maps.webp">
     <source type="image/png" data-srcset="/assets/img/logos/animated-dungeon-maps.png">
-    <img class="fit-width lazyload" data-src="/assets/img/logos/animated-dungeon-maps.png" alt="Animated Dungeon Maps logo" />
+    <img class="fit-width lazyload" data-src="/assets/img/logos/animated-dungeon-maps.png" alt="Animated Dungeon Maps logo" width="600" height="82" />
   </picture>
 </a>
