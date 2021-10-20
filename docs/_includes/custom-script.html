@@ -9,9 +9,9 @@
 
       let latest_version = await response.text();
 
-      document.querySelector('#latest-version-number').innerText = ' - ' + latest_version;
-      document.querySelector("#latest-version-number-inline").innerText = '(' + latest_version + ')';
-      document.querySelector(".downloads-title").classList.add('with-version');
+      document.querySelector( '#latest-version-number' ).innerText = ' - ' + latest_version;
+      document.querySelector( '#latest-version-number-inline' ).innerText = '(' + latest_version + ')';
+      document.querySelector( '.downloads-title' ).classList.add( 'with-version' );
 
     }
 
@@ -28,7 +28,7 @@
     '.lightbox-link.library':     'https://raw.githubusercontent.com/luiscastilho/dungeoneering/main/dungeoneering/data/maps/Static-TheLostLibrary.png'
   };
 
-  for ( const [selector, image_url] of Object.entries(lightbox_data) ) {
+  for ( const [selector, image_url] of Object.entries( lightbox_data ) ) {
 
     document.querySelector( selector ).addEventListener( 'click', function() {
       var caption = this.getAttribute( 'title' );
