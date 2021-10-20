@@ -43,7 +43,8 @@ Here's a video showing how to create a scene from scratch in dungeoneering:
     <iframe
       class="lazyload"
       data-src="https://www.youtube.com/embed/mLLleHoVkdk"
-      allowfullscreen=""></iframe>
+      allowfullscreen=""
+	  title="dungeoneering tutorial video"></iframe>
   </div>
 </div>
 
