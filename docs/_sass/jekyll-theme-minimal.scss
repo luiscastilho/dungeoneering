@@ -288,12 +288,10 @@ section ul li {
 
 @media print, screen and (min-width: 721px) and (max-width: 960px) {
 
-  header .description {
-    margin:0 0 110px;
-  }
-
-  header ul:last-child {
-    margin-bottom:25px;
+  header {
+    display:grid;
+    grid-template-columns:54% 43%;
+    grid-gap:4%;
   }
 
 }
@@ -311,10 +309,6 @@ section ul li {
     width:auto;
   }
 
-  header {
-    padding-right:320px;
-  }
-
   section {
     border:1px solid #e5e5e5;
     border-width:1px 0;
@@ -324,34 +318,6 @@ section ul li {
 
   header a small {
     display:inline;
-  }
-
-  header .downloads-title {
-    position:absolute;
-    right:155px;
-    top:55px;
-  }
-
-  header .downloads-title.with-version {
-    right:103px;
-  }
-
-  header .downloads {
-    position:absolute;
-    right:50px;
-    top:86px;
-  }
-
-  header .support-title {
-    position:absolute;
-    right:185px;
-    top:168px;
-  }
-
-  header .support-list {
-    position:absolute;
-    right:60px;
-    top:199px;
   }
 
 }
