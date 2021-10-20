@@ -76,7 +76,7 @@ Remember to disable any network software, such as VPN or proxy, before running d
 
 ## Contributing
 
-dungeoneering code can be loaded, edited, and run directly in [Processing](https://processing.org/){:target="_blank"} IDE (v3.x). Clone this repository and open the `dungeoneering.pde` file in Processing.
+dungeoneering code can be loaded, edited, and run directly in [Processing](https://processing.org/){:target="_blank" rel="noopener"} IDE (v3.x). Clone this repository and open the `dungeoneering.pde` file in Processing.
 
 Bugs can be reported through the project's [issues](https://github.com/luiscastilho/dungeoneering/issues) page. Also, there's a list of features to implement and known bugs to fix in the [TODO list](TODO.md).
 
@@ -86,7 +86,7 @@ Bugs can be reported through the project's [issues](https://github.com/luiscasti
 
 - Dialog windows may appear behind the full-screen application, forcing users to switch between open windows to find the dialog that was just opened.
 
-- Video and audio playback can be glitchy depending on the format/codec/framerate of the video being used. If you are having trouble with some of your video maps, try re-encoding them to 1080p30. In Windows it's quite easy: use [HandBrake](https://handbrake.fr/){:target="_blank"} and in the Preset field choose General > Fast 1080p30. Create an issue if it doesn't work even after re-encoding.
+- Video and audio playback can be glitchy depending on the format/codec/framerate of the video being used. If you are having trouble with some of your video maps, try re-encoding them to 1080p30. In Windows it's quite easy: use [HandBrake](https://handbrake.fr/){:target="_blank" rel="noopener"} and in the Preset field choose General > Fast 1080p30. Create an issue if it doesn't work even after re-encoding.
 
 - Tokens may look pixelated if zoom in is used, even if loading high-resolution token images.
 
@@ -98,15 +98,15 @@ Copyright © 2019-2021 Luis Castilho
 
 dungeoneering is licensed under the GPLv3. See [LICENSE](https://github.com/luiscastilho/dungeoneering/blob/main/LICENSE.md) for details. dungeoneering also uses components from other open-source projects. Their code and license can be found at these links:
 
-- [Processing](https://github.com/processing/processing){:target="_blank"}
-- [ControlP5](https://github.com/sojamo/controlp5){:target="_blank"} ([Forked](https://github.com/luiscastilho/controlp5){:target="_blank"} and customized)
-- [PostFX for Processing](https://github.com/cansik/processing-postfx){:target="_blank"}
-- [UiBooster](https://github.com/Milchreis/uibooster-for-processing){:target="_blank"}
-- [Apache Commons](https://commons.apache.org/){:target="_blank"}
-- [rotating-fos](https://github.com/vy/rotating-fos){:target="_blank"}
-- [Hazelcast IMDG](https://github.com/hazelcast/hazelcast){:target="_blank"}
+- [Processing](https://github.com/processing/processing){:target="_blank" rel="noopener"}
+- [ControlP5](https://github.com/sojamo/controlp5){:target="_blank" rel="noopener"} ([Forked](https://github.com/luiscastilho/controlp5){:target="_blank" rel="noopener"} and customized)
+- [PostFX for Processing](https://github.com/cansik/processing-postfx){:target="_blank" rel="noopener"}
+- [UiBooster](https://github.com/Milchreis/uibooster-for-processing){:target="_blank" rel="noopener"}
+- [Apache Commons](https://commons.apache.org/){:target="_blank" rel="noopener"}
+- [rotating-fos](https://github.com/vy/rotating-fos){:target="_blank" rel="noopener"}
+- [Hazelcast IMDG](https://github.com/hazelcast/hazelcast){:target="_blank" rel="noopener"}
 
-The icons used in the application were either released under a public-domain-like license ([CC0](https://creativecommons.org/share-your-work/public-domain/cc0/){:target="_blank"}) or are free to use with attribution ([CC BY 3.0](https://creativecommons.org/licenses/by/3.0/){:target="_blank"}, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){:target="_blank"}). Thanks to the following authors from the [Noun Project](https://thenounproject.com/){:target="_blank"}: Andrew Nielsen; Tokka Elkholy; Sweet Farm; HeadsOfBirds; Mike Rowe; Denis; Yu luck; Patrick Morrison; and Sergey Demushkin. Thanks to Delapouite, Lorc, and sbed from [Game-icons.net](https://game-icons.net/){:target="_blank"}. And thanks to Freepik and Good Ware from [Flaticon](https://www.flaticon.com/){:target="_blank"}.
+The icons used in the application were either released under a public-domain-like license ([CC0](https://creativecommons.org/share-your-work/public-domain/cc0/){:target="_blank" rel="noopener"}) or are free to use with attribution ([CC BY 3.0](https://creativecommons.org/licenses/by/3.0/){:target="_blank" rel="noopener"}, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){:target="_blank" rel="noopener"}). Thanks to the following authors from the [Noun Project](https://thenounproject.com/){:target="_blank" rel="noopener"}: Andrew Nielsen; Tokka Elkholy; Sweet Farm; HeadsOfBirds; Mike Rowe; Denis; Yu luck; Patrick Morrison; and Sergey Demushkin. Thanks to Delapouite, Lorc, and sbed from [Game-icons.net](https://game-icons.net/){:target="_blank" rel="noopener"}. And thanks to Freepik and Good Ware from [Flaticon](https://www.flaticon.com/){:target="_blank" rel="noopener"}.
 
 
 
@@ -114,13 +114,13 @@ The icons used in the application were either released under a public-domain-lik
 
 There are a few demo scenes bundled with the application. The assets used in these scenes can be found at or created using the following links.
 
-- The Sword Coast and Siege of Bamburgh animated maps are from [Animated Dungeon Maps](https://www.patreon.com/animatedmaps "Animated Dungeon Maps Patreon page"){:target="_blank"}.
-- The Yawning Portal animated map was created by [3DMAcademy](https://www.reddit.com/user/3DMAcademy/ "3DMAcademy Reddit user page"){:target="_blank"}.
-- The <a class="lightbox-link cabin" title="Abandoned Cabin map by Mike Schley">Abandoned Cabin map</a> is from Mike Schley, available in this [D&D article](https://dnd.wizards.com/articles/features/schley-stack "D&D Schley Stack article"){:target="_blank"}, © Wizards of the Coast.
-- The <a class="lightbox-link illusionist" title="Dungeons of the Grand Illusionist map by Dyson Logos">Dungeons of the Grand Illusionist map</a> is from [Dyson Logos](https://www.patreon.com/dysonlogos "Dyson Logos Patreon page"){:target="_blank"}.
-- The <a class="lightbox-link library" title="The Lost Library map by Paths Peculiar">Lost Library map</a> is from [Paths Peculiar](https://www.wistedt.net/ "Paths Peculiar website"){:target="_blank"}.
-- The <a class="lightbox-link cliff" title="Cliff Edge map by Sliph">Cliff Edge map</a> is from [Sliph](https://www.patreon.com/sliph "Sliph Patreon page"){:target="_blank"}.
-- All tokens were created using the [Token Stamp tool](https://rolladvantage.com/tokenstamp/ "Token Stamp tool"){:target="_blank"} with D&D 5th edition images, © Wizards of the Coast.
+- The Sword Coast and Siege of Bamburgh animated maps are from [Animated Dungeon Maps](https://www.patreon.com/animatedmaps "Animated Dungeon Maps Patreon page"){:target="_blank" rel="noopener"}.
+- The Yawning Portal animated map was created by [3DMAcademy](https://www.reddit.com/user/3DMAcademy/ "3DMAcademy Reddit user page"){:target="_blank" rel="noopener"}.
+- The <a class="lightbox-link cabin" title="Abandoned Cabin map by Mike Schley">Abandoned Cabin map</a> is from Mike Schley, available in this [D&D article](https://dnd.wizards.com/articles/features/schley-stack "D&D Schley Stack article"){:target="_blank" rel="noopener"}, © Wizards of the Coast.
+- The <a class="lightbox-link illusionist" title="Dungeons of the Grand Illusionist map by Dyson Logos">Dungeons of the Grand Illusionist map</a> is from [Dyson Logos](https://www.patreon.com/dysonlogos "Dyson Logos Patreon page"){:target="_blank" rel="noopener"}.
+- The <a class="lightbox-link library" title="The Lost Library map by Paths Peculiar">Lost Library map</a> is from [Paths Peculiar](https://www.wistedt.net/ "Paths Peculiar website"){:target="_blank" rel="noopener"}.
+- The <a class="lightbox-link cliff" title="Cliff Edge map by Sliph">Cliff Edge map</a> is from [Sliph](https://www.patreon.com/sliph "Sliph Patreon page"){:target="_blank" rel="noopener"}.
+- All tokens were created using the [Token Stamp tool](https://rolladvantage.com/tokenstamp/ "Token Stamp tool"){:target="_blank" rel="noopener"} with D&D 5th edition images, © Wizards of the Coast.
 
 
 
@@ -159,9 +159,9 @@ Thanks to my awesome RPG group that supported me in developing this application 
 	<img class="token-image lazyload" data-src="/assets/img/playtesters/sora.png" alt="Sora token" title="Sora, Human Monk (Way of the Long Death)" width="135" height="135" />
 </picture>
 
-And thanks to [Animated Dungeon Maps](https://www.patreon.com/animatedmaps "Animated Dungeon Maps Patreon page"){:target="_blank"} for letting me use some of his maps on the demo scenes and even lending me an [exclusive map](https://github.com/luiscastilho/dungeoneering/blob/main/dungeoneering/data/maps/Animated-SwordCoast.mp4){:target="_blank"}. Much appreciated! <img class="emoji lazyload" data-src="/assets/img/emojis/plus-one.png" width="20" height="20" alt=":+1:" title=":+1:" />
+And thanks to [Animated Dungeon Maps](https://www.patreon.com/animatedmaps "Animated Dungeon Maps Patreon page"){:target="_blank" rel="noopener"} for letting me use some of his maps on the demo scenes and even lending me an [exclusive map](https://github.com/luiscastilho/dungeoneering/blob/main/dungeoneering/data/maps/Animated-SwordCoast.mp4){:target="_blank" rel="noopener"}. Much appreciated! <img class="emoji lazyload" data-src="/assets/img/emojis/plus-one.png" width="20" height="20" alt=":+1:" title=":+1:" />
 
-<a href="https://www.patreon.com/animatedmaps" title="Animated Dungeon Maps Patreon page" target="_blank"><picture>
+<a href="https://www.patreon.com/animatedmaps" title="Animated Dungeon Maps Patreon page" target="_blank" rel="noopener"><picture>
     <source type="image/webp" data-srcset="/assets/img/logos/animated-dungeon-maps.webp">
     <source type="image/png" data-srcset="/assets/img/logos/animated-dungeon-maps.png">
     <img class="fit-width lazyload" data-src="/assets/img/logos/animated-dungeon-maps.png" alt="Animated Dungeon Maps logo" width="600" height="82" />
