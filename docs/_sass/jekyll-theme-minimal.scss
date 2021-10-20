@@ -282,6 +282,10 @@ footer {
   border:0;
 }
 
+section ul li {
+  margin:6px 0;
+}
+
 @media print, screen and (min-width: 721px) and (max-width: 960px) {
 
   header .description {
