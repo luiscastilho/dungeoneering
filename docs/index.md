@@ -18,7 +18,7 @@ The latest stable version <span id="latest-version-number-inline"></span>, avail
 
 1. On this page or on the [releases](https://github.com/luiscastilho/dungeoneering/releases) page, download the appropriate ZIP file for your operating system.
 2. Extract all files to a folder of your choice — `Documents/dungeoneering` for example.
-3. Run `dungeoneering`, `dungeoneeringDm`, or `dungeoneeringPlayers` depending on the screen configuration you plan to use. See ["Single and Dual Screen Modes"](#single-and-dual-screen-modes) below.
+3. Run `dungeoneering`, `dungeoneeringDm`, or `dungeoneeringPlayers` depending on the screen configuration you plan to use. See [Single and Dual Screen Modes](#single-and-dual-screen-modes) below.
 
 ### Windows
 
