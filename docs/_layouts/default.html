@@ -18,20 +18,24 @@
   <body>
     <div class="wrapper">
       <header>
-        {% if site.logo %}
+
+        <div class="intro">
+
           <a class="logo-link" href="/">
             <picture>
               <source type="image/webp" srcset="/assets/img/logos/dungeoneering-logo.webp">
               <img class="fit-width" src="/assets/img/logos/dungeoneering-logo.png" alt="dungeoneering logo" width="600" height="153">
             </picture>
           </a>
-        {% endif %}
 
-        <p class="description">{{ site.title | default: site.github.project_tagline }}</p>
+          <p class="description">{{ site.title | default: site.github.project_tagline }}</p>
 
-        {% include downloads.html %}
+        </div>
 
-        {% include support.html %}
+        <div class="actions">
+          {% include downloads.html %}
+          {% include support.html %}
+        </div>
 
       </header>
       <section>
