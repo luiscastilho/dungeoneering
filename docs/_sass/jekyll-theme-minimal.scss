@@ -323,6 +323,7 @@ section ul li {
 }
 
 @media print, screen and (max-width: 720px) {
+
   body {
     word-wrap:break-word;
   }
@@ -338,9 +339,19 @@ section ul li {
   pre, code {
     word-wrap:normal;
   }
+
+  section ul li {
+    margin:8px 0px;
+  }
+
+  small {
+    font-size:12px;
+  }
+
 }
 
 @media print, screen and (max-width: 480px) {
+
   body {
     padding:15px;
   }
@@ -352,9 +363,11 @@ section ul li {
 }
 
 @media print {
+
   body {
     padding:0.4in;
     font-size:12pt;
     color:#444;
   }
+
 }
