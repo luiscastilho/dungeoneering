@@ -48,5 +48,24 @@
 
 <script src="/assets/js/cookieconsent.min.js"></script>
 <script>
-  // Show cookie consent popup
+  // Show cookie consent
+  window.cookieconsent.initialise({
+    "palette": {
+      "popup": {
+        "background": "#f4f4f4",
+        "text": "#626262"
+      },
+      "button": {
+        "background": "#f64b29",
+        "text": "#ffffff"
+      }
+    },
+    "showLink": false,
+    "theme": "classic",
+    "position": "bottom-left",
+    "content": {
+      "message": "This website uses essential cookies to ensure its proper operation and tracking cookies to understand how you and others interact with it.",
+      "dismiss": "OK"
+    }
+});
 </script>
