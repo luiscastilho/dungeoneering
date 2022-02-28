@@ -48,7 +48,7 @@ Here's a video showing how to create a scene from scratch in dungeoneering:
   </div>
 </div>
 
-If you prefer a text description instead of a video, read on.
+If you prefer a text description, read on.
 
 To see how a scene looks like once it's composed you can load one of the demo scenes that come with the application. Click on the load scene button ( <picture><source type="image/webp" data-srcset="/assets/img/icons/load_idle.webp"><source type="image/jpeg" data-srcset="/assets/img/icons/load_idle.jpg"><source type="image/png" data-srcset="/assets/img/icons/load_idle.png"><img class="lazyload" data-src="/assets/img/icons/load_idle.jpg" width="20" height="20" alt="load scene icon" title="load scene icon" /></picture> ) and choose a scene (`*.json` files) from the `data/scenes` folder.
 
