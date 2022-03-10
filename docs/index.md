@@ -159,12 +159,3 @@ Thanks to my awesome RPG group that supported me in developing this application 
 	<source type="image/png" data-srcset="/assets/img/playtesters/sora.png">
 	<img class="token-image lazyload" data-src="/assets/img/playtesters/sora.png" alt="Sora token" title="Sora, Human Monk (Way of the Long Death)" width="135" height="135" />
 </picture>
-
-And thanks to [Animated Dungeon Maps](https://www.patreon.com/animatedmaps "Animated Dungeon Maps Patreon page"){:target="_blank" rel="noopener"} for letting me use some of his maps on the demo scenes and even lending me an [exclusive map](https://github.com/luiscastilho/dungeoneering/blob/main/dungeoneering/data/maps/Animated-SwordCoast.mp4){:target="_blank" rel="noopener"}. Much appreciated! <img class="emoji lazyload" data-src="/assets/img/emojis/plus-one.png" width="20" height="20" alt=":+1:" title=":+1:" />
-
-<a href="https://www.patreon.com/animatedmaps" title="Animated Dungeon Maps Patreon page" target="_blank" rel="noopener"><picture>
-    <source type="image/webp" data-srcset="/assets/img/logos/animated-dungeon-maps.webp">
-    <source type="image/png" data-srcset="/assets/img/logos/animated-dungeon-maps.png">
-    <img class="fit-width lazyload" data-src="/assets/img/logos/animated-dungeon-maps.png" alt="Animated Dungeon Maps logo" width="600" height="82" />
-  </picture>
-</a>
