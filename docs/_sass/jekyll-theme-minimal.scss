@@ -286,8 +286,8 @@ footer {
   border:0;
 }
 
-section ul li {
-  margin:6px 0;
+section ul li, section ol li {
+  margin:8px 0;
 }
 
 @media print, screen and (min-width: 721px) and (max-width: 960px) {
@@ -343,10 +343,6 @@ section ul li {
 
   pre, code {
     word-wrap:normal;
-  }
-
-  section ul li {
-    margin:8px 0px;
   }
 
   a small, small {
