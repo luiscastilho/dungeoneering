@@ -30,7 +30,7 @@ The macOS ZIP is unsigned, meaning macOS will complain about it. Once you unzip 
 
 ### Linux
 
-To run dungeoneering on Linux, you will need to install Gstreamer v0.10. It's an older version of Gstreamer so it might be difficult to find the right packages to install. If you are using Ubuntu 18.04 or 20.04, [this script](releases/ubuntu_install_prereqs.sh) should install everything you need. If you are using another Linux distribution, create an issue please and I will try to help.
+To run dungeoneering on Linux, you will need to install Gstreamer v0.10. It's an older version of Gstreamer so it might be difficult to find the right packages to install. If you are using Ubuntu 18.04 or 20.04, [this script](releases/ubuntu_install_prereqs.sh) should install everything you need. If you are using another Linux distribution, create an issue please and I will try to help. If you can't get dungeoneering to run in your system due to OpenGL/JOGL errors, setting this environment variable might help: `LIBGL_ALWAYS_SOFTWARE=1`. Note though that this setting will disable hardware graphics acceleration so dungeoneering can become quite slow.
 
 
 
