@@ -100,10 +100,11 @@ Copyright © 2019-2021 Luis Castilho
 dungeoneering is licensed under the GPLv3. See [LICENSE](https://github.com/luiscastilho/dungeoneering/blob/main/LICENSE.md) for details. dungeoneering also uses components from other open-source projects. Their code and license can be found at these links:
 
 - [Processing](https://github.com/processing/processing){:target="_blank" rel="noopener"}
-- [ControlP5](https://github.com/sojamo/controlp5){:target="_blank" rel="noopener"} ([Forked](https://github.com/luiscastilho/controlp5){:target="_blank" rel="noopener"} and customized)
-- [PostFX for Processing](https://github.com/cansik/processing-postfx){:target="_blank" rel="noopener"}
+- [Processing Video](https://github.com/processing/processing-video){:target="_blank" rel="noopener"}
+- [ControlP5](https://github.com/sojamo/controlp5){:target="_blank" rel="noopener"} - [Forked](https://github.com/luiscastilho/controlp5){:target="_blank" rel="noopener"} and customized
+- [PostFX](https://github.com/cansik/processing-postfx){:target="_blank" rel="noopener"}
 - [UiBooster](https://github.com/Milchreis/uibooster-for-processing){:target="_blank" rel="noopener"}
-- [Apache Commons](https://commons.apache.org/){:target="_blank" rel="noopener"}
+- [Apache Commons](https://commons.apache.org/){:target="_blank" rel="noopener"} - [IO](https://commons.apache.org/proper/commons-io/){:target="_blank" rel="noopener"} and [Lang](https://commons.apache.org/proper/commons-lang/){:target="_blank" rel="noopener"}
 - [rotating-fos](https://github.com/vy/rotating-fos){:target="_blank" rel="noopener"}
 - [Hazelcast IMDG](https://github.com/hazelcast/hazelcast){:target="_blank" rel="noopener"}
 
