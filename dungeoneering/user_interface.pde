@@ -1000,6 +1000,20 @@ public class UserInterface {
 
   void reset() {
 
+    resetScene();
+
+    setControllersInitialState();
+
+    layerShown = LayerShown.players;
+
+    changeAppState(AppState.idle);
+
+    logger.debug("UserInterface: UI reset");
+
+  }
+
+  void resetScene() {
+
     initiative.clear();
     obstacles.setIllumination(Illumination.brightLight);
     obstacles.clear();
@@ -1008,11 +1022,7 @@ public class UserInterface {
     grid.clear();
     map.clear();
 
-    setControllersInitialState();
-
-    layerShown = LayerShown.players;
-
-    changeAppState(AppState.idle);
+    logger.debug("UserInterface: Scene reset");
 
   }
 
