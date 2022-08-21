@@ -2674,25 +2674,32 @@ public class UserInterface {
 
       JSONObject sceneJson = loadJSONObject(sceneFile.getAbsolutePath());
 
-      sceneFromJson(sceneJson);
+      if ( sceneFromJson(sceneJson) ) {
 
-      logger.info("UserInterface: Scene loaded from: " + sceneFile.getAbsolutePath());
+        logger.info("UserInterface: Scene loaded from: " + sceneFile.getAbsolutePath());
 
-      // If loading a scene in DM's app, send it to Players' app as well
-      if ( appMode == AppMode.dm ) {
-        logger.info("UserInterface: Pushing loaded scene to Players' App");
-        pushSceneSync(true);
+        // If loading a scene in DM's app, send it to Players' app as well
+        if ( appMode == AppMode.dm ) {
+          logger.info("UserInterface: Pushing loaded scene to Players' App");
+          pushSceneSync(true);
+        }
+
+      } else {
+
+        logger.error("UserInterface: Error loading scene from JSON: " + sceneFile.getAbsolutePath());
+        reset();
+
       }
 
     } catch ( Exception e ) {
       logger.error("UserInterface: Error loading scene");
       logger.error(ExceptionUtils.getStackTrace(e));
-      throw e;
+      reset();
     }
 
   }
 
-  void sceneFromJson(JSONObject sceneJson) {
+  boolean sceneFromJson(JSONObject sceneJson) {
 
     try {
 
@@ -2700,14 +2707,7 @@ public class UserInterface {
 
       changeAppState(AppState.sceneLoad);
 
-      map.clear();
-      grid.clear();
-      playersLayer.clear();
-      dmLayer.clear();
-      obstacles.clear();
-      initiative.clear();
-
-      logger.debug("UserInterface: Scene reset");
+      resetScene();
 
       setSwitchButtonState("Toggle combat mode", false, false);
       setSwitchButtonState("Toggle grid", false, false);
@@ -2728,9 +2728,8 @@ public class UserInterface {
         } else {
           logger.error("UserInterface: Map file not found: " + mapFilePath);
           logger.error("UserInterface: Scene could not be loaded from JSON");
-          reset();
           uiDialogs.showErrorDialog("Map file not found: " + mapFilePath, "Error loading scene");
-          return;
+          return false;
         }
 
         boolean isMuted = getSwitchButtonState("Toggle mute sound");
@@ -2739,9 +2738,8 @@ public class UserInterface {
         if ( !mapLoaded ) {
           logger.error("UserInterface: Map could not be loaded");
           logger.error("UserInterface: Scene could not be loaded from JSON");
-          reset();
           uiDialogs.showErrorDialog("Map could not be loaded: " + mapFilePath, "Error loading scene");
-          return;
+          return false;
         }
 
         enableController("Grid setup");
@@ -2941,8 +2939,10 @@ public class UserInterface {
     } catch ( Exception e ) {
       logger.error("UserInterface: Error loading scene from JSON");
       logger.error(ExceptionUtils.getStackTrace(e));
-      throw e;
+      return false;
     }
+
+    return true;
 
   }
 
@@ -3325,7 +3325,8 @@ public class UserInterface {
     if ( !map.isSet() || !grid.isSet() || sceneJson.getBoolean("reloadScene", false) ) {
 
       logger.info("UserInterface: Loading initial scene from received JSON");
-      sceneFromJson(sceneJson);
+      if ( !sceneFromJson(sceneJson) )
+        logger.error("UserInterface: Error loading scene from received JSON");
       return;
 
     }
