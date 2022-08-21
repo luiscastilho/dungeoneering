@@ -1779,6 +1779,7 @@ public class UserInterface {
 
   void mapFileSelected(File mapFile) {
 
+    String type = null;
     boolean isVideo;
     boolean isMuted;
     boolean mapLoaded;
@@ -1788,23 +1789,24 @@ public class UserInterface {
     if ( mapFile == null || !fileExists(mapFile.getAbsolutePath()) )
       return;
 
-    MimetypesFileTypeMap mimetypesMap = new MimetypesFileTypeMap();
-    mimetypesMap.addMimeTypes("image/png image/x-png png");
-    mimetypesMap.addMimeTypes("image/jpeg jpg jpeg");
-    mimetypesMap.addMimeTypes("image/bmp image/x-ms-bmp bmp");
-    mimetypesMap.addMimeTypes("image/gif gif");
-    mimetypesMap.addMimeTypes("image/tga image/x-tga tga");
-    mimetypesMap.addMimeTypes("video/mp4 mp4 m4v");
-    String mimetype = mimetypesMap.getContentType(mapFile);
-    logger.trace("UserInterface: Map file mime type: " + mimetype);
-    String type = mimetype.split("/")[0];
-    if ( (!type.equals("image") && !type.equals("video")) || mimetype.equals("image/tiff") ) {
-      logger.error("UserInterface: Selected map file is not of a supported image or video type");
-      uiDialogs.showErrorDialog("Selected map file is not of a supported image or video type: " + mapFile.getName(), "Unknown map file type");
+    try {
+
+      String mimetype = Files.probeContentType(mapFile.toPath());
+      logger.trace("UserInterface: Map file mime type: " + mimetype);
+      type = mimetype.split("/")[0];
+      if ( (!type.equals("image") && !type.equals("video")) || mimetype.equals("image/tiff") ) {
+        logger.error("UserInterface: Selected map file is not of a supported image or video type");
+        uiDialogs.showErrorDialog("Selected map file is not of a supported image or video type: " + mapFile.getName(), "Unknown map file type");
+        return;
+      }
+
+    } catch ( Exception e ) {
+      logger.error("UserInterface: Error loading selected map");
+      logger.error(ExceptionUtils.getStackTrace(e));
       return;
     }
 
-    isVideo = type.equals("video");
+    isVideo = type != null && type.equals("video");
     isMuted = getSwitchButtonState("Toggle mute sound");
 
     mapLoaded = map.setup(mapFile.getAbsolutePath(), false, isVideo, isMuted);
