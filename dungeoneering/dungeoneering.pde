@@ -735,11 +735,18 @@ void movieEvent(Movie movie) {
     try {
       if ( movie.available() )
         movie.read();
+      // Fix for large video files not looping
+      if ( movieFinished(movie) )
+        movie.jump(0);
     } catch ( Exception e ) {
-      logger.error("Map: Error reading video frame");
+      logger.error("Map: Error processing video event");
     }
   }
 
+}
+
+boolean movieFinished(Movie movie) {
+  return movie.duration() - movie.time() < 0.1;
 }
 
 void outlineText(PGraphics canvas, String text, color textColor, color outlineColor, int x, int y) {
