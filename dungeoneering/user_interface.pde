@@ -154,7 +154,10 @@ public class UserInterface {
 
     platform = _platform;
 
-    uiDialogs = new UiBooster();
+    uiDialogs = new UiBooster(
+      UiBoosterOptions.Theme.DARK_THEME,
+      dataPath("/logos/dungeoneering-icon.png")
+    );
     uiConfirmDialogAnswer = false;
 
     newWall = null;
