@@ -1791,10 +1791,10 @@ public class UserInterface {
 
     try {
 
-      String mimetype = Files.probeContentType(mapFile.toPath());
-      logger.trace("UserInterface: Map file mime type: " + mimetype);
-      type = mimetype.split("/")[0];
-      if ( (!type.equals("image") && !type.equals("video")) || mimetype.equals("image/tiff") ) {
+      String mimeType = Files.probeContentType(mapFile.toPath());
+      logger.trace("UserInterface: Map file MIME type: " + mimeType);
+      type = mimeType.split("/")[0];
+      if ( (!type.equals("image") && !type.equals("video")) || mimeType.equals("image/tiff") ) {
         logger.error("UserInterface: Selected map file is not of a supported image or video type");
         uiDialogs.showErrorDialog("Selected map file is not of a supported image or video type: " + mapFile.getName(), "Unknown map file type");
         return;
@@ -2648,6 +2648,14 @@ public class UserInterface {
 
       if ( sceneFile == null || !fileExists(sceneFile.getAbsolutePath()) )
         return;
+
+      String mimeType = Files.probeContentType(sceneFile.toPath());
+      logger.trace("UserInterface: Scene file MIME type: " + mimeType);
+      if ( !mimeType.equals("application/json") ) {
+        logger.error("UserInterface: Selected scene file is not a JSON text file");
+        uiDialogs.showErrorDialog("Selected scene file is not a JSON text file: " + sceneFile.getName(), "Unknown scene file type");
+        return;
+      }
 
       logger.info("UserInterface: Loading scene from: " + sceneFile.getAbsolutePath());
 
