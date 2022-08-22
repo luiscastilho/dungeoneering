@@ -243,6 +243,15 @@ void setup() {
     appVersion = "v1.3.1";
     checkedForUpdates = false;
 
+    if ( PApplet.platform == WINDOWS )
+      System.setProperty("gstreamer.library.path", sketchPath() + "/code/windows-amd64");
+    else if ( PApplet.platform == MACOSX )
+      System.setProperty("gstreamer.library.path", sketchPath() + "/code/macos-x86_64");
+    else if ( PApplet.platform == LINUX )
+      System.setProperty("gstreamer.library.path", sketchPath() + "/code/linux-amd64");
+    System.setProperty("gstreamer.plugin.path", System.getProperty("gstreamer.library.path") + "/gstreamer-1.0");
+    logger.debug("Setup: Video library initialization done");
+
     logger.info("Setup: dungeoneering initialization done");
 
   } catch ( Exception e ) {

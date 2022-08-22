@@ -77,7 +77,7 @@ Remember to disable any network software, such as VPN or proxy, before running d
 
 ## Contributing
 
-dungeoneering code can be loaded, edited, and run directly in [Processing](https://processing.org/){:target="_blank" rel="noopener"} IDE (v3.x). Clone this repository and open the `dungeoneering.pde` file in Processing.
+dungeoneering code can be loaded, edited, and run directly in [Processing](https://processing.org/){:target="_blank" rel="noopener"} IDE (v4.x). Clone this repository, open the `dungeoneering.pde` file in Processing, and press Run (▶).
 
 Bugs can be reported through the project's [issues](https://github.com/luiscastilho/dungeoneering/issues) page. Also, there's a list of features to implement and known bugs to fix in the [TODO list](TODO.md).
 
@@ -99,7 +99,7 @@ Copyright © 2019-2021 Luis Castilho
 
 dungeoneering is licensed under the GPLv3. See [LICENSE](https://github.com/luiscastilho/dungeoneering/blob/main/LICENSE.md) for details. dungeoneering also uses components from other open-source projects. Their code and license can be found at these links:
 
-- [Processing](https://github.com/processing/processing){:target="_blank" rel="noopener"}
+- [Processing 4](https://github.com/processing/processing4){:target="_blank" rel="noopener"}
 - [Processing Video](https://github.com/processing/processing-video){:target="_blank" rel="noopener"}
 - [ControlP5](https://github.com/sojamo/controlp5){:target="_blank" rel="noopener"} - [Forked](https://github.com/luiscastilho/controlp5){:target="_blank" rel="noopener"} and customized
 - [PostFX](https://github.com/cansik/processing-postfx){:target="_blank" rel="noopener"}
