@@ -50,6 +50,7 @@ List of features to implement and known bugs to fix:
 - [X] Add a right click menu option to toggle tokens in initiative
 - [X] Allow DMs to load and manipulate the same scene PCs are seeing in a secondary screen
 - [X] Add more D&D 5e sight types to right click menu
+- [ ] Allow DM and players to ping the map
 - [ ] Add more conditions: Concentrated, Dodging, Blessed, Raging, Hex, Hunter Marked, Turned (for undeads)
 - [ ] Allow to add environment light sources, not associated with player or DM tokens
 - [ ] Create scene selection screen with thumbnails
