@@ -38,7 +38,7 @@ class Logger {
     // Initial log level set to TRACE, redefined below
     logLevel = 1;
 
-    if ( _platform == MACOSX )
+    if ( _platform == MACOS )
       logsDir = SystemUtils.getUserHome().getAbsolutePath() + "/Documents/dungeoneering/log";
     else if ( _platform == WINDOWS )
       logsDir = sketchPath().replaceAll("\\\\", "/") + "/log";

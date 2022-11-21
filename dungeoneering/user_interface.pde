@@ -2609,7 +2609,7 @@ public class UserInterface {
     String imageSavePath = null;
 
     // If running on macOS
-    if ( platform == MACOSX ) {
+    if ( platform == MACOS ) {
 
       // Check if image path is inside sketchPath() + /dungeoneering.app/Contents/Java
       if ( imageAbsolutePath != imageAbsolutePath.replaceFirst("^(?i)" + Pattern.quote(sketchPath() + "/dungeoneering.app/Contents/Java/"), "") ) {
@@ -3238,7 +3238,7 @@ public class UserInterface {
       }
 
     // If not, check if it's running on macOS
-    } else if ( platform == MACOSX ) {
+    } else if ( platform == MACOS ) {
 
       // Check if image path is inside /dungeoneering.app/Contents/Java/data/
       if ( imagePathFromJson != imagePathFromJson.replaceFirst("^(?i)" + Pattern.quote("/dungeoneering.app/Contents/Java/data/"), "") ) {
@@ -3253,7 +3253,7 @@ public class UserInterface {
         }
 
       // Check if image path is inside /dungeoneeringDm.app/Contents/Java/data/
-      } else if ( platform == MACOSX && imagePathFromJson != imagePathFromJson.replaceFirst("^(?i)" + Pattern.quote("/dungeoneeringDm.app/Contents/Java/data/"), "") ) {
+      } else if ( platform == MACOS && imagePathFromJson != imagePathFromJson.replaceFirst("^(?i)" + Pattern.quote("/dungeoneeringDm.app/Contents/Java/data/"), "") ) {
 
         // If it is, check if image indeed exists inside /dungeoneeringDm.app/Contents/Java/data/
         imagePathInDataFolder = imagePathFromJson.replaceFirst("^(?i)" + Pattern.quote("/dungeoneeringDm.app/Contents/Java/data/"), "");
@@ -3265,7 +3265,7 @@ public class UserInterface {
         }
 
       // Check if image path is inside /dungeoneeringPlayers.app/Contents/Java/data/
-      } else if ( platform == MACOSX && imagePathFromJson != imagePathFromJson.replaceFirst("^(?i)" + Pattern.quote("/dungeoneeringPlayers.app/Contents/Java/data/"), "") ) {
+      } else if ( platform == MACOS && imagePathFromJson != imagePathFromJson.replaceFirst("^(?i)" + Pattern.quote("/dungeoneeringPlayers.app/Contents/Java/data/"), "") ) {
 
         // If it is, check if image indeed exists inside /dungeoneeringPlayers.app/Contents/Java/data/
         imagePathInDataFolder = imagePathFromJson.replaceFirst("^(?i)" + Pattern.quote("/dungeoneeringPlayers.app/Contents/Java/data/"), "");

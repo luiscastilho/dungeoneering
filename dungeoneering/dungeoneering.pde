@@ -245,7 +245,7 @@ void setup() {
 
     if ( PApplet.platform == WINDOWS )
       System.setProperty("gstreamer.library.path", sketchPath() + "/code/windows-amd64");
-    else if ( PApplet.platform == MACOSX )
+    else if ( PApplet.platform == MACOS )
       System.setProperty("gstreamer.library.path", sketchPath() + "/code/macos-x86_64");
     else if ( PApplet.platform == LINUX )
       System.setProperty("gstreamer.library.path", sketchPath() + "/code/linux-amd64");
