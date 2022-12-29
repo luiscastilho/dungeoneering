@@ -30,7 +30,7 @@ The macOS ZIP is unsigned, meaning macOS will complain about it. Once you unzip 
 
 ### Linux
 
-To run dungeoneering on Linux, you will need to install Gstreamer v0.10. It's an older version of Gstreamer so it might be difficult to find the right packages to install. If you are using Ubuntu 18.04 or 20.04, [this script](releases/ubuntu_install_prereqs.sh) should install everything you need. If you are using another Linux distribution, create an issue please and I will try to help.
+To run dungeoneering on Linux, you will need to install GStreamer v0.10. It's an older version of GStreamer so it might be difficult to find the right packages to install. If you are using Ubuntu 18.04 or 20.04, [this script](releases/ubuntu_install_prereqs.sh) should install everything you need. If you are using another Linux distribution, create an issue please and I will try to help.
 
 
 
@@ -77,7 +77,7 @@ Remember to disable any network software, such as VPN or proxy, before running d
 
 ## Contributing
 
-dungeoneering code can be loaded, edited, and run directly in [Processing](https://processing.org/){:target="_blank" rel="noopener"} IDE (v4.x). Clone this repository, open the `dungeoneering.pde` file in Processing, and press Run (▶).
+dungeoneering code can be loaded, edited, and run directly in [Processing](https://processing.org/){:target="_blank" rel="noopener"} IDE. Install Processing (v4.x), go to Sketch > Import Library > Manage Libraries and install "Video Library for Processing 4". Then clone this repository, open the `dungeoneering.pde` file in Processing, and press Run (▶).
 
 Bugs can be reported through the project's [issues](https://github.com/luiscastilho/dungeoneering/issues) page. Also, there's a list of features to implement and known bugs to fix in the [TODO list](TODO.md).
 

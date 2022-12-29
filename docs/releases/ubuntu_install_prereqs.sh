@@ -11,7 +11,7 @@ IFS=$'\n\t'
 # Check if it's Ubuntu 18.04 or 20.04
 lsb_release -d | grep -qi '18.04'; is_ubuntu_18=$?
 lsb_release -d | grep -qi '20.04'; is_ubuntu_20=$?
-if [ $is_ubuntu_18 -ne 0 -a $is_ubuntu_20 -ne 0 ]; then
+if [ $is_ubuntu_18 -ne 0 ] && [ $is_ubuntu_20 -ne 0 ]; then
     echo "ERROR: This script only works for Ubuntu 18.04 or 20.04. Please create an issue for other Ubuntu versions or for other Linux distributions."
     exit 1
 fi
