@@ -224,16 +224,16 @@ class Logger {
     }
 
     @Override
-    void onTrigger(RotationPolicy policy, Instant instant) {}
+    public void onTrigger(RotationPolicy policy, Instant instant) {}
 
     @Override
-    void onOpen(RotationPolicy policy, Instant instant, OutputStream stream) {}
+    public void onOpen(RotationPolicy policy, Instant instant, OutputStream stream) {}
 
     @Override
-    void onClose(RotationPolicy policy, Instant instant, OutputStream stream) {}
+    public void onClose(RotationPolicy policy, Instant instant, OutputStream stream) {}
 
     @Override
-    void onSuccess(RotationPolicy policy, Instant instant, File file) {
+    public void onSuccess(RotationPolicy policy, Instant instant, File file) {
 
       try {
 
@@ -257,7 +257,7 @@ class Logger {
     }
 
     @Override
-    void onFailure(RotationPolicy policy, Instant instant, File file, Exception error) {}
+    public void onFailure(RotationPolicy policy, Instant instant, File file, Exception error) {}
 
   }
 
