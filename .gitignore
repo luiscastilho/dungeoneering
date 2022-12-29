@@ -7,6 +7,9 @@
 
 # Processing export application dirs
 /dungeoneering/application.*/
+/dungeoneering/windows-*/
+/dungeoneering/linux-*/
+/dungeoneering/macos-*/
 
 # Releases dir
 /releases/
