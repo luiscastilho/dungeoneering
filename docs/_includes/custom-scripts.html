@@ -68,3 +68,21 @@
     }
   });
 </script>
+
+<script>
+  // Watch for color scheme changes and change current favicon
+  const favicon_elem = document.querySelector( 'link[rel="icon"]' );
+  const media_query = window.matchMedia( '(prefers-color-scheme: dark)' );
+  function theme_changed( event ) {
+    if ( event.matches ) {
+      favicon_elem.setAttribute( 'href', '/assets/img/favicons/favicon-dark.ico' );
+    } else {
+      favicon_elem.setAttribute( 'href', '/assets/img/favicons/favicon.ico' );
+    }
+  }
+  media_query.addEventListener( 'change', theme_changed );
+  // Update favicon once page finishes loading
+  document.addEventListener( 'DOMContentLoaded', function() {
+    theme_changed( media_query );
+  });
+</script>
