@@ -70,18 +70,22 @@
 </script>
 
 <script>
-  // Watch for color scheme changes and change current favicon
+  // Watch for color scheme changes
   const favicon_elem = document.querySelector( 'link[rel="icon"]' );
+  const linux_icon_elem = document.querySelector( '.downloads .linux .download-icon img' );
   const media_query = window.matchMedia( '(prefers-color-scheme: dark)' );
   function theme_changed( event ) {
     if ( event.matches ) {
       favicon_elem.setAttribute( 'href', '/assets/img/favicons/favicon-dark.ico' );
+      linux_icon_elem.setAttribute( 'src', '/assets/img/brands/linux-dark.png' );
     } else {
       favicon_elem.setAttribute( 'href', '/assets/img/favicons/favicon.ico' );
+      linux_icon_elem.setAttribute( 'src', '/assets/img/brands/linux.svg' );
     }
   }
+  // Update elements if color scheme changes
   media_query.addEventListener( 'change', theme_changed );
-  // Update favicon once page finishes loading
+  // Update elements once page finishes loading
   document.addEventListener( 'DOMContentLoaded', function() {
     theme_changed( media_query );
   });
