@@ -1,13 +1,13 @@
 @import "fonts";
 @import "rouge-github";
 
-/* Light mode colors - default */
+/* Light mode rules - default */
 :root {
-  --body-bg-color: #fff;
-  --body-color: #626262;
-  --h-general-color: #222;
-  --h-2-color: #393939;
-  --h-3-6-color: #494949;
+  --body-bg-color:#fff;
+  --body-color:#626262;
+  --h-general-color:#222;
+  --h-2-color:#393939;
+  --h-3-6-color:#494949;
   --a-color:#f64b29;
   --small-color:#666;
   --border-color:#e5e5e5;
@@ -25,15 +25,19 @@
   --print-body-color:#444;
 }
 
-/* Dark mode colors */
+.dark-only {
+  display:none;
+}
+
+/* Dark mode rules */
 @media (prefers-color-scheme: dark) {
 
   :root {
-    --body-bg-color: #121212;
-    --body-color: #bbb;
-    --h-general-color: #ddd;
-    --h-2-color: #c6c6c6;
-    --h-3-6-color: #b6b6b6;
+    --body-bg-color:#121212;
+    --body-color:#bbb;
+    --h-general-color:#ddd;
+    --h-2-color:#c6c6c6;
+    --h-3-6-color:#b6b6b6;
     --a-color:#dd4425;
     --small-color:#999;
     --border-color:#1a1a1a;
@@ -53,6 +57,14 @@
 
   .logo-link, .download-icon {
     filter:invert(100%);
+  }
+
+  .light-only {
+    display:none;
+  }
+
+  .dark-only {
+    display:inline;
   }
 
 }
