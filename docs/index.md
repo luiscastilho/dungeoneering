@@ -30,7 +30,7 @@ The macOS ZIP is unsigned, meaning macOS will complain about it. Once you unzip 
 
 ### Linux
 
-In older versions of dungeoneering you had to install an specific version of GStreamer to be able to use animated maps. Since version 1.4.0, GStreamer comes bundled with dungeoneering for Linux. So it should work with the instructions above. If it doesn't, create an issue, please.
+To run dungeoneering on Linux, you will need to install GStreamer v0.10. It's an older version of GStreamer so it might be difficult to find the right packages to install. If you are using Ubuntu 18.04 or 20.04, [this script](releases/ubuntu_install_prereqs.sh) should install everything you need. If you are using another Linux distribution, create an issue please and I will try to help.
 
 
 
