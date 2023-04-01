@@ -1,18 +1,1 @@
-<?xml version="1.0" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
-  "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
-<svg width="24" height="24">
-<g style="fill:black;fill-opacity:1;stroke:none;stroke-width:1;stroke-opacity:1;fill-rule:nonzero;">
-<g style="fill:black;fill-opacity:1;stroke:none;stroke-width:1;stroke-opacity:1;fill-rule:nonzero;">
-<g style="fill:black;fill-opacity:1;stroke:none;stroke-width:1;stroke-opacity:1;fill-rule:nonzero;">
-<g style="">
-<g style="">
-<g style="">
-  <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/>
-</g>
-</g>
-</g>
-</g>
-</g>
-</g>
-</svg>
+<svg height="24" width="24"><path d="m0 3.449 9.75-1.349v9.451h-9.75m10.949-9.602 13.051-1.949v11.4h-13.051m-10.949 1.2h9.75v9.451l-9.75-1.352m10.949-8.099h13.051v11.4l-12.9-1.801"/></svg>

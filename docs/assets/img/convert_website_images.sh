@@ -16,7 +16,18 @@ find ./ -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.svg" -o
 
 done
 
-# Convert no-transparency images to JPG
+# Minify SVGs
+find ./ -iname "*.svg" | while read -r image_path; do
+
+    echo -n "Minifying SVG ${image_path}... "
+    image_extension="${image_path##*.}"
+    image_path_tmp="${image_path%.*}_tmp.${image_extension}"
+    svgcleaner "${image_path}" "${image_path_tmp}"
+    mv "${image_path_tmp}" "${image_path}"
+
+done
+
+# Convert non-transparent images to JPG
 find ./icons ./screenshot -iname "*.jpeg" -o -iname "*.png" | while read -r image_path; do
 
     echo -n "Converting ${image_path} to JPG..."
