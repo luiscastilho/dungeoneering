@@ -33,21 +33,21 @@ echo -n "Creating output dir ${results_dir}..."
 mkdir -p "${results_dir}"
 echo " done"
 
-for orig_file in $(find . -path "./${results_dir}" -prune -false -o -type f -name "*${images_extension}" -printf '%P\n'); do
+find . -path "./${results_dir}" -prune -false -o -type f -name "*${images_extension}" -printf '%P\n' | while read -r orig_file; do
 
     echo "Processing ${orig_file}..."
 
-    file_dirname=$(dirname ${orig_file})
+    file_dirname=$(dirname "${orig_file}")
     echo -n "  Creating output dir ${results_dir}/${file_dirname}..."
     mkdir -p "${results_dir}/${file_dirname}"
     echo " done"
 
     file_basename=$(basename "${orig_file}" "${images_extension}")
     echo -n "  Creating files ${results_dir}/${file_dirname}/${file_basename}*..."
-    convert "${orig_file}" -colorspace sRGB -background "${idle_color}" -alpha remove -alpha off "${results_dir}/${file_dirname}/${file_basename}_${idle_suffix}.png"
-    convert "${orig_file}" -colorspace sRGB -background "${mouse_over_color}" -alpha remove -alpha off "${results_dir}/${file_dirname}/${file_basename}_${mouse_over_suffix}.png"
-    convert "${orig_file}" -colorspace sRGB -background "${mouse_click_color}" -alpha remove -alpha off "${results_dir}/${file_dirname}/${file_basename}_${mouse_click_suffix}.png"
-    convert "${orig_file}" -colorspace sRGB -channel RGB +level-colors "$disabled_color" -background "${idle_color}" -alpha remove -alpha off "${results_dir}/${file_dirname}/${file_basename}_${disabled_suffix}.png"
+    convert "${orig_file}" -strip -colorspace sRGB -background "${idle_color}" -alpha remove -alpha off "${results_dir}/${file_dirname}/${file_basename}_${idle_suffix}.png"
+    convert "${orig_file}" -strip -colorspace sRGB -background "${mouse_over_color}" -alpha remove -alpha off "${results_dir}/${file_dirname}/${file_basename}_${mouse_over_suffix}.png"
+    convert "${orig_file}" -strip -colorspace sRGB -background "${mouse_click_color}" -alpha remove -alpha off "${results_dir}/${file_dirname}/${file_basename}_${mouse_click_suffix}.png"
+    convert "${orig_file}" -strip -colorspace sRGB -channel RGB +level-colors "$disabled_color" -background "${idle_color}" -alpha remove -alpha off "${results_dir}/${file_dirname}/${file_basename}_${disabled_suffix}.png"
     echo " done"
 
     echo "Done processing ${orig_file}"
