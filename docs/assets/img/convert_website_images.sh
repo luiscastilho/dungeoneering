@@ -22,7 +22,7 @@ find ./ -iname "*.svg" | while read -r image_path; do
     echo -n "Minifying SVG ${image_path}... "
     image_extension="${image_path##*.}"
     image_path_tmp="${image_path%.*}_tmp.${image_extension}"
-    svgcleaner "${image_path}" "${image_path_tmp}"
+    svgcleaner --copy-on-error "${image_path}" "${image_path_tmp}"
     mv "${image_path_tmp}" "${image_path}"
 
 done
