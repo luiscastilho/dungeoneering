@@ -110,7 +110,7 @@ class Layer {
       currentCell = grid.getCellAt(0, 0);
 
     Token token = new Token(canvas, grid, obstacles);
-    Light lineOfSightTemplate = resources.getSightType("Line of Sight");
+    Light lineOfSightTemplate = resources.getLineOfSight();
     Light lineOfSight = new Light(lineOfSightTemplate.getName(), lineOfSightTemplate.getBrightLightRadius(), lineOfSightTemplate.getDimLightRadius());
     token.setup(tokenBaseName, tokenId, tokenVersion, sceneUpdateListener, tokenImageFile.getAbsolutePath(), grid.getCellWidth(), grid.getCellHeight(), resources.getSize("Medium"), lineOfSight);
     token.setCell(currentCell);

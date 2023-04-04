@@ -442,19 +442,19 @@ class Obstacles {
     float ux = B.x-A.x, uy = B.y-A.y;  // u = A->B
     float det = vx*ux + vy*uy;
 
-    // its outside the line segment near A
+    // It's outside the line segment near A
     if ( det <= 0 ) {
       return vx*vx + vy*vy;
     }
 
     float len = ux*ux + uy*uy;  // len = u^2
 
-    // its outside the line segment near B
+    // It's outside the line segment near B
     if ( det >= len ) {
       return sq(B.x-P.x) + sq(B.y-P.y);
     }
 
-    // its near line segment between A and B
+    // It's near line segment between A and B
     return sq(ux*vy-uy*vx) / len;  // (u X v)^2 / len
 
   }

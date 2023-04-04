@@ -33,7 +33,9 @@ class Condition {
 
   Size size;
 
-  Condition(PGraphics _canvas, String _name, String _imagePath, int cellWidth, int cellHeight, boolean _disablesTarget, boolean _hidesTarget, boolean _centered, Size _size) {
+  boolean sizeIsSet;
+
+  Condition(PGraphics _canvas, String _name, String _imagePath, boolean _disablesTarget, boolean _hidesTarget, boolean _centered) {
 
     canvas = _canvas;
 
@@ -47,9 +49,15 @@ class Condition {
 
     centered = _centered;
 
+    sizeIsSet = false;
+
+  }
+
+  void setSize(Size _size, int cellWidth, int cellHeight) {
+
     size = _size;
 
-    // must be a square number: 4, 9, 16, 25
+    // Must be a square number: 4, 9, 16, 25
     switch ( size.getName() ) {
       case "Tiny":
       case "Small":
@@ -57,20 +65,20 @@ class Condition {
         maxConditionsPerToken = 4;
         break;
       case "Large":
-        // three extra cells occupied:
+        // Three extra cells occupied:
         // X 1
         // 2 3
         maxConditionsPerToken = 9;
         break;
       case "Huge":
-        // eight extra cells occupied:
+        // Eight extra cells occupied:
         // 1 2 3
         // 4 X 5
         // 6 7 8
         maxConditionsPerToken = 16;
         break;
       case "Gargantuan":
-        // fifteen extra cells occupied:
+        // Fifteen extra cells occupied:
         //  X  1  2  3
         //  4  5  6  7
         //  8  9 10 11
@@ -89,6 +97,8 @@ class Condition {
       image.resize(cellWidth/maxConditionColumns * round(size.getResizeFactor()), cellHeight/maxConditionRows * round(size.getResizeFactor()));
 
     }
+
+    sizeIsSet = true;
 
   }
 
@@ -115,20 +125,20 @@ class Condition {
           canvas.image(image, tokenCellCenterX, tokenCellCenterY);
           break;
         case "Large":
-          // three extra cells occupied:
+          // Three extra cells occupied:
           // X 1
           // 2 3
           canvas.image(image, tokenCellCenterX + tokenCellWidth/2f, tokenCellCenterY + tokenCellHeight/2f);
           break;
         case "Huge":
-          // eight extra cells occupied:
+          // Eight extra cells occupied:
           // 1 2 3
           // 4 X 5
           // 6 7 8
           canvas.image(image, tokenCellCenterX, tokenCellCenterY);
           break;
         case "Gargantuan":
-          // fifteen extra cells occupied:
+          // Fifteen extra cells occupied:
           //  X  1  2  3
           //  4  5  6  7
           //  8  9 10 11
@@ -153,14 +163,14 @@ class Condition {
           tokenLowRightCornerY = tokenCellCenterY + tokenCellHeight/2;
           break;
         case "Large":
-          // three extra cells occupied:
+          // Three extra cells occupied:
           // X 1
           // 2 3
           tokenLowRightCornerX = tokenCellCenterX + tokenCellWidth/2 + tokenCellWidth;
           tokenLowRightCornerY = tokenCellCenterY + tokenCellHeight/2 + tokenCellHeight;
           break;
         case "Huge":
-          // eight extra cells occupied:
+          // Eight extra cells occupied:
           // 1 2 3
           // 4 X 5
           // 6 7 8
@@ -168,7 +178,7 @@ class Condition {
           tokenLowRightCornerY = tokenCellCenterY + tokenCellHeight/2 + tokenCellHeight;
           break;
         case "Gargantuan":
-          // fifteen extra cells occupied:
+          // Fifteen extra cells occupied:
           //  X  1  2  3
           //  4  5  6  7
           //  8  9 10 11
@@ -205,6 +215,12 @@ class Condition {
 
   boolean isCentered() {
     return centered;
+  }
+
+  Condition copy() {
+    return new Condition(
+      canvas, name, imagePath, disablesTarget, hidesTarget, centered
+    );
   }
 
   @Override

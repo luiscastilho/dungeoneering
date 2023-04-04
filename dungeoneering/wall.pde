@@ -115,16 +115,16 @@ class Wall {
         if ( i.equals(j) )
           continue;
 
-        // calculate line defined by these two vertexes
+        // Calculate line defined by these two vertexes
         float lineA = i.y - j.y;
         float lineB = j.x - i.x;
         float lineC = (i.x - j.x) * i.y + (j.y - i.y) * i.x;
 
-        // calculate distance between this line and the light center
+        // Calculate distance between this line and the light center
         double dist = (Math.abs(lineA * lightCenter.x + lineB * lightCenter.y + lineC)) /
                         Math.sqrt(lineA * lineA + lineB * lineB);
 
-        // check if light radius is greater than or equals the calculated distance
+        // Check if light radius is greater than or equals the calculated distance
         intersects = lightRadius >= dist;
 
         if ( intersects )

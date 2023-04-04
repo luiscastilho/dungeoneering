@@ -206,7 +206,7 @@ class Token {
 
     recenterLightSources();
 
-    // set extra cells occupied based on size
+    // Set extra cells occupied based on size
     int cellRow = cell.getRow();
     int cellColumn = cell.getColumn();
 
@@ -215,13 +215,13 @@ class Token {
       case "Small":
       case "Medium":
 
-        // no extra cells occupied
+        // No extra cells occupied
         extraCells.clear();
 
         break;
       case "Large":
 
-        // three extra cells occupied:
+        // Three extra cells occupied:
         // X 1
         // 2 3
         extraCells.clear();
@@ -232,7 +232,7 @@ class Token {
         break;
       case "Huge":
 
-        // eight extra cells occupied:
+        // Eight extra cells occupied:
         // 1 2 3
         // 4 X 5
         // 6 7 8
@@ -249,7 +249,7 @@ class Token {
         break;
       case "Gargantuan":
 
-        // fifteen extra cells occupied:
+        // Fifteen extra cells occupied:
         //  X  1  2  3
         //  4  5  6  7
         //  8  9 10 11
@@ -283,7 +283,7 @@ class Token {
     int tokenCenterX = 0;
     int tokenCenterY = 0;
 
-    // calculate token center based on its size
+    // Calculate token center based on its size
     switch ( size.getName() ) {
       case "Tiny":
       case "Small":
@@ -313,7 +313,7 @@ class Token {
         break;
     }
 
-    // set line of sight, light sources and sight types center
+    // Set line of sight, light sources and sight types center
     lineOfSight.setPosition(tokenCenterX, tokenCenterY);
     for ( Light light: lightSources )
       light.setPosition(tokenCenterX, tokenCenterY);

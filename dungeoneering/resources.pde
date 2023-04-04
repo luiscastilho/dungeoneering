@@ -20,11 +20,18 @@ class Resources {
 
   Grid grid;
 
-  HashMap<String, Size> sizes;
-  HashMap<String, Light> commonLightSources;
-  HashMap<String, Light> spellLightSources;
-  HashMap<String, Light> sightTypes;
-  HashMap<String, Condition> conditions;
+  HashMap<String, Size> baseSizes;
+  ArrayList<Light> baseCommonLightSources;
+  ArrayList<Light> baseSpellLightSources;
+  ArrayList<Light> baseSightTypes;
+  ArrayList<Condition> baseConditions;
+  Light baseLineOfSight;
+
+  HashMap<String, Light> commonLightSourcesBasedOnGrid;
+  HashMap<String, Light> spellLightSourcesBasedOnGrid;
+  HashMap<String, Light> sightTypesBasedOnGrid;
+  HashMap<String, Condition> conditionsBySize;
+  Light lineOfSight;
 
   boolean set;
 
@@ -34,129 +41,143 @@ class Resources {
 
     grid = _grid;
 
-    sizes = new HashMap<String, Size>();
-    commonLightSources = new HashMap<String, Light>();
-    spellLightSources = new HashMap<String, Light>();
-    sightTypes = new HashMap<String, Light>();
-    conditions = new HashMap<String, Condition>();
+    // Base resources
+    baseSizes = new LinkedHashMap<String, Size>();
+    baseCommonLightSources = new ArrayList<Light>();
+    baseSpellLightSources = new ArrayList<Light>();
+    baseSightTypes = new ArrayList<Light>();
+    baseConditions = new ArrayList<Condition>();
+    baseLineOfSight = new Light("Line of Sight", 1000, 0);
+
+    // Resources taking into account cell size
+    commonLightSourcesBasedOnGrid = new LinkedHashMap<String, Light>();
+    spellLightSourcesBasedOnGrid = new LinkedHashMap<String, Light>();
+    sightTypesBasedOnGrid = new LinkedHashMap<String, Light>();
+    conditionsBySize = new LinkedHashMap<String, Condition>();
+    lineOfSight = null;
+
+    setBaseSizes();
+    setBaseCommonLightSources();
+    setBaseSpellLightSources();
+    setBaseSightTypes();
+    setBaseConditions();
 
     set = false;
 
   }
 
-  void setup() {
+  void reset() {
 
-    setSizes();
-    setCommonLightSources();
-    setSpellLightSources();
-    setSightTypes();
-    setConditions();
+    baseSizes = new LinkedHashMap<String, Size>();
+    baseCommonLightSources = new ArrayList<Light>();
+    baseSpellLightSources = new ArrayList<Light>();
+    baseSightTypes = new ArrayList<Light>();
+    baseConditions = new ArrayList<Condition>();
+    baseLineOfSight = new Light("Line of Sight", 1000, 0);
+
+    commonLightSourcesBasedOnGrid = new LinkedHashMap<String, Light>();
+    spellLightSourcesBasedOnGrid = new LinkedHashMap<String, Light>();
+    sightTypesBasedOnGrid = new LinkedHashMap<String, Light>();
+    conditionsBySize = new LinkedHashMap<String, Condition>();
+    lineOfSight = null;
+
+    setBaseSizes();
+    setBaseCommonLightSources();
+    setBaseSpellLightSources();
+    setBaseSightTypes();
+    setBaseConditions();
+
+    set = false;
+
+  }
+
+  void setBaseSizes() {
+
+    baseSizes.put("Tiny", new Size("Tiny", 0.5f, true));
+    baseSizes.put("Small", new Size("Small", 1f, true));
+    baseSizes.put("Medium", new Size("Medium", 1f, true));
+    baseSizes.put("Large", new Size("Large", 2f, false));
+    baseSizes.put("Huge", new Size("Huge", 3f, true));
+    baseSizes.put("Gargantuan", new Size("Gargantuan", 4f, false));
+
+  }
+
+  void setBaseCommonLightSources() {
+
+    baseCommonLightSources.add(new Light("Candle", 5, 10));
+    baseCommonLightSources.add(new Light("Hooded Lantern", 30, 60));
+    baseCommonLightSources.add(new Light("Lamp", 15, 45));
+    baseCommonLightSources.add(new Light("Torch", 20, 40));
+    baseCommonLightSources.add(new Light("Daylight", 1000, 0));
+
+  }
+
+  void setBaseSpellLightSources() {
+
+    baseSpellLightSources.add(new Light("Light", 20, 40));
+    // baseSpellLightSources.add(new Light("Dancing Lights", 0, 10));
+    // baseSpellLightSources.add(new Light("Daylight", 60, 60));
+    // baseSpellLightSources.add(new Light("Faerie Fire", 0, 10));
+    // baseSpellLightSources.add(new Light("Produce Flame", 10, 20));
+
+  }
+
+  void setBaseSightTypes() {
+
+    baseSightTypes.add(new Light("Blindsight 10'", 10, 0));
+    baseSightTypes.add(new Light("Blindsight 30'", 30, 0));
+    baseSightTypes.add(new Light("Blindsight 60'", 60, 0));
+    baseSightTypes.add(new Light("Blindsight 90'", 90, 0));
+    baseSightTypes.add(new Light("Blindsight 120'", 120, 0));
+    baseSightTypes.add(new Light("Darkvision 10'", 0, 10));
+    baseSightTypes.add(new Light("Darkvision 30'", 0, 30));
+    baseSightTypes.add(new Light("Darkvision 60'", 0, 60));
+    baseSightTypes.add(new Light("Darkvision 90'", 0, 90));
+    baseSightTypes.add(new Light("Darkvision 120'", 0, 120));
+    baseSightTypes.add(new Light("Truesight 120'", 120, 0));
+
+  }
+
+  void setBaseConditions() {
+
+    baseConditions.add(new Condition(canvas, "Blinded", "conditions/blinded.png", true, false, false));
+    baseConditions.add(new Condition(canvas, "Bloodied", "conditions/bloodied.png", false, false, false));
+    baseConditions.add(new Condition(canvas, "Burned", "conditions/burned.png", false, false, false));
+    baseConditions.add(new Condition(canvas, "Charmed", "conditions/charmed.png", false, false, false));
+    baseConditions.add(new Condition(canvas, "Dead", "conditions/dead.png", true, false, true));
+    baseConditions.add(new Condition(canvas, "Deafened", "conditions/deafened.png", false, false, false));
+    baseConditions.add(new Condition(canvas, "Frightened", "conditions/frightened.png", false, false, false));
+    baseConditions.add(new Condition(canvas, "Grappled", "conditions/grappled.png", false, false, false));
+    baseConditions.add(new Condition(canvas, "Hidden", "conditions/hidden.png", false, true, false));
+    baseConditions.add(new Condition(canvas, "Incapacitated", "conditions/incapacitated.png", true, false, false));
+    baseConditions.add(new Condition(canvas, "Invisible", "conditions/invisible.png", false, true, false));
+    baseConditions.add(new Condition(canvas, "Paralyzed", "conditions/paralyzed.png", true, false, false));
+    baseConditions.add(new Condition(canvas, "Petrified", "conditions/petrified.png", true, false, false));
+    baseConditions.add(new Condition(canvas, "Poisoned", "conditions/poisoned.png", false, false, false));
+    baseConditions.add(new Condition(canvas, "Prone", "conditions/prone.png", false, false, false));
+    baseConditions.add(new Condition(canvas, "Restrained", "conditions/restrained.png", false, false, false));
+    baseConditions.add(new Condition(canvas, "Stunned", "conditions/stunned.png", true, false, false));
+    baseConditions.add(new Condition(canvas, "Unconscious", "conditions/unconscious.png", true, false, false));
+
+  }
+
+  void setupBasedOnGrid() {
+
+    setLightSourcesBasedOnGrid(baseCommonLightSources, commonLightSourcesBasedOnGrid);
+    setLightSourcesBasedOnGrid(baseSpellLightSources, spellLightSourcesBasedOnGrid);
+    setLightSourcesBasedOnGrid(baseSightTypes, sightTypesBasedOnGrid);
+    setConditionsBasedOnGrid();
+    lineOfSight = createLight(baseLineOfSight.getName(), baseLineOfSight.getBrightLightRadius(), baseLineOfSight.getDimLightRadius());
 
     set = true;
 
   }
 
-  void reset() {
+  void setLightSourcesBasedOnGrid(ArrayList<Light> baseLightSources, HashMap<String, Light> lightSourcesBasedOnGrid) {
 
-    sizes = new HashMap<String, Size>();
-    commonLightSources = new HashMap<String, Light>();
-    spellLightSources = new HashMap<String, Light>();
-    sightTypes = new HashMap<String, Light>();
-    conditions = new HashMap<String, Condition>();
+    for ( Light baseLightSource: baseLightSources )
+      lightSourcesBasedOnGrid.put(baseLightSource.getName(), createLight(baseLightSource.getName(), baseLightSource.getBrightLightRadius(), baseLightSource.getDimLightRadius()));
 
-  }
-
-  void setSizes() {
-
-    sizes.put("Tiny", new Size("Tiny", 0.5f, true));
-    sizes.put("Small", new Size("Small", 1f, true));
-    sizes.put("Medium", new Size("Medium", 1f, true));
-    sizes.put("Large", new Size("Large", 2f, false));
-    sizes.put("Huge", new Size("Huge", 3f, true));
-    sizes.put("Gargantuan", new Size("Gargantuan", 4f, false));
-
-  }
-
-  void setCommonLightSources() {
-
-    commonLightSources.put("Candle", createLight("Candle", 5, 10));
-    commonLightSources.put("Hooded Lantern", createLight("Hooded Lantern", 30, 60));
-    commonLightSources.put("Lamp", createLight("Lamp", 15, 45));
-    commonLightSources.put("Torch", createLight("Torch", 20, 40));
-    commonLightSources.put("Daylight", createLight("Daylight", 1000, 0));
-
-  }
-
-  void setSpellLightSources() {
-
-    spellLightSources.put("Dancing Lights", createLight("Dancing Lights", 0, 10));
-    spellLightSources.put("Daylight", createLight("Daylight", 60, 60));
-    spellLightSources.put("Faerie Fire", createLight("Faerie Fire", 0, 10));
-    spellLightSources.put("Light", createLight("Light", 20, 40));
-    spellLightSources.put("Produce Flame", createLight("Produce Flame", 10, 20));
-
-  }
-
-  void setSightTypes() {
-
-    sightTypes.put("Line of Sight", createLight("Line of Sight", 1000, 0));
-    sightTypes.put("Blindsight 10'", createLight("Blindsight 10'", 10, 0));
-    sightTypes.put("Blindsight 30'", createLight("Blindsight 30'", 30, 0));
-    sightTypes.put("Blindsight 60'", createLight("Blindsight 60'", 60, 0));
-    sightTypes.put("Blindsight 90'", createLight("Blindsight 90'", 90, 0));
-    sightTypes.put("Blindsight 120'", createLight("Blindsight 120'", 120, 0));
-    sightTypes.put("Darkvision 10'", createLight("Darkvision 10'", 0, 10));
-    sightTypes.put("Darkvision 30'", createLight("Darkvision 30'", 0, 30));
-    sightTypes.put("Darkvision 60'", createLight("Darkvision 60'", 0, 60));
-    sightTypes.put("Darkvision 90'", createLight("Darkvision 90'", 0, 90));
-    sightTypes.put("Darkvision 120'", createLight("Darkvision 120'", 0, 120));
-    sightTypes.put("Truesight 120'", createLight("Truesight 120'", 120, 0));
-
-  }
-
-  void setConditions() {
-
-    for ( Size size: sizes.values() ) {
-      conditions.put(size.getName() + " Blinded", new Condition(canvas, "Blinded", "conditions/blinded.png", grid.getCellWidth(), grid.getCellHeight(), true, false, false, size));
-      conditions.put(size.getName() + " Bloodied", new Condition(canvas, "Bloodied", "conditions/bloodied.png", grid.getCellWidth(), grid.getCellHeight(), false, false, false, size));
-      conditions.put(size.getName() + " Burned", new Condition(canvas, "Burned", "conditions/burned.png", grid.getCellWidth(), grid.getCellHeight(), false, false, false, size));
-      conditions.put(size.getName() + " Charmed", new Condition(canvas, "Charmed", "conditions/charmed.png", grid.getCellWidth(), grid.getCellHeight(), false, false, false, size));
-      conditions.put(size.getName() + " Dead", new Condition(canvas, "Dead", "conditions/dead.png", grid.getCellWidth(), grid.getCellHeight(), true, false, true, size));
-      conditions.put(size.getName() + " Deafened", new Condition(canvas, "Deafened", "conditions/deafened.png", grid.getCellWidth(), grid.getCellHeight(), false, false, false, size));
-      conditions.put(size.getName() + " Frightened", new Condition(canvas, "Frightened", "conditions/frightened.png", grid.getCellWidth(), grid.getCellHeight(), false, false, false, size));
-      conditions.put(size.getName() + " Grappled", new Condition(canvas, "Grappled", "conditions/grappled.png", grid.getCellWidth(), grid.getCellHeight(), false, false, false, size));
-      conditions.put(size.getName() + " Hidden", new Condition(canvas, "Hidden", "conditions/hidden.png", grid.getCellWidth(), grid.getCellHeight(), false, true, false, size));
-      conditions.put(size.getName() + " Incapacitated", new Condition(canvas, "Incapacitated", "conditions/incapacitated.png", grid.getCellWidth(), grid.getCellHeight(), true, false, false, size));
-      conditions.put(size.getName() + " Invisible", new Condition(canvas, "Invisible", "conditions/invisible.png", grid.getCellWidth(), grid.getCellHeight(), false, true, false, size));
-      conditions.put(size.getName() + " Paralyzed", new Condition(canvas, "Paralyzed", "conditions/paralyzed.png", grid.getCellWidth(), grid.getCellHeight(), true, false, false, size));
-      conditions.put(size.getName() + " Petrified", new Condition(canvas, "Petrified", "conditions/petrified.png", grid.getCellWidth(), grid.getCellHeight(), true, false, false, size));
-      conditions.put(size.getName() + " Poisoned", new Condition(canvas, "Poisoned", "conditions/poisoned.png", grid.getCellWidth(), grid.getCellHeight(), false, false, false, size));
-      conditions.put(size.getName() + " Prone", new Condition(canvas, "Prone", "conditions/prone.png", grid.getCellWidth(), grid.getCellHeight(), false, false, false, size));
-      conditions.put(size.getName() + " Restrained", new Condition(canvas, "Restrained", "conditions/restrained.png", grid.getCellWidth(), grid.getCellHeight(), false, false, false, size));
-      conditions.put(size.getName() + " Stunned", new Condition(canvas, "Stunned", "conditions/stunned.png", grid.getCellWidth(), grid.getCellHeight(), true, false, false, size));
-      conditions.put(size.getName() + " Unconscious", new Condition(canvas, "Unconscious", "conditions/unconscious.png", grid.getCellWidth(), grid.getCellHeight(), true, false, false, size));
-    }
-
-  }
-
-  Light getCommonLightSource(String name) {
-    return commonLightSources.get(name);
-  }
-
-  Light getSpellLightSource(String name) {
-    return spellLightSources.get(name);
-  }
-
-  Light getSightType(String name) {
-    return sightTypes.get(name);
-  }
-
-  Condition getCondition(String name, Size size) {
-    return conditions.get(size.getName() + " " + name);
-  }
-
-  Size getSize(String name) {
-    return sizes.get(name);
   }
 
   Light createLight(String name, int brightLightRadiusInFeet, int dimLightRadiusInFeet) {
@@ -167,6 +188,66 @@ class Resources {
 
     return new Light(name, brightLightRadius, dimLightRadius);
 
+  }
+
+  void setConditionsBasedOnGrid() {
+
+    for ( Size size: baseSizes.values() ) {
+      for ( Condition baseCondition: baseConditions ) {
+        Condition conditionBySize = baseCondition.copy();
+        conditionBySize.setSize(size, grid.getCellWidth(), grid.getCellHeight());
+        conditionsBySize.put(size.getName() + " " + conditionBySize.getName(), conditionBySize);
+      }
+    }
+
+  }
+
+  HashMap<String, Size> getBaseSizes() {
+    return baseSizes;
+  }
+
+  ArrayList<Light> getBaseCommonLightSources() {
+    return baseCommonLightSources;
+  }
+
+  ArrayList<Light> getBaseSpellLightSources() {
+    return baseSpellLightSources;
+  }
+
+  ArrayList<Light> getBaseSightTypes() {
+    return baseSightTypes;
+  }
+
+  ArrayList<Condition> getBaseConditions() {
+    return baseConditions;
+  }
+
+  Light getBaseLineOfSight() {
+    return baseLineOfSight;
+  }
+
+  Size getSize(String name) {
+    return baseSizes.get(name);
+  }
+
+  Light getCommonLightSource(String name) {
+    return commonLightSourcesBasedOnGrid.get(name);
+  }
+
+  Light getSpellLightSource(String name) {
+    return spellLightSourcesBasedOnGrid.get(name);
+  }
+
+  Light getSightType(String name) {
+    return sightTypesBasedOnGrid.get(name);
+  }
+
+  Condition getCondition(String name, Size size) {
+    return conditionsBySize.get(size.getName() + " " + name);
+  }
+
+  Light getLineOfSight() {
+    return lineOfSight;
   }
 
   boolean isSet() {

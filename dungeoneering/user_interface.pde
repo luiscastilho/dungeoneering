@@ -83,17 +83,19 @@ public class UserInterface {
 
   Group togglableControllers;
   Group conditionMenuControllers;
-  Group lightSourceMenuControllers;
+  Group commonLightSourceMenuControllers;
+  Group spellLightSourceMenuControllers;
   Group sightTypeMenuControllers;
   Group sizeMenuControllers;
   Group settingsMenuControllers;
   Accordion tokenMenu;
 
   // Maps resources to controllers
-  HashMap<String, String> conditionToController;
-  HashMap<String, String> lightSourceToController;
-  HashMap<String, String> sightTypeToController;
-  HashMap<String, String> sizeToController;
+  ArrayList<String> conditionControllers;
+  ArrayList<String> commonLightSourceControllers;
+  ArrayList<String> spellLightSourceControllers;
+  ArrayList<String> sightTypeControllers;
+  ArrayList<String> sizeControllers;
 
   // Maps controllers to tooltips
   HashMap<String, UserInterfaceTooltip> controllerToTooltip;
@@ -111,7 +113,10 @@ public class UserInterface {
 
   int logoMaxWidth, logoMaxHeight;
 
-  UserInterface(PGraphics _canvas, ControlP5 _cp5, Map _map, Grid _grid, Obstacles _obstacles, Layer _playersLayer, Layer _dmLayer, Resources _resources, Initiative _initiative, int _platform, HazelcastInstance _sharedDataInstance, IMap<String, String> _sharedData) {
+  UserInterface(PGraphics _canvas, ControlP5 _cp5,
+                Map _map, Grid _grid, Obstacles _obstacles, Layer _playersLayer, Layer _dmLayer,
+                Resources _resources, Initiative _initiative, int _platform,
+                HazelcastInstance _sharedDataInstance, IMap<String, String> _sharedData) {
 
     canvas = _canvas;
 
@@ -220,16 +225,18 @@ public class UserInterface {
 
     togglableControllers = null;
     conditionMenuControllers = null;
-    lightSourceMenuControllers = null;
+    commonLightSourceMenuControllers = null;
+    spellLightSourceMenuControllers = null;
     sightTypeMenuControllers = null;
     sizeMenuControllers = null;
     settingsMenuControllers = null;
     tokenMenu = null;
 
-    conditionToController = new HashMap<String, String>();
-    lightSourceToController = new HashMap<String, String>();
-    sightTypeToController = new HashMap<String, String>();
-    sizeToController = new HashMap<String, String>();
+    conditionControllers = new ArrayList<String>();
+    commonLightSourceControllers = new ArrayList<String>();
+    spellLightSourceControllers = new ArrayList<String>();
+    sightTypeControllers = new ArrayList<String>();
+    sizeControllers = new ArrayList<String>();
 
     controllerToTooltip = new HashMap<String, UserInterfaceTooltip>();
     previousMouseOverControllers = new ArrayList<ControllerInterface<?>>();
@@ -245,7 +252,8 @@ public class UserInterface {
 
     allowedControllerGroupsInPlayersMode = new ArrayList<String>();
     allowedControllerGroupsInPlayersMode.add("Conditions");
-    allowedControllerGroupsInPlayersMode.add("Light Sources");
+    allowedControllerGroupsInPlayersMode.add("Common Light Sources");
+    allowedControllerGroupsInPlayersMode.add("Spell Light Sources");
     allowedControllerGroupsInPlayersMode.add("Sight Types");
     allowedControllerGroupsInPlayersMode.add("Sizes");
     allowedControllerGroupsInPlayersMode.add("Settings");
@@ -371,7 +379,9 @@ public class UserInterface {
 
     conditionMenuControllers = cp5.addGroup("Conditions")
       .setBackgroundColor(color(0, 127));
-    lightSourceMenuControllers = cp5.addGroup("Light Sources")
+    commonLightSourceMenuControllers = cp5.addGroup("Common Light Sources")
+      .setBackgroundColor(color(0, 127));
+    spellLightSourceMenuControllers = cp5.addGroup("Spell Light Sources")
       .setBackgroundColor(color(0, 127));
     sightTypeMenuControllers = cp5.addGroup("Sight Types")
       .setBackgroundColor(color(0, 127));
@@ -481,13 +491,6 @@ public class UserInterface {
       .hide()
       ;
 
-    // Disabled - map pan and zoom enabled by default
-    // addButton("Toggle camera pan", sceneConfigIconFolder + "pan", controllersTopLeftX, controllersTopLeftY, togglableControllers, true, false);
-    // addButton("Toggle camera zoom", sceneConfigIconFolder + "zoom", controllersTopLeftX, controllersTopLeftY, togglableControllers, true, false);
-
-    // Disabled - walls/doors shown during setup only
-    // addButton("Toggle walls", sceneConfigIconFolder + "walls", controllersTopLeftX, controllersTopLeftY, togglableControllers, true, false);
-
     // Top right bar - quit
 
     controllersTopRightX -= squareButtonWidth;
@@ -514,6 +517,14 @@ public class UserInterface {
 
     // Token right click menu
 
+    // Right click menu settings
+
+    int itemsPerLine = 5;
+    int currentLine = 0;
+    int currentItem = 0;
+
+    // Right click menu sections
+
     conditionMenuControllers.setHeight(menuBarHeight) // menu bar height
       .setBackgroundHeight(controllersSpacing)        // item height
       .setColorBackground(idleBackgroundColor)
@@ -522,13 +533,21 @@ public class UserInterface {
       ;
     conditionMenuControllers.getCaptionLabel().align(LEFT, CENTER).toUpperCase(false);
 
-    lightSourceMenuControllers.setHeight(menuBarHeight) // menu bar height
-      .setBackgroundHeight(controllersSpacing)          // item height
+    commonLightSourceMenuControllers.setHeight(menuBarHeight) // menu bar height
+      .setBackgroundHeight(controllersSpacing)                // item height
       .setColorBackground(idleBackgroundColor)
       .setColorForeground(mouseOverBackgroundColor)
       .setFont(instructionsFont)
       ;
-    lightSourceMenuControllers.getCaptionLabel().align(LEFT, CENTER).toUpperCase(false);
+    commonLightSourceMenuControllers.getCaptionLabel().align(LEFT, CENTER).toUpperCase(false);
+
+    spellLightSourceMenuControllers.setHeight(menuBarHeight) // menu bar height
+      .setBackgroundHeight(controllersSpacing)               // item height
+      .setColorBackground(idleBackgroundColor)
+      .setColorForeground(mouseOverBackgroundColor)
+      .setFont(instructionsFont)
+      ;
+    spellLightSourceMenuControllers.getCaptionLabel().align(LEFT, CENTER).toUpperCase(false);
 
     sightTypeMenuControllers.setHeight(menuBarHeight) // menu bar height
       .setBackgroundHeight(controllersSpacing)        // item height
@@ -547,7 +566,7 @@ public class UserInterface {
     sizeMenuControllers.getCaptionLabel().align(LEFT, CENTER).toUpperCase(false);
 
     settingsMenuControllers.setHeight(menuBarHeight) // menu bar height
-      .setBackgroundHeight(controllersSpacing)    // item height
+      .setBackgroundHeight(controllersSpacing)       // item height
       .setColorBackground(idleBackgroundColor)
       .setColorForeground(mouseOverBackgroundColor)
       .setFont(instructionsFont)
@@ -565,8 +584,10 @@ public class UserInterface {
 
     if ( controllerGroupIsAllowed(conditionMenuControllers) )
       tokenMenu.addItem(conditionMenuControllers);
-    if ( controllerGroupIsAllowed(lightSourceMenuControllers) )
-      tokenMenu.addItem(lightSourceMenuControllers);
+    if ( controllerGroupIsAllowed(commonLightSourceMenuControllers) )
+      tokenMenu.addItem(commonLightSourceMenuControllers);
+    if ( controllerGroupIsAllowed(spellLightSourceMenuControllers) )
+      tokenMenu.addItem(spellLightSourceMenuControllers);
     if ( controllerGroupIsAllowed(sightTypeMenuControllers) )
       tokenMenu.addItem(sightTypeMenuControllers);
     if ( controllerGroupIsAllowed(sizeMenuControllers) )
@@ -576,204 +597,184 @@ public class UserInterface {
 
     tokenMenu.open(0);
 
-    // first line in menu item
-    conditionMenuControllers.setBackgroundHeight(conditionMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
-    controllersMenuX = controllersMenuInitialX;
-    controllersMenuY = controllersMenuInitialY;
-    addButton("Blinded", tokenConditionsIconFolder + "blinded", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
-    conditionToController.put("Blinded", "Blinded");
+    // Add conditions
 
-    controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Bloodied", tokenConditionsIconFolder + "bloodied", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
-    conditionToController.put("Bloodied", "Bloodied");
+    currentLine = 0;
+    currentItem = 0;
+    for ( Condition condition: resources.getBaseConditions() ) {
 
-    controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Burned", tokenConditionsIconFolder + "burned", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
-    conditionToController.put("Burned", "Burned");
+      String conditionName = condition.getName();
+      String conditionFilename = conditionName.replace(" ", "_").replace("'", "").toLowerCase();
 
-    controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Charmed", tokenConditionsIconFolder + "charmed", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
-    conditionToController.put("Charmed", "Charmed");
+      // First item in line
+      if ( currentItem == 0 ) {
+        conditionMenuControllers.setBackgroundHeight(conditionMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
+        controllersMenuX = controllersMenuInitialX;
+        // First line
+        if ( currentLine == 0 ) {
+          controllersMenuY = controllersMenuInitialY;
+        } else {
+          controllersMenuY += squareButtonWidth + controllersSpacing;
+        }
+      } else {
+        controllersMenuX += squareButtonWidth + controllersSpacing;
+      }
 
-    controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Dead", tokenConditionsIconFolder + "dead", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
-    conditionToController.put("Dead", "Dead");
+      addButton(conditionName, tokenConditionsIconFolder + conditionFilename, controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
+      conditionControllers.add(conditionName);
 
-    // new line
-    conditionMenuControllers.setBackgroundHeight(conditionMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
-    controllersMenuX = controllersMenuInitialX;
-    controllersMenuY += squareButtonWidth + controllersSpacing;
-    addButton("Deafened", tokenConditionsIconFolder + "deafened", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
-    conditionToController.put("Deafened", "Deafened");
+      currentItem += 1;
+      // Move to next line
+      if ( currentItem == itemsPerLine ) {
+        currentLine += 1;
+        currentItem = 0;
+      }
 
-    controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Frightened", tokenConditionsIconFolder + "frightened", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
-    conditionToController.put("Frightened", "Frightened");
+    }
 
-    controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Grappled", tokenConditionsIconFolder + "grappled", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
-    conditionToController.put("Grappled", "Grappled");
+    // Add common light sources
 
-    controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Hidden", tokenConditionsIconFolder + "hidden", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
-    conditionToController.put("Hidden", "Hidden");
+    currentLine = 0;
+    currentItem = 0;
+    for ( Light light: resources.getBaseCommonLightSources() ) {
 
-    controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Incapacitated", tokenConditionsIconFolder + "incapacitated", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
-    conditionToController.put("Incapacitated", "Incapacitated");
+      String lightName = light.getName();
+      String lightFilename = lightName.replace(" ", "_").replace("'", "").toLowerCase();
 
-    // new line
-    conditionMenuControllers.setBackgroundHeight(conditionMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
-    controllersMenuX = controllersMenuInitialX;
-    controllersMenuY += squareButtonWidth + controllersSpacing;
-    addButton("Invisible", tokenConditionsIconFolder + "invisible", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
-    conditionToController.put("Invisible", "Invisible");
+      // First item in line
+      if ( currentItem == 0 ) {
+        commonLightSourceMenuControllers.setBackgroundHeight(commonLightSourceMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
+        controllersMenuX = controllersMenuInitialX;
+        // First line
+        if ( currentLine == 0 ) {
+          controllersMenuY = controllersMenuInitialY;
+        } else {
+          controllersMenuY += squareButtonWidth + controllersSpacing;
+        }
+      } else {
+        controllersMenuX += squareButtonWidth + controllersSpacing;
+      }
 
-    controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Paralyzed", tokenConditionsIconFolder + "paralyzed", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
-    conditionToController.put("Paralyzed", "Paralyzed");
+      addButton(lightName, tokenCommonLightSourcesIconFolder + lightFilename, controllersMenuX, controllersMenuY, commonLightSourceMenuControllers, true, false);
+      commonLightSourceControllers.add(lightName);
 
-    controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Petrified", tokenConditionsIconFolder + "petrified", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
-    conditionToController.put("Petrified", "Petrified");
+      currentItem += 1;
+      // Move to next line
+      if ( currentItem == itemsPerLine ) {
+        currentLine += 1;
+        currentItem = 0;
+      }
 
-    controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Poisoned", tokenConditionsIconFolder + "poisoned", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
-    conditionToController.put("Poisoned", "Poisoned");
+    }
 
-    controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Prone", tokenConditionsIconFolder + "prone", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
-    conditionToController.put("Prone", "Prone");
+    // Add spell light sources
 
-    // new line
-    conditionMenuControllers.setBackgroundHeight(conditionMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
-    controllersMenuX = controllersMenuInitialX;
-    controllersMenuY += squareButtonWidth + controllersSpacing;
-    addButton("Restrained", tokenConditionsIconFolder + "restrained", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
-    conditionToController.put("Restrained", "Restrained");
+    currentLine = 0;
+    currentItem = 0;
+    for ( Light light: resources.getBaseSpellLightSources() ) {
 
-    controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Stunned", tokenConditionsIconFolder + "stunned", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
-    conditionToController.put("Stunned", "Stunned");
+      String lightName = light.getName();
+      String lightFilename = lightName.replace(" ", "_").replace("'", "").toLowerCase();
 
-    controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Unconscious", tokenConditionsIconFolder + "unconscious", controllersMenuX, controllersMenuY, conditionMenuControllers, true, false);
-    conditionToController.put("Unconscious", "Unconscious");
+      // First item in line
+      if ( currentItem == 0 ) {
+        spellLightSourceMenuControllers.setBackgroundHeight(spellLightSourceMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
+        controllersMenuX = controllersMenuInitialX;
+        // First line
+        if ( currentLine == 0 ) {
+          controllersMenuY = controllersMenuInitialY;
+        } else {
+          controllersMenuY += squareButtonWidth + controllersSpacing;
+        }
+      } else {
+        controllersMenuX += squareButtonWidth + controllersSpacing;
+      }
 
-    // first line in menu item
-    lightSourceMenuControllers.setBackgroundHeight(lightSourceMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
-    controllersMenuX = controllersMenuInitialX;
-    controllersMenuY = controllersMenuInitialY;
-    addButton("Candle", tokenCommonLightSourcesIconFolder + "candle", controllersMenuX, controllersMenuY, lightSourceMenuControllers, true, false);
-    lightSourceToController.put("Candle", "Candle");
+      addButton(lightName, tokenSpellLightSourcesIconFolder + lightFilename, controllersMenuX, controllersMenuY, spellLightSourceMenuControllers, true, false);
+      spellLightSourceControllers.add(lightName);
 
-    controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Torch", tokenCommonLightSourcesIconFolder + "torch", controllersMenuX, controllersMenuY, lightSourceMenuControllers, true, false);
-    lightSourceToController.put("Torch", "Torch");
+      currentItem += 1;
+      // Move to next line
+      if ( currentItem == itemsPerLine ) {
+        currentLine += 1;
+        currentItem = 0;
+      }
 
-    controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Lamp", tokenCommonLightSourcesIconFolder + "lamp", controllersMenuX, controllersMenuY, lightSourceMenuControllers, true, false);
-    lightSourceToController.put("Lamp", "Lamp");
+    }
 
-    controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Hooded Lantern", tokenCommonLightSourcesIconFolder + "hooded_lantern", controllersMenuX, controllersMenuY, lightSourceMenuControllers, true, false);
-    lightSourceToController.put("Hooded Lantern", "Hooded Lantern");
+    // Add sight types
 
-    controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Daylight", tokenCommonLightSourcesIconFolder + "daylight", controllersMenuX, controllersMenuY, lightSourceMenuControllers, true, false);
-    lightSourceToController.put("Daylight", "Daylight");
+    currentLine = 0;
+    currentItem = 0;
+    for ( Light sight: resources.getBaseSightTypes() ) {
 
-    // new line
-    lightSourceMenuControllers.setBackgroundHeight(lightSourceMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
-    controllersMenuX = controllersMenuInitialX;
-    controllersMenuY += squareButtonWidth + controllersSpacing;
-    addButton("Light spell", tokenSpellLightSourcesIconFolder + "light", controllersMenuX, controllersMenuY, lightSourceMenuControllers, true, false);
-    lightSourceToController.put("Light", "Light spell");
+      String sightName = sight.getName();
+      String sightFilename = sightName.replace(" ", "_").replace("'", "").toLowerCase();
 
-    // first line in menu item
-    sightTypeMenuControllers.setBackgroundHeight(sightTypeMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
-    controllersMenuX = controllersMenuInitialX;
-    controllersMenuY = controllersMenuInitialY;
-    addButton("Blindsight 10'", tokenSightTypesIconFolder + "blindsight_10", controllersMenuX, controllersMenuY, sightTypeMenuControllers, true, false);
-    sightTypeToController.put("Blindsight 10'", "Blindsight 10'");
+      // First item in line
+      if ( currentItem == 0 ) {
+        sightTypeMenuControllers.setBackgroundHeight(sightTypeMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
+        controllersMenuX = controllersMenuInitialX;
+        // First line
+        if ( currentLine == 0 ) {
+          controllersMenuY = controllersMenuInitialY;
+        } else {
+          controllersMenuY += squareButtonWidth + controllersSpacing;
+        }
+      } else {
+        controllersMenuX += squareButtonWidth + controllersSpacing;
+      }
 
-    controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Blindsight 30'", tokenSightTypesIconFolder + "blindsight_30", controllersMenuX, controllersMenuY, sightTypeMenuControllers, true, false);
-    sightTypeToController.put("Blindsight 30'", "Blindsight 30'");
+      addButton(sightName, tokenSightTypesIconFolder + sightFilename, controllersMenuX, controllersMenuY, sightTypeMenuControllers, true, false);
+      sightTypeControllers.add(sightName);
 
-    controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Blindsight 60'", tokenSightTypesIconFolder + "blindsight_60", controllersMenuX, controllersMenuY, sightTypeMenuControllers, true, false);
-    sightTypeToController.put("Blindsight 60'", "Blindsight 60'");
+      currentItem += 1;
+      // Move to next line
+      if ( currentItem == itemsPerLine ) {
+        currentLine += 1;
+        currentItem = 0;
+      }
 
-    controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Blindsight 90'", tokenSightTypesIconFolder + "blindsight_90", controllersMenuX, controllersMenuY, sightTypeMenuControllers, true, false);
-    sightTypeToController.put("Blindsight 90'", "Blindsight 90'");
+    }
 
-    controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Blindsight 120'", tokenSightTypesIconFolder + "blindsight_120", controllersMenuX, controllersMenuY, sightTypeMenuControllers, true, false);
-    sightTypeToController.put("Blindsight 120'", "Blindsight 120'");
+    // Add sizes
 
-    // new line
-    sightTypeMenuControllers.setBackgroundHeight(sightTypeMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
-    controllersMenuX = controllersMenuInitialX;
-    controllersMenuY += squareButtonWidth + controllersSpacing;
-    addButton("Darkvision 10'", tokenSightTypesIconFolder + "darkvision_10", controllersMenuX, controllersMenuY, sightTypeMenuControllers, true, false);
-    sightTypeToController.put("Darkvision 10'", "Darkvision 10'");
+    currentLine = 0;
+    currentItem = 0;
+    for ( Size size: resources.getBaseSizes().values() ) {
 
-    controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Darkvision 30'", tokenSightTypesIconFolder + "darkvision_30", controllersMenuX, controllersMenuY, sightTypeMenuControllers, true, false);
-    sightTypeToController.put("Darkvision 30'", "Darkvision 30'");
+      String sizeName = size.getName();
+      String sizeFilename = sizeName.replace(" ", "_").replace("'", "").toLowerCase();
 
-    controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Darkvision 60'", tokenSightTypesIconFolder + "darkvision_60", controllersMenuX, controllersMenuY, sightTypeMenuControllers, true, false);
-    sightTypeToController.put("Darkvision 60'", "Darkvision 60'");
+      // First item in line
+      if ( currentItem == 0 ) {
+        sizeMenuControllers.setBackgroundHeight(sizeMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
+        controllersMenuX = controllersMenuInitialX;
+        // First line
+        if ( currentLine == 0 ) {
+          controllersMenuY = controllersMenuInitialY;
+        } else {
+          controllersMenuY += squareButtonWidth + controllersSpacing;
+        }
+      } else {
+        controllersMenuX += squareButtonWidth + controllersSpacing;
+      }
 
-    controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Darkvision 90'", tokenSightTypesIconFolder + "darkvision_90", controllersMenuX, controllersMenuY, sightTypeMenuControllers, true, false);
-    sightTypeToController.put("Darkvision 90'", "Darkvision 90'");
+      addButton(sizeName, tokenSizesIconFolder + sizeFilename, controllersMenuX, controllersMenuY, sizeMenuControllers, true, false);
+      sizeControllers.add(sizeName);
 
-    controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Darkvision 120'", tokenSightTypesIconFolder + "darkvision_120", controllersMenuX, controllersMenuY, sightTypeMenuControllers, true, false);
-    sightTypeToController.put("Darkvision 120'", "Darkvision 120'");
+      currentItem += 1;
+      // Move to next line
+      if ( currentItem == itemsPerLine ) {
+        currentLine += 1;
+        currentItem = 0;
+      }
 
-    // new line
-    sightTypeMenuControllers.setBackgroundHeight(sightTypeMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
-    controllersMenuX = controllersMenuInitialX;
-    controllersMenuY += squareButtonWidth + controllersSpacing;
-    addButton("Truesight 120'", tokenSightTypesIconFolder + "truesight_120", controllersMenuX, controllersMenuY, sightTypeMenuControllers, true, false);
-    sightTypeToController.put("Truesight 120'", "Truesight 120'");
+    }
 
-    // first line in menu item
-    sizeMenuControllers.setBackgroundHeight(sizeMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
-    controllersMenuX = controllersMenuInitialX;
-    controllersMenuY = controllersMenuInitialY;
-    addButton("Tiny", tokenSizesIconFolder + "tiny", controllersMenuX, controllersMenuY, sizeMenuControllers, true, false);
-    sizeToController.put("Tiny", "Tiny");
+    // Add settings
 
-    controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Small", tokenSizesIconFolder + "small", controllersMenuX, controllersMenuY, sizeMenuControllers, true, false);
-    sizeToController.put("Small", "Small");
-
-    controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Medium", tokenSizesIconFolder + "medium", controllersMenuX, controllersMenuY, sizeMenuControllers, true, false);
-    sizeToController.put("Medium", "Medium");
-
-    controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Large", tokenSizesIconFolder + "large", controllersMenuX, controllersMenuY, sizeMenuControllers, true, false);
-    sizeToController.put("Large", "Large");
-
-    controllersMenuX += squareButtonWidth + controllersSpacing;
-    addButton("Huge", tokenSizesIconFolder + "huge", controllersMenuX, controllersMenuY, sizeMenuControllers, true, false);
-    sizeToController.put("Huge", "Huge");
-
-    // new line
-    sizeMenuControllers.setBackgroundHeight(sizeMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
-    controllersMenuX = controllersMenuInitialX;
-    controllersMenuY += squareButtonWidth + controllersSpacing;
-    addButton("Gargantuan", tokenSizesIconFolder + "gargantuan", controllersMenuX, controllersMenuY, sizeMenuControllers, true, false);
-    sizeToController.put("Gargantuan", "Gargantuan");
-
-    // first line in menu item
+    // First line in menu item
     settingsMenuControllers.setBackgroundHeight(settingsMenuControllers.getBackgroundHeight() + squareButtonHeight + controllersSpacing);
     controllersMenuX = controllersMenuInitialX;
     controllersMenuY = controllersMenuInitialY;
@@ -831,7 +832,7 @@ public class UserInterface {
 
     }
 
-    // Bottom left messages
+    // Bottom left messages - setup instructions
 
     instructionsX = instructionsInitialX;
     instructionsY = instructionsInitialY;
@@ -1041,435 +1042,115 @@ public class UserInterface {
     else if ( controlEvent.isGroup() )
       controllerName = controlEvent.getGroup().getName();
 
-    switch ( controllerName ) {
-      case "New scene":
+    boolean controllerFound = false;
 
-        if ( map.isSet() ) {
+    // Condition controllers
+    if ( conditionControllers.contains(controllerName) ) {
 
-          uiDialogs.showConfirmDialog(
-            "This will reset the current scene. Confirm?",
-            "Create new scene",
-            new Runnable() {
-              public void run() {
-                uiConfirmDialogAnswer = true;
-              }
-            },
-            new Runnable() {
-              public void run() {
-                uiConfirmDialogAnswer = false;
-              }
-            }
-          );
+      if ( rightClickedToken != null ) {
 
-          if ( !uiConfirmDialogAnswer )
-            break;
+        resourceName = controllerName;
+        conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
+        if ( conditionTemplate != null ) {
+
+          rightClickedToken.toggleCondition(conditionTemplate);
+          if ( conditionTemplate.disablesTarget() )
+            obstacles.setRecalculateShadows(true);
+          hideMenu(0, 0);
+
+        } else {
+
+          logger.error("Resource: Condition " + resourceName + " not found");
 
         }
 
-        reset();
+      }
 
-        logger.info("UserInterface: New empty scene created");
+      controllerFound = true;
 
-        break;
-      case "Save scene":
+    // Light source controllers
+    } else if ( commonLightSourceControllers.contains(controllerName) || spellLightSourceControllers.contains(controllerName) ) {
 
-        File sceneFolder = null;
-        selectFolder("Select folder where to save scene:", "saveScene", sceneFolder, this);
-        fileDialogOpen = true;
+      if ( rightClickedToken != null ) {
 
-        break;
-      case "Load scene":
+        resourceName = controllerName;
+        lightTemplate = resources.getCommonLightSource(resourceName);
+        if ( lightTemplate == null )
+          lightTemplate = resources.getSpellLightSource(resourceName);
 
-        if ( map.isSet() ) {
+        if ( lightTemplate != null ) {
 
-          uiDialogs.showConfirmDialog(
-            "This will replace the current scene. Confirm?",
-            "Load scene",
-            new Runnable() {
-              public void run() {
-                uiConfirmDialogAnswer = true;
-              }
-            },
-            new Runnable() {
-              public void run() {
-                uiConfirmDialogAnswer = false;
-              }
-            }
-          );
+          rightClickedToken.toggleLightSource(new Light(lightTemplate.getName(), lightTemplate.getBrightLightRadius(), lightTemplate.getDimLightRadius()));
+          obstacles.setRecalculateShadows(true);
+          hideMenu(0, 0);
 
-          if ( !uiConfirmDialogAnswer )
-            break;
+        } else {
+
+          logger.error("Resource: Common or spell light source " + resourceName + " not found");
 
         }
 
-        File sceneFile = null;
-        selectInput("Select scene to load:", "loadScene", sceneFile, this);
-        fileDialogOpen = true;
+      }
 
-        break;
-      case "Quit":
+      controllerFound = true;
 
-        uiDialogs.showConfirmDialog(
-          "Quit dungeoneering?",
-          "Quit",
-          new Runnable() {
-            public void run() {
-              uiConfirmDialogAnswer = true;
-            }
-          },
-          new Runnable() {
-            public void run() {
-              uiConfirmDialogAnswer = false;
-            }
-          }
-        );
+    // Sight type controllers
+    } else if ( sightTypeControllers.contains(controllerName) ) {
 
-        if ( !uiConfirmDialogAnswer )
-          break;
+      if ( rightClickedToken != null ) {
 
-        initiative.clear();
-        obstacles.clear();
-        playersLayer.clear();
-        dmLayer.clear();
-        grid.clear();
-        map.clear();
+        resourceName = controllerName;
+        lightTemplate = resources.getSightType(resourceName);
+        if ( lightTemplate != null ) {
 
-        if ( appMode == AppMode.dm || appMode == AppMode.players )
-          sharedDataInstance.shutdown();
+          rightClickedToken.toggleSightType(new Light(lightTemplate.getName(), lightTemplate.getBrightLightRadius(), lightTemplate.getDimLightRadius()));
+          obstacles.setRecalculateShadows(true);
+          hideMenu(0, 0);
 
-        logger.info("UserInterface: Exiting dungeoneering");
+        } else {
 
-        exit();
-
-        break;
-      case "Select map":
-
-        if ( map.isSet() ) {
-
-          uiDialogs.showConfirmDialog(
-            "This will reset the current scene. Confirm?",
-            "Select new map",
-            new Runnable() {
-              public void run() {
-                uiConfirmDialogAnswer = true;
-              }
-            },
-            new Runnable() {
-              public void run() {
-                uiConfirmDialogAnswer = false;
-              }
-            }
-          );
-
-          if ( !uiConfirmDialogAnswer )
-            break;
+          logger.error("Resource: Sight type " + resourceName + " not found");
 
         }
 
-        File mapFile = null;
-        selectInput("Select a map:", "mapFileSelected", mapFile, this);
-        fileDialogOpen = true;
+      }
 
-        break;
-      case "Map logo":
+      controllerFound = true;
 
-        Button logo = (Button)controlEvent.getController();
-        String link = logo.getStringValue();
-        if ( !isEmpty(link) )
-          link(link);
+    // Size controllers
+    } else if ( sizeControllers.contains(controllerName) ) {
 
-        break;
-      case "Grid setup":
+      if ( rightClickedToken != null ) {
 
-        Button gridSetup = (Button)controlEvent.getController();
-        Textlabel gridInstructions1stLine = (Textlabel)cp5.getController("Grid instructions - 1st line");
-        Textlabel gridInstructions2ndLine = (Textlabel)cp5.getController("Grid instructions - 2nd line");
+        resourceName = controllerName;
+        sizeTemplate = resources.getSize(resourceName);
+        if ( sizeTemplate != null ) {
 
-        if ( gridSetup.isOn() ) {
+          rightClickedToken.setSize(new Size(sizeTemplate.getName(), sizeTemplate.getResizeFactor(), sizeTemplate.isCentered()), resources);
+          obstacles.setRecalculateShadows(true);
+          hideMenu(0, 0);
 
-          if ( grid.isSet() ) {
+        } else {
+
+          logger.error("Resource: Size " + resourceName + " not found");
+
+        }
+
+      }
+
+      controllerFound = true;
+
+    }
+
+    if ( !controllerFound ) {
+      switch ( controllerName ) {
+        case "New scene":
+
+          if ( map.isSet() ) {
 
             uiDialogs.showConfirmDialog(
-              "This will reset the current scene, leaving only the selected map. Confirm?",
-              "New grid setup",
-              new Runnable() {
-                public void run() {
-                  uiConfirmDialogAnswer = true;
-                }
-              },
-              new Runnable() {
-                public void run() {
-                  uiConfirmDialogAnswer = false;
-                }
-              }
-            );
-
-            if ( !uiConfirmDialogAnswer ) {
-
-              gridSetup.setBroadcast(false);
-              gridSetup.setOff();
-              gridSetup.setBroadcast(true);
-
-              break;
-
-            }
-
-          }
-
-          initiative.clear();
-          playersLayer.clear();
-          dmLayer.clear();
-          grid.clear();
-
-          map.reset();
-
-          disableController("Select map");
-          disableController("Add player token");
-          disableController("Add DM token");
-          disableController("Add/Remove walls");
-          disableController("Add/Remove doors");
-          disableController("Toggle UI");
-
-          setSwitchButtonState("Toggle grid", true);
-
-          gridHelperX = gridHelperToX = 0;
-          gridHelperY = gridHelperToY = 0;
-          gridHelperStarted = false;
-          gridHelperSet = false;
-          gridInstructions1stLine.show();
-          gridInstructions2ndLine.show();
-
-          PImage cursorCross = loadImage("cursors/cursor_cross_32.png");
-          cursor(cursorCross);
-
-          newAppState = AppState.gridSetup;
-
-        } else {
-
-          enableController("Select map");
-          if ( grid.isSet() ) {
-            enableController("Add player token");
-            enableController("Add DM token");
-          }
-          enableController("Add/Remove walls");
-          enableController("Add/Remove doors");
-          enableController("Toggle UI");
-
-          gridInstructions1stLine.hide();
-          gridInstructions2ndLine.hide();
-
-          if ( grid.isSet() ) {
-            resources.setup();
-            logger.info("UserInterface: Resources setup done");
-          }
-
-          cursor(ARROW);
-
-          newAppState = AppState.idle;
-
-          logger.info("UserInterface: Grid setup done");
-
-        }
-
-        break;
-      case "Add/Remove walls":
-
-        Button addWall = (Button)controlEvent.getController();
-        Textlabel wallInstructions1stLine = (Textlabel)cp5.getController("Wall instructions - 1st line");
-        Textlabel wallInstructions2ndLine = (Textlabel)cp5.getController("Wall instructions - 2nd line");
-
-        if ( addWall.isOn() ) {
-
-          disableController("Select map");
-          disableController("Grid setup");
-          disableController("Add player token");
-          disableController("Add DM token");
-          disableController("Add/Remove doors");
-          disableController("Toggle UI");
-
-          playersLayer.reset();
-          dmLayer.reset();
-          obstacles.toggleDrawObstacles();
-
-          wallInstructions1stLine.show();
-          wallInstructions2ndLine.show();
-
-          PImage cursorCross = loadImage("cursors/cursor_cross_32.png");
-          cursor(cursorCross);
-
-          newWall = null;
-
-          newAppState = AppState.wallSetup;
-
-        } else {
-
-          enableController("Select map");
-          enableController("Grid setup");
-          if ( grid.isSet() ) {
-            enableController("Add player token");
-            enableController("Add DM token");
-          }
-          enableController("Add/Remove doors");
-          enableController("Toggle UI");
-
-          obstacles.toggleDrawObstacles();
-
-          wallInstructions1stLine.hide();
-          wallInstructions2ndLine.hide();
-
-          cursor(ARROW);
-
-          newWall = null;
-
-          logger.info("UserInterface: Walls setup done");
-
-          newAppState = AppState.idle;
-
-        }
-
-        break;
-      case "Add/Remove doors":
-
-        Button addDoor = (Button)controlEvent.getController();
-        Textlabel doorInstructions1stLine = (Textlabel)cp5.getController("Door instructions - 1st line");
-        Textlabel doorInstructions2ndLine = (Textlabel)cp5.getController("Door instructions - 2nd line");
-
-        if ( addDoor.isOn() ) {
-
-          disableController("Select map");
-          disableController("Grid setup");
-          disableController("Add player token");
-          disableController("Add DM token");
-          disableController("Add/Remove walls");
-          disableController("Toggle UI");
-
-          playersLayer.reset();
-          dmLayer.reset();
-          obstacles.toggleDrawObstacles();
-
-          doorInstructions1stLine.show();
-          doorInstructions2ndLine.show();
-
-          PImage cursorCross = loadImage("cursors/cursor_cross_32.png");
-          cursor(cursorCross);
-
-          newDoor = null;
-
-          newAppState = AppState.doorSetup;
-
-        } else {
-
-          enableController("Select map");
-          enableController("Grid setup");
-          if ( grid.isSet() ) {
-            enableController("Add player token");
-            enableController("Add DM token");
-          }
-          enableController("Add/Remove walls");
-          enableController("Toggle UI");
-
-          obstacles.toggleDrawObstacles();
-
-          doorInstructions1stLine.hide();
-          doorInstructions2ndLine.hide();
-
-          cursor(ARROW);
-
-          newDoor = null;
-
-          logger.info("UserInterface: Doors setup done");
-
-          newAppState = AppState.idle;
-
-        }
-
-        break;
-      case "Add player token":
-      case "Add DM token":
-
-        Button addToken = (Button)controlEvent.getController();
-
-        if ( addToken.isOn() ) {
-
-          playersLayer.reset();
-          dmLayer.reset();
-
-          File tokenFile = null;
-          if ( controllerName.equals("Add player token") )
-            selectInput("Select a token image:", "playerTokenImageSelected", tokenFile, this);
-          else
-            selectInput("Select a token image:", "dmTokenImageSelected", tokenFile, this);
-          fileDialogOpen = true;
-
-          disableController("Select map");
-          disableController("Grid setup");
-          if ( controllerName.equals("Add player token") )
-            disableController("Add DM token");
-          else
-            disableController("Add player token");
-          disableController("Add/Remove walls");
-          disableController("Add/Remove doors");
-          disableController("Toggle UI");
-
-          newAppState = AppState.tokenSetup;
-
-        } else {
-
-          enableController("Select map");
-          enableController("Grid setup");
-          if ( controllerName.equals("Add player token") )
-            enableController("Add DM token");
-          else
-            enableController("Add player token");
-          enableController("Add/Remove walls");
-          enableController("Add/Remove doors");
-          enableController("Toggle UI");
-
-          logger.info("UserInterface: Token setup done");
-
-          newAppState = AppState.idle;
-
-        }
-
-        break;
-      case "Switch active layer":
-
-        switch ( layerShown ) {
-          case players:
-            layerShown = LayerShown.dm;
-            logger.info("UserInterface: Layer switched to " + LayerShown.dm.toString());
-            break;
-          case dm:
-            layerShown = LayerShown.all;
-            logger.info("UserInterface: Layer switched to " + LayerShown.all.toString());
-            break;
-          case all:
-            layerShown = LayerShown.players;
-            logger.info("UserInterface: Layer switched to " + LayerShown.players.toString());
-            break;
-          default:
-            break;
-        }
-
-        obstacles.setRecalculateShadows(true);
-
-        break;
-      case "Switch environment lighting":
-
-        boolean switchLightingInWhichApp = getToggleState("Switch environment lighting toggle");
-
-        Illumination appIllumination = null;
-        if ( switchLightingInWhichApp )
-          appIllumination = obstacles.getIllumination();
-        else
-          appIllumination = obstacles.getPlayersAppIllumination();
-
-        if ( !switchLightingInWhichApp ) {
-          if ( appIllumination == Illumination.dimLight || appIllumination == Illumination.darkness ) {
-
-            uiDialogs.showConfirmDialog(
-              "This will change environment lighting in Players' App and might reveal\nparts of the map and enemies to players. Confirm?",
-              "Switch environment lighting in Players' App",
+              "This will reset the current scene. Confirm?",
+              "Create new scene",
               new Runnable() {
                 public void run() {
                   uiConfirmDialogAnswer = true;
@@ -1486,304 +1167,604 @@ public class UserInterface {
               break;
 
           }
-        }
 
-        switch ( appIllumination ) {
-          case brightLight:
-            if ( switchLightingInWhichApp )
-              obstacles.setIllumination(Illumination.darkness);
-            else
-              obstacles.setPlayersAppIllumination(Illumination.darkness);
-            break;
-          case dimLight:
-            if ( switchLightingInWhichApp )
-              obstacles.setIllumination(Illumination.brightLight);
-            else
-              obstacles.setPlayersAppIllumination(Illumination.brightLight);
-            break;
-          case darkness:
-            if ( switchLightingInWhichApp )
-              obstacles.setIllumination(Illumination.dimLight);
-            else
-              obstacles.setPlayersAppIllumination(Illumination.dimLight);
-            break;
-          default:
-            break;
-        }
+          reset();
 
-        if ( switchLightingInWhichApp ) {
-          logger.info("UserInterface: Environment lighting switched to " + obstacles.getIllumination().getName());
+          logger.info("UserInterface: New empty scene created");
+
+          break;
+        case "Save scene":
+
+          File sceneFolder = null;
+          selectFolder("Select folder where to save scene:", "saveScene", sceneFolder, this);
+          fileDialogOpen = true;
+
+          break;
+        case "Load scene":
+
+          if ( map.isSet() ) {
+
+            uiDialogs.showConfirmDialog(
+              "This will replace the current scene. Confirm?",
+              "Load scene",
+              new Runnable() {
+                public void run() {
+                  uiConfirmDialogAnswer = true;
+                }
+              },
+              new Runnable() {
+                public void run() {
+                  uiConfirmDialogAnswer = false;
+                }
+              }
+            );
+
+            if ( !uiConfirmDialogAnswer )
+              break;
+
+          }
+
+          File sceneFile = null;
+          selectInput("Select scene to load:", "loadScene", sceneFile, this);
+          fileDialogOpen = true;
+
+          break;
+        case "Quit":
+
+          uiDialogs.showConfirmDialog(
+            "Quit dungeoneering?",
+            "Quit",
+            new Runnable() {
+              public void run() {
+                uiConfirmDialogAnswer = true;
+              }
+            },
+            new Runnable() {
+              public void run() {
+                uiConfirmDialogAnswer = false;
+              }
+            }
+          );
+
+          if ( !uiConfirmDialogAnswer )
+            break;
+
+          initiative.clear();
+          obstacles.clear();
+          playersLayer.clear();
+          dmLayer.clear();
+          grid.clear();
+          map.clear();
+
+          if ( appMode == AppMode.dm || appMode == AppMode.players )
+            sharedDataInstance.shutdown();
+
+          logger.info("UserInterface: Exiting dungeoneering");
+
+          exit();
+
+          break;
+        case "Select map":
+
+          if ( map.isSet() ) {
+
+            uiDialogs.showConfirmDialog(
+              "This will reset the current scene. Confirm?",
+              "Select new map",
+              new Runnable() {
+                public void run() {
+                  uiConfirmDialogAnswer = true;
+                }
+              },
+              new Runnable() {
+                public void run() {
+                  uiConfirmDialogAnswer = false;
+                }
+              }
+            );
+
+            if ( !uiConfirmDialogAnswer )
+              break;
+
+          }
+
+          File mapFile = null;
+          selectInput("Select a map:", "mapFileSelected", mapFile, this);
+          fileDialogOpen = true;
+
+          break;
+        case "Map logo":
+
+          Button logo = (Button)controlEvent.getController();
+          String link = logo.getStringValue();
+          if ( !isEmpty(link) )
+            link(link);
+
+          break;
+        case "Grid setup":
+
+          Button gridSetup = (Button)controlEvent.getController();
+          Textlabel gridInstructions1stLine = (Textlabel)cp5.getController("Grid instructions - 1st line");
+          Textlabel gridInstructions2ndLine = (Textlabel)cp5.getController("Grid instructions - 2nd line");
+
+          if ( gridSetup.isOn() ) {
+
+            if ( grid.isSet() ) {
+
+              uiDialogs.showConfirmDialog(
+                "This will reset the current scene, leaving only the selected map. Confirm?",
+                "New grid setup",
+                new Runnable() {
+                  public void run() {
+                    uiConfirmDialogAnswer = true;
+                  }
+                },
+                new Runnable() {
+                  public void run() {
+                    uiConfirmDialogAnswer = false;
+                  }
+                }
+              );
+
+              if ( !uiConfirmDialogAnswer ) {
+
+                gridSetup.setBroadcast(false);
+                gridSetup.setOff();
+                gridSetup.setBroadcast(true);
+
+                break;
+
+              }
+
+            }
+
+            initiative.clear();
+            playersLayer.clear();
+            dmLayer.clear();
+            grid.clear();
+
+            map.reset();
+
+            disableController("Select map");
+            disableController("Add player token");
+            disableController("Add DM token");
+            disableController("Add/Remove walls");
+            disableController("Add/Remove doors");
+            disableController("Toggle UI");
+
+            setSwitchButtonState("Toggle grid", true);
+
+            gridHelperX = gridHelperToX = 0;
+            gridHelperY = gridHelperToY = 0;
+            gridHelperStarted = false;
+            gridHelperSet = false;
+            gridInstructions1stLine.show();
+            gridInstructions2ndLine.show();
+
+            PImage cursorCross = loadImage("cursors/cursor_cross_32.png");
+            cursor(cursorCross);
+
+            newAppState = AppState.gridSetup;
+
+          } else {
+
+            enableController("Select map");
+            if ( grid.isSet() ) {
+              enableController("Add player token");
+              enableController("Add DM token");
+            }
+            enableController("Add/Remove walls");
+            enableController("Add/Remove doors");
+            enableController("Toggle UI");
+
+            gridInstructions1stLine.hide();
+            gridInstructions2ndLine.hide();
+
+            if ( grid.isSet() ) {
+              resources.setupBasedOnGrid();
+              logger.info("UserInterface: Resources setup done");
+            }
+
+            cursor(ARROW);
+
+            newAppState = AppState.idle;
+
+            logger.info("UserInterface: Grid setup done");
+
+          }
+
+          break;
+        case "Add/Remove walls":
+
+          Button addWall = (Button)controlEvent.getController();
+          Textlabel wallInstructions1stLine = (Textlabel)cp5.getController("Wall instructions - 1st line");
+          Textlabel wallInstructions2ndLine = (Textlabel)cp5.getController("Wall instructions - 2nd line");
+
+          if ( addWall.isOn() ) {
+
+            disableController("Select map");
+            disableController("Grid setup");
+            disableController("Add player token");
+            disableController("Add DM token");
+            disableController("Add/Remove doors");
+            disableController("Toggle UI");
+
+            playersLayer.reset();
+            dmLayer.reset();
+            obstacles.toggleDrawObstacles();
+
+            wallInstructions1stLine.show();
+            wallInstructions2ndLine.show();
+
+            PImage cursorCross = loadImage("cursors/cursor_cross_32.png");
+            cursor(cursorCross);
+
+            newWall = null;
+
+            newAppState = AppState.wallSetup;
+
+          } else {
+
+            enableController("Select map");
+            enableController("Grid setup");
+            if ( grid.isSet() ) {
+              enableController("Add player token");
+              enableController("Add DM token");
+            }
+            enableController("Add/Remove doors");
+            enableController("Toggle UI");
+
+            obstacles.toggleDrawObstacles();
+
+            wallInstructions1stLine.hide();
+            wallInstructions2ndLine.hide();
+
+            cursor(ARROW);
+
+            newWall = null;
+
+            logger.info("UserInterface: Walls setup done");
+
+            newAppState = AppState.idle;
+
+          }
+
+          break;
+        case "Add/Remove doors":
+
+          Button addDoor = (Button)controlEvent.getController();
+          Textlabel doorInstructions1stLine = (Textlabel)cp5.getController("Door instructions - 1st line");
+          Textlabel doorInstructions2ndLine = (Textlabel)cp5.getController("Door instructions - 2nd line");
+
+          if ( addDoor.isOn() ) {
+
+            disableController("Select map");
+            disableController("Grid setup");
+            disableController("Add player token");
+            disableController("Add DM token");
+            disableController("Add/Remove walls");
+            disableController("Toggle UI");
+
+            playersLayer.reset();
+            dmLayer.reset();
+            obstacles.toggleDrawObstacles();
+
+            doorInstructions1stLine.show();
+            doorInstructions2ndLine.show();
+
+            PImage cursorCross = loadImage("cursors/cursor_cross_32.png");
+            cursor(cursorCross);
+
+            newDoor = null;
+
+            newAppState = AppState.doorSetup;
+
+          } else {
+
+            enableController("Select map");
+            enableController("Grid setup");
+            if ( grid.isSet() ) {
+              enableController("Add player token");
+              enableController("Add DM token");
+            }
+            enableController("Add/Remove walls");
+            enableController("Toggle UI");
+
+            obstacles.toggleDrawObstacles();
+
+            doorInstructions1stLine.hide();
+            doorInstructions2ndLine.hide();
+
+            cursor(ARROW);
+
+            newDoor = null;
+
+            logger.info("UserInterface: Doors setup done");
+
+            newAppState = AppState.idle;
+
+          }
+
+          break;
+        case "Add player token":
+        case "Add DM token":
+
+          Button addToken = (Button)controlEvent.getController();
+
+          if ( addToken.isOn() ) {
+
+            playersLayer.reset();
+            dmLayer.reset();
+
+            File tokenFile = null;
+            if ( controllerName.equals("Add player token") )
+              selectInput("Select a token image:", "playerTokenImageSelected", tokenFile, this);
+            else
+              selectInput("Select a token image:", "dmTokenImageSelected", tokenFile, this);
+            fileDialogOpen = true;
+
+            disableController("Select map");
+            disableController("Grid setup");
+            if ( controllerName.equals("Add player token") )
+              disableController("Add DM token");
+            else
+              disableController("Add player token");
+            disableController("Add/Remove walls");
+            disableController("Add/Remove doors");
+            disableController("Toggle UI");
+
+            newAppState = AppState.tokenSetup;
+
+          } else {
+
+            enableController("Select map");
+            enableController("Grid setup");
+            if ( controllerName.equals("Add player token") )
+              enableController("Add DM token");
+            else
+              enableController("Add player token");
+            enableController("Add/Remove walls");
+            enableController("Add/Remove doors");
+            enableController("Toggle UI");
+
+            logger.info("UserInterface: Token setup done");
+
+            newAppState = AppState.idle;
+
+          }
+
+          break;
+        case "Switch active layer":
+
+          switch ( layerShown ) {
+            case players:
+              layerShown = LayerShown.dm;
+              logger.info("UserInterface: Layer switched to " + LayerShown.dm.toString());
+              break;
+            case dm:
+              layerShown = LayerShown.all;
+              logger.info("UserInterface: Layer switched to " + LayerShown.all.toString());
+              break;
+            case all:
+              layerShown = LayerShown.players;
+              logger.info("UserInterface: Layer switched to " + LayerShown.players.toString());
+              break;
+            default:
+              break;
+          }
+
           obstacles.setRecalculateShadows(true);
-        } else {
-          logger.info("UserInterface: Players' App environment lighting switched to " + obstacles.getPlayersAppIllumination().getName());
-          pushSceneSync(false);
-        }
 
-        break;
-      case "Toggle grid":
-
-        grid.toggleDrawGrid();
-        grid.incrementGridVersion();
-
-        break;
-      case "Toggle walls":
-
-        obstacles.toggleDrawObstacles();
-
-        break;
-      case "Toggle UI":
-
-        Button toggleUi = (Button)controlEvent.getController();
-
-        if ( toggleUi.isOn() ) {
-
-          togglableControllers.show();
-          logger.info("UserInterface: UI buttons shown");
-
-        } else {
-
-          togglableControllers.hide();
-          logger.info("UserInterface: UI buttons hidden");
-
-        }
-
-        break;
-      case "Toggle camera pan":
-
-        if ( map != null && map.isSet() )
-          map.togglePan();
-
-        break;
-      case "Toggle camera zoom":
-
-        if ( map != null && map.isSet() )
-          map.toggleZoom();
-
-        break;
-      case "Toggle touch screen mode":
-
-        cp5.isTouch = !cp5.isTouch;
-        logger.info("UserInterface: Touch screen mode " + (cp5.isTouch ? "enabled" : "disabled"));
-
-        break;
-      case "Toggle combat mode":
-
-        initiative.toggleDrawInitiativeOrder();
-        initiative.incrementInitiativeVersion();
-
-        break;
-      case "Toggle mute sound":
-
-        if ( map != null && map.isSet() )
-          map.toggleMute();
-
-        break;
-      case "Lock map pan and zoom":
-
-        if ( map != null && map.isSet() ) {
-          map.togglePan();
-          map.toggleZoom();
-        }
-
-        break;
-      case "Conditions":
-      case "Light Sources":
-      case "Sight Types":
-      case "Sizes":
-      case "Settings":
-
-        menuItemClicked = true;
-
-        break;
-      case "Blinded":
-      case "Bloodied":
-      case "Burned":
-      case "Charmed":
-      case "Dead":
-      case "Deafened":
-      case "Frightened":
-      case "Grappled":
-      case "Hidden":
-      case "Incapacitated":
-      case "Invisible":
-      case "Paralyzed":
-      case "Petrified":
-      case "Poisoned":
-      case "Prone":
-      case "Restrained":
-      case "Stunned":
-      case "Unconscious":
-
-        if ( rightClickedToken == null )
           break;
+        case "Switch environment lighting":
 
-        resourceName = controllerName;
-        conditionTemplate = resources.getCondition(resourceName, rightClickedToken.getSize());
-        if ( conditionTemplate == null ) {
-          logger.error("Resource: Condition " + resourceName + " not found");
+          boolean switchLightingInWhichApp = getToggleState("Switch environment lighting toggle");
+
+          Illumination appIllumination = null;
+          if ( switchLightingInWhichApp )
+            appIllumination = obstacles.getIllumination();
+          else
+            appIllumination = obstacles.getPlayersAppIllumination();
+
+          if ( !switchLightingInWhichApp ) {
+            if ( appIllumination == Illumination.dimLight || appIllumination == Illumination.darkness ) {
+
+              uiDialogs.showConfirmDialog(
+                "This will change environment lighting in Players' App and might reveal\nparts of the map and enemies to players. Confirm?",
+                "Switch environment lighting in Players' App",
+                new Runnable() {
+                  public void run() {
+                    uiConfirmDialogAnswer = true;
+                  }
+                },
+                new Runnable() {
+                  public void run() {
+                    uiConfirmDialogAnswer = false;
+                  }
+                }
+              );
+
+              if ( !uiConfirmDialogAnswer )
+                break;
+
+            }
+          }
+
+          switch ( appIllumination ) {
+            case brightLight:
+              if ( switchLightingInWhichApp )
+                obstacles.setIllumination(Illumination.darkness);
+              else
+                obstacles.setPlayersAppIllumination(Illumination.darkness);
+              break;
+            case dimLight:
+              if ( switchLightingInWhichApp )
+                obstacles.setIllumination(Illumination.brightLight);
+              else
+                obstacles.setPlayersAppIllumination(Illumination.brightLight);
+              break;
+            case darkness:
+              if ( switchLightingInWhichApp )
+                obstacles.setIllumination(Illumination.dimLight);
+              else
+                obstacles.setPlayersAppIllumination(Illumination.dimLight);
+              break;
+            default:
+              break;
+          }
+
+          if ( switchLightingInWhichApp ) {
+            logger.info("UserInterface: Environment lighting switched to " + obstacles.getIllumination().getName());
+            obstacles.setRecalculateShadows(true);
+          } else {
+            logger.info("UserInterface: Players' App environment lighting switched to " + obstacles.getPlayersAppIllumination().getName());
+            pushSceneSync(false);
+          }
+
           break;
-        }
+        case "Toggle grid":
 
-        rightClickedToken.toggleCondition(conditionTemplate);
-        if ( conditionTemplate.disablesTarget() )
+          grid.toggleDrawGrid();
+          grid.incrementGridVersion();
+
+          break;
+        case "Toggle walls":
+
+          obstacles.toggleDrawObstacles();
+
+          break;
+        case "Toggle UI":
+
+          Button toggleUi = (Button)controlEvent.getController();
+
+          if ( toggleUi.isOn() ) {
+
+            togglableControllers.show();
+            logger.info("UserInterface: UI buttons shown");
+
+          } else {
+
+            togglableControllers.hide();
+            logger.info("UserInterface: UI buttons hidden");
+
+          }
+
+          break;
+        case "Toggle camera pan":
+
+          if ( map != null && map.isSet() )
+            map.togglePan();
+
+          break;
+        case "Toggle camera zoom":
+
+          if ( map != null && map.isSet() )
+            map.toggleZoom();
+
+          break;
+        case "Toggle touch screen mode":
+
+          cp5.isTouch = !cp5.isTouch;
+          logger.info("UserInterface: Touch screen mode " + (cp5.isTouch ? "enabled" : "disabled"));
+
+          break;
+        case "Toggle combat mode":
+
+          initiative.toggleDrawInitiativeOrder();
+          initiative.incrementInitiativeVersion();
+
+          break;
+        case "Toggle mute sound":
+
+          if ( map != null && map.isSet() )
+            map.toggleMute();
+
+          break;
+        case "Lock map pan and zoom":
+
+          if ( map != null && map.isSet() ) {
+            map.togglePan();
+            map.toggleZoom();
+          }
+
+          break;
+        case "Conditions":
+        case "Common Light Sources":
+        case "Spell Light Sources":
+        case "Sight Types":
+        case "Sizes":
+        case "Settings":
+
+          menuItemClicked = true;
+
+          break;
+        case "Change token layer":
+
+          if ( rightClickedToken == null )
+            break;
+
+          if ( playersLayer.hasToken(rightClickedToken) ) {
+
+            logger.info("Switching token " + rightClickedToken.getName() + " from " + playersLayer.getName() + " to " + dmLayer.getName());
+            playersLayer.removeToken(rightClickedToken, false);
+            dmLayer.addToken(rightClickedToken);
+
+          } else {
+
+            logger.info("Switching token " + rightClickedToken.getName() + " from " + dmLayer.getName() + " to " + playersLayer.getName());
+            dmLayer.removeToken(rightClickedToken, false);
+            playersLayer.addToken(rightClickedToken);
+
+          }
+
           obstacles.setRecalculateShadows(true);
-        hideMenu(0, 0);
+          hideMenu(0, 0);
 
-        break;
-      case "Candle":
-      case "Torch":
-      case "Lamp":
-      case "Hooded Lantern":
-      case "Daylight":
-
-        if ( rightClickedToken == null )
           break;
+        case "Remove token":
 
-        resourceName = controllerName;
-        lightTemplate = resources.getCommonLightSource(resourceName);
-        if ( lightTemplate == null ) {
-          logger.error("Resource: Common light source " + resourceName + " not found");
+          if ( rightClickedToken == null )
+            break;
+
+          if ( playersLayer.hasToken(rightClickedToken) ) {
+
+            logger.info("Removing token " + rightClickedToken.getName() + " from " + playersLayer.getName());
+            playersLayer.removeToken(rightClickedToken);
+
+          } else {
+
+            logger.info("Removing token " + rightClickedToken.getName() + " from " + dmLayer.getName());
+            dmLayer.removeToken(rightClickedToken);
+
+          }
+
+          obstacles.setRecalculateShadows(true);
+          hideMenu(0, 0);
+
           break;
-        }
+        case "Toggle initiative":
 
-        rightClickedToken.toggleLightSource(new Light(lightTemplate.getName(), lightTemplate.getBrightLightRadius(), lightTemplate.getDimLightRadius()));
-        obstacles.setRecalculateShadows(true);
-        hideMenu(0, 0);
+          if ( rightClickedToken == null )
+            break;
 
-        break;
-      case "Light spell":
+          logger.info("Toggle token group " + rightClickedToken.getName() + " in initiative");
+          if ( playersLayer.hasToken(rightClickedToken) )
+            playersLayer.toggleTokenGroupInInitiative(rightClickedToken);
+          else
+            dmLayer.toggleTokenGroupInInitiative(rightClickedToken);
 
-        if ( rightClickedToken == null )
+          obstacles.setRecalculateShadows(true);
+          hideMenu(0, 0);
+
+          if ( appMode == AppMode.standalone || appMode == AppMode.dm ) {
+            setSwitchButtonState("Toggle combat mode", true);
+          } else if ( appMode == AppMode.players ) {
+            if ( !initiative.getDrawInitiativeOrder() )
+              initiative.toggleDrawInitiativeOrder();
+          }
+
           break;
-
-        resourceName = "Light";
-        lightTemplate = resources.getSpellLightSource(resourceName);
-        if ( lightTemplate == null ) {
-          logger.error("Resource: Spell light source " + resourceName + " not found");
-          break;
-        }
-
-        rightClickedToken.toggleLightSource(new Light(lightTemplate.getName(), lightTemplate.getBrightLightRadius(), lightTemplate.getDimLightRadius()));
-        obstacles.setRecalculateShadows(true);
-        hideMenu(0, 0);
-
-        break;
-      case "Blindsight 10'":
-      case "Blindsight 30'":
-      case "Blindsight 60'":
-      case "Blindsight 90'":
-      case "Blindsight 120'":
-      case "Darkvision 10'":
-      case "Darkvision 30'":
-      case "Darkvision 60'":
-      case "Darkvision 90'":
-      case "Darkvision 120'":
-      case "Truesight 120'":
-
-        if ( rightClickedToken == null )
-          break;
-
-        resourceName = controllerName;
-        lightTemplate = resources.getSightType(resourceName);
-        if ( lightTemplate == null ) {
-          logger.error("Resource: Sight type " + resourceName + " not found");
-          break;
-        }
-
-        rightClickedToken.toggleSightType(new Light(lightTemplate.getName(), lightTemplate.getBrightLightRadius(), lightTemplate.getDimLightRadius()));
-        obstacles.setRecalculateShadows(true);
-        hideMenu(0, 0);
-
-        break;
-      case "Tiny":
-      case "Small":
-      case "Medium":
-      case "Large":
-      case "Huge":
-      case "Gargantuan":
-
-        if ( rightClickedToken == null )
-          break;
-
-        resourceName = controllerName;
-        sizeTemplate = resources.getSize(resourceName);
-        if ( sizeTemplate == null ) {
-          logger.error("Resource: Size " + resourceName + " not found");
-          break;
-        }
-
-        rightClickedToken.setSize(new Size(sizeTemplate.getName(), sizeTemplate.getResizeFactor(), sizeTemplate.isCentered()), resources);
-        obstacles.setRecalculateShadows(true);
-        hideMenu(0, 0);
-
-        break;
-
-      case "Change token layer":
-
-        if ( rightClickedToken == null )
-          break;
-
-        if ( playersLayer.hasToken(rightClickedToken) ) {
-
-          logger.info("Switching token " + rightClickedToken.getName() + " from " + playersLayer.getName() + " to " + dmLayer.getName());
-          playersLayer.removeToken(rightClickedToken, false);
-          dmLayer.addToken(rightClickedToken);
-
-        } else {
-
-          logger.info("Switching token " + rightClickedToken.getName() + " from " + dmLayer.getName() + " to " + playersLayer.getName());
-          dmLayer.removeToken(rightClickedToken, false);
-          playersLayer.addToken(rightClickedToken);
-
-        }
-
-        obstacles.setRecalculateShadows(true);
-        hideMenu(0, 0);
-
-        break;
-      case "Remove token":
-
-        if ( rightClickedToken == null )
-          break;
-
-        if ( playersLayer.hasToken(rightClickedToken) ) {
-
-          logger.info("Removing token " + rightClickedToken.getName() + " from " + playersLayer.getName());
-          playersLayer.removeToken(rightClickedToken);
-
-        } else {
-
-          logger.info("Removing token " + rightClickedToken.getName() + " from " + dmLayer.getName());
-          dmLayer.removeToken(rightClickedToken);
-
-        }
-
-        obstacles.setRecalculateShadows(true);
-        hideMenu(0, 0);
-
-        break;
-      case "Toggle initiative":
-
-        if ( rightClickedToken == null )
-          break;
-
-        logger.info("Toggle token group " + rightClickedToken.getName() + " in initiative");
-        if ( playersLayer.hasToken(rightClickedToken) )
-          playersLayer.toggleTokenGroupInInitiative(rightClickedToken);
-        else
-          dmLayer.toggleTokenGroupInInitiative(rightClickedToken);
-
-        obstacles.setRecalculateShadows(true);
-        hideMenu(0, 0);
-
-        if ( appMode == AppMode.standalone || appMode == AppMode.dm ) {
-          setSwitchButtonState("Toggle combat mode", true);
-        } else if ( appMode == AppMode.players ) {
-          if ( !initiative.getDrawInitiativeOrder() )
-            initiative.toggleDrawInitiativeOrder();
-        }
-
-        break;
+      }
     }
 
     return newAppState;
@@ -2185,12 +2166,6 @@ public class UserInterface {
 
     Token token;
 
-    String controllerName;
-    String conditionName;
-    String lightSourceName;
-    String sightTypeName;
-    String sizeName;
-
     token = playersLayer.getToken(_mouseX, _mouseY);
     if ( token == null )
       if ( appMode == AppMode.standalone || appMode == AppMode.dm )
@@ -2201,46 +2176,42 @@ public class UserInterface {
     rightClickedToken = token;
 
     // Turn off all menu buttons
-    ArrayList<HashMap<String, String>> toControllerMaps = new ArrayList<HashMap<String, String>>(
+    ArrayList<ArrayList<String>> nestedListOfControllerNames = new ArrayList<ArrayList<String>>(
       Arrays.asList(
-        conditionToController,
-        lightSourceToController,
-        sightTypeToController,
-        sizeToController
+        conditionControllers,
+        commonLightSourceControllers,
+        spellLightSourceControllers,
+        sightTypeControllers,
+        sizeControllers
       )
     );
-    for ( HashMap<String, String> toControllerMap: toControllerMaps ) {
-      for ( String resourceName: toControllerMap.keySet() ) {
-        controllerName = toControllerMap.get(resourceName);
-        setSwitchButtonState(controllerName, false, false);
-      }
+	  List<String> flatListOfControllerNames = nestedListOfControllerNames.stream()
+        .flatMap(List::stream)
+        .collect(Collectors.toList());
+    for ( String controllerName: flatListOfControllerNames ) {
+      setSwitchButtonState(controllerName, false, false);
     }
 
     // Turn on condition buttons that are active for this token
     for ( Condition condition: rightClickedToken.getConditions() ) {
-      conditionName = condition.getName();
-      controllerName = conditionToController.get(conditionName);
-      setSwitchButtonState(controllerName, true, false);
+      if ( conditionControllers.contains(condition.getName()) )
+        setSwitchButtonState(condition.getName(), true, false);
     }
 
     // Turn on light source buttons that are active for this token
     for ( Light lightSource: rightClickedToken.getLightSources() ) {
-      lightSourceName = lightSource.getName();
-      controllerName = lightSourceToController.get(lightSourceName);
-      setSwitchButtonState(controllerName, true, false);
+      if ( commonLightSourceControllers.contains(lightSource.getName()) || spellLightSourceControllers.contains(lightSource.getName()) )
+        setSwitchButtonState(lightSource.getName(), true, false);
     }
 
     // Turn on sight type buttons that are active for this token
     for ( Light sightType: rightClickedToken.getSightTypes() ) {
-      sightTypeName = sightType.getName();
-      controllerName = sightTypeToController.get(sightTypeName);
-      setSwitchButtonState(controllerName, true, false);
+      if ( sightTypeControllers.contains(sightType.getName()) )
+        setSwitchButtonState(sightType.getName(), true, false);
     }
 
     // Turn on the size button that is active for this token
-    sizeName = rightClickedToken.getSize().getName();
-    controllerName = sizeToController.get(sizeName);
-    setSwitchButtonState(controllerName, true, false);
+    setSwitchButtonState(rightClickedToken.getSize().getName(), true, false);
 
     tokenMenu.setPosition(_mouseX, _mouseY);
     tokenMenu.show();
@@ -2801,7 +2772,7 @@ public class UserInterface {
 
       if ( grid.isSet() ) {
 
-        resources.setup();
+        resources.setupBasedOnGrid();
         logger.debug("UserInterface: Resources setup");
 
       }
@@ -3007,7 +2978,7 @@ public class UserInterface {
 
       token = new Token(canvas, grid, obstacles);
       Cell cell = grid.getCellAt(tokenRow, tokenColumn);
-      Light lineOfSightTemplate = resources.getSightType("Line of Sight");
+      Light lineOfSightTemplate = resources.getLineOfSight();
       Light tokenLineOfSight = new Light(lineOfSightTemplate.getName(), lineOfSightTemplate.getBrightLightRadius(), lineOfSightTemplate.getDimLightRadius());
       token.setup(tokenName, tokenId, tokenVersion, sceneUpdateListener, tokenImagePath, grid.getCellWidth(), grid.getCellHeight(), tokenSize, tokenLineOfSight);
       token.setCell(cell);
@@ -3972,7 +3943,11 @@ public class UserInterface {
       return;
 
     String controllerImageBaseName = controller.getStringValue();
-    PImage[] controllerImages = {loadImage("icons/" + controllerImageBaseName + "_idle.png"), loadImage("icons/" + controllerImageBaseName + "_over.png"), loadImage("icons/" + controllerImageBaseName + "_click.png")};
+    PImage[] controllerImages = {
+      loadImage("icons/" + controllerImageBaseName + "_idle.png"),
+      loadImage("icons/" + controllerImageBaseName + "_over.png"),
+      loadImage("icons/" + controllerImageBaseName + "_click.png")
+    };
     for ( PImage img: controllerImages )
       if ( img.width != squareButtonWidth || img.height != squareButtonHeight )
         img.resize(squareButtonWidth, squareButtonHeight);
@@ -4128,8 +4103,10 @@ public class UserInterface {
     int openItemHeight = 0;
     if ( controllerIsAllowed(conditionMenuControllers.getName()) && conditionMenuControllers.isOpen() )
       openItemHeight = conditionMenuControllers.getBackgroundHeight();
-    else if ( controllerIsAllowed(lightSourceMenuControllers.getName()) && lightSourceMenuControllers.isOpen() )
-      openItemHeight = lightSourceMenuControllers.getBackgroundHeight();
+    else if ( controllerIsAllowed(commonLightSourceMenuControllers.getName()) && commonLightSourceMenuControllers.isOpen() )
+      openItemHeight = commonLightSourceMenuControllers.getBackgroundHeight();
+    else if ( controllerIsAllowed(spellLightSourceMenuControllers.getName()) && spellLightSourceMenuControllers.isOpen() )
+      openItemHeight = spellLightSourceMenuControllers.getBackgroundHeight();
     else if ( controllerIsAllowed(sightTypeMenuControllers.getName()) && sightTypeMenuControllers.isOpen() )
       openItemHeight = sightTypeMenuControllers.getBackgroundHeight();
     else if ( controllerIsAllowed(sizeMenuControllers.getName()) && sizeMenuControllers.isOpen() )
@@ -4137,13 +4114,13 @@ public class UserInterface {
     else if ( controllerIsAllowed(settingsMenuControllers.getName()) && settingsMenuControllers.isOpen() )
       openItemHeight = settingsMenuControllers.getBackgroundHeight();
 
-    // menu bar
+    // Menu bar
     float barStartX = tokenMenu.getPosition()[0];
     float barStartY = tokenMenu.getPosition()[1];
     float barEndX = barStartX + tokenMenu.getWidth();
     float barEndY = barStartY + menuBarHeight * tokenMenu.size() + tokenMenu.size()-1;
 
-    // menu item
+    // Menu item
     float itemStartX = barStartX;
     float itemStartY = barEndY;
     float itemEndX = barEndX;

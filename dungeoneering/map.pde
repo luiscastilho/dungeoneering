@@ -244,7 +244,7 @@ class Map {
     if ( !panEnabled )
       return;
 
-    // avoid pmouseX/pmouseY starting too far from mouseX/mouseY in touch screens
+    // Avoid pmouseX/pmouseY starting too far from mouseX/mouseY in touch screens
     if ( abs(_pmouseX-_mouseX) > 100 || abs(_pmouseY-_mouseY) > 100 ) {
 
       _pmouseX = _mouseX;
