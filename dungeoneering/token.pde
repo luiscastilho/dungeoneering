@@ -196,10 +196,19 @@ class Token {
 
   boolean setCell(Cell _cell) {
 
+    return setCell(_cell, true);
+
+  }
+
+  boolean setCell(Cell _cell, boolean checkIfCellChanged) {
+
     if ( _cell == null )
       return false;
 
-    if ( cell != null && cell.equals(_cell) )
+    // If moving a token, checkIfCellChanged should be true - so extraCells is only updated when the main cell changes
+    // If setting token size, checkIfCellChanged should be false - extraCells should be updated based on the new size
+    // By default, checkIfCellChanged should be true
+    if ( cell != null && checkIfCellChanged && cell.equals(_cell) )
       return false;
 
     cell = _cell;
@@ -500,7 +509,7 @@ class Token {
     image = loadImage(imagePath);
     image.resize(round(cell.getCellWidth() * size.getResizeFactor()), round(cell.getCellHeight() * size.getResizeFactor()));
 
-    setCell(cell);
+    setCell(cell, false);
 
     for ( Condition condition: conditions )
       resizedConditions.add(resources.getCondition(condition.getName(), size));
