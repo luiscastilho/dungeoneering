@@ -95,7 +95,7 @@ Bugs can be reported through the project's [issues](https://github.com/luiscasti
 
 ## License
 
-Copyright © 2019-2021 Luis Castilho
+Copyright © 2019-2023 Luis Castilho
 
 dungeoneering is licensed under the GPLv3. See [LICENSE](https://github.com/luiscastilho/dungeoneering/blob/main/LICENSE.md) for details. dungeoneering also uses components from other open-source projects. Their code and license can be found at these links:
 
@@ -108,7 +108,7 @@ dungeoneering is licensed under the GPLv3. See [LICENSE](https://github.com/luis
 - [rotating-fos](https://github.com/vy/rotating-fos){:target="_blank" rel="noopener"}
 - [Hazelcast IMDG](https://github.com/hazelcast/hazelcast){:target="_blank" rel="noopener"}
 
-The icons used in the application were either released under a public-domain-like license ([CC0](https://creativecommons.org/share-your-work/public-domain/cc0/){:target="_blank" rel="noopener"}) or are free to use with attribution ([CC BY 3.0](https://creativecommons.org/licenses/by/3.0/){:target="_blank" rel="noopener"}, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){:target="_blank" rel="noopener"}). Thanks to the following authors from the [Noun Project](https://thenounproject.com/){:target="_blank" rel="noopener"}: Andrew Nielsen; Tokka Elkholy; Sweet Farm; HeadsOfBirds; Mike Rowe; Denis; Yu luck; Patrick Morrison; and Sergey Demushkin. Thanks to Delapouite, Lorc, and sbed from [Game-icons.net](https://game-icons.net/){:target="_blank" rel="noopener"}. And thanks to Freepik and Good Ware from [Flaticon](https://www.flaticon.com/){:target="_blank" rel="noopener"}.
+The icons used in dungeoneering were either released under a public-domain-like license ([CC0](https://creativecommons.org/share-your-work/public-domain/cc0/){:target="_blank" rel="noopener"}) or are free to use with attribution ([CC BY 3.0](https://creativecommons.org/licenses/by/3.0/){:target="_blank" rel="noopener"}, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/){:target="_blank" rel="noopener"}). Thanks to the following authors from the [Noun Project](https://thenounproject.com/){:target="_blank" rel="noopener"}: Andrew Nielsen; Tokka Elkholy; Sweet Farm; HeadsOfBirds; Mike Rowe; Denis; Yu luck; Patrick Morrison; and Sergey Demushkin. Thanks to Delapouite, Lorc, and sbed from [Game-icons.net](https://game-icons.net/){:target="_blank" rel="noopener"}. And thanks to Freepik and Good Ware from [Flaticon](https://www.flaticon.com/){:target="_blank" rel="noopener"}.
 
 
 

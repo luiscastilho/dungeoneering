@@ -3,4 +3,4 @@ dungeoneering is a free and slimmed down virtual tabletop (VTT) that can be used
 
 Website with more info and download links: [dungeoneering.app](https://dungeoneering.app/)
 
-Copyright © 2019-2021 Luis Castilho
+Copyright © 2019-2023 Luis Castilho
