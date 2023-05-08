@@ -45,11 +45,13 @@ public class UserInterface {
 
   Token rightClickedToken;
 
+  int controllerSectionsSpacing;
   int controllerBarsSpacing;
   int controllersSpacing;
 
   int squareButtonWidth, squareButtonHeight;
   int instructionsHeight;
+  int instructionsMaxWidth;
   int menuBarHeight;
   int toggleWidth, toggleHeight;
 
@@ -170,25 +172,27 @@ public class UserInterface {
 
     rightClickedToken = null;
 
+    controllerSectionsSpacing = round(min(canvas.width, canvas.height) * 0.05);
     controllerBarsSpacing = 50;
     controllersSpacing = 5;
 
     squareButtonWidth = squareButtonHeight = 50;
-    instructionsHeight = 15;
+    instructionsHeight = 20;
+    instructionsMaxWidth = round(canvas.width * 0.5 - canvas.width * 0.15);
     menuBarHeight = 35;
     toggleWidth = 40;
     toggleHeight = 20;
 
-    controllersTopLeftX = round(min(canvas.width, canvas.height) * 0.05);
-    controllersTopLeftY = round(min(canvas.width, canvas.height) * 0.05);
-    controllersTopLeftInitialX = controllersTopLeftX;
-    controllersTopLeftInitialY = controllersTopLeftY;
+    controllersTopLeftX = controllerSectionsSpacing;
+    controllersTopLeftY = controllerSectionsSpacing;
+    controllersTopLeftInitialX = controllerSectionsSpacing;
+    controllersTopLeftInitialY = controllerSectionsSpacing;
     controllersMiddleLeftInitialX = controllersTopLeftInitialX;
     controllersMiddleLeftInitialY = controllersTopLeftInitialY + squareButtonHeight + controllerBarsSpacing + controllersSpacing;
     controllersBottomLeftInitialX = controllersMiddleLeftInitialX;
     controllersBottomLeftInitialY = controllersMiddleLeftInitialY + 5*(squareButtonHeight + controllersSpacing) + squareButtonHeight + controllerBarsSpacing + controllersSpacing;
-    controllersTopRightX = canvas.width - round(min(canvas.width, canvas.height) * 0.05);
-    controllersTopRightY = round(min(canvas.width, canvas.height) * 0.05);
+    controllersTopRightX = canvas.width - controllerSectionsSpacing;
+    controllersTopRightY = controllerSectionsSpacing;
     controllersBottomRightX = controllersTopRightX - squareButtonWidth;
     controllersBottomRightY = canvas.height - controllersTopRightY - squareButtonHeight;
     controllersBottomRightInitialX = controllersBottomRightX;
@@ -213,8 +217,8 @@ public class UserInterface {
     instructionsFontColor = color(255);
     instructionsFontOutlineColor = color(0);
     instructionsVisualColor = color(#F64B29, 127);
-    instructionsX = controllersTopLeftX;
-    instructionsY = canvas.height - controllersTopLeftY;
+    instructionsX = controllerSectionsSpacing;
+    instructionsY = canvas.height - round(controllerSectionsSpacing * 1.5) + controllersSpacing;
     instructionsInitialX = instructionsX;
     instructionsInitialY = instructionsY;
 
@@ -837,69 +841,39 @@ public class UserInterface {
     instructionsX = instructionsInitialX;
     instructionsY = instructionsInitialY;
 
-    cp5.addTextlabel("Grid instructions - 2nd line")
-      .setText("Once you draw this square, you can adjust its size and position using keys W, A, S, D (top left corner) and ↑, ←, ↓, → (bottom right corner).")
+    cp5.addTextlabel("Grid instructions")
+      .setText(addLineBreaks("Click and drag to create a square the size of 3 x 3 grid cells on the map background " +
+        "you are using. Once you draw this square, you can adjust its size and position using keys W, " +
+        "A, S, D (top left corner) and ↑, ←, ↓, → (bottom right corner). Once you are done, click on " +
+        "the Grid Setup icon.", instructionsFont, instructionsMaxWidth))
       .setPosition(instructionsX, instructionsY)
       .setColorValue(instructionsFontColor)
       .setFont(instructionsFont)
       .setOutlineText(true)
+      .setLineHeight(instructionsHeight)
       .hide()
       ;
 
-    instructionsY -= instructionsHeight + controllersSpacing;
-
-    cp5.addTextlabel("Grid instructions - 1st line")
-      .setText("Click and drag to create a square the size of 3 x 3 grid cells on the map background you are using.")
+    cp5.addTextlabel("Wall instructions")
+      .setText(addLineBreaks("Draw new wall segments, adding vertexes by left clicking. Double click to stop adding " +
+        "wall segments after the current one. Right click on any wall to remove it. Once you are done, " +
+        "click on the Add/Remove Walls icon.", instructionsFont, instructionsMaxWidth))
       .setPosition(instructionsX, instructionsY)
       .setColorValue(instructionsFontColor)
       .setFont(instructionsFont)
       .setOutlineText(true)
+      .setLineHeight(instructionsHeight)
       .hide()
       ;
 
-    instructionsX = instructionsInitialX;
-    instructionsY = instructionsInitialY;
-
-    cp5.addTextlabel("Wall instructions - 2nd line")
-      .setText("Right click on any wall to remove it.")
+    cp5.addTextlabel("Door instructions")
+      .setText(addLineBreaks("Draw new doors, adding vertexes by left clicking. Right click on any door to remove it. " +
+        "Once you are done, click on the Add/Remove Doors icon.", instructionsFont, instructionsMaxWidth))
       .setPosition(instructionsX, instructionsY)
       .setColorValue(instructionsFontColor)
       .setFont(instructionsFont)
       .setOutlineText(true)
-      .hide()
-      ;
-
-    instructionsY -= instructionsHeight + controllersSpacing;
-
-    cp5.addTextlabel("Wall instructions - 1st line")
-      .setText("Draw new wall segments, adding vertexes by left clicking. Double click to stop adding wall segments after the current one.")
-      .setPosition(instructionsX, instructionsY)
-      .setColorValue(instructionsFontColor)
-      .setFont(instructionsFont)
-      .setOutlineText(true)
-      .hide()
-      ;
-
-    instructionsX = instructionsInitialX;
-    instructionsY = instructionsInitialY;
-
-    cp5.addTextlabel("Door instructions - 2nd line")
-      .setText("Right click on any door to remove it.")
-      .setPosition(instructionsX, instructionsY)
-      .setColorValue(instructionsFontColor)
-      .setFont(instructionsFont)
-      .setOutlineText(true)
-      .hide()
-      ;
-
-    instructionsY -= instructionsHeight + controllersSpacing;
-
-    cp5.addTextlabel("Door instructions - 1st line")
-      .setText("Draw new doors, adding vertexes by left clicking.")
-      .setPosition(instructionsX, instructionsY)
-      .setColorValue(instructionsFontColor)
-      .setFont(instructionsFont)
-      .setOutlineText(true)
+      .setLineHeight(instructionsHeight)
       .hide()
       ;
 
@@ -979,6 +953,26 @@ public class UserInterface {
       button.moveTo(buttonGroup);
 
     controllerToTooltip.put("dungeoneering logo", new UserInterfaceTooltip("Visit dungeoneering.app", mouseOverBackgroundColor, instructionsFontColor));
+
+  }
+
+  String addLineBreaks(String text, PFont font, int maxLineWidth) {
+
+    String multilineText = "";
+    int currentWidth = 0;
+
+    canvas.textFont(font);
+    for ( String token: Arrays.asList(text.split("\\s")) ) {
+      if ( currentWidth + canvas.textWidth(token + " ") < maxLineWidth ) {
+        multilineText += token + " ";
+        currentWidth += canvas.textWidth(token + " ");
+      } else {
+        multilineText += token + "\n";
+        currentWidth = 0;
+      }
+    }
+
+    return multilineText;
 
   }
 
@@ -1212,7 +1206,7 @@ public class UserInterface {
         case "Quit":
 
           uiDialogs.showConfirmDialog(
-            "Quit dungeoneering?",
+            "Quit dungeoneering? Any unsaved changes will be lost.",
             "Quit",
             new Runnable() {
               public void run() {
@@ -1284,8 +1278,7 @@ public class UserInterface {
         case "Grid setup":
 
           Button gridSetup = (Button)controlEvent.getController();
-          Textlabel gridInstructions1stLine = (Textlabel)cp5.getController("Grid instructions - 1st line");
-          Textlabel gridInstructions2ndLine = (Textlabel)cp5.getController("Grid instructions - 2nd line");
+          Textlabel gridInstructions = (Textlabel)cp5.getController("Grid instructions");
 
           if ( gridSetup.isOn() ) {
 
@@ -1334,12 +1327,17 @@ public class UserInterface {
 
             setSwitchButtonState("Toggle grid", true);
 
+            setSwitchButtonState("Toggle combat mode", false);
+            disableController("Toggle combat mode");
+
+            obstacles.setIllumination(Illumination.brightLight);
+            obstacles.setRecalculateShadows(true);
+
             gridHelperX = gridHelperToX = 0;
             gridHelperY = gridHelperToY = 0;
             gridHelperStarted = false;
             gridHelperSet = false;
-            gridInstructions1stLine.show();
-            gridInstructions2ndLine.show();
+            gridInstructions.show();
 
             PImage cursorCross = loadImage("cursors/cursor_cross_32.png");
             cursor(cursorCross);
@@ -1356,9 +1354,9 @@ public class UserInterface {
             enableController("Add/Remove walls");
             enableController("Add/Remove doors");
             enableController("Toggle UI");
+            enableController("Toggle combat mode");
 
-            gridInstructions1stLine.hide();
-            gridInstructions2ndLine.hide();
+            gridInstructions.hide();
 
             if ( grid.isSet() ) {
               resources.setupBasedOnGrid();
@@ -1377,8 +1375,7 @@ public class UserInterface {
         case "Add/Remove walls":
 
           Button addWall = (Button)controlEvent.getController();
-          Textlabel wallInstructions1stLine = (Textlabel)cp5.getController("Wall instructions - 1st line");
-          Textlabel wallInstructions2ndLine = (Textlabel)cp5.getController("Wall instructions - 2nd line");
+          Textlabel wallInstructions = (Textlabel)cp5.getController("Wall instructions");
 
           if ( addWall.isOn() ) {
 
@@ -1389,12 +1386,17 @@ public class UserInterface {
             disableController("Add/Remove doors");
             disableController("Toggle UI");
 
+            setSwitchButtonState("Toggle combat mode", false);
+            disableController("Toggle combat mode");
+
+            obstacles.setIllumination(Illumination.brightLight);
+            obstacles.setRecalculateShadows(true);
+
             playersLayer.reset();
             dmLayer.reset();
             obstacles.toggleDrawObstacles();
 
-            wallInstructions1stLine.show();
-            wallInstructions2ndLine.show();
+            wallInstructions.show();
 
             PImage cursorCross = loadImage("cursors/cursor_cross_32.png");
             cursor(cursorCross);
@@ -1413,11 +1415,11 @@ public class UserInterface {
             }
             enableController("Add/Remove doors");
             enableController("Toggle UI");
+            enableController("Toggle combat mode");
 
             obstacles.toggleDrawObstacles();
 
-            wallInstructions1stLine.hide();
-            wallInstructions2ndLine.hide();
+            wallInstructions.hide();
 
             cursor(ARROW);
 
@@ -1433,8 +1435,7 @@ public class UserInterface {
         case "Add/Remove doors":
 
           Button addDoor = (Button)controlEvent.getController();
-          Textlabel doorInstructions1stLine = (Textlabel)cp5.getController("Door instructions - 1st line");
-          Textlabel doorInstructions2ndLine = (Textlabel)cp5.getController("Door instructions - 2nd line");
+          Textlabel doorInstructions = (Textlabel)cp5.getController("Door instructions");
 
           if ( addDoor.isOn() ) {
 
@@ -1445,12 +1446,17 @@ public class UserInterface {
             disableController("Add/Remove walls");
             disableController("Toggle UI");
 
+            setSwitchButtonState("Toggle combat mode", false);
+            disableController("Toggle combat mode");
+
+            obstacles.setIllumination(Illumination.brightLight);
+            obstacles.setRecalculateShadows(true);
+
             playersLayer.reset();
             dmLayer.reset();
             obstacles.toggleDrawObstacles();
 
-            doorInstructions1stLine.show();
-            doorInstructions2ndLine.show();
+            doorInstructions.show();
 
             PImage cursorCross = loadImage("cursors/cursor_cross_32.png");
             cursor(cursorCross);
@@ -1469,11 +1475,11 @@ public class UserInterface {
             }
             enableController("Add/Remove walls");
             enableController("Toggle UI");
+            enableController("Toggle combat mode");
 
             obstacles.toggleDrawObstacles();
 
-            doorInstructions1stLine.hide();
-            doorInstructions2ndLine.hide();
+            doorInstructions.hide();
 
             cursor(ARROW);
 
