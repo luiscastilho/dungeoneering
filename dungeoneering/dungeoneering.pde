@@ -57,7 +57,7 @@ import uibooster.*;
 Logger logger;
 
 AppMode appMode;
-Config sharedDataconfig;
+Config sharedDataConfig;
 HazelcastInstance sharedDataInstance;
 IMap<String, String> sharedData;
 String localAddress;
@@ -127,18 +127,18 @@ void setup() {
       localAddress = "127.0.0.1";
 
       // Create Hazelcast config based on app mode - DM or Players
-      sharedDataconfig = new Config();
-      sharedDataconfig.setClusterName("dungeoneering");
+      sharedDataConfig = new Config();
+      sharedDataConfig.setClusterName("dungeoneering");
       if ( appMode == AppMode.dm ) {
-        sharedDataconfig.getNetworkConfig().setPublicAddress(localAddress).setPort(dmModePort);
-        sharedDataconfig.setInstanceName("dm-app");
+        sharedDataConfig.getNetworkConfig().setPublicAddress(localAddress).setPort(dmModePort);
+        sharedDataConfig.setInstanceName("dm-app");
       } else {
-        sharedDataconfig.getNetworkConfig().setPublicAddress(localAddress).setPort(playersModePort);
-        sharedDataconfig.setInstanceName("players-app");
+        sharedDataConfig.getNetworkConfig().setPublicAddress(localAddress).setPort(playersModePort);
+        sharedDataConfig.setInstanceName("players-app");
       }
 
       // Instantiate Hazelcast
-      sharedDataInstance = Hazelcast.newHazelcastInstance(sharedDataconfig);
+      sharedDataInstance = Hazelcast.newHazelcastInstance(sharedDataConfig);
 
       // Create shared map: String -> String
       // "fromDmApp" -> scene in JSON format sent by DM's App, as String
