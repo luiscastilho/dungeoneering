@@ -2684,7 +2684,7 @@ public class UserInterface {
 
       changeAppState(AppState.sceneLoad);
 
-      reset();
+      resetScene();
 
       setSwitchButtonState("Toggle combat mode", false, false);
       setSwitchButtonState("Toggle grid", false, false);
