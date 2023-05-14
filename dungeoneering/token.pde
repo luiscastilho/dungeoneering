@@ -137,7 +137,7 @@ class Token {
 
   void recalculateShadows(ShadowType shadowsToRecalculate) {
 
-    logger.trace("Token: " + name + ": recalculating shadows");
+    logger.trace("Token: recalculateShadows(): " + name + ": recalculating shadows");
 
     switch ( shadowsToRecalculate ) {
       case lightSources:
@@ -180,7 +180,7 @@ class Token {
         wall.calculateShadows(light, shadows);
         wallsReached += 1;
       }
-    logger.trace("Token: " + name + ": " + type + " " + light.getName() + ": " + wallsReached + "/" + obstacles.getWalls().size() + " walls reached");
+    logger.trace("Token: recalculateShadows(): " + name + ": " + type + " " + light.getName() + ": " + wallsReached + "/" + obstacles.getWalls().size() + " walls reached");
 
     int doorsReached = 0;
     for ( Door door: obstacles.getDoors() )
@@ -188,7 +188,7 @@ class Token {
         door.calculateShadows(light, shadows);
         doorsReached += 1;
       }
-    logger.trace("Token: " + name + ": " + type + " " + light.getName() + ": " + doorsReached + "/" + obstacles.getDoors().size() + " doors reached");
+    logger.trace("Token: recalculateShadows(): " + name + ": " + type + " " + light.getName() + ": " + doorsReached + "/" + obstacles.getDoors().size() + " doors reached");
 
     shadows.endDraw();
 
@@ -346,7 +346,7 @@ class Token {
 
       if ( tokenWasMoved )
         logger.debug(
-          "Token: " + name + ": Moved from " +
+          "Token: setBeingMoved(): " + name + ": Moved from " +
           prevCell.getRow() + "," + prevCell.getColumn() +
           " to " +
           cell.getRow() + "," + cell.getColumn()
@@ -426,7 +426,7 @@ class Token {
         lightSources.remove(activeLightSource);
         incrementVersion();
 
-        logger.debug("Token: " + name + ": Light source " + activeLightSource.getName() + " removed");
+        logger.debug("Token: toggleLightSource(): " + name + ": Light source " + activeLightSource.getName() + " removed");
         return;
 
       }
@@ -435,7 +435,7 @@ class Token {
     recenterLightSources();
     incrementVersion();
 
-    logger.debug("Token: " + name + ": Light source " + light.getName() + " added");
+    logger.debug("Token: toggleLightSource(): " + name + ": Light source " + light.getName() + " added");
 
   }
 
@@ -447,7 +447,7 @@ class Token {
         sightTypes.remove(activeSightType);
         incrementVersion();
 
-        logger.debug("Token: " + name + ": Sight type " + activeSightType.getName() + " removed");
+        logger.debug("Token: toggleSightType(): " + name + ": Sight type " + activeSightType.getName() + " removed");
         return;
 
       }
@@ -456,7 +456,7 @@ class Token {
     recenterLightSources();
     incrementVersion();
 
-    logger.debug("Token: " + name + ": Sight type " + sight.getName() + " added");
+    logger.debug("Token: toggleSightType(): " + name + ": Sight type " + sight.getName() + " added");
 
   }
 
@@ -479,7 +479,7 @@ class Token {
 
         }
 
-        logger.debug("Token: " + name + ": Condition " + condition.getName() + " removed");
+        logger.debug("Token: toggleCondition(): " + name + ": Condition " + condition.getName() + " removed");
         return;
 
       }
@@ -489,7 +489,7 @@ class Token {
       disabled = true;
     incrementVersion();
 
-    logger.debug("Token: " + name + ": Condition " + condition.getName() + " added");
+    logger.debug("Token: toggleCondition(): " + name + ": Condition " + condition.getName() + " added");
 
   }
 
@@ -517,7 +517,7 @@ class Token {
 
     recenterLightSources();
 
-    logger.debug("Token: " + name + ": Size set to " + size.getName());
+    logger.debug("Token: setSize(): " + name + ": Size set to " + size.getName());
 
   }
 
@@ -545,7 +545,7 @@ class Token {
   }
 
   void incrementVersion() {
-    logger.trace("Incrementing " + name + " token version from " + version.getValue() + " to " + (version.getValue()+1));
+    logger.trace("Token: incrementVersion(): Incrementing " + name + " token version from " + version.getValue() + " to " + (version.getValue()+1));
     version.set(version.getValue() + 1);
   }
 

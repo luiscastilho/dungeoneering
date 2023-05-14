@@ -96,7 +96,7 @@ class Map {
       try {
         canvas.image(video, canvas.width/2, canvas.height/2);
       } catch ( Exception e ) {
-        logger.error("Map: Error displaying video frame");
+        logger.error("Map: draw(): Error displaying video frame");
       }
 
     }
@@ -108,9 +108,9 @@ class Map {
 
       obstacles.setRecalculateShadows(true);
 
-      logger.trace("Map: Pan or zoom change");
-      logger.trace("Map: Current pan: " + panX + ", " + panY);
-      logger.trace("Map: Current scale: " + scale);
+      logger.trace("Map: draw(): Pan or zoom change");
+      logger.trace("Map: draw(): Current pan: " + panX + ", " + panY);
+      logger.trace("Map: draw(): Current scale: " + scale);
     }
 
     lastPanX = panX;
@@ -139,7 +139,7 @@ class Map {
         image = loadImage(filePath);
 
       } catch ( Exception e ) {
-        logger.error("Map: Error loading image map");
+        logger.error("Map: setup(): Error loading image map");
         logger.error(ExceptionUtils.getStackTrace(e));
         clear();
         return false;
@@ -147,7 +147,7 @@ class Map {
 
       if ( getWidth() <= 0 || getHeight() <= 0 ) {
 
-        logger.error("Map: Error loading image map");
+        logger.error("Map: setup(): Error loading image map");
         clear();
         return false;
 
@@ -157,7 +157,7 @@ class Map {
       if ( fitToScreen )
         fitToScreen();
 
-      logger.info("Map: Image map loaded");
+      logger.info("Map: setup(): Image map loaded");
 
     } else {
 
@@ -181,7 +181,7 @@ class Map {
 
         } catch ( Exception e ) {
 
-          logger.error("Map: Error loading and starting video map");
+          logger.error("Map: setup(): Error loading and starting video map");
 
           triesCount += 1;
           if ( triesCount == maxTries ) {
@@ -192,7 +192,7 @@ class Map {
           } else {
 
             delay(sleepTimeMillis);
-            logger.error("Map: Retrying...");
+            logger.error("Map: setup(): Retrying...");
 
           }
 
@@ -209,7 +209,7 @@ class Map {
 
         } else {
 
-          logger.warning("Map: Video map returned zero width/height. Waiting to retry...");
+          logger.warning("Map: setup(): Video map returned zero width/height. Waiting to retry...");
           delay(sleepTimeMillis);
 
         }
@@ -217,7 +217,7 @@ class Map {
         triesCount += 1;
         if ( triesCount == maxTries ) {
 
-          logger.warning("Map: Error loading and starting video map");
+          logger.warning("Map: setup(): Error loading and starting video map");
           clear();
           return false;
 
@@ -225,7 +225,7 @@ class Map {
 
       }
 
-      logger.info("Map: Video map loaded");
+      logger.info("Map: setup(): Video map loaded");
 
     }
 
@@ -331,7 +331,7 @@ class Map {
       mapPoint.y = canvasPoint.y - heightDiff/2;
     }
 
-    logger.trace("Map: Canvas point " + canvasPoint + " mapped to map point " + mapPoint + "");
+    logger.trace("Map: mapCanvasToMap(): Canvas point " + canvasPoint + " mapped to map point " + mapPoint + "");
 
     return mapPoint;
 
@@ -378,7 +378,7 @@ class Map {
       canvasPoint.y = mapPoint.y + heightDiff/2;
     }
 
-    logger.trace("Map: Map point " + mapPoint + " mapped to canvas point " + canvasPoint + "");
+    logger.trace("Map: mapMapToCanvas(): Map point " + mapPoint + " mapped to canvas point " + canvasPoint + "");
 
     return canvasPoint;
 
@@ -402,7 +402,7 @@ class Map {
         video.dispose();
 
       } catch ( Exception e ) {
-        logger.error("Map: Error stopping and disposing of video");
+        logger.error("Map: clear(): Error stopping and disposing of video");
       }
 
     }
@@ -475,12 +475,12 @@ class Map {
 
   void togglePan() {
     panEnabled = !panEnabled;
-    logger.info("Map: Map panning toggled " + (panEnabled ? "on" : "off"));
+    logger.info("Map: togglePan(): Map panning toggled " + (panEnabled ? "on" : "off"));
   }
 
   void toggleZoom() {
     zoomEnabled = !zoomEnabled;
-    logger.info("Map: Map zooming toggled " + (zoomEnabled ? "on" : "off"));
+    logger.info("Map: toggleZoom(): Map zooming toggled " + (zoomEnabled ? "on" : "off"));
   }
 
   boolean isPanEnabled() {
@@ -492,7 +492,7 @@ class Map {
     isMuted = !isMuted;
     muteVideo();
 
-    logger.info("Map: Video sound toggled " + (isMuted ? "off" : "on"));
+    logger.info("Map: toggleMute(): Video sound toggled " + (isMuted ? "off" : "on"));
 
   }
 
@@ -509,7 +509,7 @@ class Map {
         video.volume(volume);
 
       } catch ( Exception e ) {
-        logger.error("Map: Error setting video volume");
+        logger.error("Map: muteVideo(): Error setting video volume");
       }
 
     }

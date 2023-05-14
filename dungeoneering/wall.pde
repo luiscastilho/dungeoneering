@@ -81,8 +81,10 @@ class Wall {
 
   boolean reachedBy(Light light) {
 
-    if ( light == null )
+    if ( light == null ) {
+      logger.error("Wall: reachedBy(): Light received is null");
       return false;
+    }
 
     float distance;
 
@@ -100,8 +102,10 @@ class Wall {
   // Source: www.geeksforgeeks.org/check-line-touches-intersects-circle
   boolean intersectedBy(Light light) {
 
-    if ( light == null )
+    if ( light == null ) {
+      logger.error("Wall: intersectedBy(): Light received is null");
       return false;
+    }
 
     boolean intersects = false;
 
@@ -143,8 +147,15 @@ class Wall {
 
   void calculateShadows(Light light, PGraphics shadows) {
 
-    if ( light == null || shadows == null )
+    if ( light == null ) {
+      logger.error("Wall: calculateShadows(): Light received is null");
       return;
+    }
+
+    if ( shadows == null ) {
+      logger.error("Wall: calculateShadows(): Shadows' canvas received is null");
+      return;
+    }
 
     float angle = 0;
 

@@ -57,11 +57,8 @@ import uibooster.*;
 Logger logger;
 
 AppMode appMode;
-Config sharedDataConfig;
 HazelcastInstance sharedDataInstance;
 IMap<String, String> sharedData;
-String localAddress;
-int dmModePort, playersModePort;
 
 AppState appState;
 
@@ -111,23 +108,23 @@ void setup() {
 
   try {
 
-    logger.info("Setup: dungeoneering initialization started");
+    logger.info("dungeoneering: setup(): dungeoneering initialization started");
 
     // This defines in what mode the application will run - either standalone, DM's app, or Players' app
     appMode = AppMode.standalone;
     // appMode = AppMode.dm;
     // appMode = AppMode.players;
 
-    logger.info("Setup: initializing dungeoneering in " + appMode.toString());
+    logger.info("dungeoneering: setup(): initializing dungeoneering in " + appMode.toString());
 
     if ( appMode == AppMode.dm || appMode == AppMode.players ) {
 
-      dmModePort = 50005;
-      playersModePort = 60006;
-      localAddress = "127.0.0.1";
+      int dmModePort = 50005;
+      int playersModePort = 60006;
+      String localAddress = "127.0.0.1";
 
       // Create Hazelcast config based on app mode - DM or Players
-      sharedDataConfig = new Config();
+      Config sharedDataConfig = new Config();
       sharedDataConfig.setClusterName("dungeoneering");
       if ( appMode == AppMode.dm ) {
         sharedDataConfig.getNetworkConfig().setPublicAddress(localAddress).setPort(dmModePort);
@@ -150,15 +147,15 @@ void setup() {
 
         @Override
         public void entryAdded(EntryEvent<String, String> event) {
-          logger.debug("Entry " + event.getKey() + " added");
-          logger.trace("Entry " + event.getKey() + " added: from " + event.getOldValue() + " to " + event.getValue());
+          logger.debug("dungeoneering: sharedData: entryAdded(): Entry " + event.getKey() + " added");
+          logger.trace("dungeoneering: sharedData: entryAdded(): Entry " + event.getKey() + " added: from " + event.getOldValue() + " to " + event.getValue());
           processSharedData(event.getKey());
         }
 
         @Override
         public void entryUpdated(EntryEvent<String, String> event) {
-          logger.debug("Entry " + event.getKey() + " updated");
-          logger.trace("Entry " + event.getKey() + " updated: from " + event.getOldValue() + " to " + event.getValue());
+          logger.debug("dungeoneering: sharedData: entryUpdated(): Entry " + event.getKey() + " updated");
+          logger.trace("dungeoneering: sharedData: entryUpdated(): Entry " + event.getKey() + " updated: from " + event.getOldValue() + " to " + event.getValue());
           processSharedData(event.getKey());
         }
 
@@ -168,13 +165,13 @@ void setup() {
 
           @Override
           public void memberAdded(MembershipEvent event) {
-            logger.debug("Cluster member added: " + event.toString());
+            logger.debug("dungeoneering: sharedData: memberAdded(): Cluster member added: " + event.toString());
             showPlayerControllersInDmApp();
           }
 
           @Override
           public void memberRemoved(MembershipEvent event) {
-            logger.debug("Cluster member removed: " + event.toString());
+            logger.debug("dungeoneering: sharedData: memberRemoved(): Cluster member removed: " + event.toString());
             hidePlayerControllersInDmApp();
           }
 
@@ -187,7 +184,7 @@ void setup() {
     cp5 = new ControlP5(this);
     cp5.setAutoDraw(false);
 
-    logger.debug("Setup: controlP5 initialization done");
+    logger.debug("dungeoneering: setup(): controlP5 initialization done");
 
     mainCanvas = createGraphics(width, height, P2D);
     mainCanvas.smooth();
@@ -198,38 +195,38 @@ void setup() {
     uiCanvas = createGraphics(width, height, P2D);
     uiCanvas.smooth();
 
-    logger.debug("Setup: canvases initialization done");
+    logger.debug("dungeoneering: setup(): canvases initialization done");
 
     postFx = new PostFX(this);
     obstacles = new Obstacles(mainCanvas, postFx);
 
-    logger.debug("Setup: obstacles initialization done");
+    logger.debug("dungeoneering: setup(): obstacles initialization done");
 
     map = new Map(this, mainCanvas, obstacles);
 
-    logger.debug("Setup: map initialization done");
+    logger.debug("dungeoneering: setup(): map initialization done");
 
     grid = new Grid(mainCanvas, map);
 
-    logger.debug("Setup: grid initialization done");
+    logger.debug("dungeoneering: setup(): grid initialization done");
 
     initiative = new Initiative(initiativeCanvas);
 
-    logger.debug("Setup: initiative initialization done");
+    logger.debug("dungeoneering: setup(): initiative initialization done");
 
     resources = new Resources(mainCanvas, grid);
 
-    logger.debug("Setup: resources initialization done");
+    logger.debug("dungeoneering: setup(): resources initialization done");
 
     playersLayer = new Layer(mainCanvas, grid, obstacles, resources, initiative, "Players' Layer", LayerShown.players);
     dmLayer = new Layer(mainCanvas, grid, obstacles, resources, initiative, "DM's Layer", LayerShown.dm);
     layerShown = LayerShown.players;
 
-    logger.debug("Setup: layers initialization done");
+    logger.debug("dungeoneering: setup(): layers initialization done");
 
     userInterface = new UserInterface(mainCanvas, cp5, map, grid, obstacles, playersLayer, dmLayer, resources, initiative, PApplet.platform, sharedDataInstance, sharedData);
 
-    logger.debug("Setup: UI initialization done");
+    logger.debug("dungeoneering: setup(): UI initialization done");
 
     backgroundColor = color(0);
 
@@ -245,10 +242,10 @@ void setup() {
     appVersion = "v1.3.1";
     checkedForUpdates = false;
 
-    logger.info("Setup: dungeoneering initialization done");
+    logger.info("dungeoneering: setup(): dungeoneering initialization done");
 
   } catch ( Exception e ) {
-    logger.error("Setup: Error initializing dungeoneering");
+    logger.error("dungeoneering: setup(): Error initializing dungeoneering");
     logger.error(ExceptionUtils.getStackTrace(e));
     exit();
   }
@@ -391,7 +388,7 @@ void drawScene() {
     mainCanvas.endDraw();
 
   } catch ( Exception e ) {
-    logger.error("UserInterface: Error drawing scene");
+    logger.error("dungeoneering: drawScene(): Error drawing scene");
     logger.error(ExceptionUtils.getStackTrace(e));
   }
 
@@ -407,7 +404,7 @@ void drawInitiative() {
     initiativeCanvas.endDraw();
 
   } catch ( Exception e ) {
-    logger.error("UserInterface: Error drawing initiative");
+    logger.error("dungeoneering: drawInitiative(): Error drawing initiative");
     logger.error(ExceptionUtils.getStackTrace(e));
   }
 
@@ -426,7 +423,7 @@ void drawUi() {
     uiCanvas.endDraw();
 
   } catch ( Exception e ) {
-    logger.error("UserInterface: Error drawing user interface");
+    logger.error("dungeoneering: drawUi(): Error drawing user interface");
     logger.error(ExceptionUtils.getStackTrace(e));
   }
 
@@ -434,7 +431,7 @@ void drawUi() {
 
 void changeAppState(AppState newAppState) {
   if ( appState != newAppState ) {
-    logger.info("App state changed from " + appState.toString() + " to " + newAppState.toString());
+    logger.info("dungeoneering: changeAppState(): App state changed from " + appState.toString() + " to " + newAppState.toString());
     appState = newAppState;
   }
 }
@@ -457,7 +454,7 @@ void appUpkeep() {
   long totalMemory = Runtime.getRuntime().totalMemory();
   long usedMemory = totalMemory - Runtime.getRuntime().freeMemory();
   float usedMemoryPercent = (100*(float)usedMemory/totalMemory);
-  logger.debug("Stats: FPS: " + nf(frameRate, 2, 2) + " / " + "Memory usage: " + nf(usedMemoryPercent, 2, 2) + "%");
+  logger.debug("dungeoneering: appUpkeep(): Stats: FPS: " + nf(frameRate, 2, 2) + " / " + "Memory usage: " + nf(usedMemoryPercent, 2, 2) + "%");
 
 }
 
@@ -476,11 +473,11 @@ void checkForUpdates() {
     if ( latestVersionNumber > appVersionNumber )
       userInterface.showNewVersionDialog(latestVersion);
     else
-      logger.info("CheckForUpdates: dungeoneering is running the latest version");
+      logger.info("dungeoneering: checkForUpdates(): dungeoneering is running the latest version");
 
   } else {
 
-    logger.error("CheckForUpdates: Couldn't retrieve latest version from GitHub");
+    logger.error("dungeoneering: checkForUpdates(): Couldn't retrieve latest version from GitHub");
 
   }
 
@@ -496,7 +493,7 @@ void controlEvent(ControlEvent controlEvent) {
     changeAppState(userInterface.controllerEvent(controlEvent));
 
   } catch ( Exception e ) {
-    logger.error("UserInterface: Error handling controller event");
+    logger.error("dungeoneering: controlEvent(): Error handling controller event");
     logger.error(ExceptionUtils.getStackTrace(e));
     throw e;
   }
@@ -741,7 +738,7 @@ void movieEvent(Movie movie) {
       if ( movieFinished(movie) )
         movie.jump(0);
     } catch ( Exception e ) {
-      logger.error("Map: Error processing video event");
+      logger.error("dungeoneering: movieEvent(): Error processing video event");
     }
   }
 
@@ -784,20 +781,20 @@ void processSharedData(String fromApp) {
     // JSONObject is shared as String
     String sharedJsonObjectAsString = sharedData.get(fromApp);
     if ( sharedJsonObjectAsString == null || sharedJsonObjectAsString.trim().isEmpty() ) {
-      logger.debug("UserInterface: Received shared data is empty");
+      logger.debug("dungeoneering: processSharedData(): Received shared data is empty");
       return;
     }
 
     // Convert String to JSONObject
     JSONObject sceneJson = JSONObject.parse(sharedJsonObjectAsString);
 
-    logger.info("UserInterface: Received shared data from app in " + appMode.toString());
+    logger.info("dungeoneering: processSharedData(): Received shared data from app in " + appMode.toString());
 
     // Sync scene with received JSON
     userInterface.syncScene(sceneJson);
 
   } catch ( Exception e ) {
-    logger.error("UserInterface: Error handling shared data");
+    logger.error("dungeoneering: processSharedData(): Error handling shared data");
     logger.error(ExceptionUtils.getStackTrace(e));
     throw e;
   }

@@ -132,7 +132,7 @@ public class UserInterface {
 
       @Override
       public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-        logger.trace("Version changed from " + oldValue + " to " + newValue);
+        logger.trace("UserInterface: ChangeListener: changed(): Version changed from " + oldValue + " to " + newValue);
         pushSceneSync(false);
       }
 
@@ -265,7 +265,7 @@ public class UserInterface {
     logoMaxWidth = 300;
     logoMaxHeight = 150;
 
-    logger.debug("Setup: UI controllers setup started");
+    logger.debug("UserInterface: setup(): UI controllers setup started");
 
     try {
 
@@ -273,12 +273,12 @@ public class UserInterface {
       setControllersInitialState();
 
     } catch ( Exception e ) {
-      logger.error("Setup: Error setting up UI controllers");
+      logger.error("UserInterface: setup(): Error setting up UI controllers");
       logger.error(ExceptionUtils.getStackTrace(e));
       throw e;
     }
 
-    logger.debug("Setup: UI controllers setup done");
+    logger.debug("UserInterface: setup(): UI controllers setup done");
 
     initiative.setMaxWidth(controllersBottomRightX - controllersSpacing);
 
@@ -891,6 +891,16 @@ public class UserInterface {
 
   void addButton(String buttonName, String imageBaseName, int buttonPositionX, int buttonPositionY, ControllerGroup buttonGroup, boolean isSwitch, boolean switchInitialState) {
 
+    if ( isEmpty(buttonName) ) {
+      logger.error("UserInterface: addButton(): Received button name is empty");
+      return;
+    }
+
+    if ( isEmpty(imageBaseName) ) {
+      logger.error("UserInterface: addButton(): Received image base name is empty");
+      return;
+    }
+
     // If app is running in Players mode, check if button should be added to UI
     if ( appMode == AppMode.players ) {
 
@@ -958,6 +968,11 @@ public class UserInterface {
 
   String addLineBreaks(String text, PFont font, int maxLineWidth) {
 
+    if ( isEmpty(text) ) {
+      logger.error("UserInterface: addLineBreaks(): Received text is empty");
+      return text;
+    }
+
     String multilineText = "";
     int currentWidth = 0;
 
@@ -1003,7 +1018,7 @@ public class UserInterface {
 
     changeAppState(AppState.idle);
 
-    logger.debug("UserInterface: UI reset");
+    logger.debug("UserInterface: reset(): UI reset");
 
   }
 
@@ -1017,11 +1032,16 @@ public class UserInterface {
     grid.clear();
     map.clear();
 
-    logger.debug("UserInterface: Scene reset");
+    logger.debug("UserInterface: resetScene(): Scene reset");
 
   }
 
   AppState controllerEvent(ControlEvent controlEvent) {
+
+    if ( controlEvent == null ) {
+      logger.error("UserInterface: controllerEvent(): Received controller event is null");
+      return appState;
+    }
 
     String resourceName;
     Condition conditionTemplate;
@@ -1031,10 +1051,16 @@ public class UserInterface {
     AppState newAppState = appState;
 
     String controllerName = "";
-    if ( controlEvent.isController() )
+    if ( controlEvent.isController() ) {
       controllerName = controlEvent.getController().getName();
-    else if ( controlEvent.isGroup() )
+    } else if ( controlEvent.isGroup() ) {
       controllerName = controlEvent.getGroup().getName();
+    } else {
+      logger.error("UserInterface: controllerEvent(): Received event for unknown controller");
+      return appState;
+    }
+
+    logger.trace("UserInterface: controllerEvent(): Event received for controller " + controllerName);
 
     boolean controllerFound = false;
 
@@ -1054,7 +1080,7 @@ public class UserInterface {
 
         } else {
 
-          logger.error("Resource: Condition " + resourceName + " not found");
+          logger.error("UserInterface: controllerEvent(): Condition " + resourceName + " not found");
 
         }
 
@@ -1080,7 +1106,7 @@ public class UserInterface {
 
         } else {
 
-          logger.error("Resource: Common or spell light source " + resourceName + " not found");
+          logger.error("UserInterface: controllerEvent(): Common or spell light source " + resourceName + " not found");
 
         }
 
@@ -1103,7 +1129,7 @@ public class UserInterface {
 
         } else {
 
-          logger.error("Resource: Sight type " + resourceName + " not found");
+          logger.error("UserInterface: controllerEvent(): Sight type " + resourceName + " not found");
 
         }
 
@@ -1126,7 +1152,7 @@ public class UserInterface {
 
         } else {
 
-          logger.error("Resource: Size " + resourceName + " not found");
+          logger.error("UserInterface: controllerEvent(): Size " + resourceName + " not found");
 
         }
 
@@ -1164,7 +1190,7 @@ public class UserInterface {
 
           reset();
 
-          logger.info("UserInterface: New empty scene created");
+          logger.info("UserInterface: controllerEvent(): New empty scene created");
 
           break;
         case "Save scene":
@@ -1233,7 +1259,7 @@ public class UserInterface {
           if ( appMode == AppMode.dm || appMode == AppMode.players )
             sharedDataInstance.shutdown();
 
-          logger.info("UserInterface: Exiting dungeoneering");
+          logger.info("UserInterface: controllerEvent(): Exiting dungeoneering");
 
           exit();
 
@@ -1360,14 +1386,14 @@ public class UserInterface {
 
             if ( grid.isSet() ) {
               resources.setupBasedOnGrid();
-              logger.info("UserInterface: Resources setup done");
+              logger.info("UserInterface: controllerEvent(): Resources setup done");
             }
 
             cursor(ARROW);
 
             newAppState = AppState.idle;
 
-            logger.info("UserInterface: Grid setup done");
+            logger.info("UserInterface: controllerEvent(): Grid setup done");
 
           }
 
@@ -1425,7 +1451,7 @@ public class UserInterface {
 
             newWall = null;
 
-            logger.info("UserInterface: Walls setup done");
+            logger.info("UserInterface: controllerEvent(): Walls setup done");
 
             newAppState = AppState.idle;
 
@@ -1485,7 +1511,7 @@ public class UserInterface {
 
             newDoor = null;
 
-            logger.info("UserInterface: Doors setup done");
+            logger.info("UserInterface: controllerEvent(): Doors setup done");
 
             newAppState = AppState.idle;
 
@@ -1533,7 +1559,7 @@ public class UserInterface {
             enableController("Add/Remove doors");
             enableController("Toggle UI");
 
-            logger.info("UserInterface: Token setup done");
+            logger.info("UserInterface: controllerEvent(): Token setup done");
 
             newAppState = AppState.idle;
 
@@ -1545,15 +1571,15 @@ public class UserInterface {
           switch ( layerShown ) {
             case players:
               layerShown = LayerShown.dm;
-              logger.info("UserInterface: Layer switched to " + LayerShown.dm.toString());
+              logger.info("UserInterface: controllerEvent(): Layer switched to " + LayerShown.dm.toString());
               break;
             case dm:
               layerShown = LayerShown.all;
-              logger.info("UserInterface: Layer switched to " + LayerShown.all.toString());
+              logger.info("UserInterface: controllerEvent(): Layer switched to " + LayerShown.all.toString());
               break;
             case all:
               layerShown = LayerShown.players;
-              logger.info("UserInterface: Layer switched to " + LayerShown.players.toString());
+              logger.info("UserInterface: controllerEvent(): Layer switched to " + LayerShown.players.toString());
               break;
             default:
               break;
@@ -1620,10 +1646,10 @@ public class UserInterface {
           }
 
           if ( switchLightingInWhichApp ) {
-            logger.info("UserInterface: Environment lighting switched to " + obstacles.getIllumination().getName());
+            logger.info("UserInterface: controllerEvent(): Environment lighting switched to " + obstacles.getIllumination().getName());
             obstacles.setRecalculateShadows(true);
           } else {
-            logger.info("UserInterface: Players' App environment lighting switched to " + obstacles.getPlayersAppIllumination().getName());
+            logger.info("UserInterface: controllerEvent(): Players' App environment lighting switched to " + obstacles.getPlayersAppIllumination().getName());
             pushSceneSync(false);
           }
 
@@ -1646,12 +1672,12 @@ public class UserInterface {
           if ( toggleUi.isOn() ) {
 
             togglableControllers.show();
-            logger.info("UserInterface: UI buttons shown");
+            logger.info("UserInterface: controllerEvent(): UI buttons shown");
 
           } else {
 
             togglableControllers.hide();
-            logger.info("UserInterface: UI buttons hidden");
+            logger.info("UserInterface: controllerEvent(): UI buttons hidden");
 
           }
 
@@ -1671,7 +1697,7 @@ public class UserInterface {
         case "Toggle touch screen mode":
 
           cp5.isTouch = !cp5.isTouch;
-          logger.info("UserInterface: Touch screen mode " + (cp5.isTouch ? "enabled" : "disabled"));
+          logger.info("UserInterface: controllerEvent(): Touch screen mode " + (cp5.isTouch ? "enabled" : "disabled"));
 
           break;
         case "Toggle combat mode":
@@ -1711,13 +1737,13 @@ public class UserInterface {
 
           if ( playersLayer.hasToken(rightClickedToken) ) {
 
-            logger.info("Switching token " + rightClickedToken.getName() + " from " + playersLayer.getName() + " to " + dmLayer.getName());
+            logger.info("UserInterface: controllerEvent()Switching token " + rightClickedToken.getName() + " from " + playersLayer.getName() + " to " + dmLayer.getName());
             playersLayer.removeToken(rightClickedToken, false);
             dmLayer.addToken(rightClickedToken);
 
           } else {
 
-            logger.info("Switching token " + rightClickedToken.getName() + " from " + dmLayer.getName() + " to " + playersLayer.getName());
+            logger.info("UserInterface: controllerEvent()Switching token " + rightClickedToken.getName() + " from " + dmLayer.getName() + " to " + playersLayer.getName());
             dmLayer.removeToken(rightClickedToken, false);
             playersLayer.addToken(rightClickedToken);
 
@@ -1734,12 +1760,12 @@ public class UserInterface {
 
           if ( playersLayer.hasToken(rightClickedToken) ) {
 
-            logger.info("Removing token " + rightClickedToken.getName() + " from " + playersLayer.getName());
+            logger.info("UserInterface: controllerEvent()Removing token " + rightClickedToken.getName() + " from " + playersLayer.getName());
             playersLayer.removeToken(rightClickedToken);
 
           } else {
 
-            logger.info("Removing token " + rightClickedToken.getName() + " from " + dmLayer.getName());
+            logger.info("UserInterface: controllerEvent()Removing token " + rightClickedToken.getName() + " from " + dmLayer.getName());
             dmLayer.removeToken(rightClickedToken);
 
           }
@@ -1753,7 +1779,7 @@ public class UserInterface {
           if ( rightClickedToken == null )
             break;
 
-          logger.info("Toggle token group " + rightClickedToken.getName() + " in initiative");
+          logger.info("UserInterface: controllerEvent()Toggle token group " + rightClickedToken.getName() + " in initiative");
           if ( playersLayer.hasToken(rightClickedToken) )
             playersLayer.toggleTokenGroupInInitiative(rightClickedToken);
           else
@@ -1792,16 +1818,16 @@ public class UserInterface {
     try {
 
       String mimeType = Files.probeContentType(mapFile.toPath());
-      logger.trace("UserInterface: Map file MIME type: " + mimeType);
+      logger.trace("UserInterface: mapFileSelected(): Map file MIME type: " + mimeType);
       type = mimeType.split("/")[0];
       if ( (!type.equals("image") && !type.equals("video")) || mimeType.equals("image/tiff") ) {
-        logger.error("UserInterface: Selected map file is not of a supported image or video type");
+        logger.error("UserInterface: mapFileSelected(): Selected map file is not of a supported image or video type");
         uiDialogs.showErrorDialog("Selected map file is not of a supported image or video type: " + mapFile.getName(), "Unknown map file type");
         return;
       }
 
     } catch ( Exception e ) {
-      logger.error("UserInterface: Error loading selected map");
+      logger.error("UserInterface: mapFileSelected(): Error loading selected map");
       logger.error(ExceptionUtils.getStackTrace(e));
       return;
     }
@@ -1832,7 +1858,7 @@ public class UserInterface {
     else
       hideController("Toggle mute sound");
 
-    logger.info("UserInterface: Map setup done");
+    logger.info("UserInterface: mapFileSelected(): Map setup done");
 
   }
 
@@ -2079,7 +2105,7 @@ public class UserInterface {
 
       // Add it to obstacles
       obstacles.addWall(newWall);
-      logger.trace("UserInterface: New wall added");
+      logger.trace("UserInterface: newWallSetup(): New wall added");
 
       // Create a new wall segment, its first vertex will be the last vertex of the previous segment
       UUID wallId = UUID.randomUUID();
@@ -2133,7 +2159,7 @@ public class UserInterface {
 
       // Add it to obstacles
       obstacles.addDoor(newDoor);
-      logger.trace("UserInterface: New door added");
+      logger.trace("UserInterface: newDoorSetup(): New door added");
 
       // Finish this setup
       newDoor = null;
@@ -2289,7 +2315,7 @@ public class UserInterface {
       saveScene(sceneFolder, sceneFile);
 
     } catch ( Exception e ) {
-      logger.error("UserInterface: Error saving scene");
+      logger.error("UserInterface: saveScene(): Error saving scene");
       logger.error(ExceptionUtils.getStackTrace(e));
       throw e;
     }
@@ -2309,7 +2335,7 @@ public class UserInterface {
       if ( map.getFilePath() == null || map.getFilePath().isEmpty() )
         return;
 
-      logger.info("UserInterface: Saving scene to folder: " + sceneFolder.getAbsolutePath());
+      logger.info("UserInterface: saveScene(): Saving scene to folder: " + sceneFolder.getAbsolutePath());
 
       JSONObject sceneJson = sceneToJson(false, false);
 
@@ -2317,14 +2343,14 @@ public class UserInterface {
       boolean sceneSaved = saveJSONObject(sceneJson, sceneSavePath);
 
       if ( sceneSaved ) {
-        logger.info("UserInterface: Scene saved to: " + sceneSavePath);
+        logger.info("UserInterface: saveScene(): Scene saved to: " + sceneSavePath);
       } else {
-        logger.error("UserInterface: Scene could not be saved: " + sceneSavePath);
+        logger.error("UserInterface: saveScene(): Scene could not be saved: " + sceneSavePath);
         uiDialogs.showErrorDialog("Scene could not be saved: " + sceneSavePath, "Error saving scene");
       }
 
     } catch ( Exception e ) {
-      logger.error("UserInterface: Error saving scene");
+      logger.error("UserInterface: saveScene(): Error saving scene");
       logger.error(ExceptionUtils.getStackTrace(e));
       throw e;
     }
@@ -2337,7 +2363,7 @@ public class UserInterface {
 
     try {
 
-      logger.debug("UserInterface: Converting scene to JSON");
+      logger.debug("UserInterface: sceneToJson(): Converting scene to JSON");
 
       int initiativeGroupsIndex;
       int obstaclesIndex;
@@ -2369,7 +2395,7 @@ public class UserInterface {
         }
         sceneJson.setJSONObject("map", mapJson);
 
-        logger.debug("UserInterface: Map converted to JSON");
+        logger.debug("UserInterface: sceneToJson(): Map converted to JSON");
 
       }
 
@@ -2387,7 +2413,7 @@ public class UserInterface {
         gridJson.setBoolean("drawGrid", grid.getDrawGrid());
         sceneJson.setJSONObject("grid", gridJson);
 
-        logger.debug("UserInterface: Grid converted to JSON");
+        logger.debug("UserInterface: sceneToJson(): Grid converted to JSON");
 
       }
 
@@ -2405,14 +2431,14 @@ public class UserInterface {
       initiativeJson.setJSONArray("initiativeGroups", initiativeGroupsArray);
       sceneJson.setJSONObject("initiative", initiativeJson);
 
-      logger.debug("UserInterface: Initiative converted to JSON");
+      logger.debug("UserInterface: sceneToJson(): Initiative converted to JSON");
 
       sceneJson.setJSONArray("playerTokens", getTokensJsonArray(playersLayer));
 
       if ( appMode == AppMode.standalone || appMode == AppMode.dm )
         sceneJson.setJSONArray("dmTokens", getTokensJsonArray(dmLayer));
 
-      logger.debug("UserInterface: Tokens converted to JSON");
+      logger.debug("UserInterface: sceneToJson(): Tokens converted to JSON");
 
       if ( appMode == AppMode.standalone || appMode == AppMode.dm ) {
 
@@ -2434,7 +2460,7 @@ public class UserInterface {
         }
         sceneJson.setJSONArray("walls", wallsArray);
 
-        logger.debug("UserInterface: Walls converted to JSON");
+        logger.debug("UserInterface: sceneToJson(): Walls converted to JSON");
 
       }
 
@@ -2457,7 +2483,7 @@ public class UserInterface {
       }
       sceneJson.setJSONArray("doors", doorsArray);
 
-      logger.debug("UserInterface: Doors converted to JSON");
+      logger.debug("UserInterface: sceneToJson(): Doors converted to JSON");
 
       if ( appMode == AppMode.standalone || appMode == AppMode.dm ) {
 
@@ -2481,16 +2507,16 @@ public class UserInterface {
         }
         sceneJson.setJSONObject("illumination", illuminationJson);
 
-        logger.debug("UserInterface: Environment lighting converted to JSON");
+        logger.debug("UserInterface: sceneToJson(): Environment lighting converted to JSON");
 
       }
 
-      logger.debug("UserInterface: Scene converted to JSON");
+      logger.debug("UserInterface: sceneToJson(): Scene converted to JSON");
 
       return sceneJson;
 
     } catch ( Exception e ) {
-      logger.error("UserInterface: Error converting scene to JSON");
+      logger.error("UserInterface: sceneToJson(): Error converting scene to JSON");
       logger.error(ExceptionUtils.getStackTrace(e));
       throw e;
     }
@@ -2640,36 +2666,36 @@ public class UserInterface {
         return;
 
       String mimeType = Files.probeContentType(sceneFile.toPath());
-      logger.trace("UserInterface: Scene file MIME type: " + mimeType);
+      logger.trace("UserInterface: loadScene(): Scene file MIME type: " + mimeType);
       if ( !mimeType.equals("application/json") ) {
-        logger.error("UserInterface: Selected scene file is not a JSON text file");
+        logger.error("UserInterface: loadScene(): Selected scene file is not a JSON text file");
         uiDialogs.showErrorDialog("Selected scene file is not a JSON text file: " + sceneFile.getName(), "Unknown scene file type");
         return;
       }
 
-      logger.info("UserInterface: Loading scene from: " + sceneFile.getAbsolutePath());
+      logger.info("UserInterface: loadScene(): Loading scene from: " + sceneFile.getAbsolutePath());
 
       JSONObject sceneJson = loadJSONObject(sceneFile.getAbsolutePath());
 
       if ( sceneFromJson(sceneJson) ) {
 
-        logger.info("UserInterface: Scene loaded from: " + sceneFile.getAbsolutePath());
+        logger.info("UserInterface: loadScene(): Scene loaded from: " + sceneFile.getAbsolutePath());
 
         // If loading a scene in DM's app, send it to Players' app as well
         if ( appMode == AppMode.dm ) {
-          logger.info("UserInterface: Pushing loaded scene to Players' App");
+          logger.info("UserInterface: loadScene(): Pushing loaded scene to Players' App");
           pushSceneSync(true);
         }
 
       } else {
 
-        logger.error("UserInterface: Error loading scene from JSON: " + sceneFile.getAbsolutePath());
+        logger.error("UserInterface: loadScene(): Error loading scene from JSON: " + sceneFile.getAbsolutePath());
         reset();
 
       }
 
     } catch ( Exception e ) {
-      logger.error("UserInterface: Error loading scene");
+      logger.error("UserInterface: loadScene(): Error loading scene");
       logger.error(ExceptionUtils.getStackTrace(e));
       reset();
     }
@@ -2680,7 +2706,7 @@ public class UserInterface {
 
     try {
 
-      logger.debug("UserInterface: Loading scene from JSON");
+      logger.debug("UserInterface: sceneFromJson(): Loading scene from JSON");
 
       changeAppState(AppState.sceneLoad);
 
@@ -2703,8 +2729,8 @@ public class UserInterface {
         if ( !mapLoadPath.isEmpty() ) {
           mapFilePath = mapLoadPath;
         } else {
-          logger.error("UserInterface: Map file not found: " + mapFilePath);
-          logger.error("UserInterface: Scene could not be loaded from JSON");
+          logger.error("UserInterface: sceneFromJson(): Map file not found: " + mapFilePath);
+          logger.error("UserInterface: sceneFromJson(): Scene could not be loaded from JSON");
           uiDialogs.showErrorDialog("Map file not found: " + mapFilePath, "Error loading scene");
           return false;
         }
@@ -2713,8 +2739,8 @@ public class UserInterface {
 
         boolean mapLoaded = map.setup(mapFilePath, fitToScreen, isVideo, isMuted);
         if ( !mapLoaded ) {
-          logger.error("UserInterface: Map could not be loaded");
-          logger.error("UserInterface: Scene could not be loaded from JSON");
+          logger.error("UserInterface: sceneFromJson(): Map could not be loaded");
+          logger.error("UserInterface: sceneFromJson(): Scene could not be loaded from JSON");
           uiDialogs.showErrorDialog("Map could not be loaded: " + mapFilePath, "Error loading scene");
           return false;
         }
@@ -2745,7 +2771,7 @@ public class UserInterface {
           addLogoButton(logoFilePath, logoMinPosition, logoLink);
         }
 
-        logger.debug("UserInterface: Map loaded");
+        logger.debug("UserInterface: sceneFromJson(): Map loaded");
 
       }
 
@@ -2772,14 +2798,14 @@ public class UserInterface {
             grid.toggleDrawGrid();
         }
 
-        logger.debug("UserInterface: Grid loaded");
+        logger.debug("UserInterface: sceneFromJson(): Grid loaded");
 
       }
 
       if ( grid.isSet() ) {
 
         resources.setupBasedOnGrid();
-        logger.debug("UserInterface: Resources setup");
+        logger.debug("UserInterface: sceneFromJson(): Resources setup");
 
       }
 
@@ -2791,7 +2817,7 @@ public class UserInterface {
         enableController("Add player token");
         enableController("Add DM token");
 
-        logger.debug("UserInterface: Tokens loaded");
+        logger.debug("UserInterface: sceneFromJson(): Tokens loaded");
 
       } else {
 
@@ -2846,7 +2872,7 @@ public class UserInterface {
 
         }
 
-        logger.debug("UserInterface: Initiative loaded");
+        logger.debug("UserInterface: sceneFromJson(): Initiative loaded");
 
       }
 
@@ -2862,7 +2888,7 @@ public class UserInterface {
 
         }
 
-        logger.debug("UserInterface: Walls loaded");
+        logger.debug("UserInterface: sceneFromJson(): Walls loaded");
 
       }
 
@@ -2878,7 +2904,7 @@ public class UserInterface {
 
         }
 
-        logger.debug("UserInterface: Doors loaded");
+        logger.debug("UserInterface: sceneFromJson(): Doors loaded");
 
       }
 
@@ -2901,7 +2927,7 @@ public class UserInterface {
             break;
         }
 
-        logger.debug("UserInterface: Environment lighting loaded");
+        logger.debug("UserInterface: sceneFromJson(): Environment lighting loaded");
 
       }
 
@@ -2911,10 +2937,10 @@ public class UserInterface {
 
       changeAppState(AppState.idle);
 
-      logger.debug("UserInterface: Scene loaded from JSON");
+      logger.debug("UserInterface: sceneFromJson(): Scene loaded from JSON");
 
     } catch ( Exception e ) {
-      logger.error("UserInterface: Error loading scene from JSON");
+      logger.error("UserInterface: sceneFromJson(): Error loading scene from JSON");
       logger.error(ExceptionUtils.getStackTrace(e));
       return false;
     }
@@ -2953,7 +2979,7 @@ public class UserInterface {
       UUID tokenId = null;
       String tokenIdAsString = tokenJson.getString("id");
       if ( isEmpty(tokenIdAsString) ) {
-        logger.warning("UserInterface: JSON token " + tokenName + " has no ID, generating one");
+        logger.warning("UserInterface: createTokenFromJsonObject(): JSON token " + tokenName + " has no ID, generating one");
         tokenId = UUID.randomUUID();
       } else {
         tokenId = UUID.fromString(tokenIdAsString);
@@ -2967,7 +2993,7 @@ public class UserInterface {
       String tokenSizeName = tokenJson.getString("size", "Medium");
       Size tokenSize = resources.getSize(tokenSizeName);
       if ( tokenSize == null ) {
-        logger.error("UserInterface: Token " + tokenName + " size not found: " + tokenSizeName);
+        logger.error("UserInterface: createTokenFromJsonObject(): Token " + tokenName + " size not found: " + tokenSizeName);
         return null;
       }
 
@@ -2978,7 +3004,7 @@ public class UserInterface {
       if ( !tokenImageLoadPath.isEmpty() ) {
         tokenImagePath = tokenImageLoadPath;
       } else {
-        logger.error("UserInterface: Token " + tokenName + " image not found: " + tokenImagePath);
+        logger.error("UserInterface: createTokenFromJsonObject(): Token " + tokenName + " image not found: " + tokenImagePath);
         return null;
       }
 
@@ -2999,7 +3025,7 @@ public class UserInterface {
         token.toggleCondition(condition);
 
     } catch ( Exception e ) {
-      logger.error("UserInterface: Error creating token from JSON");
+      logger.error("UserInterface: createTokenFromJsonObject(): Error creating token from JSON");
       logger.error(ExceptionUtils.getStackTrace(e));
       token = null;
     }
@@ -3020,7 +3046,7 @@ public class UserInterface {
       UUID wallId = null;
       String wallIdAsString = wallJson.getString("id");
       if ( wallIdAsString == null || wallIdAsString.isEmpty() ) {
-        logger.warning("UserInterface: JSON wall has no ID, generating one");
+        logger.warning("UserInterface: createWallFromJsonObject(): JSON wall has no ID, generating one");
         wallId = UUID.randomUUID();
       } else {
         wallId = UUID.fromString(wallJson.getString("id"));
@@ -3047,12 +3073,12 @@ public class UserInterface {
       }
 
       if ( wall.getCanvasVertexes().size() < 2 || wall.getMapVertexes().size() < 2 ) {
-        logger.error("UserInterface: Wall has less than two vertexes, must have at least two");
+        logger.error("UserInterface: createWallFromJsonObject(): Wall has less than two vertexes, must have at least two");
         return null;
       }
 
     } catch ( Exception e ) {
-      logger.error("UserInterface: Error creating wall from JSON");
+      logger.error("UserInterface: createWallFromJsonObject(): Error creating wall from JSON");
       logger.error(ExceptionUtils.getStackTrace(e));
       wall = null;
     }
@@ -3073,7 +3099,7 @@ public class UserInterface {
       UUID doorId = null;
       String doorIdAsString = doorJson.getString("id");
       if ( doorIdAsString == null || doorIdAsString.isEmpty() ) {
-        logger.warning("UserInterface: JSON door has no ID, generating one");
+        logger.warning("UserInterface: createDoorFromJsonObject(): JSON door has no ID, generating one");
         doorId = UUID.randomUUID();
       } else {
         doorId = UUID.fromString(doorJson.getString("id"));
@@ -3103,12 +3129,12 @@ public class UserInterface {
       }
 
       if ( door.getCanvasVertexes().size() < 2 || door.getMapVertexes().size() < 2 ) {
-        logger.error("UserInterface: Door has less than two vertexes, must have at least two");
+        logger.error("UserInterface: createDoorFromJsonObject(): Door has less than two vertexes, must have at least two");
         return null;
       }
 
     } catch ( Exception e ) {
-      logger.error("UserInterface: Error creating door from JSON");
+      logger.error("UserInterface: createDoorFromJsonObject(): Error creating door from JSON");
       logger.error(ExceptionUtils.getStackTrace(e));
       door = null;
     }
@@ -3133,7 +3159,7 @@ public class UserInterface {
       if ( light != null ) {
         lights.add(light);
       } else {
-        logger.error("UserInterface: Token " + tokenName + " light source not found: " + name);
+        logger.error("UserInterface: getLightSourcesFromJsonArray(): Token " + tokenName + " light source not found: " + name);
         continue;
       }
     }
@@ -3156,7 +3182,7 @@ public class UserInterface {
       if ( sight != null ) {
         sights.add(sight);
       } else {
-        logger.error("UserInterface: Token " + tokenName + " sight type not found: " + name);
+        logger.error("UserInterface: getSightTypesFromJsonArray(): Token " + tokenName + " sight type not found: " + name);
         continue;
       }
     }
@@ -3179,7 +3205,7 @@ public class UserInterface {
       if ( condition != null ) {
         conditions.add(condition);
       } else {
-        logger.error("UserInterface: Token " + tokenName + " condition not found: " + name);
+        logger.error("UserInterface: getConditionsFromJsonArray(): Token " + tokenName + " condition not found: " + name);
         continue;
       }
     }
@@ -3190,8 +3216,9 @@ public class UserInterface {
 
   String getImageLoadPath(String imagePathFromJson) {
 
-    if ( isEmpty(imagePathFromJson) )
+    if ( isEmpty(imagePathFromJson) ) {
       return "";
+    }
 
     String imageLoadPath = null;
     String imagePathInDataFolder = null;
@@ -3269,11 +3296,20 @@ public class UserInterface {
 
   void addLogoButton(String logoImagePath, Point buttonMinPosition, String logoLink) {
 
-    if ( isEmpty(logoImagePath) || isEmpty(logoLink) )
+    if ( isEmpty(logoImagePath) ) {
+      logger.error("UserInterface: addLogoButton(): Logo image path is empty");
       return;
+    }
 
-    if ( buttonMinPosition == null )
+    if ( isEmpty(logoLink) ) {
+      logger.error("UserInterface: addLogoButton(): Logo link is empty");
       return;
+    }
+
+    if ( buttonMinPosition == null ) {
+      logger.error("UserInterface: addLogoButton(): Button position is null");
+      return;
+    }
 
     PImage logoImage = loadImage(logoImagePath);
     logoImage.resize(min(logoImage.width, logoMaxWidth), 0);
@@ -3301,9 +3337,9 @@ public class UserInterface {
 
     if ( !map.isSet() || !grid.isSet() || sceneJson.getBoolean("reloadScene", false) ) {
 
-      logger.info("UserInterface: Loading initial scene from received JSON");
+      logger.info("UserInterface: syncScene(): Loading initial scene from received JSON");
       if ( !sceneFromJson(sceneJson) )
-        logger.error("UserInterface: Error loading scene from received JSON");
+        logger.error("UserInterface: syncScene(): Error loading scene from received JSON");
       return;
 
     }
@@ -3312,7 +3348,7 @@ public class UserInterface {
 
       changeAppState(AppState.sceneSync);
 
-      logger.info("UserInterface: Syncing scene changes from received JSON");
+      logger.info("UserInterface: syncScene(): Syncing scene changes from received JSON");
 
       syncGridChanges(sceneJson.getJSONObject("grid"));
 
@@ -3331,10 +3367,10 @@ public class UserInterface {
 
       changeAppState(AppState.idle);
 
-      logger.info("UserInterface: Scene synced from received JSON");
+      logger.info("UserInterface: syncScene(): Scene synced from received JSON");
 
     } catch ( Exception e ) {
-      logger.error("UserInterface: Error syncing scene changes");
+      logger.error("UserInterface: syncScene(): Error syncing scene changes");
       logger.error(ExceptionUtils.getStackTrace(e));
       throw e;
     }
@@ -3348,17 +3384,17 @@ public class UserInterface {
 
     try {
 
-      logger.debug("UserInterface: Syncing grid changes");
+      logger.debug("UserInterface: syncGridChanges(): Syncing grid changes");
 
       // Retrieve if grid should be drawn
       boolean drawGrid = gridJson.getBoolean("drawGrid", false);
       if ( grid.getDrawGrid() != drawGrid )
         grid.toggleDrawGrid();
 
-      logger.debug("UserInterface: Grid changes synced");
+      logger.debug("UserInterface: syncGridChanges(): Grid changes synced");
 
     } catch ( Exception e ) {
-      logger.error("UserInterface: Error syncing grid changes");
+      logger.error("UserInterface: syncGridChanges(): Error syncing grid changes");
       logger.error(ExceptionUtils.getStackTrace(e));
       throw e;
     }
@@ -3372,7 +3408,7 @@ public class UserInterface {
 
     try {
 
-      logger.debug("UserInterface: Syncing " + layer.getName() + " token changes");
+      logger.debug("UserInterface: syncTokenChanges(): Syncing " + layer.getName() + " token changes");
 
       ArrayList<UUID> sceneTokenIds = new ArrayList<UUID>();
       ArrayList<UUID> syncTokenIds = new ArrayList<UUID>();
@@ -3383,7 +3419,7 @@ public class UserInterface {
         if ( sceneTokenId != null )
           sceneTokenIds.add(sceneTokenId);
         else
-          logger.warning("UserInterface: Error syncing " + layer.getName() + " token changes: scene token has null ID");
+          logger.warning("UserInterface: syncTokenChanges(): Error syncing " + layer.getName() + " token changes: scene token has null ID");
       }
 
       //
@@ -3399,7 +3435,7 @@ public class UserInterface {
         UUID tokenId = null;
         String tokenIdAsString = tokenJson.getString("id");
         if ( isEmpty(tokenIdAsString) ) {
-          logger.warning("UserInterface: Error syncing " + layer.getName() + " token changes: JSON token has null or empty ID");
+          logger.warning("UserInterface: syncTokenChanges(): Error syncing " + layer.getName() + " token changes: JSON token has null or empty ID");
           continue;
         }
         tokenId = UUID.fromString(tokenJson.getString("id"));
@@ -3416,7 +3452,7 @@ public class UserInterface {
         if ( token != null )
           layer.addToken(token);
 
-        logger.debug("UserInterface: Token " + tokenId + " added to " + layer.getName());
+        logger.debug("UserInterface: syncTokenChanges(): Token " + tokenId + " added to " + layer.getName());
 
       }
 
@@ -3434,7 +3470,7 @@ public class UserInterface {
         // Else, remove token
         layer.removeToken(layer.getTokenById(tokenId));
 
-        logger.debug("UserInterface: Token " + tokenId + " removed from " + layer.getName());
+        logger.debug("UserInterface: syncTokenChanges(): Token " + tokenId + " removed from " + layer.getName());
 
       }
 
@@ -3452,18 +3488,18 @@ public class UserInterface {
         UUID tokenId = UUID.fromString(tokenJson.getString("id"));
         int tokenVersion = tokenJson.getInt("version");
 
-        logger.trace("Sync token " + tokenName + ": " + tokenId + " v" + tokenVersion);
+        logger.trace("UserInterface: syncTokenChanges(): Sync token " + tokenName + ": " + tokenId + " v" + tokenVersion);
 
         // For each existing token in app
         for ( Token token: layer.getTokens() ) {
 
-          logger.trace("Scene token " + token.getName() + ": " + token.getStringId() + " v" + token.getVersion());
+          logger.trace("UserInterface: syncTokenChanges(): Scene token " + token.getName() + ": " + token.getStringId() + " v" + token.getVersion());
 
           // If existing token has the same UUID and a different version, update it
           if ( token.getId().equals(tokenId) ) {
             if ( token.getVersion() < tokenVersion ) {
 
-              logger.debug("Scene token " + token.getName() + " changed: " + token.getStringId() + " v" + token.getVersion());
+              logger.debug("UserInterface: syncTokenChanges(): Scene token " + token.getName() + " changed: " + token.getStringId() + " v" + token.getVersion());
 
               ArrayList<Token> tokenSceneArray = new ArrayList<Token>();
               tokenSceneArray.add(token);
@@ -3471,14 +3507,14 @@ public class UserInterface {
               // Check if token position changed
               Cell tokenNewCell = grid.getCellAt(tokenJson.getInt("row"), tokenJson.getInt("column"));
               if ( !token.getCell().equals(tokenNewCell) ) {
-                logger.debug("Position changed from " + token.getCell().getRow() + "," + token.getCell().getColumn() + " to " + tokenNewCell.getRow() + "," + tokenNewCell.getColumn());
+                logger.debug("UserInterface: syncTokenChanges(): Position changed from " + token.getCell().getRow() + "," + token.getCell().getColumn() + " to " + tokenNewCell.getRow() + "," + tokenNewCell.getColumn());
                 layer.moveToken(token, tokenNewCell);
               }
 
               // Check if token size changed
               Size tokenNewSize = resources.getSize(tokenJson.getString("size"));
               if ( !token.getSize().equals(tokenNewSize) ) {
-                logger.debug("Size changed from " + token.getSize().getName() + " to " + tokenNewSize.getName());
+                logger.debug("UserInterface: syncTokenChanges(): Size changed from " + token.getSize().getName() + " to " + tokenNewSize.getName());
                 token.setSize(tokenNewSize, resources);
               }
 
@@ -3490,7 +3526,7 @@ public class UserInterface {
               // Check if conditions were added
               for ( Condition condition: tokenNewConditions )
                 if ( !tokenConditions.contains(condition) ) {
-                  logger.debug("Condition " + condition.getName() + " added");
+                  logger.debug("UserInterface: syncTokenChanges(): Condition " + condition.getName() + " added");
                   conditionsToAdd.add(condition);
                 }
               if ( !conditionsToAdd.isEmpty() )
@@ -3499,7 +3535,7 @@ public class UserInterface {
               // Check if conditions were removed
               for ( Condition condition: tokenConditions )
                 if ( !tokenNewConditions.contains(condition) ) {
-                  logger.debug("Condition " + condition.getName() + " removed");
+                  logger.debug("UserInterface: syncTokenChanges(): Condition " + condition.getName() + " removed");
                   conditionsToRemove.add(condition);
                 }
               if ( !conditionsToRemove.isEmpty() )
@@ -3514,7 +3550,7 @@ public class UserInterface {
               // Check if light sources were added
               for ( Light lightSource: tokenNewLightSources )
                 if ( !tokenLightSources.contains(lightSource) ) {
-                  logger.debug("Light Source " + lightSource.getName() + " added");
+                  logger.debug("UserInterface: syncTokenChanges(): Light Source " + lightSource.getName() + " added");
                   lightSourcesToAdd.add(lightSource);
                 }
               if ( !lightSourcesToAdd.isEmpty() )
@@ -3523,7 +3559,7 @@ public class UserInterface {
               // Check if light sources were removed
               for ( Light lightSource: tokenLightSources )
                 if ( !tokenNewLightSources.contains(lightSource) ) {
-                  logger.debug("Light Source " + lightSource.getName() + " removed");
+                  logger.debug("UserInterface: syncTokenChanges(): Light Source " + lightSource.getName() + " removed");
                   lightSourcesToRemove.add(lightSource);
                 }
               if ( !lightSourcesToRemove.isEmpty() )
@@ -3538,7 +3574,7 @@ public class UserInterface {
               // Check if sight types were added
               for ( Light sightType: tokenNewSightTypes )
                 if ( !tokenSightTypes.contains(sightType) ) {
-                  logger.debug("Sight Type " + sightType.getName() + " added");
+                  logger.debug("UserInterface: syncTokenChanges(): Sight Type " + sightType.getName() + " added");
                   sightTypesToAdd.add(sightType);
                 }
               if ( !sightTypesToAdd.isEmpty() )
@@ -3547,7 +3583,7 @@ public class UserInterface {
               // Check if sight types were removed
               for ( Light sightType: tokenSightTypes )
                 if ( !tokenNewSightTypes.contains(sightType) ) {
-                  logger.debug("Sight Type " + sightType.getName() + " removed");
+                  logger.debug("UserInterface: syncTokenChanges(): Sight Type " + sightType.getName() + " removed");
                   sightTypesToRemove.add(sightType);
                 }
               if ( !sightTypesToRemove.isEmpty() )
@@ -3561,10 +3597,10 @@ public class UserInterface {
 
       }
 
-      logger.debug("UserInterface: " + layer.getName() + " token changes synced");
+      logger.debug("UserInterface: syncTokenChanges(): " + layer.getName() + " token changes synced");
 
     } catch ( Exception e ) {
-      logger.error("UserInterface: Error syncing " + layer.getName() + " token changes");
+      logger.error("UserInterface: syncTokenChanges(): Error syncing " + layer.getName() + " token changes");
       logger.error(ExceptionUtils.getStackTrace(e));
       throw e;
     }
@@ -3578,7 +3614,7 @@ public class UserInterface {
 
     try {
 
-      logger.debug("UserInterface: Syncing initiative group changes");
+      logger.debug("UserInterface: syncInitiativeChanges(): Syncing initiative group changes");
 
       ArrayList<String> sceneInitiativeGroups = new ArrayList<String>();
       ArrayList<String> syncInitiativeGroups = new ArrayList<String>();
@@ -3594,7 +3630,7 @@ public class UserInterface {
         if ( !isEmpty(groupName) )
           sceneInitiativeGroups.add(groupName);
         else
-          logger.warning("UserInterface: Error syncing initiative group changes: initiative group has no name");
+          logger.warning("UserInterface: syncInitiativeChanges(): Error syncing initiative group changes: initiative group has no name");
       }
 
       JSONArray initiativeGroupsArray = initiativeJson.getJSONArray("initiativeGroups");
@@ -3607,11 +3643,11 @@ public class UserInterface {
         // Retrieve JSON initiative group name
         String jsonGroupName = initiativeGroupJson.getString("name");
         if ( isEmpty(jsonGroupName) ) {
-          logger.warning("UserInterface: Error syncing initiative group changes: JSON initiative group name is null or empty");
+          logger.warning("UserInterface: syncInitiativeChanges(): Error syncing initiative group changes: JSON initiative group name is null or empty");
           continue;
         }
 
-        logger.trace("Sync initiative group: " + jsonGroupName);
+        logger.trace("UserInterface: syncInitiativeChanges(): Sync initiative group: " + jsonGroupName);
 
         // Build list with JSON initiative group IDs, used to check if a group was removed
         syncInitiativeGroups.add(jsonGroupName);
@@ -3630,18 +3666,18 @@ public class UserInterface {
           else
             dmLayer.toggleTokenGroupInInitiative(tokenToAdd);
         } else {
-          logger.warning("UserInterface: Error syncing initiative group changes: JSON initiative group name is null or empty");
+          logger.warning("UserInterface: syncInitiativeChanges(): Error syncing initiative group changes: JSON initiative group name is null or empty");
           continue;
         }
 
-        logger.debug("UserInterface: Initiative group " + jsonGroupName + " added");
+        logger.debug("UserInterface: syncInitiativeChanges(): Initiative group " + jsonGroupName + " added");
 
       }
 
       // Check if a scene initiative group was removed in the received JSON
       for ( String initiativeGroupName: sceneInitiativeGroups ) {
 
-        logger.trace("Scene initiative group: " + initiativeGroupName);
+        logger.trace("UserInterface: syncInitiativeChanges(): Scene initiative group: " + initiativeGroupName);
 
         // If scene initiative group is also present in JSON, continue
         if ( syncInitiativeGroups.contains(initiativeGroupName) )
@@ -3657,11 +3693,11 @@ public class UserInterface {
           else
             dmLayer.toggleTokenGroupInInitiative(tokenToRemove);
         } else {
-          logger.warning("UserInterface: Error syncing initiative group changes: JSON initiative group name is null or empty");
+          logger.warning("UserInterface: syncInitiativeChanges(): Error syncing initiative group changes: JSON initiative group name is null or empty");
           continue;
         }
 
-        logger.debug("UserInterface: Initiative group " + initiativeGroupName + " removed");
+        logger.debug("UserInterface: syncInitiativeChanges(): Initiative group " + initiativeGroupName + " removed");
 
       }
 
@@ -3674,13 +3710,13 @@ public class UserInterface {
         String jsonGroupName = initiativeGroupJson.getString("name");
         int jsonGroupPosition = initiativeGroupJson.getInt("position");
 
-        logger.trace("Sync initiative group: " + jsonGroupName + " at position " + jsonGroupPosition);
+        logger.trace("UserInterface: syncInitiativeChanges(): Sync initiative group: " + jsonGroupName + " at position " + jsonGroupPosition);
 
         // Retrieve scene initiative group fields
         Initiative.InitiativeGroup sceneGroup = initiative.getGroupByName(jsonGroupName);
         int sceneGroupPosition = initiative.getGroupPosition(sceneGroup);
 
-        logger.trace("Scene initiative group: " + sceneGroup.getName() + " at position " + sceneGroupPosition);
+        logger.trace("UserInterface: syncInitiativeChanges(): Scene initiative group: " + sceneGroup.getName() + " at position " + sceneGroupPosition);
 
         // If scene initiative group is already in the same position as JSON, continue
         if ( sceneGroupPosition == jsonGroupPosition )
@@ -3689,14 +3725,14 @@ public class UserInterface {
         // If not, move scene initiative group to JSON position
         initiative.moveGroupTo(jsonGroupName, jsonGroupPosition);
 
-        logger.debug("UserInterface: " + jsonGroupName + " initiative position changed from " + sceneGroupPosition + " to " + jsonGroupPosition);
+        logger.debug("UserInterface: syncInitiativeChanges(): " + jsonGroupName + " initiative position changed from " + sceneGroupPosition + " to " + jsonGroupPosition);
 
       }
 
-      logger.debug("UserInterface: Initiative group changes synced");
+      logger.debug("UserInterface: syncInitiativeChanges(): Initiative group changes synced");
 
     } catch ( Exception e ) {
-      logger.error("UserInterface: Error syncing initiative group changes");
+      logger.error("UserInterface: syncInitiativeChanges(): Error syncing initiative group changes");
       logger.error(ExceptionUtils.getStackTrace(e));
       throw e;
     }
@@ -3710,7 +3746,7 @@ public class UserInterface {
 
     try {
 
-      logger.debug("UserInterface: Syncing wall changes");
+      logger.debug("UserInterface: syncWallChanges(): Syncing wall changes");
 
       ArrayList<UUID> sceneWallIds = new ArrayList<UUID>();
       ArrayList<UUID> syncWallIds = new ArrayList<UUID>();
@@ -3721,7 +3757,7 @@ public class UserInterface {
         if ( sceneWallId != null )
           sceneWallIds.add(sceneWallId);
         else
-          logger.warning("UserInterface: Error syncing wall changes: scene wall has null ID");
+          logger.warning("UserInterface: syncWallChanges(): Error syncing wall changes: scene wall has null ID");
       }
 
       // Check if there's a new wall in the received JSON
@@ -3733,12 +3769,12 @@ public class UserInterface {
         UUID wallId = null;
         String wallIdAsString = wallJson.getString("id");
         if ( isEmpty(wallIdAsString) ) {
-          logger.warning("UserInterface: Error syncing wall changes: JSON wall has null or empty ID");
+          logger.warning("UserInterface: syncWallChanges(): Error syncing wall changes: JSON wall has null or empty ID");
           continue;
         }
         wallId = UUID.fromString(wallJson.getString("id"));
 
-        logger.trace("Sync wall: " + wallId.toString());
+        logger.trace("UserInterface: syncWallChanges(): Sync wall: " + wallId.toString());
 
         // Build list with JSON wall IDs, used to check if a wall was removed
         syncWallIds.add(wallId);
@@ -3752,14 +3788,14 @@ public class UserInterface {
         if ( wall != null )
           obstacles.addWall(wall);
 
-        logger.debug("UserInterface: Wall " + wallId + " added");
+        logger.debug("UserInterface: syncWallChanges(): Wall " + wallId + " added");
 
       }
 
       // Check if a scene wall was removed in the received JSON
       for ( UUID wallId: sceneWallIds ) {
 
-        logger.trace("Scene wall: " + wallId.toString());
+        logger.trace("UserInterface: syncWallChanges(): Scene wall: " + wallId.toString());
 
         // If scene wall is also present in JSON, continue
         if ( syncWallIds.contains(wallId) )
@@ -3768,14 +3804,14 @@ public class UserInterface {
         // Else, remove wall
         obstacles.removeWall(obstacles.getWallById(wallId));
 
-        logger.debug("UserInterface: Wall " + wallId + " removed");
+        logger.debug("UserInterface: syncWallChanges(): Wall " + wallId + " removed");
 
       }
 
-      logger.debug("UserInterface: Wall changes synced");
+      logger.debug("UserInterface: syncWallChanges(): Wall changes synced");
 
     } catch ( Exception e ) {
-      logger.error("UserInterface: Error syncing wall changes");
+      logger.error("UserInterface: syncWallChanges(): Error syncing wall changes");
       logger.error(ExceptionUtils.getStackTrace(e));
       throw e;
     }
@@ -3789,7 +3825,7 @@ public class UserInterface {
 
     try {
 
-      logger.debug("UserInterface: Syncing door changes");
+      logger.debug("UserInterface: syncDoorChanges(): Syncing door changes");
 
       HashMap<UUID, Boolean> sceneDoorIdAndStatus = new HashMap<UUID, Boolean>();
       HashMap<UUID, Boolean> syncDoorIdAndStatus = new HashMap<UUID, Boolean>();
@@ -3801,7 +3837,7 @@ public class UserInterface {
         if ( sceneDoorId != null )
           sceneDoorIdAndStatus.put(sceneDoorId, sceneDoorIsClosed);
         else
-          logger.warning("UserInterface: Error syncing door changes: scene door has null ID");
+          logger.warning("UserInterface: syncDoorChanges(): Error syncing door changes: scene door has null ID");
       }
 
       // Check if there's a new door in the received JSON
@@ -3813,7 +3849,7 @@ public class UserInterface {
         UUID doorId = null;
         String doorIdAsString = doorJson.getString("id");
         if ( isEmpty(doorIdAsString) ) {
-          logger.warning("UserInterface: Error syncing door changes: JSON door has null or empty ID");
+          logger.warning("UserInterface: syncDoorChanges(): Error syncing door changes: JSON door has null or empty ID");
           continue;
         }
         doorId = UUID.fromString(doorJson.getString("id"));
@@ -3821,7 +3857,7 @@ public class UserInterface {
         // Retrieve if JSON door is closed
         boolean doorIsClosed = doorJson.getBoolean("closed");
 
-        logger.trace("Sync door: " + doorId.toString());
+        logger.trace("UserInterface: syncDoorChanges(): Sync door: " + doorId.toString());
 
         // Build list with JSON doors, used to check if a door was removed
         syncDoorIdAndStatus.put(doorId, doorIsClosed);
@@ -3835,14 +3871,14 @@ public class UserInterface {
         if ( door != null )
           obstacles.addDoor(door);
 
-        logger.debug("UserInterface: Door " + doorId + " added");
+        logger.debug("UserInterface: syncDoorChanges(): Door " + doorId + " added");
 
       }
 
       // Check if a scene door was removed in the received JSON
       for ( UUID doorId: sceneDoorIdAndStatus.keySet() ) {
 
-        logger.trace("Scene door: " + doorId.toString());
+        logger.trace("UserInterface: syncDoorChanges(): Scene door: " + doorId.toString());
 
         // If scene door is also present in JSON, continue
         if ( syncDoorIdAndStatus.containsKey(doorId) )
@@ -3851,7 +3887,7 @@ public class UserInterface {
         // Else, remove door
         obstacles.removeDoor(obstacles.getDoorById(doorId));
 
-        logger.debug("UserInterface: Door " + doorId + " removed");
+        logger.debug("UserInterface: syncDoorChanges(): Door " + doorId + " removed");
 
       }
 
@@ -3866,10 +3902,10 @@ public class UserInterface {
 
       }
 
-      logger.debug("UserInterface: Door changes synced");
+      logger.debug("UserInterface: syncDoorChanges(): Door changes synced");
 
     } catch ( Exception e ) {
-      logger.error("UserInterface: Error syncing door changes");
+      logger.error("UserInterface: syncDoorChanges(): Error syncing door changes");
       logger.error(ExceptionUtils.getStackTrace(e));
       throw e;
     }
@@ -3883,7 +3919,7 @@ public class UserInterface {
 
     try {
 
-      logger.debug("UserInterface: Syncing illumination changes");
+      logger.debug("UserInterface: syncLighting(): Syncing illumination changes");
 
       // Retrieve current environment illumination
       String lighting = illuminationJson.getString("lighting");
@@ -3899,10 +3935,10 @@ public class UserInterface {
           break;
       }
 
-      logger.debug("UserInterface: Illumination changes synced");
+      logger.debug("UserInterface: syncLighting(): Illumination changes synced");
 
     } catch ( Exception e ) {
-      logger.error("UserInterface: Error syncing illumination changes");
+      logger.error("UserInterface: syncLighting(): Error syncing illumination changes");
       logger.error(ExceptionUtils.getStackTrace(e));
       throw e;
     }
@@ -3915,15 +3951,15 @@ public class UserInterface {
       return;
 
     if ( appState == AppState.sceneLoad ) {
-      logger.trace("pushSceneSync(): Scene being loaded. Ignoring.");
+      logger.trace("UserInterface: pushSceneSync(): Scene being loaded. Ignoring.");
       return;
     }
     if ( appState == AppState.sceneSync ) {
-      logger.trace("pushSceneSync(): Scene being synced. Ignoring.");
+      logger.trace("UserInterface: pushSceneSync(): Scene being synced. Ignoring.");
       return;
     }
 
-    logger.warning("pushSceneSync(): Pushing scene from " + appMode.toString());
+    logger.warning("UserInterface: pushSceneSync(): Pushing scene from " + appMode.toString());
 
     JSONObject sceneJson = sceneToJson(addReloadSceneFlag, true);
     String sceneJsonAsString = sceneJson.toString();
@@ -3937,16 +3973,28 @@ public class UserInterface {
 
   void removeController(String controllerName) {
 
+    if ( isEmpty(controllerName) ) {
+      logger.error("UserInterface: removeController(): Controller name is empty");
+      return;
+    }
+
     cp5.remove(controllerName);
 
   }
 
   void enableController(String controllerName) {
 
+    if ( isEmpty(controllerName) ) {
+      logger.error("UserInterface: enableController(): Controller name is empty");
+      return;
+    }
+
     controlP5.Controller controller = cp5.getController(controllerName);
 
-    if ( controller == null )
+    if ( controller == null ) {
+      logger.error("UserInterface: enableController(): Controller not found: " + controllerName);
       return;
+    }
 
     String controllerImageBaseName = controller.getStringValue();
     PImage[] controllerImages = {
@@ -3965,10 +4013,17 @@ public class UserInterface {
 
   void disableController(String controllerName) {
 
+    if ( isEmpty(controllerName) ) {
+      logger.error("UserInterface: disableController(): Controller name is empty");
+      return;
+    }
+
     controlP5.Controller controller = cp5.getController(controllerName);
 
-    if ( controller == null )
+    if ( controller == null ) {
+      logger.error("UserInterface: disableController(): Controller not found: " + controllerName);
       return;
+    }
 
     String controllerImageBaseName = controller.getStringValue();
     PImage controllerImage = loadImage("icons/" + controllerImageBaseName + "_disabled.png");
@@ -3982,10 +4037,17 @@ public class UserInterface {
 
   void showController(String controllerName) {
 
+    if ( isEmpty(controllerName) ) {
+      logger.error("UserInterface: showController(): Controller name is empty");
+      return;
+    }
+
     controlP5.Controller controller = cp5.getController(controllerName);
 
-    if ( controller == null )
+    if ( controller == null ) {
+      logger.error("UserInterface: showController(): Controller not found: " + controllerName);
       return;
+    }
 
     controller.unlock();
     controller.show();
@@ -3994,10 +4056,17 @@ public class UserInterface {
 
   void hideController(String controllerName) {
 
+    if ( isEmpty(controllerName) ) {
+      logger.error("UserInterface: hideController(): Controller name is empty");
+      return;
+    }
+
     controlP5.Controller controller = cp5.getController(controllerName);
 
-    if ( controller == null )
+    if ( controller == null ) {
+      logger.error("UserInterface: hideController(): Controller not found: " + controllerName);
       return;
+    }
 
     controller.lock();
     controller.hide();
@@ -4006,10 +4075,17 @@ public class UserInterface {
 
   boolean getSwitchButtonState(String buttonName) {
 
+    if ( isEmpty(buttonName) ) {
+      logger.error("UserInterface: getSwitchButtonState(): Button name is empty");
+      return false;
+    }
+
     Button button = (Button)cp5.getController(buttonName);
 
-    if ( button == null )
+    if ( button == null ) {
+      logger.error("UserInterface: setSwitchButtonState(): Button not found: " + buttonName);
       return false;
+    }
 
     return button.isOn();
 
@@ -4017,12 +4093,19 @@ public class UserInterface {
 
   boolean getToggleState(String buttonName) {
 
-    if ( isEmpty(buttonName) )
+    if ( isEmpty(buttonName) ) {
+      logger.error("UserInterface: getToggleState(): Button name is empty");
       return true;
+    }
 
     Toggle toggle = (Toggle)cp5.getController(buttonName);
 
-    if ( toggle == null || !toggle.isVisible() )
+    if ( toggle == null ) {
+      logger.error("UserInterface: getToggleState(): Toggle not found: " + buttonName);
+      return true;
+    }
+
+    if ( !toggle.isVisible() )
       return true;
 
     return toggle.getState();
@@ -4037,10 +4120,17 @@ public class UserInterface {
 
   void setSwitchButtonState(String buttonName, boolean buttonState, boolean broadcastButtonPress) {
 
+    if ( isEmpty(buttonName) ) {
+      logger.error("UserInterface: setSwitchButtonState(): Button name is empty");
+      return;
+    }
+
     Button button = (Button)cp5.getController(buttonName);
 
-    if ( button == null )
+    if ( button == null ) {
+      logger.error("UserInterface: setSwitchButtonState(): Button not found: " + buttonName);
       return;
+    }
 
     if ( !broadcastButtonPress )
       button.setBroadcast(false);
@@ -4075,7 +4165,12 @@ public class UserInterface {
 
   boolean isInside(controlP5.Controller controller, int x, int y) {
 
-    if ( controller == null || !controller.isVisible() )
+    if ( controller == null ) {
+      logger.error("UserInterface: isInside(): Received controller is null");
+      return false;
+    }
+
+    if ( !controller.isVisible() )
       return false;
 
     boolean inside = false;
@@ -4164,7 +4259,7 @@ public class UserInterface {
 
   void showNewVersionDialog(String newVersion) {
 
-    logger.info("CheckForUpdates: New version available - " + newVersion);
+    logger.info("UserInterface: showNewVersionDialog(): New version available - " + newVersion);
 
     uiDialogs.showConfirmDialog(
       "A new dungeoneering version is available - " + newVersion + ". Download it now?",
@@ -4190,8 +4285,10 @@ public class UserInterface {
 
   boolean controllerIsAllowed(String buttonName) {
 
-    if ( isEmpty(buttonName) )
+    if ( isEmpty(buttonName) ) {
+      logger.error("UserInterface: controllerIsAllowed(): Button name is empty");
       return true;
+    }
 
     if ( appMode == AppMode.standalone )
       return true;
@@ -4206,8 +4303,10 @@ public class UserInterface {
 
   boolean controllerGroupIsAllowed(ControllerGroup buttonGroup) {
 
-    if ( buttonGroup == null )
+    if ( buttonGroup == null ) {
+      logger.error("UserInterface: controllerGroupIsAllowed(): Received controller group is null");
       return true;
+    }
 
     if ( appMode == AppMode.standalone )
       return true;

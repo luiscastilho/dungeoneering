@@ -45,7 +45,7 @@ class Initiative {
     groups = new CopyOnWriteArrayList<InitiativeGroup>();
 
     imagesSpacing = 5;
-    xOffset = yOffset = int(min(canvas.width, canvas.height) * 0.05);
+    xOffset = yOffset = round(min(canvas.width, canvas.height) * 0.05);
     groupImageSize = 100;
     currentX = currentY = 0;
     maxWidth = canvas.width;
@@ -68,31 +68,8 @@ class Initiative {
 
   void draw(LayerShown layerShown) {
 
-    if ( !drawInitiativeOrder )
+    if ( !drawInitiativeOrder || isEmpty() || !set )
       return;
-
-    if ( groups.isEmpty() )
-      return;
-
-    boolean allHidden = true;
-    for ( InitiativeGroup group: groups ) {
-      if ( !group.isHidden(layerShown) ) {
-        allHidden = false;
-        break;
-      }
-    }
-    if ( allHidden )
-      return;
-
-    if ( !set ) {
-
-      currentX = xOffset;
-      currentY = canvas.height - yOffset - groupImageSize - imagesSpacing - titleFontHeight;
-      canvas.textFont(titleFont);
-      outlineText(canvas, loadingMessage, titleFontColor, titleFontOutlineColor, currentX, currentY);
-      return;
-
-    }
 
     currentX = xOffset;
     currentY = canvas.height - yOffset - groupImageSize - imagesSpacing - titleFontHeight;
@@ -193,7 +170,7 @@ class Initiative {
 
   void toggleDrawInitiativeOrder() {
     drawInitiativeOrder = !drawInitiativeOrder;
-    logger.info("Initiative: Initiative Order " + (drawInitiativeOrder ? "shown" : "hidden" ));
+    logger.info("Initiative: toggleDrawInitiativeOrder(): Initiative Order " + (drawInitiativeOrder ? "shown" : "hidden" ));
   }
 
   CopyOnWriteArrayList<InitiativeGroup> getInitiativeGroups() {
@@ -353,13 +330,32 @@ class Initiative {
 
   }
 
+  boolean isEmpty() {
+
+    if ( groups.isEmpty() )
+      return true;
+
+    boolean allHidden = true;
+    for ( InitiativeGroup group: groups ) {
+      if ( !group.isHidden(layerShown) ) {
+        allHidden = false;
+        break;
+      }
+    }
+    if ( allHidden )
+      return true;
+
+    return false;
+
+  }
+
   void addSceneUpdateListener(ChangeListener<Number> _sceneUpdateListener) {
-    logger.debug("Adding listener to initiative version");
+    logger.debug("Initiative: addSceneUpdateListener(): Adding listener to initiative version");
     initiativeVersion.addListener(_sceneUpdateListener);
   }
 
   void incrementInitiativeVersion() {
-    logger.trace("Incrementing initiative version from " + initiativeVersion.getValue() + " to " + (initiativeVersion.getValue()+1));
+    logger.trace("Initiative: incrementInitiativeVersion(): Incrementing initiative version from " + initiativeVersion.getValue() + " to " + (initiativeVersion.getValue()+1));
     initiativeVersion.set(initiativeVersion.getValue() + 1);
   }
 

@@ -115,7 +115,7 @@ class Obstacles {
       try {
         canvas.mask(allShadows);
       } catch(Exception e) {
-        logger.error("Obstacles: Error applying shadows mask");
+        logger.error("Obstacles: draw(): Error applying shadows mask");
       }
 
     if ( drawObstacles ) {
@@ -266,7 +266,7 @@ class Obstacles {
     if ( illumination == Illumination.brightLight )
       recalculateShadows = false;
 
-    logger.trace("Obstacles: shadows reset");
+    logger.trace("Obstacles: resetShadows(): shadows reset");
 
   }
 
@@ -349,7 +349,7 @@ class Obstacles {
     recalculateShadows = _recalculateShadows;
 
     if ( recalculateShadows )
-      logger.trace("Obstacles: recalculating shadows");
+      logger.trace("Obstacles: setRecalculateShadows(): recalculating shadows");
 
   }
 
@@ -490,19 +490,19 @@ class Obstacles {
   }
 
   void addSceneUpdateListener(ChangeListener<Number> _sceneUpdateListener) {
-    logger.debug("Adding listener to walls version");
+    logger.debug("Obstacles: addSceneUpdateListener(): Adding listener to walls version");
     wallsVersion.addListener(_sceneUpdateListener);
-    logger.debug("Adding listener to doors version");
+    logger.debug("Obstacles: addSceneUpdateListener(): Adding listener to doors version");
     doorsVersion.addListener(_sceneUpdateListener);
   }
 
   void incrementWallsVersion() {
-    logger.trace("Incrementing walls version from " + wallsVersion.getValue() + " to " + (wallsVersion.getValue()+1));
+    logger.trace("Obstacles: incrementWallsVersion(): Incrementing walls version from " + wallsVersion.getValue() + " to " + (wallsVersion.getValue()+1));
     wallsVersion.set(wallsVersion.getValue() + 1);
   }
 
   void incrementDoorsVersion() {
-    logger.trace("Incrementing doors version from " + doorsVersion.getValue() + " to " + (doorsVersion.getValue()+1));
+    logger.trace("Obstacles: incrementDoorsVersion():Incrementing doors version from " + doorsVersion.getValue() + " to " + (doorsVersion.getValue()+1));
     doorsVersion.set(doorsVersion.getValue() + 1);
   }
 

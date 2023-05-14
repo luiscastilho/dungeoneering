@@ -61,15 +61,15 @@ class Logger {
         writeLogFile = true;
     } catch ( Exception e ) {
       writeLogFile = false;
-      error("Logger: Couldn't create log dir - logging to console only");
+      error("Logger: Logger(): Couldn't create log dir - logging to console only");
     }
 
     try {
         logLevel = logLevelLookup(_logLevelName);
-        info("Logger: Log level set to " + _logLevelName);
+        info("Logger: Logger(): Log level set to " + _logLevelName);
     } catch ( Exception e ) {
         logLevel = INFO;
-        error("Logger: Unknown log level \"" + _logLevelName + "\" - log level set to INFO");
+        error("Logger: Logger(): Unknown log level \"" + _logLevelName + "\" - log level set to INFO");
     }
 
   }
@@ -249,7 +249,7 @@ class Logger {
         }
 
       } catch ( Exception e ) {
-        logger.error("Logger: Error rotating log files");
+        logger.error("Logger: LoggingRotationCallbackKeepLast: onSuccess(): Error rotating log files");
         logger.error(ExceptionUtils.getStackTrace(e));
         throw e;
       }

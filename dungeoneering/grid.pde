@@ -158,7 +158,7 @@ class Grid {
     cellWidth = round(helperWidth/3f);
     cellHeight = round(helperHeight/3f);
 
-    logger.trace("Grid: Cell size: " + cellWidth + "x" + cellHeight);
+    logger.trace("Grid: setupFromHelper(): Cell size: " + cellWidth + "x" + cellHeight);
 
     // Based on helper top corner, find grid's top corner x coordinate
     firstCorner.x = min(helperFirstCorner.x, helperSecondCorner.x);
@@ -176,7 +176,7 @@ class Grid {
       firstCorner.y + round(cellHeight/2f)
     );
 
-    logger.trace("Grid: First cell center in map: " + mapFirstCenter);
+    logger.trace("Grid: setupFromHelper(): First cell center in map: " + mapFirstCenter);
 
     // Setup map grid - grid with map coordinates
 
@@ -354,16 +354,16 @@ class Grid {
 
   void toggleDrawGrid() {
     drawGrid = !drawGrid;
-    logger.info("Grid: Grid " + (drawGrid ? "shown" : "hidden"));
+    logger.info("Grid: toggleDrawGrid(): Grid " + (drawGrid ? "shown" : "hidden"));
   }
 
   void addSceneUpdateListener(ChangeListener<Number> _sceneUpdateListener) {
-    logger.debug("Adding listener to grid version");
+    logger.debug("Grid: addSceneUpdateListener(): Adding listener to grid version");
     gridVersion.addListener(_sceneUpdateListener);
   }
 
   void incrementGridVersion() {
-    logger.trace("Incrementing grid version from " + gridVersion.getValue() + " to " + (gridVersion.getValue()+1));
+    logger.trace("Grid: incrementGridVersion(): Incrementing grid version from " + gridVersion.getValue() + " to " + (gridVersion.getValue()+1));
     gridVersion.set(gridVersion.getValue() + 1);
   }
 

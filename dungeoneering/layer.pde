@@ -88,12 +88,12 @@ class Layer {
 
   void recalculateShadows(ShadowType shadowsToRecalculate) {
 
-    logger.trace("Layer: " + name + ": recalculating " + shadowsToRecalculate.toString() + " shadows");
+    logger.trace("Layer: recalculateShadows(): " + name + ": recalculating " + shadowsToRecalculate.toString() + " shadows");
 
     for ( Token token: tokens )
       token.recalculateShadows(shadowsToRecalculate);
 
-    logger.trace("Layer: " + name + ": done recalculating " + shadowsToRecalculate.toString() + " shadows");
+    logger.trace("Layer: recalculateShadows(): " + name + ": done recalculating " + shadowsToRecalculate.toString() + " shadows");
 
   }
 
@@ -119,7 +119,7 @@ class Layer {
 
     incrementLayerVersion();
 
-    logger.info("Layer: New token added in " + name);
+    logger.info("Layer: addToken(): New token added in " + name);
 
   }
 
@@ -310,12 +310,12 @@ class Layer {
   }
 
   void addSceneUpdateListener(ChangeListener<Number> _sceneUpdateListener) {
-    logger.debug("Adding listener to " + name + " version");
+    logger.debug("Layer: addSceneUpdateListener(): Adding listener to " + name + " version");
     layerVersion.addListener(_sceneUpdateListener);
   }
 
   void incrementLayerVersion() {
-    logger.trace("Incrementing " + name + " version from " + layerVersion.getValue() + " to " + (layerVersion.getValue()+1));
+    logger.trace("Layer: incrementLayerVersion(): Incrementing " + name + " version from " + layerVersion.getValue() + " to " + (layerVersion.getValue()+1));
     layerVersion.set(layerVersion.getValue() + 1);
   }
 
