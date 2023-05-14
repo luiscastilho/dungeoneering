@@ -877,6 +877,17 @@ public class UserInterface {
       .hide()
       ;
 
+    cp5.addTextlabel("Initiative instructions")
+      .setText(addLineBreaks("Add tokens to initiative to set initiative order. To add a token, right click on it, " +
+        "go to Settings, and click Toggle initiative.", instructionsFont, instructionsMaxWidth))
+      .setPosition(instructionsX, instructionsY)
+      .setColorValue(instructionsFontColor)
+      .setFont(instructionsFont)
+      .setOutlineText(true)
+      .setLineHeight(instructionsHeight)
+      .hide()
+      ;
+
     tokenMenu.updateItems();
 
   }
@@ -1337,6 +1348,9 @@ public class UserInterface {
 
             }
 
+            setSwitchButtonState("Toggle combat mode", false);
+            disableController("Toggle combat mode");
+
             initiative.clear();
             playersLayer.clear();
             dmLayer.clear();
@@ -1352,9 +1366,6 @@ public class UserInterface {
             disableController("Toggle UI");
 
             setSwitchButtonState("Toggle grid", true);
-
-            setSwitchButtonState("Toggle combat mode", false);
-            disableController("Toggle combat mode");
 
             obstacles.setIllumination(Illumination.brightLight);
             obstacles.setRecalculateShadows(true);
@@ -1705,6 +1716,8 @@ public class UserInterface {
           initiative.toggleDrawInitiativeOrder();
           initiative.incrementInitiativeVersion();
 
+          toggleInitiativeInstructions();
+
           break;
         case "Toggle mute sound":
 
@@ -1794,6 +1807,8 @@ public class UserInterface {
             if ( !initiative.getDrawInitiativeOrder() )
               initiative.toggleDrawInitiativeOrder();
           }
+
+          toggleInitiativeInstructions();
 
           break;
       }
@@ -2257,6 +2272,21 @@ public class UserInterface {
 
     tokenMenu.hide();
     rightClickedToken = null;
+
+  }
+
+  void toggleInitiativeInstructions() {
+
+    Textlabel initiativeInstructions = (Textlabel)cp5.getController("Initiative instructions");
+
+    if (
+      initiative.getDrawInitiativeOrder() &&
+      initiative.isEmpty() &&
+      ( appMode == AppMode.standalone || appMode == AppMode.dm )
+    )
+      initiativeInstructions.show();
+    else
+      initiativeInstructions.hide();
 
   }
 
@@ -2829,14 +2859,6 @@ public class UserInterface {
       JSONObject initiativeJson = sceneJson.getJSONObject("initiative");
       if ( initiativeJson != null ) {
 
-        boolean drawInitiativeOrder = initiativeJson.getBoolean("drawInitiativeOrder");
-        if ( drawInitiativeOrder ) {
-          if ( appMode == AppMode.standalone || appMode == AppMode.dm )
-            setSwitchButtonState("Toggle combat mode", true);
-          else if ( appMode == AppMode.players )
-            initiative.toggleDrawInitiativeOrder();
-        }
-
         JSONArray initiativeGroupsArray = initiativeJson.getJSONArray("initiativeGroups");
         if ( initiativeGroupsArray != null ) {
 
@@ -2870,6 +2892,14 @@ public class UserInterface {
 
           }
 
+        }
+
+        boolean drawInitiativeOrder = initiativeJson.getBoolean("drawInitiativeOrder");
+        if ( drawInitiativeOrder ) {
+          if ( appMode == AppMode.standalone || appMode == AppMode.dm )
+            setSwitchButtonState("Toggle combat mode", true);
+          else if ( appMode == AppMode.players )
+            initiative.toggleDrawInitiativeOrder();
         }
 
         logger.debug("UserInterface: sceneFromJson(): Initiative loaded");
