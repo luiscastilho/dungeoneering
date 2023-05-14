@@ -442,7 +442,7 @@ public class UserInterface {
 
     controllersTopLeftX = controllersBottomLeftInitialX;
     controllersTopLeftY = controllersBottomLeftInitialY;
-    addButton("Toggle combat mode", sceneConfigIconFolder + "combat", controllersTopLeftX, controllersTopLeftY, togglableControllers, true, false);
+    addButton("Toggle initiative order", sceneConfigIconFolder + "initiative", controllersTopLeftX, controllersTopLeftY, togglableControllers, true, false);
 
     controllersTopLeftX += squareButtonWidth + controllersSpacing;
     addButton("Toggle grid", sceneConfigIconFolder + "grid", controllersTopLeftX, controllersTopLeftY, togglableControllers, true, false);
@@ -1014,7 +1014,7 @@ public class UserInterface {
     removeController("Map logo");
 
     setSwitchButtonState("Toggle grid", false);
-    setSwitchButtonState("Toggle combat mode", false);
+    setSwitchButtonState("Toggle initiative order", false);
     setSwitchButtonState("Toggle mute sound", false);
 
   }
@@ -1348,8 +1348,8 @@ public class UserInterface {
 
             }
 
-            setSwitchButtonState("Toggle combat mode", false);
-            disableController("Toggle combat mode");
+            setSwitchButtonState("Toggle initiative order", false);
+            disableController("Toggle initiative order");
 
             initiative.clear();
             playersLayer.clear();
@@ -1391,7 +1391,7 @@ public class UserInterface {
             enableController("Add/Remove walls");
             enableController("Add/Remove doors");
             enableController("Toggle UI");
-            enableController("Toggle combat mode");
+            enableController("Toggle initiative order");
 
             gridInstructions.hide();
 
@@ -1423,8 +1423,8 @@ public class UserInterface {
             disableController("Add/Remove doors");
             disableController("Toggle UI");
 
-            setSwitchButtonState("Toggle combat mode", false);
-            disableController("Toggle combat mode");
+            setSwitchButtonState("Toggle initiative order", false);
+            disableController("Toggle initiative order");
 
             obstacles.setIllumination(Illumination.brightLight);
             obstacles.setRecalculateShadows(true);
@@ -1452,7 +1452,7 @@ public class UserInterface {
             }
             enableController("Add/Remove doors");
             enableController("Toggle UI");
-            enableController("Toggle combat mode");
+            enableController("Toggle initiative order");
 
             obstacles.toggleDrawObstacles();
 
@@ -1483,8 +1483,8 @@ public class UserInterface {
             disableController("Add/Remove walls");
             disableController("Toggle UI");
 
-            setSwitchButtonState("Toggle combat mode", false);
-            disableController("Toggle combat mode");
+            setSwitchButtonState("Toggle initiative order", false);
+            disableController("Toggle initiative order");
 
             obstacles.setIllumination(Illumination.brightLight);
             obstacles.setRecalculateShadows(true);
@@ -1512,7 +1512,7 @@ public class UserInterface {
             }
             enableController("Add/Remove walls");
             enableController("Toggle UI");
-            enableController("Toggle combat mode");
+            enableController("Toggle initiative order");
 
             obstacles.toggleDrawObstacles();
 
@@ -1711,7 +1711,7 @@ public class UserInterface {
           logger.info("UserInterface: controllerEvent(): Touch screen mode " + (cp5.isTouch ? "enabled" : "disabled"));
 
           break;
-        case "Toggle combat mode":
+        case "Toggle initiative order":
 
           initiative.toggleDrawInitiativeOrder();
           initiative.incrementInitiativeVersion();
@@ -1802,7 +1802,7 @@ public class UserInterface {
           hideMenu(0, 0);
 
           if ( appMode == AppMode.standalone || appMode == AppMode.dm ) {
-            setSwitchButtonState("Toggle combat mode", true);
+            setSwitchButtonState("Toggle initiative order", true);
           } else if ( appMode == AppMode.players ) {
             if ( !initiative.getDrawInitiativeOrder() )
               initiative.toggleDrawInitiativeOrder();
@@ -2742,7 +2742,7 @@ public class UserInterface {
 
       resetScene();
 
-      setSwitchButtonState("Toggle combat mode", false, false);
+      setSwitchButtonState("Toggle initiative order", false, false);
       setSwitchButtonState("Toggle grid", false, false);
       removeController("Map logo");
 
@@ -2897,7 +2897,7 @@ public class UserInterface {
         boolean drawInitiativeOrder = initiativeJson.getBoolean("drawInitiativeOrder");
         if ( drawInitiativeOrder ) {
           if ( appMode == AppMode.standalone || appMode == AppMode.dm )
-            setSwitchButtonState("Toggle combat mode", true);
+            setSwitchButtonState("Toggle initiative order", true);
           else if ( appMode == AppMode.players )
             initiative.toggleDrawInitiativeOrder();
         }
