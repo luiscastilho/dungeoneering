@@ -842,10 +842,10 @@ public class UserInterface {
     instructionsY = instructionsInitialY;
 
     cp5.addTextlabel("Grid instructions")
-      .setText(addLineBreaks("Click and drag to create a square the size of 3 x 3 grid cells on the map background " +
-        "you are using. Once you draw this square, you can adjust its size and position using keys W, " +
-        "A, S, D (top left corner) and ↑, ←, ↓, → (bottom right corner). Once you are done, click on " +
-        "the Grid Setup icon.", instructionsFont, instructionsMaxWidth))
+      .setText(addLineBreaks("Click and drag to create a square on the map background by selecting a 3 x 3 grid " +
+        "cells area. After drawing the square, you can modify its size and position using the keys W, A, S, D (for " +
+        "the top left corner) and ↑, ←, ↓, → (for the bottom right corner). Once you're finished, click the Grid " +
+        "Setup button to complete the process.", instructionsFont, instructionsMaxWidth))
       .setPosition(instructionsX, instructionsY)
       .setColorValue(instructionsFontColor)
       .setFont(instructionsFont)
@@ -855,9 +855,10 @@ public class UserInterface {
       ;
 
     cp5.addTextlabel("Wall instructions")
-      .setText(addLineBreaks("Draw new wall segments, adding vertexes by left clicking. Double click to stop adding " +
-        "wall segments after the current one. Right click on any wall to remove it. Once you are done, " +
-        "click on the Add/Remove Walls icon.", instructionsFont, instructionsMaxWidth))
+      .setText(addLineBreaks("To draw new wall segments, click the left mouse button to add vertices. Double-click " +
+        "to stop adding wall segments after the current one. Right-click on any wall to remove it. Once you're " +
+        "finished, click the Add/Remove Walls button to complete the process.", instructionsFont,
+        instructionsMaxWidth))
       .setPosition(instructionsX, instructionsY)
       .setColorValue(instructionsFontColor)
       .setFont(instructionsFont)
@@ -867,8 +868,9 @@ public class UserInterface {
       ;
 
     cp5.addTextlabel("Door instructions")
-      .setText(addLineBreaks("Draw new doors, adding vertexes by left clicking. Right click on any door to remove it. " +
-        "Once you are done, click on the Add/Remove Doors icon.", instructionsFont, instructionsMaxWidth))
+      .setText(addLineBreaks("To create new doors, left-click to add vertices. Every second vertex defines a door. " +
+        "Right-click on any door to remove it. Once you have finished, click the Add/Remove Doors button to complete " +
+        "the process.", instructionsFont, instructionsMaxWidth))
       .setPosition(instructionsX, instructionsY)
       .setColorValue(instructionsFontColor)
       .setFont(instructionsFont)
@@ -878,8 +880,9 @@ public class UserInterface {
       ;
 
     cp5.addTextlabel("Initiative instructions")
-      .setText(addLineBreaks("Add tokens to initiative to set initiative order. To add a token, right click on it, " +
-        "go to Settings, and click Toggle initiative.", instructionsFont, instructionsMaxWidth))
+      .setText(addLineBreaks("To establish the initiative order, add tokens to the initiative. To add a token, right-" +
+        "click on it, navigate to Settings, and click on the Toggle Initiative button.", instructionsFont,
+        instructionsMaxWidth))
       .setPosition(instructionsX, instructionsY)
       .setColorValue(instructionsFontColor)
       .setFont(instructionsFont)
