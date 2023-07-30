@@ -868,7 +868,7 @@ public class UserInterface {
       ;
 
     cp5.addTextlabel("Door instructions")
-      .setText(addLineBreaks("To create new doors, left-click to add vertices. Every second vertex defines a door. " +
+      .setText(addLineBreaks("To create new doors, left-click to add vertexes. Every second vertex defines a door. " +
         "Right-click on any door to remove it. Once you have finished, click the Add/Remove Doors button to complete " +
         "the process.", instructionsFont, instructionsMaxWidth))
       .setPosition(instructionsX, instructionsY)
