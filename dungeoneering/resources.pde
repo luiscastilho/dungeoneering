@@ -142,10 +142,13 @@ class Resources {
 
     baseConditions.add(new Condition(canvas, "Blinded", "conditions/blinded.png", true, false, false));
     baseConditions.add(new Condition(canvas, "Bloodied", "conditions/bloodied.png", false, false, false));
+    baseConditions.add(new Condition(canvas, "Buffed", "conditions/buffed.png", false, false, false));
     baseConditions.add(new Condition(canvas, "Burned", "conditions/burned.png", false, false, false));
     baseConditions.add(new Condition(canvas, "Charmed", "conditions/charmed.png", false, false, false));
+    baseConditions.add(new Condition(canvas, "Concentrated", "conditions/concentrated.png", false, false, false));
     baseConditions.add(new Condition(canvas, "Dead", "conditions/dead.png", true, false, true));
     baseConditions.add(new Condition(canvas, "Deafened", "conditions/deafened.png", false, false, false));
+    baseConditions.add(new Condition(canvas, "Debuffed", "conditions/debuffed.png", false, false, false));
     baseConditions.add(new Condition(canvas, "Frightened", "conditions/frightened.png", false, false, false));
     baseConditions.add(new Condition(canvas, "Grappled", "conditions/grappled.png", false, false, false));
     baseConditions.add(new Condition(canvas, "Hidden", "conditions/hidden.png", false, true, false));
