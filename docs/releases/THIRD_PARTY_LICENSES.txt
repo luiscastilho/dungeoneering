@@ -14,10 +14,11 @@ and license can be found at these links:
 
 The icons used in the application were either released under a public-domain-
 like license (CC0[1]) or are free to use with attribution (CC BY 3.0[2],
-CC BY 4.0[3]). Thanks to the following authors from the Noun Project[4]: Andrew
-Nielsen; Tokka Elkholy; Sweet Farm; HeadsOfBirds; Mike Rowe; Denis; Yu luck;
-Patrick Morrison; and Sergey Demushkin. Thanks to Delapouite, Lorc, and sbed
-from Game-icons.net[5]. And thanks to Freepik and Good Ware from Flaticon[6].
+CC BY 4.0[3]). Icons created by the following authors were used: Andrew
+Nielsen, Tokka Elkholy, Sweet Farm, HeadsOfBirds, Mike Rowe, Denis, Yu luck,
+Patrick Morrison, Sergey Demushkin, Maxim Basinski, and AbtoCreative from Noun
+Project[4]: Delapouite, Lorc, and sbed from Game-icons.net[5]; and Freepik and
+Good Ware from Flaticon[6].
 
 # Assets
 

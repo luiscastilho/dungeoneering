@@ -14,6 +14,6 @@ DM should show up in the players' app, same for any other changes made in the
 scene.
 
 Remember to disable any network software, such as VPN or proxy, before running
-dungeoneering in dual screen mode. In this mode, dungeoneering uses network
+dungeoneering in dual-screen mode. In this mode, dungeoneering uses network
 ports to connect the two apps and in my tests, some network software caused
 problems and didn't let the two apps connect properly.
