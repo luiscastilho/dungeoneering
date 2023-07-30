@@ -50,8 +50,8 @@ List of features to implement and known bugs to fix:
 - [X] Add a right click menu option to toggle tokens in initiative
 - [X] Allow DMs to load and manipulate the same scene PCs are seeing in a secondary screen
 - [X] Add more D&D 5e sight types to right click menu
+- [X] Add more conditions: Concentrated, Dodging, Blessed, Raging, Hexed, Hunter Marked, Turned (for undeads)
 - [ ] Allow DM and players to ping the map
-- [ ] Add more conditions: Concentrated, Dodging, Blessed, Raging, Hex, Hunter Marked, Turned (for undeads)
 - [ ] Allow to add environment light sources, not associated with player or DM tokens
 - [ ] Create scene selection screen with thumbnails
 - [ ] Create map selection screen with thumbnails
@@ -70,8 +70,11 @@ List of features to implement and known bugs to fix:
 - [ ] Allow doors to be locked - only DM can unlock them
 - [ ] Add D&D 5e obscurement sources to right click menu
 - [ ] Add D&D 5e spell effects - fireball, etc
-- [ ] Allow to automatically move a token placed on a givan cell to another cell (stairs, secret passages, etc)
+- [ ] Allow a token placed on a givan cell to be automatically moved to another cell (stairs, secret passages, etc)
 - [ ] Manual FoW - areas revealed when a player reaches/illuminates it
 - [ ] Multiple maps linked (NSEW)
 - [ ] Show movement path
 - [ ] Don't allow tokens to stop on top of other tokens - move it back to previous cell
+- [ ] Allow a map interaction to open a new scene - a door is opened, a token is placed on a given cell, etc.
+- [ ] Add a ruler to show distance from one point to another
+- [ ] Allow tokens to be rotated
