@@ -8,8 +8,14 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-# Remove metadata from images
-find ./ -iname "*.png" -o -iname "*.jpg" | while read -r image_path; do
+root_dir="../.."
+
+# Go to application root dir
+
+cd ${root_dir}
+
+# Remove metadata from images in data folder
+find dungeoneering/data/ -iname "*.png" -o -iname "*.jpg" | while read -r image_path; do
 
     echo -n "Removing metadata from ${image_path}..."
     mogrify -strip "${image_path}" &> /dev/null && echo " done" || echo " FAILED"
