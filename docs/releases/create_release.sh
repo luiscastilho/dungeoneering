@@ -20,6 +20,7 @@
 # Also, remember to sync info between index.md and TXT files on docs/releases.
 #
 # Requirements: bash, coreutils, zip
+# macOS requirements: Homebrew, coreutils, findutils
 #
 
 set -euo pipefail
@@ -117,13 +118,14 @@ if [ "${platform}" == "linux" ] || [ "${platform}" == "macos" ]; then
     chmod 644 docs/releases/*.txt
     chmod 644 docs/*.md
     if [ "${platform}" == "linux" ]; then
+        find dungeoneering/data/ -type f -exec chmod 644 {} \;
+        find dungeoneering/code/ -type f -exec chmod 644 {} \;
         find dungeoneering/linux-amd64/data/ -type f -exec chmod 644 {} \;
         find dungeoneering/linux-amd64/lib/ -type f -exec chmod 644 {} \;
         find dungeoneering/linux-amd64/source/ -type f -exec chmod 644 {} \;
     elif [ "${platform}" == "macos" ]; then
-        find dungeoneering/macos-x86_64/data/ -type f -exec chmod 644 {} \;
-        find dungeoneering/macos-x86_64/lib/ -type f -exec chmod 644 {} \;
-        find dungeoneering/macos-x86_64/source/ -type f -exec chmod 644 {} \;
+        gfind dungeoneering/data/ -type f -exec chmod 644 {} \;
+        gfind dungeoneering/code/ -type f -exec chmod 644 {} \;
     fi
     echo " done"
 fi
@@ -180,7 +182,7 @@ if [ "${platform}" == "windows" ]; then
 elif [ "${platform}" == "linux" ]; then
     cp -r dungeoneering/code/shader "releases/${version}/${working_dir}/lib"
 elif [ "${platform}" == "macos" ]; then
-    cp -r dungeoneering/code/shader "releases/${version}/${working_dir}/${working_subdir}/Contents/Java/"
+    gcp -r dungeoneering/code/shader "releases/${version}/${working_dir}/${working_subdir}/Contents/Java/"
 fi
 echo " done"
 
@@ -196,7 +198,7 @@ if [ "${platform}" == "macos" ]; then
         rm -r "releases/${version}/${working_dir}/data/icons/"
         echo " done"
     else
-        echo -n "  Skipping copy of data to ${working_dir} - already present..."
+        echo "  Skipping copy of data to ${working_dir} - already present"
     fi
 fi
 
@@ -208,6 +210,11 @@ if [ -f "releases/${version}/${working_dir}/source/dungeoneering.java" ]; then
 fi
 if [ -d "releases/${version}/${working_dir}/data/icons/orig/" ]; then
     rm -r "releases/${version}/${working_dir}/data/icons/orig/"
+fi
+if [ "${platform}" == "macos" ]; then
+    if [ -d "releases/${version}/${working_dir}/${working_subdir}/Contents/Java/data/icons/orig/" ]; then
+        rm -r "releases/${version}/${working_dir}/${working_subdir}/Contents/Java/data/icons/orig/"
+    fi
 fi
 if [ -d "releases/${version}/${working_dir}/data/campaign/" ]; then
     rm -r "releases/${version}/${working_dir}/data/campaign/"
