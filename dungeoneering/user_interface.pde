@@ -163,7 +163,7 @@ public class UserInterface {
 
     uiDialogs = new UiBooster(
       UiBoosterOptions.Theme.DARK_THEME,
-      dataPath("/logos/dungeoneering-icon.png")
+      dataPath("logos/dungeoneering-icon.png")
     );
     uiConfirmDialogAnswer = false;
 
