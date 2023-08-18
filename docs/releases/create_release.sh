@@ -228,6 +228,11 @@ echo " done"
 
 echo -n "  Create a ZIP file with ${working_dir} contents..."
 cd "releases/${version}"
+if [ "${platform}" == "macos" ]; then
+    if [ -f "${working_dir}.zip" ]; then
+        rm "${working_dir}.zip"
+    fi
+fi
 zip -qr ${working_dir}.zip ${working_dir}/
 echo " done"
 
