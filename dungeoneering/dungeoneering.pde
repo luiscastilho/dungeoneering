@@ -104,6 +104,7 @@ void setup() {
   // fullScreen(P2D, 2);
   smooth();
 
+  // Check Logger class for valid log levels
   logger = new Logger("DEBUG", PApplet.platform);
 
   try {
@@ -123,6 +124,7 @@ void setup() {
       int playersModePort = 60006;
       String localAddress = "127.0.0.1";
 
+      // Hazelcast is used to share data between DM's and Players' apps
       // Create Hazelcast config based on app mode - DM or Players
       Config sharedDataConfig = new Config();
       sharedDataConfig.setClusterName("dungeoneering");
