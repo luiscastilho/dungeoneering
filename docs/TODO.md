@@ -51,15 +51,16 @@ List of features to implement and known bugs to fix:
 - [X] Allow DMs to load and manipulate the same scene PCs are seeing in a secondary screen
 - [X] Add more D&D 5e sight types to right click menu
 - [X] Add more conditions: Concentrated, Dodging, Blessed, Raging, Hexed, Hunter Marked, Turned (for undeads)
+- [X] Set min and max zoom
 - [ ] Allow DM and players to ping the map
 - [ ] Allow to add environment light sources, not associated with player or DM tokens
 - [ ] Create scene selection screen with thumbnails
 - [ ] Create map selection screen with thumbnails
 - [ ] Create token selection screen with thumbnails
 - [ ] Allow to load images as free floating objects on top of map
-- [ ] Add more D&D 5e spell light sources to right click menu - separate menu entry?
+- [ ] Add more D&D 5e spell light sources to right click menu
 - [ ] Fix token images looking pixelated if zoom in is used
-- [ ] Set maximum zoom and pan
+- [ ] Set min and max pan
 - [ ] Keep tokens inside grid when moving - larger tokens being moved to grid borders
 - [ ] Keep right click menu inside canvas - right click in tokens near grid borders
 - [ ] For larger tokens, remember token cell being dragged
