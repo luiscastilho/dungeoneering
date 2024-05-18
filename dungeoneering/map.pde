@@ -16,6 +16,9 @@
 
 class Map {
 
+  static final float MIN_ZOOM = 0.5;
+  static final float MAX_ZOOM = 2;
+
   PApplet sketch;
 
   PGraphics canvas;
@@ -262,9 +265,9 @@ class Map {
     if ( !zoomEnabled )
       return;
 
-    if ( toScale >= 2 && mouseWheelAmount < 0 )
+    if ( toScale >= MAX_ZOOM && mouseWheelAmount < 0 )
       return;
-    if ( toScale <= 0.5 && mouseWheelAmount > 0 )
+    if ( toScale <= MIN_ZOOM && mouseWheelAmount > 0 )
       return;
 
     float zoom = -mouseWheelAmount * .05;
