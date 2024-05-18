@@ -16,6 +16,7 @@
 
 class Logger {
 
+  // Valid log levels
   static final int CRITICAL = 7;
   static final int ERROR = 6;
   static final int WARNING = 5;
@@ -50,7 +51,7 @@ class Logger {
       .file(logsDir + "/dungeoneering.log")
       .filePattern(logsDir + "/dungeoneering-%d{yyyyMMdd-HHmmss-SSS}.log")
       .policy(new SizeBasedRotationPolicy(500 * 1024)) // 500KB
-      .callback(new LoggingRotationCallbackKeepLast(5)) // Keep last 5 rotated log files
+      .callback(new LoggingRotationCallbackKeepLast(5)) // Keep the last 5 rotated log files
       .build();
 
     lineSeparator = System.getProperty("line.separator");
